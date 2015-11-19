@@ -1,0 +1,65 @@
+/* 
+  Localizable.strings
+  ureport
+
+  Created by Daniel Amaral on 11/07/15.
+  Copyright (c) 2015 ilhasoft. All rights reserved.
+*/
+
+"Main" = "Main";
+"About" = "About";
+"Moderation" = "Moderation";
+"Settings" = "Settings";
+
+"menu_points" = "Points:";
+"menu_stories" = "Stories:";
+"menu_polls" = "Polls:";
+
+"Hi" = "Hi ";
+
+"about_title" = "About";
+
+"add_story_tell_us" = "Tell us what's going on";
+"contributions" = "contributions";
+"Contributions " = "Contributions ";
+"invite_message" = "Chat with me on U-Report app! Download it here Http://";
+"invite_title" = "Invite";
+
+"chat_title" = "Chat";
+"My Chats" = "My Chats";
+"Open Groups" = "Open Groups";
+"Stories" = "Stories";
+"Polls" = "Polls";
+"Country Moderators" = "Country Moderators";
+"Group" = "Group";
+
+"Created By " = "Created By ";
+
+
+"gamefication_story1" = "Wow, you've created a story!";
+"gamefication_story2" = "You went up in the ranking";
+"gamefication_poll1" = "Wow, you've participed of a poll!";
+"gamefication_poll2" = "You went up in the ranking";
+
+"poll_message" = "Wait for the next poll or send a message to U-Report below";
+"poll_message" = "%@ polled";
+"Poll Result" = "Poll Result";
+"profile_stories" = "Stories: %@";
+"profile_stories" = "%@ Points: %d";
+" responded out of " = " responded out of ";
+"polled" = "polled";
+"feature_without_permission" = "You aren't in your own Country. You can't access this feature";
+"Switch Country Program" = "Switch Country Program";
+"twitter_account" = "This country program doesn't have twitter account yet";
+"facebook_account" = "This country program doesn't have facebook account yet";
+
+"settings_title" = "Settings";
+"Available in Chat" = "Available in Chat";
+"OpenSource License" = "OpenSource License";
+
+"profile_email_use" = "The new user account cannot be created because the email is already in use.";
+"profile_email_invalid" = "The specified email is not a valid email.";
+"profile_district" = "District";
+"profile_loading_textfield" = "Please wait, loading states...";
+"profile_female" = "Female";
+"profile_close" = "Close";

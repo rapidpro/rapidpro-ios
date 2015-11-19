@@ -1,0 +1,11 @@
+/* 
+  Localizable.strings
+  ureport
+
+  Created by Daniel Amaral on 11/07/15.
+  Copyright (c) 2015 ilhasoft. All rights reserved.
+*/
+
+"male" = "Masculino";
+"female" = "Feminino";
+"close" = "Fechar";

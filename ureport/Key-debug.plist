@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>COUNTRY_PROGRAM_CHANNEL_IDN</key>
+	<string>4309d4ae-5abc-488a-8c8f-334c5bd220bd</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_NGA</key>
+	<string>9bc1d3e8-58f1-4007-85ef-5051ce51d8ed</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_CHL</key>
+	<string>71dd10b3-e629-4ece-a56c-2e7ead7db91b</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_GLOBAL</key>
+	<string>bf1a1e63-e60f-4614-b639-25dc457da0bd</string>
+	<key>COUNTRY_PROGRAM_TOKEN_CHL</key>
+	<string>Token 60600f1c0740dfbe28aa1e9ace1bba4f5d430d6d</string>
+	<key>COUNTRY_PROGRAM_TOKEN_IDN</key>
+	<string>Token 5608d5b6f8d11b4349dae163dda3227d9633d162</string>
+	<key>COUNTRY_PROGRAM_TOKEN_NGA</key>
+	<string>Token 69653a2d2352a5da7eb0281a877d9eadb8226783</string>
+	<key>COUNTRY_PROGRAM_TOKEN_GLOBAL</key>
+	<string>Token 8cbcf1080cac0455311f5fce636ab4cf7cc75eb9</string>
+	<key>TWITTER_APP_ID</key>
+	<string>SKYXxzv0LeBdETT19fn2X3PkN</string>
+	<key>FACEBOOK_APP_ID</key>
+	<string>1021658627874726</string>
+	<key>S3_BUCKET_NAME_CHAT</key>
+	<string>ureport-app/chat_group</string>
+	<key>S3_BUCKET_NAME_STORIES</key>
+	<string>ureport-app/story</string>
+	<key>URL_STORAGE_CHAT</key>
+	<string>https://s3.amazonaws.com/ureport-app/chat_group</string>
+	<key>URL_STORAGE_STORIES</key>
+	<string>https://s3.amazonaws.com/ureport-app/story</string>
+	<key>COGNITO_IDENTITY_POLL_ID</key>
+	<string>us-east-1:938eb41c-68e0-4196-b542-988fdf02e10e</string>
+</dict>
+</plist>
