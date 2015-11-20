@@ -84,7 +84,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             // Register for Push Notifications before iOS 8
             application.registerForRemoteNotificationTypes([.Alert, .Badge, .Sound])
         }
-    }
+    }        
     
     func setupGoogle() {
         var configureError: NSError?
@@ -93,6 +93,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
 
     func checkMainViewControllerToShow(){
+        
+        if NSUserDefaults.standardUserDefaults().objectForKey("FirstRun") == nil {
+            NSUserDefaults.standardUserDefaults().setObject("firstrun", forKey: "FirstRun")
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            URNavigationManager.setupNavigationControllerWithTutorialViewController()
+            
+            return
+        }
+        
         if URUser.activeUser() != nil {
             URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
         }else {

@@ -63,6 +63,19 @@ class URNavigationManager: NSObject{
         appDelegate.window?.makeKeyAndVisible()
     }
     
+    class func setupNavigationControllerWithTutorialViewController() {
+        
+        let tutorialViewController = URTutorialViewController()
+        
+        self.navigation = ScrollingNavigationController(rootViewController: tutorialViewController)
+        URNavigationManager.setupNavigationDefaultAtrributes()
+        self.navigation!.navigationBar.translucent = false
+        self.navigation!.setNavigationBarHidden(true, animated: false)
+        
+        URNavigationManager.switchRootViewController(self.navigation!, animated: true, completion: nil)
+        appDelegate.window?.makeKeyAndVisible()
+    }
+    
     class func setupNavigationDefaultAtrributes() {
         self.navigation!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),
             NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as! AnyObject
