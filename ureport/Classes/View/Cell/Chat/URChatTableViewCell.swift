@@ -160,7 +160,7 @@ class URChatTableViewCell: UITableViewCell {
     
     func getTimeAgoFromDate(chatRoom:URChatRoom) -> String{
         if let lastMessage = chatRoom.lastMessage {
-            let date:NSDate = NSDate(timeIntervalSince1970: NSNumber(double: lastMessage.date.doubleValue/1000) as NSTimeInterval)
+            let date:NSDate = NSDate(timeIntervalSince1970: NSNumber(double: lastMessage.date!.doubleValue/1000) as NSTimeInterval)
             return "\(NSDate().offsetFrom(date)) ago"
         }else {
             return ""

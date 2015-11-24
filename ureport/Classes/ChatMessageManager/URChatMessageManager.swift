@@ -34,9 +34,9 @@ class URChatMessageManager: NSObject {
                     
                     let chatMessage = URChatMessage()
                     
-//                    chatMessage.user = URUser(jsonDict: snapshot.value.objectForKey("user") as? NSDictionary)
                     chatMessage.user = URUser(jsonDict: snapshot.value.objectForKey("user") as? NSDictionary)
                     chatMessage.message = snapshot.value.objectForKey("message") as? String
+                    chatMessage.media = URMedia(jsonDict:snapshot.value.objectForKey("media") as? NSDictionary)
                     chatMessage.date = snapshot.value.objectForKey("date") as! NSNumber
                     
                     if chatMessage.user.nickname != nil {

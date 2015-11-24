@@ -29,6 +29,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
         self.window?.backgroundColor = URConstant.Color.YELLOW
         
+        NSUserDefaults.saveIncomingAvatarSetting(true)
+        NSUserDefaults.saveOutgoingAvatarSetting(true)
+        
         URCountryProgramManager.deactivateSwitchCountryProgram()
         Firebase.defaultConfig().persistenceEnabled = false
         setupGoogle()
@@ -99,14 +102,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             NSUserDefaults.standardUserDefaults().synchronize()
             
             URNavigationManager.setupNavigationControllerWithTutorialViewController()
-            
-            return
-        }
-        
-        if URUser.activeUser() != nil {
-            URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
         }else {
-            URNavigationManager.setupNavigationControllerWithLoginViewController()
+            if URUser.activeUser() != nil {
+                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+            }else {
+                URNavigationManager.setupNavigationControllerWithLoginViewController()
+            }
         }
     }
     

@@ -107,6 +107,15 @@ struct URConstant {
 
     }
     
+    struct Media {
+        static let VIDEO = "Video"
+        static let PICTURE = "Picture"
+    }
+    
+    struct Youtube {
+        static let COVERIMAGE = "http://img.youtube.com/vi/%@/mqdefault.jpg"
+    }
+    
     struct RapidPro {
         static let GLOBAL = "GLOBAL"
         static let API_URL = "https://api.rapidpro.io/api/v1/"

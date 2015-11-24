@@ -16,3 +16,5 @@ pod 'TagListView', :git => 'https://github.com/xhacker/TagListView', :branch => 
 pod 'AMScrollingNavbar', '~> 2.0.0'
 pod 'SwiftAddressBook'
 pod 'AlamofireObjectMapper'
+pod 'JSQMessagesViewController'
+pod 'youtube-ios-player-helper', '0.1.4'

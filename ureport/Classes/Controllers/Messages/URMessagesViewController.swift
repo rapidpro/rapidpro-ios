@@ -8,23 +8,36 @@
 
 import UIKit
 import Foundation
+import JSQMessagesViewController
+import SDWebImage
+import NYTPhotoViewer
+import youtube_ios_player_helper
 
-class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate {
+protocol URMessagesViewControllerDelegate {
+    func didDismissJSQDemoViewController(messagesViewController:URMessagesViewController)
+}
+
+class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     var chatRoom:URChatRoom!
     let chatMessage:URChatMessageManager = URChatMessageManager()
     var chatMembers:[URUser] = []
     
-    var messages = [URChatMessage]()
-    var avatars = Dictionary<String, UIImage>()
+    var jsqMessages = [JSQMessage]()
+    var mediaList = [URMedia]()
+    var users = Dictionary<String, String>()
+    var avatars = Dictionary<String, JSQMessagesAvatarImage>()
 
-    var outgoingBubbleImageView = JSQMessagesBubbleImageFactory.outgoingMessageBubbleImageViewWithColor(UIColor(rgba: "#E8F9FF"))
-    var incomingBubbleImageView = JSQMessagesBubbleImageFactory.incomingMessageBubbleImageViewWithColor(UIColor(rgba: "#e5e5e5"))
     var senderImageUrl: String!
-    
+    var delegate: URMessagesViewControllerDelegate!
     var batchMessages = true
     var navigationTitle:String!
 
+    var outgoingBubbleImageData:JSQMessagesBubbleImage!
+    var incomingBubbleImageData:JSQMessagesBubbleImage!
+    
+    var mediaCount:Int!
+    
     init(chatRoom:URChatRoom!,chatMembers:[URUser],title:String){
         self.chatMembers = chatMembers
         self.chatRoom = chatRoom
@@ -39,24 +52,39 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.mediaCount = 1
         self.navigationItem.title = navigationTitle
         
         if self.chatRoom is URGroupChatRoom {
             self.navigationItem.rightBarButtonItems = self.addRightBarButtons()
         }
         
-        inputToolbar!.contentView!.leftBarButtonItem = nil
+        self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
         automaticallyScrollsToMostRecentMessage = true
         
-        sender = (sender != nil) ? URUser.activeUser()?.nickname : "Anonymous"
+        self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
+        self.senderId = URUser.activeUser()!.key
         
-        if let urlString = URUser.activeUser()!.picture {
-            setupAvatarImage(sender, imageUrl: urlString as String, incoming: false)
-            senderImageUrl = urlString as String
-        } else {
-            setupAvatarColor(sender, incoming: false)
-            senderImageUrl = ""
+        if NSUserDefaults.incomingAvatarSetting() {
+            self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
         }
+        if !NSUserDefaults.outgoingAvatarSetting() {
+            self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        }
+
+        self.showLoadEarlierMessagesHeader = true
+        
+        let bubbleFactory: JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
+        
+        setupAvatarImages()
+        
+        JSQMessagesCollectionViewCell.registerMenuAction("customAction:")
+        
+        UIMenuController.sharedMenuController().menuItems = [UIMenuItem(title: "Custom Action", action: "customAction:")]
+        
+        JSQMessagesCollectionViewCell.registerMenuAction("delete:")
         
         chatMessage.delegate = self
         chatMessage.getMessages(self.chatRoom)
@@ -65,13 +93,17 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        collectionView!.collectionViewLayout.springinessEnabled = true
+        collectionView!.collectionViewLayout.springinessEnabled = false
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithType(.Blue)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
+        
+        if let _ = self.delegate {
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: "closePressed:")
+        }
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -86,22 +118,93 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         })
     }
     
+    //MARK: Action
+    
+    func addPhotoMediaMessage() {
+//        let photoItem: JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
+//        var photoMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: photoItem)
+//        messages.addObject(photoMessage)
+    }
+    
+    func addLocationMediaMessageCompletion(completion: JSQLocationMediaItemCompletionBlock) {
+//        let ferryBuildingInSF: CLLocation = CLLocation(latitude: 37.795313, longitude: -122.393757)
+//        let locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
+//        locationItem.setLocation(ferryBuildingInSF, withCompletionHandler: completion)
+//        var locationMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: locationItem)
+//        messages.addObject(locationMessage)
+    }
+    
+    func addVideoMediaMessage() {
+//        var videoURL: NSURL = NSURL(string: "file://")
+//        var videoItem: JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
+//        var videoMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: videoItem)
+//        messages.addObject(videoMessage)
+    }
+    
+    //MARK: ChatMessageDelegate
+    
+    func newMessageReceived(chatMessage: URChatMessage) {
+        
+        let date =  NSDate(timeIntervalSince1970: NSTimeInterval(chatMessage.date))
+    
+        if chatMessage.media != nil && chatMessage.media!.url != nil {
+
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:chatMessage.media!.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+                
+                }, completed: { (image, error, cacheType, finish, url) -> Void in
+                    
+                    let mediaItem = JSQPhotoMediaItem(image: image)
+                    
+                    self.mediaList.append(chatMessage.media!)
+                    mediaItem.mediaView().tag = self.mediaCount
+                    
+                    self.mediaCount = self.mediaCount + 1
+                    
+                    if chatMessage.media!.type == URConstant.Media.PICTURE {
+                        self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media: mediaItem))
+                    }else{
+                        
+                        let frame = CGRect(x: 0, y: 0, width: mediaItem.mediaView().frame.size.width, height: mediaItem.mediaView().frame.size.height)
+                        let playerView = YTPlayerView(frame: frame)
+                        mediaItem.mediaView().addSubview(playerView)
+                        playerView.loadWithVideoId(chatMessage.media!.id)
+                        
+                        self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:                     mediaItem))
+                    }
+
+                    self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])                    
+            })
+            
+        }else{
+            self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
+            self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])
+        }
+        
+    }
+    
     //MARK: Class Methods
     
-    func setupAvatarColor(name: String, incoming: Bool) {
-        let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
-        
-        let rgbValue = name.hash
-        let r = CGFloat(Float((rgbValue & 0xFF0000) >> 16)/255.0)
-        let g = CGFloat(Float((rgbValue & 0xFF00) >> 8)/255.0)
-        let b = CGFloat(Float(rgbValue & 0xFF)/255.0)
-        let color = UIColor(red: r, green: g, blue: b, alpha: 0.5)
-        
-        let nameLength = name.characters.count
-        let initials : String? = name.substringToIndex(sender.startIndex.advancedBy(min(3, nameLength)))
-        let userImage = JSQMessagesAvatarFactory.avatarWithUserInitials(initials, backgroundColor: color, textColor: UIColor.blackColor(), font: UIFont.systemFontOfSize(CGFloat(13)), diameter: diameter)
-        
-        avatars[name] = userImage
+    func setupAvatarImages() {
+        for user in chatMembers {
+            
+            if let picture = user.picture {
+                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: picture), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+                    
+                    }, completed: { (image, error, cache, finish, url) -> Void in
+                        let userImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: 30)
+                        self.avatars[user.key] = userImage
+                        self.users[user.key] = user.nickname
+                })
+                
+            }
+            
+        }
+    }
+    
+    func closePressed(sender: UIBarButtonItem) {
+        if let delegate = self.delegate {
+            delegate.didDismissJSQDemoViewController(self)
+        }
     }
     
     func addRightBarButtons() -> [UIBarButtonItem]{
@@ -137,158 +240,288 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         URNavigationManager.navigation.pushViewController(URGroupDetailsViewController(groupChatRoom: self.chatRoom as! URGroupChatRoom,members:chatMembers), animated: true)
     }
     
-    func sendMessage(text: String!) {
+    func sendTextMessage(text: String!) {
         
         let newMessage = URChatMessage()
         newMessage.user = URUser.activeUser()
         newMessage.message = text
-        
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
+        self.finishSendingMessage()        
     }
     
-    
-    // ACTIONS
-    
-    func receivedMessagePressed(sender: UIBarButtonItem) {
-        // Simulate reciving message
-        showTypingIndicator = !showTypingIndicator
-        scrollToBottomAnimated(true)
+    func sendMediaMessage(media: URMedia!) {
+        
+        let newMessage = URChatMessage()
+        newMessage.user = URUser.activeUser()
+        newMessage.media = media
+        newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+        
+        URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
+        self.finishSendingMessage()
     }
     
-    override func didPressSendButton(button: UIButton!, withMessageText text: String!, sender: String!, date: NSDate!) {
+    //MARK: ImagePickerControllerDelegate
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+        
+        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            ProgressHUD.show(nil)
+            URAWSManager.uploadImage(pickedImage, uploadPath: .Chat, completion: { (media:URMedia?) -> Void in
+                ProgressHUD.dismiss()
+                self.sendMediaMessage(media!)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            })
+        }
+    }
+    
+    //MARK: JSQMessagesViewController method overrides
+    
+    override func didPressSendButton(button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: NSDate) {
         JSQSystemSoundPlayer.jsq_playMessageSentSound()
-        
-        sendMessage(text)
-        
-        finishSendingMessage()
+        self.sendTextMessage(text)
+        finishSendingMessageAnimated(true)
     }
     
-    override func didPressAccessoryButton(sender: UIButton!) {
-        print("Camera pressed!")
-    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
-        return messages[indexPath.item]
-    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, bubbleImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = messages[indexPath.item]
-        
-        if message.user.key == URUser.activeUser()?.key {
-            return UIImageView(image: outgoingBubbleImageView.image, highlightedImage: outgoingBubbleImageView.highlightedImage)
-        }
-        
-        return UIImageView(image: incomingBubbleImageView.image, highlightedImage: incomingBubbleImageView.highlightedImage)
-    }
-    
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageViewForItemAtIndexPath indexPath: NSIndexPath!) -> UIImageView! {
-        let message = messages[indexPath.item]
+    override func didPressAccessoryButton(sender: UIButton) {
+//        let sheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send youtube video", "")
+//        sheet.showFromToolbar(inputToolbar!)
+        let alertController = UIAlertController(title: "Media message", message: "Choose an option", preferredStyle: .ActionSheet)
 
-        if let avatar = avatars[message.sender()] {
-            return UIImageView(image: avatar)
-        } else {
-
-            for user in chatMembers {
-                if user.key == message.user.key {
-                    if let pic = user.picture {
-                        setupAvatarImage(message.sender(), imageUrl: pic, incoming: true)
-                        return UIImageView(image:avatars[message.sender()])
-                    }
-                }
-            }
+        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:nil))
+        
+        alertController.addAction(UIAlertAction(title: "Photo from Camera", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+            let imagePicker = UIImagePickerController()
             
-            setupAvatarImage(message.sender(), imageUrl: "ic_person", incoming: true)
-            return UIImageView(image:avatars[message.sender()])
-        }
+            imagePicker.delegate = self
+            imagePicker.sourceType = .Camera
+            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
+            imagePicker.showsCameraControls = true
+            imagePicker.allowsEditing = true
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Photo from Library", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+            let imagePicker = UIImagePickerController()
+            imagePicker.delegate = self
+            imagePicker.allowsEditing = false
+            imagePicker.sourceType = .PhotoLibrary
+            
+            self.presentViewController(imagePicker, animated: true, completion: nil)
+        }))
+
+        alertController.addAction(UIAlertAction(title: "Youtube Video", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+            
+            let alertControllerTextField = UIAlertController(title: nil, message: "Insert youtube URL", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
+            
+            alertControllerTextField.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            
+            alertControllerTextField.addAction(UIAlertAction(title: "Confirmar", style: .Default, handler: { (alertAction) -> Void in
+                
+                let urlVideo = alertControllerTextField.textFields![0].text!
+                
+                if urlVideo.isEmpty {
+                    UIAlertView(title: nil, message: "Insert a valid youtube URL", delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
+                
+                let media = URMedia()
+                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
+                media.id = videoID
+                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
+                media.type = URConstant.Media.VIDEO
+                self.sendMediaMessage(media)
+            }))
+            
+            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
+        }))
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
+    
+    //MARK: JSQMessages CollectionView DataSource
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, messageDataForItemAtIndexPath indexPath: NSIndexPath) -> JSQMessageData {
+        return self.jsqMessages[indexPath.item]
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, didDeleteMessageAtIndexPath indexPath: NSIndexPath) {
+        self.jsqMessages.removeAtIndex(indexPath.item)
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath) -> JSQMessageBubbleImageDataSource {
+        let message = self.jsqMessages[indexPath.item]
+        if (message.senderId == senderId) {
+            return self.outgoingBubbleImageData
+        }
+        return self.incomingBubbleImageData
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath) -> JSQMessageAvatarImageDataSource? {
+        let message = self.jsqMessages[indexPath.item]
+        if (message.senderId == senderId) {
+            if !NSUserDefaults.outgoingAvatarSetting() {
+                return nil
+            }
+        }else {
+            if !NSUserDefaults.incomingAvatarSetting() {
+                return nil
+            }
+        }
+        return self.avatars[message.senderId]!
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath) -> NSAttributedString? {
+        if indexPath.item % 3 == 0 {
+        let message: JSQMessage = self.jsqMessages[indexPath.item]
+            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+        }
+        return nil
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> NSAttributedString? {
+        let message = self.jsqMessages[indexPath.item]
+        if (message.senderId == senderId) {
+            return nil
+        }
+        if indexPath.item - 1 > 0 {
+            let previousMessage = self.jsqMessages[indexPath.item - 1]
+            if (previousMessage.senderId == message.senderId) {
+                return nil
+            }
+        }
+        return NSAttributedString(string: message.senderDisplayName)
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath) -> NSAttributedString? {
+        return nil
+    }
+    
+    //MARK: UICollectionView DataSource
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return messages.count
+        return self.jsqMessages.count
     }
+    
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
-        
-        let message = messages[indexPath.item]
-        if message.user.key == URUser.activeUser()?.key {
-            cell.textView!.textColor = UIColor.blackColor()
-        } else {
-            cell.textView!.textColor = UIColor.blackColor()
+        let msg = self.jsqMessages[indexPath.item]
+        if !msg.isMediaMessage {
+            if (msg.senderId == senderId) {
+                cell.textView!.textColor = UIColor.blackColor()
+            }
+            else {
+                cell.textView!.textColor = UIColor.whiteColor()
+            }
+            cell.textView!.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView!.textColor!, NSUnderlineStyleAttributeName: [NSUnderlineStyle.StyleSingle.rawValue | NSUnderlineStyle.PatternSolid.rawValue]]
         }
-        
-        let textColor = cell.textView!.textColor
-        
-        let attributes = [NSForegroundColorAttributeName:textColor!,NSUnderlineStyleAttributeName:1]
-        cell.textView!.linkTextAttributes = attributes
-        
         return cell
     }
     
+    //MARK: Custom menu items
     
-    // View  usernames above bubbles
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
-        let message = messages[indexPath.item];
-        
-        // Sent by me, skip
-        if message.user.key == URUser.activeUser()?.key {
-            return nil;
-        }
-        
-        // Same as previous sender, skip
-        if indexPath.item > 0 {
-            let previousMessage = messages[indexPath.item - 1];
-            if previousMessage.user.key == message.user.key {
-                return nil;
-            }
-        }
-        
-        return NSAttributedString(string:message.user.nickname)
+//    func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject) -> Bool {
+//        if action == "customAction:" {
+//            return true
+//        }
+//        return super.collectionView(collectionView, canPerformAction: action, forItemAtIndexPath: indexPath, withSender: sender)
+//    }
+//    
+//    func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject) {
+//        if action == "customAction:" {
+//            customAction(sender)
+//            return
+//        }
+//        super.collectionView(collectionView, performAction: action, forItemAtIndexPath: indexPath, withSender: sender)
+//    }
+    
+    func customAction(sender: AnyObject) {
+//        NSLog("Custom action received! Sender: %@", sender)
+        UIAlertView(title: "Custom Action", message: "Custom action received", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK").show()
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
-        let message = messages[indexPath.item]
-        
-        // Sent by me, skip
-        if message.user.key == URUser.activeUser()?.key {
-            return CGFloat(0.0);
+    //MARK: Adjusting cell label heights
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath.item % 3 == 0 {
+            return kJSQMessagesCollectionViewCellLabelHeightDefault
         }
-        
-        // Same as previous sender, skip
-        if indexPath.item > 0 {
-            let previousMessage = messages[indexPath.item - 1];
-            if previousMessage.user.key == message.user.key  {
-                return CGFloat(0.0);
+        return 0.0
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        let currentMessage = self.jsqMessages[indexPath.item]
+        if (currentMessage.senderId == senderId) {
+            return 0.0
+        }
+        if indexPath.item - 1 > 0 {
+            let previousMessage = self.jsqMessages[indexPath.item - 1]
+            if (previousMessage.senderId == currentMessage.senderId) {
+                return 0.0
             }
         }
-        
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
-    func setupAvatarImage(name: String, imageUrl: String?, incoming: Bool) {
-        if let stringUrl = imageUrl {
-            if let url = NSURL(string: stringUrl) {
-                if let data = NSData(contentsOfURL: url) {
-                    let image = UIImage(data: data)
-                    let diameter = incoming ? UInt(collectionView!.collectionViewLayout.incomingAvatarViewSize.width) : UInt(collectionView!.collectionViewLayout.outgoingAvatarViewSize.width)
-                    let avatarImage = JSQMessagesAvatarFactory.avatarWithImage(image, diameter: diameter)
-                    avatars[name] = avatarImage
-                    return
-                }
+    override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        return 0.0
+    }
+    
+    //MARK: Responding to collection view tap events
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, header headerView: JSQMessagesLoadEarlierHeaderView, didTapLoadEarlierMessagesButton sender: UIButton) {
+        NSLog("Load earlier messages!")
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, didTapAvatarImageView avatarImageView: UIImageView, atIndexPath indexPath: NSIndexPath) {
+        NSLog("Tapped avatar!")
+    }
+    
+    override func collectionView(collectionView: JSQMessagesCollectionView, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath) {
+        let jsqMessage = self.jsqMessages[indexPath.item]
+        
+        if jsqMessage.isMediaMessage == true {
+            let index = (jsqMessage.media.mediaView().tag) - 1
+            
+            let media = self.mediaList[index] as URMedia
+            
+            if (media.type == URConstant.Media.PICTURE) {
+                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: media.url), options: SDWebImageOptions.CacheMemoryOnly, progress: { (size, expectedSize) -> Void in
+                    
+                    }, completed: { (image, error, cache, finish, url) -> Void in
+                        self.presentViewController(NYTPhotosViewController(photos: [PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: ""))]), animated: true, completion: { () -> Void in
+                            
+                        })
+                })
+            }else{
+                (jsqMessage.media.mediaView().subviews[jsqMessage.media.mediaView().subviews.count-1] as! YTPlayerView).playVideo()
             }
         }
         
-        // At some point, we failed at getting the image (probably broken URL), so default to avatarColor
-        setupAvatarColor(name, incoming: incoming)
+        NSLog("Tapped message bubble!")
     }
     
-    //MARK: URChatMessageDelegate
+    override func collectionView(collectionView: JSQMessagesCollectionView, didTapCellAtIndexPath indexPath: NSIndexPath, touchLocation: CGPoint) {
+        NSLog("Tapped cell at %@!", NSStringFromCGPoint(touchLocation))
+    }
     
-    func newMessageReceived(chatMessage: URChatMessage) {
-        self.messages.append(chatMessage)
-        self.finishReceivingMessage()
-        
+    //MARK: JSQMessagesComposerTextViewPasteDelegate methods
+    
+    func composerTextView(textView: JSQMessagesComposerTextView, shouldPasteWithSender sender: AnyObject) -> Bool {
+        if let _ = UIPasteboard.generalPasteboard().image {
+//            let item: JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIPasteboard.generalPasteboard().image)
+//            let message: URChatMessage = URChatMessage(senderId: senderId, senderDisplayName: senderDisplayName, date: NSDate(), media: item)
+//            self.messages.append(message)
+//            finishSendingMessage()
+            return false
+        }
+        return true
     }
     
 }

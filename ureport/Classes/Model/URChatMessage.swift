@@ -7,14 +7,15 @@
 //
 
 import UIKit
+import JSQMessagesViewController
 
-
-class URChatMessage: Serializable, JSQMessageData {
+class URChatMessage: Serializable {
     
     var key:String!
-    var message:String!
+    var message:String?
     var user:URUser!
     var date:NSNumber!
+    var media:URMedia?
     
     func text() -> String! {
         return self.message

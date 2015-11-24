@@ -27,22 +27,28 @@ class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
     var enablePaging:Bool?
     var fillContent:Bool?
     var scrollViewPageType:ISScrollViewPageType!
+    var isLoaded:Bool!
     
     //MARK: Life Cycle
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        self.isLoaded = false        
         self.initScrollView()
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        self.isLoaded = false
         self.initScrollView()
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
-        setupLayout(scrollViewPageType!)
+        if isLoaded == false{
+            setupLayout(scrollViewPageType!)
+            isLoaded = true
+        }
     }
     
     //MARK: UIScrollViewDelegate
