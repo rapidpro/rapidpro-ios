@@ -80,8 +80,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     }
     
     func getCurrentPollHeight() -> CGFloat {
-        let switchLanguageHeight = btSwitchLanguage.hidden ? 0 : btSwitchLanguage.frame.size.height
-        return constraintQuestionHeight.constant + constraintResponseHeight.constant + 127 + switchLanguageHeight
+        return constraintQuestionHeight.constant + constraintResponseHeight.constant + 127 + btSwitchLanguage.frame.size.height
     }
     
     func getResponse() -> URRulesetResponse {
@@ -142,7 +141,9 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         actionSheetLanguage = UIAlertController(title: nil, message: "Choose a language", preferredStyle: .ActionSheet)
         
         for language in languages.sort() {
-            let switchLanguageAction = UIAlertAction(title: language, style: .Default, handler: {
+            let languageDescription = URCountry.getLanguageDescription(language, type: URCountryCodeType.ISO3) ?? language
+            
+            let switchLanguageAction = UIAlertAction(title: languageDescription, style: .Default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 
                 let settings = URSettings()
@@ -203,6 +204,6 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     }
     
     private func getSelectedLanguage() -> String {
-        return (selectedLanguage != nil ? selectedLanguage : flowDefinition.baseLanguage)!
+        return (selectedLanguage != nil && (flowActionSet?.actions?[0].message.keys.contains(selectedLanguage!))! ? selectedLanguage : flowDefinition.baseLanguage)!
     }
 }

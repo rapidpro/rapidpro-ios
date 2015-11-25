@@ -26,6 +26,16 @@ class URCountry: NSObject {
     override init() {
     }
     
+    class func getLanguageDescription(var languageCode:String, type:URCountryCodeType) -> String? {
+        if type == .ISO3 {
+            let keys = (NSLocale.ISO639_2Dictionary() as NSDictionary).allKeysForObject(languageCode)
+            languageCode = keys.count > 0 ? keys.first as! String : languageCode
+        }
+        
+        let id = NSLocale.localeIdentifierFromComponents([NSLocaleLanguageCode: languageCode])
+        return NSLocale(localeIdentifier: NSLocale.preferredLanguages()[0]).displayNameForKey(NSLocaleIdentifier, value: id)
+    }
+    
     class func getCountries(type:URCountryCodeType) -> AnyObject {
 
         var countries: [URCountry] = []
