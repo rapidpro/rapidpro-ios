@@ -15,6 +15,7 @@ class URFlowRun: Mappable {
     var flow:Int!
     var completed:Bool!
     var expires_on:NSDate!
+    var expired_on:NSDate!
     
     required init?(_ map: Map){}
     
@@ -23,5 +24,6 @@ class URFlowRun: Mappable {
         self.flow       <- map["flow"]
         self.completed  <- map["completed"]
         self.expires_on <- (map["expires_on"], URRapidPRODateTransform())
+        self.expired_on <- (map["expired_on"], URRapidPRODateTransform())
     }
 }

@@ -7,19 +7,87 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URClosedPollTableViewController" customModule="ureport" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="contentViewHeight" destination="DrN-yF-Mvs" id="cjM-ws-g3l"/>
+                <outlet property="scrollView" destination="qvQ-tK-8VQ" id="Nfs-8K-TXK"/>
+                <outlet property="tableView" destination="OUv-vI-SDL" id="IYi-pJ-UdY"/>
+                <outlet property="topView" destination="WbC-0n-Dcv" id="wRE-03-Quh"/>
+                <outlet property="topViewHeight" destination="rDR-1n-eWQ" id="nvN-XV-37g"/>
+                <outlet property="view" destination="O8o-Ow-kye" id="S8H-aP-Ije"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableView opaque="NO" clipsSubviews="YES" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" bouncesZoom="NO" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="18" sectionFooterHeight="18" id="i5M-Pr-FkT" customClass="TPKeyboardAvoidingTableView">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+        <view contentMode="scaleToFill" id="O8o-Ow-kye">
+            <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qvQ-tK-8VQ" customClass="TPKeyboardAvoidingScrollView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZMJ-6h-795">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                            <subviews>
+                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WbC-0n-Dcv">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="0.0"/>
+                                    <animations/>
+                                    <color key="backgroundColor" red="0.88235294119999996" green="0.88235294119999996" blue="0.88235294119999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" id="rDR-1n-eWQ"/>
+                                    </constraints>
+                                </view>
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="OUv-vI-SDL">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="416"/>
+                                    <animations/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </tableView>
+                            </subviews>
+                            <animations/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="416" id="DrN-yF-Mvs"/>
+                                <constraint firstItem="OUv-vI-SDL" firstAttribute="leading" secondItem="ZMJ-6h-795" secondAttribute="leading" id="QgL-Dr-5dI"/>
+                                <constraint firstAttribute="trailing" secondItem="OUv-vI-SDL" secondAttribute="trailing" id="Y8u-dQ-jET"/>
+                                <constraint firstItem="WbC-0n-Dcv" firstAttribute="leading" secondItem="ZMJ-6h-795" secondAttribute="leading" id="c7m-FY-tRm"/>
+                                <constraint firstItem="OUv-vI-SDL" firstAttribute="top" secondItem="WbC-0n-Dcv" secondAttribute="bottom" id="hSP-nh-tl9"/>
+                                <constraint firstItem="WbC-0n-Dcv" firstAttribute="top" secondItem="ZMJ-6h-795" secondAttribute="top" id="kfI-hr-p7h"/>
+                                <constraint firstAttribute="trailing" secondItem="WbC-0n-Dcv" secondAttribute="trailing" id="sHx-Qs-GXh"/>
+                                <constraint firstAttribute="bottom" secondItem="OUv-vI-SDL" secondAttribute="bottom" id="yig-DN-7xA"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <animations/>
+                    <constraints>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="height" secondItem="qvQ-tK-8VQ" secondAttribute="height" id="DMg-P1-2IW"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="leading" secondItem="qvQ-tK-8VQ" secondAttribute="leading" id="Ik3-xz-nEL"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="centerY" secondItem="qvQ-tK-8VQ" secondAttribute="centerY" id="OWp-jW-faU"/>
+                        <constraint firstAttribute="bottom" secondItem="ZMJ-6h-795" secondAttribute="bottom" id="bVz-Ds-Zg4"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="width" secondItem="qvQ-tK-8VQ" secondAttribute="width" id="cDd-2Y-aqk"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="height" secondItem="qvQ-tK-8VQ" secondAttribute="height" id="nAd-bp-7OK"/>
+                        <constraint firstAttribute="trailing" secondItem="ZMJ-6h-795" secondAttribute="trailing" id="rAo-RU-sOd"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="top" secondItem="qvQ-tK-8VQ" secondAttribute="top" id="y2Z-ih-qQb"/>
+                        <constraint firstItem="ZMJ-6h-795" firstAttribute="centerX" secondItem="qvQ-tK-8VQ" secondAttribute="centerX" id="zkA-gn-BE5"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="DMg-P1-2IW"/>
+                            <exclude reference="OWp-jW-faU"/>
+                            <exclude reference="nAd-bp-7OK"/>
+                            <exclude reference="zkA-gn-BE5"/>
+                        </mask>
+                    </variation>
+                </scrollView>
+            </subviews>
             <animations/>
-            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
-            <connections>
-                <outlet property="dataSource" destination="-1" id="Tng-2m-Rnh"/>
-                <outlet property="delegate" destination="-1" id="9aC-8N-iBw"/>
-            </connections>
-        </tableView>
+            <color key="backgroundColor" red="0.88235294117647056" green="0.88235294117647056" blue="0.88235294117647056" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="qvQ-tK-8VQ" secondAttribute="trailing" id="Cjb-hO-cPK"/>
+                <constraint firstItem="qvQ-tK-8VQ" firstAttribute="leading" secondItem="O8o-Ow-kye" secondAttribute="leading" id="VqZ-GK-3T0"/>
+                <constraint firstAttribute="bottom" secondItem="qvQ-tK-8VQ" secondAttribute="bottom" id="Y2d-ng-DJZ"/>
+                <constraint firstItem="qvQ-tK-8VQ" firstAttribute="top" secondItem="O8o-Ow-kye" secondAttribute="top" id="vU1-rD-VS5"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" translucent="NO" prompted="NO"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <simulatedScreenMetrics key="simulatedDestinationMetrics"/>
+        </view>
     </objects>
 </document>

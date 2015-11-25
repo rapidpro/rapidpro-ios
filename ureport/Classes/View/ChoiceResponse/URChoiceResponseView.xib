@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="URChoiceResponseView" customModule="ureport" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="47"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7xA-MK-o5p">
+                    <rect key="frame" x="46" y="15" width="253" height="18"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="253" id="cdy-RV-Tms"/>
+                        <constraint firstAttribute="height" constant="18" id="yRt-YG-enh"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ksb-xn-86V">
+                    <rect key="frame" x="13" y="13" width="20" height="20"/>
+                    <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="20" id="mWr-lb-0Uw"/>
+                        <constraint firstAttribute="width" constant="20" id="wn3-qG-DGx"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="radio_button_Inactive">
+                        <color key="titleShadowColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="toggleCheckButton:" destination="iN0-l3-epB" eventType="touchUpInside" id="0Nn-VZ-kUH"/>
+                    </connections>
+                </button>
+            </subviews>
+            <animations/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="7xA-MK-o5p" firstAttribute="leading" secondItem="Ksb-xn-86V" secondAttribute="trailing" constant="13" id="Ddr-PI-apI"/>
+                <constraint firstItem="7xA-MK-o5p" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="15" id="PIG-Wt-Gn6"/>
+                <constraint firstItem="Ksb-xn-86V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="13" id="U7B-JZ-tcS"/>
+                <constraint firstItem="Ksb-xn-86V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="13" id="ZuC-I1-4Bf"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="btCheck" destination="Ksb-xn-86V" id="vkV-dV-aVL"/>
+                <outlet property="lbResponse" destination="7xA-MK-o5p" id="NnP-uU-ZlH"/>
+            </connections>
+        </view>
+    </objects>
+    <resources>
+        <image name="radio_button_Inactive" width="20" height="20"/>
+    </resources>
+</document>

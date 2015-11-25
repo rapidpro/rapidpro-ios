@@ -32,7 +32,7 @@ class URCountry: NSObject {
         
         for code in NSLocale.ISOCountryCodes() {
             let country:URCountry? = URCountry()
-
+            
             let id = NSLocale.localeIdentifierFromComponents([NSLocaleCountryCode: code])
             let name = NSLocale(localeIdentifier: NSLocale.preferredLanguages()[0] ).displayNameForKey(NSLocaleIdentifier, value: id) ?? "Country not found for code: \(code)"
             

@@ -12,24 +12,32 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Response" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="R0r-GR-ATd">
-                    <rect key="frame" x="8" y="8" width="304" height="31"/>
+                    <rect key="frame" x="8" y="8" width="304" height="30"/>
                     <animations/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="bug-mH-WB6"/>
+                    </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
+                    <connections>
+                        <action selector="responseChanged:" destination="iN0-l3-epB" eventType="editingChanged" id="8Ep-6N-m78"/>
+                    </connections>
                 </textField>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstAttribute="trailing" secondItem="R0r-GR-ATd" secondAttribute="trailing" constant="8" id="QM9-Ce-5DH"/>
-                <constraint firstItem="R0r-GR-ATd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="UVg-P0-3h2"/>
-                <constraint firstItem="R0r-GR-ATd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="geV-NH-BKg"/>
-                <constraint firstAttribute="bottom" secondItem="R0r-GR-ATd" secondAttribute="bottom" constant="8" id="ieL-nM-wyu"/>
+                <constraint firstItem="R0r-GR-ATd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="Jih-tm-WJS"/>
+                <constraint firstItem="R0r-GR-ATd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="8" id="b6O-0g-WRD"/>
+                <constraint firstAttribute="trailing" secondItem="R0r-GR-ATd" secondAttribute="trailing" constant="8" id="xde-6H-2a3"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <nil key="simulatedTopBarMetrics"/>
             <nil key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="tfResponse" destination="R0r-GR-ATd" id="A6K-gN-hEb"/>
+            </connections>
             <point key="canvasLocation" x="275" y="371.5"/>
         </view>
     </objects>

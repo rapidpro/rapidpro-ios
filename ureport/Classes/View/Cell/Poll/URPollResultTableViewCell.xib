@@ -14,8 +14,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="283"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1Jw-H1-BNh">
-                        <rect key="frame" x="5" y="2" width="310" height="276"/>
+                    <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Jw-H1-BNh">
+                        <rect key="frame" x="5" y="2" width="310" height="275"/>
                         <subviews>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="sep, 4, 2015" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FUY-ie-8Wj">
                                 <rect key="frame" x="10" y="8" width="149" height="28"/>
@@ -38,8 +38,8 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa" customClass="TagListView" customModule="TagListView">
-                                <rect key="frame" x="7" y="148" width="297" height="120"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="7" y="148" width="297" height="119"/>
                                 <animations/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -51,8 +51,8 @@
                                     <constraint firstAttribute="height" constant="1" id="f8K-RI-CHv"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="4Pv-Ca-wcv" userLabel="ViewSeparator1">
-                                <rect key="frame" x="0.0" y="274" width="310" height="2"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Pv-Ca-wcv" userLabel="ViewSeparator1">
+                                <rect key="frame" x="0.0" y="273" width="310" height="2"/>
                                 <animations/>
                                 <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

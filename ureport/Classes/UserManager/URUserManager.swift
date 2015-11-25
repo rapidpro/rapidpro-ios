@@ -271,7 +271,6 @@ class URUserManager: NSObject {
                 }
                 
                 URUserManager.fetchUser(URUser.activeUser()!)
-                
                 return FTransactionResult.successWithValue(currentData)
         }
     }
