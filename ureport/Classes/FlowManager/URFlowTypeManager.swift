@@ -29,4 +29,23 @@ class URFlowTypeManager: NSObject {
     let State: URFlowTypeValidation = URFlowTypeValidation(type: URFlowType.State, validation: "state", message: "State with invalid value, check the instructions")
     let District: URFlowTypeValidation = URFlowTypeValidation(type: URFlowType.District, validation: "district", message: "District with invalid value, check the instructions")
     
+    let typeValidations: [URFlowTypeValidation]
+    
+    override init() {
+        typeValidations = [OpenField, Choice, OpenFieldContains, OpenFieldNotEmpty, OpenFieldStarts, OpenFieldRegex, Number, NumberLessThan, NumberGreaterThan, NumberBetween, NumberEqual, Date, DateBefore, DateAfter, DateEqual, Phone, State, District]
+    }
+    
+    func getTypeValidationForRule(flowRule:URFlowRule) -> URFlowTypeValidation {
+        return getTypeValidation((flowRule.test?.type)!)
+    }
+    
+    func getTypeValidation(validation:String) -> URFlowTypeValidation {
+        for typeValidation in self.typeValidations {
+            if typeValidation.validation == validation {
+                return typeValidation
+            }
+        }
+        return OpenField
+    }
+    
 }

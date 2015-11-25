@@ -43,6 +43,8 @@ class URRapidProManager: NSObject {
                 }
             })
     }
+    
+    
  
     class func sendPollResponse(text:String!) {
         
@@ -120,6 +122,61 @@ class URRapidProManager: NSObject {
                     }
                 }
         }
+    }
+    
+    class func sendRulesetResponses(user:URUser, responses:[URRulesetResponse], completion:() -> Void) {
+        let token = URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
+        let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
+        
+        let userId = URUserManager.formatExtUserId(user.key)
+        let url = "\(URConstant.RapidPro.API_URL)external/received/\(channel)/"
+        
+        let group = dispatch_group_create();
+        let queue = dispatch_queue_create("in.ureport-poll-responses", DISPATCH_QUEUE_SERIAL);
+        
+        for response in responses {
+            dispatch_group_async(group, queue, { () -> Void in
+                let request = NSMutableURLRequest(URL: NSURL(string: url)!)
+                request.HTTPMethod = "POST"
+                request.setValue(token, forHTTPHeaderField: "Authorization")
+                request.timeoutInterval = 15
+                
+                let postString = "from=\(userId)&text=\(response.response)"
+                request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
+                var httpResponse: NSURLResponse?
+                
+                do {
+                    try NSURLConnection.sendSynchronousRequest(request, returningResponse: &httpResponse)
+                    print("Sent: \(response.response!)")
+                } catch {
+                    print("Error on sending poll response")
+                }
+                
+                NSThread.sleepForTimeInterval(2)
+            })
+        }
+        
+        dispatch_group_notify(group, queue) { () -> Void in
+            completion()
+        }
+    }
+    
+    class func sendReceivedMessage(user:URUser, text:String) {
+        let headers = [
+            "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
+        ]
+        
+        let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
+        
+        let userId = URUserManager.formatExtUserId(user.key)
+        let url = "\(URConstant.RapidPro.API_URL)external/received/\(channel)/"
+        
+        let parameters = [
+            "from": userId,
+            "text": text
+        ]
+
+        Alamofire.request(.POST, url, parameters: parameters, encoding: .URLEncodedInURL, headers: headers).response
     }
     
     class func getContactFields(country:URCountry, completion:([String]) -> Void) {

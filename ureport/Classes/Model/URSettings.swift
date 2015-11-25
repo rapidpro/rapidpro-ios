@@ -13,6 +13,7 @@ class URSettings: Serializable {
     var notifications:NSNumber!
     var chatNotifications:NSNumber!
     var availableInChat:NSNumber!
+    var preferredLanguage:NSString!
     
     class func saveSettingsLocaly(settings:URSettings) {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -23,7 +24,7 @@ class URSettings: Serializable {
     class func buildSettingsValues(settings:URSettings) -> URSettings{
         
         if let savedSettings = URSettings.getSettings() {
-            
+
             if settings.notifications == nil && savedSettings.notifications != nil{
                 settings.notifications = savedSettings.notifications
             }
@@ -36,6 +37,9 @@ class URSettings: Serializable {
                 settings.availableInChat = savedSettings.availableInChat
             }
             
+            if settings.preferredLanguage == nil && savedSettings.preferredLanguage != nil{
+                settings.preferredLanguage = savedSettings.preferredLanguage
+            }
         }
         return settings
     }

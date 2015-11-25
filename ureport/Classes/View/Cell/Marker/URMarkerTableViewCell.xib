@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,12 +16,14 @@
                 <subviews>
                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag_newstory" translatesAutoresizingMaskIntoConstraints="NO" id="Pw3-si-q25">
                         <rect key="frame" x="8" y="15" width="15" height="14"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="15" id="zOc-Rt-ZGy"/>
                         </constraints>
                     </imageView>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZrI-26-klf">
                         <rect key="frame" x="36" y="11" width="231" height="21"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="231" id="4QH-J3-UGr"/>
                         </constraints>
@@ -31,6 +33,7 @@
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GxI-WV-qsi">
                         <rect key="frame" x="290" y="11" width="22" height="22"/>
+                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="22" id="7tM-6j-Xo2"/>
                         </constraints>
@@ -42,6 +45,7 @@
                         </connections>
                     </button>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstItem="Pw3-si-q25" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="3QV-kl-zm7"/>
                     <constraint firstItem="Pw3-si-q25" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="15" id="7u5-wV-WkJ"/>
@@ -54,6 +58,7 @@
                     <constraint firstAttribute="bottom" secondItem="Pw3-si-q25" secondAttribute="bottom" constant="14.5" id="tYm-8z-6TT"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="btCheck" destination="GxI-WV-qsi" id="bTa-db-41Y"/>
                 <outlet property="lbName" destination="ZrI-26-klf" id="pdx-gk-piT"/>

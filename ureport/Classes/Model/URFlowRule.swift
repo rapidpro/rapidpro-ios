@@ -11,7 +11,7 @@ import ObjectMapper
 
 class URFlowRule: Mappable {
     
-    var category:[String : String] = [:]
+    var ruleCategory:[String : String] = [:]
     var test:URFlowRuleTest?
     var destination:String?
     var uuid:NSString?
@@ -20,7 +20,7 @@ class URFlowRule: Mappable {
     required init?(_ map: Map){}
     
     func mapping(map: Map) {
-        self.category           <- map["category"]
+        self.ruleCategory       <- map["category"]
         self.test               <- map["test"]
         self.destination        <- map["destination"]
         self.uuid               <- map["uuid"]

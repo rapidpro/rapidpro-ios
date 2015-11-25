@@ -14,8 +14,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     
     let storiesTableViewController:URStoriesTableViewController = URStoriesTableViewController(filterStoriesToModerate: false)
     let myChatsViewController:URMyChatsViewController = URMyChatsViewController(nibName:"URMyChatsViewController",bundle:nil)
-    let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController()
-    let pollQuestionViewController:URPollQuestionViewController = URPollQuestionViewController(nibName:"URPollQuestionViewController", bundle:nil)
+    let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController(nibName: "URClosedPollTableViewController", bundle: nil)
     
     override func viewDidLoad() {
         
@@ -55,8 +54,6 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         storiesTableViewController.title = "Stories".localized
         storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories")
         
-        pollQuestionViewController.title = "Polls".localized
-        pollQuestionViewController.tabBarItem.image = UIImage(named: "icon_polls")
         closedPollViewController.title = "Polls".localized
         closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
@@ -64,7 +61,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         myChatsViewController.tabBarItem.image = UIImage(named: "icon_chat")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
-            self.viewControllers = [storiesTableViewController,pollQuestionViewController, myChatsViewController]
+            self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]
         }
@@ -115,7 +112,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     
     func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
         
-        if viewController is URPollQuestionViewController || viewController is URMyChatsViewController {
+        if viewController is URClosedPollTableViewController || viewController is URMyChatsViewController {
             if let _ = URUser.activeUser() {
                 return true
             }else {

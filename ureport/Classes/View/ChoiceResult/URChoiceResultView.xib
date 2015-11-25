@@ -11,8 +11,8 @@
             <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qwr-gY-pAo">
-                    <rect key="frame" x="8" y="0.0" width="151" height="24"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qwr-gY-pAo">
+                    <rect key="frame" x="8" y="4" width="151" height="24"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="ANp-lr-4nv"/>
@@ -21,8 +21,8 @@
                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KXL-T5-xjV">
-                    <rect key="frame" x="8" y="27" width="41" height="22"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KXL-T5-xjV">
+                    <rect key="frame" x="8" y="31" width="41" height="22"/>
                     <animations/>
                     <color key="backgroundColor" red="0.17917750969999999" green="0.82541749340000004" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
@@ -30,8 +30,8 @@
                         <constraint firstAttribute="height" constant="22" id="wtG-Jh-aZB"/>
                     </constraints>
                 </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uw7-cg-Szf">
-                    <rect key="frame" x="57" y="28" width="31" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="10%" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="uw7-cg-Szf">
+                    <rect key="frame" x="57" y="32" width="31" height="17"/>
                     <animations/>
                     <constraints>
                         <constraint firstAttribute="width" constant="31" id="Bq5-Ch-dws"/>
