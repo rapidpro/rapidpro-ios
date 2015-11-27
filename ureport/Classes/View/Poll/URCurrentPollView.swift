@@ -12,7 +12,7 @@ public protocol URCurrentPollViewDelegate {
     func onBoundsChanged()
 }
 
-class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldResponseDelegate  {
+class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldResponseDelegate {
 
     @IBOutlet weak var lbFlowName: UILabel!
     @IBOutlet weak var btNext: UIButton!

@@ -6,10 +6,10 @@
 	<string>843441539089-a3ksd60vkbvg6v9kef20t8oi8u3hcsq9.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
 	<string>com.googleusercontent.apps.843441539089-a3ksd60vkbvg6v9kef20t8oi8u3hcsq9</string>
-	<key>PLIST_VERSION</key>
-	<string>1</string>
 	<key>GCM_SENDER_ID</key>
 	<string>843441539089</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
 	<key>BUNDLE_ID</key>
 	<string>in.ureport</string>
 	<key>IS_ADS_ENABLED</key>
@@ -22,5 +22,7 @@
 	<true/>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:843441539089:ios:8970e90be4c0795a</string>
 </dict>
 </plist>
