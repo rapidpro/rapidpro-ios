@@ -145,7 +145,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     func newMessageReceived(chatMessage: URChatMessage) {
         
-        let date =  NSDate(timeIntervalSince1970: NSTimeInterval(chatMessage.date))
+        let date =  NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date!.doubleValue/1000) as NSTimeInterval)
     
         if chatMessage.media != nil && chatMessage.media!.url != nil {
 
