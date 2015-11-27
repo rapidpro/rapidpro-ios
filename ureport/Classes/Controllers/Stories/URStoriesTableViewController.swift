@@ -20,7 +20,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     var newsList:[URNews] = []
     var filterStoriesToModerate:Bool!
     var modalProfileViewController:URModalProfileViewController!
-    
+    var index = 1
 
     init (filterStoriesToModerate:Bool) {
         self.storyList.removeAll()
@@ -68,6 +68,10 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     // MARK: - Table view data source
+    
+    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+    }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.storyList.count + self.newsList.count
@@ -169,7 +173,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     func newStoryReceived(story: URStory) {
         ProgressHUD.dismiss()
         storyList.insert(story, atIndex: 0)
-        self.tableView.reloadData()
+        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+        index++
     }
     
 }

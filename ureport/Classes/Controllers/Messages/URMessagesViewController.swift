@@ -172,13 +172,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:                     mediaItem))
                     }
 
-                    self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])                    
             })
             
         }else{
             self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
-            self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])
         }
+
+        self.finishReceivingMessageAnimated(false)
         
     }
     

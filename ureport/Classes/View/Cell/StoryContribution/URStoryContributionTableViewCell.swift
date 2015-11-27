@@ -18,6 +18,7 @@ class URStoryContributionTableViewCell: UITableViewCell {
     @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var lbContributionText: UILabel!
     @IBOutlet weak var lbUserName: UILabel!
+    @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var btDelete: UIButton!
     
     var delegate:URStoryContributionTableViewCellDelegate?
@@ -51,6 +52,7 @@ class URStoryContributionTableViewCell: UITableViewCell {
         
         self.lbContributionText.text = "\(contribution.content)\n"
         self.lbUserName.text = contribution.author.nickname
+        self.lbDate.text = "\(NSDate().offsetFrom(NSDate(timeIntervalSince1970: NSNumber(double: contribution.createdDate.doubleValue/1000) as NSTimeInterval)))"
         
         if let picture = contribution.author.picture {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)

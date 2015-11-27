@@ -11,15 +11,15 @@ import UIKit
 class URCountryProgram: Serializable {
    
     var code:String!
-    var theme:String?
+    var themeColor:UIColor?
     var name:String!
     var org:NSNumber?
     var twitter:String!
     var facebook:String!
     
-    init (code:String!,theme:String?,org:NSNumber?,name:String!,twitter:String?,facebook:String?) {
+    init (code:String!,themeColor:UIColor?,org:NSNumber?,name:String!,twitter:String?,facebook:String?) {
         self.code = code
-        self.theme = theme
+        self.themeColor = themeColor
         self.org = org
         self.name = name
         self.twitter = twitter

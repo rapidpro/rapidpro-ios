@@ -24,9 +24,9 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
         
-        setupViewControllers()
         tabBarController(self, didSelectViewController: storiesTableViewController)
         reloadUserInfo()
+        setupViewControllers()
         self.title = "U-Report"
     }
     

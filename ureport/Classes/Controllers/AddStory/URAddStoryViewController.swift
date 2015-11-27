@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
+import SDWebImage
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate {
 
@@ -179,6 +181,19 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         self.txtHistory.textColor = UIColor.lightGrayColor()
     }
     
+    func setupMediaViewWithImage(image:UIImage) {
+        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as? URMediaView
+        
+        viewMedia!.delegate = self
+        viewMedia!.imgMedia.image = image
+        scrollViewMedias.addCustomView(viewMedia!)
+        
+        if scrollViewMedias.views!.count == 1 {
+            self.mediaViewCover = viewMedia!
+            self.mediaViewTapped(viewMedia!)
+        }
+    }
+    
     //MARK: TextView Delegate
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -242,6 +257,39 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             self.presentViewController(imagePicker, animated: true, completion: nil)
             
             break;
+            
+        case 3:
+            
+            let alertControllerTextField = UIAlertController(title: nil, message: "Insert youtube URL", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
+            alertControllerTextField.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alertControllerTextField.addAction(UIAlertAction(title: "Confirmar", style: .Default, handler: { (alertAction) -> Void in
+                
+                let urlVideo = alertControllerTextField.textFields![0].text!
+                
+                if urlVideo.isEmpty {
+                    UIAlertView(title: nil, message: "Insert a valid youtube URL", delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
+                
+                let media = URMedia()
+                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
+                media.id = videoID
+                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
+                media.type = URConstant.Media.VIDEO
+                
+                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+                    
+                    }, completed: { (image, error, cacheType, finish, url) -> Void in
+                      self.setupMediaViewWithImage(image)
+                })
+
+            }))
+
+            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
+            
+            break
         default:
             print("Default")
             break;
@@ -283,18 +331,8 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as? URMediaView
-        viewMedia!.delegate = self
-        
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            viewMedia!.imgMedia.image = pickedImage
-            scrollViewMedias.addCustomView(viewMedia!)
-            
-            if scrollViewMedias.views!.count == 1 {
-                self.mediaViewCover = viewMedia!
-                self.mediaViewTapped(viewMedia!)
-            }
-            
+            setupMediaViewWithImage(pickedImage)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
