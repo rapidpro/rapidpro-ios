@@ -135,8 +135,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             if error != nil {
                 print("Could not connect to GCM: \(error.localizedDescription)")
             } else {
-//                self.subscribeToTopic()
-
+                print("Connected with GCM")
             }
         })
     }
@@ -147,14 +146,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application( application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: NSError ) {
             print("Registration for remote notification failed with error: \(error.localizedDescription)")
-            let userInfo = ["error": error.localizedDescription]
-//            NSNotificationCenter.defaultCenter().postNotificationName(URGCMManager.registrationKey, object: nil, userInfo: userInfo)
     }
 
+    func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+        URGCMManager.handleNotification(userInfo)
+        completionHandler(.NewData)
+    }
+    
     func application( application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
-            print("Notification received: \(userInfo)")
-            GCMService.sharedInstance().appDidReceiveMessage(userInfo);
-//            NSNotificationCenter.defaultCenter().postNotificationName(URGCMManager.messageKey, object: nil, userInfo: userInfo)
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+        URGCMManager.handleNotification(userInfo)
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

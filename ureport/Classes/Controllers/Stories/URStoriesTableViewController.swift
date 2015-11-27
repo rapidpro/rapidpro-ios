@@ -25,7 +25,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     init (filterStoriesToModerate:Bool) {
         self.storyList.removeAll()
         self.filterStoriesToModerate = filterStoriesToModerate
-        super.init(style: UITableViewStyle.Plain)
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

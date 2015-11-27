@@ -1419,6 +1419,11 @@
 					65409FBA1B4C842700344D75 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 5DSXDX2N9P;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 					65409FCF1B4C842700344D75 = {
 						CreatedOnToolsVersion = 6.4;
