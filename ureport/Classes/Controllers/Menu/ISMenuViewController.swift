@@ -21,13 +21,14 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var btLogout: UIButton!
     @IBOutlet weak var btLogin: UIButton!
         
-    var countryProgramChanged:URCountryProgram?
+    var countryProgramChanged:URCountryProgram!
     var user:URUser!
     var appDelegate:AppDelegate!
     var menuList:[ISMenu] = []
     
     var pickerCountryProgram:UIPickerView?
-    let countries:[URCountry]? = URCountry.getCountries(URCountryCodeType.ISO3) as? [URCountry]
+//    let countries:[URCountry]? = URCountry.getCountries(URCountryCodeType.ISO3) as? [URCountry]
+    let countryPrograms:[URCountryProgram] = URCountryProgramManager.getAvailableCountryPrograms()
     var country = URCountry()
     
     static let instance = ISMenuViewController(nibName:"ISMenuViewController",bundle:nil)
@@ -109,17 +110,16 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return countries!.count
+        return countryPrograms.count
     }
     
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return self.countries![row].name
+        return countryPrograms[row].name
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        country = (URCountry.getCountries(URCountryCodeType.ISO3)[row] as! URCountry)
-        countryProgramChanged = URCountryProgramManager.getCountryProgramByCountry(country)
-        txtSwitchCountryProgram.text = countryProgramChanged!.name!
+        countryProgramChanged = self.countryPrograms[row] 
+        txtSwitchCountryProgram.text = countryProgramChanged.name!
     }
     
     
@@ -160,6 +160,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     func checkIfIsADifferentCountryProgram(countryProgram:URCountryProgram) {
         if URCountryProgramManager.activeCountryProgram()?.code != countryProgram.code {
             URCountryProgramManager.setSwitchActiveCountryProgram(countryProgram)
+            
             
             URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             

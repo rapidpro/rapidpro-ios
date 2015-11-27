@@ -168,6 +168,28 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
     
+    class func setLoggedUserWithCompletion(user:URUser,mainCompletion:(finish:Bool) -> Void) {
+        URUserManager.checkIfUserIsMasterModerator(user.key) { (isMasterModerator) -> Void in
+            if isMasterModerator == true {
+                user.masterModerator = true
+                
+                URUser.setActiveUser(user)
+                mainCompletion(finish: true)
+            }else {
+                
+                URUserManager.checkIfUserIsCountryProgramModerator(user.key, completion: { (isModerator) -> Void in
+                    if isModerator == true {
+                        user.moderator = isModerator
+                    }
+                    
+                    URUser.setActiveUser(user)
+                    mainCompletion(finish: true)
+                })
+                
+            }
+        }
+    }
+    
     class func setUserAndCountryProgram(user:URUser) {
 //        user.chatRooms = nil
         URUser.setActiveUser(user)

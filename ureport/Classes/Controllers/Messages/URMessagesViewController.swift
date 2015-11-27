@@ -145,7 +145,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     func newMessageReceived(chatMessage: URChatMessage) {
         
-        let date =  NSDate(timeIntervalSince1970: NSTimeInterval(chatMessage.date))
+        let date =  NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date!.doubleValue/1000) as NSTimeInterval)
     
         if chatMessage.media != nil && chatMessage.media!.url != nil {
 
@@ -172,13 +172,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:                     mediaItem))
                     }
 
-                    self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])                    
             })
             
         }else{
             self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
-            self.collectionView!.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count, inSection: 1)])
         }
+
+        self.finishReceivingMessageAnimated(false)
         
     }
     

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
+import SDWebImage
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate {
 
@@ -23,12 +25,13 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     var actionSheetPicture:UIActionSheet!
     let defaultText = "Tell us what's going on".localized
     let maxTitleLength = 80
-    
+    var youtubeMediaList:[URMedia]!
     var appDelegate:AppDelegate!
     let markerTableViewController = URMarkerTableViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        youtubeMediaList = []
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         setupUI()
         setupScrollViewPage()
@@ -89,17 +92,24 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             ProgressHUD.show(nil)
             
             for i in 0...scrollViewMedias.views!.count-1 {
-                let img = (scrollViewMedias.views![i] as! URMediaView).imgMedia.image
-                URAWSManager.uploadImage(img!, uploadPath:.Stories, completion: { (picture:URMedia?) -> Void in
-                    if picture != nil {
-                        self.mediaList.append(picture!)
-                        
-                        if self.scrollViewMedias.views!.count == self.mediaList.count {
-                            self.saveStory(self.mediaList)
+                
+                let mediaView = (scrollViewMedias.views![i] as! URMediaView)
+                
+                if mediaView.media == nil{
+                
+                    let img = mediaView.imgMedia.image
+                    URAWSManager.uploadImage(img!, uploadPath:.Stories, completion: { (picture:URMedia?) -> Void in
+                        if picture != nil {
+                            self.mediaList.append(picture!)
+                            
+                            if self.scrollViewMedias.views!.count == self.mediaList.count {
+                                self.saveStory(self.mediaList)
+                            }
+                            
                         }
-                        
-                    }
-                })
+                    })
+                }
+                
             }
         }else {
             self.saveStory(nil)
@@ -116,7 +126,18 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             var m:[URMedia] = medias!
             story.cover = m[indexImgCover]                        
             story.medias =  m
+            
+            if !youtubeMediaList.isEmpty {
+                for media in story.medias {
+                    story.medias.append(media)
+                }
+            }
+        }else{
+            if !youtubeMediaList.isEmpty {
+                story.medias = youtubeMediaList
+            }
         }
+        
         story.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         story.title = self.txtTitle.text
         story.content = self.txtHistory.text
@@ -177,6 +198,23 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     func setupUI() {
         self.txtHistory.text = defaultText
         self.txtHistory.textColor = UIColor.lightGrayColor()
+    }
+    
+    func setupMediaViewWithImage(image:UIImage,media:URMedia?) {
+        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as? URMediaView
+        
+        if let media = media {
+            viewMedia!.media = media
+        }
+        
+        viewMedia!.delegate = self
+        viewMedia!.imgMedia.image = image
+        scrollViewMedias.addCustomView(viewMedia!)
+        
+        if scrollViewMedias.views!.count == 1 {
+            self.mediaViewCover = viewMedia!
+            self.mediaViewTapped(viewMedia!)
+        }
     }
     
     //MARK: TextView Delegate
@@ -242,6 +280,43 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             self.presentViewController(imagePicker, animated: true, completion: nil)
             
             break;
+            
+        case 3:
+            
+            let alertControllerTextField = UIAlertController(title: nil, message: "Insert youtube URL", preferredStyle: UIAlertControllerStyle.Alert)
+            
+            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
+            alertControllerTextField.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alertControllerTextField.addAction(UIAlertAction(title: "Confirmar", style: .Default, handler: { (alertAction) -> Void in
+                
+                let urlVideo = alertControllerTextField.textFields![0].text!
+                
+                if urlVideo.isEmpty {
+                    UIAlertView(title: nil, message: "Insert a valid youtube URL", delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
+                
+                let media = URMedia()
+                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
+                media.id = videoID
+                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
+                media.type = URConstant.Media.VIDEO
+                
+                self.youtubeMediaList.append(media)
+                
+                ProgressHUD.show(nil)
+                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+                    
+                    }, completed: { (image, error, cacheType, finish, url) -> Void in
+                      ProgressHUD.dismiss()
+                      self.setupMediaViewWithImage(image,media: media)
+                })
+
+            }))
+
+            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
+            
+            break
         default:
             print("Default")
             break;
@@ -271,6 +346,20 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func removeMediaView(mediaView: URMediaView) {
         
+        for i in 0...self.scrollViewMedias.views!.count-1 {
+            let mView = self.scrollViewMedias.views![i] as! URMediaView
+   
+            for j in 0...self.youtubeMediaList.count-1 {
+                
+                if mView.media == self.youtubeMediaList[j] {
+                    self.youtubeMediaList.removeAtIndex(j)
+                    break
+                }
+                
+            }
+            
+        }
+        
         scrollViewMedias.removeCustomView(mediaView)
         
         if mediaView.isCover == true {
@@ -283,18 +372,8 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as? URMediaView
-        viewMedia!.delegate = self
-        
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            viewMedia!.imgMedia.image = pickedImage
-            scrollViewMedias.addCustomView(viewMedia!)
-            
-            if scrollViewMedias.views!.count == 1 {
-                self.mediaViewCover = viewMedia!
-                self.mediaViewTapped(viewMedia!)
-            }
-            
+            setupMediaViewWithImage(pickedImage,media: nil)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
