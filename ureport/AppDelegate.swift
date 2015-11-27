@@ -35,8 +35,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         URCountryProgramManager.deactivateSwitchCountryProgram()
         Firebase.defaultConfig().persistenceEnabled = false
         setupGoogle()
-//        setupGCM()
-//        requestPermissionForPushNotification(application)
+        requestPermissionForPushNotification(application)
+        setupGCM(application)
         setupAWS()
         createDirectoryToImageUploads()
         checkMainViewControllerToShow()
@@ -59,8 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         
     }
     
-    func setupGCM() {
-        
+    func setupGCM(application: UIApplication) {
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
@@ -68,25 +67,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         
         let instanceIDConfig = GGLInstanceIDConfig.defaultConfig()
         instanceIDConfig.delegate = self
-        
         GGLInstanceID.sharedInstance().startWithConfig(instanceIDConfig)
         
         let gcmConfig = GCMConfig.defaultConfig()
         gcmConfig.receiverDelegate = self
-        
+        GCMService.sharedInstance().startWithConfig(gcmConfig)
     }
     
     func requestPermissionForPushNotification(application:UIApplication) {
-        if application.respondsToSelector("registerUserNotificationSettings:") {
-            let types:UIUserNotificationType = ([.Alert, .Badge, .Sound])
-            let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
-            application.registerUserNotificationSettings(settings)
-            application.registerForRemoteNotifications()
-            
-        } else {
-            // Register for Push Notifications before iOS 8
-            application.registerForRemoteNotificationTypes([.Alert, .Badge, .Sound])
-        }
+        let types:UIUserNotificationType = ([.Alert, .Badge, .Sound])
+        let settings:UIUserNotificationSettings = UIUserNotificationSettings(forTypes: types, categories: nil)
+        application.registerUserNotificationSettings(settings)
+        application.registerForRemoteNotifications()
     }        
     
     func setupGoogle() {
