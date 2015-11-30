@@ -32,6 +32,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
         pollManager.delegate = self
         pollManager.getPollsResults(poll.key)
     }

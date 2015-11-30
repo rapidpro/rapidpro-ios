@@ -45,10 +45,11 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         setupGestureRecognizer()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardHideNotification:"), name:   UIKeyboardWillHideNotification, object: nil);
         self.appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
-    }
+    }    
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.topView.backgroundColor = URCountryProgramManager.activeCountryProgram()?.themeColor!
         loadUserInfo()
     }
     
@@ -84,14 +85,17 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             URNavigationManager.setFrontViewController(URAboutViewController(nibName:"URAboutViewController",bundle:nil))
             break
         case .Settings:
+            URNavigationManager.toggleMenu()
+            URNavigationManager.setFrontViewController(URSettingsTableViewController())
             break
         case .Moderation:
             
-            if URUserManager.isUserInYourOwnCountryProgram() == true {
+            if URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true {
                 URNavigationManager.setFrontViewController(URModerationViewController())
-            }else if URUser.activeUser()!.masterModerator == nil || URUser.activeUser()!.masterModerator == false {
+            }else if URUserManager.isUserInYourOwnCountryProgram() == false {
                 UIAlertView(title: nil, message: "feature_without_permission".localized, delegate: self, cancelButtonTitle: "Ok").show()
             }
+            
             break
         }
         

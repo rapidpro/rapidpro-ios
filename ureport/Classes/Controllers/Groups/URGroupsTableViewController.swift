@@ -20,6 +20,7 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         listGroups = []
         chatRoomManager.delegate = self
         chatRoomManager.getOpenGroups()

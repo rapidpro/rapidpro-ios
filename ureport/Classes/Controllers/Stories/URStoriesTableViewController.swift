@@ -42,9 +42,14 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        ProgressHUD.dismiss()
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
     }
     
     //MARK: URStoriesTableViewCellDelegate

@@ -25,14 +25,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
         
         tabBarController(self, didSelectViewController: storiesTableViewController)
-        reloadUserInfo()
         setupViewControllers()
         self.title = "U-Report"
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        
+        reloadUserInfo()
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
@@ -126,6 +126,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     }
     
     func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+        
         if viewController is URStoriesTableViewController {
             self.title = "U-Report"            
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {

@@ -36,6 +36,11 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         self.title = "Poll Results".localized
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pollList.count
     }

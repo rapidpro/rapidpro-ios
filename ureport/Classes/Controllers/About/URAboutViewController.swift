@@ -24,7 +24,7 @@ class URAboutViewController: UIViewController {
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Blue)        
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
     }
     
     //MARK: Class Methods

@@ -25,7 +25,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
     }
 
     override func viewWillDisappear(animated: Bool) {

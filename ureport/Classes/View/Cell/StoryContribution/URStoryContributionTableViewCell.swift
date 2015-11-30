@@ -52,7 +52,7 @@ class URStoryContributionTableViewCell: UITableViewCell {
         
         self.lbContributionText.text = "\(contribution.content)\n"
         self.lbUserName.text = contribution.author.nickname
-        self.lbDate.text = "\(NSDate().offsetFrom(NSDate(timeIntervalSince1970: NSNumber(double: contribution.createdDate.doubleValue/1000) as NSTimeInterval)))"
+        self.lbDate.text = "\(NSDate().offsetFrom(NSDate(timeIntervalSince1970: NSNumber(double: contribution.createdDate.doubleValue/1000) as NSTimeInterval))) ago"
         
         if let picture = contribution.author.picture {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
