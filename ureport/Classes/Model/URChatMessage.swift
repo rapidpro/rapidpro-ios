@@ -8,6 +8,7 @@
 
 import UIKit
 import JSQMessagesViewController
+import ObjectMapper
 
 class URChatMessage: Serializable {
     
@@ -24,5 +25,4 @@ class URChatMessage: Serializable {
     func sender() -> String! {
         return self.user.nickname
     }
-    
 }

@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		279A47B6F10766742C161C79 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D4A2F49216E9109C180A69 /* Pods.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		279A47B6F10766742C161C79 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D4A2F49216E9109C180A69 /* Pods.framework */; };
 		6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */; };
 		6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB791B881AE100CEEC3B /* Images.xcassets */; };
 		6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */; };
@@ -171,6 +171,7 @@
 		65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65FAF0CD1BC2DA0000F8B380 /* URPointsScoredViewController.xib */; };
 		65FAF0D31BC41AF300F8B380 /* URGroupDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65FAF0D11BC41AF300F8B380 /* URGroupDetailsViewController.swift */; };
 		65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65FAF0D21BC41AF300F8B380 /* URGroupDetailsViewController.xib */; };
+		9725C5961C0EAE1A00EE1237 /* URAlamofireLogExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */; };
 		972817A91BFF9C3000FBD20E /* URChoiceResponseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 972817A81BFF9C3000FBD20E /* URChoiceResponseView.xib */; };
 		972817AB1BFFCA0800FBD20E /* URResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 972817AA1BFFCA0800FBD20E /* URResponseView.swift */; };
 		974249261BFB76570024384E /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 974249251BFB76570024384E /* Key-debug.plist */; };
@@ -192,6 +193,10 @@
 		974249511BFE5EFA0024384E /* URFlowType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249501BFE5EFA0024384E /* URFlowType.swift */; };
 		974249531BFE5F6A0024384E /* URFlowTypeValidation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249521BFE5F6A0024384E /* URFlowTypeValidation.swift */; };
 		974249551BFE5FC00024384E /* URFlowTypeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249541BFE5FC00024384E /* URFlowTypeManager.swift */; };
+		97A5A6F21C0E2970006CBA25 /* URGcmInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5A6F11C0E2970006CBA25 /* URGcmInput.swift */; };
+		97A5A6F41C0E2B07006CBA25 /* URGcmPriority.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */; };
+		97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */; };
+		97A5A6F81C0E2C20006CBA25 /* URGcmChatMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */; };
 		97B2FAB71C03938B000820BD /* URRulesetResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2FAB61C03938B000820BD /* URRulesetResponse.swift */; };
 		97B2FABB1C061C83000820BD /* NSUserDefaults+DemoSettings.m in Sources */ = {isa = PBXBuildFile; fileRef = 97B2FAB91C061C83000820BD /* NSUserDefaults+DemoSettings.m */; };
 		97B2FABC1C061C83000820BD /* URYoutubeUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 97B2FABA1C061C83000820BD /* URYoutubeUtil.swift */; };
@@ -403,6 +408,7 @@
 		65FAF0D11BC41AF300F8B380 /* URGroupDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupDetailsViewController.swift; sourceTree = "<group>"; };
 		65FAF0D21BC41AF300F8B380 /* URGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupDetailsViewController.xib; sourceTree = "<group>"; };
 		80289A0F74769B82DBFF3EA2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAlamofireLogExtension.swift; sourceTree = "<group>"; };
 		972817A81BFF9C3000FBD20E /* URChoiceResponseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = URChoiceResponseView.xib; path = ChoiceResponse/URChoiceResponseView.xib; sourceTree = "<group>"; };
 		972817AA1BFFCA0800FBD20E /* URResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URResponseView.swift; path = PollResponse/URResponseView.swift; sourceTree = "<group>"; };
 		974249251BFB76570024384E /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
@@ -424,6 +430,10 @@
 		974249501BFE5EFA0024384E /* URFlowType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlowType.swift; sourceTree = "<group>"; };
 		974249521BFE5F6A0024384E /* URFlowTypeValidation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlowTypeValidation.swift; sourceTree = "<group>"; };
 		974249541BFE5FC00024384E /* URFlowTypeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URFlowTypeManager.swift; path = FlowManager/URFlowTypeManager.swift; sourceTree = "<group>"; };
+		97A5A6F11C0E2970006CBA25 /* URGcmInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGcmInput.swift; sourceTree = "<group>"; };
+		97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGcmPriority.swift; sourceTree = "<group>"; };
+		97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGcmNotification.swift; sourceTree = "<group>"; };
+		97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGcmChatMessage.swift; sourceTree = "<group>"; };
 		97B2FAB61C03938B000820BD /* URRulesetResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRulesetResponse.swift; sourceTree = "<group>"; };
 		97B2FAB81C061C83000820BD /* NSUserDefaults+DemoSettings.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+DemoSettings.h"; sourceTree = "<group>"; };
 		97B2FAB91C061C83000820BD /* NSUserDefaults+DemoSettings.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+DemoSettings.m"; sourceTree = "<group>"; };
@@ -721,6 +731,10 @@
 				974249501BFE5EFA0024384E /* URFlowType.swift */,
 				974249521BFE5F6A0024384E /* URFlowTypeValidation.swift */,
 				97B2FAB61C03938B000820BD /* URRulesetResponse.swift */,
+				97A5A6F11C0E2970006CBA25 /* URGcmInput.swift */,
+				97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */,
+				97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */,
+				97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -753,6 +767,7 @@
 				65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */,
 				65F8B3211BE92EB9009F9CAB /* URStringExtension.swift */,
 				974249291BFBCEB90024384E /* URRapidPRODateTransform.swift */,
+				9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1595,6 +1610,7 @@
 				655690951B7D142900525E00 /* UROpenQuestion.swift in Sources */,
 				65D0F3AB1BA8E13500E5D367 /* URMyChatsViewController.swift in Sources */,
 				655690931B7D13F000525E00 /* URMultipleResult.swift in Sources */,
+				97A5A6F81C0E2C20006CBA25 /* URGcmChatMessage.swift in Sources */,
 				655690871B7D101500525E00 /* URPollCategory.swift in Sources */,
 				65685B4D1BA6686300099CFB /* URStoryManager.swift in Sources */,
 				6556917F1B7E2A8F00525E00 /* ISRoundedView.swift in Sources */,
@@ -1607,6 +1623,7 @@
 				655690781B7CFF5100525E00 /* ISViewExtension.swift in Sources */,
 				658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */,
 				974249531BFE5F6A0024384E /* URFlowTypeValidation.swift in Sources */,
+				97A5A6F41C0E2B07006CBA25 /* URGcmPriority.swift in Sources */,
 				97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */,
 				656562051BD5962400EBA9BD /* URSettings.swift in Sources */,
 				65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */,
@@ -1654,9 +1671,11 @@
 				6515FBAF1B8D6E2600CEEC3B /* ISDateExtension.swift in Sources */,
 				972817AB1BFFCA0800FBD20E /* URResponseView.swift in Sources */,
 				65FAF0C91BC2C2E200F8B380 /* URPasswordEditViewController.swift in Sources */,
+				97A5A6F21C0E2970006CBA25 /* URGcmInput.swift in Sources */,
 				65EA8C201BB0792800F2E29E /* URAboutViewController.swift in Sources */,
 				65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */,
 				655691831B7E668B00525E00 /* URMarkerTableViewCell.swift in Sources */,
+				9725C5961C0EAE1A00EE1237 /* URAlamofireLogExtension.swift in Sources */,
 				655690711B7CFA0B00525E00 /* URConstant.swift in Sources */,
 				652F8B111BA214810096C8DC /* URPollQuestionViewController.swift in Sources */,
 				65D562FF1BA9E8A1001AEF54 /* URStoryContributionViewController.swift in Sources */,
@@ -1698,6 +1717,7 @@
 				6556907F1B7D0A5200525E00 /* URUser.swift in Sources */,
 				659A7A931B4F6C3100B56983 /* URDateUtil.swift in Sources */,
 				65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */,
+				97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */,
 				65A45CD61B876BCE001C6808 /* URNewsTableViewController.swift in Sources */,
 				97B2FABB1C061C83000820BD /* NSUserDefaults+DemoSettings.m in Sources */,
 				652F8B0D1BA207EC0096C8DC /* URChatMemberManager.swift in Sources */,
@@ -1763,8 +1783,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1786,7 +1806,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "49b2f5b8-06ee-4695-bcf6-4bb95a05bfcf";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1810,8 +1830,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1826,7 +1846,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "49b2f5b8-06ee-4695-bcf6-4bb95a05bfcf";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1839,8 +1859,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1850,7 +1870,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49b2f5b8-06ee-4695-bcf6-4bb95a05bfcf";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1862,8 +1882,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1873,7 +1893,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "49b2f5b8-06ee-4695-bcf6-4bb95a05bfcf";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
