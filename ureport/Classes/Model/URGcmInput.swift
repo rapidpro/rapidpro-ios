@@ -13,13 +13,13 @@ class URGcmInput : Mappable {
 
     var to:String?
     var data:[String : AnyObject] = [:]
-    var priority:URGcmPriority? = .high
+    var priority:URGcmPriority? = URGcmPriority.high
     var notification:URGcmNotification?
     
     init(to:String?, data:[String : AnyObject]) {
         self.to = to
         self.data = data
-        self.priority = .high
+        priority = URGcmPriority.high
     }
     
     required init?(_ map: Map){}

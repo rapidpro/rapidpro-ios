@@ -269,13 +269,13 @@ class URChatRoomManager: NSObject {
                                         })
                                     })
                                     
-                                }else {
+                                } else if snapshot?.childrenCount == 2 {
                                     //IndividualChat
                                     var userKey:String = ""
                                     
                                     if ((snapshot!.children.allObjects[0] as! FDataSnapshot).key != user.key){
                                         userKey = (snapshot!.children.allObjects[0] as! FDataSnapshot).key
-                                    }else {
+                                    } else {
                                         userKey = (snapshot!.children.allObjects[1] as! FDataSnapshot).key
                                     }
                                     

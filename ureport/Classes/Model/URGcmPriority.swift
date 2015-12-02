@@ -8,6 +8,6 @@
 
 import UIKit
 
-enum URGcmPriority {
+enum URGcmPriority:String {
     case normal, high
 }
