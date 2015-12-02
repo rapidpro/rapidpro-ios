@@ -37,6 +37,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     var incomingBubbleImageData:JSQMessagesBubbleImage!
     
     var mediaCount:Int!
+    var userBlocked:Bool!
     
     init(chatRoom:URChatRoom!,chatMembers:[URUser],title:String){
         self.chatMembers = chatMembers
@@ -55,36 +56,16 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         self.mediaCount = 1
         self.navigationItem.title = navigationTitle
         
-        if self.chatRoom is URGroupChatRoom {
-            self.navigationItem.rightBarButtonItems = self.addRightBarButtons()
-        }
-        
-        self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
-        automaticallyScrollsToMostRecentMessage = true
-        
-        self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
-        self.senderId = URUser.activeUser()!.key
-        
-        if NSUserDefaults.incomingAvatarSetting() {
-            self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
-        }
-        if !NSUserDefaults.outgoingAvatarSetting() {
-            self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
-        }
-
-        self.showLoadEarlierMessagesHeader = true
-        
-        let bubbleFactory: JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
-        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
-        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
+        setupRightButtons()
+        setupJSQMessageLayout()
         
         setupAvatarImages()
         
-        JSQMessagesCollectionViewCell.registerMenuAction("customAction:")
+//        JSQMessagesCollectionViewCell.registerMenuAction("customAction:")
         
         UIMenuController.sharedMenuController().menuItems = [UIMenuItem(title: "Custom Action", action: "customAction:")]
         
-        JSQMessagesCollectionViewCell.registerMenuAction("delete:")
+//        JSQMessagesCollectionViewCell.registerMenuAction("delete:")
         
         chatMessage.delegate = self
         chatMessage.getMessages(self.chatRoom)
@@ -185,6 +166,82 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     //MARK: Class Methods
     
+    func setupJSQMessageLayout() {
+        self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
+        automaticallyScrollsToMostRecentMessage = true
+        
+        self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
+        self.senderId = URUser.activeUser()!.key
+        
+        if NSUserDefaults.incomingAvatarSetting() {
+            self.collectionView!.collectionViewLayout.incomingAvatarViewSize = CGSizeZero
+        }
+        if !NSUserDefaults.outgoingAvatarSetting() {
+            self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
+        }
+        
+        self.showLoadEarlierMessagesHeader = true
+        
+        let bubbleFactory: JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
+        self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
+        self.incomingBubbleImageData = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleGreenColor())
+    }
+    
+    func setupRightButtons() {
+        if self.chatRoom is URGroupChatRoom {
+            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForGroupChatRoom()
+        }else {
+            if self.chatRoom is URIndividualChatRoom {
+                let individualChatRoom = self.chatRoom as? URIndividualChatRoom
+                
+                userBlocked = false
+                
+                self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
+                
+                if let blocked = individualChatRoom?.blocked {
+                    
+                    self.collectionView!.userInteractionEnabled = false
+                    self.inputToolbar!.userInteractionEnabled = false
+                    
+                    if blocked == URUser.activeUser()!.key {
+                        userBlocked = true
+                        
+                        self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()                        
+                        
+                        let alertController = UIAlertController(title: nil, message: "You has blocked this user. Do you want unblock?", preferredStyle: .Alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+                        alertController.addAction(UIAlertAction(title: "Unblock", style: .Default, handler: { (alertAction) -> Void in
+                            URChatRoomManager.unblockUser(self.chatRoom.key)
+                            self.userBlocked = false
+                            self.collectionView!.userInteractionEnabled = true
+                            self.inputToolbar!.userInteractionEnabled = true
+                            
+                            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
+                            
+                        }))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }else {
+                        
+                        let alertController = UIAlertController(title: nil, message: "This chat room was blocked by \(self.navigationTitle)", preferredStyle: .Alert)
+                        
+                        alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (alertAction) -> Void in
+                            self.navigationController!.popViewControllerAnimated(true)
+                        }))
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                    }
+                    
+                }else{
+                    userBlocked = false
+                }
+            }
+        }
+    }
+    
     func setupAvatarImages() {
         for user in chatMembers {
             
@@ -208,7 +265,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         }
     }
     
-    func addRightBarButtons() -> [UIBarButtonItem]{
+    func addRightBarButtonsForGroupChatRoom() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
         
@@ -235,6 +292,64 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let infoItem = UIBarButtonItem(customView: container)
         
         return [infoItem]
+    }
+    
+    func addRightBarButtonsForIndividualChatRoom() -> [UIBarButtonItem]{
+        
+        self.navigationItem.rightBarButtonItem = nil
+        
+        let btnInfo: UIButton = UIButton(type: UIButtonType.Custom)
+        
+        let container = UIView(frame: CGRectMake(0, 0, 36, 36))
+        
+        btnInfo.frame = CGRectMake(0, 7, 21, 19)
+        btnInfo.setBackgroundImage(UIImage(named: userBlocked == true ?  "icon_unblock" : "icon_block"), forState: UIControlState.Normal)
+        container.layer.cornerRadius = 0
+        
+        btnInfo.addTarget(self, action: "blockUserIfNeccessary", forControlEvents: UIControlEvents.TouchUpInside)
+        
+        container.clipsToBounds = true
+        container.addSubview(btnInfo)
+        
+        let infoItem = UIBarButtonItem(customView: container)
+        
+        return [infoItem]
+    }
+    
+    func blockUserIfNeccessary() {
+        if userBlocked == true {
+            unblockUser()
+        }else{
+            blockUser()
+        }
+    }
+    
+    func blockUser() {
+        let alertController = UIAlertController(title: nil, message: "Do you really want to block this chat room?", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Block", style: .Default, handler: { (alertAction) -> Void in
+            URChatRoomManager.blockUser(self.chatRoom.key)
+            self.collectionView!.userInteractionEnabled = false
+            self.inputToolbar!.userInteractionEnabled = false
+            self.userBlocked = true
+            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.navigationController!.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func unblockUser() {
+        let alertController = UIAlertController(title: nil, message: "Do you really want to unblock this chat room?", preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "Unblock", style: .Default, handler: { (alertAction) -> Void in
+            URChatRoomManager.unblockUser(self.chatRoom.key)
+            self.collectionView!.userInteractionEnabled = true
+            self.inputToolbar!.userInteractionEnabled = true
+            self.userBlocked = false
+            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
+        }))
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        self.navigationController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func openGroupDetail() {

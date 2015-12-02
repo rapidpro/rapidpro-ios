@@ -78,6 +78,7 @@ class URChatRoomManager: NSObject {
                     }else {
                         let individualChatRoom = URIndividualChatRoom(jsonDict: (snapshot.value as! NSDictionary))
                         individualChatRoom.key = snapshot.key
+                        
                         completion(individualChatRoom)
                     }
                 }else {
@@ -205,6 +206,25 @@ class URChatRoomManager: NSObject {
         
     }
     
+    class func blockUser(chatRoomKey:String) {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(URChatRoomManager.path())
+            .childByAppendingPath(chatRoomKey)
+            .updateChildValues(["blocked" : URUser.activeUser()!.key])
+    }
+    
+    class func unblockUser(chatRoomKey:String) {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(URChatRoomManager.path())
+            .childByAppendingPath(chatRoomKey)
+            .childByAppendingPath("blocked")
+            .removeValue()
+    }
+    
     class func getChatRooms(user:URUser,completion:([URChatRoom]?) -> Void){
         
         var chatRoomList:[URChatRoom] = []
@@ -282,43 +302,50 @@ class URChatRoomManager: NSObject {
                                     URUserManager.getByKey(userKey, completion: { (user:URUser?, exists:Bool) -> Void in
                                         if exists == true && user != nil {
                                             
-                                            let individualChatRoom:URIndividualChatRoom = URIndividualChatRoom()
-                                            individualChatRoom.friend = user!
-                                            individualChatRoom.key = rest.key
-                                            
-                                            URChatMessageManager.getLastMessage(rest.key, completion: { (chatMessage:URChatMessage?) -> Void in
-                                                if chatMessage != nil {
-                                                    individualChatRoom.lastMessage = chatMessage
+                                            URChatRoomManager.getByKey(rest.key, completion: { (chatRoom:URChatRoom?) -> Void in
+                                                
+                                                if chatRoom is URIndividualChatRoom {
                                                     
-                                                    URChatMessageManager.getTotalMessages(individualChatRoom, completion: { (totalMessages:Int) -> Void in
-                                                        var totalUnreadMessages = 0
-                                                        
-                                                        for messageRead in URMessageRead.getMessagesRead() as [NSDictionary]{
-                                                            let messageRead = URMessageRead(jsonDict:messageRead)
-                                                            if messageRead.roomKey == individualChatRoom.key {
-                                                                totalUnreadMessages = totalMessages - Int(messageRead.totalMessages)
+                                                    let individualChatRoom = chatRoom as! URIndividualChatRoom
+                                                    
+                                                    individualChatRoom.friend = user!
+                                                 
+                                                    URChatMessageManager.getLastMessage(rest.key, completion: { (chatMessage:URChatMessage?) -> Void in
+                                                        if chatMessage != nil {
+                                                            individualChatRoom.lastMessage = chatMessage
+                                                            
+                                                            URChatMessageManager.getTotalMessages(individualChatRoom, completion: { (totalMessages:Int) -> Void in
+                                                                var totalUnreadMessages = 0
+                                                                
+                                                                for messageRead in URMessageRead.getMessagesRead() as [NSDictionary]{
+                                                                    let messageRead = URMessageRead(jsonDict:messageRead)
+                                                                    if messageRead.roomKey == individualChatRoom.key {
+                                                                        totalUnreadMessages = totalMessages - Int(messageRead.totalMessages)
+                                                                    }
+                                                                }
+                                                                
+                                                                individualChatRoom.totalUnreadMessages = totalUnreadMessages
+                                                                
+                                                                chatRoomList.append(individualChatRoom)
+                                                                
+                                                                if currentChatRoom == totalChatRooms {
+                                                                    completion(chatRoomList)
+                                                                }
+                                                                
+                                                            })
+                                                            
+                                                        }else{
+                                                            chatRoomList.append(individualChatRoom)
+                                                            if currentChatRoom == totalChatRooms {
+                                                                completion(chatRoomList)
                                                             }
-                                                        }
-                                                        
-                                                        individualChatRoom.totalUnreadMessages = totalUnreadMessages
-                                                        
-                                                        chatRoomList.append(individualChatRoom)
-                                                        
-                                                        if currentChatRoom == totalChatRooms {
-                                                            completion(chatRoomList)
                                                         }
                                                         
                                                     })
                                                     
-                                                }else{
-                                                    chatRoomList.append(individualChatRoom)
-                                                    if currentChatRoom == totalChatRooms {
-                                                        completion(chatRoomList)
-                                                    }
                                                 }
                                                 
                                             })
-                                            
                                         }
                                     })
                                     

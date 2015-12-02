@@ -11,5 +11,6 @@ import UIKit
 class URIndividualChatRoom: URChatRoom {
 
     var friend:URUser!
+    var blocked:String?
     
 }
