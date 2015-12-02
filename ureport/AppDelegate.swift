@@ -150,7 +150,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-        URGCMManager.handleNotification(userInfo)
         completionHandler(.NewData)
     }
     

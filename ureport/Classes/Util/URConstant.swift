@@ -122,6 +122,11 @@ struct URConstant {
         static let API_NEWS = "http://ureport.in/api/v1/stories/org/"
     }
     
+    struct Gcm {
+        static let GCM_URL = "https://gcm-http.googleapis.com/gcm/send"
+        static let GCM_AUTHORIZATION = "key=AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs"
+    }
+    
     struct Key {
         static let COUNTRY_PROGRAM_CHANNEL = "COUNTRY_PROGRAM_CHANNEL_"
         static let COUNTRY_PROGRAM_TOKEN = "COUNTRY_PROGRAM_TOKEN_"

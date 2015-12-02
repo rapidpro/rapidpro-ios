@@ -65,6 +65,8 @@ class URChatMessageManager: NSObject {
     }
     
     class func sendChatMessage(chatMessage:URChatMessage, chatRoom:URChatRoom) {
+        URGCMManager.notifyChatMessage(chatRoom, chatMessage: chatMessage)
+        
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)

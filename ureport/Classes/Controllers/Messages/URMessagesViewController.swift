@@ -374,7 +374,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                 return nil
             }
         }
-        return self.avatars[message.senderId]!
+        return self.avatars[message.senderId]
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath) -> NSAttributedString? {

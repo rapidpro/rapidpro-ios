@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import Alamofire
+import ObjectMapper
 
 class URGCMManager: NSObject {
  
@@ -16,7 +18,6 @@ class URGCMManager: NSObject {
     static let messageKey = "onMessageReceived"
     
     class func handleNotification(userData:[NSObject : AnyObject]) {
-        print("Notification received: \(userData)")
         let from = userData["from"] as! String
         if from.hasPrefix(chatTopic) {
             let chatMessageDict = convertJsonToDictionary(userData["chatMessage"] as! String)
@@ -24,11 +25,7 @@ class URGCMManager: NSObject {
             let user = URUser(jsonDict: (chatMessageDict!["user"] as? NSDictionary))
             
             if isUserAllowedForMessageNotification(user) {
-                let localNotification:UILocalNotification = UILocalNotification()
-                localNotification.alertBody = "\(user.nickname): \(chatMessage.text())"
-                localNotification.fireDate = NSDate()
-                localNotification.soundName = UILocalNotificationDefaultSoundName
-                UIApplication.sharedApplication().scheduleLocalNotification(localNotification)
+                print("Chat notifiction: \(chatMessage)")
             }
         }
     }
@@ -65,6 +62,38 @@ class URGCMManager: NSObject {
                     }
             })
         }
+    }
+    
+    class func notifyChatMessage(chatRoom:URChatRoom, chatMessage:URChatMessage) {
+        let headers = [
+            "Authorization": URConstant.Gcm.GCM_AUTHORIZATION
+        ]
+        
+        let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
+        input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname): \(chatMessage.message!)")
+        
+        let param = Mapper<URGcmInput>().toJSON(input)
+        
+        Alamofire.request(.POST, URConstant.Gcm.GCM_URL, parameters: param, encoding: .JSON, headers: headers).debugLog()
+    }
+    
+    class func buildChatMessageData(chatRoom:URChatRoom, chatMessage:URChatMessage) -> [String : AnyObject] {
+        let chatMessageDict:[String : AnyObject] = [
+            "message": chatMessage.message!,
+            "date": URDateUtil.dateFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date.doubleValue/1000) as NSTimeInterval)),
+            "user": buildUserData(chatMessage.user)
+        ]
+        return [
+            "chatMessage": chatMessageDict,
+            "chatRoom": ["key": chatRoom.key]
+        ];
+    }
+    
+    class func buildUserData(user:URUser) -> [String : AnyObject] {
+        return [
+            "key": user.key!,
+            "nickname": user.nickname!
+        ]
     }
     
     class func registrationHandler(registrationToken: String!, error: NSError!) {

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class URUser: Serializable {
     
