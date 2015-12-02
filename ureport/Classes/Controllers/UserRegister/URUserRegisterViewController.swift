@@ -48,7 +48,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     var birthDay:NSDate?
     var gender:String?
     let genders:[String]? = [NSLocalizedString("male",comment:""),NSLocalizedString("female",comment:"")]
-    let countries:[URCountry]? = URCountry.getCountries(URCountryCodeType.ISO2) as? [URCountry]
+    var countries:[URCountry]!
     var states:[String]!
     var districts:[String]!
     
@@ -58,6 +58,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         super.viewDidLoad()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.navigationController!.setNavigationBarHidden(false, animated: false)
+        
+        countries = URCountry.getCountries(URCountryCodeType.ISO2) as? [URCountry]
+        
         hasDistrict = false
         setupUI()
         setupUIWithUserData()

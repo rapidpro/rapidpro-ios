@@ -63,3 +63,7 @@
 "profile_loading_textfield" = "Please wait, loading states...";
 "profile_female" = "Female";
 "profile_close" = "Close";
+
+"male" = "Male";
+"female" = "Female";
+"close" = "Close";

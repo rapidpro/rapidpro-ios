@@ -56,9 +56,10 @@ class URCountry: NSObject {
             countries.append(country!)
         }
         
-        countries.sortInPlace({ $0.name < $1.name })
+
+        let sortedCountries = countries.sort({ $0.name < $1.name })
         
-        return countries
+        return sortedCountries
         
     }
     

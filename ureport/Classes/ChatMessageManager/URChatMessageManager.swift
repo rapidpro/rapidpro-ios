@@ -39,6 +39,8 @@ class URChatMessageManager: NSObject {
                     chatMessage.media = URMedia(jsonDict:snapshot.value.objectForKey("media") as? NSDictionary)
                     chatMessage.date = snapshot.value.objectForKey("date") as! NSNumber
                     
+                    print(snapshot.childrenCount)
+                    
                     if chatMessage.user.nickname != nil {
                         delegate.newMessageReceived(chatMessage)
                     }

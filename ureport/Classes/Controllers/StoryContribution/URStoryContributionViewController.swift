@@ -8,6 +8,8 @@
 
 import UIKit
 import NYTPhotoViewer
+import youtube_ios_player_helper
+import SDWebImage
 
 class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, NYTPhotosViewControllerDelegate, URStoryContributionTableViewCellDelegate {
     
@@ -32,7 +34,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     var listContribution:[URContribution] = []
     var story:URStory!
     var photos:[PhotoShow] = []
-    var photoIndexTapped = 0
+    var photosViewController:NYTPhotosViewController!
     
     init(story:URStory) {
         super.init(nibName: "URStoryContributionViewController", bundle: nil)
@@ -134,37 +136,59 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         scrollViewMedias.setPaging(false)
         scrollViewMedias.scrollViewPageType = ISScrollViewPageType.ISScrollViewPageHorizontally
         
-        if story.medias != nil && story.medias.count > 0{
+        if story.medias != nil && story.medias.count > 0 {
             var photoIndex = 0
             
             for media in story.medias {
-                
-                let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 115))
-                imgView.layer.borderWidth = 2
-                imgView.layer.borderColor = UIColor.whiteColor().CGColor
-                imgView.contentMode = UIViewContentMode.ScaleAspectFill
-                imgView.userInteractionEnabled = true
-                
-                let tapGesture = UITapGestureRecognizer(target: self, action: "imgViewTapped:")
-                tapGesture.numberOfTouchesRequired = 1
-                
-                imgView.addGestureRecognizer(tapGesture)
-                
-                imgView.sd_setImageWithURL(NSURL(string:media.url), completed: { (image, _, _, _) -> Void in
-                    self.scrollViewMedias.addCustomView(imgView)
-                    imgView.tag = photoIndex
+
+                if media.type == URConstant.Media.PICTURE {
+
+                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 115))
+                    imgView.layer.borderWidth = 2
+                    imgView.layer.borderColor = UIColor.whiteColor().CGColor
+                    imgView.contentMode = UIViewContentMode.ScaleAspectFill
+                    imgView.userInteractionEnabled = true
+    
+                    let tapGesture = UITapGestureRecognizer(target: self, action: "imgViewTapped:")
+                    tapGesture.numberOfTouchesRequired = 1
+    
+                    imgView.addGestureRecognizer(tapGesture)
+    
+                    imgView.sd_setImageWithURL(NSURL(string:media.url), completed: { (image, _, _, _) -> Void in
+                        self.scrollViewMedias.addCustomView(imgView)
+                        imgView.tag = photoIndex
+    
+                        let title = NSAttributedString(string: "Photo", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+                        let photo = PhotoShow(image: imgView.image, attributedCaptionTitle: title)
+                        photo.index = photoIndex
+                        
+                        self.photos.append(photo)
+                        photoIndex++
+                    })
                     
-                    let title = NSAttributedString(string: "\(photoIndex + 1)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-                    let photo = PhotoShow(image: imgView.image, attributedCaptionTitle: title)
-                    photo.index = photoIndex
+                }else if media.type == URConstant.Media.VIDEO {
                     
-                    self.photos.append(photo)
+                    let frame = CGRect(x: 0, y: 0, width: 100, height: 115)
+                    let playerView = YTPlayerView(frame: frame)
+                    playerView.loadWithVideoId(media.id)
+                    self.scrollViewMedias.addCustomView(playerView)
                     
-                    photoIndex++
-                })
-                                
+                    SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+                        
+                        }, completed: { (image, error, cacheType, finish, url) -> Void in
+                            
+                            let title = NSAttributedString(string: "Youtube", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+                            let photo = PhotoShow(image: image, attributedCaptionTitle: title)
+                            photo.index = photoIndex
+                            
+                            self.photos.append(photo)
+                            photoIndex++
+                            
+                    })
+                    
+                }
+                
             }
-            
         }
     }
     
@@ -174,7 +198,9 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func imgViewTapped(sender:UITapGestureRecognizer) {
         
-        let photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
+        print(sender.view!.tag)
+        
+        photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
         photosViewController.delegate = self
         presentViewController(photosViewController, animated: true, completion: nil)
         
@@ -249,6 +275,26 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     // MARK: - NYTPhotosViewControllerDelegate
+    
+    func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
+        
+//        let media = story.medias![Int(photoIndex)] as URMedia
+//        
+//        let frame = UIScreen.mainScreen().bounds
+//        let playerView = YTPlayerView(frame: frame)
+//        
+//        if media.type == URConstant.Media.VIDEO {
+//            playerView.loadWithVideoId(media.id)
+//            playerView.tag = 100
+//            self.photosViewController.view.addSubview(playerView)
+//            playerView.playVideo()
+//        }else {
+//            if playerView.tag == 100 {
+//                playerView.stopVideo()
+//                playerView.removeFromSuperview()
+//            }
+//        }
+    }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
         

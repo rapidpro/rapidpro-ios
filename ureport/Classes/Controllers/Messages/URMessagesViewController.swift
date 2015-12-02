@@ -172,13 +172,14 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:                     mediaItem))
                     }
 
+                    self.finishReceivingMessage()
+                    
             })
             
         }else{
             self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
+            self.finishReceivingMessage()
         }
-
-        self.finishReceivingMessageAnimated(false)
         
     }
     
@@ -259,7 +260,8 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
-        self.finishSendingMessage()
+        
+        ProgressHUD.dismiss()
     }
     
     //MARK: ImagePickerControllerDelegate
@@ -269,7 +271,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             ProgressHUD.show(nil)
             URAWSManager.uploadImage(pickedImage, uploadPath: .Chat, completion: { (media:URMedia?) -> Void in
-                ProgressHUD.dismiss()
                 self.sendMediaMessage(media!)
                 self.dismissViewControllerAnimated(true, completion: nil)
             })
@@ -403,6 +404,10 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     //MARK: UICollectionView DataSource
+    
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return 1
+    }
     
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.jsqMessages.count

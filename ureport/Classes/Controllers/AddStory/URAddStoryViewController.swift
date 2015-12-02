@@ -102,12 +102,16 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                         if picture != nil {
                             self.mediaList.append(picture!)
                             
-                            if self.scrollViewMedias.views!.count == self.mediaList.count {
+                            if (self.mediaList.count + self.youtubeMediaList.count) == self.scrollViewMedias.views!.count {
                                 self.saveStory(self.mediaList)
                             }
                             
                         }
                     })
+                }else{
+                    if (self.mediaList.count + youtubeMediaList.count) == scrollViewMedias.views!.count {
+                        self.saveStory(nil)                        
+                    }
                 }
                 
             }
@@ -128,13 +132,14 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             story.medias =  m
             
             if !youtubeMediaList.isEmpty {
-                for media in story.medias {
+                for media in youtubeMediaList {
                     story.medias.append(media)
                 }
             }
         }else{
             if !youtubeMediaList.isEmpty {
                 story.medias = youtubeMediaList
+                story.cover = youtubeMediaList[indexImgCover]
             }
         }
         
@@ -184,7 +189,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func setupActionSheet() {
-        actionSheetPicture = UIActionSheet(title: "Choose an option above", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Choose from Camera roll", "Take a Picture")
+        actionSheetPicture = UIActionSheet(title: "Choose an option above", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Choose from Camera roll", "Take a Picture", "Youtube Video")
     }
     
     func setupScrollViewPage() {
@@ -212,8 +217,11 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         scrollViewMedias.addCustomView(viewMedia!)
         
         if scrollViewMedias.views!.count == 1 {
+            viewMedia!.isCover = true
             self.mediaViewCover = viewMedia!
             self.mediaViewTapped(viewMedia!)
+        }else{
+            viewMedia!.isCover = false
         }
     }
     
@@ -349,23 +357,27 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         for i in 0...self.scrollViewMedias.views!.count-1 {
             let mView = self.scrollViewMedias.views![i] as! URMediaView
    
-            for j in 0...self.youtubeMediaList.count-1 {
-                
-                if mView.media == self.youtubeMediaList[j] {
-                    self.youtubeMediaList.removeAtIndex(j)
-                    break
+            if !self.youtubeMediaList.isEmpty {
+                for j in 0...self.youtubeMediaList.count-1 {
+                    
+                    if let media = mView.media {
+                        if media == self.youtubeMediaList[j] {
+                            self.youtubeMediaList.removeAtIndex(j)
+                            break
+                        }
+                    }
                 }
-                
             }
             
         }
-        
-        scrollViewMedias.removeCustomView(mediaView)
-        
+
         if mediaView.isCover == true {
             mediaViewCover = nil
             indexImgCover = -1
         }
+        
+        scrollViewMedias.removeCustomView(mediaView)
+        
     }
     
     //MARK: ImagePickerControllerDelegate

@@ -270,7 +270,13 @@ class URUserManager: NSObject {
                     currentData.value = pointsCount
                 }
                 
-                URUserManager.fetchUser(URUser.activeUser()!)
+                let totalPoints = currentData.value as! NSNumber
+                
+                let user = URUser.activeUser()
+                user!.points = totalPoints
+                
+                URUser.setActiveUser(user)
+                
                 return FTransactionResult.successWithValue(currentData)
         }
     }
@@ -291,7 +297,12 @@ class URUserManager: NSObject {
                     currentData.value = pointsCount
                 }
                 
-                URUserManager.fetchUser(URUser.activeUser()!)                
+                let totalPoints = currentData.value as! NSNumber
+                
+                let user = URUser.activeUser()
+                user!.points = totalPoints
+                
+                URUser.setActiveUser(user)
                 
                 return FTransactionResult.successWithValue(currentData)
         }
