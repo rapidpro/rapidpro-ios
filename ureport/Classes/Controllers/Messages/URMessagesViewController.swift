@@ -17,7 +17,7 @@ protocol URMessagesViewControllerDelegate {
     func didDismissJSQDemoViewController(messagesViewController:URMessagesViewController)
 }
 
-class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NYTPhotosViewControllerDelegate {
     
     var chatRoom:URChatRoom!
     let chatMessage:URChatMessageManager = URChatMessageManager()
@@ -180,7 +180,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             self.collectionView!.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero
         }
         
-        self.showLoadEarlierMessagesHeader = true
+        self.showLoadEarlierMessagesHeader = false
         
         let bubbleFactory: JSQMessagesBubbleImageFactory = JSQMessagesBubbleImageFactory()
         self.outgoingBubbleImageData = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
@@ -275,11 +275,11 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let container = UIView(frame: CGRectMake(0, 0, 36, 36))
         
         if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
-            btnInfo.frame = CGRectMake(0, 0, 36, 36)
+            btnInfo.frame = CGRectMake(0, 7, 21, 21)
             btnInfo.setBackgroundImageWithURL(NSURL(string: groupChatRoom.picture.url), forState: UIControlState.Normal)
             container.layer.cornerRadius = 18
         }else {
-            btnInfo.frame = CGRectMake(0, 0, 32, 24)
+            btnInfo.frame = CGRectMake(0, 3, 29, 18)
             btnInfo.setBackgroundImage(UIImage(named: "ic_group"), forState: UIControlState.Normal)
             container.layer.cornerRadius = 0
         }
@@ -593,6 +593,12 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         return 0.0
     }
     
+    //MARK: PhotosViewControllerDelegate
+    
+    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
+    }
+    
     //MARK: Responding to collection view tap events
     
     override func collectionView(collectionView: JSQMessagesCollectionView, header headerView: JSQMessagesLoadEarlierHeaderView, didTapLoadEarlierMessagesButton sender: UIButton) {
@@ -615,9 +621,14 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                 SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: media.url), options: SDWebImageOptions.CacheMemoryOnly, progress: { (size, expectedSize) -> Void in
                     
                     }, completed: { (image, error, cache, finish, url) -> Void in
-                        self.presentViewController(NYTPhotosViewController(photos: [PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: ""))]), animated: true, completion: { () -> Void in
-                            
+                        
+                        let photosViewController = NYTPhotosViewController(photos: [PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: ""))])
+                        photosViewController.delegate = self
+                        
+                        self.presentViewController(photosViewController, animated: true, completion: { () -> Void in
+                            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
                         })
+   
                 })
             }else{
                 (jsqMessage.media.mediaView().subviews[jsqMessage.media.mediaView().subviews.count-1] as! YTPlayerView).playVideo()

@@ -19,7 +19,7 @@
                             <animations/>
                         </imageView>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="select_cover_inactive" translatesAutoresizingMaskIntoConstraints="NO" id="mh1-cV-bqB">
-                            <rect key="frame" x="50" y="50" width="25" height="25"/>
+                            <rect key="frame" x="52" y="52" width="25" height="25"/>
                             <animations/>
                         </imageView>
                     </subviews>
@@ -30,7 +30,7 @@
                     <rect key="frame" x="3" y="80" width="78" height="20"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Cover" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="byO-la-ROD">
-                            <rect key="frame" x="8" y="0.0" width="62" height="20"/>
+                            <rect key="frame" x="8" y="-2" width="62" height="20"/>
                             <animations/>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="10"/>
                             <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -51,7 +51,7 @@
                     </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuE-ym-Nph">
-                    <rect key="frame" x="54" y="0.0" width="30" height="30"/>
+                    <rect key="frame" x="56" y="-2" width="30" height="30"/>
                     <animations/>
                     <state key="normal" image="icon_remove_photo">
                         <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>

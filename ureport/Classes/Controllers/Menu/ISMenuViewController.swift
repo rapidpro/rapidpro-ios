@@ -174,7 +174,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     func setupUI() {
         
         self.pickerCountryProgram = UIPickerView()
-        
+        self.pickerCountryProgram!.backgroundColor = UIColor.whiteColor()
         self.pickerCountryProgram!.dataSource = self
         self.pickerCountryProgram!.delegate = self
         self.pickerCountryProgram!.showsSelectionIndicator = true

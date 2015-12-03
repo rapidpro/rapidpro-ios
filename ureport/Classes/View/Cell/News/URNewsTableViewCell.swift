@@ -14,6 +14,7 @@ class URNewsTableViewCell: UITableViewCell {
     @IBOutlet weak var lbDescription: UILabel!
     @IBOutlet weak var imgNew: UIImageView!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var viewCategory: UIView!
     @IBOutlet weak var viewOpacityImage: UIView!
     @IBOutlet weak var lbCategory: UILabel!
@@ -25,6 +26,7 @@ class URNewsTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.viewOpacityImage.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.38)
         self.bgView.layer.cornerRadius = 5
+        self.viewSeparator.layer.cornerRadius = 5
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

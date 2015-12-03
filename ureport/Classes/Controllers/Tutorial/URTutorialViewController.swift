@@ -28,9 +28,15 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         setupScrollViewPage()
     }
 
+    override func viewDidDisappear(animated: Bool) {
+        super.viewDidDisappear(animated)
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
+    }
+    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         

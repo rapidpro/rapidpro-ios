@@ -1,14 +1,15 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URMyChatsViewController" customModule="ureport" customModuleProvider="target">
             <connections>
                 <outlet property="btSee" destination="dvO-oP-o8U" id="Fvl-ax-JJW"/>
                 <outlet property="lbDescriptionOpenGroups" destination="Xvn-qw-G3x" id="Wn0-Nb-dOl"/>
+                <outlet property="lbMessage" destination="esD-Hl-Ef4" id="Nmu-ei-zPw"/>
                 <outlet property="lbTitle" destination="NCL-ex-IFI" id="rPe-Lt-8Ux"/>
                 <outlet property="tableView" destination="VXT-St-j04" id="sLX-yo-7jf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -90,13 +91,24 @@
                         <outlet property="delegate" destination="-1" id="RsL-20-XVz"/>
                     </connections>
                 </tableView>
+                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no chat or group that you are participating" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="esD-Hl-Ef4">
+                    <rect key="frame" x="27" y="285" width="320" height="134"/>
+                    <animations/>
+                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
+                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VXT-St-j04" secondAttribute="bottom" id="2ov-NY-qqx"/>
                 <constraint firstAttribute="trailing" secondItem="f4k-hl-7qm" secondAttribute="trailing" id="6Xd-ov-FU2"/>
+                <constraint firstAttribute="trailing" secondItem="esD-Hl-Ef4" secondAttribute="trailing" constant="28" id="Ah2-Rd-OSy"/>
                 <constraint firstItem="f4k-hl-7qm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="C5d-T0-Umy"/>
+                <constraint firstAttribute="bottom" secondItem="esD-Hl-Ef4" secondAttribute="bottom" constant="248" id="PAB-QZ-ys1"/>
+                <constraint firstItem="esD-Hl-Ef4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="27" id="Qh6-ef-jJt"/>
+                <constraint firstItem="esD-Hl-Ef4" firstAttribute="top" secondItem="f4k-hl-7qm" secondAttribute="bottom" constant="134" id="UoE-hp-CIb"/>
                 <constraint firstItem="VXT-St-j04" firstAttribute="top" secondItem="f4k-hl-7qm" secondAttribute="bottom" id="WuR-X6-F8m"/>
                 <constraint firstItem="VXT-St-j04" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bYm-bD-QSM"/>
                 <constraint firstAttribute="trailing" secondItem="VXT-St-j04" secondAttribute="trailing" id="di4-iI-Pts"/>

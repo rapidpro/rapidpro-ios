@@ -20,8 +20,10 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     @IBOutlet weak var lbContributions: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var topView: UIView!
+    @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var contributionView: UIView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
@@ -76,7 +78,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.scrollViewMediaHeight.constant = 0
         }
         
-        var scrollViewHeight = self.lbContent.frame.size.height + self.contributionView.frame.height + self.topView.frame.size.height + self.scrollViewMedias.frame.height + 45
+        var scrollViewHeight = self.lbContent.frame.size.height + self.contributionView.frame.height + self.topView.frame.size.height + self.scrollViewMedias.frame.height + 70
 
         self.tableViewHeight.constant = self.tableView.contentSize.height
         scrollViewHeight = scrollViewHeight + self.tableView.contentSize.height
@@ -93,6 +95,16 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.lbTitle.text = story.title
         self.lbMarkers.text = story.markers
         self.lbContent.text = story.content
+        
+        if story.userObject.picture == nil{
+            self.imgProfile.contentMode = UIViewContentMode.Center
+            self.imgProfile.image = UIImage(named: "ic_person")
+            
+            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        }else{
+            self.imgProfile.sd_setImageWithURL(NSURL(string: story.userObject.picture))
+        }
+        
     }
     
     func setupTableView() {
@@ -129,6 +141,10 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     //MARK: Class Methods
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     func setupScrollViewMedias() {
         
         scrollViewMedias.setFillContent(false)
@@ -143,7 +159,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
 
                 if media.type == URConstant.Media.PICTURE {
 
-                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 115))
+                    let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 100))
                     imgView.layer.borderWidth = 2
                     imgView.layer.borderColor = UIColor.whiteColor().CGColor
                     imgView.contentMode = UIViewContentMode.ScaleAspectFill
@@ -168,7 +184,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                     
                 }else if media.type == URConstant.Media.VIDEO {
                     
-                    let frame = CGRect(x: 0, y: 0, width: 100, height: 115)
+                    let frame = CGRect(x: 0, y: 0, width: 100, height: 100)
                     let playerView = YTPlayerView(frame: frame)
                     playerView.loadWithVideoId(media.id)
                     self.scrollViewMedias.addCustomView(playerView)
@@ -202,7 +218,10 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
         photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
         photosViewController.delegate = self
-        presentViewController(photosViewController, animated: true, completion: nil)
+        
+        presentViewController(photosViewController, animated: true) { () -> Void in
+           UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+        }
         
     }
     
@@ -357,7 +376,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
-//        print("Did dismiss Photo Viewer: \(photosViewController)")
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
     }
     
 }

@@ -24,6 +24,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var btContribute: UIButton!
     @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var bgView: UIView!
+    @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var moderationView: UIView!
     @IBOutlet weak var markerView: UIView!
     @IBOutlet weak var roundedView: UIView!
@@ -48,6 +49,7 @@ class URStoriesTableViewCell: UITableViewCell {
         super.awakeFromNib()
         
         self.bgView.layer.cornerRadius = 5
+        self.viewSeparator.layer.cornerRadius = 7
         btDisapprove.layer.cornerRadius = 5
         btPublish.layer.cornerRadius = 5
         
