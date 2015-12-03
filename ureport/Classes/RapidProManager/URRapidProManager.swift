@@ -8,6 +8,7 @@
 
 import UIKit
 import Alamofire
+import Firebase
 
 protocol URRapidProManagerDelegate {
     func newMessageReceived(message:String)

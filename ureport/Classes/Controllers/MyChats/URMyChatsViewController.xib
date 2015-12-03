@@ -1,15 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URMyChatsViewController" customModule="ureport" customModuleProvider="target">
             <connections>
                 <outlet property="btSee" destination="dvO-oP-o8U" id="Fvl-ax-JJW"/>
                 <outlet property="lbDescriptionOpenGroups" destination="Xvn-qw-G3x" id="Wn0-Nb-dOl"/>
-                <outlet property="lbMessage" destination="YOO-1T-et4" id="4af-5T-kv1"/>
                 <outlet property="lbTitle" destination="NCL-ex-IFI" id="rPe-Lt-8Ux"/>
                 <outlet property="tableView" destination="VXT-St-j04" id="sLX-yo-7jf"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -91,27 +90,16 @@
                         <outlet property="delegate" destination="-1" id="RsL-20-XVz"/>
                     </connections>
                 </tableView>
-                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="There is no chat or groups that you are participating" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YOO-1T-et4">
-                    <rect key="frame" x="20" y="353" width="334" height="113"/>
-                    <animations/>
-                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="17"/>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                    <nil key="highlightedColor"/>
-                </label>
             </subviews>
             <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="VXT-St-j04" secondAttribute="bottom" id="2ov-NY-qqx"/>
-                <constraint firstItem="YOO-1T-et4" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="20" id="5yu-Wb-R1k"/>
                 <constraint firstAttribute="trailing" secondItem="f4k-hl-7qm" secondAttribute="trailing" id="6Xd-ov-FU2"/>
-                <constraint firstAttribute="bottom" secondItem="YOO-1T-et4" secondAttribute="bottom" constant="201" id="Bqq-n9-3bE"/>
                 <constraint firstItem="f4k-hl-7qm" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="C5d-T0-Umy"/>
-                <constraint firstItem="YOO-1T-et4" firstAttribute="top" secondItem="f4k-hl-7qm" secondAttribute="bottom" constant="202" id="SW5-I7-3OD"/>
                 <constraint firstItem="VXT-St-j04" firstAttribute="top" secondItem="f4k-hl-7qm" secondAttribute="bottom" id="WuR-X6-F8m"/>
                 <constraint firstItem="VXT-St-j04" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="bYm-bD-QSM"/>
                 <constraint firstAttribute="trailing" secondItem="VXT-St-j04" secondAttribute="trailing" id="di4-iI-Pts"/>
-                <constraint firstAttribute="trailing" secondItem="YOO-1T-et4" secondAttribute="trailing" constant="21" id="ei5-Uu-qa9"/>
                 <constraint firstItem="f4k-hl-7qm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="obv-es-6Cr"/>
             </constraints>
             <simulatedStatusBarMetrics key="simulatedStatusBarMetrics"/>

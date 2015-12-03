@@ -24,7 +24,6 @@ class URNavigationManager: NSObject{
     class func setupNavigationControllerWithMainViewController(viewController:UIViewController) {
         
         let menuViewController:ISMenuViewController = ISMenuViewController.sharedInstance()
-        let notificationController = URNotificationViewController()
         
         URNavigationManager.addLeftButtonMenuInViewController(viewController)
         
@@ -33,7 +32,6 @@ class URNavigationManager: NSObject{
         self.navigation!.navigationBar.translucent = true
         
         self.revealController = SWRevealViewController(rearViewController: menuViewController, frontViewController: self.navigation)
-        self.revealController.rightViewController = notificationController
         self.revealController!.rearViewRevealWidth = 250
         
         viewController.view.userInteractionEnabled = true

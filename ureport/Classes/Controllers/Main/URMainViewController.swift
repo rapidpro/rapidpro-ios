@@ -11,19 +11,32 @@ import UIKit
 class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     
     var appDelegate:AppDelegate!
+    var chatRoomKey:String?
     
     let storiesTableViewController:URStoriesTableViewController = URStoriesTableViewController(filterStoriesToModerate: false)
-    let myChatsViewController:URMyChatsViewController = URMyChatsViewController(nibName:"URMyChatsViewController",bundle:nil)
+    let myChatsViewController:URMyChatsViewController = URMyChatsViewController(nibName:"URMyChatsViewController", bundle:nil)
     let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController(nibName: "URClosedPollTableViewController", bundle: nil)
     
+    init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(chatRoomKey:String?) {
+        self.chatRoomKey = chatRoomKey
+        super.init(nibName: nil, bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
-        
         super.viewDidLoad()
         
         self.delegate = self
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
-        
+
         tabBarController(self, didSelectViewController: storiesTableViewController)
         setupViewControllers()
         self.title = "U-Report"
@@ -62,6 +75,12 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
             self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
+            
+            if chatRoomKey != nil {
+                myChatsViewController.chatRoomKeyToOpen = chatRoomKey
+                tabBarController(self, didSelectViewController: myChatsViewController)
+                self.selectedIndex = 2
+            }
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]
         }

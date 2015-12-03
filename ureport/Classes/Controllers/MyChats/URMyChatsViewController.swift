@@ -17,6 +17,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     @IBOutlet weak var tableView: UITableView!
     
     var listChatRoom:[URChatRoom] = []
+    var chatRoomKeyToOpen:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,6 +28,8 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         super.viewWillAppear(animated)
         loadData()
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
+        
+        openChatRoomWithKey(chatRoomKeyToOpen)
     }
 
     override func viewWillDisappear(animated: Bool) {
@@ -54,21 +57,8 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
                 
         if let chatRoom = cell.chatRoom {
-            ProgressHUD.show(nil)
             URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
-            URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
-                ProgressHUD.dismiss()
-                
-                var chatName = ""
-                
-                if chatRoom is URIndividualChatRoom {
-                    chatName = (chatRoom as! URIndividualChatRoom).friend.nickname
-                }else if chatRoom is URGroupChatRoom {
-                    chatName = (chatRoom as! URGroupChatRoom).title
-                }
-                
-                self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:chatName), animated: true)
-            })
+            openChatRoom(chatRoom)
         }
         
     }
@@ -81,6 +71,42 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     
     //MARK: Class Methods
+    
+    func openChatRoomWithKey(chatRoomKey: String?) {
+        if chatRoomKey != nil {
+            URChatRoomManager.getByKey(chatRoomKey!, completion: { (chatRoom) -> Void in
+                self.openChatRoom(chatRoom!)
+            })
+        }
+    }
+    
+    func openChatRoom(chatRoom: URChatRoom) {
+        ProgressHUD.show(nil)
+        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
+            ProgressHUD.dismiss()
+            
+            var chatName = ""
+            
+            if chatRoom is URIndividualChatRoom {
+                let friend = self.getFriend(users)
+                chatName = friend!.nickname
+            }else if chatRoom is URGroupChatRoom {
+                chatName = (chatRoom as! URGroupChatRoom).title
+            }
+            
+            self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:chatName), animated: true)
+        })
+    }
+    
+    func getFriend(users:[URUser]) -> URUser? {
+        for user in users {
+            if user.key != URUser.activeUser()?.key {
+                return user
+            }
+        }
+        
+        return nil
+    }
     
     func setupUI() {
         btSee.layer.cornerRadius = 4
