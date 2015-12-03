@@ -88,7 +88,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
             for person in people! {
                 let phoneNumber = person.phoneNumbers?.map( {$0.value})
                 if phoneNumber != nil && person.firstName != nil{
-                    addressBookList.append(["name":person.firstName!,"phone":phoneNumber!])
+                    addressBookList.append(["name":person.lastName != nil ? "\(person.firstName!) \(person.lastName!)" : person.firstName!,"phone":phoneNumber!])
                 }
             }
             

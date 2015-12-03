@@ -12,6 +12,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
 
     @IBOutlet weak var btSee: UIButton!
     @IBOutlet weak var lbTitle: UILabel!
+    @IBOutlet weak var lbMessage: UILabel!
     @IBOutlet weak var lbDescriptionOpenGroups: UILabel!
     @IBOutlet weak var tableView: UITableView!
     
@@ -92,12 +93,16 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         if listChatRoom.count == 0 {
             ProgressHUD.show(nil)
         }
+        
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
             ProgressHUD.dismiss()
             if chatRooms != nil {
+                self.lbMessage.hidden = true
                 self.listChatRoom = chatRooms!
                 
                 self.tableView.reloadData()
+            }else{
+                self.lbMessage.hidden = false
             }
         })
     }
