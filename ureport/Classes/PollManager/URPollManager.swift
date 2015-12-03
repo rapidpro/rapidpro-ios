@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol URPollManagerDelegate {
     func newPollReceived(poll:URPoll)

@@ -7,6 +7,8 @@
 //
 
 #import <Firebase/Firebase.h>
+#import "Accounts/ACAccountStore.h"
+#import "Accounts/ACAccountType.h"
 
 @interface TwitterAuthHelper : NSObject
 

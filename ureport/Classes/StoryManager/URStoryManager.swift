@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 protocol URStoryManagerDelegate {
     func newStoryReceived(story:URStory)

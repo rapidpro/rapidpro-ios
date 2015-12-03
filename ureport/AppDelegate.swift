@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import ObjectMapper
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
@@ -39,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         setupGCM(application)
         setupAWS()
         createDirectoryToImageUploads()
-        checkMainViewControllerToShow()
+        checkMainViewControllerToShow(launchOptions)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -86,8 +87,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
     }
+    
+    func convertStringToDictionary(text: String) -> [String:AnyObject]? {
+        if let data = text.dataUsingEncoding(NSUTF8StringEncoding) {
+            do {
+                let json = try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? [String:AnyObject]
+                return json
+            } catch {
+                print("Something went wrong")
+            }
+        }
+        return nil
+    }
 
-    func checkMainViewControllerToShow(){
+    func checkMainViewControllerToShow(launchOptions: [NSObject: AnyObject]?) {
         
         if NSUserDefaults.standardUserDefaults().objectForKey("FirstRun") == nil {
             NSUserDefaults.standardUserDefaults().setObject("firstrun", forKey: "FirstRun")
@@ -96,11 +109,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             URNavigationManager.setupNavigationControllerWithTutorialViewController()
         }else {
             if URUser.activeUser() != nil {
-                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+                var mainController: URMainViewController
+                
+                if let chatRoomKey = getChatRoomKey(launchOptions) {
+                    mainController = URMainViewController(chatRoomKey: chatRoomKey)
+                } else {
+                    mainController = URMainViewController()
+                }
+                URNavigationManager.setupNavigationControllerWithMainViewController(mainController)
             }else {
                 URNavigationManager.setupNavigationControllerWithLoginViewController()
             }
         }
+    }
+    
+    func getChatRoomKey(launchOptions: [NSObject: AnyObject]?) -> String? {
+        if launchOptions != nil {
+            let notificationData = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey]
+            
+            if notificationData != nil && notificationData!["chatRoom"] != nil {
+                let chatRoom = convertStringToDictionary(notificationData!["chatRoom"] as! String)
+                return chatRoom!["key"] as? String
+            }
+        }
+        return nil
     }
     
     //MARK: GCMReceiverDelegate
@@ -155,7 +187,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application( application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject]) {
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-        URGCMManager.handleNotification(userInfo)
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {

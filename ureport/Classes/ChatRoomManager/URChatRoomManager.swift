@@ -6,6 +6,7 @@
 //  Copyright (c) 2015 ilhasoft. All rights reserved.
 //
 
+import Firebase
 
 @objc protocol URChatRoomManagerDelegate {
     optional func newOpenGroupReceived(groupChatRoom:URGroupChatRoom)
