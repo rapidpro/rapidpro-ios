@@ -15,11 +15,18 @@ enum URNavigationBarType {
     case Yellow
 }
 
-class URNavigationManager: NSObject{
+class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
 
     static var navigation:ScrollingNavigationController!
     static var revealController:SWRevealViewController!
     static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    var sidebarMenuOpen:Bool!
+    
+    static let instance = URNavigationManager()
+    
+    class func sharedInstance() -> URNavigationManager{
+        return instance
+    }
     
     class func setupNavigationControllerWithMainViewController(viewController:UIViewController) {
         
@@ -33,6 +40,7 @@ class URNavigationManager: NSObject{
         
         self.revealController = SWRevealViewController(rearViewController: menuViewController, frontViewController: self.navigation)
         self.revealController!.rearViewRevealWidth = 250
+        self.revealController!.delegate = URNavigationManager.sharedInstance()
         
         viewController.view.userInteractionEnabled = true
         viewController.view.addGestureRecognizer(self.revealController!.panGestureRecognizer())
@@ -145,5 +153,30 @@ class URNavigationManager: NSObject{
             appDelegate.window!.rootViewController = rootViewController
         }
     }
+    
+    //MARK SWRevealViewControllerDelegate
+    
+    func revealController(revealController: SWRevealViewController!,  willMoveToPosition position: FrontViewPosition){
+        if(position == FrontViewPosition.Left) {
+            revealController.frontViewController.view.userInteractionEnabled = true
+            sidebarMenuOpen = false
+        } else {
+            revealController.frontViewController.view.userInteractionEnabled = false
+            revealController.frontViewController.revealViewController().tapGestureRecognizer().enabled = true
+            revealController.frontViewController.revealViewController().panGestureRecognizer().enabled = true
+            sidebarMenuOpen = true
+        }
+    }
+    
+    func revealController(revealController: SWRevealViewController!,  didMoveToPosition position: FrontViewPosition){
+        if(position == FrontViewPosition.Left) {
+            // self.view.userInteractionEnabled = true
+            sidebarMenuOpen = false
+        } else {
+            // self.view.userInteractionEnabled = false
+            sidebarMenuOpen = true
+        }
+    }
+    
     
 }

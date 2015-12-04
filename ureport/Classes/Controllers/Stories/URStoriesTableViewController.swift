@@ -49,6 +49,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
     }
     

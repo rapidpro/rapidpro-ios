@@ -10,9 +10,10 @@ import UIKit
 
 enum URMenuItem:String {
     case Main = "Main"
-    case About = "About"
+    case About = "About U-Report"
     case Moderation = "Moderation"
     case Settings = "Settings"
+    case Logout = "Logout"
 }
 
 class ISMenu: NSObject {

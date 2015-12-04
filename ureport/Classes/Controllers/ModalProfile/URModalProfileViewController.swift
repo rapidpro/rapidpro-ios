@@ -59,7 +59,7 @@ class URModalProfileViewController: UIViewController {
         self.lbNickName.text = user.nickname
         
         if let contributions = user.contributions {
-            self.lbContributions.text! = "\("Contributions".localized) \(contributions)"
+            self.lbContributions.text! = "\(contributions) \("Contributions".localized)"
         }
         
         if let points = user.points {

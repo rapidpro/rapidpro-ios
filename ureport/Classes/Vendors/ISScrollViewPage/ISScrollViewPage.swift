@@ -13,8 +13,9 @@ enum ISScrollViewPageType {
     case ISScrollViewPageVertically
 }
 
-protocol ISScrollViewPageDelegate {
+@objc protocol ISScrollViewPageDelegate {
     func scrollViewPageDidChanged(scrollViewPage:ISScrollViewPage,index:Int);
+    optional func scrollViewPageDidScroll(scrollView:UIScrollView);
 }
 
 class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
@@ -52,6 +53,10 @@ class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
     }
     
     //MARK: UIScrollViewDelegate
+    
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        scrollViewPageDelegate!.scrollViewPageDidScroll!(scrollView)
+    }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {
         

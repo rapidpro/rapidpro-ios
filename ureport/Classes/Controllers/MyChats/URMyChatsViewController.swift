@@ -112,6 +112,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         btSee.layer.cornerRadius = 4
         self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
     

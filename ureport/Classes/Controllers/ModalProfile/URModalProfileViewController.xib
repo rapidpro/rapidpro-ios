@@ -201,7 +201,7 @@
                                 <constraint firstItem="aPB-kL-iFd" firstAttribute="top" secondItem="NDw-ml-lSA" secondAttribute="top" id="kJ5-66-slP"/>
                             </constraints>
                         </view>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Contributions: 0" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQd-8d-nqF">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No contributions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QQd-8d-nqF">
                             <rect key="frame" x="48" y="258" width="189" height="28"/>
                             <animations/>
                             <constraints>

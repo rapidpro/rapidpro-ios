@@ -28,6 +28,9 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+//        self.view.backgroundColor = UIColor(rgba: "#00cff6").colorWithAlphaComponent(1)
+        
         UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
         setupScrollViewPage()
     }
@@ -72,6 +75,10 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
         tutoView2!.imgTutorial.image = UIImage(named: "img_intro2")
         tutoView3!.imgTutorial.image = UIImage(named: "img_intro3")
         
+        tutoView1!.backgroundColor = UIColor.clearColor()
+        tutoView2!.backgroundColor = UIColor.clearColor()
+        tutoView3!.backgroundColor = UIColor.clearColor()
+        
         tutoView1!.lbTitle.text = "Create Stories"
         tutoView1!.lbText.text = "Amplify your voice, talk about what's happening in your community creating stories and contributing to reports of other users."
         
@@ -80,6 +87,28 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
 
         tutoView3!.lbTitle.text = "Chat"
         tutoView3!.lbText.text = "Contact with other users and see what they say out there."
+        
+    }
+    
+    func scrollViewPageDidScroll(scrollView: UIScrollView) {
+        
+        let value = scrollView.contentOffset.x / UIScreen.mainScreen().bounds.size.width
+        
+        print(value)
+        
+//        if value >= 0 && value <= 0.99 {
+//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+//                    self.view.backgroundColor = UIColor(rgba: "#00cff6")
+//                }, completion: nil)
+//        }else if value >= 1 && value <= 1.99 {
+//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+//                    self.view.backgroundColor = UIColor(rgba: "#ffa500")
+//                }, completion: nil)
+//        }else if value >= 2.0 && value <= 3.0 {
+//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
+//                    self.view.backgroundColor = UIColor(rgba: "#00d400")
+//                }, completion: nil)
+//        }
         
     }
     

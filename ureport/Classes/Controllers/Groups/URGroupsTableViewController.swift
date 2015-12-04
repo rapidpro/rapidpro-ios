@@ -58,6 +58,6 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
         self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         self.tableView.registerNib(UINib(nibName: "URGroupsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URGroupsTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = URConstant.Color.WINDOW_BACKGROUND
     }
 }

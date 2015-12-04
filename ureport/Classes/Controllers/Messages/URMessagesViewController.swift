@@ -249,9 +249,11 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                 SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: picture), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
                     
                     }, completed: { (image, error, cache, finish, url) -> Void in
-                        let userImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: 30)
-                        self.avatars[user.key] = userImage
-                        self.users[user.key] = user.nickname
+                        if image != nil {
+                            let userImage = JSQMessagesAvatarImageFactory.avatarImageWithImage(image, diameter: 30)
+                            self.avatars[user.key] = userImage
+                            self.users[user.key] = user.nickname
+                        }
                 })
                 
             }

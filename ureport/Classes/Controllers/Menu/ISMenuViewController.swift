@@ -43,6 +43,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         setupMenu()
         setupTableViewCell()
         setupGestureRecognizer()
+        self.txtSwitchCountryProgram.tintColor = UIColor.clearColor()
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardHideNotification:"), name:   UIKeyboardWillHideNotification, object: nil);
         self.appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     }    
@@ -97,7 +98,15 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             }
             
             break
+        case .Logout:
+            
+            URNavigationManager.toggleMenu()
+            URUser.deactivateUser()
+            URNavigationManager.setupNavigationControllerWithLoginViewController()
+            
+            break
         }
+        
         
     }
     
@@ -130,12 +139,6 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     //MARK: Button Events
     
     @IBAction func btLoginTapped(sender: AnyObject) {
-        URNavigationManager.setupNavigationControllerWithLoginViewController()
-    }
-    
-    @IBAction func btLogoutTapped(sender: AnyObject) {
-        URNavigationManager.toggleMenu()
-        URUser.deactivateUser()
         URNavigationManager.setupNavigationControllerWithLoginViewController()
     }
     
@@ -236,7 +239,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     private func setupMenu() {
         
-        var menuItem1,menuItem2,menuItem3,menuItem4:ISMenu?
+        var menuItem1,menuItem2,menuItem3,menuItem4,menuItem5:ISMenu?
         
         menuItem1 = ISMenu()
         menuItem1?.title = URMenuItem.Main.rawValue.localized
@@ -260,8 +263,14 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         menuItem4 = ISMenu()
         menuItem4?.title = URMenuItem.Settings.rawValue.localized
         menuItem4!.menuItem = .Settings
-        
+
         menuList.append(menuItem4!)
+        
+        menuItem5 = ISMenu()
+        menuItem5?.title = URMenuItem.Logout.rawValue.localized
+        menuItem5!.menuItem = .Logout
+        
+        menuList.append(menuItem5!)
         
     }
     

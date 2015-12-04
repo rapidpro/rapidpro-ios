@@ -192,14 +192,13 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     
     func save(picture:URMedia?) {
         
-        print(self.groupChatRoom.createdDate)
-        
         let groupChatRoom = URGroupChatRoom()
         groupChatRoom.title = self.txtTitleGroup.text
         groupChatRoom.subject = self.txtDescriptionGroup.text
         groupChatRoom.privateAccess = self.privateGroupSwitch.on
         groupChatRoom.administrator = URUser.activeUser()
-        groupChatRoom.createdDate = (self.groupChatRoom.createdDate != nil && self.groupChatRoom.createdDate.integerValue > 0) ? self.groupChatRoom.createdDate : NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+        
+        groupChatRoom.createdDate = self.groupChatRoom != nil && self.groupChatRoom.createdDate != nil && self.groupChatRoom.createdDate.integerValue > 0 ? self.groupChatRoom.createdDate : NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         groupChatRoom.type = "Group".localized
         
         if let pic = picture {

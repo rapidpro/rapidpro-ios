@@ -90,7 +90,7 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
         self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         
         self.tableView.registerNib(UINib(nibName: "URSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URSettingsTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = URConstant.Color.WINDOW_BACKGROUND
     }
 
 }

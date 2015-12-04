@@ -154,8 +154,8 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
             }
         }
         
-        if viewController is URPollQuestionViewController {
-            self.title = ""
+        if viewController is URClosedPollTableViewController{
+            self.title = "Poll"
             self.navigationItem.rightBarButtonItems = nil
         }
         

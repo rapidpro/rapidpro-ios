@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -11,23 +11,26 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="55"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
+                <rect key="frame" x="0.0" y="0.0" width="200" height="54.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJe-Yw-Sqn">
-                        <rect key="frame" x="8" y="8" width="185" height="38.5"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="14"/>
+                        <rect key="frame" x="12" y="8" width="180" height="38.5"/>
+                        <animations/>
+                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
                         <color key="textColor" red="0.18909143518518523" green="0.18909143518518523" blue="0.18909143518518523" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
+                <animations/>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="nJe-Yw-Sqn" secondAttribute="bottom" constant="8" id="14u-jQ-4Ug"/>
-                    <constraint firstItem="nJe-Yw-Sqn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="8" id="GGc-fE-RFm"/>
-                    <constraint firstAttribute="trailing" secondItem="nJe-Yw-Sqn" secondAttribute="trailing" constant="7" id="Lcf-33-Ubd"/>
+                    <constraint firstItem="nJe-Yw-Sqn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="GGc-fE-RFm"/>
+                    <constraint firstAttribute="trailing" secondItem="nJe-Yw-Sqn" secondAttribute="trailing" constant="8" id="Lcf-33-Ubd"/>
                     <constraint firstItem="nJe-Yw-Sqn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="TIj-iN-jYy"/>
                 </constraints>
             </tableViewCellContentView>
+            <animations/>
             <connections>
                 <outlet property="lbTitle" destination="nJe-Yw-Sqn" id="RRC-K2-e0j"/>
             </connections>

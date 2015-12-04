@@ -15,6 +15,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbDetails: UILabel!
     @IBOutlet var tagView: TagListView!
+    @IBOutlet var viewSeparator: UIView!
     @IBOutlet var choiceView: UIView!
     @IBOutlet var containerView: UIView!
     
@@ -39,7 +40,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
         self.tagView.paddingX = 8
         self.tagView.paddingY = 8
         self.tagView.textFont = UIFont(name: "Helvetica Neue", size: 15)!
-        
+        self.viewSeparator.layer.cornerRadius = 5
         self.containerView.layer.cornerRadius = 5
     }
 

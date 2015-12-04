@@ -154,6 +154,8 @@
 		65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563021BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift */; };
 		65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D563031BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib */; };
 		65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563071BA9EF3B001AEF54 /* URContributionManager.swift */; };
+		65D61BAB1C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D61BA91C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift */; };
+		65D61BAC1C111EBE0059F1B0 /* URWriteStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */; };
 		65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */; };
 		65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C191BAFAEA900F2E29E /* URCountry.swift */; };
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
@@ -390,6 +392,8 @@
 		65D563021BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryContributionTableViewCell.swift; sourceTree = "<group>"; };
 		65D563031BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryContributionTableViewCell.xib; sourceTree = "<group>"; };
 		65D563071BA9EF3B001AEF54 /* URContributionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URContributionManager.swift; sourceTree = "<group>"; };
+		65D61BA91C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URWriteStoryTableViewCell.swift; sourceTree = "<group>"; };
+		65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URWriteStoryTableViewCell.xib; sourceTree = "<group>"; };
 		65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginAlertController.swift; sourceTree = "<group>"; };
 		65EA8C191BAFAEA900F2E29E /* URCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountry.swift; sourceTree = "<group>"; };
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
@@ -799,6 +803,7 @@
 		65409FE91B4C845200344D75 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				65D61BA81C111EAB0059F1B0 /* WriteStory */,
 				656561F71BD58DC000EBA9BD /* Settings */,
 				65B16FDE1BB9F52600BDBDEE /* Ranking */,
 				65D563011BA9EDCA001AEF54 /* StoryContribution */,
@@ -1256,6 +1261,15 @@
 			path = ContributionManager;
 			sourceTree = "<group>";
 		};
+		65D61BA81C111EAB0059F1B0 /* WriteStory */ = {
+			isa = PBXGroup;
+			children = (
+				65D61BA91C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift */,
+				65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */,
+			);
+			path = WriteStory;
+			sourceTree = "<group>";
+		};
 		65EA8C1D1BB0791300F2E29E /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -1488,6 +1502,7 @@
 				65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
+				65D61BAC1C111EBE0059F1B0 /* URWriteStoryTableViewCell.xib in Resources */,
 				974249261BFB76570024384E /* Key-debug.plist in Resources */,
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
@@ -1716,6 +1731,7 @@
 				659969EB1BBDE66900711973 /* URChatRoomManager.swift in Sources */,
 				6556907F1B7D0A5200525E00 /* URUser.swift in Sources */,
 				659A7A931B4F6C3100B56983 /* URDateUtil.swift in Sources */,
+				65D61BAB1C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift in Sources */,
 				65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */,
 				97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */,
 				65A45CD61B876BCE001C6808 /* URNewsTableViewController.swift in Sources */,
@@ -1806,7 +1822,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "c747bf61-340b-44c1-9468-1d88c4052daf";
+				PROVISIONING_PROFILE = "b66bf260-ad10-46de-8d2b-5eb34e42a68c";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1846,7 +1862,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "c747bf61-340b-44c1-9468-1d88c4052daf";
+				PROVISIONING_PROFILE = "b66bf260-ad10-46de-8d2b-5eb34e42a68c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;

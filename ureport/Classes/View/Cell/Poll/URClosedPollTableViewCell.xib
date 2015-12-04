@@ -1,21 +1,29 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="197" id="KGk-i7-Jjw" customClass="URClosedPollTableViewCell" customModule="ureport" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="197"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="205" id="KGk-i7-Jjw" customClass="URClosedPollTableViewCell" customModule="ureport" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="205"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
-                <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
+                <rect key="frame" x="0.0" y="0.0" width="320" height="204.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
+                        <rect key="frame" x="5" y="193" width="310" height="8"/>
+                        <animations/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="8" id="tbj-Sc-9LB"/>
+                        </constraints>
+                    </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-QK-Tmu">
-                        <rect key="frame" x="5" y="5" width="310" height="187"/>
+                        <rect key="frame" x="5" y="5" width="310" height="194.5"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8eT-yU-F9i" userLabel="TopView">
                                 <rect key="frame" x="0.0" y="0.0" width="310" height="61"/>
@@ -71,22 +79,11 @@
                                 <color key="textColor" red="0.0039215686274509803" green="0.81960784313725488" blue="0.85882352941176465" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
-                                <rect key="frame" x="0.0" y="185" width="310" height="2"/>
-                                <animations/>
-                                <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="2" id="fL8-FP-EJI"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="xGr-7P-obE" firstAttribute="leading" secondItem="MS8-QK-Tmu" secondAttribute="leading" id="8HM-UD-CqW"/>
                             <constraint firstAttribute="trailing" secondItem="PAf-cd-B0R" secondAttribute="trailing" constant="9" id="OWq-9n-PB5"/>
-                            <constraint firstAttribute="trailing" secondItem="xGr-7P-obE" secondAttribute="trailing" id="PGh-fL-5Yj"/>
-                            <constraint firstAttribute="bottom" secondItem="xGr-7P-obE" secondAttribute="bottom" constant="-0.5" id="bcL-tz-Uu8"/>
                             <constraint firstItem="PAf-cd-B0R" firstAttribute="leading" secondItem="MS8-QK-Tmu" secondAttribute="leading" constant="9" id="i7x-Wf-7vg"/>
                             <constraint firstItem="8eT-yU-F9i" firstAttribute="leading" secondItem="MS8-QK-Tmu" secondAttribute="leading" id="keG-or-TAJ"/>
                             <constraint firstAttribute="trailing" secondItem="8eT-yU-F9i" secondAttribute="trailing" id="kvz-8z-65K"/>
@@ -96,7 +93,7 @@
                             <constraint firstAttribute="bottom" secondItem="PAf-cd-B0R" secondAttribute="bottom" id="pWO-dr-kMU"/>
                             <constraint firstItem="DvK-6A-gYh" firstAttribute="top" secondItem="8eT-yU-F9i" secondAttribute="bottom" constant="14.5" id="rOL-lJ-fuG"/>
                             <constraint firstItem="8eT-yU-F9i" firstAttribute="top" secondItem="MS8-QK-Tmu" secondAttribute="top" id="srS-f7-fuE"/>
-                            <constraint firstAttribute="bottom" secondItem="PAf-cd-B0R" secondAttribute="bottom" constant="3" id="uGi-Le-Y3k"/>
+                            <constraint firstAttribute="bottom" secondItem="PAf-cd-B0R" secondAttribute="bottom" constant="10.5" id="uGi-Le-Y3k"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -110,8 +107,11 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MS8-QK-Tmu" secondAttribute="trailing" constant="5" id="Cea-Wu-Q4n"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bXQ-8X-yHD"/>
+                    <constraint firstAttribute="trailing" secondItem="xGr-7P-obE" secondAttribute="trailing" constant="5" id="f5h-dx-uSh"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="htg-zv-IAS"/>
-                    <constraint firstAttribute="bottom" secondItem="MS8-QK-Tmu" secondAttribute="bottom" constant="4" id="kX9-QR-hSX"/>
+                    <constraint firstAttribute="bottom" secondItem="MS8-QK-Tmu" secondAttribute="bottom" constant="5" id="kX9-QR-hSX"/>
+                    <constraint firstItem="xGr-7P-obE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="nmA-kd-fRJ"/>
+                    <constraint firstAttribute="bottom" secondItem="xGr-7P-obE" secondAttribute="bottom" constant="3.5" id="yNB-6P-LKd"/>
                 </constraints>
             </tableViewCellContentView>
             <animations/>
@@ -121,9 +121,10 @@
                 <outlet property="lbCategoryName" destination="2dl-1s-znp" id="RkB-c7-rUd"/>
                 <outlet property="lbClosedDate" destination="Ca7-KB-Mba" id="KzU-22-QB1"/>
                 <outlet property="lbDescr" destination="DvK-6A-gYh" id="zyS-te-XwR"/>
+                <outlet property="viewSeparator" destination="xGr-7P-obE" id="0oq-Nc-7sX"/>
                 <outlet property="viewTop" destination="8eT-yU-F9i" id="W48-ws-JSH"/>
             </connections>
-            <point key="canvasLocation" x="248" y="466.5"/>
+            <point key="canvasLocation" x="248" y="470.5"/>
         </tableViewCell>
     </objects>
 </document>

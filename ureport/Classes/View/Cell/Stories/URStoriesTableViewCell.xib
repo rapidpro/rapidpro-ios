@@ -107,7 +107,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p18-Kz-aLs">
                                 <rect key="frame" x="10" y="100" width="292" height="27"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Advocacy, Child protection, Education, Social Policy, Social Policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="CtC-Fz-Ne3">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Advocacy, Child protection, Education, Social Policy, Social Policy" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CtC-Fz-Ne3">
                                         <rect key="frame" x="23" y="0.0" width="269" height="27"/>
                                         <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>

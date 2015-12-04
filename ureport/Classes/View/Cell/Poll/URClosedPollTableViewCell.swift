@@ -15,12 +15,14 @@ class URClosedPollTableViewCell: UITableViewCell {
     @IBOutlet weak var lbClosedDate: UILabel!
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var containerView: UIView!
+    @IBOutlet weak var viewSeparator: UIView!
     
     var poll:URPoll!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.containerView.layer.cornerRadius = 5
+        self.viewSeparator.layer.cornerRadius = 5
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
