@@ -53,7 +53,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         setupTableView()
         setupScrollView()
         setupScrollViewMedias()
-        self.title = story.userObject.nickname
+        self.title = story.userObject!.nickname
         contributionManager.getContributions(story.key)
         contributionManager.delegate = self
     }
@@ -96,13 +96,13 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.lbMarkers.text = story.markers
         self.lbContent.text = story.content
         
-        if story.userObject.picture == nil{
+        if story.userObject!.picture == nil{
             self.imgProfile.contentMode = UIViewContentMode.Center
             self.imgProfile.image = UIImage(named: "ic_person")
             
             self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         }else{
-            self.imgProfile.sd_setImageWithURL(NSURL(string: story.userObject.picture))
+            self.imgProfile.sd_setImageWithURL(NSURL(string: story.userObject!.picture))
         }
         
     }

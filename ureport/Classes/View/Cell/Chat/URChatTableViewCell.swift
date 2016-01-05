@@ -58,13 +58,13 @@ class URChatTableViewCell: UITableViewCell {
         
         var user:URUser
         
-        if createGroupOption == true && indexPath.row == 0 {
+        if createGroupOption == true && indexPath.row == 0 && (URUserManager.userHasPermissionToAccessTheFeature(true)) {
             self.lbName.text = "New Group".localized
             self.img.image = UIImage(named: "icon_group_add_grey")
             self.roundedView.backgroundColor = UIColor.whiteColor()
             self.type = .CreateGroup
         }else {
-            user = (createGroupOption == true) ? list[indexPath.row - 1] : list[indexPath.row]
+            user = (createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)) ? list[indexPath.row - 1] : list[indexPath.row]
             self.user = user
             self.lbName.text = user.nickname
             self.type = URChatCellType.CreateIndividualChat

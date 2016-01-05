@@ -95,7 +95,9 @@ class URStoriesTableViewCell: UITableViewCell {
     func openModalProfile() {
         if let delegate = self.delegate {
             if story.user != URUser.activeUser()?.key {
-                delegate.openProfile(story.userObject)
+                if let userObject = story.userObject {
+                    delegate.openProfile(userObject)                    
+                }
             }
         }
     }
@@ -123,21 +125,25 @@ class URStoriesTableViewCell: UITableViewCell {
         
         self.lbTitle.text = story.title!
         self.lbContributions.text = "\(story.contributions!) \("contributions".localized)"
-        self.lbAuthorName.text = "\(story.userObject.nickname!)"
+        if let userObject = story.userObject {
+            
+            self.lbAuthorName.text = "\(userObject.nickname!)"
+            
+            if userObject.picture != nil {
+                self.imgUser.sd_setImageWithURL(NSURL(string: userObject.picture))
+            }else{
+                self.imgUser.contentMode = UIViewContentMode.Center
+                self.imgUser.image = UIImage(named: "ic_person")
+                
+                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+            }
+        }
+        
         if story.cover != nil && story.cover.url != nil {
             self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
         }
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content
-        
-        if story.userObject.picture == nil{
-            self.imgUser.contentMode = UIViewContentMode.Center
-            self.imgUser.image = UIImage(named: "ic_person")
-
-            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        }else{
-            self.imgUser.sd_setImageWithURL(NSURL(string: story.userObject.picture))
-        }
         
         self.moderationView.hidden = !moderateUserMode
         

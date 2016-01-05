@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URStoryContributionViewController" customModule="ureport" customModuleProvider="target">
@@ -40,10 +40,10 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title asd asd ads asd asd asd ads asd ads " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ejk-zR-XSN">
-                                            <rect key="frame" x="71" y="90" width="236" height="43"/>
+                                            <rect key="frame" x="76" y="82" width="231" height="57"/>
                                             <animations/>
                                             <constraints>
-                                                <constraint firstAttribute="height" constant="43" id="LBU-SR-F1h"/>
+                                                <constraint firstAttribute="height" constant="57" id="LBU-SR-F1h"/>
                                                 <constraint firstAttribute="height" constant="53" id="z6s-HM-aso"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
@@ -74,22 +74,22 @@
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HLb-s2-6gF" customClass="ISRoundedView" customModule="ureport" customModuleProvider="target">
-                                            <rect key="frame" x="11" y="90" width="43" height="43"/>
+                                            <rect key="frame" x="11" y="82" width="57" height="57"/>
                                             <subviews>
                                                 <imageView contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="IXr-3d-O5q">
-                                                    <rect key="frame" x="1" y="1" width="41" height="41"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="57" height="57"/>
                                                     <animations/>
                                                 </imageView>
                                             </subviews>
                                             <animations/>
                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             <constraints>
-                                                <constraint firstItem="IXr-3d-O5q" firstAttribute="leading" secondItem="HLb-s2-6gF" secondAttribute="leading" constant="1" id="HJJ-Aa-9RX"/>
-                                                <constraint firstAttribute="trailing" secondItem="IXr-3d-O5q" secondAttribute="trailing" constant="1" id="JC2-iW-sK7"/>
-                                                <constraint firstAttribute="bottom" secondItem="IXr-3d-O5q" secondAttribute="bottom" constant="1" id="hd2-Ke-7lK"/>
-                                                <constraint firstItem="IXr-3d-O5q" firstAttribute="top" secondItem="HLb-s2-6gF" secondAttribute="top" constant="1" id="lEK-R2-jm7"/>
-                                                <constraint firstAttribute="height" constant="43" id="oNy-3z-gLH"/>
-                                                <constraint firstAttribute="width" constant="43" id="rro-t9-O5q"/>
+                                                <constraint firstItem="IXr-3d-O5q" firstAttribute="leading" secondItem="HLb-s2-6gF" secondAttribute="leading" id="HJJ-Aa-9RX"/>
+                                                <constraint firstAttribute="trailing" secondItem="IXr-3d-O5q" secondAttribute="trailing" id="JC2-iW-sK7"/>
+                                                <constraint firstAttribute="bottom" secondItem="IXr-3d-O5q" secondAttribute="bottom" id="hd2-Ke-7lK"/>
+                                                <constraint firstItem="IXr-3d-O5q" firstAttribute="top" secondItem="HLb-s2-6gF" secondAttribute="top" id="lEK-R2-jm7"/>
+                                                <constraint firstAttribute="height" constant="57" id="oNy-3z-gLH"/>
+                                                <constraint firstAttribute="width" constant="57" id="rro-t9-O5q"/>
                                             </constraints>
                                         </view>
                                     </subviews>
@@ -99,15 +99,15 @@
                                         <constraint firstItem="ejk-zR-XSN" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="84" id="55L-ht-D2v"/>
                                         <constraint firstItem="Dtc-LK-oFT" firstAttribute="leading" secondItem="tMl-65-lLz" secondAttribute="leading" constant="11" id="Cnb-Jo-3eA"/>
                                         <constraint firstAttribute="trailing" secondItem="ejk-zR-XSN" secondAttribute="trailing" constant="13" id="HBZ-sv-aXn"/>
-                                        <constraint firstItem="ejk-zR-XSN" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="90" id="LX3-Va-Eu9"/>
+                                        <constraint firstItem="ejk-zR-XSN" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="82" id="LX3-Va-Eu9"/>
                                         <constraint firstAttribute="trailing" secondItem="PUX-ec-XJV" secondAttribute="trailing" constant="8" id="Le9-Jb-OHW"/>
-                                        <constraint firstItem="HLb-s2-6gF" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="90" id="PyQ-K2-Hrq"/>
+                                        <constraint firstItem="HLb-s2-6gF" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="82" id="PyQ-K2-Hrq"/>
                                         <constraint firstAttribute="height" constant="181" id="cO7-Ld-sKE"/>
                                         <constraint firstAttribute="trailing" secondItem="ejk-zR-XSN" secondAttribute="trailing" constant="13" id="dGL-Mu-QFD"/>
                                         <constraint firstItem="Dtc-LK-oFT" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="157" id="i6o-4V-kwm"/>
                                         <constraint firstItem="PUX-ec-XJV" firstAttribute="leading" secondItem="Dtc-LK-oFT" secondAttribute="trailing" constant="8" id="pup-sl-JhY"/>
-                                        <constraint firstItem="ejk-zR-XSN" firstAttribute="leading" secondItem="HLb-s2-6gF" secondAttribute="trailing" constant="17" id="rDs-pz-uyO"/>
-                                        <constraint firstItem="PUX-ec-XJV" firstAttribute="top" secondItem="HLb-s2-6gF" secondAttribute="bottom" constant="12" id="saL-4M-lyS"/>
+                                        <constraint firstItem="ejk-zR-XSN" firstAttribute="leading" secondItem="HLb-s2-6gF" secondAttribute="trailing" constant="8" id="rDs-pz-uyO"/>
+                                        <constraint firstItem="PUX-ec-XJV" firstAttribute="top" secondItem="HLb-s2-6gF" secondAttribute="bottom" constant="6" id="saL-4M-lyS"/>
                                         <constraint firstItem="PUX-ec-XJV" firstAttribute="top" secondItem="ejk-zR-XSN" secondAttribute="bottom" constant="8" id="wrM-ki-AQZ"/>
                                         <constraint firstItem="HLb-s2-6gF" firstAttribute="leading" secondItem="tMl-65-lLz" secondAttribute="leading" constant="11" id="yAt-KV-4RA"/>
                                     </constraints>

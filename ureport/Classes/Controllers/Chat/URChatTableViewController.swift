@@ -61,7 +61,9 @@ class URChatTableViewController: UITableViewController {
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return self.myChatsMode == false ? self.createGroupOption == true ? self.listUser.count + 1 : self.listUser.count : self.listChatRoom.count
+        
+        
+        return self.myChatsMode == false ? (self.createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)) ? self.listUser.count + 1 : self.listUser.count : self.listChatRoom.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

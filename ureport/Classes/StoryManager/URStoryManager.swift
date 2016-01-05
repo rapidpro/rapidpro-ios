@@ -62,7 +62,7 @@ class URStoryManager: NSObject {
                     story.key = snapshot.key
                     
                     URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
-                        if user != nil {
+                        if user != nil && user!.nickname != nil{
                             URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
                                 story.contributions = total
                                 story.userObject = user

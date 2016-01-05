@@ -34,11 +34,13 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()        
-        reloadDataWithStories()
+        
+        setupTableView()
         
         if filterStoriesToModerate == false {
             loadNews()
+        }else{
+            self.reloadDataWithStories()
         }
     }
     
@@ -85,6 +87,10 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+        if indexPath.row == 0 && filterStoriesToModerate == false{
+            return 75
+        }
+        
         if indexPath.row < self.storyList.count {
             let story = storyList[indexPath.row]
             
@@ -101,7 +107,10 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row < self.storyList.count {
+        if indexPath.row == 0 && filterStoriesToModerate == false {
+            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URWriteStoryTableViewCell.self), forIndexPath: indexPath) as! URWriteStoryTableViewCell
+            return cell
+        }else if indexPath.row < self.storyList.count {
         
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
             
@@ -111,6 +120,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             cell.setupCellWith(story,moderateUserMode: self.filterStoriesToModerate)
             return cell
         }else {
+            print(indexPath.row)
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URNewsTableViewCell.self), forIndexPath: indexPath) as! URNewsTableViewCell
             let news = newsList[indexPath.row - self.storyList.count]
             cell.setupCellWith(news)
@@ -129,6 +139,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             }
         }else if cell is URNewsTableViewCell {
             self.navigationController?.pushViewController(URNewsDetailViewController(news:(cell as! URNewsTableViewCell).news),animated: true)
+        }else if cell is URWriteStoryTableViewCell {
+            self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
         }
         
     }
@@ -139,11 +151,13 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
             let url = "\(URConstant.RapidPro.API_NEWS)\(org)"
-            print(url)
             Alamofire.request(.GET, url, headers: nil).responseObject({ (response:URAPIResponse<URNews>?, error:ErrorType?) -> Void in
                 if let response = response {
                     self.newsList = response.results
                     self.tableView.reloadData()
+                    
+                    self.reloadDataWithStories()
+                    
                 }
             })
             
@@ -152,7 +166,6 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     func reloadDataWithStories() {
-        ProgressHUD.show(nil)
         storyManager.delegate = self
         storyList.removeAll()
         storyManager.getStories(self.filterStoriesToModerate)        
@@ -165,6 +178,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
         self.tableView.separatorColor = UIColor.clearColor()
     }
     
@@ -177,9 +191,12 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     func newStoryReceived(story: URStory) {
-        ProgressHUD.dismiss()
         storyList.insert(story, atIndex: 0)
-        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+        if filterStoriesToModerate == false {
+            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: (storyList.count - index)+1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }else{
+            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
         index++
     }
     

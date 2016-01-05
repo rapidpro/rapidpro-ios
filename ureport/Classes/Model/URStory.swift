@@ -19,6 +19,6 @@ class URStory: Serializable {
     var markers:String!
     var cover:URMedia!
     var medias:[URMedia]!
-    var userObject:URUser!
+    var userObject:URUser?
     
 }

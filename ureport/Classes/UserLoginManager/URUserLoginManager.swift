@@ -29,10 +29,16 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         self.googleSignIn.uiDelegate = self
     }
     
+    class func logoutFromSocialNetwork() {
+        GIDSignIn.sharedInstance().disconnect()
+        FBSDKLoginManager().logOut()
+        URFireBaseManager.sharedInstance().unauth()
+    }
+    
     class func loginWithFacebook(viewController:UIViewController, completion:(URUser?) -> Void ) {
         
         let login: FBSDKLoginManager = FBSDKLoginManager()
-
+        
         login.logInWithReadPermissions(["email","user_birthday"], fromViewController: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
                 print(error)
@@ -61,6 +67,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     class func loginWithTwitter(completion:(URUser?) ->Void ) {
         let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedInstance(), apiKey: URConstant.SocialNetwork.FACEBOOK_APP_ID())
+
         twitterAuthHelper.selectTwitterAccountWithCallback { (error, accounts:[AnyObject]!) -> Void in
             
             if error != nil {

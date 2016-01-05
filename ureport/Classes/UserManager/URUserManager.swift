@@ -148,6 +148,7 @@ class URUserManager: NSObject {
     }
     
     class func checkIfUserIsCountryProgramModerator(key:String,completion:(Bool) -> Void){
+
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)

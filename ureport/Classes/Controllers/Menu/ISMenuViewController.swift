@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class ISMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -93,13 +94,18 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             if URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true {
                 URNavigationManager.setFrontViewController(URModerationViewController())
-            }else if URUserManager.isUserInYourOwnCountryProgram() == false {
+            }else if URUser.activeUser()!.moderator != nil && URUser.activeUser()!.moderator == true {
+                let storyModerationViewController = URStoriesTableViewController(filterStoriesToModerate: true)
+                storyModerationViewController.title = "Stories".localized
+                URNavigationManager.setFrontViewController(URStoriesTableViewController(filterStoriesToModerate: true))
+            }
+            else if URUserManager.isUserInYourOwnCountryProgram() == false {
                 UIAlertView(title: nil, message: "feature_without_permission".localized, delegate: self, cancelButtonTitle: "Ok").show()
             }
             
             break
         case .Logout:
-            
+            URUserLoginManager.logoutFromSocialNetwork()
             URNavigationManager.toggleMenu()
             URUser.deactivateUser()
             URNavigationManager.setupNavigationControllerWithLoginViewController()

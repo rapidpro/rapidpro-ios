@@ -65,6 +65,8 @@
 "profile_female" = "Female";
 "profile_close" = "Close";
 
+"chat_group_created" = "Group created by";
+
 "male" = "Male";
 "female" = "Female";
 "close" = "Close";

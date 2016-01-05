@@ -131,7 +131,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
             ProgressHUD.dismiss()
             
             if users != nil && !users!.isEmpty {
-                self.listUser = users!
+                self.listUser = users!.sort({$0.nickname < $1.nickname})
                 
                 for i in 0...self.listUser.count-1 {
                     if self.listUser[i].key == URUser.activeUser()!.key {

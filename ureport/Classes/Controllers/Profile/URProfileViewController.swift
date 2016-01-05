@@ -171,6 +171,11 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
                 if let points = user!.points {
                     self.lbProfileDetails.text = "\(self.lbProfileDetails.text!) \("menu_points".localized) \(points)"
                 }
+                
+                if self.lbProfileDetails.text!.isEmpty {
+                   self.lbProfileDetails.text = "Stories: 0 Points: 0"
+                }
+                
             })
             
         }
