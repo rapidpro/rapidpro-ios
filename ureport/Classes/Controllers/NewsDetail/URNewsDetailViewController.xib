@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URNewsDetailViewController" customModule="ureport" customModuleProvider="target">
@@ -34,14 +34,12 @@
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zuP-IA-iG0">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="181" id="SKW-zS-czK"/>
                                             </constraints>
                                         </imageView>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IOI-R7-1I8" userLabel="OpacityView">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
-                                            <animations/>
                                             <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="181" id="uA9-20-Fk3"/>
@@ -52,13 +50,11 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Health" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="odT-Vr-Lf0">
                                                     <rect key="frame" x="0.0" y="3" width="92" height="13"/>
-                                                    <animations/>
                                                     <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
-                                            <animations/>
                                             <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="20" id="YKm-cJ-HEW"/>
@@ -75,7 +71,6 @@
                                         </view>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hashtags" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="c4K-Mc-Jaw">
                                             <rect key="frame" x="13" y="137" width="294" height="19"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="19" id="Ap2-4u-MJQ"/>
                                             </constraints>
@@ -87,7 +82,6 @@
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increasing Immunization Coverage in Uganda" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="gbz-YD-MSL">
                                             <rect key="frame" x="13" y="84" width="299" height="45"/>
-                                            <animations/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="45" id="VeR-pz-7eA"/>
                                             </constraints>
@@ -98,7 +92,6 @@
                                             <size key="shadowOffset" width="1" height="1"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstItem="c4K-Mc-Jaw" firstAttribute="leading" secondItem="Vd3-ur-mWg" secondAttribute="leading" constant="13" id="A2H-b6-BoL"/>
                                         <constraint firstItem="1A4-9D-hG5" firstAttribute="leading" secondItem="Vd3-ur-mWg" secondAttribute="leading" id="Dgk-ch-gUG"/>
@@ -119,7 +112,6 @@
                                 </view>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9r1-a3-ZdO" customClass="ISScrollViewPage" customModule="ureport" customModuleProvider="target">
                                     <rect key="frame" x="11" y="224" width="299" height="101"/>
-                                    <animations/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="101" id="pEl-bN-6sV"/>
                                     </constraints>
@@ -129,12 +121,10 @@
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="89L-gV-6eT">
                                             <rect key="frame" x="0.0" y="0.0" width="299" height="17"/>
-                                            <animations/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <animations/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="trailing" secondItem="89L-gV-6eT" secondAttribute="trailing" id="2jj-sR-Qr7"/>
@@ -145,14 +135,12 @@
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T2z-nj-zrl" userLabel="ViewSeparator">
                                     <rect key="frame" x="11" y="213" width="299" height="1"/>
-                                    <animations/>
                                     <color key="backgroundColor" red="0.90588235289999997" green="0.90196078430000004" blue="0.90196078430000004" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="Y65-Vw-nlD"/>
                                     </constraints>
                                 </view>
                             </subviews>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstAttribute="trailing" secondItem="9r1-a3-ZdO" secondAttribute="trailing" constant="10" id="3WL-TW-gXv"/>
@@ -171,7 +159,6 @@
                             </constraints>
                         </view>
                     </subviews>
-                    <animations/>
                     <constraints>
                         <constraint firstItem="Gbc-YR-dXg" firstAttribute="width" secondItem="AWd-ay-wEc" secondAttribute="width" id="5Wo-NT-ett"/>
                         <constraint firstItem="Gbc-YR-dXg" firstAttribute="height" secondItem="AWd-ay-wEc" secondAttribute="height" id="7sw-bj-G3F"/>
@@ -199,7 +186,6 @@
                     </variation>
                 </scrollView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="AWd-ay-wEc" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4hh-eU-mGD"/>

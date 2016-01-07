@@ -57,6 +57,13 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithType(.Clear)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Group Creation")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
     }
     
     override func viewDidLayoutSubviews() {

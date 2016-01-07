@@ -29,6 +29,9 @@ PODS:
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
+  - Google/Analytics (1.2.1):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
   - Google/CloudMessaging (1.2.1):
     - GGLInstanceID (~> 1.0)
     - Google/Core
@@ -41,6 +44,7 @@ PODS:
   - Google/SignIn (1.2.1):
     - Google/Core
     - GoogleSignIn (~> 2.0)
+  - GoogleAnalytics (3.14.0)
   - GoogleAppUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
   - GoogleAuthUtilities (1.0.1):
@@ -88,6 +92,7 @@ DEPENDENCIES:
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase (>= 2.3.3)
+  - Google/Analytics
   - Google/CloudMessaging
   - Google/SignIn
   - JSQMessagesViewController
@@ -120,6 +125,7 @@ SPEC CHECKSUMS:
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
   GGLInstanceID: 407e418571271b5166ce15f9a9f5412b2e219b70
   Google: fd33b5fa40fa3aaee5176de49c873a74e3d11dce
+  GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
   GoogleCloudMessaging: eae7280c5317d41fc8e1c93514e925b87eb0b2d2

@@ -4,6 +4,7 @@
 
 #import "ProgressHUD.h"
 
+#import <Google/Analytics.h>
 #import "NSLocale+ISO639_2.h"
 #import "NSUserDefaults+DemoSettings.h"
 #import "SWRevealViewController.h"

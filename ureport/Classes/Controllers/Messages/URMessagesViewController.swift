@@ -85,6 +85,14 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         if let _ = self.delegate {
             self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: "closePressed:")
         }
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Chat Messages")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        
     }
     
     override func viewWillDisappear(animated: Bool) {

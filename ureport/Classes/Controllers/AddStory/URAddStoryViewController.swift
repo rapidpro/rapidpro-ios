@@ -46,6 +46,16 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         self.view.endEditing(true)        
     }
 
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Story Creation")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     //Mark: Button Events
     
     @IBAction func btSendHistoryTapped(sender: AnyObject) {

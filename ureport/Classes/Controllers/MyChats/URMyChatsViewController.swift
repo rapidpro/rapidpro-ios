@@ -30,6 +30,14 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         openChatRoomWithKey(chatRoomKeyToOpen)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "My Chats")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        
     }
 
     override func viewWillDisappear(animated: Bool) {

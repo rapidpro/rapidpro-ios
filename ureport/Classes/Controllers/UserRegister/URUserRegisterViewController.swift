@@ -69,6 +69,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "User Register")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -123,6 +130,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
         
         ProgressHUD.show(nil)
+        
+        //apagar
+//        user.key = "123"
+//        user.type = URType.UReport
+//        saveUser(user)
+//        return
+        //
         
         if (self.userInput != nil) {
             user.key = userInput?.key

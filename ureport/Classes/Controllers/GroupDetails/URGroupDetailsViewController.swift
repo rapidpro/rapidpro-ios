@@ -42,6 +42,14 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.rightBarButtonItems = self.addRightBarButtons()
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Group Details")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        
     }
     
     required init?(coder aDecoder: NSCoder) {

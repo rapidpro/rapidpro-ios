@@ -86,6 +86,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         var configureError: NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        
+        var gai: GAI = GAI.sharedInstance()
+        gai.trackUncaughtExceptions = true
     }
     
     func convertStringToDictionary(text: String) -> [String:AnyObject]? {

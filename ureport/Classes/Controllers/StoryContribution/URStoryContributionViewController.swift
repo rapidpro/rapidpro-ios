@@ -62,6 +62,14 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithType(.Clear)
         URNavigationManager.navigation.followScrollView(self.scrollView, delay: 50.0)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Story Detail")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        
     }
     
     override func viewWillDisappear(animated: Bool) {

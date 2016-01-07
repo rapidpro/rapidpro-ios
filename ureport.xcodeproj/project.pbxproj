@@ -124,7 +124,6 @@
 		65A45CCE1B8694AE001C6808 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */; };
 		65A45CD21B8768D8001C6808 /* URNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CD01B8768D8001C6808 /* URNewsTableViewCell.swift */; };
 		65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CD11B8768D8001C6808 /* URNewsTableViewCell.xib */; };
-		65A45CD61B876BCE001C6808 /* URNewsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CD51B876BCE001C6808 /* URNewsTableViewController.swift */; };
 		65A45CDB1B879551001C6808 /* URMainChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CDA1B879551001C6808 /* URMainChatViewController.swift */; };
 		65A45CE71B880C3B001C6808 /* URGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */; };
 		65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CE61B880C3B001C6808 /* URGroupsTableViewCell.xib */; };
@@ -362,7 +361,6 @@
 		65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65A45CD01B8768D8001C6808 /* URNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewsTableViewCell.swift; sourceTree = "<group>"; };
 		65A45CD11B8768D8001C6808 /* URNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewsTableViewCell.xib; sourceTree = "<group>"; };
-		65A45CD51B876BCE001C6808 /* URNewsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewsTableViewController.swift; sourceTree = "<group>"; };
 		65A45CDA1B879551001C6808 /* URMainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMainChatViewController.swift; sourceTree = "<group>"; };
 		65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		65A45CE61B880C3B001C6808 /* URGroupsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupsTableViewCell.xib; sourceTree = "<group>"; };
@@ -673,7 +671,6 @@
 				65A45CE91B880D6F001C6808 /* Groups */,
 				65A45CE11B879B2C001C6808 /* Chat */,
 				65A45CD91B87953D001C6808 /* MainChat */,
-				65A45CD41B876BBA001C6808 /* News */,
 				658949BB1B83E1690087F361 /* Menu */,
 				655691851B7E679800525E00 /* Marker */,
 				655691791B7D85DD00525E00 /* Poll */,
@@ -1095,14 +1092,6 @@
 			children = (
 				65A45CD01B8768D8001C6808 /* URNewsTableViewCell.swift */,
 				65A45CD11B8768D8001C6808 /* URNewsTableViewCell.xib */,
-			);
-			path = News;
-			sourceTree = "<group>";
-		};
-		65A45CD41B876BBA001C6808 /* News */ = {
-			isa = PBXGroup;
-			children = (
-				65A45CD51B876BCE001C6808 /* URNewsTableViewController.swift */,
 			);
 			path = News;
 			sourceTree = "<group>";
@@ -1734,7 +1723,6 @@
 				65D61BAB1C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift in Sources */,
 				65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */,
 				97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */,
-				65A45CD61B876BCE001C6808 /* URNewsTableViewController.swift in Sources */,
 				97B2FABB1C061C83000820BD /* NSUserDefaults+DemoSettings.m in Sources */,
 				652F8B0D1BA207EC0096C8DC /* URChatMemberManager.swift in Sources */,
 				656562021BD5912500EBA9BD /* URNotificationViewController.swift in Sources */,

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9060" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9051"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URLoginViewController" customModule="ureport" customModuleProvider="target">
@@ -27,10 +27,8 @@
                     <subviews>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo" translatesAutoresizingMaskIntoConstraints="NO" id="ne3-nk-U5u">
                             <rect key="frame" x="70" y="0.0" width="181" height="61"/>
-                            <animations/>
                         </imageView>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="ne3-nk-U5u" firstAttribute="top" secondItem="PNX-Uu-LQL" secondAttribute="top" id="I6W-a2-din"/>
@@ -51,7 +49,6 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuB-Oz-6SQ" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                             <rect key="frame" x="25" y="21" width="275" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.0" green="0.84313725490196079" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="6Ss-5e-f34"/>
@@ -66,7 +63,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKV-wx-Vue" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                             <rect key="frame" x="25" y="73" width="275" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.0039215686274509803" green="0.81960784313725488" blue="0.85882352941176465" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="9yF-aL-1n7"/>
@@ -81,7 +77,6 @@
                         </button>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZ6-mL-bC2">
                             <rect key="frame" x="147" y="124" width="27" height="26"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="27" id="kQU-4f-73X"/>
                                 <constraint firstAttribute="height" constant="26" id="uov-pE-xbu"/>
@@ -92,7 +87,6 @@
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjh-IX-6Au" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                             <rect key="frame" x="25" y="160" width="134" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.31605315807318246" green="0.47882310561574443" blue="0.94144758597883593" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="N4f-mv-z0u"/>
@@ -107,7 +101,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTR-FY-6nF" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                             <rect key="frame" x="166" y="160" width="134" height="40"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.95145983040017423" green="0.37557847577501252" blue="0.29378919262598896" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="HWC-al-NzQ"/>
@@ -122,7 +115,6 @@
                         </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edX-Cm-QZZ">
                             <rect key="frame" x="0.0" y="248" width="320" height="47"/>
-                            <animations/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="47" id="1yv-z6-grR"/>
@@ -138,7 +130,6 @@
                         </button>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpG-cd-Gua" userLabel="ViewSeparator2">
                             <rect key="frame" x="25" y="138" width="119" height="1"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.87647374922191101" green="0.6774240995692129" blue="0.05636268756287003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="bpN-6r-1rT"/>
@@ -146,14 +137,12 @@
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVU-bN-FG0" userLabel="ViewSeparator1">
                             <rect key="frame" x="181" y="138" width="119" height="1"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.87647374922191101" green="0.6774240995692129" blue="0.05636268756287003" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="1" id="vBK-DF-LA5"/>
                             </constraints>
                         </view>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstItem="Yjh-IX-6Au" firstAttribute="width" secondItem="jTR-FY-6nF" secondAttribute="width" id="0FG-vX-cW3"/>
@@ -198,7 +187,6 @@
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QVp-pa-NZe">
                     <rect key="frame" x="202" y="8" width="110" height="35"/>
-                    <animations/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="110" id="3hA-n4-mNX"/>
@@ -214,7 +202,6 @@
                     </connections>
                 </button>
             </subviews>
-            <animations/>
             <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.0039215686274509803" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="centerX" secondItem="RaM-Oi-FNm" secondAttribute="centerX" id="6q1-rr-VUS"/>

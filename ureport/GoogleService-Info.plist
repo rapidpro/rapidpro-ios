@@ -15,7 +15,9 @@
 	<key>IS_ADS_ENABLED</key>
 	<false/>
 	<key>IS_ANALYTICS_ENABLED</key>
-	<false/>
+	<true/>
+	<key>TRACKING_ID</key>
+	<string>UA-62089811-3</string>
 	<key>IS_APPINVITE_ENABLED</key>
 	<false/>
 	<key>IS_GCM_ENABLED</key>

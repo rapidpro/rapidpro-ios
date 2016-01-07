@@ -24,6 +24,13 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
         listGroups = []
         chatRoomManager.delegate = self
         chatRoomManager.getOpenGroups()
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Open Groups")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
     }
     
     // MARK: - Table view data source

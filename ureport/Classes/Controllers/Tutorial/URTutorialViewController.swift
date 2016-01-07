@@ -26,6 +26,15 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
         fatalError("init(coder:) has not been implemented")
     }
     
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Tutorial")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

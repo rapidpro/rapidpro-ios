@@ -70,6 +70,14 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithType(.Clear)
         setupDelegates()
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Profile")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        
     }
     
     override func viewWillDisappear(animated: Bool) {

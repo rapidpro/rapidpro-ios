@@ -47,6 +47,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         reloadUserInfo()
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Main")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
+        
     }
     
     //MARK: Class Methods    

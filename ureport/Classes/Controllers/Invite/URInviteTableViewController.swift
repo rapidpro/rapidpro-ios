@@ -25,7 +25,13 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Invite")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])        
     }
     
     // MARK: - Table view data source

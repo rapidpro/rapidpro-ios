@@ -27,7 +27,7 @@ class URChatTableViewController: UITableViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
-        self.loadData()        
+        self.loadData()                
     }
     
     override func viewDidLayoutSubviews() {

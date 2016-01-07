@@ -53,6 +53,12 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewWillAppear(animated)
         self.topView.backgroundColor = URCountryProgramManager.activeCountryProgram()?.themeColor!
         loadUserInfo()
+        
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker.set(kGAIScreenName, value: "Menu")
+        
+        let builder = GAIDictionaryBuilder.createScreenView()
+        tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
     // MARK: - Table view data source
