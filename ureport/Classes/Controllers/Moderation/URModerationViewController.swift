@@ -31,10 +31,10 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
     
     func setupViewControllers() {
         
-        storyViewController.title = "Stories".localized
+        storyViewController.title = "main_stories".localized
         storyViewController.tabBarItem.image = UIImage(named: "icon_stories")
                 
-        moderatorViewController.title = "Country Moderators".localized
+        moderatorViewController.title = "label_country_moderator".localized
         moderatorViewController.tabBarItem.image = UIImage(named: "manageMod")
         
         if URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true {

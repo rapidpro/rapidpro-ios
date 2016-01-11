@@ -37,10 +37,6 @@ class URPointsScoredViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-//        let tapGesture = UITapGestureRecognizer(target: self, action: "close")
-//        tapGesture.numberOfTouchesRequired = 1
-//        self.view.addGestureRecognizer(tapGesture)
         
         self.backgroundView.layer.cornerRadius = 5
         self.btGoToRanking.layer.cornerRadius = 4
@@ -62,14 +58,15 @@ class URPointsScoredViewController: UIViewController {
     }
     
     func setupUI() {
+        
+        self.lbPoints.text = "\("points_earning_count_title".localized) +5"
+        self.lbYouCreated.text = "points_earning_title".localized
+        self.lbYouWent.text = "points_earning_subtitle".localized
+        
         if scoreType == .Story {
             self.imgBadge.image = UIImage(named: "points_orange")
-            self.lbYouCreated.text = "gamefication_story1".localized
-            self.lbYouWent.text = "gamefication_story2".localized
         }else {
             self.imgBadge.image = UIImage(named: "img_points_green")
-            self.lbYouCreated.text = "gamefication_poll1".localized
-            self.lbYouWent.text = "gamefication_poll2".localized
         }
     }
     

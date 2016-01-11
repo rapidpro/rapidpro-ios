@@ -173,15 +173,15 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
             
             URUserManager.getByKey(user.key, completion: { (user:URUser?, exists:Bool) -> Void in
                 if let stories = user!.stories {
-                    self.lbProfileDetails.text = "\("menu_stories".localized) \(stories)"
+                    self.lbProfileDetails.text = String(format: "profile_stories".localized, arguments: [stories])
                 }
                 
                 if let points = user!.points {
-                    self.lbProfileDetails.text = "\(self.lbProfileDetails.text!) \("menu_points".localized) \(points)"
+                    self.lbProfileDetails.text = "\(self.lbProfileDetails.text!) \(String(format: "menu_points".localized, arguments: [Int(points)]))"
                 }
                 
                 if self.lbProfileDetails.text!.isEmpty {
-                   self.lbProfileDetails.text = "Stories: 0 Points: 0"
+                   self.lbProfileDetails.text = "\(String(format: "profile_stories".localized, arguments: [0])) \(String(format: "menu_points".localized, arguments: [0]))"
                 }
                 
             })
@@ -195,6 +195,11 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
         self.roundedView.layer.borderWidth = 2
         self.roundedView.layer.borderColor = UIColor.whiteColor().CGColor
         self.tableviewRanking.layer.cornerRadius = 5
+        
+        self.btEdit.setTitle("label_edit".localized, forState: UIControlState.Normal)
+        self.btMyStories.setTitle("label_view_stories".localized, forState: UIControlState.Normal)
+        self.btAnsweredPolls.setTitle("profile_answered_polls".localized, forState: UIControlState.Normal)
+        self.btRanking.setTitle("profile_ranking".localized, forState: UIControlState.Normal)
     }
     
     // MARK: - Table view data source
@@ -317,17 +322,17 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
             URNavigationManager.navigation.pushViewController(URUserRegisterViewController(color: URConstant.Color.PRIMARY, user: URUser.activeUser()!,updateMode:true), animated: true)
         }else {
             
-            let alertController = UIAlertController(title: nil, message: "Choose an option below", preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: "title_media_source".localized, preferredStyle: .ActionSheet)
             
-            let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
                 
             }
             
-            let passwordUpdateAction: UIAlertAction = UIAlertAction(title: "Change Password", style: .Default) { action -> Void in
+            let passwordUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_change_password".localized, style: .Default) { action -> Void in
                 self.navigationController?.pushViewController(URPasswordEditViewController(nibName:"URPasswordEditViewController", bundle:nil), animated: true)
             }
             
-            let profileUpdateAction: UIAlertAction = UIAlertAction(title: "Change Profile Info", style: .Default) { action -> Void in
+            let profileUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_edit_profile".localized, style: .Default) { action -> Void in
                 URNavigationManager.navigation.pushViewController(URUserRegisterViewController(color: URConstant.Color.PRIMARY, user: URUser.activeUser()!,updateMode:true), animated: true)
             }
             

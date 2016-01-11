@@ -27,7 +27,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
-        self.title = "Poll Result".localized
+        self.title = "label_last_polls".localized
     }
     
     override func viewWillAppear(animated: Bool) {

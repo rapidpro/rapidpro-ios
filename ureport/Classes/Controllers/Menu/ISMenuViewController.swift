@@ -203,6 +203,10 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     func loadUserInfo() {
         
+        self.lbPoints.text = "\("menu_points".localized) 0"
+        self.lbStoriesAndPolls.text = "\("menu_stories".localized) 0"
+        self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \("menu_polls".localized) 0"
+        
         if let user = URUser.activeUser() {
             self.user = user
             

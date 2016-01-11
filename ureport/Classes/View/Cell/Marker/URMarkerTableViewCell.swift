@@ -50,20 +50,15 @@ class URMarkerTableViewCell: UITableViewCell {
     //MARK: Button Events
     
     @IBAction func btCheckTapped(sender: AnyObject) {
+        
+        if let delegate = self.delegate {
+            delegate.markerHasTapped(self)
+        }
+        
         if btCheck.selected {
             setBtCheckSelected(false)
-            
-            if let delegate = self.delegate {
-                delegate.markerHasTapped(self)
-            }
-            
         }else{
-            setBtCheckSelected(true)
-            
-            if let delegate = self.delegate {
-                delegate.markerHasTapped(self)
-            }
-            
+            setBtCheckSelected(true)            
         }
     }
     

@@ -156,7 +156,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func setupActionSheet() {
-        actionSheetPicture = UIActionSheet(title: "Choose an option above", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Choose from Camera roll", "Take a Picture")
+        actionSheetPicture = UIActionSheet(title: "title_media_source".localized, delegate: self, cancelButtonTitle: "cancel_dialog_button".localized, destructiveButtonTitle: nil, otherButtonTitles: "choose_camera".localized, "choose_take_picture".localized)
     }
     
     func setupUI() {

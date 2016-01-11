@@ -123,8 +123,10 @@ class URStoriesTableViewCell: UITableViewCell {
 
         self.contentView.layoutIfNeeded()
         
-        self.lbTitle.text = story.title!
-        self.lbContributions.text = "\(story.contributions!) \("contributions".localized)"
+        self.lbTitle.text = story.title!        
+        
+        self.lbContributions.text = String(format: "contributions".localized, arguments: [Int(story.contributions)])
+        
         if let userObject = story.userObject {
             
             self.lbAuthorName.text = "\(userObject.nickname!)"

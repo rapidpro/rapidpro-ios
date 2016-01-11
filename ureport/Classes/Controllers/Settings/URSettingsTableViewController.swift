@@ -15,7 +15,7 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
         
         self.tableView.delegate = self
         setupTableView()
-        self.title = "Settings".localized
+        self.title = "label_settings".localized
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -66,11 +66,11 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
                 }else {
                     cell.switchEnable.on = true
                 }
-                cell.lbSettingName.text = "Available in Chat".localized
+                cell.lbSettingName.text = "title_pref_chat_available".localized
                 break
             case 1:
                 cell.switchEnable.hidden = true
-                cell.lbSettingName.text = "OpenSource License".localized
+                cell.lbSettingName.text = "OpenSource License"
             break
             default:
                 break

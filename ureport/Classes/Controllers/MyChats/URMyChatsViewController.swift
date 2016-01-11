@@ -117,6 +117,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func setupUI() {
+        
+        self.lbTitle.text = "label_chat_groups".localized
+        self.lbDescriptionOpenGroups.text = "description_open_groups".localized
+        self.btSee.setTitle("title_see".localized, forState: UIControlState.Normal)
+        
         btSee.layer.cornerRadius = 4
         self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         self.tableView.separatorColor = UIColor.clearColor()

@@ -88,36 +88,20 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
         tutoView2!.backgroundColor = UIColor.clearColor()
         tutoView3!.backgroundColor = UIColor.clearColor()
         
-        tutoView1!.lbTitle.text = "Create Stories"
-        tutoView1!.lbText.text = "Amplify your voice, talk about what's happening in your community creating stories and contributing to reports of other users."
+        tutoView1!.lbTitle.text = "tutorial_title1".localized
+        tutoView1!.lbText.text = "tutorial_description1".localized
         
-        tutoView2!.lbTitle.text = "Polls"
-        tutoView2!.lbText.text = "Polls on community interest topics will be sent periodically to be answered."
+        tutoView2!.lbTitle.text = "tutorial_title2".localized
+        tutoView2!.lbText.text = "tutorial_description2".localized
 
-        tutoView3!.lbTitle.text = "Chat"
-        tutoView3!.lbText.text = "Contact with other users and see what they say out there."
+        tutoView3!.lbTitle.text = "tutorial_title3".localized
+        tutoView3!.lbText.text = "tutorial_description3".localized
         
     }
     
     func scrollViewPageDidScroll(scrollView: UIScrollView) {
         
         let value = scrollView.contentOffset.x / UIScreen.mainScreen().bounds.size.width
-        
-        print(value)
-        
-//        if value >= 0 && value <= 0.99 {
-//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-//                    self.view.backgroundColor = UIColor(rgba: "#00cff6")
-//                }, completion: nil)
-//        }else if value >= 1 && value <= 1.99 {
-//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-//                    self.view.backgroundColor = UIColor(rgba: "#ffa500")
-//                }, completion: nil)
-//        }else if value >= 2.0 && value <= 3.0 {
-//            UIView.animateWithDuration(0.1, delay: 0, options: UIViewAnimationOptions.TransitionCrossDissolve, animations: { () -> Void in
-//                    self.view.backgroundColor = UIColor(rgba: "#00d400")
-//                }, completion: nil)
-//        }
         
     }
     

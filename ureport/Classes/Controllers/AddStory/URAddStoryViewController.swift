@@ -78,23 +78,23 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func addRightButtonItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish", style: UIBarButtonItemStyle.Done, target: self, action: "buildStory")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Publish".localized, style: UIBarButtonItemStyle.Done, target: self, action: "buildStory")
     }
     
     func buildStory() {
         
         if let textField = self.view.findTextFieldEmptyInView(self.view) {
-            UIAlertView(title: nil, message: "\(textField.placeholder!) is empty", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
         if self.txtHistory.text.isEmpty {
-            UIAlertView(title: nil, message: "What is your story?", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "what_your_story".localized, delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
         if !scrollViewMedias.views!.isEmpty && indexImgCover == -1 {
-            UIAlertView(title: nil, message: "Please select one picture to put as cover!", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "cover_msg".localized, delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
@@ -168,7 +168,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             
             dispatch_async(dispatch_get_main_queue(), {
                 
-                let alertController: UIAlertController = UIAlertController(title: nil, message: "Your story has been subimitted to the U-Report team. Check back soon to see it published", preferredStyle: .Alert)
+                let alertController: UIAlertController = UIAlertController(title: nil, message: "story_created_info".localized, preferredStyle: .Alert)
                 
                 let cancelAction: UIAlertAction = UIAlertAction(title: "Ok", style: .Cancel) { action -> Void in
                     self.showPointsScoredViewController()
@@ -199,7 +199,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func setupActionSheet() {
-        actionSheetPicture = UIActionSheet(title: "Choose an option above", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Choose from Camera roll", "Take a Picture", "Youtube Video")
+        actionSheetPicture = UIActionSheet(title: "choose_an_option".localized, delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "choose_camera".localized, "choose_picture".localized, "choose_video".localized)
     }
     
     func setupScrollViewPage() {
@@ -278,7 +278,6 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         switch buttonIndex {
             
         case 0:
-            print("cancel")
             break;
         case 1:
             
@@ -301,16 +300,16 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             
         case 3:
             
-            let alertControllerTextField = UIAlertController(title: nil, message: "Insert youtube URL", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertControllerTextField = UIAlertController(title: nil, message: "insert_youtube".localized, preferredStyle: UIAlertControllerStyle.Alert)
             
             alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
-            alertControllerTextField.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
-            alertControllerTextField.addAction(UIAlertAction(title: "Confirmar", style: .Default, handler: { (alertAction) -> Void in
+            alertControllerTextField.addAction(UIAlertAction(title: "choose_cancel".localized, style: .Cancel, handler: nil))
+            alertControllerTextField.addAction(UIAlertAction(title: "Confirm".localized, style: .Default, handler: { (alertAction) -> Void in
                 
                 let urlVideo = alertControllerTextField.textFields![0].text!
                 
                 if urlVideo.isEmpty {
-                    UIAlertView(title: nil, message: "Insert a valid youtube URL", delegate: self, cancelButtonTitle: "OK").show()
+                    UIAlertView(title: nil, message: "insert_youtube".localized, delegate: self, cancelButtonTitle: "OK").show()
                     return
                 }
                 

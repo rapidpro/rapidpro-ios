@@ -41,6 +41,8 @@ class URAboutViewController: UIViewController {
         scrollView.contentInset = UIEdgeInsets(top: -64, left: 0, bottom: 0, right: 0)
         self.btTwitter.layer.cornerRadius = self.btTwitter.frame.size.height / CGFloat(2.0)
         self.btFacebook.layer.cornerRadius = self.btTwitter.frame.height / CGFloat(2.0)
+        self.lbAboutContent.text = "about_content".localized
+        self.lbVoiceMatters.text = "about_subtitle".localized
     }
     
     //MARK: Button Events
@@ -48,16 +50,12 @@ class URAboutViewController: UIViewController {
     @IBAction func btTwitterTapped(sender: AnyObject) {
         if let twitter =  URCountryProgramManager.activeCountryProgram()?.twitter {
             UIApplication.sharedApplication().openURL(NSURL(string: "http://www.twitter.com/\(twitter)")!)
-        }else {
-            UIAlertView(title: "", message: "twitter_account".localized, delegate: self, cancelButtonTitle: "OK").show()
         }
     }
     
     @IBAction func btFacebookTapped(sender: AnyObject) {
         if let facebook =  URCountryProgramManager.activeCountryProgram()?.facebook {
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.twitter.com/\(facebook)")!)
-        }else {
-            UIAlertView(title: "", message: "This country program doesn't have facebook account yet", delegate: self, cancelButtonTitle: "OK").show()
+            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.facebook.com/\(facebook)")!)
         }
     }
 }

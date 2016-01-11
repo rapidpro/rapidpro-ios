@@ -20,6 +20,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     @IBOutlet weak var lbContributions: UILabel!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var txtContribute: UITextField!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var topView: UIView!
@@ -100,6 +101,9 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     //MARK: Class Methods
     
     func setupStory() {
+        
+        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [0])
+        self.txtContribute.placeholder = "story_item_contribute_to_story".localized
         self.lbTitle.text = story.title
         self.lbMarkers.text = story.markers
         self.lbContent.text = story.content
@@ -222,8 +226,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func imgViewTapped(sender:UITapGestureRecognizer) {
         
-        print(sender.view!.tag)
-        
         photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
         photosViewController.delegate = self
         
@@ -237,15 +239,15 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func contributionTableViewCellDeleteButtonTapped(cell: URStoryContributionTableViewCell) {
         
-        let alert = UIAlertController(title: nil, message: "Do you want remove this contribution?", preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: nil, message: "message_remove_chat_message".localized, preferredStyle: UIAlertControllerStyle.ActionSheet)
 
-        alert.addAction(UIAlertAction(title: "Remove", style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
+        alert.addAction(UIAlertAction(title: "label_remove".localized, style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
             let indexPath = self.tableView.indexPathForCell(cell)!
             self.listContribution.removeAtIndex(indexPath.row)
             self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
             
             let totalContributions = Int(self.story.contributions) - 1
-            self.lbContributions.text = "\(totalContributions) \("contributions".localized)"
+            self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
             
             self.tableView.contentSize.height = CGFloat(totalContributions)
             URContributionManager.removeContribution(self.story.key, contributionKey: cell.contribution.key)
@@ -254,7 +256,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             
         }))
 
-        alert.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
         
         self.presentViewController(alert, animated: true, completion: nil)
         
@@ -264,7 +266,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func newContributionReceived(contribution: URContribution) {
         listContribution.append(contribution)
-        self.lbContributions.text = "\(listContribution.count) contributions"        
+        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [listContribution.count])
         tableView.reloadData()
     }
     
@@ -304,23 +306,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     // MARK: - NYTPhotosViewControllerDelegate
     
     func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
-        
-//        let media = story.medias![Int(photoIndex)] as URMedia
-//        
-//        let frame = UIScreen.mainScreen().bounds
-//        let playerView = YTPlayerView(frame: frame)
-//        
-//        if media.type == URConstant.Media.VIDEO {
-//            playerView.loadWithVideoId(media.id)
-//            playerView.tag = 100
-//            self.photosViewController.view.addSubview(playerView)
-//            playerView.playVideo()
-//        }else {
-//            if playerView.tag == 100 {
-//                playerView.stopVideo()
-//                playerView.removeFromSuperview()
-//            }
-//        }
+
     }
     
     func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {

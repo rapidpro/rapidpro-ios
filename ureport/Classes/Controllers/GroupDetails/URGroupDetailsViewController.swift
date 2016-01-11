@@ -98,9 +98,9 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     }
     
     func openActionSheet() {
-        let alertController: UIAlertController = UIAlertController(title: nil, message: "Choose an option below", preferredStyle: .ActionSheet)
+        let alertController: UIAlertController = UIAlertController(title: nil, message: "title_media_source".localized, preferredStyle: .ActionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
             
         }
         
@@ -112,7 +112,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
             }
         }
         
-        let editAction: UIAlertAction = UIAlertAction(title: "Edit", style: .Default) { action -> Void in
+        let editAction: UIAlertAction = UIAlertAction(title: "label_edit".localized, style: .Default) { action -> Void in
             URNavigationManager.navigation.pushViewController(URNewGroupViewController(groupChatRoom: self.groupChatRoom, members: self.listUser), animated: true)
         }
         
@@ -144,7 +144,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         
         self.lbGroupTitle.text = groupChatRoom.title
         self.lbSubject.text = groupChatRoom.subject
-        self.lbCreatedBy.text = "\("chat_group_created".localized) \(groupChatRoom.administrator.nickname)"
+        self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname])
         
         if let createdDate = groupChatRoom.createdDate {
              self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) in \(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: createdDate.doubleValue/1000) as NSTimeInterval)))"

@@ -36,6 +36,8 @@ class URPasswordEditViewController: UIViewController {
     //MARK: Class Methods
     
     func setupUI() {
+        self.txtCurrentPassword.placeholder = "old_password_title".localized
+        self.txtNewPassword.placeholder = "new_password".localized
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)        
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         URNavigationManager.setupNavigationBarWithType(.Blue)

@@ -30,14 +30,11 @@ class URModalProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let tapGesture = UITapGestureRecognizer(target: self, action: "close")
-//        tapGesture.numberOfTouchesRequired = 1
-//        self.view.addGestureRecognizer(tapGesture)        
-        
         self.backgroundView.layer.cornerRadius = 5
         self.btInviteToChat.layer.cornerRadius = 4
         
         setupUserInfo()
+        setupLayout()
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -63,11 +60,17 @@ class URModalProfileViewController: UIViewController {
     
     //MARK: Class Methods
     
+    func setupLayout() {
+        self.lbPoints.text = "label_view_points".localized
+        self.lbStories.text = "main_stories".localized
+        self.lbPolls.text = "main_polls".localized
+    }
+    
     func setupUserInfo() {
         self.lbNickName.text = user.nickname
         
         if let contributions = user.contributions {
-            self.lbContributions.text! = "\(contributions) \("Contributions".localized)"
+            self.lbContributions.text! = String(format: "stories_list_item_contributions".localized, arguments: [contributions])
         }
         
         if let points = user.points {
