@@ -18,7 +18,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.title = "Invite"
+        self.title = "chat_contact_invite_button".localized
         setupTableView()
         requestAuthorizationToAddressBook()
     }

@@ -14,6 +14,7 @@
                 <outlet property="btSkipLogin" destination="QVp-pa-NZe" id="9BS-IA-cdS"/>
                 <outlet property="btTwitterLogin" destination="TKV-wx-Vue" id="Ihm-BX-CsO"/>
                 <outlet property="imgLogo" destination="ne3-nk-U5u" id="AaJ-tW-VAm"/>
+                <outlet property="lbOr" destination="KZ6-mL-bC2" id="PyM-hn-Ru6"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="qXc-Bc-Jv2"/>
             </connections>
         </placeholder>

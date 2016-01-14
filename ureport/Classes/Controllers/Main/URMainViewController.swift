@@ -71,13 +71,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     
     func setupViewControllers() {
         
-        storiesTableViewController.title = "Stories".localized
+        storiesTableViewController.title = "stories_moderation".localized
         storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories")
         
-        closedPollViewController.title = "Polls".localized
+        closedPollViewController.title = "main_polls".localized
         closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
-        myChatsViewController.title = "My Chats".localized
+        myChatsViewController.title = "chat_rooms".localized
         myChatsViewController.tabBarItem.image = UIImage(named: "icon_chat")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
@@ -157,12 +157,12 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
             self.title = "U-Report"            
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationItem.rightBarButtonItems = nil
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "New Story", style: UIBarButtonItemStyle.Done, target: self, action: "newStory")
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_new_story".localized, style: UIBarButtonItemStyle.Done, target: self, action: "newStory")
             }
         }
         
         if viewController is URClosedPollTableViewController{
-            self.title = "Poll"
+            self.title = "main_polls"
             self.navigationItem.rightBarButtonItems = nil
         }
         

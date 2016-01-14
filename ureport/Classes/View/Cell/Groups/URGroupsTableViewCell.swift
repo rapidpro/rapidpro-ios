@@ -38,9 +38,9 @@ class URGroupsTableViewCell: UITableViewCell {
         self.lbDescription.text = groupChatRoom.subject
         
         if groupChatRoom.userIsMember != nil && groupChatRoom.userIsMember == true{
-            self.btJoin.setTitle("Open", forState: UIControlState.Normal)
+            self.btJoin.setTitle("open".localized, forState: UIControlState.Normal)
         }else {
-            self.btJoin.setTitle("Join", forState: UIControlState.Normal)
+            self.btJoin.setTitle("chat_groups_join", forState: UIControlState.Normal)
         }
         
         if let picture = groupChatRoom.picture {

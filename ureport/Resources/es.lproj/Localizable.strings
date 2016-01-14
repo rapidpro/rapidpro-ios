@@ -126,7 +126,7 @@
 "label_chat" = "Chat";
 "login_forgot_password" = "Olvidaste tu clave?";
 "story_item_contribute_to_story" = "Contribuir a esta historia";
-"list_stories_header_title" = "Hola %d, cuéntanos qué está pasando";
+"list_stories_header_title" = "Hola %@, cuéntanos qué está pasando";
 "main_menu_group_institutional" = "Institucional";
 "label_settings" = "Configuración";
 "group_info_add_ureporter" = "Agregar U-Reporter";
@@ -239,7 +239,7 @@
 "ureport_message_title" = "Mensaje U-Report";
 "message_remove_chat_message" = "Seguro que quieres borrar este mensaje?";
 "message_delete_message_success" = "Tu mensaje ha sido borrado exitosamente!";
-"message_individual_chat_blocked" = "Esta habitación de chateo ha sido bloqueada por %d";
+"message_individual_chat_blocked" = "Esta habitación de chateo ha sido bloqueada por %@";
 "block_chat_room" = "Bloquear habitación de chat";
 "label_unblock_chat_room" = "Desbloquear habitación de chat";
 "message_block_chat_room" = "Esta habitación de chat está bloqueada";
@@ -268,6 +268,21 @@
 "prompt_media_notification" = "media";
 "choose_camera" = "Escolher do álbum";
 "choose_take_picture" = "Tirar Foto";
+"group_no_user" = "Ningún usuario ha seleccionado.";
+"group_min_user" = "Un grupo debe tener al menos 2 personas";
+"feature_without_permission" = "No se le permite acceder a esta característica.";
+"is_empty" = "%@ está vacío";
+"story_empty" = "Inserte una historia";
+"login_password_error" = "Login/Contraseña incorrecta";
+"loading_states" = "Por favor espere, loading states...";
+"state" = "Estado";
+"district" = "Distrito";
+"country" = "País";
+"gender" = "Género";
+"next" = "Continúa";
+"new_group" = "Grupo nuevo";
+"open" = "Abra";
+"switch_language" = "Cambiar idioma";
 
 //TUTORIAL
 

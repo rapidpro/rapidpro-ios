@@ -24,6 +24,11 @@ class URMediaView: UIView {
     var isCover:Bool!
     var delegate:URMediaViewDelegate?
     
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        self.lbCover.text = "cover_title".localized
+    }
+    
     //MARK: Button Events
     
     @IBAction func btChoiceMediaTapped(sender: AnyObject) {

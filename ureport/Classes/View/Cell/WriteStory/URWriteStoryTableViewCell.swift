@@ -34,7 +34,7 @@ class URWriteStoryTableViewCell: UITableViewCell {
     
     func setupLayout() {
         if let user = URUser.activeUser() {
-            self.lbMsg.text = String(format: "add_story_tell_us".localized, arguments: [user.nickname])
+            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
             
             if user.picture != nil && user.picture.characters.count > 0 {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
@@ -47,7 +47,7 @@ class URWriteStoryTableViewCell: UITableViewCell {
             }
             
         }else{
-            self.lbMsg.text = String(format: "add_story_tell_us".localized, arguments: [""])
+            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [""])
         }
     }
     

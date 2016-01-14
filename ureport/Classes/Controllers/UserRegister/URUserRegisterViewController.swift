@@ -47,7 +47,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     var countryISO3:URCountry?
     var birthDay:NSDate?
     var gender:String?
-    let genders:[String]? = [NSLocalizedString("male",comment:""),NSLocalizedString("female",comment:"")]
+    let genders:[String]? = ["user_gender_male".localized,"user_gender_female".localized]
     var countries:[URCountry]!
     var states:[String]!
     var districts:[String]!
@@ -131,13 +131,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         ProgressHUD.show(nil)
         
-        //apagar
-//        user.key = "123"
-//        user.type = URType.UReport
-//        saveUser(user)
-//        return
-        //
-        
         if (self.userInput != nil) {
             user.key = userInput?.key
             user.picture = userInput?.picture
@@ -159,10 +152,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         
                         switch (error.code) {
                         case -9:
-                            msg = "The new user account cannot be created because the email is already in use."
+                            msg = "error_email_already_exists".localized
                             break;
                         case -5:
-                            msg = "The specified email is not a valid email."
+                            msg = "error_valid_email".localized
                             break;
                         default:
                             break
@@ -170,7 +163,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         
                         if msg.isEmpty {
                             print(error)
-                            UIAlertView(title: "Error", message: "Check your internet connection.", delegate: self, cancelButtonTitle: "OK").show()
+                            UIAlertView(title: "Error", message: "error_no_internet".localized, delegate: self, cancelButtonTitle: "OK").show()
                         }else {
                             UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "OK").show()
                         }
@@ -189,8 +182,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                 ProgressHUD.dismiss()
                                 if success {
                                     URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
-                                }else {
-                                    print("usuario nao encontrado")
                                 }
                             })
                         }
@@ -204,7 +195,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Class Methods
     
     func showEmptyTextFieldAlert(textField:UITextField) {
-        UIAlertView(title: nil, message: "The field \(textField.placeholder!) is empty", delegate: self, cancelButtonTitle: "OK").show()
+        UIAlertView(title: nil, message: String(format: "is_empty", arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
     }
     
     func saveUser(user:URUser) {
@@ -223,7 +214,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
             
         }else {
-            UIAlertView(title: nil, message: "Your profile was updated", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
             URNavigationManager.navigation.popViewControllerAnimated(true)
         }
     }
@@ -276,7 +267,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if self.userInput!.district != nil && !self.userInput!.district!.isEmpty {
                 hasDistrict = true
-                self.txtDistrict.placeholder = "District"
+                self.txtDistrict.placeholder = "error_choose_district".localized
                 self.topDisctrictView.constant = 8
                 self.heightDisctrictView.constant = 50
                 
@@ -297,7 +288,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
 
     func setupTextFieldLoading(textField:UITextField) {
-        textField.placeholder = "Please wait, loading states..."
+        textField.placeholder = "loading_states".localized
         textField.enabled = false
     }
     
@@ -346,8 +337,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         print("error on http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport")
                     }
                 }
-            }else {
-                print("geonames not exists")
             }
             
         }
@@ -355,6 +344,16 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     private func setupUI() {
         
+        self.txtNick.placeholder = "sign_up_nickname".localized
+        self.txtBirthDay.placeholder = "sign_up_birthday".localized
+        self.txtCountry.placeholder = "country".localized
+        self.txtDistrict.placeholder = "district".localized
+        self.txtEmail.placeholder = "sign_up_email".localized
+        self.txtGender.placeholder = "gender".localized
+        self.txtPassword.placeholder = "login_password".localized
+        self.txtState.placeholder = "state".localized
+        self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
+                
         URNavigationManager.setupNavigationBarWithCustomColor(self.color!)
         self.btNext.backgroundColor = self.color
         
@@ -476,7 +475,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             URRapidProManager.getStatesByCountry(countryISO3!, completion: { (states:[String]?, districts:[String]?) -> Void in
                 
-                self.setupFinishLoadingTextField(self.txtState, placeholder: "State")
+                self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                 
                 if let states = states {
                     self.states = states
@@ -489,7 +488,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                     self.hasDistrict = true
                     self.districts = districts
                     
-                    self.txtDistrict.placeholder = "District"
+                    self.txtDistrict.placeholder = "district".localized
                     
                     self.topDisctrictView.constant = 8
                     self.heightDisctrictView.constant = 50

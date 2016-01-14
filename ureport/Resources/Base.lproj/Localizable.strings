@@ -126,7 +126,7 @@
 "label_chat" = "Chat";
 "login_forgot_password" = "Forgot password?";
 "story_item_contribute_to_story" = "Contribute to this story";
-"list_stories_header_title" = "Hi %d, tell us what\'s going on";
+"list_stories_header_title" = "Hi %@, tell us what\'s going on";
 "main_menu_group_institutional" = "Institutional";
 "label_settings" = "Settings";
 "group_info_add_ureporter" = "Add U-Reporter";
@@ -239,7 +239,7 @@
 "ureport_message_title" = "U-Report message";
 "message_remove_chat_message" = "Do you really want to delete this message?";
 "message_delete_message_success" = "Your message was deleted with success!";
-"message_individual_chat_blocked" = "This chat room was blocked by %d";
+"message_individual_chat_blocked" = "This chat room was blocked by %@";
 "block_chat_room" = "Block chat room";
 "label_unblock_chat_room" = "Unblock chat room";
 "message_block_chat_room" = "This chat room is blocked now!";
@@ -268,6 +268,21 @@
 "prompt_media_notification" = "media";
 "choose_camera" = "Choose from camera roll";
 "choose_take_picture" = "Take a Picture";
+"group_no_user" = "There is no user selected";
+"group_min_user" = "A group must have at least 2 people";
+"feature_without_permission" = "You are not allowed to access this feature.";
+"is_empty" = "%@ is empty";
+"story_empty" = "Insert a Story";
+"login_password_error" = "Login/Senha incorrect";
+"loading_states" = "Please wait, loading states...";
+"state" = "State";
+"district" = "District";
+"country" = "Country";
+"gender" = "Gender";
+"next" = "Next";
+"new_group" = "New Group";
+"open" = "Open";
+"switch_language" = "Switch Language";
 
 //TUTORIAL
 

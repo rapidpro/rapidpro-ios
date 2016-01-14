@@ -59,7 +59,7 @@ class URChatTableViewCell: UITableViewCell {
         var user:URUser
         
         if createGroupOption == true && indexPath.row == 0 && (URUserManager.userHasPermissionToAccessTheFeature(true)) {
-            self.lbName.text = "New Group".localized
+            self.lbName.text = "new_group".localized
             self.img.image = UIImage(named: "icon_group_add_grey")
             self.roundedView.backgroundColor = UIColor.whiteColor()
             self.type = .CreateGroup

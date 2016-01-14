@@ -52,7 +52,7 @@ class URLoginCredentialsViewController: UIViewController {
     @IBAction func btLoginTapped(sender: AnyObject) {
         
         if let textfield = self.view.findTextFieldEmptyInView(self.view) {
-            UIAlertView(title: nil, message: "\(textfield.placeholder!) is empty", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textfield.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
@@ -63,7 +63,7 @@ class URLoginCredentialsViewController: UIViewController {
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             }else {
-                UIAlertView(title: nil, message: "Login/Password incorrect", delegate: self, cancelButtonTitle: "OK").show()
+                UIAlertView(title: nil, message: "login_password_error".localized, delegate: self, cancelButtonTitle: "OK").show()
             }
         })
     }
@@ -71,6 +71,10 @@ class URLoginCredentialsViewController: UIViewController {
     //MARK: Class Methods
     
     func setupUI() {
+        
+        self.txtLogin.placeholder = "login_email".localized
+        self.txtPassword.placeholder = "login_password".localized
+        
         self.navigationController?.navigationBar.barTintColor = URConstant.Color.LOGIN_PRIMARY
     }
     

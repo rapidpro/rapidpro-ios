@@ -25,6 +25,7 @@ class URInviteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.btInvite.layer.cornerRadius = 3
+        self.btInvite.setTitle("chat_contact_invite_button".localized, forState: UIControlState.Normal)
         super.selectionStyle = UITableViewCellSelectionStyle.None
         
         self.imgContact.contentMode = UIViewContentMode.Center

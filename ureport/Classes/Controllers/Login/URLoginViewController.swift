@@ -17,6 +17,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     @IBOutlet weak var btSignUp: UIButton!
     @IBOutlet weak var btTwitterLogin: UIButton!
     @IBOutlet weak var btSkipLogin: UIButton!
+    @IBOutlet weak var lbOr: UILabel!
     
     var appDelegate:AppDelegate!
     var userLoginManager:URUserLoginManager!
@@ -57,7 +58,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     func userHasLoggedInGoogle(user: URUser) {
         ProgressHUD.dismiss()
         if user.key.isEmpty {
-            print("error ao logar com google")
         }else{
             
             URUserManager.getByKey(user.key, completion: { (userById,exists) -> Void in
@@ -73,6 +73,15 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     //MARK: Class Methods
     
     func setupUI() {
+        
+        self.lbOr.text = "login_or".localized
+        self.btSkipLogin.setTitle("login_skip".localized, forState: UIControlState.Normal)
+        self.btSignUp.setTitle("login_sign_up".localized, forState: UIControlState.Normal)
+        self.btLogin.setTitle("login".localized, forState: UIControlState.Normal)
+        self.btFacebookLogin.setTitle("login_facebook".localized, forState: UIControlState.Normal)
+        self.btTwitterLogin.setTitle("login_twitter".localized, forState: UIControlState.Normal)
+        self.btGooglePlusLogin.setTitle("login_google".localized, forState: UIControlState.Normal)
+
         self.btSignUp.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.5)
     }
     
@@ -88,7 +97,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
         URUserLoginManager.loginWithTwitter { (user) -> Void in
             ProgressHUD.dismiss()
             if user == nil || user!.key.isEmpty {
-                print("error ao logar com twitter")
+
             }else{
                 ProgressHUD.show(nil)
                 URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
@@ -112,8 +121,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
         URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
             ProgressHUD.dismiss()
             if user == nil || user!.key.isEmpty {
-                print("error ao logar com facebook")
-                //alert
+
             }else{
                 ProgressHUD.show(nil)
                 URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in

@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <objects>
@@ -20,10 +20,8 @@
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1pX-cY-SYR">
                                 <rect key="frame" x="0.0" y="0.0" width="43" height="43"/>
-                                <animations/>
                             </imageView>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="43" id="40t-1C-SPJ"/>
@@ -36,7 +34,6 @@
                     </view>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="userName" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bPt-Eu-gew">
                         <rect key="frame" x="57" y="8" width="152" height="21"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="DUG-68-fuQ"/>
                         </constraints>
@@ -46,7 +43,6 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cXE-L3-iuc">
                         <rect key="frame" x="229" y="7" width="73" height="17"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="height" constant="17" id="gTy-fg-9xw"/>
                         </constraints>
@@ -56,14 +52,12 @@
                     </label>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" ads asd asd" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7cg-6c-ZTX">
                         <rect key="frame" x="57" y="30" width="220" height="37.5"/>
-                        <animations/>
                         <fontDescription key="fontDescription" name="HelveticaNeue-Light" family="Helvetica Neue" pointSize="12"/>
                         <color key="textColor" red="0.28962053570000001" green="0.28962053570000001" blue="0.28962053570000001" alpha="1" colorSpace="calibratedRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4bq-Qd-Iii" userLabel="ViewSeparator">
                         <rect key="frame" x="0.0" y="67" width="320" height="1"/>
-                        <animations/>
                         <color key="backgroundColor" red="0.87058823529999996" green="0.86666666670000003" blue="0.87450980389999999" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="1" id="r2V-bJ-Jpc"/>
@@ -71,7 +65,6 @@
                     </view>
                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XaS-HN-ot0">
                         <rect key="frame" x="285" y="24" width="27" height="28"/>
-                        <animations/>
                         <constraints>
                             <constraint firstAttribute="width" constant="27" id="hZZ-Ft-4uo"/>
                             <constraint firstAttribute="height" constant="28" id="m4L-cT-hRF"/>
@@ -82,7 +75,6 @@
                         </connections>
                     </button>
                 </subviews>
-                <animations/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4bq-Qd-Iii" secondAttribute="trailing" id="4Cr-Ep-Xfo"/>
                     <constraint firstAttribute="trailing" secondItem="cXE-L3-iuc" secondAttribute="trailing" constant="18" id="6Vt-Q3-S0d"/>
@@ -109,7 +101,6 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <animations/>
             <connections>
                 <outlet property="btDelete" destination="XaS-HN-ot0" id="2bQ-LI-aU0"/>
                 <outlet property="imgUser" destination="1pX-cY-SYR" id="WGp-AL-yyO"/>

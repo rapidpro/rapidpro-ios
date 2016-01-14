@@ -14,6 +14,7 @@ public protocol URCurrentPollViewDelegate {
 
 class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldResponseDelegate {
 
+    @IBOutlet weak var lbCurrentPoll: UILabel!
     @IBOutlet weak var lbFlowName: UILabel!
     @IBOutlet weak var btNext: UIButton!
     @IBOutlet weak var viewResponses: UIView!
@@ -42,6 +43,11 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
+        self.lbCurrentPoll.text = "polls_current".localized
+        self.btSwitchLanguage.setTitle("switch_language".localized, forState: UIControlState.Normal)
+        
         btNext.layer.cornerRadius = 5
         
         let preferredLanguage = URSettings.getSettings()?.preferredLanguage
@@ -138,7 +144,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         
         btSwitchLanguage.hidden = languages.count <= 1
         
-        actionSheetLanguage = UIAlertController(title: nil, message: "Choose a language", preferredStyle: .ActionSheet)
+        actionSheetLanguage = UIAlertController(title: nil, message: "switch_language".localized, preferredStyle: .ActionSheet)
         
         for language in languages.sort() {
             let languageDescription = URCountry.getLanguageDescription(language, type: URCountryCodeType.ISO3) ?? language
@@ -163,7 +169,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
             actionSheetLanguage.addAction(switchLanguageAction)
         }
         
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil)
         actionSheetLanguage.addAction(cancelAction)
     }
     

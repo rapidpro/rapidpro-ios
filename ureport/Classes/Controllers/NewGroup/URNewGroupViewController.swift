@@ -160,9 +160,14 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     func setupUI() {
+        
+        self.txtTitleGroup.placeholder = "chat_group_title_hint".localized
+        self.txtDescriptionGroup.placeholder = "chat_group_description_hint".localized
+        self.lbPrivateGroup.text = "chat_private_group_title".localized
+            
         txtTitleGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
         txtDescriptionGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Save", style: UIBarButtonItemStyle.Done, target: self, action: "newGroup")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_save".localized, style: UIBarButtonItemStyle.Done, target: self, action: "newGroup")
     }
     
     func newGroup() {
@@ -173,12 +178,12 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         if listUserSelectedToGroup.isEmpty {
-            UIAlertView(title: nil, message: "There is no user member selected", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "group_no_user".localized, delegate: self, cancelButtonTitle: "OK").show()
             return
         }
 
         if listUserSelectedToGroup.count < 2 {
-            UIAlertView(title: nil, message: "A group must have at least 2 people", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "group_min_user".localized, delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         

@@ -18,6 +18,9 @@ class URForgotPasswordViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.lbMessage.text = "info_forgot_password".localized
+        self.txtEmail.placeholder = "login_email".localized
     }
 
     override func viewWillAppear(animated: Bool) {
@@ -35,7 +38,7 @@ class URForgotPasswordViewController: UIViewController {
     @IBAction func btSendPasswordTapped(sender: AnyObject) {
         
         if self.txtEmail.text!.isEmpty {
-            UIAlertView(title: nil, message: "Put your email", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: ["login_email".localized]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
@@ -44,9 +47,9 @@ class URForgotPasswordViewController: UIViewController {
         URUserLoginManager.resetPassword(self.txtEmail.text!, completion: { (success:Bool) -> Void in
             ProgressHUD.dismiss()
             if success == true {
-                UIAlertView(title: nil, message: "The password has sent to your email.", delegate: self, cancelButtonTitle: "OK").show()
+                UIAlertView(title: nil, message: "error_email_check".localized, delegate: self, cancelButtonTitle: "OK").show()
             }else {
-                UIAlertView(title: nil, message: "Sorry, unexpected error try again.", delegate: self, cancelButtonTitle: "OK").show()
+                UIAlertView(title: nil, message: "error_no_internet".localized, delegate: self, cancelButtonTitle: "OK").show()
             }
         })
     }

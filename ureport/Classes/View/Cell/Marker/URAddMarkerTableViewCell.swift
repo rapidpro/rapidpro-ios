@@ -20,6 +20,7 @@ class URAddMarkerTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.txtMarkerName.placeholder = "create_story_add_marker_title".localized
         // Initialization code
     }
 

@@ -102,7 +102,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
                 URNavigationManager.setFrontViewController(URModerationViewController())
             }else if URUser.activeUser()!.moderator != nil && URUser.activeUser()!.moderator == true {
                 let storyModerationViewController = URStoriesTableViewController(filterStoriesToModerate: true)
-                storyModerationViewController.title = "Stories".localized
+                storyModerationViewController.title = "stories_moderation".localized
                 URNavigationManager.setFrontViewController(URStoriesTableViewController(filterStoriesToModerate: true))
             }
             else if URUserManager.isUserInYourOwnCountryProgram() == false {
@@ -194,7 +194,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         self.pickerCountryProgram!.delegate = self
         self.pickerCountryProgram!.showsSelectionIndicator = true
         self.txtSwitchCountryProgram.inputView = self.pickerCountryProgram
-        self.txtSwitchCountryProgram.attributedPlaceholder = NSAttributedString(string: "Switch Country Program".localized, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.txtSwitchCountryProgram.attributedPlaceholder = NSAttributedString(string: "switch_country_program".localized, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
         
         self.btLogin.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
@@ -203,9 +203,9 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     func loadUserInfo() {
         
-        self.lbPoints.text = "\("menu_points".localized) 0"
-        self.lbStoriesAndPolls.text = "\("menu_stories".localized) 0"
-        self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \("menu_polls".localized) 0"
+        self.lbPoints.text = String(format: "menu_points".localized, arguments: [0])
+        self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [0])
+        self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \(String(format: "profile_polls".localized, arguments: [0]))"
         
         if let user = URUser.activeUser() {
             self.user = user
@@ -213,15 +213,15 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             self.lbNickName.text = user.nickname
             
             if let points = user.points {
-                self.lbPoints.text = "\("menu_points".localized) \(points)"
+                self.lbPoints.text = String(format: "menu_points".localized, arguments: [points])
             }
             
             if let stories = user.stories {
-                self.lbStoriesAndPolls.text = "\("menu_stories".localized) \(stories)"
+                self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [stories])
             }
             
             if let polls = user.polls {
-                self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text) \("menu_polls".localized) \(polls)"
+                self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text) \(String(format: "profile_polls".localized, arguments: [polls]))"
             }
             
             if let picture = user.picture {

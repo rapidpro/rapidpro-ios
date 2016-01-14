@@ -216,10 +216,10 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         
                         self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()                        
                         
-                        let alertController = UIAlertController(title: nil, message: "You has blocked this user. Do you want unblock?", preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
                         
                         alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
-                        alertController.addAction(UIAlertAction(title: "Unblock", style: .Default, handler: { (alertAction) -> Void in
+                        alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
                             URChatRoomManager.unblockUser(self.chatRoom.key)
                             self.userBlocked = false
                             self.collectionView!.userInteractionEnabled = true
@@ -233,7 +233,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         
                     }else {
                         
-                        let alertController = UIAlertController(title: nil, message: "This chat room was blocked by \(self.navigationTitle)", preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: nil, message: String(format: "message_individual_chat_blocked".localized, arguments: [self.navigationTitle]), preferredStyle: .Alert)
                         
                         alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (alertAction) -> Void in
                             self.navigationController!.popViewControllerAnimated(true)
@@ -335,7 +335,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     func blockUser() {
-        let alertController = UIAlertController(title: nil, message: "Do you really want to block this chat room?", preferredStyle: .Alert)
+        let alertController = UIAlertController(title: nil, message: "message_confirm_block_user".localized, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "Block", style: .Default, handler: { (alertAction) -> Void in
             URChatRoomManager.blockUser(self.chatRoom.key)
             self.collectionView!.userInteractionEnabled = false
@@ -344,13 +344,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
         self.navigationController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
     func unblockUser() {
-        let alertController = UIAlertController(title: nil, message: "Do you really want to unblock this chat room?", preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Unblock", style: .Default, handler: { (alertAction) -> Void in
+        let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
+        alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
             URChatRoomManager.unblockUser(self.chatRoom.key)
             self.collectionView!.userInteractionEnabled = true
             self.inputToolbar!.userInteractionEnabled = true
@@ -358,7 +358,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
         }))
         
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+        alertController.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
         self.navigationController!.presentViewController(alertController, animated: true, completion: nil)
     }
     
@@ -413,11 +413,11 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     override func didPressAccessoryButton(sender: UIButton) {
 //        let sheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send youtube video", "")
 //        sheet.showFromToolbar(inputToolbar!)
-        let alertController = UIAlertController(title: "Media message", message: "Choose an option", preferredStyle: .ActionSheet)
+        let alertController = UIAlertController(title: "", message: "title_media_source".localized, preferredStyle: .ActionSheet)
 
-        alertController.addAction(UIAlertAction(title: "Cancel", style: UIAlertActionStyle.Cancel, handler:nil))
+        alertController.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
         
-        alertController.addAction(UIAlertAction(title: "Photo from Camera", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+        alertController.addAction(UIAlertAction(title: "choose_take_picture".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
             let imagePicker = UIImagePickerController()
             
             imagePicker.delegate = self
@@ -429,7 +429,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }))
         
-        alertController.addAction(UIAlertAction(title: "Photo from Library", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+        alertController.addAction(UIAlertAction(title: "choose_camera".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
             let imagePicker = UIImagePickerController()
             imagePicker.delegate = self
             imagePicker.allowsEditing = false
@@ -438,20 +438,20 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             self.presentViewController(imagePicker, animated: true, completion: nil)
         }))
 
-        alertController.addAction(UIAlertAction(title: "Youtube Video", style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
+        alertController.addAction(UIAlertAction(title: "hint_youtube_link".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
             
-            let alertControllerTextField = UIAlertController(title: nil, message: "Insert youtube URL", preferredStyle: UIAlertControllerStyle.Alert)
+            let alertControllerTextField = UIAlertController(title: nil, message: "message_youtube_link".localized, preferredStyle: UIAlertControllerStyle.Alert)
             
             alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
             
-            alertControllerTextField.addAction(UIAlertAction(title: "Cancel", style: .Cancel, handler: nil))
+            alertControllerTextField.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
             
-            alertControllerTextField.addAction(UIAlertAction(title: "Confirmar", style: .Default, handler: { (alertAction) -> Void in
+            alertControllerTextField.addAction(UIAlertAction(title: "sign_up_confirm".localized, style: .Default, handler: { (alertAction) -> Void in
                 
                 let urlVideo = alertControllerTextField.textFields![0].text!
                 
                 if urlVideo.isEmpty {
-                    UIAlertView(title: nil, message: "Insert a valid youtube URL", delegate: self, cancelButtonTitle: "OK").show()
+                    UIAlertView(title: nil, message: "error_empty_link".localized, delegate: self, cancelButtonTitle: "OK").show()
                     return
                 }
                 

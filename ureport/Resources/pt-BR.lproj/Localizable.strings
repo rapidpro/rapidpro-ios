@@ -127,7 +127,7 @@
 "label_chat" = "Chat";
 "login_forgot_password" = "Esqueceu a senha?";
 "story_item_contribute_to_story" = "Contribua com essa história";
-"list_stories_header_title" = "Oi %d, nos diga o que está acontecendo";
+"list_stories_header_title" = "Oi %@, nos diga o que está acontecendo";
 "main_menu_group_institutional" = "Institucional";
 "label_settings" = "Configurações";
 "group_info_add_ureporter" = "Adicionar U-Reporter";
@@ -240,7 +240,7 @@
 "ureport_message_title" = "Mensagem do U-Report";
 "message_remove_chat_message" = "Você realmente quer deletar essa mensagem?";
 "message_delete_message_success" = "Sua mensagem foi deletada com sucesso!";
-"message_individual_chat_blocked" = "Essa sala de chat foi bloqueada por %d";
+"message_individual_chat_blocked" = "Essa sala de chat foi bloqueada por %@";
 "block_chat_room" = "Bloquear sala de chat";
 "label_unblock_chat_room" = "Desbloquear sala de chat";
 "message_block_chat_room" = "Essa sala de chat está bloqueada agora!";
@@ -269,6 +269,21 @@
 "prompt_media_notification" = "media";
 "choose_camera" = "Escolher do álbum";
 "choose_take_picture" = "Tirar Foto";
+"group_no_user" = "Não há usuário selecionado.";
+"group_min_user" = "Um grupo deve ter no mínimo 2 pessoas";
+"feature_without_permission" = "Você não tem permissão para acessar este recurso.";
+"is_empty" = "%@ está vazio";
+"story_empty" = "Insira uma História";
+"login_password_error" = "Login/Password incorreto";
+"loading_states" = "Por favor espere, carregando estados...";
+"state" = "Estado";
+"district" = "Distrito";
+"country" = "País";
+"gender" = "Gênero";
+"next" = "Próximo";
+"new_group" = "Novo Grupo";
+"open" = "Abrir";
+"switch_language" = "Trocar Idioma";
 
 //TUTORIAL
 

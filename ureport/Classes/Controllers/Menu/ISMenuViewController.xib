@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ISMenuViewController" customModule="ureport" customModuleProvider="target">
@@ -32,10 +32,8 @@
                             <subviews>
                                 <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zcx-bM-adt">
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                    <animations/>
                                 </imageView>
                             </subviews>
-                            <animations/>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
                                 <constraint firstItem="zcx-bM-adt" firstAttribute="top" secondItem="rOj-Kw-ybm" secondAttribute="top" id="Ho9-Jd-SXA"/>
@@ -48,7 +46,6 @@
                         </view>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@Daniel" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="GOO-66-tEG">
                             <rect key="frame" x="87" y="35" width="130" height="21"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="eMv-5v-4V4"/>
                             </constraints>
@@ -58,7 +55,6 @@
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="xAb-Ps-a9U">
                             <rect key="frame" x="87" y="59" width="130" height="19"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="OIc-v7-Erl"/>
                             </constraints>
@@ -68,7 +64,6 @@
                         </label>
                         <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stories: 0   Polls: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="3tj-Xq-nbV">
                             <rect key="frame" x="87" y="80" width="130" height="19"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="19" id="YAU-vP-C9a"/>
                             </constraints>
@@ -78,7 +73,6 @@
                         </label>
                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Switch Country Program" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="ZuV-lb-hm5">
                             <rect key="frame" x="12" y="114" width="216" height="30"/>
-                            <animations/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="vsb-hC-DNp"/>
                             </constraints>
@@ -91,7 +85,6 @@
                         </textField>
                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTl-xs-ITI">
                             <rect key="frame" x="115" y="55" width="92" height="31"/>
-                            <animations/>
                             <color key="backgroundColor" red="0.32549019610000002" green="0.59607843140000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="92" id="0pX-Rn-FtP"/>
@@ -105,7 +98,6 @@
                             </connections>
                         </button>
                     </subviews>
-                    <animations/>
                     <color key="backgroundColor" red="0.25882352941176467" green="0.71372549019607845" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="145" id="3IK-LM-ECY"/>
@@ -130,7 +122,6 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-yi-mz0">
                     <rect key="frame" x="0.0" y="145" width="237" height="423"/>
-                    <animations/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="UW7-QF-4QT"/>
@@ -138,7 +129,6 @@
                     </connections>
                 </tableView>
             </subviews>
-            <animations/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="foF-kR-CZQ" secondAttribute="trailing" id="Ahl-2D-8xg"/>

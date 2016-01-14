@@ -33,7 +33,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         setupHeaderCell()
         loadCurrentFlow()
         
-        self.title = "Poll Results".localized
+        self.title = "poll_question_latest_results".localized
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -93,7 +93,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             if !URFlowManager.isLastActionSet(currentActionSet) {
                 reloadCurrentFlowSection()
             } else {
-                ProgressHUD.show("Sending responses")
+                ProgressHUD.show("message_send_poll".localized)
                 
                 URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                     ProgressHUD.dismiss()
@@ -103,7 +103,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
                 self.view.endEditing(true)
             }
         } else {
-            UIAlertView(title: nil, message: "You need to choose an answer!", delegate: self, cancelButtonTitle: "OK").show()
+            UIAlertView(title: nil, message: "answer_poll_choose_error".localized, delegate: self, cancelButtonTitle: "OK").show()
         }
     }
     

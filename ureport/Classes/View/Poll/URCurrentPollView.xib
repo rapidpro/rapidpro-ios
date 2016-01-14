@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -22,7 +22,6 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Current poll" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="2dl-1s-znp">
                                         <rect key="frame" x="8" y="8" width="167" height="21"/>
-                                        <animations/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="21" id="dNs-vs-3LO"/>
                                             <constraint firstAttribute="width" constant="167" id="e8D-Eb-sk3"/>
@@ -33,13 +32,11 @@
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i9b-Q7-FZn">
                                         <rect key="frame" x="8" y="32" width="294" height="21"/>
-                                        <animations/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <animations/>
                                 <color key="backgroundColor" red="0.15686274509803921" green="0.59607843137254901" blue="0.7803921568627451" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstItem="2dl-1s-znp" firstAttribute="leading" secondItem="8eT-yU-F9i" secondAttribute="leading" constant="8" id="2uH-ei-ehk"/>
@@ -53,7 +50,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
                                 <rect key="frame" x="0.0" y="144" width="310" height="2"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="2" id="fL8-FP-EJI"/>
@@ -61,7 +57,6 @@
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aPK-c7-Zsd">
                                 <rect key="frame" x="10" y="104" width="290" height="30"/>
-                                <animations/>
                                 <color key="backgroundColor" red="0.0" green="0.84313725490196079" blue="0.33333333333333331" alpha="1" colorSpace="deviceRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="Glq-BS-QRx"/>
@@ -73,7 +68,6 @@
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" delaysContentTouches="NO" canCancelContentTouches="NO" bouncesZoom="NO" editable="NO" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="17M-gY-Yc5">
                                 <rect key="frame" x="8" y="78" width="294" height="0.0"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" id="1Sg-OB-XL4"/>
                                 </constraints>
@@ -83,14 +77,12 @@
                             </textView>
                             <view autoresizesSubviews="NO" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycV-KR-1sz">
                                 <rect key="frame" x="10" y="86" width="290" height="10"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="10" id="bs6-dd-zAH"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OUA-a7-jbk">
                                 <rect key="frame" x="197" y="61" width="103" height="22"/>
-                                <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="103" id="2ww-0M-fI6"/>
                                     <constraint firstAttribute="height" constant="22" id="weu-BX-NJY"/>
@@ -102,7 +94,6 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="xGr-7P-obE" firstAttribute="leading" secondItem="MS8-QK-Tmu" secondAttribute="leading" id="8HM-UD-CqW"/>
@@ -126,7 +117,6 @@
                         </constraints>
                     </view>
                 </subviews>
-                <animations/>
                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MS8-QK-Tmu" secondAttribute="trailing" constant="5" id="Cea-Wu-Q4n"/>
@@ -134,13 +124,13 @@
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="htg-zv-IAS"/>
                 </constraints>
             </tableViewCellContentView>
-            <animations/>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
                 <outlet property="btNext" destination="aPK-c7-Zsd" id="ETp-Kz-aGc"/>
                 <outlet property="btSwitchLanguage" destination="OUA-a7-jbk" id="JfS-OY-UnB"/>
                 <outlet property="constraintQuestionHeight" destination="1Sg-OB-XL4" id="PMj-2J-2DX"/>
                 <outlet property="constraintResponseHeight" destination="bs6-dd-zAH" id="NWG-uh-XPW"/>
+                <outlet property="lbCurrentPoll" destination="2dl-1s-znp" id="rWu-YV-B9I"/>
                 <outlet property="lbFlowName" destination="i9b-Q7-FZn" id="w4l-Q9-bg7"/>
                 <outlet property="tvQuestion" destination="17M-gY-Yc5" id="fuI-yP-8iH"/>
                 <outlet property="viewResponses" destination="ycV-KR-1sz" id="Ysf-g2-qz1"/>
