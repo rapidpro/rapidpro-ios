@@ -40,7 +40,7 @@ class URGroupsTableViewCell: UITableViewCell {
         if groupChatRoom.userIsMember != nil && groupChatRoom.userIsMember == true{
             self.btJoin.setTitle("open".localized, forState: UIControlState.Normal)
         }else {
-            self.btJoin.setTitle("chat_groups_join", forState: UIControlState.Normal)
+            self.btJoin.setTitle("chat_groups_join".localized, forState: UIControlState.Normal)
         }
         
         if let picture = groupChatRoom.picture {

@@ -27,7 +27,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)                
         loadData()
     }
     

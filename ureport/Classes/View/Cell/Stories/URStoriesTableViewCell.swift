@@ -52,6 +52,9 @@ class URStoriesTableViewCell: UITableViewCell {
         self.viewSeparator.layer.cornerRadius = 7
         btDisapprove.layer.cornerRadius = 5
         btPublish.layer.cornerRadius = 5
+        btContribute.setTitle("story_item_contribute_to_story".localized, forState: UIControlState.Normal)
+        btDisapprove.setTitle("button_title_disapprove".localized, forState: UIControlState.Normal)
+        btPublish.setTitle("button_title_publish".localized, forState: UIControlState.Normal)
         
         let tapGesture = UITapGestureRecognizer(target: self, action: "openModalProfile")
         tapGesture.numberOfTouchesRequired = 1
@@ -125,7 +128,7 @@ class URStoriesTableViewCell: UITableViewCell {
         
         self.lbTitle.text = story.title!        
         
-        self.lbContributions.text = String(format: "contributions".localized, arguments: [Int(story.contributions)])
+        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
         
         if let userObject = story.userObject {
             

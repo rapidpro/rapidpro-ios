@@ -70,15 +70,15 @@ class URModalProfileViewController: UIViewController {
         self.lbNickName.text = user.nickname
         
         if let contributions = user.contributions {
-            self.lbContributions.text! = String(format: "stories_list_item_contributions".localized, arguments: [contributions])
+            self.lbContributions.text! = String(format: "stories_list_item_contributions".localized, arguments: [Int(contributions)])
         }
         
         if let points = user.points {
-            self.lbPointsValue.text! = "\(points)"
+            self.lbPointsValue.text! = "\(Int(points))"
         }
         
         if let stories = user.stories {
-            self.lbStoriesValue.text! = "\(stories)"
+            self.lbStoriesValue.text! = "\(Int(stories))"
         }
         
         self.roundedView.layer.borderWidth = 2

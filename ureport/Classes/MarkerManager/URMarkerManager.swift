@@ -16,16 +16,17 @@ class URMarkerManager: Serializable {
         
         if markers == nil {
             markers = []
-            markers.append(URMarker(name: "Advocacy"))
-            markers.append(URMarker(name: "Child Protection"))
-            markers.append(URMarker(name: "Education"))
-            markers.append(URMarker(name: "Health"))
-            markers.append(URMarker(name: "HIV/AIDS"))
-            markers.append(URMarker(name: "Nutrition"))
-            markers.append(URMarker(name: "Politics"))
-            markers.append(URMarker(name: "Social Policy"))
-            markers.append(URMarker(name: "Sanitation"))
-            markers.append(URMarker(name: "Violence"))
+            markers.append(URMarker(name: "Advocacy".localized))
+            markers.append(URMarker(name: "Child Protection".localized))
+            markers.append(URMarker(name: "Education".localized))
+            markers.append(URMarker(name: "Emergency".localized))
+            markers.append(URMarker(name: "Health".localized))
+            markers.append(URMarker(name: "HIV/AIDS".localized))
+            markers.append(URMarker(name: "Nutrition".localized))
+            markers.append(URMarker(name: "Politics".localized))
+            markers.append(URMarker(name: "Social Policy".localized))
+            markers.append(URMarker(name: "Sanitation".localized))
+            markers.append(URMarker(name: "Violence".localized))
         }
         
         if !URMarkerManager.getLocalyMarkers().isEmpty {

@@ -33,7 +33,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         setupHeaderCell()
         loadCurrentFlow()
         
-        self.title = "poll_question_latest_results".localized
+        self.title = "poll_results".localized
     }
     
     override func viewWillAppear(animated: Bool) {

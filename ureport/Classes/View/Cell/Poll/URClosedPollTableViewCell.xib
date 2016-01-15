@@ -112,6 +112,7 @@
                 <outlet property="lbCategoryName" destination="2dl-1s-znp" id="RkB-c7-rUd"/>
                 <outlet property="lbClosedDate" destination="Ca7-KB-Mba" id="KzU-22-QB1"/>
                 <outlet property="lbDescr" destination="DvK-6A-gYh" id="zyS-te-XwR"/>
+                <outlet property="lbSeeResults" destination="PAf-cd-B0R" id="ucv-5N-ASu"/>
                 <outlet property="viewSeparator" destination="xGr-7P-obE" id="0oq-Nc-7sX"/>
                 <outlet property="viewTop" destination="8eT-yU-F9i" id="W48-ws-JSH"/>
             </connections>

@@ -30,6 +30,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         self.isUserAdmin = false
         URNavigationManager.setupNavigationBarWithType(.Clear)
         setupTableView()
+        setupUI()
         setupGroupInfo()
     }
 
@@ -81,6 +82,10 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     
     //MARK: Class Methods
     
+    func setupUI() {
+        self.btAddUreporter.setTitle("group_info_add_ureporter".localized, forState: UIControlState.Normal)
+    }
+    
     func addRightBarButtons() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
@@ -98,13 +103,13 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     }
     
     func openActionSheet() {
-        let alertController: UIAlertController = UIAlertController(title: nil, message: "title_media_source".localized, preferredStyle: .ActionSheet)
+        let alertController: UIAlertController = UIAlertController(title: nil, message: "choose_option".localized, preferredStyle: .ActionSheet)
         
         let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
             
         }
         
-        let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "Delete Group" : "Leave", style: .Default) { action -> Void in
+        let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "remove_group".localized : "label_leave_group".localized , style: .Default) { action -> Void in
             if self.isUserAdmin == true {
                 URChatMemberManager.removeChatRoom(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key)
             }else {
@@ -147,7 +152,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname])
         
         if let createdDate = groupChatRoom.createdDate {
-             self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) in \(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: createdDate.doubleValue/1000) as NSTimeInterval)))"
+             self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) \(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: createdDate.doubleValue/1000) as NSTimeInterval)))"
         }
         
         if self.groupChatRoom.picture != nil && self.groupChatRoom.picture.url != nil {

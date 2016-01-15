@@ -286,10 +286,10 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         
         if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
             btnInfo.frame = CGRectMake(0, 7, 21, 21)
-            btnInfo.setBackgroundImageWithURL(NSURL(string: groupChatRoom.picture.url), forState: UIControlState.Normal)
+            btnInfo.sd_setBackgroundImageWithURL(NSURL(string: groupChatRoom.picture.url), forState: UIControlState.Normal)
             container.layer.cornerRadius = 18
         }else {
-            btnInfo.frame = CGRectMake(0, 3, 29, 18)
+            btnInfo.frame = CGRectMake(0, 7, 29, 18)
             btnInfo.setBackgroundImage(UIImage(named: "ic_group"), forState: UIControlState.Normal)
             container.layer.cornerRadius = 0
         }
@@ -336,7 +336,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     func blockUser() {
         let alertController = UIAlertController(title: nil, message: "message_confirm_block_user".localized, preferredStyle: .Alert)
-        alertController.addAction(UIAlertAction(title: "Block", style: .Default, handler: { (alertAction) -> Void in
+        alertController.addAction(UIAlertAction(title: "block_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
             URChatRoomManager.blockUser(self.chatRoom.key)
             self.collectionView!.userInteractionEnabled = false
             self.inputToolbar!.userInteractionEnabled = false

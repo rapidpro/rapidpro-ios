@@ -19,7 +19,7 @@ class URAboutViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
-        self.title = "About".localized
+        self.title = "label_about_ureport".localized
     }
 
     override func viewWillAppear(animated: Bool) {

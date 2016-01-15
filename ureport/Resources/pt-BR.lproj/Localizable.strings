@@ -45,7 +45,7 @@
 "label_new_story" = "Nova história";
 "create_story_insert_cover" = "Insira uma imagem de capa";
 "create_story_insert_title" = "Insira um título";
-"create_story_insert_story_content" = "Nos dia o que está acontecendo";
+"create_story_insert_story_content" = "Nos diga o que está acontecendo";
 "create_story_title_media" = "Insira uma mídia";
 "create_story_add_markers" = "Adicionar marcadores";
 "media_remove" = "Remover";
@@ -60,7 +60,7 @@
 "story_contribution_add" = "Adicione uma contribuição";
 "polls_participate" = "Resposta";
 "polls_current" = "Enquete atual";
-"polls_responded_info" = "%d respondidos de %2$s enviados";
+"polls_responded_info" = "%@ respondidos de %@ enviados";
 "polls_response_rate" = "%d%% taxa de resposta";
 "polls_see_results" = "Veja os resultados";
 "news_more_statistics" = "Mais estatísticas";
@@ -86,7 +86,7 @@
 "profile_ranking" = "Ranking";
 "list_stories_error" = "Você não publicou nenhuma história até agora.";
 "profile_polls" = "Enquetes: %d";
-"profile_stories" = "Histórias: %@";
+"profile_stories" = "Histórias: %d";
 "menu_points" = "Pontos: %d";
 "label_chat_groups" = "Grupos Abertos";
 "chat_groups_join" = "Entrar";
@@ -120,7 +120,7 @@
 "chat_room_message_hint" = "Escreva uma mensagem";
 "label_action_search" = "Buscar";
 "label_leave_group" = "Sair do Grupo";
-"chat_group_info_created_date" = "Criado por %d, %2$S";
+"chat_group_info_created_date" = "Criado por %@";
 "label_group_info" = "Info do Grupo";
 "chat_group_leave" = "Você realmente quer sair deste grupo?";
 "login_validation_error_message" = "Você precisa efetuar o login antes de executar esta ação!\nVocê quer fazer o login agora?";
@@ -279,11 +279,17 @@
 "state" = "Estado";
 "district" = "Distrito";
 "country" = "País";
-"gender" = "Gênero";
+"gender" = "Sexo";
 "next" = "Próximo";
 "new_group" = "Novo Grupo";
 "open" = "Abrir";
 "switch_language" = "Trocar Idioma";
+"poll_results" = "Resultado de Enquetes";
+"remove_group" = "Deletar grupo";
+"choose_option" = "Escolha uma opção";
+"login_required" = "Requer Login";
+"login_msg" = "Por favor autentique-se para acessar este recurso!";
+"login_now" = "Logar Agora!";
 
 //TUTORIAL
 
@@ -293,4 +299,18 @@
 "tutorial_description2" = "Toda semana você e milhões de outros U-Reporters podem responder enquetes sobre questões que impactam pessoas jovens em sua comunidade. Resultados serão sempre compartilhados";
 "tutorial_title3" = "Chat grátis";
 "tutorial_description3" = "Chat com outros U-Reporters e siga grupos de chat sobre questões da juventude";
+
+//MARKERS
+
+"Advocacy" = "Advocacia";
+"Child Protection" = "Proteção Infantil";
+"Education" = "Educação";
+"Emergency" = "Emergência";
+"Health" = "Saúde";
+"HIV/AIDS" = "HIV/AIDS";
+"Nutrition" = "Nutrição";
+"Politics" = "Politica";
+"Social Policy" = "Politica Social";
+"Sanitation" = "Saneamento";
+"Violence" = "Violência";
 

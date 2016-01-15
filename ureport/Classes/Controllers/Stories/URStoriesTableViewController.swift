@@ -94,7 +94,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if indexPath.row == 0 && filterStoriesToModerate == false{
+        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true {
             return 75
         }
         
@@ -114,7 +114,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 && filterStoriesToModerate == false {
+        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true{
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URWriteStoryTableViewCell.self), forIndexPath: indexPath) as! URWriteStoryTableViewCell
             return cell
         }else if indexPath.row < self.storyList.count {
@@ -127,7 +127,6 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             cell.setupCellWith(story,moderateUserMode: self.filterStoriesToModerate)
             return cell
         }else {
-            print(indexPath.row)
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URNewsTableViewCell.self), forIndexPath: indexPath) as! URNewsTableViewCell
             let news = newsList[indexPath.row - self.storyList.count]
             cell.setupCellWith(news)
@@ -147,7 +146,11 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }else if cell is URNewsTableViewCell {
             self.navigationController?.pushViewController(URNewsDetailViewController(news:(cell as! URNewsTableViewCell).news),animated: true)
         }else if cell is URWriteStoryTableViewCell {
-            self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
+            if URUser.activeUser() != nil {
+                self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
+            }else{
+                URLoginAlertController.show(self)
+            }
         }
         
     }

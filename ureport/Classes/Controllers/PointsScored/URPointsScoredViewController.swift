@@ -62,6 +62,8 @@ class URPointsScoredViewController: UIViewController {
         self.lbPoints.text = "\("points_earning_count_title".localized) +5"
         self.lbYouCreated.text = "points_earning_title".localized
         self.lbYouWent.text = "points_earning_subtitle".localized
+        self.btGoToRanking.setTitle("points_earning_ranking".localized, forState: UIControlState.Normal)
+        self.btClose.setTitle("points_earning_close".localized, forState: UIControlState.Normal)
         
         if scoreType == .Story {
             self.imgBadge.image = UIImage(named: "points_orange")

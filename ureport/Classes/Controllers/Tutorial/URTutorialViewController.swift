@@ -74,6 +74,8 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
     
     func setupLayout() {
         
+        self.btGetStarted.setTitle("get_started_title".localized, forState: UIControlState.Normal)
+        
         let frame = CGRectMake(0, 0, self.view.frame.size.width, self.scrollViewTutorial.frame.height)
         
         tutoView1!.frame = frame

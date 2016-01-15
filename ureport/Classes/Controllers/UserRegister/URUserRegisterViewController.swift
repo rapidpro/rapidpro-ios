@@ -195,6 +195,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Class Methods
     
     func showEmptyTextFieldAlert(textField:UITextField) {
+        print(textField.placeholder!)
         UIAlertView(title: nil, message: String(format: "is_empty", arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
     }
     
@@ -206,7 +207,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         if updateMode == false {
         
-        URRapidProManager.buildRapidProUserDictionary(user, country: URCountry(code:user.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:user.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
             URRapidProManager.saveUser(user, country: URCountry(code:user.country), completion: { (response) -> Void in
                 print(response)
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
@@ -267,7 +268,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if self.userInput!.district != nil && !self.userInput!.district!.isEmpty {
                 hasDistrict = true
-                self.txtDistrict.placeholder = "error_choose_district".localized
+                self.txtDistrict.placeholder = "district".localized
                 self.topDisctrictView.constant = 8
                 self.heightDisctrictView.constant = 50
                 
@@ -318,7 +319,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                     if data.value != nil {
                         
                         if updateUI == true {
-                            self.setupFinishLoadingTextField(self.txtState, placeholder: "State")
+                            self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                         }
                         
                         if data.value!.objectForKey("geonames") != nil {
@@ -347,7 +348,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.txtNick.placeholder = "sign_up_nickname".localized
         self.txtBirthDay.placeholder = "sign_up_birthday".localized
         self.txtCountry.placeholder = "country".localized
-        self.txtDistrict.placeholder = "district".localized
         self.txtEmail.placeholder = "sign_up_email".localized
         self.txtGender.placeholder = "gender".localized
         self.txtPassword.placeholder = "login_password".localized

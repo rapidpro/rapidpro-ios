@@ -30,7 +30,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     
     class func setupNavigationControllerWithMainViewController(viewController:UIViewController) {
         
-        let menuViewController:ISMenuViewController = ISMenuViewController.sharedInstance()
+        let menuViewController:ISMenuViewController = ISMenuViewController()
         
         URNavigationManager.addLeftButtonMenuInViewController(viewController)
         

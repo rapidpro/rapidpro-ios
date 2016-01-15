@@ -16,14 +16,7 @@ protocol URRapidProManagerDelegate {
 
 class URRapidProManager: NSObject {
  
-    var delegate:URRapidProManagerDelegate?
-    static let rapidProUser = NSMutableDictionary()
-    
-    static let GROUP_UREPORT_YOUTH = "UReport Youth"
-    static let GROUP_UREPORT_ADULTS = "UReport Adults"
-    static let GROUP_UREPORT_MALES = "UReport Males"
-    static let GROUP_UREPORT_FEMALES = "UReport Females"
-    static let GROUP_UREPORT_APP = "App U-Reporters"
+    var delegate:URRapidProManagerDelegate?    
     
     //MARK: FireBase Methods
     class func path() -> String {
@@ -210,40 +203,6 @@ class URRapidProManager: NSObject {
         
     }
     
-    class func buildRapidProUserDictionary(user:URUser,country:URCountry,completion:(NSDictionary) -> Void) {
-        
-        URRapidProManager.getContactFields(country) { (contactFields:[String]) -> Void in
-            if !contactFields.isEmpty {
-                URRapidProManager.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
-                URRapidProManager.putValueIfExists(user.nickname, countryProgramContactFields: contactFields, possibleFields: ["nickname","nick_name"])
-                URRapidProManager.putValueIfExists(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval)), countryProgramContactFields: contactFields, possibleFields: ["birthday","birthdate","birth_day"])
-                URRapidProManager.putValueIfExists(String(URDateUtil.getYear(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["born"])
-                URRapidProManager.putValueIfExists(user.gender, countryProgramContactFields: contactFields, possibleFields: ["gender"])
-                URRapidProManager.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: ["state","region","province","county"])
-                URRapidProManager.putValueIfExists(user.district, countryProgramContactFields: contactFields, possibleFields: ["district","lga"])
-                URRapidProManager.putValueIfExists(user.country, countryProgramContactFields: contactFields, possibleFields: ["country"])
-                completion(URRapidProManager.rapidProUser)
-            }
-        }
-        
-    }
-    
-    class func putValueIfExists(value:String?,countryProgramContactFields:[String],possibleFields:[String]) {
-        if value == nil {
-            return
-        }
-        
-        for possibleField in possibleFields {
-            let index = countryProgramContactFields.indexOf(possibleField)
-            if index != nil && index != -1{
-                let field = countryProgramContactFields[index!]
-                URRapidProManager.rapidProUser.setValue(value, forKey: field)
-                break
-            }
-        }
-        
-    }
-    
     class func getStatesByCountry(country:URCountry, completion:(states:[String]?,districts:[String]?) -> Void) {
         
         let headers = [
@@ -300,17 +259,7 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
-        let rootDictionary = NSMutableDictionary()
-        let dateFormat = NSDateFormatter()
-        dateFormat.dateFormat = "MM/dd/yyyy"
-        
-        URRapidProManager.rapidProUser.setValue(dateFormat.stringFromDate(NSDate()), forKey: "registration_date")
-        rootDictionary.setValue(URRapidProManager.rapidProUser, forKey: "fields")
-        rootDictionary.setValue(["ext:\(URUserManager.formatExtUserId(user.key))"], forKey: "urns")
-        rootDictionary.setValue(user.nickname, forKey:"name")
-        rootDictionary.setValue(["App U-Reporters"], forKey: "groups")
-        
-        Alamofire.request(.POST, "\(URConstant.RapidPro.API_URL)contacts.json", parameters: rootDictionary.copy() as! [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+        Alamofire.request(.POST, "\(URConstant.RapidPro.API_URL)contacts.json", parameters: URRapidProContactUtil.buildRapidProUserRootDictionary(user).copy() as! [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
             completion(response: JSON.value as! NSDictionary)
         }
     }

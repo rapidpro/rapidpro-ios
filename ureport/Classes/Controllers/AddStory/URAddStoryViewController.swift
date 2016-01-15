@@ -12,6 +12,7 @@ import SDWebImage
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate {
 
+    @IBOutlet weak var lbInsertImage: UILabel!
     @IBOutlet weak var txtTitle: UITextField!
     @IBOutlet weak var txtMarkers: UITextField!
     @IBOutlet weak var txtHistory: UITextView!
@@ -168,7 +169,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             
             dispatch_async(dispatch_get_main_queue(), {
                 
-                let alertController: UIAlertController = UIAlertController(title: nil, message: "story_created_info".localized, preferredStyle: .Alert)
+                let alertController: UIAlertController = UIAlertController(title: nil, message: "message_story_publish_warning".localized, preferredStyle: .Alert)
                 
                 let cancelAction: UIAlertAction = UIAlertAction(title: "Ok", style: .Cancel) { action -> Void in
                     self.showPointsScoredViewController()
@@ -199,7 +200,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func setupActionSheet() {
-        actionSheetPicture = UIActionSheet(title: "title_media_source".localized, delegate: self, cancelButtonTitle: "cancel_dialog_button".localized, destructiveButtonTitle: nil, otherButtonTitles: "choose_camera".localized, "choose_picture".localized, "hint_youtube_link".localized)
+        actionSheetPicture = UIActionSheet(title: "title_media_source".localized, delegate: self, cancelButtonTitle: "cancel_dialog_button".localized, destructiveButtonTitle: nil, otherButtonTitles: "choose_camera".localized, "choose_take_picture".localized, "hint_youtube_link".localized)
     }
     
     func setupScrollViewPage() {
@@ -212,8 +213,9 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func setupUI() {
         
-        self.txtTitle.text = "create_story_insert_title".localized
-        self.txtMarkers.text = "create_story_add_markers".localized
+        self.txtTitle.placeholder = "create_story_insert_title".localized
+        self.txtMarkers.placeholder = "create_story_add_markers".localized
+        self.lbInsertImage.text = "create_story_title_media".localized
         
         self.txtHistory.text = defaultText
         self.txtHistory.textColor = UIColor.lightGrayColor()

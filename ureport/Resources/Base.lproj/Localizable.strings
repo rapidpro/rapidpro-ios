@@ -59,7 +59,7 @@
 "story_contribution_add" = "Add a contribution";
 "polls_participate" = "Answer";
 "polls_current" = "Current poll";
-"polls_responded_info" = "%d responded out of %2$s polled";
+"polls_responded_info" = "%@ responded out of %@ polled";
 "polls_response_rate" = "%d%% response rate";
 "polls_see_results" = "See results";
 "news_more_statistics" = "More statistics";
@@ -283,6 +283,12 @@
 "new_group" = "New Group";
 "open" = "Open";
 "switch_language" = "Switch Language";
+"poll_results" = "Poll Results";
+"remove_group" = "Delete group";
+"choose_option" = "Choose an option";
+"login_required" = "Login Required";
+"login_msg" = "Please Login to access this feature!";
+"login_now" = "Login Now!";
 
 //TUTORIAL
 
@@ -292,3 +298,17 @@
 "tutorial_description2" = "Each week you and millions of other U‑Reporters can answer polls about issues impacting young people in your community. Results will always be shared";
 "tutorial_title3" = "Chat for Free";
 "tutorial_description3" = "Chat with other U-Reporters and follow Group Chats around youth issues";
+
+//MARKERS
+
+"Advocacy" = "Advocacy";
+"Child Protection" = "Child Protection";
+"Education" = "Education";
+"Emergency" = "Emergency";
+"Health" = "Health";
+"HIV/AIDS" = "HIV/AIDS";
+"Nutrition" = "Nutrition";
+"Politics" = "Politics";
+"Social Policy" = "Social Policy";
+"Sanitation" = "Sanitation";
+"Violence" = "Violence";

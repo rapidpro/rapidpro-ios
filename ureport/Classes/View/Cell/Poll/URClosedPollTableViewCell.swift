@@ -16,6 +16,7 @@ class URClosedPollTableViewCell: UITableViewCell {
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var viewSeparator: UIView!
+    @IBOutlet weak var lbSeeResults:UILabel!
     
     var poll:URPoll!
     
@@ -23,6 +24,7 @@ class URClosedPollTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.containerView.layer.cornerRadius = 5
         self.viewSeparator.layer.cornerRadius = 5
+        self.lbSeeResults.text = "polls_see_results".localized
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

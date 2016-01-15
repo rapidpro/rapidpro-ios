@@ -83,7 +83,7 @@
                                         <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="E-mail" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gNe-AZ-YHd">
                                             <rect key="frame" x="0.0" y="18" width="304" height="27"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits"/>
+                                            <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                                             <connections>
                                                 <outlet property="delegate" destination="-1" id="awa-wA-aJK"/>
                                             </connections>

@@ -9,6 +9,6 @@
 import UIKit
 
 class URGender {
-    static let Male = "Male".localized
-    static let Female = "Female".localized
+    static let Male = "user_gender_male".localized
+    static let Female = "user_gender_female".localized
 }

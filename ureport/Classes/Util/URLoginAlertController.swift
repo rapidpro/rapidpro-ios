@@ -11,9 +11,9 @@ import UIKit
 class URLoginAlertController: UIAlertController {
     
     class func show(viewController:UIViewController) {
-        let alertController: UIAlertController = UIAlertController(title: "Login Required", message: "Please Login to access this feature!", preferredStyle: .Alert)
+        let alertController: UIAlertController = UIAlertController(title: "login_required".localized, message: "login_msg".localized, preferredStyle: .Alert)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "Cancel", style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
 
         }
         

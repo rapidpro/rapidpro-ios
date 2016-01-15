@@ -211,7 +211,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         groupChatRoom.administrator = URUser.activeUser()
         
         groupChatRoom.createdDate = self.groupChatRoom != nil && self.groupChatRoom.createdDate != nil && self.groupChatRoom.createdDate.integerValue > 0 ? self.groupChatRoom.createdDate : NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
-        groupChatRoom.type = "Group".localized
+        groupChatRoom.type = "Group"
         
         if let pic = picture {
             groupChatRoom.picture = pic
@@ -219,17 +219,20 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
 
         self.listUserSelectedToGroup += [URUser.activeUser()!]
         
+        let main = URMainViewController()
+        URNavigationManager.addLeftButtonMenuInViewController(main)
+        
         if self.groupChatRoom == nil {
             
             URChatRoomManager.save(groupChatRoom, members: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
                 ProgressHUD.show(nil)
-                URNavigationManager.navigation.setViewControllers([URMainViewController(),URMessagesViewController(chatRoom: chatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
+                URNavigationManager.navigation.setViewControllers([main,URMessagesViewController(chatRoom: chatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
             }
         }else {
             groupChatRoom.key = self.groupChatRoom.key
             URChatRoomManager.update(groupChatRoom, newMembers: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
                 ProgressHUD.show(nil)
-                URNavigationManager.navigation.setViewControllers([URMainViewController(),URMessagesViewController(chatRoom: groupChatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
+                URNavigationManager.navigation.setViewControllers([main,URMessagesViewController(chatRoom: groupChatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
             }
         }
 

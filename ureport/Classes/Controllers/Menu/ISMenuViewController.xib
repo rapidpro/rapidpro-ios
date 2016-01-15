@@ -83,7 +83,7 @@
                                 <outlet property="delegate" destination="-1" id="09q-ek-0Ey"/>
                             </connections>
                         </textField>
-                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xTl-xs-ITI">
+                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xTl-xs-ITI">
                             <rect key="frame" x="115" y="55" width="92" height="31"/>
                             <color key="backgroundColor" red="0.32549019610000002" green="0.59607843140000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>

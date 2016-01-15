@@ -60,7 +60,7 @@
 "story_contribution_add" = "Agregar aporte";
 "polls_participate" = "Responder";
 "polls_current" = "Encuesta actual";
-"polls_responded_info" = "%d respuestas de %2$s encuestadxs";
+"polls_responded_info" = "%@ respuestas de %@ encuestas";
 "polls_response_rate" = "%d%% tasa de respuesta";
 "polls_see_results" = "Ver resultados";
 "news_more_statistics" = "Más estadísticas";
@@ -119,7 +119,7 @@
 "chat_room_message_hint" = "Escribir un mensaje";
 "label_action_search" = "Buscar";
 "label_leave_group" = "Dejar el grupo";
-"chat_group_info_created_date" = "Creado por %d, %2$S";
+"chat_group_info_created_date" = "Creado por %@";
 "label_group_info" = "Información del grupo";
 "chat_group_leave" = "¿Estás segurx que quieres dejar este grupo?";
 "login_validation_error_message" = "Necesitas registrarte antes de esta acción. Quieres registrarte ahora?";
@@ -278,11 +278,37 @@
 "state" = "Estado";
 "district" = "Distrito";
 "country" = "País";
-"gender" = "Género";
+"gender" = "Sexo";
 "next" = "Continúa";
 "new_group" = "Grupo nuevo";
 "open" = "Abra";
 "switch_language" = "Cambiar idioma";
+"poll_results" = "Resultados de la Encuesta";
+"remove_group" = "Eliminar grupo";
+"choose_option" = "Elija una opción";
+"login_required" = "Requiere Login";
+"login_msg" = "Inicia sesión para acceder a esta característica.";
+"login_now" = "Ingresar Ahora!";
 
 //TUTORIAL
 
+"tutorial_title1" = "Criar Histórias";
+"tutorial_description1" = "Amplifique sua voz e compartilhe o que está acontecendo em sua comunidade criando histórias e contribuindo em outras";
+"tutorial_title2" = "Responder Enquetes";
+"tutorial_description2" = "Toda semana você e milhões de outros U-Reporters podem responder enquetes sobre questões que impactam pessoas jovens em sua comunidade. Resultados serão sempre compartilhados";
+"tutorial_title3" = "Chat grátis";
+"tutorial_description3" = "Chat com outros U-Reporters e siga grupos de chat sobre questões da juventude";
+
+//MARKERS
+
+"Advocacy" = "Advocacy";
+"Child Protection" = "Child Protection";
+"Education" = "Education";
+"Emergency" = "Emergency";
+"Health" = "Health";
+"HIV/AIDS" = "HIV/AIDS";
+"Nutrition" = "Nutrition";
+"Politics" = "Politics";
+"Social Policy" = "Social Policy";
+"Sanitation" = "Sanitation";
+"Violence" = "Violence";

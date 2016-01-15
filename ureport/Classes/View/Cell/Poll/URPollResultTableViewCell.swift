@@ -24,13 +24,6 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
     
     var viewChoiceHeight = 61
     
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-////        self.choiceView.setNeedsLayout()
-////        self.choiceView.layoutIfNeeded()
-////        self.cView.layoutIfNeeded()
-//    }
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.tagView.tagBackgroundColor = URConstant.Color.PRIMARY
@@ -54,7 +47,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
     func setupCellWithData(pollResult:URPollResult) {
         self.pollResult = pollResult
         self.lbDate.text = pollResult.date
-        self.lbDetails.text = "\(pollResult.responded) \("responded out of".localized) \(pollResult.polled) \("polled".localized)"
+        self.lbDetails.text = String(format: "polls_responded_info".localized, arguments: [pollResult.responded,pollResult.polled])
         self.lbTitle.text = pollResult.title
         
         if pollResult.type == "Keywords" {

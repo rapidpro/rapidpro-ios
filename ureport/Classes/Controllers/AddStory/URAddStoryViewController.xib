@@ -9,6 +9,7 @@
             <connections>
                 <outlet property="btAddMarkers" destination="qjD-4a-nxI" id="dNJ-n5-2fq"/>
                 <outlet property="btAddMedia" destination="3cp-Ml-5Jt" id="mn4-aK-Vxi"/>
+                <outlet property="lbInsertImage" destination="vEd-aS-RAt" id="920-rh-sHq"/>
                 <outlet property="scrollViewMedias" destination="wGx-6L-syJ" id="64u-e6-dQh"/>
                 <outlet property="txtHistory" destination="WX5-2D-cBu" id="SRi-05-wLl"/>
                 <outlet property="txtMarkers" destination="7Gn-6I-Mfo" id="CwN-27-eND"/>

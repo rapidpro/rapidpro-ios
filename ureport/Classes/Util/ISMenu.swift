@@ -9,10 +9,10 @@
 import UIKit
 
 enum URMenuItem:String {
-    case Main = "Main"
-    case About = "About U-Report"
-    case Moderation = "Moderation"
-    case Settings = "Settings"
+    case Main = "main_menu_home"
+    case About = "label_about_ureport"
+    case Moderation = "label_moderation"
+    case Settings = "label_settings"
     case Logout = "Logout"
 }
 

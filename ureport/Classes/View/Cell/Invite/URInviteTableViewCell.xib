@@ -15,8 +15,8 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="66.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Juliano Sabará" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j3j-Q8-ags">
-                        <rect key="frame" x="59" y="9" width="184" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Juliano Sabará" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="j3j-Q8-ags">
+                        <rect key="frame" x="59" y="9" width="172" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="PXv-v9-e6P"/>
                         </constraints>
@@ -44,13 +44,14 @@
                             <constraint firstAttribute="height" constant="1" id="xwT-rq-Vvp"/>
                         </constraints>
                     </view>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="leB-bY-845">
-                        <rect key="frame" x="246" y="14" width="61" height="33"/>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="leB-bY-845">
+                        <rect key="frame" x="239" y="14" width="68" height="33"/>
                         <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="61" id="J09-uT-FT5"/>
-                            <constraint firstAttribute="width" constant="61" id="Nvs-90-YvJ"/>
+                            <constraint firstAttribute="width" constant="68" id="Nvs-90-YvJ"/>
                         </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
                         <state key="normal" title="Invite">
                             <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -64,8 +65,8 @@
                             <action selector="btInviteTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="xxP-GU-hKl"/>
                         </connections>
                     </button>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+558833992231" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-M3-Nmy">
-                        <rect key="frame" x="59" y="30" width="202" height="21"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="+558833992231" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="7" translatesAutoresizingMaskIntoConstraints="NO" id="cf2-M3-Nmy">
+                        <rect key="frame" x="59" y="30" width="172" height="21"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="21" id="KiR-cx-MSX"/>
                         </constraints>
@@ -75,7 +76,7 @@
                     </label>
                 </subviews>
                 <constraints>
-                    <constraint firstAttribute="trailingMargin" secondItem="cf2-M3-Nmy" secondAttribute="trailing" constant="51" id="26A-N7-FYg"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="cf2-M3-Nmy" secondAttribute="trailing" constant="81" id="26A-N7-FYg"/>
                     <constraint firstItem="cf2-M3-Nmy" firstAttribute="leading" secondItem="c7A-op-46v" secondAttribute="trailing" constant="8" id="3Wh-oL-YZ0"/>
                     <constraint firstItem="lte-G5-IVo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="6ET-gc-1S2"/>
                     <constraint firstItem="leB-bY-845" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="14" id="E8U-vF-Sy0"/>
@@ -84,7 +85,7 @@
                     <constraint firstItem="c7A-op-46v" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="1" id="MGd-fR-hZd"/>
                     <constraint firstItem="lte-G5-IVo" firstAttribute="top" secondItem="c7A-op-46v" secondAttribute="bottom" constant="13" id="Nt4-Ez-InK"/>
                     <constraint firstAttribute="trailing" secondItem="leB-bY-845" secondAttribute="trailing" constant="13" id="Whl-BL-RMq"/>
-                    <constraint firstAttribute="trailingMargin" secondItem="j3j-Q8-ags" secondAttribute="trailing" constant="69" id="ZTY-5c-JcC"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="j3j-Q8-ags" secondAttribute="trailing" constant="81" id="ZTY-5c-JcC"/>
                     <constraint firstItem="lte-G5-IVo" firstAttribute="top" secondItem="leB-bY-845" secondAttribute="bottom" constant="18" id="m3c-FY-JRO"/>
                     <constraint firstAttribute="trailing" secondItem="lte-G5-IVo" secondAttribute="trailing" id="mt4-qc-3ju"/>
                     <constraint firstItem="c7A-op-46v" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="uFX-Zn-QJn"/>

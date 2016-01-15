@@ -173,7 +173,7 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
             
             URUserManager.getByKey(user.key, completion: { (user:URUser?, exists:Bool) -> Void in
                 if let stories = user!.stories {
-                    self.lbProfileDetails.text = String(format: "profile_stories".localized, arguments: [stories])
+                    self.lbProfileDetails.text = String(format: "profile_stories".localized, arguments: [Int(stories)])
                 }
                 
                 if let points = user!.points {

@@ -188,6 +188,8 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     func setupUI() {
         
+        self.btLogin.setTitle("login_now".localized, forState: UIControlState.Normal)
+        
         self.pickerCountryProgram = UIPickerView()
         self.pickerCountryProgram!.backgroundColor = UIColor.whiteColor()
         self.pickerCountryProgram!.dataSource = self
@@ -213,15 +215,15 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             self.lbNickName.text = user.nickname
             
             if let points = user.points {
-                self.lbPoints.text = String(format: "menu_points".localized, arguments: [points])
+                self.lbPoints.text = String(format: "menu_points".localized, arguments: [Int(points)])
             }
             
             if let stories = user.stories {
-                self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [stories])
+                self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [Int(stories)])
             }
             
             if let polls = user.polls {
-                self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text) \(String(format: "profile_polls".localized, arguments: [polls]))"
+                self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \(String(format: "profile_polls".localized, arguments: [Int(polls)]))"
             }
             
             if let picture = user.picture {
@@ -269,7 +271,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         
         menuList.append(menuItem2!)
         
-        if URUserManager.userHasPermissionToAccessTheFeature(true) == true {
+        if URUser.activeUser() != nil && URUserManager.userHasPermissionToAccessTheFeature(true) == true {
             menuItem3 = ISMenu()
             menuItem3!.title = URMenuItem.Moderation.rawValue.localized
             menuItem3!.menuItem = .Moderation
