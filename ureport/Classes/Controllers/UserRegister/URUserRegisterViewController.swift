@@ -122,6 +122,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         user.nickname = self.txtNick.text
         user.email = self.txtEmail.text
         user.gender = gender
+        user.gender = user.gender == URGender.Male ? "Male" : "Female"
         user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
         user.country = countryISO3!.code
         user.state = self.txtState.text
@@ -136,7 +137,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             user.picture = userInput?.picture
             user.type = userInput?.type
             user.gender = userInput?.gender == nil ? gender : userInput?.gender
-
+            user.gender = user.gender == URGender.Male ? "Male" : "Female"
+            
             self.saveUser(user)
 
         }else {
@@ -235,7 +237,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
             
             if let gender = self.userInput!.gender {
-                self.txtGender.text = gender as String
+                if gender == "Male" {
+                    self.txtGender.text = URGender.Male
+                }else{
+                    self.txtGender.text = URGender.Female
+                }
             }
             
             if let birthDay = self.userInput!.birthday {
