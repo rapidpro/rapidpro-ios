@@ -253,7 +253,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.pickerDate?.setDate(convertedDate, animated: false)
                 
             }
-            
         }
     }
     
