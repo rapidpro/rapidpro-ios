@@ -198,7 +198,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func showEmptyTextFieldAlert(textField:UITextField) {
         print(textField.placeholder!)
-        UIAlertView(title: nil, message: String(format: "is_empty", arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
+        UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
     }
     
     func saveUser(user:URUser) {

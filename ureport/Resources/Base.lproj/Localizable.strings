@@ -60,7 +60,7 @@
 "polls_participate" = "Answer";
 "polls_current" = "Current poll";
 "polls_responded_info" = "%@ responded out of %@ polled";
-"polls_response_rate" = "%d%% response rate";
+"polls_response_rate" = "%d response rate";
 "polls_see_results" = "See results";
 "news_more_statistics" = "More statistics";
 "news_ureporters" = "U-Reporters";
@@ -207,7 +207,7 @@
 "new_password" = "New password";
 "change_password_title" = "Inform below the current password and the new one";
 "error_change_password" = "The password is incorrect";
-"title_poll_question_user" = "Hi %d!";
+"title_poll_question_user" = "Hi %@!";
 "poll_question_latest_results" = "Previous poll results";
 "view_title" = "View";
 "poll_response_hint" = "Tap here to answer";
@@ -293,11 +293,11 @@
 //TUTORIAL
 
 "tutorial_title1" = "Create Stories";
-"tutorial_description1" = "Amplify your voice and share what is happening in your community by creating stories and commenting on others";
+"tutorial_description1" = "Amplify your voice and share what is happening in your community by creating stories and commenting on others.";
 "tutorial_title2" = "Answer Polls";
-"tutorial_description2" = "Each week you and millions of other U‑Reporters can answer polls about issues impacting young people in your community. Results will always be shared";
+"tutorial_description2" = "Each week you and millions of other U‑Reporters can answer polls about issues impacting young people in your community. Results will always be shared.";
 "tutorial_title3" = "Chat for Free";
-"tutorial_description3" = "Chat with other U-Reporters and follow Group Chats around youth issues";
+"tutorial_description3" = "Chat with other U-Reporters and follow Group Chats around youth issues.";
 
 //MARKERS
 

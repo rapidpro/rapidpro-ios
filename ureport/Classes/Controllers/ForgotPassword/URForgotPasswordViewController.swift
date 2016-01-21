@@ -19,6 +19,7 @@ class URForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.btSendPassword.setTitle("answer_polls_respond".localized, forState: UIControlState.Normal)
         self.lbMessage.text = "info_forgot_password".localized
         self.txtEmail.placeholder = "login_email".localized
     }

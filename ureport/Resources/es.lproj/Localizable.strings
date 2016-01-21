@@ -60,8 +60,8 @@
 "story_contribution_add" = "Agregar aporte";
 "polls_participate" = "Responder";
 "polls_current" = "Encuesta actual";
-"polls_responded_info" = "%@ respuestas de %@ encuestas";
-"polls_response_rate" = "%d%% tasa de respuesta";
+"polls_responded_info" = "%@ respuestas de %@ encuestadxs";
+"polls_response_rate" = "%d tasa de respuesta";
 "polls_see_results" = "Ver resultados";
 "news_more_statistics" = "Más estadísticas";
 "news_ureporters" = "U-Reporters";
@@ -86,7 +86,7 @@
 "profile_ranking" = "Ranking";
 "list_stories_error" = "No has publicado historias";
 "profile_polls" = "Encuesta: %d";
-"profile_stories" = "Historias: %d";
+"profile_stories" = "Historias: %d$s";
 "menu_points" = "Puntos: %d";
 "label_chat_groups" = "Grupos abiertos";
 "chat_groups_join" = "Unirse";
@@ -109,9 +109,10 @@
 "chat_create_individual_message" = "Te gustaría crear una nueva habitación de chat con este U-Reporter?";
 "error_chat_create_individual" = "Ya tienes una habitación de chat con este usuario. No es posible duplicar.";
 "cancel_dialog_button" = "Cancelar";
-"about_content" = "U-Report es una herramienta gratis para la participación comunitaria, diseñada para abordar temas que le interesan a lxs jóvenes. Una vez que te registras pasas a ser un/a U-Reporter y puedes chatear con otrxs U-Reporters, contestar encuestas semanalmente, y enviar tus propias historias. Los resultados e ideas son luego compartidos con la comunidad de U-Report. Los temas de las encuestas incluyen HIV/Sida, brotes de enfermedades, paz, salud, educación, agua, higiene, empleo juvenil, y cualquiera que las personas quieran tratar.La información es después usada para conectar a las personas con sus representantes, mejorar los programas de UNICEF, y llamar la atención de los gobiernos, Naciones Unidas, organizaciones de la sociedad civil y autoridades en general, sobre temas de suma urgencia. Nuestro objetivo es que ellxs usen esta información.El registro es voluntario, y no hay costos asociados para lxs U-Reporters.Juntxs, lxs U-Reporters pueden crear cambios positivos internacionalmente, en su país, o comunidad.";
-"about_subtitle" = "Voice\nMatters";
+"label_action_notifications" = "Notificaciones";
+"about_content" = "U-Report es una herramienta gratis para la participación comunitaria, diseñada para abordar temas que le interesan a lxs jóvenes. Una vez que te registras pasas a ser un/a U-Reporter y puedes chatear con otrxs U-Reporters, contestar encuestas semanalmente, y enviar tus propias historias. Los resultados e ideas son luego compartidos con la comunidad de U-Report. Los temas de las encuestas incluyen HIV/Sida, brotes de enfermedades, paz, salud, educación, agua, higiene, empleo juvenil, y cualquiera que las personas quieran tratar. La información es después usada para conectar a las personas con sus representantes, mejorar los programas de UNICEF, y llamar la atención de los gobiernos, Naciones Unidas, organizaciones de la sociedad civil y autoridades en general, sobre temas de suma urgencia. Nuestro objetivo es que ellxs usen esta información. El registro es voluntario, y no hay costos asociados para lxs U-Reporters. Juntxs, lxs U-Reporters pueden crear cambios positivos internacionalmente, en su país, o comunidad.";
 "label_about_ureport" = "Acerca de U-Report";
+"about_subtitle" = "Tu voz\nImporta";
 "donation_subtitle" = "Cuando haces una donación";
 "label_make_donation_subtitle" = "Hacer una donación";
 "make_donations_content" = "Ayudas a UNICEF a transformar y salvar la vida de niños y niñas, al trabajar por un mundo más justo y seguro para los y las jóvenes. ¡Puedes hacer una diferencia hoy!";
@@ -150,9 +151,9 @@
 "login_load_user_message" = "Cargando  información de usuario.";
 "user_confirmation_load_message" = "Verificando usuario.";
 "user_registering_load_message" = "Registrando usuario.";
-"caching_user_load_message" = "Guardando usuario";
-"error_email_already_exists" = "Ya hay un usuario registrado con este mail. Por favor usa una dirección diferente.";
-"error_nickname_already_exists" = "Ya hay un usuario usando ese apodo. Por favor escoge otro.";
+"caching_user_load_message" = "Guardando usuario...";
+"error_email_already_exists" = "Ya hay un usuario registrado con este mail. Por favor usa una dirección diferente!";
+"error_nickname_already_exists" = "Ya hay un usuario usando ese apodo. Por favor escoge otro!";
 "publishing_story_load_message" = "Publicando historia";
 "load_message_publishing_contribution" = "Publicando... ";
 "date_now" = "Ahora mismo";
@@ -207,12 +208,12 @@
 "new_password" = "Nueva contraseña";
 "change_password_title" = "Escribe más abajo tu antigua contraseña y la nueva";
 "error_change_password" = "La contraseña es incorrecta";
-"title_poll_question_user" = "Hola %d!";
+"title_poll_question_user" = "Hola %@!";
 "poll_question_latest_results" = "Resultado de encuestas anteriores";
 "view_title" = "Ver";
 "poll_response_hint" = "Haz click acá para responder";
 "poll_question_default_message" = "Esperar a próxima encuesta o enviar mensaje a U-Report más abajo.";
-"main_chat" = "ChaT";
+"main_chat" = "Chat";
 "title_open_groups" = "Seguir grupos";
 "description_open_groups" = "Ver lo que las comunidades de U-Report están hablando";
 "title_see" = "Ver";
@@ -246,7 +247,7 @@
 "message_unblock_chat_room" = "Esta habitación de chat ha sido desbloqueada";
 "message_confirm_block_user" = "Estas seguro que quieres bloquear esta habitación de chat?";
 "message_confirm_unblock_user" = "Esta seguro que quieres desbloquear esta habitación de chat?";
-"message_user_blocked_by_other" = "El usuario %d te ha bloqueado. Ya no pueden chatear.";
+"message_user_blocked_by_other" = "El usuario %@ te ha bloqueado. Ya no pueden chatear.";
 "label_chat_invite" = "Chat";
 "label_view_stories" = "Historias";
 "label_view_points" = "Puntos";
@@ -266,8 +267,9 @@
 "message_story_disapproved" = "Esta historia ha sido desaprobada.";
 "title_chat_message" = "Nuevo mensaje de chat";
 "prompt_media_notification" = "media";
-"choose_camera" = "Escolher do álbum";
-"choose_take_picture" = "Tirar Foto";
+"error_message_permission" = "No es posible iniciar sesión con Google+ sin permisos";
+"choose_camera" = "Galería";
+"choose_take_picture" = "Cámara";
 "group_no_user" = "Ningún usuario ha seleccionado.";
 "group_min_user" = "Un grupo debe tener al menos 2 personas";
 "feature_without_permission" = "No se le permite acceder a esta característica.";
@@ -292,23 +294,23 @@
 
 //TUTORIAL
 
-"tutorial_title1" = "Criar Histórias";
-"tutorial_description1" = "Amplifique sua voz e compartilhe o que está acontecendo em sua comunidade criando histórias e contribuindo em outras";
-"tutorial_title2" = "Responder Enquetes";
-"tutorial_description2" = "Toda semana você e milhões de outros U-Reporters podem responder enquetes sobre questões que impactam pessoas jovens em sua comunidade. Resultados serão sempre compartilhados";
-"tutorial_title3" = "Chat grátis";
-"tutorial_description3" = "Chat com outros U-Reporters e siga grupos de chat sobre questões da juventude";
+"tutorial_title1" = "Crea historias";
+"tutorial_description1" = "Amplifica tu voz y comparte lo que está pasando en tu comunidad creando y comentando historias.";
+"tutorial_title2" = "Responde encuestas";
+"tutorial_description2" = "Semanalmente, y junto a millones de U-Reporters, contesta encuestas sobre temas que te impactan a ti y a tu comunidad. Los resultados serán compartidos.";
+"tutorial_title3" = "Chatea gratis";
+"tutorial_description3" = "Chatea con otrxs U-Reporters y sigue grupos que hablen sobre temas que te interesen.";
 
 //MARKERS
 
-"Advocacy" = "Advocacy";
-"Child Protection" = "Child Protection";
-"Education" = "Education";
-"Emergency" = "Emergency";
-"Health" = "Health";
-"HIV/AIDS" = "HIV/AIDS";
-"Nutrition" = "Nutrition";
-"Politics" = "Politics";
-"Social Policy" = "Social Policy";
-"Sanitation" = "Sanitation";
-"Violence" = "Violence";
+"Advocacy" = "Incidencia";
+"Child Protection" = "Protección de niños y niñas";
+"Education" = "Educación";
+"Emergency" = "Emergencia";
+"Health" = "Salud";
+"HIV/AIDS" = "HIV/Sida";
+"Nutrition" = "Nutrición";
+"Politics" = "Política";
+"Social Policy" = "Política Social";
+"Sanitation" = "Sanidad";
+"Violence" = "Violencia";
