@@ -10,7 +10,7 @@ import UIKit
 import youtube_ios_player_helper
 import SDWebImage
 
-class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate {
+class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate, URMediaSourceViewControllerDelegate {
 
     @IBOutlet weak var lbInsertImage: UILabel!
     @IBOutlet weak var txtTitle: UITextField!
@@ -27,8 +27,10 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     let defaultText = "create_story_insert_story_content".localized
     let maxTitleLength = 80
     var youtubeMediaList:[URMedia]!
+    var videoMediaList:[URMedia]!
     var appDelegate:AppDelegate!
     let markerTableViewController = URMarkerTableViewController()
+    let mediaSourceViewController = URMediaSourceViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,7 +59,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         tracker.send(builder.build() as [NSObject : AnyObject])
     }
     
-    //Mark: Button Events
+    //MARK: Button Events
     
     @IBAction func btSendHistoryTapped(sender: AnyObject) {
         self.navigationController!.popViewControllerAnimated(true)
@@ -69,11 +71,39 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
 
     @IBAction func btAddMediaTapped(sender: AnyObject) {
         self.view.endEditing(true)
-        actionSheetPicture.showInView(self.view)
+//        actionSheetPicture.showInView(self.view)
+        
+        self.view.addSubview(mediaSourceViewController.view)
+        mediaSourceViewController.delegate = self
+        mediaSourceViewController.toggleView()
+        
     }
     
+    //MARK: MediaSourceViewControllerDelegate
+
+    func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, type: String) {
+     
+        let media = mediaSourceViewController.media
+        let image = mediaSourceViewController.image
+        
+        if type == URConstant.Media.PICTURE {
+            
+            self.setupMediaViewWithImage(image,media: nil)
+            
+        } else if type == URConstant.Media.VIDEO {
+        
+            self.youtubeMediaList.append(media)
+            self.setupMediaViewWithImage(image,media: media)
+            
+        } else if type == URConstant.Media.VIDEOPHONE {
+            
+            self.videoMediaList.append(media)
+        }
+        
+    }
+
     //MARK: Class Methods
-    
+
     func pointsScoredDidClosed(notification:NSNotification) {
         URNavigationManager.setFrontViewController(URMainViewController())
     }

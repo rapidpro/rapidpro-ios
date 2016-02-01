@@ -30,6 +30,8 @@
 	<string>https://s3.amazonaws.com/ureport-app/chat_group</string>
 	<key>URL_STORAGE_STORIES</key>
 	<string>https://s3.amazonaws.com/ureport-app/story</string>
+	<key>UREPORT_API_TOKEN</key>
+	<string>65395e80-b6db-4778-b10f-6ffb246744d4</string>
 	<key>COGNITO_IDENTITY_POLL_ID</key>
 	<string>us-east-1:938eb41c-68e0-4196-b542-988fdf02e10e</string>
 </dict>

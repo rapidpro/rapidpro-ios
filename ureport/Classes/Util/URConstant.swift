@@ -108,6 +108,9 @@ struct URConstant {
     }
     
     struct Media {
+        static let FILE = "File"
+        static let AUDIO = "Audio"
+        static let VIDEOPHONE = "VideoPhone"
         static let VIDEO = "Video"
         static let PICTURE = "Picture"
     }

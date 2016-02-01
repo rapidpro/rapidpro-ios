@@ -46,7 +46,7 @@ class URRapidProContactUtil: NSObject {
                 URRapidProContactUtil.putValueIfExists(user.nickname, countryProgramContactFields: contactFields, possibleFields: ["nickname","nick_name"])
                 URRapidProContactUtil.putValueIfExists(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval)), countryProgramContactFields: contactFields, possibleFields: ["birthday","birthdate","birth_day"])
                 URRapidProContactUtil.putValueIfExists(String(URDateUtil.getYear(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["born"])
-                URRapidProContactUtil.putValueIfExists(user.gender == URGender.Male ? "Male" : "Female", countryProgramContactFields: contactFields, possibleFields: ["gender"])
+                URRapidProContactUtil.putValueIfExists(user.gender.localized == URGender.Male ? "Male" : "Female", countryProgramContactFields: contactFields, possibleFields: ["gender"])
                 URRapidProContactUtil.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: ["state","region","province","county"])
                 URRapidProContactUtil.putValueIfExists(user.district, countryProgramContactFields: contactFields, possibleFields: ["district","lga"])
                 URRapidProContactUtil.putValueIfExists(user.country, countryProgramContactFields: contactFields, possibleFields: ["country"])

@@ -9,11 +9,11 @@
 	<key>COUNTRY_PROGRAM_CHANNEL_CHL</key>
 	<string>71dd10b3-e629-4ece-a56c-2e7ead7db91b</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_GLOBAL</key>
-	<string>464c265f-b9fc-4cae-a46b-1eb7c57ca72a</string>
+	<string>c9457440-607a-4a86-9968-a9caf3943127</string>
 	<key>COUNTRY_PROGRAM_TOKEN_CHL</key>
-	<string>Token 3ec9cf0cd6ad80ecaafa443ec38f43bcc93caa21</string>
+	<string>Token 15593494b1b1caa57b71281265d216a2c26add14</string>
 	<key>COUNTRY_PROGRAM_TOKEN_IDN</key>
-	<string>Token a68d478fd13c7be2bb899183cbb1fcc819dec59d</string>
+	<string>Token 1a162c2064173feb4e957bf72ab318a53bed1756</string>
 	<key>COUNTRY_PROGRAM_TOKEN_NGA</key>
 	<string>Token d8f646a2da5306184bad9c8710be31e258d4a931</string>
 	<key>COUNTRY_PROGRAM_TOKEN_GLOBAL</key>
@@ -30,6 +30,8 @@
 	<string>https://s3.amazonaws.com/ureport-app/chat_group</string>
 	<key>URL_STORAGE_STORIES</key>
 	<string>https://s3.amazonaws.com/ureport-app/story</string>
+	<key>UREPORT_API_TOKEN</key>
+	<string>65395e80-b6db-4778-b10f-6ffb246744d4</string>
 	<key>COGNITO_IDENTITY_POLL_ID</key>
 	<string>us-east-1:938eb41c-68e0-4196-b542-988fdf02e10e</string>
 </dict>

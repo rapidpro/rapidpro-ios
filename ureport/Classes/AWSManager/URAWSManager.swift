@@ -49,4 +49,37 @@ class URAWSManager: NSObject {
         
     }
     
+    class func uploadVideo(image:UIImage,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+        
+        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.mp4")
+        let filePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName).path!
+        let imageData = UIImageJPEGRepresentation(image, 0.2)
+        imageData!.writeToFile(filePath, atomically: true)
+        
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        
+        uploadRequest.body = NSURL(fileURLWithPath: filePath)
+        uploadRequest.key = fileName
+        uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
+        
+        transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
+            ProgressHUD.dismiss()
+            if task!.error != nil{
+                print(task!.error)
+            }else {
+                
+                let video = URMedia()
+                
+                video.type = "VideoPhone"
+                video.id = fileName
+                video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                
+                completion(video)
+            }
+            return nil
+        }
+        
+    }
+    
 }

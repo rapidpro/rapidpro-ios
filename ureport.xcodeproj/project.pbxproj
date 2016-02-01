@@ -45,6 +45,9 @@
 		6554D0981B934CCB009C5E89 /* URNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */; };
 		6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */; };
 		6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D09A1B94AE4A009C5E89 /* URMedia.swift */; };
+		655532391C51683E002F6AFC /* URMediaSourceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655532371C51683E002F6AFC /* URMediaSourceViewController.swift */; };
+		6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655532381C51683E002F6AFC /* URMediaSourceViewController.xib */; };
+		6555323C1C518376002F6AFC /* ISCircleButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6555323B1C518376002F6AFC /* ISCircleButton.swift */; };
 		655690711B7CFA0B00525E00 /* URConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655690701B7CFA0B00525E00 /* URConstant.swift */; };
 		655690761B7CFF5100525E00 /* ISImageUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655690721B7CFF5100525E00 /* ISImageUtil.swift */; };
 		655690771B7CFF5100525E00 /* ISShareUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655690731B7CFF5100525E00 /* ISShareUtil.swift */; };
@@ -95,6 +98,7 @@
 		656A2BE41B98C7780079BD6A /* URGCMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A2BE31B98C7780079BD6A /* URGCMManager.swift */; };
 		657629161BE135010095772F /* URModerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629151BE135010095772F /* URModerationViewController.swift */; };
 		657629191BE13A360095772F /* URModeratorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629181BE13A360095772F /* URModeratorTableViewController.swift */; };
+		65780CB81C5FFF150025398D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65780CB71C5FFF150025398D /* MobileCoreServices.framework */; };
 		658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949BC1B83E1740087F361 /* ISMenuViewController.swift */; };
 		658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
 		658949C11B83E1A60087F361 /* ISMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949C01B83E1A60087F361 /* ISMenu.swift */; };
@@ -278,6 +282,9 @@
 		6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewGroupViewController.swift; sourceTree = "<group>"; };
 		6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewGroupViewController.xib; sourceTree = "<group>"; };
 		6554D09A1B94AE4A009C5E89 /* URMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMedia.swift; sourceTree = "<group>"; };
+		655532371C51683E002F6AFC /* URMediaSourceViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaSourceViewController.swift; sourceTree = "<group>"; };
+		655532381C51683E002F6AFC /* URMediaSourceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaSourceViewController.xib; sourceTree = "<group>"; };
+		6555323B1C518376002F6AFC /* ISCircleButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISCircleButton.swift; sourceTree = "<group>"; };
 		655690701B7CFA0B00525E00 /* URConstant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URConstant.swift; sourceTree = "<group>"; };
 		655690721B7CFF5100525E00 /* ISImageUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISImageUtil.swift; sourceTree = "<group>"; };
 		655690731B7CFF5100525E00 /* ISShareUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISShareUtil.swift; sourceTree = "<group>"; };
@@ -329,6 +336,7 @@
 		65711A2C1C40502500E05BBD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		657629151BE135010095772F /* URModerationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModerationViewController.swift; sourceTree = "<group>"; };
 		657629181BE13A360095772F /* URModeratorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModeratorTableViewController.swift; sourceTree = "<group>"; };
+		65780CB71C5FFF150025398D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		658949BC1B83E1740087F361 /* ISMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenuViewController.swift; sourceTree = "<group>"; };
 		658949BD1B83E1740087F361 /* ISMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ISMenuViewController.xib; sourceTree = "<group>"; };
 		658949C01B83E1A60087F361 /* ISMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenu.swift; sourceTree = "<group>"; };
@@ -457,6 +465,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65780CB81C5FFF150025398D /* MobileCoreServices.framework in Frameworks */,
 				658949D61B861B5E0087F361 /* Security.framework in Frameworks */,
 				658949D41B85775A0087F361 /* Accounts.framework in Frameworks */,
 				658949D21B8577530087F361 /* Social.framework in Frameworks */,
@@ -652,6 +661,7 @@
 		65409FE21B4C845200344D75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				655532361C51682C002F6AFC /* MediaSource */,
 				97B2FABD1C061E44000820BD /* Tutorial */,
 				65F8B3041BE2D6FE009F9CAB /* NewsDetail */,
 				657629171BE13A250095772F /* Moderator */,
@@ -773,6 +783,7 @@
 				974249291BFBCEB90024384E /* URRapidPRODateTransform.swift */,
 				9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */,
 				6533CF431C496627009DF49C /* URRapidProContactUtil.swift */,
+				6555323B1C518376002F6AFC /* ISCircleButton.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -883,6 +894,15 @@
 				6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */,
 			);
 			path = NewGroup;
+			sourceTree = "<group>";
+		};
+		655532361C51682C002F6AFC /* MediaSource */ = {
+			isa = PBXGroup;
+			children = (
+				655532371C51683E002F6AFC /* URMediaSourceViewController.swift */,
+				655532381C51683E002F6AFC /* URMediaSourceViewController.xib */,
+			);
+			path = MediaSource;
 			sourceTree = "<group>";
 		};
 		655690AC1B7D394500525E00 /* Main */ = {
@@ -1319,6 +1339,7 @@
 		765863F8BACD5E4ED452B82C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				65780CB71C5FFF150025398D /* MobileCoreServices.framework */,
 				658949D51B861B5E0087F361 /* Security.framework */,
 				658949D31B85775A0087F361 /* Accounts.framework */,
 				658949D11B8577530087F361 /* Social.framework */,
@@ -1488,6 +1509,7 @@
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
+				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
 				659A7A961B51EFA800B56983 /* Localizable.strings in Resources */,
@@ -1606,6 +1628,7 @@
 				65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */,
 				655690851B7D0F6700525E00 /* URPoll.swift in Sources */,
 				658949DA1B8623CF0087F361 /* TwitterAuthHelper.m in Sources */,
+				6555323C1C518376002F6AFC /* ISCircleButton.swift in Sources */,
 				658D85901B554D3700DFB949 /* URStoriesTableViewCell.swift in Sources */,
 				652F8B0A1BA207250096C8DC /* URChatMessageManager.swift in Sources */,
 				6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */,
@@ -1614,6 +1637,7 @@
 				9742494B1BFE0D010024384E /* UROpenFieldResponseView.swift in Sources */,
 				654CB3C51BAB632100D8803B /* Serializable.swift in Sources */,
 				658949C51B83E1D30087F361 /* ISMenuTableViewCell.swift in Sources */,
+				655532391C51683E002F6AFC /* URMediaSourceViewController.swift in Sources */,
 				654850631BB1D7390002A3D5 /* URPollManager.swift in Sources */,
 				9742493B1BFBE2C00024384E /* URFlowMetadata.swift in Sources */,
 				655690951B7D142900525E00 /* UROpenQuestion.swift in Sources */,
@@ -1794,8 +1818,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1817,7 +1841,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "eca623d9-4304-4e3f-8a79-f3cadd32ab62";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1841,8 +1865,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1857,7 +1881,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "eca623d9-4304-4e3f-8a79-f3cadd32ab62";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -1870,8 +1894,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1881,7 +1905,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eca623d9-4304-4e3f-8a79-f3cadd32ab62";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -1893,8 +1917,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1904,7 +1928,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "eca623d9-4304-4e3f-8a79-f3cadd32ab62";
+				PROVISIONING_PROFILE = "7ce76c6b-0831-4973-a7a9-8702493da256";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = 1;
 			};

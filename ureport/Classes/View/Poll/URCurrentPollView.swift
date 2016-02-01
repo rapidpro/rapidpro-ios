@@ -198,6 +198,10 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
                     break
                 case URFlowType.Choice:
                     responseView = getChoiceResponse(flowRule, frame: frame)
+                    break
+                case URFlowType.Number:
+                    responseView = getOpenFieldResponse(flowRule, frame: frame)
+                    break
                 default: break
                 }
             

@@ -31,7 +31,6 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         super.viewDidLoad()
         setupTableView()
         setupHeaderCell()
-        loadCurrentFlow()
         
         self.title = "poll_results".localized
     }
@@ -46,6 +45,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         
+        loadCurrentFlow()
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -96,7 +96,9 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
                 ProgressHUD.show("message_send_poll".localized)
                 
                 URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
-                    ProgressHUD.dismiss()
+                    dispatch_async(dispatch_get_main_queue()) {
+                        ProgressHUD.dismiss()
+                    }
                 })
                 updateTopViewHeight(0)
                 headerCell.removeFromSuperview()
@@ -131,7 +133,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         URRapidProManager.getContact(URUser.activeUser()!, completion: { (contact) -> Void in
             self.contact = contact
             URRapidProManager.getFlowRuns(contact, completion: { (flowRuns: [URFlowRun]) -> Void in
-                if !flowRuns.isEmpty && URFlowManager.isFlowActive(flowRuns[0]) {
+                if !(flowRuns.isEmpty && URFlowManager.isFlowActive(flowRuns[0])) {
                     URRapidProManager.getFlowDefinition(flowRuns[0].flow_uuid, completion: {
                         (flowDefinition: URFlowDefinition) -> Void in
                         self.currentFlow = flowDefinition
@@ -151,7 +153,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     private func reloadCurrentFlowSection() {
         headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset!, contact: contact!)
         headerCell.delegate = self
-        headerCell.frame = CGRectMake(0, 0, headerCell.frame.width, headerCell.getCurrentPollHeight())
+        headerCell.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, headerCell.getCurrentPollHeight())
         updateTopViewHeight(headerCell.getCurrentPollHeight())
         fitScrollSize()
     }

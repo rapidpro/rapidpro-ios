@@ -1,0 +1,302 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URMediaSourceViewController" customModule="ureport" customModuleProvider="target">
+            <connections>
+                <outlet property="btAudio" destination="h54-uP-07y" id="qoC-OA-zl7"/>
+                <outlet property="btCamera" destination="nRL-5T-8lb" id="ojc-5r-LJa"/>
+                <outlet property="btDismiss" destination="dT1-wj-VIb" id="DNG-tj-Vzw"/>
+                <outlet property="btFile" destination="GVE-eh-rgL" id="6n2-DO-YWN"/>
+                <outlet property="btGallery" destination="9Mj-Iu-fpf" id="t7k-L6-he2"/>
+                <outlet property="btVideo" destination="SVk-Kk-vNr" id="mM7-1q-FQL"/>
+                <outlet property="btYoutube" destination="MeC-ex-hDc" id="hjl-0S-Ca0"/>
+                <outlet property="lbAudio" destination="U2U-5k-nhM" id="AsQ-00-q3p"/>
+                <outlet property="lbCamera" destination="Zd5-dP-C51" id="wt1-lB-wL6"/>
+                <outlet property="lbFile" destination="w2U-TQ-e1e" id="aul-OA-0b1"/>
+                <outlet property="lbGallery" destination="jDt-DN-PkK" id="hUj-SH-GvK"/>
+                <outlet property="lbVideo" destination="7u0-Cw-vHC" id="2um-ZO-16b"/>
+                <outlet property="lbYoutube" destination="fpu-1k-zi8" id="JJx-bo-prI"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RW3-SF-IWj">
+                    <rect key="frame" x="0.0" y="336" width="200" height="120"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Camera" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zd5-dP-C51">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="9Xa-ug-2HO"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nRL-5T-8lb" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="0.086274509803921567" green="0.69411764705882351" blue="0.94117647058823528" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="Ab0-FK-K6Z"/>
+                                <constraint firstAttribute="height" constant="76" id="hQ3-29-nE0"/>
+                            </constraints>
+                            <state key="normal" image="icon_camera"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="axc-Fl-k4F"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="nRL-5T-8lb" firstAttribute="centerX" secondItem="RW3-SF-IWj" secondAttribute="centerX" id="Fgv-cx-qhB"/>
+                        <constraint firstItem="Zd5-dP-C51" firstAttribute="leading" secondItem="RW3-SF-IWj" secondAttribute="leading" constant="8" id="KgM-iY-Zwl"/>
+                        <constraint firstAttribute="height" constant="120" id="RnE-05-5rA"/>
+                        <constraint firstItem="Zd5-dP-C51" firstAttribute="top" secondItem="nRL-5T-8lb" secondAttribute="bottom" constant="14" id="byZ-az-hJK"/>
+                        <constraint firstAttribute="trailing" secondItem="Zd5-dP-C51" secondAttribute="trailing" constant="8" id="mCC-wa-vZc"/>
+                        <constraint firstItem="nRL-5T-8lb" firstAttribute="centerY" secondItem="RW3-SF-IWj" secondAttribute="centerY" constant="-16" id="veH-HO-3An"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vdF-b4-7Ve">
+                    <rect key="frame" x="0.0" y="472" width="200" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GVE-eh-rgL" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="0.98039215686274506" green="0.45490196078431372" blue="0.10196078431372549" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="6KW-TS-dCb"/>
+                                <constraint firstAttribute="height" constant="76" id="ivr-c2-dOA"/>
+                            </constraints>
+                            <state key="normal" image="icon_file"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="Pda-lC-Nu7"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="File" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="w2U-TQ-e1e">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="jRT-a4-fc9"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="w2U-TQ-e1e" secondAttribute="trailing" constant="8" id="Cgu-3f-c4l"/>
+                        <constraint firstItem="GVE-eh-rgL" firstAttribute="centerY" secondItem="vdF-b4-7Ve" secondAttribute="centerY" constant="-16" id="NpX-H8-VBG"/>
+                        <constraint firstAttribute="height" constant="120" id="mG2-h8-q6r"/>
+                        <constraint firstItem="w2U-TQ-e1e" firstAttribute="top" secondItem="GVE-eh-rgL" secondAttribute="bottom" constant="14" id="nFh-cK-PPe"/>
+                        <constraint firstItem="GVE-eh-rgL" firstAttribute="centerX" secondItem="vdF-b4-7Ve" secondAttribute="centerX" id="xO9-9K-eQy"/>
+                        <constraint firstItem="w2U-TQ-e1e" firstAttribute="leading" secondItem="vdF-b4-7Ve" secondAttribute="leading" constant="8" id="zsG-lf-zPJ"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-Uu-5lv">
+                    <rect key="frame" x="400" y="472" width="200" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeC-ex-hDc" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="0.94509803921568625" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="0ab-jV-0pZ"/>
+                                <constraint firstAttribute="height" constant="76" id="z0b-mU-74v"/>
+                            </constraints>
+                            <state key="normal" image="icon_play"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="lds-1j-D5u"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpu-1k-zi8">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="hDT-C7-V1N"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="MeC-ex-hDc" firstAttribute="centerY" secondItem="q2P-Uu-5lv" secondAttribute="centerY" constant="-16" id="2ZZ-Iu-KT9"/>
+                        <constraint firstItem="MeC-ex-hDc" firstAttribute="centerX" secondItem="q2P-Uu-5lv" secondAttribute="centerX" id="cNp-9T-pHm"/>
+                        <constraint firstAttribute="trailing" secondItem="fpu-1k-zi8" secondAttribute="trailing" constant="8" id="d3F-bd-OxS"/>
+                        <constraint firstItem="fpu-1k-zi8" firstAttribute="top" secondItem="MeC-ex-hDc" secondAttribute="bottom" constant="14" id="o9e-hU-EKH"/>
+                        <constraint firstAttribute="height" constant="120" id="pNP-Wf-FcY"/>
+                        <constraint firstItem="fpu-1k-zi8" firstAttribute="leading" secondItem="q2P-Uu-5lv" secondAttribute="leading" constant="8" id="zOK-C2-LzL"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uwl-HR-vHy">
+                    <rect key="frame" x="200" y="336" width="200" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9Mj-Iu-fpf" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="1" green="0.73333333333333328" blue="0.25882352941176467" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="Msx-w4-PXp"/>
+                                <constraint firstAttribute="height" constant="76" id="XQ7-Z6-5Qw"/>
+                            </constraints>
+                            <state key="normal" image="icon_image"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="A68-Qm-Wsu"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Gallery" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDt-DN-PkK">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="tHL-Qh-wTS"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="jDt-DN-PkK" firstAttribute="leading" secondItem="Uwl-HR-vHy" secondAttribute="leading" constant="8" id="4Nq-CH-Rpq"/>
+                        <constraint firstItem="jDt-DN-PkK" firstAttribute="top" secondItem="9Mj-Iu-fpf" secondAttribute="bottom" constant="14" id="Jtm-R6-5si"/>
+                        <constraint firstAttribute="height" constant="120" id="Xru-Zr-lxj"/>
+                        <constraint firstItem="9Mj-Iu-fpf" firstAttribute="centerX" secondItem="Uwl-HR-vHy" secondAttribute="centerX" id="dgp-yd-n2e"/>
+                        <constraint firstAttribute="trailing" secondItem="jDt-DN-PkK" secondAttribute="trailing" constant="8" id="j8e-8g-Qhk"/>
+                        <constraint firstItem="9Mj-Iu-fpf" firstAttribute="centerY" secondItem="Uwl-HR-vHy" secondAttribute="centerY" constant="-16" id="uXW-sW-qRx"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OUk-BX-Wbw">
+                    <rect key="frame" x="400" y="336" width="200" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SVk-Kk-vNr" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="0.70588235294117641" green="0.2196078431372549" blue="0.80784313725490198" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="76" id="peT-40-ddc"/>
+                                <constraint firstAttribute="width" constant="76" id="vfT-71-Cwi"/>
+                            </constraints>
+                            <state key="normal" image="icon_video"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="ibD-WK-lEE"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Video" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7u0-Cw-vHC">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="dnC-3z-AGW"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="trailing" secondItem="7u0-Cw-vHC" secondAttribute="trailing" constant="8" id="E2C-A6-ci4"/>
+                        <constraint firstItem="7u0-Cw-vHC" firstAttribute="top" secondItem="SVk-Kk-vNr" secondAttribute="bottom" constant="14" id="cJC-bc-l6O"/>
+                        <constraint firstItem="SVk-Kk-vNr" firstAttribute="centerY" secondItem="OUk-BX-Wbw" secondAttribute="centerY" constant="-16" id="o2D-rO-NOd"/>
+                        <constraint firstItem="SVk-Kk-vNr" firstAttribute="centerX" secondItem="OUk-BX-Wbw" secondAttribute="centerX" id="qD6-Iq-AaV"/>
+                        <constraint firstItem="7u0-Cw-vHC" firstAttribute="leading" secondItem="OUk-BX-Wbw" secondAttribute="leading" constant="8" id="sML-7B-G4d"/>
+                        <constraint firstAttribute="height" constant="120" id="sgH-e7-EO4"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpx-sP-WcG">
+                    <rect key="frame" x="200" y="472" width="200" height="120"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h54-uP-07y" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="62" y="6" width="76" height="76"/>
+                            <color key="backgroundColor" red="0.10980392156862745" green="0.82745098039215681" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="76" id="UM6-05-8H9"/>
+                                <constraint firstAttribute="height" constant="76" id="u4A-zI-Sue"/>
+                            </constraints>
+                            <state key="normal" image="icon_mic_white"/>
+                            <connections>
+                                <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="Oh0-2q-kyz"/>
+                            </connections>
+                        </button>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Audio" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U2U-5k-nhM">
+                            <rect key="frame" x="8" y="96" width="184" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="zcn-bk-fP8"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="h54-uP-07y" firstAttribute="centerX" secondItem="cpx-sP-WcG" secondAttribute="centerX" id="3Wy-zb-9Bn"/>
+                        <constraint firstAttribute="height" constant="120" id="Hzf-ws-48w"/>
+                        <constraint firstItem="U2U-5k-nhM" firstAttribute="leading" secondItem="cpx-sP-WcG" secondAttribute="leading" constant="8" id="RyL-VE-VUb"/>
+                        <constraint firstItem="U2U-5k-nhM" firstAttribute="top" secondItem="h54-uP-07y" secondAttribute="bottom" constant="14" id="Udx-ZU-Px6"/>
+                        <constraint firstItem="h54-uP-07y" firstAttribute="centerY" secondItem="cpx-sP-WcG" secondAttribute="centerY" constant="-16" id="s4l-u7-atw"/>
+                        <constraint firstAttribute="trailing" secondItem="U2U-5k-nhM" secondAttribute="trailing" constant="8" id="vo3-iW-dpS"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" alpha="0.0" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dT1-wj-VIb">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="328"/>
+                    <color key="backgroundColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <connections>
+                        <action selector="btDismissTapped:" destination="-1" eventType="touchUpInside" id="Ugs-N0-ejK"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="dT1-wj-VIb" secondAttribute="trailing" id="187-Sx-nMw"/>
+                <constraint firstAttribute="bottom" secondItem="cpx-sP-WcG" secondAttribute="bottom" constant="8" id="1By-J3-qba"/>
+                <constraint firstItem="Uwl-HR-vHy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="2ml-vx-jsE"/>
+                <constraint firstItem="q2P-Uu-5lv" firstAttribute="leading" secondItem="cpx-sP-WcG" secondAttribute="trailing" id="3xY-kS-sK4"/>
+                <constraint firstItem="RW3-SF-IWj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4BA-1z-BRU"/>
+                <constraint firstItem="OUk-BX-Wbw" firstAttribute="width" secondItem="RW3-SF-IWj" secondAttribute="width" id="4bY-JC-nrG"/>
+                <constraint firstItem="cpx-sP-WcG" firstAttribute="leading" secondItem="vdF-b4-7Ve" secondAttribute="trailing" id="9nw-1I-0nq"/>
+                <constraint firstItem="vdF-b4-7Ve" firstAttribute="top" secondItem="RW3-SF-IWj" secondAttribute="bottom" constant="16" id="AYz-EL-LQB"/>
+                <constraint firstItem="cpx-sP-WcG" firstAttribute="top" secondItem="Uwl-HR-vHy" secondAttribute="bottom" constant="16" id="Ftn-YC-oJR"/>
+                <constraint firstItem="dT1-wj-VIb" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="GfE-9s-IVB"/>
+                <constraint firstAttribute="trailing" secondItem="q2P-Uu-5lv" secondAttribute="trailing" id="IRE-1J-n7v"/>
+                <constraint firstAttribute="bottom" secondItem="q2P-Uu-5lv" secondAttribute="bottom" constant="8" id="Mt0-h7-rgk"/>
+                <constraint firstItem="q2P-Uu-5lv" firstAttribute="top" secondItem="OUk-BX-Wbw" secondAttribute="bottom" constant="16" id="S7k-Eb-om8"/>
+                <constraint firstItem="vdF-b4-7Ve" firstAttribute="top" secondItem="RW3-SF-IWj" secondAttribute="bottom" constant="16" id="SuG-7c-qZb"/>
+                <constraint firstAttribute="trailing" secondItem="OUk-BX-Wbw" secondAttribute="trailing" id="Wfn-m2-sv4"/>
+                <constraint firstItem="OUk-BX-Wbw" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Z9N-GV-szz"/>
+                <constraint firstItem="vdF-b4-7Ve" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="aVL-4T-axT"/>
+                <constraint firstItem="Uwl-HR-vHy" firstAttribute="leading" secondItem="RW3-SF-IWj" secondAttribute="trailing" id="ajJ-0N-Sdp"/>
+                <constraint firstItem="OUk-BX-Wbw" firstAttribute="leading" secondItem="Uwl-HR-vHy" secondAttribute="trailing" id="bMj-si-0Cc"/>
+                <constraint firstItem="OUk-BX-Wbw" firstAttribute="top" secondItem="dT1-wj-VIb" secondAttribute="bottom" constant="8" id="jYR-TR-AgY"/>
+                <constraint firstItem="q2P-Uu-5lv" firstAttribute="width" secondItem="vdF-b4-7Ve" secondAttribute="width" id="kJB-zS-0pi"/>
+                <constraint firstItem="RW3-SF-IWj" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="kNJ-Db-bn0"/>
+                <constraint firstItem="dT1-wj-VIb" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="n44-6U-xJQ"/>
+                <constraint firstItem="q2P-Uu-5lv" firstAttribute="top" secondItem="OUk-BX-Wbw" secondAttribute="bottom" constant="16" id="rIB-Fi-Xbv"/>
+                <constraint firstItem="Uwl-HR-vHy" firstAttribute="width" secondItem="RW3-SF-IWj" secondAttribute="width" id="u25-BM-0em"/>
+                <constraint firstAttribute="bottom" secondItem="vdF-b4-7Ve" secondAttribute="bottom" constant="8" id="uUw-kG-rB8"/>
+                <constraint firstItem="cpx-sP-WcG" firstAttribute="width" secondItem="vdF-b4-7Ve" secondAttribute="width" id="wXV-0l-rqc"/>
+                <constraint firstItem="cpx-sP-WcG" firstAttribute="top" secondItem="Uwl-HR-vHy" secondAttribute="bottom" constant="16" id="xre-XP-vOp"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="kNJ-Db-bn0"/>
+                    <exclude reference="2ml-vx-jsE"/>
+                    <exclude reference="AYz-EL-LQB"/>
+                    <exclude reference="xre-XP-vOp"/>
+                    <exclude reference="Z9N-GV-szz"/>
+                    <exclude reference="S7k-Eb-om8"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="301" y="57"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="icon_camera" width="20" height="18"/>
+        <image name="icon_file" width="23" height="20"/>
+        <image name="icon_image" width="20" height="20"/>
+        <image name="icon_mic_white" width="15" height="25"/>
+        <image name="icon_play" width="14" height="18"/>
+        <image name="icon_video" width="26" height="17"/>
+    </resources>
+</document>
