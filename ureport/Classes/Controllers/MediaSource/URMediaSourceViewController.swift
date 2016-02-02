@@ -97,6 +97,11 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         
         if mediaType == kUTTypeMovie {
             let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
+            
+            URAWSManager.uploadVideo(path!, uploadPath: URUploadPath.Stories, completion: { (media) -> Void in
+                print(media)
+            })
+            
             if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
                 
             }
@@ -151,6 +156,9 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         case btVideo:
             imagePicker.sourceType = .Camera
             imagePicker.mediaTypes = [kUTTypeMovie as String]
+            imagePicker.videoQuality = .Type640x480
+            imagePicker.videoMaximumDuration = 20
+            
 //            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video
             imagePicker.allowsEditing = false
             

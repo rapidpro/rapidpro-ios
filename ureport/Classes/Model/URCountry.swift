@@ -36,7 +36,7 @@ class URCountry: NSObject {
         return NSLocale(localeIdentifier: NSLocale.preferredLanguages()[0]).displayNameForKey(NSLocaleIdentifier, value: id)
     }
     
-    class func getCountries(type:URCountryCodeType) -> AnyObject {
+    class func getCountries(type:URCountryCodeType) -> [URCountry] {
 
         var countries: [URCountry] = []
         

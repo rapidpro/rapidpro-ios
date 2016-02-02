@@ -99,6 +99,7 @@
 		657629161BE135010095772F /* URModerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629151BE135010095772F /* URModerationViewController.swift */; };
 		657629191BE13A360095772F /* URModeratorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629181BE13A360095772F /* URModeratorTableViewController.swift */; };
 		65780CB81C5FFF150025398D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65780CB71C5FFF150025398D /* MobileCoreServices.framework */; };
+		65780CBA1C61064A0025398D /* URVideoUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65780CB91C61064A0025398D /* URVideoUtil.swift */; };
 		658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949BC1B83E1740087F361 /* ISMenuViewController.swift */; };
 		658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
 		658949C11B83E1A60087F361 /* ISMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949C01B83E1A60087F361 /* ISMenu.swift */; };
@@ -337,6 +338,7 @@
 		657629151BE135010095772F /* URModerationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModerationViewController.swift; sourceTree = "<group>"; };
 		657629181BE13A360095772F /* URModeratorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModeratorTableViewController.swift; sourceTree = "<group>"; };
 		65780CB71C5FFF150025398D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		65780CB91C61064A0025398D /* URVideoUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoUtil.swift; sourceTree = "<group>"; };
 		658949BC1B83E1740087F361 /* ISMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenuViewController.swift; sourceTree = "<group>"; };
 		658949BD1B83E1740087F361 /* ISMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ISMenuViewController.xib; sourceTree = "<group>"; };
 		658949C01B83E1A60087F361 /* ISMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenu.swift; sourceTree = "<group>"; };
@@ -784,6 +786,7 @@
 				9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */,
 				6533CF431C496627009DF49C /* URRapidProContactUtil.swift */,
 				6555323B1C518376002F6AFC /* ISCircleButton.swift */,
+				65780CB91C61064A0025398D /* URVideoUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1707,6 +1710,7 @@
 				65FAF0C91BC2C2E200F8B380 /* URPasswordEditViewController.swift in Sources */,
 				97A5A6F21C0E2970006CBA25 /* URGcmInput.swift in Sources */,
 				65EA8C201BB0792800F2E29E /* URAboutViewController.swift in Sources */,
+				65780CBA1C61064A0025398D /* URVideoUtil.swift in Sources */,
 				65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */,
 				655691831B7E668B00525E00 /* URMarkerTableViewCell.swift in Sources */,
 				9725C5961C0EAE1A00EE1237 /* URAlamofireLogExtension.swift in Sources */,

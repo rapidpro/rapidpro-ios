@@ -49,35 +49,43 @@ class URAWSManager: NSObject {
         
     }
     
-    class func uploadVideo(image:UIImage,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+    class func uploadVideo(path:String,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
         
-        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.mp4")
-        let filePath = NSURL(fileURLWithPath: NSTemporaryDirectory()).URLByAppendingPathComponent(fileName).path!
-        let imageData = UIImageJPEGRepresentation(image, 0.2)
-        imageData!.writeToFile(filePath, atomically: true)
-        
-        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
-        let uploadRequest = AWSS3TransferManagerUploadRequest()
-        
-        uploadRequest.body = NSURL(fileURLWithPath: filePath)
-        uploadRequest.key = fileName
-        uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
-        
-        transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
-            ProgressHUD.dismiss()
-            if task!.error != nil{
-                print(task!.error)
-            }else {
+        URVideoUtil.compressVideo(NSURL(fileURLWithPath: path)) { (session) -> Void in
+            
+            if session.status == .Completed {
                 
-                let video = URMedia()
+                let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.MOV")
                 
-                video.type = "VideoPhone"
-                video.id = fileName
-                video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+                let uploadRequest = AWSS3TransferManagerUploadRequest()
                 
-                completion(video)
+                uploadRequest.body = NSURL(fileURLWithPath: URVideoUtil.outPutURL.path!)
+                uploadRequest.key = fileName
+                uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
+                
+                transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
+                    ProgressHUD.dismiss()
+                    if task!.error != nil{
+                        print(task!.error)
+                    }else {
+                        
+                        let video = URMedia()
+                        
+                        video.type = "VideoPhone"
+                        video.id = fileName
+                        video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                        
+                        completion(video)
+                    }
+                    return nil
+                }
+                
+            }else{
+                print(session.status.rawValue)
+                print(session.error)
             }
-            return nil
+            
         }
         
     }

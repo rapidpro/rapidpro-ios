@@ -468,8 +468,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == self.pickerCities {
 
-            country = (URCountry.getCountries(URCountryCodeType.ISO2)[row] as! URCountry)
-            countryISO3 = (URCountry.getCountries(URCountryCodeType.ISO3)[row] as! URCountry)
+            country = (URCountry.getCountries(URCountryCodeType.ISO2)[row]) as URCountry
+            countryISO3 = (URCountry.getCountries(URCountryCodeType.ISO3)[row]) as URCountry
             
             self.txtCountry.text = country!.name
             
