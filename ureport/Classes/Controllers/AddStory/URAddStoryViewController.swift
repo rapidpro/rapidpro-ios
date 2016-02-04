@@ -71,11 +71,11 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
 
     @IBAction func btAddMediaTapped(sender: AnyObject) {
         self.view.endEditing(true)
-//        actionSheetPicture.showInView(self.view)
+        actionSheetPicture.showInView(self.view)
         
-        self.view.addSubview(mediaSourceViewController.view)
-        mediaSourceViewController.delegate = self
-        mediaSourceViewController.toggleView()
+//        self.view.addSubview(mediaSourceViewController.view)
+//        mediaSourceViewController.delegate = self
+//        mediaSourceViewController.toggleView()
         
     }
     
