@@ -28,4 +28,24 @@ class URVideoUtil: NSObject {
         
     }
     
+    class func generateThumbnail(url : NSURL) -> UIImage?{
+        let asset = AVAsset(URL: url)
+        let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+        assetImgGenerate.appliesPreferredTrackTransform = true
+        assetImgGenerate.maximumSize = CGSizeMake(100, 100);
+
+        var time = asset.duration
+        time.value = min(time.value, 2)
+        
+        do {
+            let image = try assetImgGenerate.copyCGImageAtTime(time, actualTime: nil)
+            let frameImg = UIImage(CGImage: image)
+            
+            return frameImg
+        }catch let error as NSError {
+            print("error on generate image thumbnail \(error.localizedDescription)")
+            return nil
+        }
+    }
+    
 }

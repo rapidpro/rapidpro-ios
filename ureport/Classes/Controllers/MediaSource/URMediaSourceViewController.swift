@@ -95,25 +95,47 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         
-        if mediaType == kUTTypeMovie {
-            let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
-            
-            URAWSManager.uploadVideo(path!, uploadPath: URUploadPath.Stories, completion: { (media) -> Void in
-                print(media)
-            })
-            
-            if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {
+        if let delegate = delegate {
+        
+            if mediaType == kUTTypeMovie {
+                let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
                 
-            }
-        }else {
-            
-            if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                self.image = pickedImage
+//                URAWSManager.uploadVideo(path!, uploadPath: URUploadPath.Stories, completion: { (media) -> Void in
+//                    print(media)
+//                })
                 
-                if let delegate = delegate {
+                if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {}
+                
+                self.image = URVideoUtil.generateThumbnail(NSURL(fileURLWithPath: path!))
+                
+//                let media = URMedia()
+//                media.id = "VideoPhone"
+//                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
+//                media.type = URConstant.Media.VIDEOPHONE
+//                
+//                self.media = media
+//                
+//                ProgressHUD.show(nil)
+//                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+//                    
+//                    }, completed: { (image, error, cacheType, finish, url) -> Void in
+//                        ProgressHUD.dismiss()
+//                        
+//                        self.image = image
+//                        
+//                        if let delegate = self.delegate {
+//                            delegate.newMediaAdded(self,type: URConstant.Media.VIDEO)
+//                        }
+//                })
+                
+                delegate.newMediaAdded(self, type: URConstant.Media.VIDEOPHONE)
+                
+            }else {
+                
+                if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+                    self.image = pickedImage
                     delegate.newMediaAdded(self, type: URConstant.Media.PICTURE)
                 }
-                
             }
         }
         
