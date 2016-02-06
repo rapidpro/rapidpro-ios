@@ -166,6 +166,11 @@
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
 		65EA8C201BB0792800F2E29E /* URAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C1E1BB0792800F2E29E /* URAboutViewController.swift */; };
 		65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1F1BB0792800F2E29E /* URAboutViewController.xib */; };
+		65F47F4E1C653FB2009A2066 /* URLocalMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */; };
+		65F47F501C654517009A2066 /* URVideoMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F4F1C654517009A2066 /* URVideoMedia.swift */; };
+		65F47F521C654A6C009A2066 /* URVideoPhoneMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */; };
+		65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F531C654B79009A2066 /* URImageMedia.swift */; };
+		65F47F561C658C71009A2066 /* URMediaUpload.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F551C658C71009A2066 /* URMediaUpload.swift */; };
 		65F7DA2A1C073544001AFA22 /* URFireBaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F7DA291C073544001AFA22 /* URFireBaseManager.swift */; };
 		65F8B3011BE2A76A009F9CAB /* URNewsCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B3001BE2A76A009F9CAB /* URNewsCategory.swift */; };
 		65F8B3031BE2CA7F009F9CAB /* URAPIResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F8B3021BE2CA7E009F9CAB /* URAPIResponse.swift */; };
@@ -410,6 +415,11 @@
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
 		65EA8C1E1BB0792800F2E29E /* URAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAboutViewController.swift; sourceTree = "<group>"; };
 		65EA8C1F1BB0792800F2E29E /* URAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAboutViewController.xib; sourceTree = "<group>"; };
+		65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLocalMedia.swift; sourceTree = "<group>"; };
+		65F47F4F1C654517009A2066 /* URVideoMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoMedia.swift; sourceTree = "<group>"; };
+		65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoPhoneMedia.swift; sourceTree = "<group>"; };
+		65F47F531C654B79009A2066 /* URImageMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URImageMedia.swift; sourceTree = "<group>"; };
+		65F47F551C658C71009A2066 /* URMediaUpload.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaUpload.swift; sourceTree = "<group>"; };
 		65F7DA291C073544001AFA22 /* URFireBaseManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFireBaseManager.swift; sourceTree = "<group>"; };
 		65F8B3001BE2A76A009F9CAB /* URNewsCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewsCategory.swift; sourceTree = "<group>"; };
 		65F8B3021BE2CA7E009F9CAB /* URAPIResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAPIResponse.swift; sourceTree = "<group>"; };
@@ -751,6 +761,11 @@
 				97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */,
 				97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */,
 				97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */,
+				65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */,
+				65F47F4F1C654517009A2066 /* URVideoMedia.swift */,
+				65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */,
+				65F47F531C654B79009A2066 /* URImageMedia.swift */,
+				65F47F551C658C71009A2066 /* URMediaUpload.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1657,12 +1672,14 @@
 				652F8B041BA205560096C8DC /* URUserManager.swift in Sources */,
 				658D85971B558A6700DFB949 /* URAddStoryViewController.swift in Sources */,
 				974249391BFBE0AF0024384E /* URFlowRuleTest.swift in Sources */,
+				65F47F4E1C653FB2009A2066 /* URLocalMedia.swift in Sources */,
 				655690781B7CFF5100525E00 /* ISViewExtension.swift in Sources */,
 				658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */,
 				974249531BFE5F6A0024384E /* URFlowTypeValidation.swift in Sources */,
 				97A5A6F41C0E2B07006CBA25 /* URGcmPriority.swift in Sources */,
 				97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */,
 				656562051BD5962400EBA9BD /* URSettings.swift in Sources */,
+				65F47F561C658C71009A2066 /* URMediaUpload.swift in Sources */,
 				65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */,
 				6515FBA01B8B9FCD00CEEC3B /* URChatCellType.swift in Sources */,
 				97B2FABC1C061C83000820BD /* URYoutubeUtil.swift in Sources */,
@@ -1684,6 +1701,7 @@
 				655690891B7D11E700525E00 /* URPollQuestion.swift in Sources */,
 				655690971B7D144C00525E00 /* URMultipleChoiceQuestion.swift in Sources */,
 				655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */,
+				65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */,
 				652F8AA81BA0D8C10096C8DC /* URCountryProgramManager.swift in Sources */,
 				65F8B3221BE92EB9009F9CAB /* URStringExtension.swift in Sources */,
 				9742493E1BFCE2F00024384E /* URCurrentPollView.swift in Sources */,
@@ -1691,6 +1709,7 @@
 				65685ADE1BA23C4C00099CFB /* URPollResponse.swift in Sources */,
 				658949C11B83E1A60087F361 /* ISMenu.swift in Sources */,
 				65A45CEB1B880D81001C6808 /* URGroupsTableViewController.swift in Sources */,
+				65F47F501C654517009A2066 /* URVideoMedia.swift in Sources */,
 				655690AB1B7D170100525E00 /* ISRoundedButton.swift in Sources */,
 				655690811B7D0AF200525E00 /* URGender.swift in Sources */,
 				658D85931B554FD600DFB949 /* URStory.swift in Sources */,
@@ -1758,6 +1777,7 @@
 				65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */,
 				97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */,
 				97B2FABB1C061C83000820BD /* NSUserDefaults+DemoSettings.m in Sources */,
+				65F47F521C654A6C009A2066 /* URVideoPhoneMedia.swift in Sources */,
 				652F8B0D1BA207EC0096C8DC /* URChatMemberManager.swift in Sources */,
 				656562021BD5912500EBA9BD /* URNotificationViewController.swift in Sources */,
 				974249281BFBB6D40024384E /* URFlowRun.swift in Sources */,

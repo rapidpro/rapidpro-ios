@@ -49,9 +49,9 @@ class URAWSManager: NSObject {
         
     }
     
-    class func uploadVideo(path:String,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+    class func uploadVideo(video:URMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
         
-        URVideoUtil.compressVideo(NSURL(fileURLWithPath: path)) { (session) -> Void in
+        URVideoUtil.compressVideo(NSURL(fileURLWithPath: video.url)) { (session) -> Void in
             
             if session.status == .Completed {
                 
@@ -76,7 +76,12 @@ class URAWSManager: NSObject {
                         video.id = fileName
                         video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
                         
-                        completion(video)
+//                        URAWSManager.uploadImage(video.thumbnailImage, uploadPath: .Stories, completion: { (media) -> Void in
+//                            
+//                            completion(video)
+//                            
+//                        })
+                        
                     }
                     return nil
                 }

@@ -80,26 +80,32 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     //MARK: MediaSourceViewControllerDelegate
 
-    func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, type: String) {
-     
-        let media = mediaSourceViewController.media
-        let image = mediaSourceViewController.image
+    func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
         
-        if type == URConstant.Media.PICTURE {
+        if let media = media as? URVideoMedia {
             
-            self.setupMediaViewWithImage(image,media: nil)
-            
-        } else if type == URConstant.Media.VIDEO {
-        
-            self.youtubeMediaList.append(media)
-            self.setupMediaViewWithImage(image,media: media)
-            
-        } else if type == URConstant.Media.VIDEOPHONE {
+            ProgressHUD.show(nil)
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
 
-            self.setupMediaViewWithImage(image,media: media)
+                }, completed: { (image, error, cacheType, finish, url) -> Void in
+                    ProgressHUD.dismiss()
+
+                    media.image = image
+            })
             
+            setupMediaViewMediaObject(media)
+            
+        }else if let media = media as? URVideoPhoneMedia {
+            
+            setupMediaViewMediaObject(media)
+            
+        }else if let media = media as? URImageMedia {
+            
+            setupMediaViewMediaObject(media)
+            
+        }else if let media = media as? URLocalMedia {
+            setupMediaViewMediaObject(media)
         }
-        
     }
 
     //MARK: Class Methods
@@ -129,36 +135,56 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             return
         }
         
-        if !scrollViewMedias.views!.isEmpty {
-            ProgressHUD.show(nil)
-            
-            for i in 0...scrollViewMedias.views!.count-1 {
-                
-                let mediaView = (scrollViewMedias.views![i] as! URMediaView)
-                
-                if mediaView.media == nil{
-                
-                    let img = mediaView.imgMedia.image
-                    URAWSManager.uploadImage(img!, uploadPath:.Stories, completion: { (picture:URMedia?) -> Void in
-                        if picture != nil {
-                            self.mediaList.append(picture!)
-                            
-                            if (self.mediaList.count + self.youtubeMediaList.count) == self.scrollViewMedias.views!.count {
-                                self.saveStory(self.mediaList)
-                            }
-                            
-                        }
-                    })
-                }else{
-                    if (self.mediaList.count + youtubeMediaList.count) == scrollViewMedias.views!.count {
-                        self.saveStory(nil)                        
-                    }
-                }
-                
+//        if !scrollViewMedias.views!.isEmpty {
+//            ProgressHUD.show(nil)
+//            
+//            for i in 0...scrollViewMedias.views!.count-1 {
+//                
+//                let mediaView = (scrollViewMedias.views![i] as! URMediaView)
+//                
+//                if mediaView.media == nil{
+//                
+//                    if mediaView.type == URConstant.Media.VIDEOPHONE {
+//                        
+//                        let img = mediaView.imgMedia.image
+////                        URAWSManager.uploadVideo(mediaView.media.url, uploadPath: .Stories, completion: { (video:URMedia?) -> Void in
+////                            
+////                        })
+//                        
+//                    }else {
+//                        
+//                        let img = mediaView.imgMedia.image
+//                        URAWSManager.uploadImage(img!, uploadPath: .Stories, completion: { (picture:URMedia?) -> Void in
+//                            if picture != nil {
+//                                self.mediaList.append(picture!)
+//                                
+//                                if (self.mediaList.count + self.youtubeMediaList.count) == self.scrollViewMedias.views!.count {
+//                                    self.saveStory(self.mediaList)
+//                                }
+//                                
+//                            }
+//                        })
+//                    }
+//                    
+//                }else{
+//                    if (self.mediaList.count + youtubeMediaList.count) == scrollViewMedias.views!.count {
+//                        self.saveStory(nil)                        
+//                    }
+//                }
+//                
+//            }
+//        }else {
+//            self.saveStory(nil)
+//        }
+        
+        if !self.mediaList.isEmpty {
+            URMediaUpload.uploadMedias(self.mediaList) { (medias) -> Void in
+                self.saveStory(medias)
             }
-        }else {
-            self.saveStory(nil)
+        }else{
+            saveStory(nil)
         }
+        
     }
     
     func saveStory(medias:[URMedia]?) {
@@ -167,22 +193,35 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         
         let story = URStory()
         
-        if medias != nil {
-            var m:[URMedia] = medias!
-            story.cover = m[indexImgCover]                        
-            story.medias =  m
-            
-            if !youtubeMediaList.isEmpty {
-                for media in youtubeMediaList {
-                    story.medias.append(media)
-                }
-            }
-        }else{
-            if !youtubeMediaList.isEmpty {
-                story.medias = youtubeMediaList
-                story.cover = youtubeMediaList[indexImgCover]
-            }
+        if let medias = medias {
+            story.cover = medias[indexImgCover]
         }
+        
+//        if medias != nil {
+//            var m:[URMedia] = medias!
+//            story.cover = m[indexImgCover]                        
+//            story.medias =  m
+//            
+//            if !youtubeMediaList.isEmpty {
+//                for media in youtubeMediaList {
+//                    story.medias.append(media)
+//                }
+//            }
+//            if !videoMediaList.isEmpty {
+//                for media in videoMediaList {
+//                    story.medias.append(media)
+//                }
+//            }
+//        }else{
+//            if !youtubeMediaList.isEmpty {
+//                story.medias = youtubeMediaList
+//                story.cover = youtubeMediaList[indexImgCover]
+//            }
+//            if !videoMediaList.isEmpty {
+//                story.medias = videoMediaList
+//                story.cover = videoMediaList[indexImgCover]
+//            }
+//        }
         
         story.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         story.title = self.txtTitle.text
@@ -251,24 +290,22 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         self.txtHistory.textColor = UIColor.lightGrayColor()
     }
     
-    func setupMediaViewWithImage(image:UIImage,media:URMedia?) {
-        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as? URMediaView
+    func setupMediaViewMediaObject(media:URMedia?) {
+        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as! URMediaView
         
-        if let media = media {
-            viewMedia!.media = media
-        }
-        
-        viewMedia!.delegate = self
-        viewMedia!.imgMedia.image = image
-        scrollViewMedias.addCustomView(viewMedia!)
+        viewMedia.setupWithMediaObject(media!)
+        scrollViewMedias.addCustomView(viewMedia)
         
         if scrollViewMedias.views!.count == 1 {
-            viewMedia!.isCover = true
-            self.mediaViewCover = viewMedia!
-            self.mediaViewTapped(viewMedia!)
+            viewMedia.isCover = true
+            self.mediaViewCover = viewMedia
+            self.mediaViewTapped(viewMedia)
         }else{
-            viewMedia!.isCover = false
+            viewMedia.isCover = false
         }
+        
+        self.mediaList.append(media!)
+        
     }
     
     //MARK: TextView Delegate
@@ -362,7 +399,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                     
                     }, completed: { (image, error, cacheType, finish, url) -> Void in
                       ProgressHUD.dismiss()
-                      self.setupMediaViewWithImage(image,media: media)
+//                      self.setupMediaViewWithImage(image,media: media)
                 })
 
             }))
@@ -430,7 +467,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            setupMediaViewWithImage(pickedImage,media: nil)
+//            setupMediaViewWithImage(pickedImage,media: nil)
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -438,6 +475,10 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     //MARK: ISScrollViewPageDelegate
+    
+    func scrollViewPageDidScroll(scrollView: UIScrollView) {
+        
+    }
     
     func scrollViewPageDidChanged(scrollViewPage: ISScrollViewPage, index: Int) {
         

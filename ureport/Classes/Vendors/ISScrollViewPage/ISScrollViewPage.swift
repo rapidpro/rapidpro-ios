@@ -55,7 +55,9 @@ class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
     //MARK: UIScrollViewDelegate
     
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        scrollViewPageDelegate!.scrollViewPageDidScroll!(scrollView)
+        if let scrollViewPageDelegate = self.scrollViewPageDelegate {
+            scrollViewPageDelegate.scrollViewPageDidScroll!(scrollView)            
+        }
     }
     
     func scrollViewDidEndDecelerating(scrollView: UIScrollView) {

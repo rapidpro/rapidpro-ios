@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SDWebImage
 
 protocol URMediaViewDelegate {
     func mediaViewTapped(mediaView:URMediaView)
@@ -23,6 +24,7 @@ class URMediaView: UIView {
     var media:URMedia!
     var isCover:Bool!
     var delegate:URMediaViewDelegate?
+    var type:String!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -38,6 +40,34 @@ class URMediaView: UIView {
     }
     
     //MARK: Class Methods
+    
+    func setupWithMediaObject(media:URMedia) {
+        
+        if let media = media as? URVideoMedia {
+
+            ProgressHUD.show(nil)
+            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+
+                }, completed: { (image, error, cacheType, finish, url) -> Void in
+                    ProgressHUD.dismiss()
+                    self.imgMedia.image = image
+            })
+            
+            
+        }else if let media = media as? URVideoPhoneMedia {
+            
+            self.imgMedia.image = media.thumbnail
+            
+        }else if let media = media as? URImageMedia {
+
+            self.imgMedia.image = media.image
+            
+        }else if let media = media as? URLocalMedia {
+            
+            
+        }
+        
+    }
     
     func setMediaAsCover(isCover:Bool) {
         self.isCover = isCover        

@@ -11,7 +11,7 @@ import SDWebImage
 import MobileCoreServices
 
 protocol URMediaSourceViewControllerDelegate {
-    func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, type:String)
+    func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, media:URMedia)
 }
 
 class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -98,43 +98,25 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         if let delegate = delegate {
         
             if mediaType == kUTTypeMovie {
-                let path = (info[UIImagePickerControllerMediaURL] as! NSURL).path
-                
-//                URAWSManager.uploadVideo(path!, uploadPath: URUploadPath.Stories, completion: { (media) -> Void in
-//                    print(media)
-//                })
+                let mediaURL = (info[UIImagePickerControllerMediaURL] as! NSURL)
+                let path = mediaURL.path
                 
                 if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {}
                 
-                self.image = URVideoUtil.generateThumbnail(NSURL(fileURLWithPath: path!))
+                let media = URVideoPhoneMedia()
+                media.path = path
+                media.thumbnail = URVideoUtil.generateThumbnail(mediaURL)
                 
-//                let media = URMedia()
-//                media.id = "VideoPhone"
-//                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
-//                media.type = URConstant.Media.VIDEOPHONE
-//                
-//                self.media = media
-//                
-//                ProgressHUD.show(nil)
-//                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-//                    
-//                    }, completed: { (image, error, cacheType, finish, url) -> Void in
-//                        ProgressHUD.dismiss()
-//                        
-//                        self.image = image
-//                        
-//                        if let delegate = self.delegate {
-//                            delegate.newMediaAdded(self,type: URConstant.Media.VIDEO)
-//                        }
-//                })
-                
-                delegate.newMediaAdded(self, type: URConstant.Media.VIDEOPHONE)
+                delegate.newMediaAdded(self, media: media)
                 
             }else {
                 
                 if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-                    self.image = pickedImage
-                    delegate.newMediaAdded(self, type: URConstant.Media.PICTURE)
+                    
+                    let media = URImageMedia()
+                    media.image = pickedImage
+                    
+                    delegate.newMediaAdded(self, media: media)
                 }
             }
         }
@@ -143,7 +125,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     }
     
     //MARK: Button Events
-
+    
     @IBAction func btDismissTapped(sender: AnyObject) {
         self.toggleView()
     }
@@ -181,7 +163,6 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             imagePicker.videoQuality = .Type640x480
             imagePicker.videoMaximumDuration = 20
             
-//            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Video
             imagePicker.allowsEditing = false
             
             self.presentViewController(imagePicker, animated: true, completion: nil)
@@ -209,26 +190,13 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                     return
                 }
                 
-                let media = URMedia()
-                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
-                media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
-                media.type = URConstant.Media.VIDEO
+                let media = URVideoMedia()
+                media.id = URYoutubeUtil.getYoutubeVideoID(urlVideo)
+                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: media.id)
                 
-                self.media = media
-                
-                ProgressHUD.show(nil)
-                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                    
-                    }, completed: { (image, error, cacheType, finish, url) -> Void in
-                        ProgressHUD.dismiss()
-                        
-                        self.image = image
-                        
-                        if let delegate = self.delegate {
-                            delegate.newMediaAdded(self,type: URConstant.Media.VIDEO)
-                        }
-                })
+                if let delegate = self.delegate {
+                    delegate.newMediaAdded(self, media: media)
+                }
                 
             }))
             
