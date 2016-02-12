@@ -11,6 +11,6 @@ import UIKit
 class URVideoPhoneMedia: URMedia {
 
     var path:String!
-    var thumbnail:UIImage!
+    var thumbnailImage:UIImage!
     
 }

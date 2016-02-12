@@ -12,27 +12,50 @@ class URMediaUpload: NSObject {
 
     class func uploadMedias(medias:[URMedia],completion:(medias:[URMedia]) -> Void) {
         
-        let mediaList:[URMedia] = []
+        var mediaList:[URMedia] = []
         
         for media in medias {
             
-            if let media = media as? URVideoMedia {
+            if let youtubeVideoMedia = media as? URVideoMedia {
                 
-            }else if let media = media as? URVideoPhoneMedia {
+                let media = URMedia()
+                let videoID = URYoutubeUtil.getYoutubeVideoID(youtubeVideoMedia.url)
+                media.id = videoID
+                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
+                media.type = URConstant.Media.VIDEO
                 
+                mediaList.append(media)
                 
-            }else if let media = media as? URImageMedia {
+                if mediaList.count == medias.count {
+                    completion(medias: mediaList)
+                }
                 
+            }else if let videoPhoneMedia = media as? URVideoPhoneMedia {
                 
+                URAWSManager.uploadVideo(videoPhoneMedia, uploadPath: .Stories, completionVideoUpload: { (video:URMedia?) -> Void in
+                    mediaList.append(video!)
+                    
+                    if mediaList.count == medias.count {
+                        completion(medias: mediaList)
+                    }
+                    
+                })
+                
+            }else if let imageMedia = media as? URImageMedia {
+                URAWSManager.uploadImage(imageMedia.image, uploadPath: .Stories, completion: { (image:URMedia?) -> Void in
+                    mediaList.append(image!)
+                    
+                    if mediaList.count == medias.count {
+                        completion(medias: mediaList)
+                    }
+                    
+                })
             }else if let media = media as? URLocalMedia {
 
                 
             }
             
         }
-     
-        completion(medias: mediaList)
-        
     }
     
 }

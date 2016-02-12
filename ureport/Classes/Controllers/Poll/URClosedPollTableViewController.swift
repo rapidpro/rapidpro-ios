@@ -132,14 +132,16 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     private func loadCurrentFlow() {
         URRapidProManager.getContact(URUser.activeUser()!, completion: { (contact) -> Void in
             self.contact = contact
-            URRapidProManager.getFlowRuns(contact, completion: { (flowRuns: [URFlowRun]) -> Void in
-                if !(flowRuns.isEmpty && URFlowManager.isFlowActive(flowRuns[0])) {
-                    URRapidProManager.getFlowDefinition(flowRuns[0].flow_uuid, completion: {
-                        (flowDefinition: URFlowDefinition) -> Void in
-                        self.currentFlow = flowDefinition
-                        self.setupNextStep(self.currentFlow!.entry)
-                        self.reloadCurrentFlowSection()
-                    })
+            URRapidProManager.getFlowRuns(contact, completion: { (flowRuns: [URFlowRun]?) -> Void in
+                if let flowRuns = flowRuns {
+                    if ((!flowRuns.isEmpty) && URFlowManager.isFlowActive(flowRuns[0])) {
+                        URRapidProManager.getFlowDefinition(flowRuns[0].flow_uuid, completion: {
+                            (flowDefinition: URFlowDefinition) -> Void in
+                            self.currentFlow = flowDefinition
+                            self.setupNextStep(self.currentFlow!.entry)
+                            self.reloadCurrentFlowSection()
+                        })
+                    }
                 }
             })
         })

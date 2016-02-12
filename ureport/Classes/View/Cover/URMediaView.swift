@@ -56,7 +56,7 @@ class URMediaView: UIView {
             
         }else if let media = media as? URVideoPhoneMedia {
             
-            self.imgMedia.image = media.thumbnail
+            self.imgMedia.image = media.thumbnailImage
             
         }else if let media = media as? URImageMedia {
 

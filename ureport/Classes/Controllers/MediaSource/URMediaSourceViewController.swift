@@ -105,7 +105,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 
                 let media = URVideoPhoneMedia()
                 media.path = path
-                media.thumbnail = URVideoUtil.generateThumbnail(mediaURL)
+                media.thumbnailImage = URVideoUtil.generateThumbnail(mediaURL)
                 
                 delegate.newMediaAdded(self, media: media)
                 

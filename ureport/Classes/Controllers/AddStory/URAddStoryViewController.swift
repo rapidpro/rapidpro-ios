@@ -178,7 +178,9 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
 //        }
         
         if !self.mediaList.isEmpty {
+            ProgressHUD.show(nil)
             URMediaUpload.uploadMedias(self.mediaList) { (medias) -> Void in
+            ProgressHUD.dismiss()
                 self.saveStory(medias)
             }
         }else{
@@ -194,6 +196,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         let story = URStory()
         
         if let medias = medias {
+            story.medias = medias
             story.cover = medias[indexImgCover]
         }
         

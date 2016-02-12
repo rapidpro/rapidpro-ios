@@ -38,7 +38,7 @@ class URAWSManager: NSObject {
                 
                 let picture = URMedia()
                 
-                picture.type = "Picture"
+                picture.type = URConstant.Media.PICTURE
                 picture.id = fileName
                 picture.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
 
@@ -49,9 +49,9 @@ class URAWSManager: NSObject {
         
     }
     
-    class func uploadVideo(video:URMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+    class func uploadVideo(videoPhone:URVideoPhoneMedia,uploadPath:URUploadPath,completionVideoUpload:(URMedia?) -> Void) {
         
-        URVideoUtil.compressVideo(NSURL(fileURLWithPath: video.url)) { (session) -> Void in
+        URVideoUtil.compressVideo(NSURL(fileURLWithPath: videoPhone.path)) { (session) -> Void in
             
             if session.status == .Completed {
                 
@@ -72,15 +72,16 @@ class URAWSManager: NSObject {
                         
                         let video = URMedia()
                         
-                        video.type = "VideoPhone"
+                        video.type = URConstant.Media.VIDEOPHONE
                         video.id = fileName
                         video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
                         
-//                        URAWSManager.uploadImage(video.thumbnailImage, uploadPath: .Stories, completion: { (media) -> Void in
-//                            
-//                            completion(video)
-//                            
-//                        })
+                        URAWSManager.uploadImage(videoPhone.thumbnailImage, uploadPath: .Stories, completion: { (media) -> Void in
+                            
+                            video.thumbnail = media!.url
+                            completionVideoUpload(video)
+                            
+                        })
                         
                     }
                     return nil
@@ -88,7 +89,7 @@ class URAWSManager: NSObject {
                 
             }else{
                 print(session.status.rawValue)
-                print(session.error)
+                print(session.error!.localizedDescription)
             }
             
         }

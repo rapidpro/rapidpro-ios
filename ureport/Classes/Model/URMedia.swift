@@ -9,8 +9,10 @@
 import UIKit
 
 class URMedia: Serializable {
+
     var id:String!
     var url:String!
     var type:String!
+    var thumbnail:String!
     var isCover:Bool!
 }

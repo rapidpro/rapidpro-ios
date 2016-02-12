@@ -78,7 +78,7 @@ class URRapidProManager: NSObject {
         })
     }
     
-    class func getFlowRuns(contact: URContact, completion:([URFlowRun]) -> Void) {
+    class func getFlowRuns(contact: URContact, completion:([URFlowRun]?) -> Void) {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
@@ -88,7 +88,13 @@ class URRapidProManager: NSObject {
         
         Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject({ (response:URAPIResponse<URFlowRun>?, error:ErrorType?) -> Void in
             if let response = response {
-                completion(response.results)
+                if response.results.count > 0 {
+                    completion(response.results)
+                }else{
+                    completion(nil)
+                }
+            }else{
+                completion(nil)
             }
         })
     }
