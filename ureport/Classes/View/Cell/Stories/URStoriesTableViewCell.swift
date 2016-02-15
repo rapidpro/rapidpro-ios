@@ -145,7 +145,12 @@ class URStoriesTableViewCell: UITableViewCell {
         }
         
         if story.cover != nil && story.cover.url != nil {
-            self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
+            
+            if story.cover.type == URConstant.Media.VIDEOPHONE {
+                self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.thumbnail))
+            }else {
+                self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
+            }
         }
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content

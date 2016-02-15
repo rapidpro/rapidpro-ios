@@ -19,10 +19,10 @@ class URMediaUpload: NSObject {
             if let youtubeVideoMedia = media as? URVideoMedia {
                 
                 let media = URMedia()
-                let videoID = URYoutubeUtil.getYoutubeVideoID(youtubeVideoMedia.url)
-                media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
                 media.type = URConstant.Media.VIDEO
+                media.url = youtubeVideoMedia.url
+                media.id = youtubeVideoMedia.id
+                media.isCover = youtubeVideoMedia.isCover
                 
                 mediaList.append(media)
                 
@@ -33,6 +33,9 @@ class URMediaUpload: NSObject {
             }else if let videoPhoneMedia = media as? URVideoPhoneMedia {
                 
                 URAWSManager.uploadVideo(videoPhoneMedia, uploadPath: .Stories, completionVideoUpload: { (video:URMedia?) -> Void in
+                    
+                    video!.isCover = videoPhoneMedia.isCover
+                    
                     mediaList.append(video!)
                     
                     if mediaList.count == medias.count {
@@ -42,8 +45,12 @@ class URMediaUpload: NSObject {
                 })
                 
             }else if let imageMedia = media as? URImageMedia {
-                URAWSManager.uploadImage(imageMedia.image, uploadPath: .Stories, completion: { (image:URMedia?) -> Void in
-                    mediaList.append(image!)
+                URAWSManager.uploadImage(imageMedia.image, uploadPath: .Stories, completion: { (media:URMedia?) -> Void in
+                    
+                    media!.isCover = imageMedia.isCover
+                    mediaList.append(media!)
+                    
+                    imageMedia.image = nil
                     
                     if mediaList.count == medias.count {
                         completion(medias: mediaList)

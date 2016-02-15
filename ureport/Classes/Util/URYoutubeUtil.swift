@@ -16,6 +16,8 @@ class URYoutubeUtil: NSObject {
         }
         let URLVideo = NSURL(string: strVideoUrl)
         
+        print(URLVideo!.host)
+        
         if URLVideo?.host != "youtube.com" && URLVideo?.host != "www.youtube.com" && URLVideo?.host != "youtu.be" && URLVideo?.host != "www.youtu.be" && URLVideo?.host != "m.youtube.com" {
             print("Só é permitido adicionar vídeos do YouTube.")
             return nil

@@ -43,6 +43,8 @@ class URMediaView: UIView {
     
     func setupWithMediaObject(media:URMedia) {
         
+        self.media = media
+        
         if let media = media as? URVideoMedia {
 
             ProgressHUD.show(nil)
@@ -72,9 +74,11 @@ class URMediaView: UIView {
     func setMediaAsCover(isCover:Bool) {
         self.isCover = isCover        
         if isCover {
+            self.media.isCover = true
             self.imgActive.image = UIImage(named:"icon_select_cover_active")
             self.viewBottom.hidden = false
         }else {
+            self.media.isCover = false
             self.imgActive.image = UIImage(named:"select_cover_inactive")
             self.viewBottom.hidden = true
         }

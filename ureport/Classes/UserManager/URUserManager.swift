@@ -328,12 +328,14 @@ class URUserManager: NSObject {
     
     class func userHasPermissionToAccessTheFeature(featureNeedModeratorPermission:Bool) -> Bool {
         
-        if URUser.activeUser() == nil {
+        let user = URUser.activeUser()
+        
+        if user == nil {
             return true
         }
         
-        if ( ((URUser.activeUser()!.masterModerator != nil) && (URUser.activeUser()?.masterModerator == true)) || ((URUser.activeUser()!.moderator != nil) &&
-            (URUser.activeUser()!.moderator == true))) {
+        if ( ((user!.masterModerator != nil) && (user!.masterModerator == true)) || ((user!.moderator != nil) &&
+            (user!.moderator == true))) {
             return true
         }else if (featureNeedModeratorPermission == false){
             return URUserManager.isUserInYourOwnCountryProgram()

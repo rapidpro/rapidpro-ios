@@ -66,6 +66,7 @@ class URStoryManager: NSObject {
                             URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
                                 story.contributions = total
                                 story.userObject = user
+                                
                                 delegate.newStoryReceived(story)
                             })
                         }
@@ -75,7 +76,7 @@ class URStoryManager: NSObject {
     }
     
     class func saveStory(story:URStory,isModerator:Bool, completion:(Bool) -> Void) {
-        
+                
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
