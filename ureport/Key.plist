@@ -5,19 +5,27 @@
 	<key>COUNTRY_PROGRAM_CHANNEL_IDN</key>
 	<string>653adfb1-622a-4eae-8798-c648d8f21b1e</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_NGA</key>
-	<string>f2a93f0c-0b92-456e-b458-526c93ce3f58</string>
+	<string>21f112e3-6c15-4a03-9fd6-3a2df7857b4d</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_CHL</key>
 	<string>5603ae08-2072-4cd0-bd2e-387890aa586d</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_GLOBAL</key>
 	<string>c9457440-607a-4a86-9968-a9caf3943127</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_MEX</key>
+	<string>c9ebcf4e-2172-4844-bac4-bc208a7ba8b5</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_UGA</key>
+	<string>f6388fb1-17e9-408d-947c-43e2046d1e3b</string>
 	<key>COUNTRY_PROGRAM_TOKEN_CHL</key>
 	<string>Token 15593494b1b1caa57b71281265d216a2c26add14</string>
 	<key>COUNTRY_PROGRAM_TOKEN_IDN</key>
 	<string>Token 1a162c2064173feb4e957bf72ab318a53bed1756</string>
 	<key>COUNTRY_PROGRAM_TOKEN_NGA</key>
-	<string>Token d8f646a2da5306184bad9c8710be31e258d4a931</string>
+	<string>Token 597ffd5fa359129da1f9a689eb35ac04d227ac33</string>
 	<key>COUNTRY_PROGRAM_TOKEN_GLOBAL</key>
 	<string>Token e3c496851c5c346a58b95c07bc9026a39c0b58ec</string>
+	<key>COUNTRY_PROGRAM_TOKEN_MEX</key>
+	<string>Token 480618d272d381d30c2a02cced874514b55d965d</string>
+	<key>COUNTRY_PROGRAM_TOKEN_UGA</key>
+	<string>Token 1e56890341a78f60e4b6109b7862fc7ebfb2452b</string>
 	<key>TWITTER_APP_ID</key>
 	<string>SKYXxzv0LeBdETT19fn2X3PkN</string>
 	<key>FACEBOOK_APP_ID</key>

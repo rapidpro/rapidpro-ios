@@ -10,6 +10,10 @@
 	<string>71dd10b3-e629-4ece-a56c-2e7ead7db91b</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_GLOBAL</key>
 	<string>bf1a1e63-e60f-4614-b639-25dc457da0bd</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_MEX</key>
+	<string>c9ebcf4e-2172-4844-bac4-bc208a7ba8b5</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_UGA</key>
+	<string>f6388fb1-17e9-408d-947c-43e2046d1e3b</string>
 	<key>COUNTRY_PROGRAM_TOKEN_CHL</key>
 	<string>Token 60600f1c0740dfbe28aa1e9ace1bba4f5d430d6d</string>
 	<key>COUNTRY_PROGRAM_TOKEN_IDN</key>
@@ -18,6 +22,10 @@
 	<string>Token 69653a2d2352a5da7eb0281a877d9eadb8226783</string>
 	<key>COUNTRY_PROGRAM_TOKEN_GLOBAL</key>
 	<string>Token 8cbcf1080cac0455311f5fce636ab4cf7cc75eb9</string>
+	<key>COUNTRY_PROGRAM_TOKEN_MEX</key>
+	<string>Token 480618d272d381d30c2a02cced874514b55d965d</string>
+	<key>COUNTRY_PROGRAM_TOKEN_UGA</key>
+	<string>Token 1e56890341a78f60e4b6109b7862fc7ebfb2452b</string>
 	<key>TWITTER_APP_ID</key>
 	<string>SKYXxzv0LeBdETT19fn2X3PkN</string>
 	<key>FACEBOOK_APP_ID</key>
