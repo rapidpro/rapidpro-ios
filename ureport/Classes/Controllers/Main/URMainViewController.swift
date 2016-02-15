@@ -14,8 +14,8 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     var chatRoomKey:String?
     
     let storiesTableViewController:URStoriesTableViewController = URStoriesTableViewController(filterStoriesToModerate: false)
-    let myChatsViewController:URMyChatsViewController = URMyChatsViewController(nibName:"URMyChatsViewController", bundle:nil)
-    let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController(nibName: "URClosedPollTableViewController", bundle: nil)
+    let myChatsViewController:URMyChatsViewController = URMyChatsViewController()
+    let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -128,7 +128,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     
     func newStory() {
         if let _ = URUser.activeUser() {
-            self.navigationController!.pushViewController(URAddStoryViewController(nibName:"URAddStoryViewController",bundle:nil), animated: true)
+            self.navigationController!.pushViewController(URAddStoryViewController(), animated: true)
         }else {
             URLoginAlertController.show(self)
         }

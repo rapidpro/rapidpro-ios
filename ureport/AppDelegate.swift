@@ -23,7 +23,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        loginViewController = URLoginViewController(nibName: "URLoginViewController", bundle: nil)
+        loginViewController = URLoginViewController()
         
         UIApplication.sharedApplication().setStatusBarStyle(UIStatusBarStyle.LightContent,animated:true)
         

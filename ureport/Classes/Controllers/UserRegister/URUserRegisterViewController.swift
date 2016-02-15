@@ -57,9 +57,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.navigationController!.setNavigationBarHidden(false, animated: false)
         
-        countries = URCountry.getCountries(URCountryCodeType.ISO2) as? [URCountry]
+        countries = URCountry.getCountries(URCountryCodeType.ISO2) as [URCountry]
         
         hasDistrict = false
         setupUI()
@@ -69,6 +68,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
+        self.navigationController!.setNavigationBarHidden(false, animated: false)
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "User Register")
@@ -133,11 +134,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         ProgressHUD.show(nil)
         
         if (self.userInput != nil) {
-            user.key = userInput?.key
-            user.picture = userInput?.picture
-            user.type = userInput?.type
-            user.gender = userInput?.gender == nil ? gender : userInput?.gender
-            user.gender = user.gender == URGender.Male ? "Male" : "Female"
+            user.key = userInput!.key
+            user.picture = userInput!.picture
+            user.type = userInput!.type
             
             self.saveUser(user)
 
@@ -237,6 +236,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
             
             if let gender = self.userInput!.gender {
+                
+                self.gender = gender
+                
                 if gender == "Male" {
                     self.txtGender.text = URGender.Male
                 }else{

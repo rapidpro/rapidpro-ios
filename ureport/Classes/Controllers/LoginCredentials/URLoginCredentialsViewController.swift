@@ -20,6 +20,14 @@ class URLoginCredentialsViewController: UIViewController {
     
     var appDelegate:AppDelegate!
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: "URLoginCredentialsViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()        
         appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -46,7 +54,7 @@ class URLoginCredentialsViewController: UIViewController {
     //MARK: Button Events
     @IBAction func btForgotPasswordTapped(sender: AnyObject) {
         self.view.endEditing(true)
-        self.navigationController?.pushViewController(URForgotPasswordViewController(nibName:"URForgotPasswordViewController",bundle:nil), animated: true)
+        self.navigationController?.pushViewController(URForgotPasswordViewController(), animated: true)
     }
 
     @IBAction func btLoginTapped(sender: AnyObject) {

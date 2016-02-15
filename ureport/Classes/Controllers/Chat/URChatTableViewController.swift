@@ -82,7 +82,7 @@ class URChatTableViewController: UITableViewController {
         
         if (cell.type == URChatCellType.CreateGroup){
             
-            let groupViewController = URNewGroupViewController(nibName: "URNewGroupViewController", bundle: nil)
+            let groupViewController = URNewGroupViewController()
             groupViewController.listUser = self.listUser
             
             self.navigationController?.pushViewController(groupViewController, animated: true)

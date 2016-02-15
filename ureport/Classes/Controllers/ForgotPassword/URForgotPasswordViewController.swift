@@ -15,6 +15,13 @@ class URForgotPasswordViewController: UIViewController {
     @IBOutlet weak var btSendPassword: UIButton!
     @IBOutlet weak var viewEmail: UIView!
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: "URForgotPasswordViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

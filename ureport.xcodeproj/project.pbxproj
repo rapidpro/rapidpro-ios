@@ -85,6 +85,7 @@
 		655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691861B7E67AB00525E00 /* URMarkerTableViewController.swift */; };
 		6556918A1B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691881B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift */; };
 		6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655691891B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib */; };
+		65609F131C714C0F0039A8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659A7A981B51EFA800B56983 /* Localizable.strings */; };
 		656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */; };
 		656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */; };
 		656561FE1BD58E9600EBA9BD /* URSettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656561FD1BD58E9600EBA9BD /* URSettingsTableViewController.swift */; };
@@ -124,7 +125,6 @@
 		659969EB1BBDE66900711973 /* URChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659969EA1BBDE66900711973 /* URChatRoomManager.swift */; };
 		659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 659A20D21B7ECD6C00D02C69 /* URClosedPollTableViewController.xib */; };
 		659A7A931B4F6C3100B56983 /* URDateUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A7A921B4F6C3100B56983 /* URDateUtil.swift */; };
-		659A7A961B51EFA800B56983 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659A7A981B51EFA800B56983 /* Localizable.strings */; };
 		659A7A9C1B51F6F700B56983 /* UITextField+Keyboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 659A7A9B1B51F6F700B56983 /* UITextField+Keyboard.swift */; };
 		65A45CCC1B868481001C6808 /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CCB1B868481001C6808 /* URUserLoginManager.swift */; };
 		65A45CCE1B8694AE001C6808 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */; };
@@ -328,6 +328,8 @@
 		655691861B7E67AB00525E00 /* URMarkerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerTableViewController.swift; sourceTree = "<group>"; };
 		655691881B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddMarkerTableViewCell.swift; sourceTree = "<group>"; };
 		655691891B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAddMarkerTableViewCell.xib; sourceTree = "<group>"; };
+		65609F141C714E130039A8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65609F151C71517B0039A8AB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		656561FD1BD58E9600EBA9BD /* URSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -371,9 +373,7 @@
 		659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		659A20D21B7ECD6C00D02C69 /* URClosedPollTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URClosedPollTableViewController.xib; sourceTree = "<group>"; };
 		659A7A921B4F6C3100B56983 /* URDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDateUtil.swift; sourceTree = "<group>"; };
-		659A7A971B51EFA800B56983 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		659A7A991B51EFE100B56983 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		659A7A9A1B51EFF600B56983 /* ar */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ar; path = ar.lproj/Localizable.strings; sourceTree = "<group>"; };
 		659A7A9B1B51F6F700B56983 /* UITextField+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Keyboard.swift"; sourceTree = "<group>"; };
 		65A45CCB1B868481001C6808 /* URUserLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URUserLoginManager.swift; path = ureport/Classes/UserLoginManager/URUserLoginManager.swift; sourceTree = SOURCE_ROOT; };
 		65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -1499,10 +1499,9 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"pt-BR",
-				ar,
 				es,
+				pt,
 			);
 			mainGroup = 65409FB21B4C842700344D75;
 			productRefGroup = 65409FBC1B4C842700344D75 /* Products */;
@@ -1520,6 +1519,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,
 				65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */,
@@ -1530,7 +1530,6 @@
 				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
-				659A7A961B51EFA800B56983 /* Localizable.strings in Resources */,
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
 				65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */,
@@ -1814,10 +1813,10 @@
 		659A7A981B51EFA800B56983 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				659A7A971B51EFA800B56983 /* Base */,
 				659A7A991B51EFE100B56983 /* pt-BR */,
-				659A7A9A1B51EFF600B56983 /* ar */,
 				65711A2C1C40502500E05BBD /* es */,
+				65609F141C714E130039A8AB /* en */,
+				65609F151C71517B0039A8AB /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

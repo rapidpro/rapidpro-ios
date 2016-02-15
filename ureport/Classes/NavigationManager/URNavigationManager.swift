@@ -60,7 +60,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     
     class func setupNavigationControllerWithLoginViewController() {
         
-        self.navigation = ScrollingNavigationController(rootViewController: URLoginViewController(nibName:"URLoginViewController",bundle:nil))
+        self.navigation = ScrollingNavigationController(rootViewController: URLoginViewController())
         URNavigationManager.setupNavigationDefaultAtrributes()
         self.navigation!.navigationBar.translucent = false
         self.navigation!.setNavigationBarHidden(true, animated: false)

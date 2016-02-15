@@ -39,7 +39,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     var delegate:URMediaSourceViewControllerDelegate?
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    init() {
         super.init(nibName: "URMediaSourceViewController", bundle: nil)
         isVisible = false
         

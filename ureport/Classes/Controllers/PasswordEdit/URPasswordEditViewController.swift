@@ -17,6 +17,14 @@ class URPasswordEditViewController: UIViewController {
     @IBOutlet weak var txtNewPassword: UITextField!
     @IBOutlet weak var scrollView: UIScrollView!
     
+    init() {
+        super.init(nibName: "URPasswordEditViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()

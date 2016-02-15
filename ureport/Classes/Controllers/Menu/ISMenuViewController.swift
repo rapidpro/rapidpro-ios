@@ -19,7 +19,6 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSwitchCountryProgram: UITextField!
     @IBOutlet weak var imgProfile: UIImageView!
-    @IBOutlet weak var btLogout: UIButton!
     @IBOutlet weak var btLogin: UIButton!
         
     var countryProgramChanged:URCountryProgram!
@@ -36,6 +35,14 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     class func sharedInstance() -> ISMenuViewController{
         return instance
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: "ISMenuViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

@@ -22,6 +22,14 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     var appDelegate:AppDelegate!
     var userLoginManager:URUserLoginManager!
     
+    init() {
+        super.init(nibName: "URLoginViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }        
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -114,7 +122,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     }
     
     @IBAction func btLoginTapped(sender: AnyObject) {
-        self.navigationController!.pushViewController(URLoginCredentialsViewController(nibName: "URLoginCredentialsViewController", bundle: nil), animated: true)
+        self.navigationController!.pushViewController(URLoginCredentialsViewController(), animated: true)
     }
     @IBAction func btFacebookTapped(sender: AnyObject) {
         ProgressHUD.show(nil)

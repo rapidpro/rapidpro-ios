@@ -68,6 +68,7 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
 
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController!.setNavigationBarHidden(false, animated: false)           
         URNavigationManager.setupNavigationBarWithType(.Clear)
         setupDelegates()
         
@@ -329,7 +330,7 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
             }
             
             let passwordUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_change_password".localized, style: .Default) { action -> Void in
-                self.navigationController?.pushViewController(URPasswordEditViewController(nibName:"URPasswordEditViewController", bundle:nil), animated: true)
+                self.navigationController?.pushViewController(URPasswordEditViewController(), animated: true)
             }
             
             let profileUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_edit_profile".localized, style: .Default) { action -> Void in

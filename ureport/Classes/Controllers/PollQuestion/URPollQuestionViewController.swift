@@ -49,7 +49,7 @@ class URPollQuestionViewController: UIViewController, URRapidProManagerDelegate 
     //MARK: Button Events
     
     @IBAction func btSeePollsResultsTapped(sender: AnyObject) {
-        self.navigationController?.pushViewController(URClosedPollTableViewController(nibName:"URClosedPollTableViewController",bundle:nil), animated: true)
+        self.navigationController?.pushViewController(URClosedPollTableViewController(), animated: true)
     }
         
     //MARK: TextFieldDelegate

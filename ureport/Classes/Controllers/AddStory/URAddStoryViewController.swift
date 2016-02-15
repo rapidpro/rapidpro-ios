@@ -32,6 +32,14 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     let markerTableViewController = URMarkerTableViewController()
     let mediaSourceViewController = URMediaSourceViewController()
     
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+        super.init(nibName: "URAddStoryViewController", bundle: nil)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         youtubeMediaList = []

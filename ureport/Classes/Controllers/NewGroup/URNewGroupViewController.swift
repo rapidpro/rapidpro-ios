@@ -38,8 +38,8 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         super.init(nibName: "URNewGroupViewController", bundle: nil)
     }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
-        super.init(nibName: nibNameOrNil!, bundle: nibBundleOrNil)
+    init() {
+        super.init(nibName: "URNewGroupViewController", bundle: nil)
     }
     
     required init?(coder aDecoder: NSCoder) {

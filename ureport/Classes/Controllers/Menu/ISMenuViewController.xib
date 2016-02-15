@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ISMenuViewController" customModule="ureport" customModuleProvider="target">
             <connections>
-                <outlet property="btLogin" destination="xTl-xs-ITI" id="xa9-T1-OBl"/>
+                <outlet property="btLogin" destination="xTl-xs-ITI" id="4yC-4d-P1o"/>
                 <outlet property="imgProfile" destination="zcx-bM-adt" id="cf8-U9-52g"/>
                 <outlet property="lbNickName" destination="GOO-66-tEG" id="FcN-Wt-FZn"/>
                 <outlet property="lbPoints" destination="xAb-Ps-a9U" id="VPt-6F-BBy"/>
