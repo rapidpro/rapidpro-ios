@@ -173,8 +173,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 if media.type == URConstant.Media.PICTURE {
                     
                     let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(media)
-                    playMediaView.backgroundColor = UIColor.blackColor()
+                    playMediaView.setupViewWithMedia(self, media: media)
                     
                     self.scrollViewMedias.addCustomView(playMediaView)
                     
@@ -211,7 +210,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
 //                    self.scrollViewMedias.addCustomView(playMediaView)
                     
                     let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(media)
+                    playMediaView.setupViewWithMedia(self, media: media)
                     self.scrollViewMedias.addCustomView(playMediaView)
                     
 //                    SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
@@ -230,7 +229,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 } else if media.type == URConstant.Media.VIDEOPHONE {
                     
                     let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(media)
+                    playMediaView.setupViewWithMedia(self, media: media)
                     self.scrollViewMedias.addCustomView(playMediaView)
                     
 //                    let playMediaView = URPlayMediaView()
