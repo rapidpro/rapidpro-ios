@@ -14,7 +14,7 @@ protocol URMediaSourceViewControllerDelegate {
     func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, media:URMedia)
 }
 
-class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate {
     
     @IBOutlet weak var btCamera: ISCircleButton!
     @IBOutlet weak var btGallery: ISCircleButton!
@@ -88,6 +88,20 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         
     }
     
+    //MARK: UIDocumentPickerDelegate
+    
+    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+        
+        if let delegate = self.delegate {
+            print(url.lastPathComponent)
+            
+            let media = URLocalMedia()
+            media.path = url.lastPathComponent
+            
+            delegate.newMediaAdded(self, media: media)
+        }
+        
+    }
     
     //MARK: ImagePickerControllerDelegate
     
@@ -170,6 +184,11 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             break
             
         case btFile:
+            
+            let documentPicker = UIDocumentPickerViewController(documentTypes: [""], inMode: .Import)
+            documentPicker.delegate = self
+            self.presentViewController(documentPicker, animated: true, completion: nil)
+            
             break
             
         case btAudio:

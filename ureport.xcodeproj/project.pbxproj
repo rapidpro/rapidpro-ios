@@ -332,6 +332,7 @@
 		65609F141C714E130039A8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65609F151C71517B0039A8AB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65609F291C7266100039A8AB /* URPlayMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPlayMediaView.swift; sourceTree = "<group>"; };
+		65609F2B1C72C1EA0039A8AB /* ureport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ureport.entitlements; sourceTree = "<group>"; };
 		656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettingsTableViewCell.swift; sourceTree = "<group>"; };
 		656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URSettingsTableViewCell.xib; sourceTree = "<group>"; };
 		656561FD1BD58E9600EBA9BD /* URSettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettingsTableViewController.swift; sourceTree = "<group>"; };
@@ -597,6 +598,7 @@
 		65409FBD1B4C842700344D75 /* ureport */ = {
 			isa = PBXGroup;
 			children = (
+				65609F2B1C72C1EA0039A8AB /* ureport.entitlements */,
 				65409FE01B4C845200344D75 /* Classes */,
 				65409FEA1B4C845200344D75 /* Resources */,
 				65409FC01B4C842700344D75 /* AppDelegate.swift */,
@@ -1495,6 +1497,9 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
+							com.apple.iCloud = {
+								enabled = 1;
+							};
 						};
 					};
 					65409FCF1B4C842700344D75 = {
@@ -1929,6 +1934,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;
@@ -1952,6 +1958,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				ENABLE_BITCODE = NO;

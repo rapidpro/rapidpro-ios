@@ -16,6 +16,36 @@ enum URUploadPath:String {
 
 class URAWSManager: NSObject {
    
+    class func uploadFile(path:String,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+        
+        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))")
+        
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        
+        uploadRequest.body = NSURL(fileURLWithPath: path)
+        uploadRequest.key = fileName
+        uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
+        
+        transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
+            ProgressHUD.dismiss()
+            if task!.error != nil{
+                print(task!.error)
+            }else {
+                
+                let file = URMedia()
+                
+                file.type = URConstant.Media.FILE
+                file.id = fileName
+                file.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                
+                completion(file)
+            }
+            return nil
+        }
+        
+    }
+    
     class func uploadImage(image:UIImage,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
         
         let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.jpg")

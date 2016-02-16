@@ -57,8 +57,18 @@ class URMediaUpload: NSObject {
                     }
                     
                 })
-            }else if let media = media as? URLocalMedia {
+            }else if let fileMedia = media as? URLocalMedia {
 
+                URAWSManager.uploadFile(fileMedia.path, uploadPath: .Stories, completion: { (media:URMedia?) -> Void in
+                    
+                    media!.isCover = fileMedia.isCover
+                    mediaList.append(media!)
+                    
+                    if mediaList.count == medias.count {
+                        completion(medias: mediaList)
+                    }
+                    
+                })
                 
             }
             
