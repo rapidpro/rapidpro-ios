@@ -20,6 +20,15 @@ class URPlayMediaView: UIView {
 
     static let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
     
+    init(parentViewController:UIViewController, media:URMedia) {
+        super.init(frame: URPlayMediaView.defaultFrame)
+        setupViewWithMedia(parentViewController, media: media)
+    }
+
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var imageView:UIImageView!
     var media:URMedia!
     var delegate:URPlayMediaViewDelegate?
@@ -41,15 +50,15 @@ class URPlayMediaView: UIView {
         self.media = media
         self.frame = URPlayMediaView.defaultFrame
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: "openMedia:")
+        tapGesture.numberOfTapsRequired = 1
+        self.addGestureRecognizer(tapGesture)
+        
         if media.type == URConstant.Media.PICTURE {
             
             SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
                 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    
-                    let tapGesture = UITapGestureRecognizer(target: self, action: "openMedia:")
-                    tapGesture.numberOfTapsRequired = 1
-                    self.addGestureRecognizer(tapGesture)
                     
                     self.addSubview(URPlayMediaView.buildImageView(image))
             })
@@ -66,13 +75,19 @@ class URPlayMediaView: UIView {
                 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
                     
-                    let tapGesture = UITapGestureRecognizer(target: self, action: "openMedia:")
-                    tapGesture.numberOfTapsRequired = 1
-                    self.addGestureRecognizer(tapGesture)
-                    
                     self.addSubview(URPlayMediaView.buildImageView(image))
                     
             })
+        }else if media.type == URConstant.Media.FILE {
+            let backgroundView = UIView(frame: URPlayMediaView.defaultFrame)
+            backgroundView.backgroundColor = UIColor.orangeColor()
+            
+            let fileIconImgView = UIImageView(image: UIImage(named: "icon_file"))
+            fileIconImgView.contentMode = UIViewContentMode.Center
+            fileIconImgView.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
+            backgroundView.addSubview(fileIconImgView)
+            self.addSubview(backgroundView)
+            
         }
         
     }
@@ -110,6 +125,16 @@ class URPlayMediaView: UIView {
             moviePlayer.moviePlayer.setFullscreen(true, animated: true)
 
             self.parentViewController.presentMoviePlayerViewControllerAnimated(moviePlayer)
+            
+        }else if media.type == URConstant.Media.FILE {
+            
+            if let checkURL = NSURL(string: media.url) {
+                if UIApplication.sharedApplication().openURL(checkURL) {
+                    print("url successfully opened")
+                }
+            } else {
+                print("invalid url")
+            }
             
         }
         

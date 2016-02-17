@@ -89,31 +89,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     //MARK: MediaSourceViewControllerDelegate
 
     func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
-        
-        if let media = media as? URVideoMedia {
-            
-            ProgressHUD.show(nil)
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-
-                }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    ProgressHUD.dismiss()
-
-                    media.image = image
-            })
-            
-            setupMediaViewMediaObject(media)
-            
-        }else if let media = media as? URVideoPhoneMedia {
-            
-            setupMediaViewMediaObject(media)
-            
-        }else if let media = media as? URImageMedia {
-            
-            setupMediaViewMediaObject(media)
-            
-        }else if let media = media as? URLocalMedia {
-            setupMediaViewMediaObject(media)
-        }
+        setupMediaViewMediaObject(media)
     }
 
     //MARK: Class Methods

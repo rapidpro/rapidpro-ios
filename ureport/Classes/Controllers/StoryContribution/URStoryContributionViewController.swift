@@ -166,108 +166,15 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         scrollViewMedias.scrollViewPageType = ISScrollViewPageType.ISScrollViewPageHorizontally
         
         if story.medias != nil && story.medias.count > 0 {
-            var photoIndex = 0
             
-            for media in story.medias {
-                
-                if media.type == URConstant.Media.PICTURE {
-                    
-                    let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(self, media: media)
-                    
-                    self.scrollViewMedias.addCustomView(playMediaView)
-                    
-//                    let tapGesture = UITapGestureRecognizer(target: self, action: "imgViewTapped:")
-//                    tapGesture.numberOfTouchesRequired = 1
-//    
-//                    imgView.addGestureRecognizer(tapGesture)
-    
-//                    imgView.sd_setImageWithURL(NSURL(string:media.url), completed: { (image, _, _, _) -> Void in
-//                        
-//
-//                        
-//                        self.scrollViewMedias.addCustomView(playMediaView)
-//    
-//                        let title = NSAttributedString(string: "Photo", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-//                        let photo = PhotoShow(image: imgView.image, attributedCaptionTitle: title)
-//                        photo.index = photoIndex
-//                        
-//                        self.photos.append(photo)
-//                        photoIndex++
-//                    })
-                    
-                } else if media.type == URConstant.Media.VIDEO {
-                    
-//                    let playerView = YTPlayerView(frame: frame)
-//                    playerView.loadWithVideoId(media.id)
-//                    
-//                    let playMediaView = URPlayMediaView()
-//                    playMediaView.frame = frame
-//                    playMediaView.media = media
-//                    playMediaView.addSubview(playerView)
-//                    playMediaView.tag = photoIndex
-//                    
-//                    self.scrollViewMedias.addCustomView(playMediaView)
-                    
-                    let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(self, media: media)
-                    self.scrollViewMedias.addCustomView(playMediaView)
-                    
-//                    SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-//                        
-//                        }, completed: { (image, error, cacheType, finish, url) -> Void in
-//                            
-//                            let title = NSAttributedString(string: "Youtube", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-//                            let photo = PhotoShow(image: image, attributedCaptionTitle: title)
-//                            photo.index = photoIndex
-//                            
-//                            self.photos.append(photo)
-//                            photoIndex++
-//                            
-//                    })
-                    
-                } else if media.type == URConstant.Media.VIDEOPHONE {
-                    
-                    let playMediaView = URPlayMediaView()
-                    playMediaView.setupViewWithMedia(self, media: media)
-                    self.scrollViewMedias.addCustomView(playMediaView)
-                    
-//                    let playMediaView = URPlayMediaView()
-//                    playMediaView.frame = frame
-//                    playMediaView.media = media
-//                    playMediaView.tag = photoIndex
-//                    
-//                    let url = NSURL(string: media.url)!
-//                    
-//                    let moviePlayer = MPMoviePlayerController(contentURL: url)
-//                    
-//                    moviePlayer.view.frame = CGRect(x: 0, y: 0, width: 100, height: 100)
-//                    moviePlayer.shouldAutoplay = true
-//                    moviePlayer.controlStyle = .Default
-//                    
-//                    playMediaView.addSubview(moviePlayer.view)
-//                    
-//                    self.scrollViewMedias.addCustomView(playMediaView)
-//                    moviePlayer.setFullscreen(true, animated: true)
-//                    
-//                    SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.thumbnail), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-//                        
-//                        }, completed: { (image, error, cacheType, finish, url) -> Void in
-//                            
-//                            let title = NSAttributedString(string: "Video", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
-//                            let photo = PhotoShow(image: image, attributedCaptionTitle: title)
-//                            photo.index = photoIndex
-//                            
-//                            self.photos.append(photo)
-//                            photoIndex++
-//                            
-//                    })
-                    
-                }
-                
+            for media in story.medias {                
+                let playMediaView = URPlayMediaView(parentViewController: self, media: media)
+                self.scrollViewMedias.addCustomView(playMediaView)
             }
+                
         }
     }
+    
     
     func setupScrollView() {
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)

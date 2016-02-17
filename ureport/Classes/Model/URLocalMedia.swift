@@ -11,5 +11,6 @@ import UIKit
 class URLocalMedia: URMedia {
 
     var path:String!
+    var fileName:String!
     
 }

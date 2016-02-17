@@ -113,6 +113,7 @@
 		658949D41B85775A0087F361 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D31B85775A0087F361 /* Accounts.framework */; };
 		658949D61B861B5E0087F361 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D51B861B5E0087F361 /* Security.framework */; };
 		658949DA1B8623CF0087F361 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 658949D91B8623CF0087F361 /* TwitterAuthHelper.m */; };
+		658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D35A51C73ABDA00173DCB /* ISImageExtension.swift */; };
 		658D857B1B5457CC00DFB949 /* URLoginCredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D85791B5457CC00DFB949 /* URLoginCredentialsViewController.swift */; };
 		658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D857A1B5457CC00DFB949 /* URLoginCredentialsViewController.xib */; };
 		658D85801B54597700DFB949 /* URForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D857E1B54597700DFB949 /* URForgotPasswordViewController.swift */; };
@@ -362,6 +363,7 @@
 		658949D51B861B5E0087F361 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		658949D81B8623CF0087F361 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		658949D91B8623CF0087F361 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		658D35A51C73ABDA00173DCB /* ISImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISImageExtension.swift; sourceTree = "<group>"; };
 		658D85791B5457CC00DFB949 /* URLoginCredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginCredentialsViewController.swift; sourceTree = "<group>"; };
 		658D857A1B5457CC00DFB949 /* URLoginCredentialsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLoginCredentialsViewController.xib; sourceTree = "<group>"; };
 		658D857E1B54597700DFB949 /* URForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URForgotPasswordViewController.swift; sourceTree = "<group>"; };
@@ -677,6 +679,7 @@
 		65409FE21B4C845200344D75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				65816BA91C74C208004F9DEB /* AudioRecorder */,
 				655532361C51682C002F6AFC /* MediaSource */,
 				97B2FABD1C061E44000820BD /* Tutorial */,
 				65F8B3041BE2D6FE009F9CAB /* NewsDetail */,
@@ -806,6 +809,7 @@
 				6533CF431C496627009DF49C /* URRapidProContactUtil.swift */,
 				6555323B1C518376002F6AFC /* ISCircleButton.swift */,
 				65780CB91C61064A0025398D /* URVideoUtil.swift */,
+				658D35A51C73ABDA00173DCB /* ISImageExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1050,6 +1054,13 @@
 				657629181BE13A360095772F /* URModeratorTableViewController.swift */,
 			);
 			path = Moderator;
+			sourceTree = "<group>";
+		};
+		65816BA91C74C208004F9DEB /* AudioRecorder */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = AudioRecorder;
 			sourceTree = "<group>";
 		};
 		658949BB1B83E1690087F361 /* Menu */ = {
@@ -1657,6 +1668,7 @@
 				65A45CE71B880C3B001C6808 /* URGroupsTableViewCell.swift in Sources */,
 				65FAF0CE1BC2DA0000F8B380 /* URPointsScoredViewController.swift in Sources */,
 				656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */,
+				658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */,
 				65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */,
 				65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */,
 				655690851B7D0F6700525E00 /* URPoll.swift in Sources */,

@@ -11,7 +11,7 @@ import AVFoundation
 
 class URVideoUtil: NSObject {
 
-    static let outPutURL = NSURL(fileURLWithPath:NSTemporaryDirectory()).URLByAppendingPathComponent("video_upload")
+    static let outPutURL = NSURL(fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]).URLByAppendingPathComponent("video_upload")
     
     class func compressVideo(inputURL: NSURL, handler:(session: AVAssetExportSession) -> Void) {
         

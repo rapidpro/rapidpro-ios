@@ -16,14 +16,14 @@ enum URUploadPath:String {
 
 class URAWSManager: NSObject {
    
-    class func uploadFile(path:String,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+    class func uploadFile(localMedia:URLocalMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
         
-        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))")
+        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))\(localMedia.fileName)")
         
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
         let uploadRequest = AWSS3TransferManagerUploadRequest()
         
-        uploadRequest.body = NSURL(fileURLWithPath: path)
+        uploadRequest.body = NSURL(fileURLWithPath: localMedia.path)
         uploadRequest.key = fileName
         uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
@@ -85,7 +85,7 @@ class URAWSManager: NSObject {
             
             if session.status == .Completed {
                 
-                let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.MOV")
+                let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS.mp4")
                 
                 let transferManager = AWSS3TransferManager.defaultS3TransferManager()
                 let uploadRequest = AWSS3TransferManagerUploadRequest()
@@ -118,7 +118,6 @@ class URAWSManager: NSObject {
                 }
                 
             }else{
-                print(session.status.rawValue)
                 print(session.error!.localizedDescription)
             }
             

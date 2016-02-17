@@ -20,6 +20,7 @@ class URMediaView: UIView {
     @IBOutlet weak var viewBottom: UIView!
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var lbCover: UILabel!
+    @IBOutlet weak var lbFileName: UILabel!
     @IBOutlet weak var imgActive: UIImageView!
     
     var media:URMedia!
@@ -68,7 +69,9 @@ class URMediaView: UIView {
         }else if let media = media as? URLocalMedia {
             
             self.backgroundView.backgroundColor = UIColor.orangeColor()
+            self.imgMedia.contentMode = UIViewContentMode.Center
             self.imgMedia.image = UIImage(named: "icon_file")
+            self.lbFileName.text = media.fileName
             
         }
         

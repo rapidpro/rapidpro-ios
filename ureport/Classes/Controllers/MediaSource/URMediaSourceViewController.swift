@@ -93,10 +93,13 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
         
         if let delegate = self.delegate {
+            
             print(url.lastPathComponent)
+            print(url.path)
             
             let media = URLocalMedia()
-            media.path = url.lastPathComponent
+            media.fileName = url.lastPathComponent!.stringByReplacingOccurrencesOfString(" ", withString: "_")
+            media.path = url.path
             
             delegate.newMediaAdded(self, media: media)
         }
@@ -185,7 +188,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             
         case btFile:
             
-            let documentPicker = UIDocumentPickerViewController(documentTypes: [""], inMode: .Import)
+            let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], inMode: .Import)
             documentPicker.delegate = self
             self.presentViewController(documentPicker, animated: true, completion: nil)
             

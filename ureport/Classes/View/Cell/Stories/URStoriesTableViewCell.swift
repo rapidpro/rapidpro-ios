@@ -148,7 +148,20 @@ class URStoriesTableViewCell: UITableViewCell {
             
             if story.cover.type == URConstant.Media.VIDEOPHONE {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.thumbnail))
-            }else {
+            }else if story.cover.type == URConstant.Media.FILE {
+
+                self.imgStory.image = UIImage(color: UIColor.orangeColor())
+                
+                let fileIconImgView = UIImageView(image: UIImage(named: "icon_file"))
+                fileIconImgView.tag = 10
+                fileIconImgView.contentMode = UIViewContentMode.Center
+                fileIconImgView.frame = CGRect(x: (self.imgStory.bounds.size.width - 50) / 2, y: (self.imgStory.bounds.size.height - 50) / 2, width: 50, height: 50)
+                self.imgStory.addSubview(fileIconImgView)
+
+            } else {
+                if let fileIconImgView = self.imgStory.viewWithTag(10) {
+                    fileIconImgView.removeFromSuperview()
+                }
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
             }
         }
