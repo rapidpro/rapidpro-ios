@@ -17,7 +17,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     let myChatsViewController:URMyChatsViewController = URMyChatsViewController()
     let closedPollViewController:URClosedPollTableViewController = URClosedPollTableViewController()
     
+    var viewControllerToShow:UIViewController?
+    
     init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(viewControllerToShow:UIViewController?) {
+        self.viewControllerToShow = viewControllerToShow        
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -36,9 +43,9 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         self.delegate = self
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
-
-        tabBarController(self, didSelectViewController: storiesTableViewController)
+        
         setupViewControllers()
+        
         self.title = "U-Report"
     }
     
@@ -85,8 +92,22 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
             
             if chatRoomKey != nil {
                 myChatsViewController.chatRoomKeyToOpen = chatRoomKey
+                chatRoomKey = nil
                 tabBarController(self, didSelectViewController: myChatsViewController)
                 self.selectedIndex = 2
+            }else if let viewControllerToShow = self.viewControllerToShow {
+                
+                if viewControllerToShow is URClosedPollTableViewController {
+                    self.selectedIndex = 1
+                    tabBarController(self, didSelectViewController: closedPollViewController)
+                }else if viewControllerToShow is URStoriesTableViewController {
+                    self.selectedIndex = 0
+                    tabBarController(self, didSelectViewController: storiesTableViewController)
+                }
+                
+            }else{
+                self.selectedIndex = 0
+                tabBarController(self, didSelectViewController: storiesTableViewController)
             }
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]
@@ -119,7 +140,10 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
     //MARK: SelectorMethods
     
     func createChatRoom() {
-        URNavigationManager.navigation.pushViewController(URChatTableViewController(createGroupOption: true,myChatsMode:false), animated: true)
+        let chatTableViewController = URChatTableViewController(createGroupOption: true,myChatsMode:false)
+        chatTableViewController.listChatRoom = myChatsViewController.listChatRoom
+        
+        URNavigationManager.navigation.pushViewController(chatTableViewController, animated: true)
     }
     
     func invitePeople() {

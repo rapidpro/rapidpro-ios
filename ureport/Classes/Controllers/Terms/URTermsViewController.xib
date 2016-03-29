@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URTermsViewController" customModule="ureport" customModuleProvider="target">
+            <connections>
+                <outlet property="btAccept" destination="TZd-oL-Tuo" id="rhL-LO-qwR"/>
+                <outlet property="btCancel" destination="mvB-jn-WFu" id="hbm-Mv-aq8"/>
+                <outlet property="txtTerms" destination="v4T-IJ-kKy" id="euC-cg-yF5"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewBackground" destination="2g1-VT-WRx" id="dn2-Y0-YEF"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2g1-VT-WRx">
+                    <rect key="frame" x="15" y="68" width="570" height="464"/>
+                    <subviews>
+                        <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" usesAttributedText="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v4T-IJ-kKy">
+                            <rect key="frame" x="26" y="16" width="519" height="370"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <attributedString key="attributedText">
+                                <fragment content="Terms and Privacy Policy">
+                                    <attributes>
+                                        <font key="NSFont" size="24" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+
+Unicef ("us", "we", or "our") operates the U-Report mobile application (the "Service").
+
+This page informs you of our policies regarding the collection, use and disclosure of Personal Information when you use our Service.
+
+We will not use or share your information with anyone except as described in this Privacy Policy.
+
+We use your Personal Information for providing and improving the Service. By using the Service, you agree to the collection and use of information in accordance with this policy. 
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Information Collection And Use">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+
+While using our Service, we may ask you to provide us with certain personally identifiable information that can be used to contact or identify you. Personally identifiable information may include, but is not limited to, your email address, name, phone number, other information ("Personal Information").
+We collect this information for the purpose of providing the Service, identifying and communicating with you, responding to your requests/inquiries, servicing your purchase orders, and improving our services.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Log Data">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+
+When you access the Service by or through a mobile device, we may collect certain information automatically, including, but not limited to, the type of mobile device you use, your mobile device unique ID, the IP address of your mobile device, your mobile operating system, the type of mobile Internet browser you use and other statistics ("Log Data").
+
+In addition, we may use third party services such as Google Analytics that collect, monitor and analyze this type of information in order to increase our Service's functionality. These third party service providers have their own privacy policies addressing how they use such information.
+
+
+Please see the section regarding Location Information below regarding the use of your location information and your options.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Location information">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+
+We may use and store information about your location depending on the permissions you have set on your device. We use this information to provide features of our Service, to improve and customize our Service. You can enable or disable location services when you use our Service at anytime, through your mobile device settings.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Cookies">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+
+Cookies are files with a small amount of data, which may include an anonymous unique identifier. Cookies are sent to your browser from a web site and transferred to your device. We use cookies to collect information in order to improve our services for you.
+
+You can instruct your browser to refuse all cookies or to indicate when a cookie is being sent. The Help feature on most browsers provide information on how to accept cookies, disable cookies or to notify you when receiving a new cookie.
+
+If you do not accept cookies, you may not be able to use some features of our Service and we recommend that you leave them turned on.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Communications and Privacy">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+ 
+By creating an Account on our Service, you agree to subscribe to newsletters, marketing or promotional materials and other information we may send. However, you may opt out of receiving any, or all, of these communications from us by following the unsubscribe link or instructions provided in any email we send.
+ 
+We are the sole owners of the information collected on U-Report. We only have access to/collect information that you voluntarily provide us. We will not sell or rent this information to anyone.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment content="Accounts">
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica-Bold"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                                <fragment>
+                                    <string key="content">
+ 
+When you create an account with us, you guarantee that you are above the age of 18, and that the information you provide us is accurate, complete, and current at all times. Inaccurate, incomplete, or obsolete information may result in the immediate termination of your account on the Service.
+ 
+You are responsible for maintaining the confidentiality of your account and password, including but not limited to the restriction of access to your computer and/or account. You agree to accept responsibility for any and all activities or actions that occur under your account and/or password, whether your password is with our Service or a third-party service. You must notify us immediately upon becoming aware of any breach of security or unauthorized use of your account.
+ 
+You may not use as a username the name of another person or entity or that is not lawfully available for use, a name or trademark that is subject to any rights of another person or entity other than you, without appropriate authorization. You may not use as a username any name that is offensive, vulgar or obscene.
+  
+ 
+We reserve the right to refuse service, terminate accounts, remove or edit content, or cancel orders in our sole discretion.
+
+</string>
+                                    <attributes>
+                                        <font key="NSFont" size="13" name="Helvetica"/>
+                                        <real key="NSKern" value="0.0"/>
+                                        <paragraphStyle key="NSParagraphStyle" alignment="justified" lineBreakMode="wordWrapping" baseWritingDirection="leftToRight" defaultTabInterval="36" tighteningFactorForTruncation="0.0" allowsDefaultTighteningForTruncation="NO">
+                                            <tabStops/>
+                                        </paragraphStyle>
+                                    </attributes>
+                                </fragment>
+                            </attributedString>
+                            <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                        </textView>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mvB-jn-WFu" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="26" y="397" width="255" height="47"/>
+                            <color key="backgroundColor" red="0.84705882352941175" green="0.84705882352941175" blue="0.84705882352941175" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="Et8-7r-zsS"/>
+                            </constraints>
+                            <state key="normal" title="Cancel">
+                                <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btCancelTapped:" destination="-1" eventType="touchUpInside" id="gra-cN-Hul"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TZd-oL-Tuo" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
+                            <rect key="frame" x="290" y="397" width="255" height="47"/>
+                            <color key="backgroundColor" red="0.33333333333333331" green="0.83529411764705885" blue="0.56862745098039214" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="47" id="2FG-4V-qTW"/>
+                            </constraints>
+                            <state key="normal" title="Accept">
+                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="btAcceptTapped:" destination="-1" eventType="touchUpInside" id="bz5-z4-gBE"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="TZd-oL-Tuo" firstAttribute="top" secondItem="v4T-IJ-kKy" secondAttribute="bottom" constant="11" id="EEz-q5-0tV"/>
+                        <constraint firstItem="v4T-IJ-kKy" firstAttribute="leading" secondItem="2g1-VT-WRx" secondAttribute="leading" constant="26" id="GVd-aj-EKB"/>
+                        <constraint firstAttribute="trailing" secondItem="TZd-oL-Tuo" secondAttribute="trailing" constant="25" id="Guq-RZ-roY"/>
+                        <constraint firstAttribute="height" constant="464" id="JeW-w9-dcV"/>
+                        <constraint firstItem="mvB-jn-WFu" firstAttribute="leading" secondItem="2g1-VT-WRx" secondAttribute="leading" constant="26" id="JkO-sM-udH"/>
+                        <constraint firstAttribute="bottom" secondItem="mvB-jn-WFu" secondAttribute="bottom" constant="20" id="bxt-fa-USb"/>
+                        <constraint firstItem="TZd-oL-Tuo" firstAttribute="width" secondItem="mvB-jn-WFu" secondAttribute="width" id="clb-25-DNc"/>
+                        <constraint firstItem="v4T-IJ-kKy" firstAttribute="top" secondItem="2g1-VT-WRx" secondAttribute="top" constant="16" id="h2T-Il-UkL"/>
+                        <constraint firstAttribute="trailing" secondItem="v4T-IJ-kKy" secondAttribute="trailing" constant="25" id="tRQ-xM-KYh"/>
+                        <constraint firstItem="TZd-oL-Tuo" firstAttribute="leading" secondItem="mvB-jn-WFu" secondAttribute="trailing" constant="9" id="wIZ-kj-1Df"/>
+                        <constraint firstAttribute="bottom" secondItem="TZd-oL-Tuo" secondAttribute="bottom" constant="20" id="zla-vJ-apo"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="2g1-VT-WRx" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="92h-Jr-8bd"/>
+                <constraint firstAttribute="trailing" secondItem="2g1-VT-WRx" secondAttribute="trailing" constant="15" id="Eis-Xr-tMs"/>
+                <constraint firstItem="2g1-VT-WRx" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="T2d-5q-5B2"/>
+                <constraint firstItem="2g1-VT-WRx" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="15" id="mj7-38-XdR"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

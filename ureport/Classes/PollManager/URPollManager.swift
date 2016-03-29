@@ -51,7 +51,7 @@ class URPollManager: NSObject {
                     poll.category = category
                     delegate.newPollReceived(poll)
                     
-                    self.pollIndex++
+                    self.pollIndex += 1
                 }
             })
     }
@@ -78,7 +78,7 @@ class URPollManager: NSObject {
             })
     }
  
-    class func getAvailableColorToCategory(pollCategory:URPollCategory,var index:Int) -> UIColor {
+    class func getAvailableColorToCategory(pollCategory:URPollCategory, var index:Int) -> UIColor {
         
         let filtered = categoryAndColorList.filter {
             if $0.objectForKey(pollCategory.name) != nil {

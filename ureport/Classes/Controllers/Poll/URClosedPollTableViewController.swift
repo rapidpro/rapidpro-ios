@@ -25,7 +25,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     var contact:URContact?
     var currentFlow:URFlowDefinition?
     var currentActionSet:URFlowActionSet?
-    var currentRuleset:URFlowRuleset?
+    var currentRuleset:URFlowRuleset?        
     
     init() {
         super.init(nibName: "URClosedPollTableViewController", bundle: nil)
@@ -36,6 +36,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         setupTableView()
         setupHeaderCell()
@@ -52,8 +53,13 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
-        
-        loadCurrentFlow()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        if !URRapidProManager.sendingAnswers {
+            loadCurrentFlow()
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -98,20 +104,8 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             responses.append(headerCell.getResponse())
             setupNextStep(headerCell.flowRule?.destination)
             
-            if !URFlowManager.isLastActionSet(currentActionSet) {
-                reloadCurrentFlowSection()
-            } else {
-                ProgressHUD.show("message_send_poll".localized)
-                
-                URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        ProgressHUD.dismiss()
-                    }
-                })
-                updateTopViewHeight(0)
-                headerCell.removeFromSuperview()
-                self.view.endEditing(true)
-            }
+            reloadCurrentFlowSection()
+            
         } else {
             UIAlertView(title: nil, message: "answer_poll_choose_error".localized, delegate: self, cancelButtonTitle: "OK").show()
         }
@@ -161,14 +155,51 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     private func reloadCurrentFlowSection() {
-        headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset!, contact: contact!)
+        
         headerCell.delegate = self
-        headerCell.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, headerCell.getCurrentPollHeight())
-        updateTopViewHeight(headerCell.getCurrentPollHeight())
+        
+        var currentPollHeight:CGFloat = 0.0
+        
+        if !URFlowManager.isLastActionSet(currentActionSet) {
+            headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset!, contact: contact!)
+            currentPollHeight = headerCell.getCurrentPollHeight()
+            
+        }else if currentActionSet == nil {
+            
+            ProgressHUD.show("message_send_poll".localized)
+            
+            URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
+                
+                dispatch_async(dispatch_get_main_queue()) {                    
+                    ProgressHUD.dismiss()
+                }
+            })
+            
+            updateTopViewHeight(0)
+            headerCell.removeFromSuperview()
+            self.view.endEditing(true)
+            
+        }else{
+            headerCell.setupDataWithNoAnswer(currentFlow, flowActionSet: currentActionSet, flowRuleset: currentRuleset, contact: contact)
+            
+            currentPollHeight = headerCell.getCurrentPollHeight() - 30
+            ProgressHUD.show("message_send_poll".localized)
+            
+            URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
+                
+                dispatch_async(dispatch_get_main_queue()) {
+                    ProgressHUD.dismiss()
+                }
+            })
+        }
+        
+        headerCell.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, currentPollHeight)
+        updateTopViewHeight(currentPollHeight)
         fitScrollSize()
     }
     
     private func updateTopViewHeight(newHeight:CGFloat) {
+        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -64)
         topViewHeight.constant = newHeight
         
         UIView.animateWithDuration(0.5) { () -> Void in

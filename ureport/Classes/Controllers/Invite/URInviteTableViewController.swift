@@ -12,7 +12,6 @@ import MessageUI
 
 class URInviteTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate, URInviteTableViewCellDelegate {
     
-    let addressBook : SwiftAddressBook? = swiftAddressBook
     var addressBookList:[NSDictionary] = []
     let inviteMessage = "invite_message".localized
     
@@ -78,7 +77,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     func requestAuthorizationToAddressBook() {
 
-        swiftAddressBook?.requestAccessWithCompletion({ (success, error) -> Void in
+        SwiftAddressBook.requestAccessWithCompletion({ (success, error) -> Void in
             if success {
                 self.readContacts()
             }else {

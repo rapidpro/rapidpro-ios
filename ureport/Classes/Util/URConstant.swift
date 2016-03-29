@@ -125,6 +125,11 @@ struct URConstant {
         static let API_NEWS = "http://ureport.in/api/v1/stories/org/"
     }
     
+    struct NotificationType {
+        static let RAPIDPRO = "Rapidpro"
+        static let CHAT = "Chat"
+    }
+    
     struct Gcm {
         static let GCM_URL = "https://gcm-http.googleapis.com/gcm/send"
         static let GCM_AUTHORIZATION = "key=AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs"

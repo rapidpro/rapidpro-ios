@@ -14,7 +14,7 @@ protocol URMediaSourceViewControllerDelegate {
     func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, media:URMedia)
 }
 
-class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate {
+class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate, URAudioRecorderViewControllerDelegate {
     
     @IBOutlet weak var btCamera: ISCircleButton!
     @IBOutlet weak var btGallery: ISCircleButton!
@@ -39,6 +39,8 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     var delegate:URMediaSourceViewControllerDelegate?
     
+    let audioRecorderViewController = URAudioRecorderViewController()
+    
     init() {
         super.init(nibName: "URMediaSourceViewController", bundle: nil)
         isVisible = false
@@ -54,8 +56,14 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        self.lbAudio.text = "audio".localized
+        self.lbCamera.text = "camera".localized
+        self.lbFile.text = "file".localized
+        self.lbGallery.text = "gallery".localized
+        self.lbVideo.text = "video".localized
+        self.lbYoutube.text = "Youtube"
+        
     }
 
     //MARK: Class Methods
@@ -93,9 +101,6 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
         
         if let delegate = self.delegate {
-            
-            print(url.lastPathComponent)
-            print(url.path)
             
             let media = URLocalMedia()
             media.fileName = url.lastPathComponent!.stringByReplacingOccurrencesOfString(" ", withString: "_")
@@ -139,6 +144,12 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         }
         
         self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    //MARK: AudioRecorderViewControllerDelegate
+    
+    func newAudioRecorded(audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
+        
     }
     
     //MARK: Button Events
@@ -195,6 +206,11 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             break
             
         case btAudio:
+            
+            self.view.addSubview(audioRecorderViewController.view)
+            audioRecorderViewController.delegate = self
+            audioRecorderViewController.toggleView()
+            
             break
             
         case btYoutube:

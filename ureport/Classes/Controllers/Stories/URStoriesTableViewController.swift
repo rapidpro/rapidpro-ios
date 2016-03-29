@@ -72,7 +72,6 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
                 self.modalProfileViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
             }
         }
-        
     }
     
     //MARK: MenuDelegateMethods
@@ -160,7 +159,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     func loadNews() {
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
-            let url = "\(URConstant.RapidPro.API_NEWS)\(org)"
+            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
             Alamofire.request(.GET, url, headers: nil).responseObject({ (response:URAPIResponse<URNews>?, error:ErrorType?) -> Void in
                 if let response = response {
                     self.newsList = response.results
@@ -201,13 +200,22 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     func newStoryReceived(story: URStory) {
+        
+        if story.medias != nil {
+            for media in story.medias {
+                if media.type == URConstant.Media.AUDIO {
+                    return
+                }
+            }
+        }
+        
         storyList.insert(story, atIndex: 0)
         if filterStoriesToModerate == false {
             self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: (storyList.count - index)+1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
         }else{
             self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
         }
-        index++
+        index += 1
     }
     
 }

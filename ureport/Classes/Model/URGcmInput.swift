@@ -15,6 +15,7 @@ class URGcmInput : Mappable {
     var data:[String : AnyObject] = [:]
     var priority:URGcmPriority? = URGcmPriority.high
     var notification:URGcmNotification?
+    var type:String!
     
     init(to:String?, data:[String : AnyObject]) {
         self.to = to
@@ -28,7 +29,7 @@ class URGcmInput : Mappable {
         self.to             <- map["to"]
         self.data           <- map["data"]
         self.priority       <- map["priority"]
-        self.notification   <- map["notification"]
+        self.notification   <- map["notification"]    
     }
     
 }

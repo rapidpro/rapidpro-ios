@@ -59,13 +59,9 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         setupRightButtons()
         setupJSQMessageLayout()
         
-        setupAvatarImages()
-        
-//        JSQMessagesCollectionViewCell.registerMenuAction("customAction:")
+        setupAvatarImages()        
         
         UIMenuController.sharedMenuController().menuItems = [UIMenuItem(title: "Custom Action", action: "customAction:")]
-        
-//        JSQMessagesCollectionViewCell.registerMenuAction("delete:")
         
         chatMessage.delegate = self
         chatMessage.getMessages(self.chatRoom)

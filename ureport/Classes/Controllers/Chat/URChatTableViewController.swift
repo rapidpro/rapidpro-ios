@@ -87,11 +87,23 @@ class URChatTableViewController: UITableViewController {
             
             self.navigationController?.pushViewController(groupViewController, animated: true)
             
-        } else if (self.myChatsMode == false && (cell.type != .Group || cell.type != .Individual)) && cell.chatRoom == nil{
-
-            ProgressHUD.show(nil)
+        } else if (self.myChatsMode == false && (cell.type != .Group || cell.type != .Individual)) && cell.chatRoom == nil{        
             
-            URChatRoomManager.createIndividualChatRoomIfPossible(cell.user!)
+            var hasChatOpened = false
+            
+            for currentChatRoom in self.listChatRoom {
+                if let currentChatRoom = currentChatRoom as? URIndividualChatRoom {
+                    if currentChatRoom.friend.key == cell.user?.key {
+                        hasChatOpened = true
+                        UIAlertView(title: nil, message: "You already have a chat with this user", delegate: self, cancelButtonTitle: "OK").show()
+                        break
+                    }
+                }
+            }
+            
+            if hasChatOpened == false {
+                URChatRoomManager.createIndividualChatRoomIfPossible(cell.user!)
+            }
             
         }else {
             if let chatRoom = cell.chatRoom {

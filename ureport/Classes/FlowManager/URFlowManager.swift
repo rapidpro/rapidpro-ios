@@ -44,8 +44,7 @@ class URFlowManager {
     
     class func getRulesetForAction(flowDefinition: URFlowDefinition, actionSet: URFlowActionSet?) -> URFlowRuleset? {
         for ruleSet in flowDefinition.ruleSets! {
-            if actionSet != nil && actionSet?.destination != nil
-                && actionSet?.destination == ruleSet.uuid {
+            if actionSet != nil && actionSet?.destination != nil && actionSet?.destination == ruleSet.uuid {
                     return ruleSet
             }
         }

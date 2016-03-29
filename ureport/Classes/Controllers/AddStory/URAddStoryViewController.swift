@@ -118,38 +118,6 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             UIAlertView(title: nil, message: "create_story_insert_cover".localized, delegate: self, cancelButtonTitle: "OK").show()
             return
         }
-//
-//        if !scrollViewMedias.views!.isEmpty {
-//            ProgressHUD.show(nil)
-//            
-//            for i in 0...scrollViewMedias.views!.count-1 {
-//                
-//                let mediaView = (scrollViewMedias.views![i] as! URMediaView)
-//                
-//                if mediaView.media == nil{
-//                    
-//                    let img = mediaView.imgMedia.image
-//                    URAWSManager.uploadImage(img!, uploadPath: .Stories, completion: { (picture:URMedia?) -> Void in
-//                        if picture != nil {
-//                            self.mediaList.append(picture!)
-//                            
-//                            if (self.mediaList.count + self.youtubeMediaList.count) == self.scrollViewMedias.views!.count {
-//                                self.saveStory(self.mediaList)
-//                            }
-//                            
-//                        }
-//                    })
-//                    
-//                }else{
-//                    if (self.mediaList.count + youtubeMediaList.count) == scrollViewMedias.views!.count {
-//                        self.saveStory(nil)                        
-//                    }
-//                }
-//                
-//            }
-//        }else {
-//            self.saveStory(nil)
-//        }
         
         if !self.mediaList.isEmpty {
             ProgressHUD.show(nil)
@@ -173,7 +141,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             story.medias = medias
 
             for media in medias {
-                if media.isCover == true {
+                if media.isCover != nil && media.isCover == true {
                     story.cover = media
                 }
                 media.isCover = nil
@@ -181,22 +149,9 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             
         }
         
-//        if medias != nil {
-//            var m:[URMedia] = medias!
-//            story.cover = m[indexImgCover]                        
-//            story.medias =  m
-//            
-//            if !youtubeMediaList.isEmpty {
-//                for media in youtubeMediaList {
-//                    story.medias.append(media)
-//                }
-//            }
-//        }else{
-//            if !youtubeMediaList.isEmpty {
-//                story.medias = youtubeMediaList
-//                story.cover = youtubeMediaList[indexImgCover]
-//            }
-//        }
+        if story.cover == nil && story.medias != nil && story.medias.count > 0 {
+            story.cover = story.medias[0]
+        }
         
         story.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         story.title = self.txtTitle.text
@@ -394,6 +349,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         for i in 0...self.scrollViewMedias.views!.count-1 {
             let mView = self.scrollViewMedias.views![i] as! URMediaView
             if mView == mediaView {
+                indexImgCover = 0
                 mView.setMediaAsCover(true)
                 mediaViewCover = mView
             }else {

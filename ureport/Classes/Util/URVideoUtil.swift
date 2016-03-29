@@ -11,28 +11,54 @@ import AVFoundation
 
 class URVideoUtil: NSObject {
 
-    static let outPutURL = NSURL(fileURLWithPath:NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]).URLByAppendingPathComponent("video_upload")
+    static let outPutURLDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString
+    static let outputURLFile = NSURL(fileURLWithPath: outPutURLDirectory.stringByAppendingPathComponent("video.mp4"))
     
     class func compressVideo(inputURL: NSURL, handler:(session: AVAssetExportSession) -> Void) {
         
         let urlAsset = AVURLAsset(URL: inputURL, options: nil)
         let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality)!
         
-        exportSession.outputURL = outPutURL
-        exportSession.outputFileType = AVFileTypeQuickTimeMovie
-        exportSession.shouldOptimizeForNetworkUse = true
+        URVideoUtil.removeFile(outputURLFile)
         
-        exportSession.exportAsynchronouslyWithCompletionHandler { () -> Void in            
-            handler(session: exportSession)
+        do {
+            try NSFileManager.defaultManager().createDirectoryAtPath(outPutURLDirectory as String, withIntermediateDirectories: true, attributes: nil)
+            
+            exportSession.outputURL = outputURLFile
+            exportSession.shouldOptimizeForNetworkUse = true
+            exportSession.outputFileType = AVFileTypeMPEG4
+            
+            exportSession.exportAsynchronouslyWithCompletionHandler { () -> Void in
+                handler(session: exportSession)
+            }
+            
+        } catch let error as NSError {
+            print("Creating 'upload' directory failed. Error: \(error)")
         }
         
+    }
+    
+    class func removeFile(fileURL: NSURL) {
+        let filePath = fileURL.path
+        let fileManager = NSFileManager.defaultManager()
+        
+        if fileManager.fileExistsAtPath(filePath!) {
+            do {
+                try fileManager.removeItemAtPath(filePath!)
+            }catch let error as NSError {
+                print("Can't remove file \(error.localizedDescription)")
+            }
+
+        }else{
+            print("file doesn't exist")
+        }
     }
     
     class func generateThumbnail(url : NSURL) -> UIImage?{
         let asset = AVAsset(URL: url)
         let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
         assetImgGenerate.appliesPreferredTrackTransform = true
-        assetImgGenerate.maximumSize = CGSizeMake(100, 100);
+//        assetImgGenerate.maximumSize = CGSizeMake(1024, 768);
 
         var time = asset.duration
         time.value = min(time.value, 2)

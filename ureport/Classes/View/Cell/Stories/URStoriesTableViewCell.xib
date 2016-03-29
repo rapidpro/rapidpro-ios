@@ -24,6 +24,17 @@
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-9A-e87">
                         <rect key="frame" x="5" y="5" width="310" height="461.5"/>
                         <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dZR-rg-rg5">
+                                <rect key="frame" x="275" y="8" width="27" height="28"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="28" id="M1l-0J-zs8"/>
+                                    <constraint firstAttribute="width" constant="27" id="OCy-zp-dOR"/>
+                                </constraints>
+                                <state key="normal" backgroundImage="ic_more_vert_grey"/>
+                                <connections>
+                                    <action selector="btReportContentTapped:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="DAc-Kk-SMb"/>
+                                </connections>
+                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coD-VO-YzA">
                                 <rect key="frame" x="23" y="392" width="277" height="23"/>
                                 <constraints>
@@ -86,9 +97,8 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="daniel.amaral" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AIA-bL-GZw">
-                                <rect key="frame" x="61" y="21" width="241" height="21"/>
+                                <rect key="frame" x="61" y="21" width="206" height="21"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="241" id="62Q-c6-HVh"/>
                                     <constraint firstAttribute="height" constant="21" id="sfE-VC-1Vj"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="15"/>
@@ -193,11 +203,14 @@
                             <constraint firstAttribute="trailing" secondItem="vti-q7-iQU" secondAttribute="trailing" constant="10" id="VeK-dm-hnl"/>
                             <constraint firstAttribute="trailing" secondItem="3z0-OJ-i8J" secondAttribute="trailing" id="VzA-W5-SRb"/>
                             <constraint firstItem="39P-Ht-qdf" firstAttribute="top" secondItem="YPb-9A-e87" secondAttribute="top" constant="10" id="WRq-UB-dv4"/>
+                            <constraint firstItem="dZR-rg-rg5" firstAttribute="top" secondItem="YPb-9A-e87" secondAttribute="top" constant="8" id="Xbh-Em-DSf"/>
                             <constraint firstAttribute="trailing" secondItem="p18-Kz-aLs" secondAttribute="trailing" constant="8" id="Yhc-c4-hRJ"/>
                             <constraint firstItem="IP1-lH-HTA" firstAttribute="top" secondItem="39P-Ht-qdf" secondAttribute="bottom" constant="1" id="cQk-Dm-1kh"/>
                             <constraint firstItem="39P-Ht-qdf" firstAttribute="leading" secondItem="YPb-9A-e87" secondAttribute="leading" constant="10" id="eIx-DS-0j5"/>
+                            <constraint firstItem="dZR-rg-rg5" firstAttribute="leading" secondItem="AIA-bL-GZw" secondAttribute="trailing" constant="8" id="gO7-xO-dCm"/>
                             <constraint firstAttribute="trailing" secondItem="P5C-91-wQf" secondAttribute="trailing" constant="8" id="gpr-Vy-ZRc"/>
                             <constraint firstItem="vti-q7-iQU" firstAttribute="leading" secondItem="YPb-9A-e87" secondAttribute="leading" constant="10" id="jm2-hk-kpd"/>
+                            <constraint firstAttribute="trailing" secondItem="dZR-rg-rg5" secondAttribute="trailing" constant="8" id="kde-B7-DsP"/>
                             <constraint firstItem="P5C-91-wQf" firstAttribute="leading" secondItem="YPb-9A-e87" secondAttribute="leading" constant="8" id="kta-zW-CJj"/>
                             <constraint firstItem="b0C-QF-s8f" firstAttribute="top" secondItem="p18-Kz-aLs" secondAttribute="bottom" constant="10" id="l1Y-iU-Qc1"/>
                             <constraint firstItem="vti-q7-iQU" firstAttribute="top" secondItem="p18-Kz-aLs" secondAttribute="bottom" constant="2" id="oUH-s2-DDS"/>
@@ -231,6 +244,7 @@
                 <outlet property="btContribute" destination="P5C-91-wQf" id="Xa8-JK-S5J"/>
                 <outlet property="btDisapprove" destination="hOY-8Q-4OO" id="u76-Bu-QRT"/>
                 <outlet property="btPublish" destination="B0g-cu-HpE" id="XES-0N-T2a"/>
+                <outlet property="btReportContent" destination="dZR-rg-rg5" id="95I-TS-J3K"/>
                 <outlet property="contentViewBottom" destination="CDe-ms-dKM" id="Wjd-GM-25g"/>
                 <outlet property="imgStory" destination="b0C-QF-s8f" id="xF9-gh-9ZG"/>
                 <outlet property="imgStoryHeight" destination="cGG-04-R25" id="yHg-Vh-npD"/>
@@ -252,6 +266,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ic_more_vert_grey" width="36" height="36"/>
         <image name="icon_person_black" width="12" height="12"/>
         <image name="icon_tag_grey" width="9" height="9"/>
     </resources>

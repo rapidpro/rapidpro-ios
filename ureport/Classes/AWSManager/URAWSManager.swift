@@ -14,6 +14,7 @@ enum URUploadPath:String {
     case Stories = "STORIES"
 }
 
+
 class URAWSManager: NSObject {
    
     class func uploadFile(localMedia:URLocalMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
@@ -30,7 +31,7 @@ class URAWSManager: NSObject {
         transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
             ProgressHUD.dismiss()
             if task!.error != nil{
-                print(task!.error)
+                print("Error on send file to AWS \(task!.error)")
             }else {
                 
                 let file = URMedia()
@@ -63,7 +64,7 @@ class URAWSManager: NSObject {
         transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
             ProgressHUD.dismiss()
             if task!.error != nil{
-                print(task!.error)
+                print("Error on send file to AWS \(task!.error)")
             }else {
                 
                 let picture = URMedia()
@@ -90,14 +91,14 @@ class URAWSManager: NSObject {
                 let transferManager = AWSS3TransferManager.defaultS3TransferManager()
                 let uploadRequest = AWSS3TransferManagerUploadRequest()
                 
-                uploadRequest.body = NSURL(fileURLWithPath: URVideoUtil.outPutURL.path!)
+                uploadRequest.body = URVideoUtil.outputURLFile
                 uploadRequest.key = fileName
                 uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
                 
                 transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
                     ProgressHUD.dismiss()
                     if task!.error != nil{
-                        print(task!.error)
+                        print("Error on send file to AWS \(task!.error)")
                     }else {
                         
                         let video = URMedia()
@@ -118,7 +119,7 @@ class URAWSManager: NSObject {
                 }
                 
             }else{
-                print(session.error!.localizedDescription)
+                print(session.error)
             }
             
         }

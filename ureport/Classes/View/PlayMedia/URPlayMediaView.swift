@@ -44,6 +44,36 @@ class URPlayMediaView: UIView {
         return imgView
     }
     
+    func videoHasFinishedPlaying(notification: NSNotification){
+        
+        print("Video finished playing")
+        
+        /* Find out what the reason was for the player to stop */
+        let reason =
+        notification.userInfo![MPMoviePlayerPlaybackDidFinishReasonUserInfoKey]
+            as! NSNumber?
+        
+        if let theReason = reason{
+            
+            let reasonValue = MPMovieFinishReason(rawValue: theReason.integerValue)
+            
+            switch reasonValue!{
+            case .PlaybackEnded:
+                /* The movie ended normally */
+                print("Playback Ended")
+            case .PlaybackError:
+                /* An error happened and the movie ended */
+                print("Error happened")
+            case .UserExited:
+                /* The user exited the player */
+                print("User exited")
+            }
+            
+            print("Finish Reason = \(theReason)")
+        }
+        
+    }
+    
     func setupViewWithMedia(viewController:UIViewController,media:URMedia) {
         
         self.parentViewController = viewController
@@ -76,6 +106,9 @@ class URPlayMediaView: UIView {
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
                     
                     self.addSubview(URPlayMediaView.buildImageView(image))
+                    let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
+                    playImage.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
+                    self.addSubview(playImage)
                     
             })
         }else if media.type == URConstant.Media.FILE {
@@ -114,15 +147,20 @@ class URPlayMediaView: UIView {
             
             
         }else if media.type == URConstant.Media.VIDEOPHONE {
+
+            NSNotificationCenter.defaultCenter().addObserver(self,
+                selector: "videoHasFinishedPlaying:",
+                name: MPMoviePlayerPlaybackDidFinishNotification,
+                object: nil)
             
             let url = NSURL(string: media.url)!
 
             let moviePlayer = MPMoviePlayerViewController(contentURL: url)
 
-            moviePlayer.moviePlayer.controlStyle = .Embedded
+            moviePlayer.moviePlayer.controlStyle = .Fullscreen
             moviePlayer.moviePlayer.prepareToPlay()
             moviePlayer.moviePlayer.play()
-            moviePlayer.moviePlayer.setFullscreen(true, animated: true)
+            moviePlayer.moviePlayer.setFullscreen(false, animated: true)
 
             self.parentViewController.presentMoviePlayerViewControllerAnimated(moviePlayer)
             

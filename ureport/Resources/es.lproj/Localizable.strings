@@ -86,7 +86,7 @@
 "profile_ranking" = "Ranking";
 "list_stories_error" = "No has publicado historias";
 "profile_polls" = "Encuesta: %d";
-"profile_stories" = "Historias: %d$s";
+"profile_stories" = "Historias: %d";
 "menu_points" = "Puntos: %d";
 "label_chat_groups" = "Grupos abiertos";
 "chat_groups_join" = "Unirse";
@@ -291,6 +291,11 @@
 "login_required" = "Requiere Login";
 "login_msg" = "Inicia sesión para acceder a esta característica.";
 "login_now" = "Ingresar Ahora!";
+"audio" = "Audio";
+"gallery" = "Galería";
+"file" = "Archivo";
+"camera" = "Cámara";
+"video" = "Vídeo";
 
 //TUTORIAL
 

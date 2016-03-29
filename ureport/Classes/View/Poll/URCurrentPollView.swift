@@ -50,7 +50,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         
         btNext.layer.cornerRadius = 5
         
-        let preferredLanguage = URSettings.getSettings()?.preferredLanguage
+        let preferredLanguage = URSettings.getSettings().preferredLanguage
         selectedLanguage = preferredLanguage != nil ? String(preferredLanguage!) : nil
     }
     
@@ -112,7 +112,27 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         self.flowActionSet = flowActionSet
         self.lbFlowName.text = flowDefinition.metadata?.name
 
+        self.btNext.hidden = false
+        
         setupNextStep()
+    }
+    
+    func setupDataWithNoAnswer(flowDefinition: URFlowDefinition?, flowActionSet: URFlowActionSet?, flowRuleset:URFlowRuleset?, contact:URContact?) {
+        self.flowRule = nil
+        self.response = nil
+        
+        self.contact = contact
+        self.flowDefinition = flowDefinition
+        self.flowRuleset = flowRuleset
+        self.flowActionSet = flowActionSet
+        self.lbFlowName.text = flowDefinition?.metadata?.name
+        
+        removeAnswersViewOfLastQuestion()
+        setupLanguages()
+        setupQuestionTitle()
+        
+        self.btNext.hidden = true
+        self.constraintResponseHeight.constant = CGFloat(viewResponses.subviews.count * responseHeight)
     }
     
     func setupNextStep() {
@@ -154,7 +174,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
                 
                 let settings = URSettings()
                 settings.preferredLanguage = language
-                URSettings.saveSettingsLocaly(settings)
+                URSettings.saveSettingsLocaly(settings)                
                 
                 self.selectedLanguage = language
                 self.setupQuestionTitle()
@@ -179,11 +199,16 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         constraintQuestionHeight.constant = sizeThatFitsTextView.height;
     }
     
-    private func setupQuestionAnswers() {
+    private func removeAnswersViewOfLastQuestion() {
         let array = self.viewResponses.subviews as [UIView]
         for view in array {
             view.removeFromSuperview()
         }
+    }
+    
+    private func setupQuestionAnswers() {
+        
+        removeAnswersViewOfLastQuestion()
         
         for flowRule in (flowRuleset?.rules)! {
             if !URFlowManager.hasRecursiveDestination(flowDefinition, ruleSet: flowRuleset!, rule: flowRule) {
@@ -204,7 +229,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
                     break
                 default: break
                 }
-            
+                
                 responseView?.setFlowRule(flowDefinition, flowRule: flowRule)
                 responseView?.selectedLanguage = self.selectedLanguage
                 self.viewResponses.addSubview(responseView!)

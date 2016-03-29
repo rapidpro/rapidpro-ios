@@ -61,11 +61,13 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
         switch indexPath.row {
             case 0:
                 cell.switchEnable.hidden = false
-                if let settings = URSettings.getSettings() {
-                    cell.switchEnable.on = settings.availableInChat.boolValue
-                }else {
+                
+                if let availAbleInChat = URSettings.getSettings().availableInChat {
+                    cell.switchEnable.on = availAbleInChat.boolValue
+                }else{
                     cell.switchEnable.on = true
                 }
+                
                 cell.lbSettingName.text = "title_pref_chat_available".localized
                 break
             case 1:

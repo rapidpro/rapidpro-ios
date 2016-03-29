@@ -30,6 +30,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
+    @IBOutlet weak var btReportContent: UIButton!
 
     @IBOutlet weak var lbContentTop: NSLayoutConstraint!
     @IBOutlet weak var contentViewBottom: NSLayoutConstraint!
@@ -47,6 +48,8 @@ class URStoriesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.btReportContent.hidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         self.viewSeparator.layer.cornerRadius = 7
@@ -68,6 +71,28 @@ class URStoriesTableViewCell: UITableViewCell {
     }
     
     //MARK: Button Events
+    
+    @IBAction func btReportContentTapped(sender: AnyObject) {
+        
+        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .ActionSheet)
+        
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
+            
+        }
+        
+        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .Default) { action -> Void in
+        }
+
+        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .Default) { action -> Void in
+        }
+        
+        reportContentAlertController.addAction(spamAction)
+        reportContentAlertController.addAction(inappropriateContentAction)
+        reportContentAlertController.addAction(cancelAction)
+        
+        URNavigationManager.navigation.presentViewController(reportContentAlertController, animated: true, completion: nil)
+        
+    }
     
     @IBAction func btContributeTapped(sender: AnyObject) {
         if let _ = URUser.activeUser() {
@@ -143,11 +168,16 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
             }
         }
+
+        if let fileIconImgView = self.imgStory.viewWithTag(10) {
+            fileIconImgView.removeFromSuperview()
+        }
         
         if story.cover != nil && story.cover.url != nil {
             
             if story.cover.type == URConstant.Media.VIDEOPHONE {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.thumbnail))
+                
             }else if story.cover.type == URConstant.Media.FILE {
 
                 self.imgStory.image = UIImage(color: UIColor.orangeColor())
@@ -158,13 +188,11 @@ class URStoriesTableViewCell: UITableViewCell {
                 fileIconImgView.frame = CGRect(x: (self.imgStory.bounds.size.width - 50) / 2, y: (self.imgStory.bounds.size.height - 50) / 2, width: 50, height: 50)
                 self.imgStory.addSubview(fileIconImgView)
 
-            } else {
-                if let fileIconImgView = self.imgStory.viewWithTag(10) {
-                    fileIconImgView.removeFromSuperview()
-                }
+            } else if story.cover.type == URConstant.Media.PICTURE || story.cover.type == URConstant.Media.VIDEO {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
             }
         }
+        
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content
         

@@ -290,6 +290,11 @@
 "login_required" = "Requer Login";
 "login_msg" = "Por favor autentique-se para acessar este recurso!";
 "login_now" = "Logar Agora!";
+"audio" = "Áudio";
+"gallery" = "Galeria";
+"file" = "Arquivo";
+"camera" = "Câmera";
+"video" = "Vídeo";
 
 //TUTORIAL
 

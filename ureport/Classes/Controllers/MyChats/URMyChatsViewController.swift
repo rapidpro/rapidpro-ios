@@ -22,7 +22,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     init() {
         super.init(nibName: "URMyChatsViewController", bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -37,17 +37,19 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         loadData()
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
-        openChatRoomWithKey(chatRoomKeyToOpen)
-        
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "My Chats")
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         
-        
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        openChatRoomWithKey()
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)    
     }
@@ -88,9 +90,10 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: Class Methods
     
-    func openChatRoomWithKey(chatRoomKey: String?) {
-        if chatRoomKey != nil {
-            URChatRoomManager.getByKey(chatRoomKey!, completion: { (chatRoom) -> Void in
+    func openChatRoomWithKey() {
+        if chatRoomKeyToOpen != nil {
+            URChatRoomManager.getByKey(chatRoomKeyToOpen!, completion: { (chatRoom) -> Void in
+                self.chatRoomKeyToOpen = nil
                 self.openChatRoom(chatRoom!)
             })
         }
