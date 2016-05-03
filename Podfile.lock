@@ -75,7 +75,7 @@ PODS:
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SwiftAddressBook (0.6.2)
-  - TagListView (0.1.3)
+  - TagListView (0.3)
   - TPKeyboardAvoiding (1.2.8)
   - youtube-ios-player-helper (0.1.4)
 
@@ -94,19 +94,9 @@ DEPENDENCIES:
   - NYTPhotoViewer
   - SDWebImage
   - SwiftAddressBook
-  - TagListView (from `https://github.com/xhacker/TagListView`, branch `swift-2.0`)
+  - TagListView (= 0.3)
   - TPKeyboardAvoiding
   - youtube-ios-player-helper (= 0.1.4)
-
-EXTERNAL SOURCES:
-  TagListView:
-    :branch: swift-2.0
-    :git: https://github.com/xhacker/TagListView
-
-CHECKOUT OPTIONS:
-  TagListView:
-    :commit: 6e23fa583e3d08b8b97a745403ccbf3a3bc6720f
-    :git: https://github.com/xhacker/TagListView
 
 SPEC CHECKSUMS:
   Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
@@ -136,7 +126,7 @@ SPEC CHECKSUMS:
   ObjectMapper: fa286b7cb5a398f1b0d8d64d0dd33fd1b307022c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
-  TagListView: f558b954b78c88079259db01f01ec4bd26119bcb
+  TagListView: c0ffe7e779b3c7a8dc6b7e82b331eacfcc7795b7
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 

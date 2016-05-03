@@ -17,6 +17,9 @@ class URReviewModeManager: NSObject {
     
     class func checkIfIsInReviewMode(completion:(reviewMode:Bool) -> Void) {
         
+        let settings = URSettings.getSettings()
+        settings.reviewMode = false
+        
         var version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
         version = version.stringByReplacingOccurrencesOfString(".", withString: "")
         
@@ -31,7 +34,7 @@ class URReviewModeManager: NSObject {
             .childByAppendingPath(self.path())
             .childByAppendingPath(version)
             .childByAppendingPath("active")
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
+            .observeSingleEventOfType(.Value, withBlock: { snapshot in
                 
                 if let active = snapshot.value as? Bool {
                     completion(reviewMode: active)

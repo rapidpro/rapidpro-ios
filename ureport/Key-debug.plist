@@ -18,6 +18,10 @@
 	<string>ad4f94c2-07ed-492a-b1d3-cbc57b8ddb7e</string>
 	<key>COUNTRY_PROGRAM_CHANNEL_IRL</key>
 	<string>dfce72d3-b982-44a3-ba3a-e3b3fd68b989</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_MYS</key>
+	<string>9c19a43f-4790-4c1b-893d-39dd600b94b8</string>
+	<key>COUNTRY_PROGRAM_CHANNEL_FJI</key>
+	<string>83498b0c-167e-43b0-895e-f8b971e4c5b5</string>
 	<key>COUNTRY_PROGRAM_TOKEN_CHL</key>
 	<string>Token 60600f1c0740dfbe28aa1e9ace1bba4f5d430d6d</string>
 	<key>COUNTRY_PROGRAM_TOKEN_IDN</key>
@@ -34,6 +38,10 @@
 	<string>Token 4eefb650b15ad3f670876df9800b13dcd249e918</string>
 	<key>COUNTRY_PROGRAM_TOKEN_IRL</key>
 	<string>Token d3dd22f61f3fb82b7eccacebc1b0950843f1c08d</string>
+	<key>COUNTRY_PROGRAM_TOKEN_MYS</key>
+	<string>Token e7b6d4835f56e54b6706e4446670de9e4520b454</string>
+	<key>COUNTRY_PROGRAM_TOKEN_FJI</key>
+	<string>Token de2d00c8df1cdb8491acd2945f22ebe1670024de</string>
 	<key>TWITTER_APP_ID</key>
 	<string>SKYXxzv0LeBdETT19fn2X3PkN</string>
 	<key>FACEBOOK_APP_ID</key>

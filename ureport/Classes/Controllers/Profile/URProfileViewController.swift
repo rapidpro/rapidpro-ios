@@ -98,8 +98,8 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     func newUserReceived(user: URUser) {
         if (user.points != nil) {
             userList.insert(user, atIndex: 0)
+            self.tableviewRanking.reloadData()
         }
-        self.tableviewRanking.reloadData()
     }
     
     //MARK: Class Methods

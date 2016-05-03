@@ -69,6 +69,9 @@ class URGCMManager: NSObject {
             "Authorization": URConstant.Gcm.GCM_AUTHORIZATION
         ]
         
+        let message = chatMessage.message != nil ? chatMessage.message! : "label_chat_picture_notification".localized
+        chatMessage.message = message
+        
         let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
         input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname): \(chatMessage.message!)",type: URConstant.NotificationType.CHAT)
         

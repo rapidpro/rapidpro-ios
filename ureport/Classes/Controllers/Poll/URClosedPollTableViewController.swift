@@ -170,7 +170,8 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
-                dispatch_async(dispatch_get_main_queue()) {                    
+                dispatch_async(dispatch_get_main_queue()) {
+                    self.responses = []
                     ProgressHUD.dismiss()
                 }
             })
@@ -188,6 +189,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
                 dispatch_async(dispatch_get_main_queue()) {
+                    self.responses = []
                     ProgressHUD.dismiss()
                 }
             })

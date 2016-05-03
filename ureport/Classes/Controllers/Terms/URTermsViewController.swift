@@ -8,12 +8,18 @@
 
 import UIKit
 
-class URTermsViewController: UIViewController {
+protocol URTermsViewControllerDelegate {
+    func userDidAcceptTerms(accept:Bool)
+}
 
+class URTermsViewController: UIViewController {
+    
     @IBOutlet weak var txtTerms: UITextView!
     @IBOutlet weak var btCancel: ISRoundedButton!
     @IBOutlet weak var btAccept: ISRoundedButton!
     @IBOutlet weak var viewBackground: UIView!
+    
+    var delegate:URTermsViewControllerDelegate?
     
     init() {
         super.init(nibName: "URTermsViewController", bundle: nil)        
@@ -49,12 +55,20 @@ class URTermsViewController: UIViewController {
 
     @IBAction func btCancelTapped(sender: AnyObject) {
         close()
+        if let delegate = self.delegate {
+            delegate.userDidAcceptTerms(false)
+        }
     }
     
     @IBAction func btAcceptTapped(sender: AnyObject) {
+        close()
+        
         let settings = URSettings.getSettings()
         settings.firstRun = false
         URSettings.saveSettingsLocaly(settings)
-        close()
+        
+        if let delegate = self.delegate {
+            delegate.userDidAcceptTerms(true)
+        }
     }
 }

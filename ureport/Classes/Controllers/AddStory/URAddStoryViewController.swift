@@ -8,7 +8,6 @@
 
 import UIKit
 import youtube_ios_player_helper
-import SDWebImage
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate, URMediaSourceViewControllerDelegate {
 
@@ -18,7 +17,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     @IBOutlet weak var txtHistory: UITextView!
     @IBOutlet weak var btAddMarkers: UIButton!
     @IBOutlet weak var btAddMedia: UIButton!
-    @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
+    @IBOutlet var scrollViewMedias: ISScrollViewPage!
     
     var indexImgCover:Int!
     var mediaViewCover: URMediaView?

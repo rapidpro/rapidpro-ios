@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
+class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTermsViewControllerDelegate {
 
     @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet weak var btLogin: UIButton!
@@ -35,9 +35,12 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        termsViewController.delegate = self
         userLoginManager = URUserLoginManager()
         
         setupUI()
+        URSettings.checkIfTermsIsAccepted()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -63,6 +66,12 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
     }
     
+    //MARK: URTermsViewControllerDelegate
+    
+    func userDidAcceptTerms(accept: Bool) {
+        
+    }
+    
     //MARK: URUserLoginManagerDelegate
     
     func userHasLoggedInGoogle(user: URUser) {
@@ -73,13 +82,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
             URUserManager.getByKey(user.key, completion: { (userById,exists) -> Void in
                 if exists {
                     
-                    URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(userById!, country: URCountry(code:userById!.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
-                        URRapidProManager.saveUser(userById!, country: URCountry(code:userById!.country),setupGroups: false, completion: { (response) -> Void in
-                            URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                            URRapidProContactUtil.groupList = []
-                            print(response)
-                        })
-                    }
+                    self.updateUserDataInRapidPro(userById!)
                     
                     URUserLoginManager.setUserAndCountryProgram(userById!)
                 }else {
@@ -90,6 +93,18 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
     }
     
     //MARK: Class Methods
+    
+    func updateUserDataInRapidPro(user:URUser) {
+        
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary) -> Void in
+            URRapidProManager.saveUser(user, country: URCountry(code:user.country),setupGroups: false, completion: { (response) -> Void in
+                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
+                URRapidProContactUtil.groupList = []
+                print(response)
+            })
+        }
+        
+    }
     
     func setupUI() {
         
@@ -124,14 +139,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
                         ProgressHUD.dismiss()
                         if exists {
                             
-                            URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(userById!, country: URCountry(code:userById!.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
-                                URRapidProManager.saveUser(userById!, country: URCountry(code:userById!.country),setupGroups: false, completion: { (response) -> Void in
-                                    URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                                    URRapidProContactUtil.groupList = []
-                                    print(response)
-                                })
-                            }
-                            
+                            self.updateUserDataInRapidPro(userById!)
                             URUserLoginManager.setUserAndCountryProgram(userById!)
                             
                         }else {
@@ -162,13 +170,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
                         ProgressHUD.dismiss()
                         if exists {
                             
-                            URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(userById!, country: URCountry(code:userById!.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
-                                URRapidProManager.saveUser(userById!, country: URCountry(code:userById!.country),setupGroups: false, completion: { (response) -> Void in
-                                    URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                                    URRapidProContactUtil.groupList = []
-                                    print(response)
-                                })
-                            }
+                            self.updateUserDataInRapidPro(userById!)
                             
                             URUserLoginManager.setUserAndCountryProgram(userById!)
                             

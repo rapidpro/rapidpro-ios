@@ -381,8 +381,12 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
-        
-        ProgressHUD.dismiss()
+                
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+            dispatch_async(dispatch_get_main_queue(), {
+                ProgressHUD.dismiss()
+                })
+            })
     }
     
     //MARK: ImagePickerControllerDelegate
@@ -537,6 +541,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
         let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        
         let msg = self.jsqMessages[indexPath.item]
         if !msg.isMediaMessage {
             if (msg.senderId == senderId) {

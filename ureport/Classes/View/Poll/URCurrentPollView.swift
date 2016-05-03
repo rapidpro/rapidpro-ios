@@ -194,7 +194,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     }
     
     private func setupQuestionTitle() {
-        self.tvQuestion.text = URFlowManager.translateFields(contact, message: (flowActionSet?.actions?[0].message[getSelectedLanguage()])!)
+        self.tvQuestion.text = URFlowManager.translateFields(contact, message: (flowActionSet?.actions?[0].message == nil || flowActionSet?.actions?[0].message.count == 0 ? "answer_poll_greeting_message".localized : flowActionSet?.actions?[0].message[getSelectedLanguage()])!)
         let sizeThatFitsTextView = tvQuestion.sizeThatFits(CGSizeMake(tvQuestion.frame.size.width, CGFloat.max));
         constraintQuestionHeight.constant = sizeThatFitsTextView.height;
     }

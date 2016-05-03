@@ -65,29 +65,24 @@ class URSettings: Serializable {
     }
     
     class func checkIfTermsIsAccepted() -> Bool {
-        
-        if URSettings.getSettings().reviewMode == true {
+     
+        if URSettings.getSettings().firstRun == nil {
             
-            if URSettings.getSettings().firstRun == nil {
-                
-                let termsViewController = URTermsViewController()
-                
-                termsViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-                URNavigationManager.navigation!.presentViewController(termsViewController, animated: true) { () -> Void in
-                    UIView.animateWithDuration(0.3) { () -> Void in
-                        termsViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
-                    }
+            let termsViewController = URTermsViewController()
+            
+            termsViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            URNavigationManager.navigation!.presentViewController(termsViewController, animated: true) { () -> Void in
+                UIView.animateWithDuration(0.3) { () -> Void in
+                    termsViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
                 }
-                
-                return false
-                
-            }else{
-                return true
             }
+            
+            return false
             
         }else{
             return true
         }
+        
     }
     
 }

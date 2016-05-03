@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import ObjectMapper
+import AudioToolbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
@@ -97,7 +98,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
-        var gai: GAI = GAI.sharedInstance()
+        let gai: GAI = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true
     }
     
@@ -186,6 +187,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                 if let chatRoomKey = getChatRoomKey(userInfo) {
                     if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
                         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
+                    }else{
+                        if let visibleViewController = URNavigationManager.navigation.visibleViewController {
+                            if !(visibleViewController is URMessagesViewController) {
+//                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
+                            }
+                        }
                     }
                 }
                 

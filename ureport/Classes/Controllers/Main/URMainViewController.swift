@@ -81,7 +81,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         storiesTableViewController.title = "stories_moderation".localized
         storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories")
         
-        closedPollViewController.title = "poll_results".localized
+        closedPollViewController.title = "main_polls".localized
         closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
         myChatsViewController.title = "chat_rooms".localized
@@ -186,7 +186,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate {
         }
         
         if viewController is URClosedPollTableViewController{
-            self.title = "poll_results".localized
+            self.title = "main_polls".localized
             self.navigationItem.rightBarButtonItems = nil
         }
         

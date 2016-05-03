@@ -91,7 +91,7 @@ class URPollManager: NSObject {
         if !filtered.isEmpty {
             return UIColor(rgba: filtered[0].objectForKey(pollCategory.name) as! String)
         }else {
-            if index > URPollManager.getColors().count {
+            if index >= URPollManager.getColors().count {
                 index = Int(arc4random_uniform(UInt32(self.colors.count)))
             }
             categoryAndColorList.append([pollCategory.name:URPollManager.getColors()[index]])
