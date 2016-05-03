@@ -66,7 +66,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
             for dictionary in results {
                 let tag = dictionary.objectForKey("keyword") as! String
                 self.tagView.addTag("\(indexKeywords).\(tag)")
-                indexKeywords += 1
+                indexKeywords++
             }
             
         } else if pollResult.type == "Choices"{
@@ -112,7 +112,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
                     self.choiceView.addSubview(choiceResultView!)
                     choiceResultView!.viewPercentWidth.constant = (CGFloat(percentValue!/100)) * widthCell
                     
-                    indexChoices += 1
+                    indexChoices++                
                 }
         }
         

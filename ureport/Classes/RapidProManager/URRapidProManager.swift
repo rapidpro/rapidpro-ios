@@ -17,7 +17,6 @@ protocol URRapidProManagerDelegate {
 class URRapidProManager: NSObject {
  
     var delegate:URRapidProManagerDelegate?    
-    static var sendingAnswers:Bool = false
     
     //MARK: FireBase Methods
     class func path() -> String {
@@ -70,7 +69,7 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
         
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)flow_definition.json?uuid=\(flowUuid)"
+        let url = "\(URConstant.RapidPro.API_URL)flow_definition.json?uuid=\(flowUuid)"
         
         Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject({ (response:URFlowDefinition?, error:ErrorType?) -> Void in
             if let flowDefinition = response {
@@ -85,7 +84,7 @@ class URRapidProManager: NSObject {
         ]
         
         let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+        let url = "\(URConstant.RapidPro.API_URL)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
         
         Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject({ (response:URAPIResponse<URFlowRun>?, error:ErrorType?) -> Void in
             if let response = response {
@@ -117,12 +116,10 @@ class URRapidProManager: NSObject {
         ]
         
         let userId = "ext:" + URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)contacts.json?urns=\(userId)"
+        let url = "\(URConstant.RapidPro.API_URL)contacts.json?urns=\(userId)"
         
         Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
-            
-            if !JSON.isFailure {
-            
+
                 let response = JSON.value as! NSDictionary
                 if let results = response.objectForKey("results") as? [NSDictionary] {
                     for object in results {
@@ -130,8 +127,6 @@ class URRapidProManager: NSObject {
                         completion(contact)
                     }
                 }
-            }
-            
         }
     }
     
@@ -140,12 +135,10 @@ class URRapidProManager: NSObject {
         let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
         
         let userId = URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)external/received/\(channel)/"
+        let url = "\(URConstant.RapidPro.API_URL)external/received/\(channel)/"
         
         let group = dispatch_group_create();
         let queue = dispatch_queue_create("in.ureport-poll-responses", DISPATCH_QUEUE_SERIAL);
-        
-        self.sendingAnswers = true
         
         for response in responses {
             dispatch_group_async(group, queue, { () -> Void in
@@ -170,7 +163,6 @@ class URRapidProManager: NSObject {
         }
         
         dispatch_group_notify(group, queue) { () -> Void in
-            self.sendingAnswers = false
             completion()
         }
     }
@@ -183,7 +175,7 @@ class URRapidProManager: NSObject {
         let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
         
         let userId = URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)external/received/\(channel)/"
+        let url = "\(URConstant.RapidPro.API_URL)external/received/\(channel)/"
         
         let parameters = [
             "from": userId,
@@ -198,40 +190,37 @@ class URRapidProManager: NSObject {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
+        
+        Alamofire.request(.GET, "\(URConstant.RapidPro.API_URL)fields.json", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+            
+            let response = JSON.value as! NSDictionary
+            var arrayFields:[String] = []
+            if let results = response.objectForKey("results") as? [NSDictionary] {
                 
-        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)fields.json", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
-            
-            if JSON.isSuccess {
-                let response = JSON.value as! NSDictionary
-                var arrayFields:[String] = []
-                if let results = response.objectForKey("results") as? [NSDictionary] {
-                    
-                    for dictionary in results {
-                        arrayFields.append(dictionary.objectForKey("key") as! String)
-                    }
-                    
-                    completion(arrayFields)
-                }else {
-                    completion(arrayFields)
+                for dictionary in results {
+                    arrayFields.append(dictionary.objectForKey("key") as! String)
                 }
+                
+                completion(arrayFields)
+            }else {
+                completion(arrayFields)
             }
-            
         }
         
     }
     
-    class func getStatesByCountry(country:URCountry, completion:(states:[URState]?,districts:[URDistrict]?) -> Void) {
+    class func getStatesByCountry(country:URCountry, completion:(states:[String]?,districts:[String]?) -> Void) {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
-        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)boundaries.json?aliases=true", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+        Alamofire.request(.GET, "\(URConstant.RapidPro.API_URL)boundaries.json?aliases=true", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
             
             let response = JSON.value as! NSDictionary
             
-            var states:[URState] = []
-            var districts:[URDistrict] = []
+            var states:[String] = []
+            var districts:[String] = []
                         
             if let results = response.objectForKey("results") as? [NSDictionary] {
                 
@@ -249,12 +238,10 @@ class URRapidProManager: NSObject {
                     case 0:
                         break
                     case 1:
-                        let state = URState(name: name, boundary: dictionary.objectForKey("boundary") as! String)
-                        states.append(state)
+                        states.append(name)
                         break
                     case 2:
-                        let district = URDistrict(name: name, parent: dictionary.objectForKey("parent") as! String)
-                        districts.append(district)
+                        districts.append(name)
                         break
                     default:
                         break
@@ -272,24 +259,14 @@ class URRapidProManager: NSObject {
         
     }
     
-    class func saveUser(user:URUser,country:URCountry,setupGroups:Bool,completion:(response:NSDictionary) -> Void) {
+    class func saveUser(user:URUser,country:URCountry,completion:(response:NSDictionary) -> Void) {
 
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
-        URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
-            
-            Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as! [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
-                
-                if JSON.isFailure == true {
-                    print("error: \(JSON)")
-                }else{
-                    completion(response: JSON.value as! NSDictionary)
-                }
-                
-            }
-            
+        Alamofire.request(.POST, "\(URConstant.RapidPro.API_URL)contacts.json", parameters: URRapidProContactUtil.buildRapidProUserRootDictionary(user).copy() as! [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+            completion(response: JSON.value as! NSDictionary)
         }
     }
     

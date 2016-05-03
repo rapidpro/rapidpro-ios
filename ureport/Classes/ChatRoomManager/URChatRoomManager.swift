@@ -22,11 +22,36 @@ class URChatRoomManager: NSObject {
     }
     
     class func createIndividualChatRoomIfPossible(user:URUser) {
-        ProgressHUD.show(nil)
-        URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
-            ProgressHUD.dismiss()
-            URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
-        })
+        if let chatRooms = user.chatRooms {
+            for chatRoomKey in chatRooms.allKeys {
+                
+                let filtered = user.chatRooms.filter {
+                    return $0.key as! String == chatRoomKey as! String
+                }
+                
+                if !filtered.isEmpty {
+                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
+                        URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
+                            URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:user.nickname),animated:true)
+                        })
+                    })
+                }else {
+                    ProgressHUD.show(nil)
+                    URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
+                        ProgressHUD.dismiss()
+                        URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
+                    })
+                }
+                
+            }
+        }else {
+            ProgressHUD.show(nil)
+            URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
+                ProgressHUD.dismiss()
+                URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
+            })
+        }
+        
     }
     
     class func getByKey(key:String,completion:(URChatRoom?) -> Void) {

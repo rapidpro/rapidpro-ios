@@ -70,6 +70,19 @@ class URMediaUpload: NSObject {
                     
                 })
                 
+            }else if let audioMedia = media as? URAudioMedia {
+                
+                URAWSManager.uploadAudio(audioMedia, uploadPath: .Stories, completion: { (media:URMedia?) -> Void in
+                    
+                    media!.isCover = audioMedia.isCover
+                    mediaList.append(media!)
+                    
+                    if mediaList.count == medias.count {
+                        completion(medias: mediaList)
+                    }
+                    
+                })
+                
             }
             
         }

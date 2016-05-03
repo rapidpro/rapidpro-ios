@@ -39,10 +39,12 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     var delegate:URMediaSourceViewControllerDelegate?
     
-    let audioRecorderViewController = URAudioRecorderViewController()
-    
     init() {
-        super.init(nibName: "URMediaSourceViewController", bundle: nil)
+        if !URConstant.isIpad {
+            super.init(nibName: "URMediaSourceViewController", bundle: nil)
+        }else{
+            super.init(nibName: "URMediaSourceViewIPadController", bundle: nil)
+        }
         isVisible = false
         
         let frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height, width: UIScreen.mainScreen().bounds.size.width, height: self.view.frame.size.height)
@@ -68,7 +70,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
 
     //MARK: Class Methods
     
-    func toggleView() {
+    func toggleView(animationFinish:(finish:Bool!) -> Void) {
 
         if !isVisible {
             
@@ -77,10 +79,12 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 self.view.frame = frame
                 }) { (finish) -> Void in
                     UIView.animateWithDuration(0.3, animations: { () -> Void in
-                        self.btDismiss.layer.opacity = 0.3
+                        self.btDismiss.layer.opacity = 0.5
+                        }, completion: { (finish) -> Void in
+                            self.isVisible = true
+                            animationFinish(finish: true)
                     })
             }
-            isVisible = true
         }else{
 
             UIView.animateWithDuration(0.3, animations: { () -> Void in
@@ -89,9 +93,11 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                     UIView.animateWithDuration(0.5, animations: { () -> Void in
                         let frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
                         self.view.frame = frame
+                        }, completion: { (finish:Bool) -> Void in
+                            self.isVisible = false
+                            animationFinish(finish: true)
                     })
             }
-            isVisible = false
         }
         
     }
@@ -103,13 +109,15 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         if let delegate = self.delegate {
             
             let media = URLocalMedia()
-            media.fileName = url.lastPathComponent!.stringByReplacingOccurrencesOfString(" ", withString: "_")
-            media.path = url.path
+            media.metadata = ["filename":url.lastPathComponent!.stringByReplacingOccurrencesOfString(" ", withString: "_") as String]
+            media.path = url.path!
+            media.type = URConstant.Media.FILE
             
             delegate.newMediaAdded(self, media: media)
         }
         
     }
+    
     
     //MARK: ImagePickerControllerDelegate
     
@@ -128,6 +136,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 let media = URVideoPhoneMedia()
                 media.path = path
                 media.thumbnailImage = URVideoUtil.generateThumbnail(mediaURL)
+                media.type = URConstant.Media.VIDEOPHONE
                 
                 delegate.newMediaAdded(self, media: media)
                 
@@ -136,6 +145,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
                     
                     let media = URImageMedia()
+                    media.type = URConstant.Media.PICTURE
                     media.image = pickedImage
                     
                     delegate.newMediaAdded(self, media: media)
@@ -149,13 +159,16 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     //MARK: AudioRecorderViewControllerDelegate
     
     func newAudioRecorded(audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
-        
+        if let delegate = delegate {
+            media.type = URConstant.Media.AUDIO
+            delegate.newMediaAdded(self, media: media)
+        }
     }
     
     //MARK: Button Events
     
     @IBAction func btDismissTapped(sender: AnyObject) {
-        self.toggleView()
+        self.toggleView { (finish) -> Void in }
     }
     
     @IBAction func btMediaSourceTapped(sender: AnyObject) {
@@ -207,9 +220,19 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             
         case btAudio:
             
-            self.view.addSubview(audioRecorderViewController.view)
+            let audioRecorderViewController = URAudioRecorderViewController(audioURL: nil)
             audioRecorderViewController.delegate = self
-            audioRecorderViewController.toggleView()
+            
+            self.toggleView({ (finish) -> Void in
+                
+            })
+            
+            audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            URNavigationManager.navigation.presentViewController(audioRecorderViewController, animated: true) { () -> Void in
+                UIView.animateWithDuration(0.3) { () -> Void in
+                    audioRecorderViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
+                }
+            }
             
             break
             
@@ -231,6 +254,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 let media = URVideoMedia()
                 media.id = URYoutubeUtil.getYoutubeVideoID(urlVideo)
                 media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: media.id)
+                media.type = URConstant.Media.VIDEO
                 
                 if let delegate = self.delegate {
                     delegate.newMediaAdded(self, media: media)

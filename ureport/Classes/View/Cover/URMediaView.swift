@@ -21,6 +21,7 @@ class URMediaView: UIView {
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var lbCover: UILabel!
     @IBOutlet weak var lbFileName: UILabel!
+    @IBOutlet weak var lbDuration: UILabel!
     @IBOutlet weak var imgActive: UIImageView!
     
     var media:URMedia!
@@ -37,7 +38,9 @@ class URMediaView: UIView {
     
     @IBAction func btChoiceMediaTapped(sender: AnyObject) {
         if let delegate = self.delegate {
-            delegate.mediaViewTapped(self)
+            if !(self.media.type == URConstant.Media.AUDIO || self.media.type == URConstant.Media.FILE) {
+                delegate.mediaViewTapped(self)
+            }
         }
     }
     
@@ -46,6 +49,8 @@ class URMediaView: UIView {
     func setupWithMediaObject(media:URMedia) {
         
         self.media = media
+        
+        self.lbDuration.hidden = true
         
         if let media = media as? URVideoMedia {
 
@@ -68,11 +73,17 @@ class URMediaView: UIView {
             
         }else if let media = media as? URLocalMedia {
             
-            self.backgroundView.backgroundColor = UIColor.orangeColor()
+            self.backgroundView.backgroundColor = URConstant.Color.MEDIA_FILE
             self.imgMedia.contentMode = UIViewContentMode.Center
             self.imgMedia.image = UIImage(named: "icon_file")
-            self.lbFileName.text = media.fileName
+            self.lbFileName.text = media.metadata!["filename"] as? String
             
+        }else if let media = media as? URAudioMedia {
+            self.lbDuration.hidden = false
+            self.backgroundView.backgroundColor = URConstant.Color.MEDIA_AUDIO
+            self.imgMedia.contentMode = UIViewContentMode.Center
+            self.imgMedia.image = UIImage(named: "ic_music_note_white")
+            self.lbDuration.text = "\(media.metadata!["duration"]!)"
         }
         
     }

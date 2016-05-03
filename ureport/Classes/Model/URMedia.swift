@@ -15,4 +15,6 @@ class URMedia: Serializable {
     var type:String!
     var thumbnail:String!
     var isCover:Bool!
+    var metadata:[String:AnyObject]?
+    
 }

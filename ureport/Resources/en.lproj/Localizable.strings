@@ -294,6 +294,8 @@
 "file" = "File";
 "camera" = "Camera";
 "video" = "Movie";
+"attachments" = "%d attachments";
+"likes" = "%d likes";
 
 //TUTORIAL
 

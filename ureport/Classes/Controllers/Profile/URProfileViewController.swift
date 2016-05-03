@@ -14,7 +14,7 @@ enum TabType {
     case Ranking
 }
 
-class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate {
+class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryManagerDelegate, URUserManagerDelegate {
     
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var imageProfile: UIImageView!
@@ -24,9 +24,11 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     @IBOutlet weak var btLogout: UIButton!
 
     @IBOutlet weak var tableviewMyStories: UITableView!
+    @IBOutlet weak var tableviewAnsweredPoll: UITableView!
     @IBOutlet weak var tableviewRanking: UITableView!
     
     @IBOutlet weak var btMyStories: UIButton!
+    @IBOutlet weak var btAnsweredPolls: UIButton!
     @IBOutlet weak var btRanking: UIButton!
     
     var tabType:TabType!
@@ -84,6 +86,16 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         self.navigationController?.setNavigationBarHidden(true, animated: true)
     }
     
+    //MARK: PollManagerDelegate
+    
+    func newPollReceived(poll: URPoll) {
+        self.pollList.insert(poll, atIndex: 0)
+        self.tableviewAnsweredPoll.reloadData()
+    }
+    
+    func newPollResultReceived(pollResult: URPollResult) {
+    }
+    
     //MARK: StoryManagerDelegate
     
     func newStoryReceived(story: URStory) {
@@ -98,8 +110,8 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     func newUserReceived(user: URUser) {
         if (user.points != nil) {
             userList.insert(user, atIndex: 0)
-            self.tableviewRanking.reloadData()
         }
+        self.tableviewRanking.reloadData()
     }
     
     //MARK: Class Methods
@@ -109,10 +121,11 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         case .MyStories:
             btMyStoriesTapped(self.btMyStories)
             break
+        case .AnsweredPolls:
+            btAnsweredPollsTapped(self.btAnsweredPolls)
+            break
         case .Ranking:
             btRankingTapped(self.btRanking)
-            break
-        default:
             break
         }
     }
@@ -121,6 +134,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         storyList = []
         pollList = []
         userList = []
+        pollManager.delegate = self
         pollManager.getPolls()
         storyManager.getStories(false)
         storyManager.delegate = self
@@ -129,6 +143,13 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     }
     
     func setupTableView() {
+        self.tableviewAnsweredPoll.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableviewAnsweredPoll.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
+         self.tableviewAnsweredPoll.separatorColor = UIColor.clearColor()
+        
+        self.tableviewAnsweredPoll.rowHeight = UITableViewAutomaticDimension
+        self.tableviewAnsweredPoll.estimatedRowHeight = 220.0
+        
         self.tableviewMyStories.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         self.tableviewMyStories.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
          self.tableviewMyStories.separatorColor = UIColor.clearColor()
@@ -178,6 +199,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         
         self.btEdit.setTitle("label_edit".localized, forState: UIControlState.Normal)
         self.btMyStories.setTitle("label_view_stories".localized, forState: UIControlState.Normal)
+        self.btAnsweredPolls.setTitle("profile_answered_polls".localized, forState: UIControlState.Normal)
         self.btRanking.setTitle("profile_ranking".localized, forState: UIControlState.Normal)
     }
     
@@ -192,6 +214,8 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             }else {
                 return 471 - imgViewHistoryHeight
             }
+        }else if tableView == self.tableviewAnsweredPoll {
+            return UITableViewAutomaticDimension
         }else {
             return 65
         }
@@ -200,6 +224,8 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableviewMyStories {
             return storyList.count
+        }else if tableView == self.tableviewAnsweredPoll {
+            return pollList.count
         }else {
             return userList.count
         }
@@ -211,6 +237,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
             cell.viewController = self
             cell.setupCellWith(storyList[indexPath.row],moderateUserMode: false)
+            return cell
+        }else if tableView == self.tableviewAnsweredPoll{
+            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URClosedPollTableViewCell.self), forIndexPath: indexPath) as! URClosedPollTableViewCell
+            cell.setupCellWithData(pollList[indexPath.row])
             return cell
         }else {
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URRankingTableViewCell.self), forIndexPath: indexPath) as! URRankingTableViewCell
@@ -249,8 +279,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if isBtMyStoriesTapped == false {
             isBtMyStoriesTapped = true
             self.tableviewMyStories.hidden = false
+            self.tableviewAnsweredPoll.hidden = true
             self.tableviewRanking.hidden = true
             btMyStories.backgroundColor = URConstant.Color.DARK_BLUE
+            btAnsweredPolls.backgroundColor = URConstant.Color.PRIMARY
             btRanking.backgroundColor = URConstant.Color.PRIMARY
             isBtAnsweredPollsTapped = false
             isBtRankingTapped = false
@@ -261,8 +293,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if isBtAnsweredPollsTapped == false {
             isBtAnsweredPollsTapped = true
             self.tableviewMyStories.hidden = true
+            self.tableviewAnsweredPoll.hidden = false
             self.tableviewRanking.hidden = true
             btMyStories.backgroundColor = URConstant.Color.PRIMARY
+            btAnsweredPolls.backgroundColor = URConstant.Color.DARK_BLUE
             btRanking.backgroundColor = URConstant.Color.PRIMARY
             isBtMyStoriesTapped = false
             isBtRankingTapped = false
@@ -273,8 +307,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if isBtRankingTapped == false {
             isBtRankingTapped = true
             self.tableviewMyStories.hidden = true
+            self.tableviewAnsweredPoll.hidden = true
             self.tableviewRanking.hidden = false
             btMyStories.backgroundColor = URConstant.Color.PRIMARY
+            btAnsweredPolls.backgroundColor = URConstant.Color.PRIMARY
             btRanking.backgroundColor = URConstant.Color.DARK_BLUE
             isBtMyStoriesTapped = false
             isBtAnsweredPollsTapped = false

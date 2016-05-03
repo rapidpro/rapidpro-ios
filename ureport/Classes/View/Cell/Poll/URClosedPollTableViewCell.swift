@@ -31,7 +31,7 @@ class URClosedPollTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         super.selectionStyle = UITableViewCellSelectionStyle.None
         // Configure the view for the selected state
-    }
+    }        
     
     //MARK: Class Methods
     

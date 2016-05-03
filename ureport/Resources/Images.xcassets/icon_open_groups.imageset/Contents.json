@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "icon_open_groups.png"
+      "filename" : "icon_open_groups.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "icon_open_groups@2x.png"
+      "filename" : "icon_open_groups@2x.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "icon_open_groups@3x.png"
+      "filename" : "icon_open_groups@3x.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

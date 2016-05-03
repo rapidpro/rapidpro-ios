@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTermsViewControllerDelegate {
+class URLoginViewController: UIViewController, URUserLoginManagerDelegate {
 
     @IBOutlet weak var imgLogo: UIImageView!
     @IBOutlet weak var btLogin: UIButton!
@@ -22,8 +22,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
     var appDelegate:AppDelegate!
     var userLoginManager:URUserLoginManager!
     
-    let termsViewController:URTermsViewController = URTermsViewController()
-    
     init() {
         super.init(nibName: "URLoginViewController", bundle: nil)
     }
@@ -35,12 +33,9 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
     override func viewDidLoad() {
         super.viewDidLoad()
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        
-        termsViewController.delegate = self
         userLoginManager = URUserLoginManager()
         
         setupUI()
-        URSettings.checkIfTermsIsAccepted()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -66,12 +61,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
     }
     
-    //MARK: URTermsViewControllerDelegate
-    
-    func userDidAcceptTerms(accept: Bool) {
-        
-    }
-    
     //MARK: URUserLoginManagerDelegate
     
     func userHasLoggedInGoogle(user: URUser) {
@@ -81,9 +70,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
             
             URUserManager.getByKey(user.key, completion: { (userById,exists) -> Void in
                 if exists {
-                    
-                    self.updateUserDataInRapidPro(userById!)
-                    
                     URUserLoginManager.setUserAndCountryProgram(userById!)
                 }else {
                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
@@ -93,18 +79,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
     }
     
     //MARK: Class Methods
-    
-    func updateUserDataInRapidPro(user:URUser) {
-        
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary) -> Void in
-            URRapidProManager.saveUser(user, country: URCountry(code:user.country),setupGroups: false, completion: { (response) -> Void in
-                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                URRapidProContactUtil.groupList = []
-                print(response)
-            })
-        }
-        
-    }
     
     func setupUI() {
         
@@ -127,71 +101,55 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, URTer
     
     @IBAction func btTwitterTapped(sender: AnyObject) {
         
-        if URSettings.checkIfTermsIsAccepted() == true {
-            ProgressHUD.show(nil)
-            URUserLoginManager.loginWithTwitter { (user) -> Void in
-                ProgressHUD.dismiss()
-                if user == nil || user!.key.isEmpty {
-                    
-                }else{
-                    ProgressHUD.show(nil)
-                    URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        ProgressHUD.dismiss()
-                        if exists {
-                            
-                            self.updateUserDataInRapidPro(userById!)
-                            URUserLoginManager.setUserAndCountryProgram(userById!)
-                            
-                        }else {
-                            self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!, updateMode:false),animated:true)
-                        }
-                    })
-                }
+        ProgressHUD.show(nil)
+        URUserLoginManager.loginWithTwitter { (user) -> Void in
+            ProgressHUD.dismiss()
+            if user == nil || user!.key.isEmpty {
+
+            }else{
+                ProgressHUD.show(nil)
+                URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
+                    ProgressHUD.dismiss()
+                    if exists {
+                        URUserLoginManager.setUserAndCountryProgram(userById!)
+                    }else {
+                        self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!, updateMode:false),animated:true)
+                    }
+                })
             }
         }
+        
     }
     
     @IBAction func btLoginTapped(sender: AnyObject) {
-        
         self.navigationController!.pushViewController(URLoginCredentialsViewController(), animated: true)
-        
     }
     @IBAction func btFacebookTapped(sender: AnyObject) {
-        
-        if URSettings.checkIfTermsIsAccepted() == true {
-            ProgressHUD.show(nil)
-            URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
-                ProgressHUD.dismiss()
-                if user == nil || user!.key.isEmpty {
-                    
-                }else{
-                    ProgressHUD.show(nil)
-                    URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        ProgressHUD.dismiss()
-                        if exists {
-                            
-                            self.updateUserDataInRapidPro(userById!)
-                            
-                            URUserLoginManager.setUserAndCountryProgram(userById!)
-                            
-                        }else {
-                            self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!,updateMode:false),animated:true)
-                        }
-                    })
-                }
-                
+        ProgressHUD.show(nil)
+        URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
+            ProgressHUD.dismiss()
+            if user == nil || user!.key.isEmpty {
+
+            }else{
+                ProgressHUD.show(nil)
+                URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
+                    ProgressHUD.dismiss()
+                    if exists {
+                        URUserLoginManager.setUserAndCountryProgram(userById!)
+
+                    }else {
+                        self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!,updateMode:false),animated:true)
+                    }
+                })
             }
+
         }
     }
     @IBAction func btGooglePlusTapped(sender: AnyObject) {
-        
-        if URSettings.checkIfTermsIsAccepted() == true {
-            ProgressHUD.show(nil)
-            userLoginManager.loginViewController = self
-            userLoginManager.loginWithGoogle(self)
-            userLoginManager.delegate = self
-        }
-        
+        ProgressHUD.show(nil)
+        userLoginManager.loginViewController = self
+        userLoginManager.loginWithGoogle(self)        
+        userLoginManager.delegate = self
     }
     
     @IBAction func btSignUpTapped(sender: AnyObject) {

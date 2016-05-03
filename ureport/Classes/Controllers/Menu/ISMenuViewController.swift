@@ -118,7 +118,6 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             break
         case .Logout:
-            URCountryProgramManager.deactivateSwitchCountryProgram()
             URUserLoginManager.logoutFromSocialNetwork()
             URNavigationManager.toggleMenu()
             URUser.deactivateUser()
@@ -215,6 +214,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.lbPoints.text = String(format: "menu_points".localized, arguments: [0])
         self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [0])
+        self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \(String(format: "profile_polls".localized, arguments: [0]))"
         
         if let user = URUser.activeUser() {
             self.user = user

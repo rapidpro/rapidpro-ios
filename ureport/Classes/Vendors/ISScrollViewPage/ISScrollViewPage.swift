@@ -163,7 +163,7 @@ class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
         setupLayout(self.scrollViewPageType)
     }
     
-    func removeCustomView(mediaView:UIView) {
+    func removeCustomView(mediaView:URMediaView) {
         if views != nil && !views!.isEmpty{
             if let index = (views!).indexOf(mediaView) {
                 self.views!.removeAtIndex(index)
@@ -199,6 +199,7 @@ class ISScrollViewPage: UIScrollView, UIScrollViewDelegate {
         
         removeSubviews()
         
+        var frame:CGRect = self.frame
         var list:[AnyObject] = []
         
         if !viewControllers!.isEmpty {

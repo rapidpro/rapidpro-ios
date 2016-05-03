@@ -1,25 +1,25 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URMediaSourceViewController" customModule="ureport" customModuleProvider="target">
             <connections>
-                <outlet property="btAudio" destination="MeC-ex-hDc" id="BLe-0w-kRm"/>
+                <outlet property="btAudio" destination="h54-uP-07y" id="Kg2-bM-Xe7"/>
                 <outlet property="btCamera" destination="nRL-5T-8lb" id="ojc-5r-LJa"/>
                 <outlet property="btDismiss" destination="dT1-wj-VIb" id="DNG-tj-Vzw"/>
                 <outlet property="btFile" destination="GVE-eh-rgL" id="6n2-DO-YWN"/>
                 <outlet property="btGallery" destination="9Mj-Iu-fpf" id="t7k-L6-he2"/>
                 <outlet property="btVideo" destination="SVk-Kk-vNr" id="mM7-1q-FQL"/>
-                <outlet property="btYoutube" destination="h54-uP-07y" id="Yhd-Vw-9xf"/>
-                <outlet property="lbAudio" destination="fpu-1k-zi8" id="EYF-xj-hUy"/>
+                <outlet property="btYoutube" destination="MeC-ex-hDc" id="KZc-b4-hAd"/>
+                <outlet property="lbAudio" destination="U2U-5k-nhM" id="ez9-Jr-F0H"/>
                 <outlet property="lbCamera" destination="Zd5-dP-C51" id="wt1-lB-wL6"/>
                 <outlet property="lbFile" destination="w2U-TQ-e1e" id="aul-OA-0b1"/>
                 <outlet property="lbGallery" destination="jDt-DN-PkK" id="hUj-SH-GvK"/>
                 <outlet property="lbVideo" destination="7u0-Cw-vHC" id="2um-ZO-16b"/>
-                <outlet property="lbYoutube" destination="U2U-5k-nhM" id="hZe-mr-LqE"/>
+                <outlet property="lbYoutube" destination="fpu-1k-zi8" id="lXo-kz-rq2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -105,7 +105,7 @@
                         <constraint firstItem="w2U-TQ-e1e" firstAttribute="leading" secondItem="vdF-b4-7Ve" secondAttribute="leading" id="zsG-lf-zPJ"/>
                     </constraints>
                 </view>
-                <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-Uu-5lv">
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q2P-Uu-5lv">
                     <rect key="frame" x="408" y="472" width="157" height="120"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MeC-ex-hDc" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
@@ -120,7 +120,7 @@
                                 <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="lds-1j-D5u"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youtube" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpu-1k-zi8">
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fpu-1k-zi8">
                             <rect key="frame" x="0.0" y="96" width="157" height="21"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="21" id="hDT-C7-V1N"/>
@@ -215,12 +215,12 @@
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h54-uP-07y" customClass="ISCircleButton" customModule="ureport" customModuleProvider="target">
                             <rect key="frame" x="41" y="6" width="76" height="76"/>
-                            <color key="backgroundColor" red="0.94509803921568625" green="0.22745098039215686" blue="0.25490196078431371" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <color key="backgroundColor" red="0.10980392156862745" green="0.82745098039215681" blue="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="76" id="UM6-05-8H9"/>
                                 <constraint firstAttribute="height" constant="76" id="u4A-zI-Sue"/>
                             </constraints>
-                            <state key="normal" image="icon_play"/>
+                            <state key="normal" image="icon_mic_white"/>
                             <connections>
                                 <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="Oh0-2q-kyz"/>
                             </connections>
@@ -305,6 +305,7 @@
         <image name="icon_camera" width="20" height="18"/>
         <image name="icon_file" width="23" height="20"/>
         <image name="icon_image" width="20" height="20"/>
+        <image name="icon_mic_white" width="15" height="25"/>
         <image name="icon_play" width="14" height="18"/>
         <image name="icon_video" width="26" height="17"/>
     </resources>

@@ -7,9 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		279A47B6F10766742C161C79 /* Pods.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30D4A2F49216E9109C180A69 /* Pods.framework */; };
-		65075AF31C7F8A50008CF8F3 /* URState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF21C7F8A50008CF8F3 /* URState.swift */; };
-		65075AF51C7F8CCC008CF8F3 /* URDistrict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF41C7F8CCC008CF8F3 /* URDistrict.swift */; };
+		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
+		65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */; };
 		6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */; };
 		6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB791B881AE100CEEC3B /* Images.xcassets */; };
 		6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */; };
@@ -21,6 +20,7 @@
 		6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBA31B8CADB900CEEC3B /* URChatMember.swift */; };
 		6515FBAF1B8D6E2600CEEC3B /* ISDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */; };
 		6515FBB91B8E0B4000CEEC3B /* URMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */; };
+		6523C2121CBD8C72007523CB /* URMediaVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523C2111CBD8C72007523CB /* URMediaVideoView.swift */; };
 		652F8AA81BA0D8C10096C8DC /* URCountryProgramManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F8AA71BA0D8C10096C8DC /* URCountryProgramManager.swift */; };
 		652F8B041BA205560096C8DC /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F8B031BA205560096C8DC /* URUserManager.swift */; };
 		652F8B0A1BA207250096C8DC /* URChatMessageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F8B091BA207250096C8DC /* URChatMessageManager.swift */; };
@@ -29,7 +29,6 @@
 		652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652F8B101BA214810096C8DC /* URPollQuestionViewController.xib */; };
 		6530BE6A1B974ADB00C9707C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE691B974ADB00C9707C /* SWRevealViewController.m */; };
 		6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE6B1B974E0F00C9707C /* URMessageRead.swift */; };
-		6533853B1CACB0FB00169BCA /* URServerDateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533853A1CACB0FB00169BCA /* URServerDateTime.swift */; };
 		6533CF441C496627009DF49C /* URRapidProContactUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533CF431C496627009DF49C /* URRapidProContactUtil.swift */; };
 		65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FC01B4C842700344D75 /* AppDelegate.swift */; };
 		65409FD71B4C842700344D75 /* ureportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FD61B4C842700344D75 /* ureportTests.swift */; };
@@ -38,7 +37,8 @@
 		65409FF11B4C977600344D75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65409FF01B4C977600344D75 /* Foundation.framework */; };
 		65409FF51B4C9E7C00344D75 /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FF31B4C9E7C00344D75 /* URUserRegisterViewController.swift */; };
 		65409FF61B4C9E7C00344D75 /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65409FF41B4C9E7C00344D75 /* URUserRegisterViewController.xib */; };
-		6547D3DD1C77AB5F00938236 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 6547D3DF1C77AB5F00938236 /* Localizable.strings */; };
+		6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D71C762FDB00938236 /* URFileUtil.swift */; };
+		6547D3DA1C76324E00938236 /* URAudioMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D91C76324E00938236 /* URAudioMedia.swift */; };
 		654850631BB1D7390002A3D5 /* URPollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850621BB1D7390002A3D5 /* URPollManager.swift */; };
 		6548506B1BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */; };
 		6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */; };
@@ -46,6 +46,8 @@
 		654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654850721BB209C80002A3D5 /* URChoiceResultView.xib */; };
 		654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850751BB209E70002A3D5 /* URChoiceResultView.swift */; };
 		654CB3C51BAB632100D8803B /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CB3C41BAB632100D8803B /* Serializable.swift */; };
+		6551A6911CD78DCD004F5009 /* URPollResultCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */; };
+		6551A6971CD79369004F5009 /* URPollResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */; };
 		6554D0981B934CCB009C5E89 /* URNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */; };
 		6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */; };
 		6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D09A1B94AE4A009C5E89 /* URMedia.swift */; };
@@ -89,6 +91,7 @@
 		655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691861B7E67AB00525E00 /* URMarkerTableViewController.swift */; };
 		6556918A1B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691881B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift */; };
 		6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655691891B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib */; };
+		65609F131C714C0F0039A8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659A7A981B51EFA800B56983 /* Localizable.strings */; };
 		65609F2A1C7266100039A8AB /* URPlayMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65609F291C7266100039A8AB /* URPlayMediaView.swift */; };
 		656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */; };
 		656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */; };
@@ -96,6 +99,11 @@
 		656562021BD5912500EBA9BD /* URNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656562001BD5912500EBA9BD /* URNotificationViewController.swift */; };
 		656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656562011BD5912500EBA9BD /* URNotificationViewController.xib */; };
 		656562051BD5962400EBA9BD /* URSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656562041BD5962400EBA9BD /* URSettings.swift */; };
+		6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6566A5C31CD24ECC00A0730F /* URMediaSourceViewIPadController.xib */; };
+		6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6566A5C81CD2634400A0730F /* URPollViewIPadController.xib */; };
+		6566A5CB1CD2635E00A0730F /* URPollViewIPadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6566A5CA1CD2635E00A0730F /* URPollViewIPadController.swift */; };
+		6567C1D01CB5A4D10041F004 /* URChatVideoPhoneItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6567C1CF1CB5A4D10041F004 /* URChatVideoPhoneItem.swift */; };
+		6567C1D31CB5A8990041F004 /* URChatVideoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */; };
 		65685ADA1BA224BB00099CFB /* URRapidProManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65685AD91BA224BB00099CFB /* URRapidProManager.swift */; };
 		65685ADC1BA230DA00099CFB /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65685ADB1BA230DA00099CFB /* Key.plist */; };
 		65685ADE1BA23C4C00099CFB /* URPollResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65685ADD1BA23C4C00099CFB /* URPollResponse.swift */; };
@@ -109,6 +117,7 @@
 		65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */; };
 		65816BB01C750756004F9DEB /* URAudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65816BAF1C750756004F9DEB /* URAudioRecorderManager.swift */; };
 		65816BB41C756C58004F9DEB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65816BB31C756C58004F9DEB /* CloudKit.framework */; };
+		6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6585BB0F1CCFD606000FA60E /* URStoryContributionViewIPadController.xib */; };
 		658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949BC1B83E1740087F361 /* ISMenuViewController.swift */; };
 		658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
 		658949C11B83E1A60087F361 /* ISMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949C01B83E1A60087F361 /* ISMenu.swift */; };
@@ -120,6 +129,17 @@
 		658949D41B85775A0087F361 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D31B85775A0087F361 /* Accounts.framework */; };
 		658949D61B861B5E0087F361 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D51B861B5E0087F361 /* Security.framework */; };
 		658949DA1B8623CF0087F361 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 658949D91B8623CF0087F361 /* TwitterAuthHelper.m */; };
+		658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14A71C99EF2C009A63A5 /* URMediaAudioView.xib */; };
+		658D14AB1C99EF64009A63A5 /* URMediaAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14AA1C99EF64009A63A5 /* URMediaAudioView.swift */; };
+		658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14AE1C99F482009A63A5 /* URAudioView.xib */; };
+		658D14B21C99F497009A63A5 /* URAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14B11C99F497009A63A5 /* URAudioView.swift */; };
+		658D14BD1C9B4DB7009A63A5 /* URMediaFileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14BB1C9B4DB7009A63A5 /* URMediaFileView.swift */; };
+		658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14BC1C9B4DB7009A63A5 /* URMediaFileView.xib */; };
+		658D14C41C9B54A2009A63A5 /* URMediaVideoPhoneView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14C21C9B54A2009A63A5 /* URMediaVideoPhoneView.xib */; };
+		658D14C61C9B54EE009A63A5 /* URMediaVideoPhoneView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14C51C9B54EE009A63A5 /* URMediaVideoPhoneView.swift */; };
+		658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14C81C9C3201009A63A5 /* URMediaImageView.xib */; };
+		658D14CC1C9C322B009A63A5 /* URMediaImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14CB1C9C322B009A63A5 /* URMediaImageView.swift */; };
+		658D14CE1C9C8DA8009A63A5 /* URChatImageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14CD1C9C8DA8009A63A5 /* URChatImageItem.swift */; };
 		658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D35A51C73ABDA00173DCB /* ISImageExtension.swift */; };
 		658D857B1B5457CC00DFB949 /* URLoginCredentialsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D85791B5457CC00DFB949 /* URLoginCredentialsViewController.swift */; };
 		658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D857A1B5457CC00DFB949 /* URLoginCredentialsViewController.xib */; };
@@ -150,7 +170,6 @@
 		65B16FDD1BB5E7AB00BDBDEE /* URProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FDB1BB5E7AB00BDBDEE /* URProfileViewController.xib */; };
 		65B16FE11BB9F53300BDBDEE /* URRankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B16FDF1BB9F53300BDBDEE /* URRankingTableViewCell.swift */; };
 		65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */; };
-		65C03BDB1CB1A100001070C0 /* ISScrollViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C03BDA1CB1A100001070C0 /* ISScrollViewPage.swift */; };
 		65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C234031BACB89D002DB994 /* PhotoShow.swift */; };
 		65C234061BAE0843002DB994 /* ISLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C234051BAE0843002DB994 /* ISLabelExtension.swift */; };
 		65C55FDF1BBCD174007F66FA /* URModalProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C55FDD1BBCD174007F66FA /* URModalProfileViewController.swift */; };
@@ -159,6 +178,7 @@
 		65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */; };
 		65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F3991BA7625000E5D367 /* URMediaView.xib */; };
 		65D0F39D1BA7627800E5D367 /* URMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F39C1BA7627800E5D367 /* URMediaView.swift */; };
+		65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */; };
 		65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A61BA8792D00E5D367 /* URAWSManager.swift */; };
 		65D0F3AB1BA8E13500E5D367 /* URMyChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A91BA8E13500E5D367 /* URMyChatsViewController.swift */; };
 		65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F3AA1BA8E13500E5D367 /* URMyChatsViewController.xib */; };
@@ -170,14 +190,13 @@
 		65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563071BA9EF3B001AEF54 /* URContributionManager.swift */; };
 		65D61BAB1C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D61BA91C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift */; };
 		65D61BAC1C111EBE0059F1B0 /* URWriteStoryTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */; };
-		65DE347C1C96EFF7009D6188 /* URTermsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE347A1C96EFF7009D6188 /* URTermsViewController.swift */; };
-		65DE347D1C96EFF7009D6188 /* URTermsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DE347B1C96EFF7009D6188 /* URTermsViewController.xib */; };
-		65DE34801C984993009D6188 /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DE347F1C984993009D6188 /* URReviewModeManager.swift */; };
 		65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */; };
 		65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C191BAFAEA900F2E29E /* URCountry.swift */; };
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
 		65EA8C201BB0792800F2E29E /* URAboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C1E1BB0792800F2E29E /* URAboutViewController.swift */; };
 		65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1F1BB0792800F2E29E /* URAboutViewController.xib */; };
+		65F077251CB5A9BF00A1D608 /* URChatAudioItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */; };
+		65F077271CB5AA4700A1D608 /* URChatFileItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F077261CB5AA4700A1D608 /* URChatFileItem.swift */; };
 		65F47F4E1C653FB2009A2066 /* URLocalMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */; };
 		65F47F501C654517009A2066 /* URVideoMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F4F1C654517009A2066 /* URVideoMedia.swift */; };
 		65F47F521C654A6C009A2066 /* URVideoPhoneMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */; };
@@ -230,6 +249,7 @@
 		97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2FAC41C061EC0000820BD /* URTutoView.xib */; };
 		97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
+		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -256,10 +276,11 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		507D21513E08C736F7EBC680 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		65075AF21C7F8A50008CF8F3 /* URState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URState.swift; sourceTree = "<group>"; };
-		65075AF41C7F8CCC008CF8F3 /* URDistrict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDistrict.swift; sourceTree = "<group>"; };
+		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDownloader.swift; sourceTree = "<group>"; };
+		65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchImages.xcassets; sourceTree = "<group>"; };
 		6515FB791B881AE100CEEC3B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExampleImages.xcassets; sourceTree = "<group>"; };
@@ -271,6 +292,7 @@
 		6515FBA31B8CADB900CEEC3B /* URChatMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatMember.swift; sourceTree = "<group>"; };
 		6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISDateExtension.swift; sourceTree = "<group>"; };
 		6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessagesViewController.swift; sourceTree = "<group>"; };
+		6523C2111CBD8C72007523CB /* URMediaVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaVideoView.swift; sourceTree = "<group>"; };
 		652F8AA71BA0D8C10096C8DC /* URCountryProgramManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountryProgramManager.swift; sourceTree = "<group>"; };
 		652F8B031BA205560096C8DC /* URUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserManager.swift; sourceTree = "<group>"; };
 		652F8B091BA207250096C8DC /* URChatMessageManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatMessageManager.swift; sourceTree = "<group>"; };
@@ -280,7 +302,6 @@
 		6530BE681B974ADB00C9707C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		6530BE691B974ADB00C9707C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		6530BE6B1B974E0F00C9707C /* URMessageRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessageRead.swift; sourceTree = "<group>"; };
-		6533853A1CACB0FB00169BCA /* URServerDateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URServerDateTime.swift; sourceTree = "<group>"; };
 		6533CF431C496627009DF49C /* URRapidProContactUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRapidProContactUtil.swift; sourceTree = "<group>"; };
 		65409FBB1B4C842700344D75 /* ureport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ureport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65409FBF1B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -293,9 +314,8 @@
 		65409FF01B4C977600344D75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65409FF31B4C9E7C00344D75 /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
 		65409FF41B4C9E7C00344D75 /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
-		6547D3DE1C77AB5F00938236 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		6547D3E01C77AB6500938236 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		6547D3E11C77AB6900938236 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
+		6547D3D71C762FDB00938236 /* URFileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFileUtil.swift; sourceTree = "<group>"; };
+		6547D3D91C76324E00938236 /* URAudioMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioMedia.swift; sourceTree = "<group>"; };
 		654850621BB1D7390002A3D5 /* URPollManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollManager.swift; sourceTree = "<group>"; };
 		654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultTableViewCell.swift; sourceTree = "<group>"; };
 		6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultTableViewCell.xib; sourceTree = "<group>"; };
@@ -303,6 +323,8 @@
 		654850721BB209C80002A3D5 /* URChoiceResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URChoiceResultView.xib; sourceTree = "<group>"; };
 		654850751BB209E70002A3D5 /* URChoiceResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChoiceResultView.swift; sourceTree = "<group>"; };
 		654CB3C41BAB632100D8803B /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
+		6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultCollectionViewController.swift; sourceTree = "<group>"; };
+		6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewGroupViewController.swift; sourceTree = "<group>"; };
 		6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewGroupViewController.xib; sourceTree = "<group>"; };
 		6554D09A1B94AE4A009C5E89 /* URMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMedia.swift; sourceTree = "<group>"; };
@@ -346,6 +368,8 @@
 		655691861B7E67AB00525E00 /* URMarkerTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerTableViewController.swift; sourceTree = "<group>"; };
 		655691881B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddMarkerTableViewCell.swift; sourceTree = "<group>"; };
 		655691891B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAddMarkerTableViewCell.xib; sourceTree = "<group>"; };
+		65609F141C714E130039A8AB /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		65609F151C71517B0039A8AB /* pt */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = pt; path = pt.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65609F291C7266100039A8AB /* URPlayMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPlayMediaView.swift; sourceTree = "<group>"; };
 		65609F2B1C72C1EA0039A8AB /* ureport.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = ureport.entitlements; sourceTree = "<group>"; };
 		656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettingsTableViewCell.swift; sourceTree = "<group>"; };
@@ -354,20 +378,26 @@
 		656562001BD5912500EBA9BD /* URNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNotificationViewController.swift; sourceTree = "<group>"; };
 		656562011BD5912500EBA9BD /* URNotificationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNotificationViewController.xib; sourceTree = "<group>"; };
 		656562041BD5962400EBA9BD /* URSettings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URSettings.swift; sourceTree = "<group>"; };
+		6566A5C31CD24ECC00A0730F /* URMediaSourceViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaSourceViewIPadController.xib; sourceTree = "<group>"; };
+		6566A5C81CD2634400A0730F /* URPollViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollViewIPadController.xib; sourceTree = "<group>"; };
+		6566A5CA1CD2635E00A0730F /* URPollViewIPadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollViewIPadController.swift; sourceTree = "<group>"; };
+		6567C1CF1CB5A4D10041F004 /* URChatVideoPhoneItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatVideoPhoneItem.swift; sourceTree = "<group>"; };
+		6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatVideoItem.swift; sourceTree = "<group>"; };
 		65685AD91BA224BB00099CFB /* URRapidProManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRapidProManager.swift; sourceTree = "<group>"; };
 		65685ADB1BA230DA00099CFB /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 		65685ADD1BA23C4C00099CFB /* URPollResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResponse.swift; sourceTree = "<group>"; };
 		65685B4C1BA6686300099CFB /* URStoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryManager.swift; sourceTree = "<group>"; };
 		656A2BE31B98C7780079BD6A /* URGCMManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGCMManager.swift; sourceTree = "<group>"; };
+		65711A2C1C40502500E05BBD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		657629151BE135010095772F /* URModerationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModerationViewController.swift; sourceTree = "<group>"; };
 		657629181BE13A360095772F /* URModeratorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModeratorTableViewController.swift; sourceTree = "<group>"; };
 		65780CB71C5FFF150025398D /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
 		65780CB91C61064A0025398D /* URVideoUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoUtil.swift; sourceTree = "<group>"; };
-		6581159F1C77B1A0001AC7EA /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		65816BAA1C74C26D004F9DEB /* URAudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioRecorderViewController.swift; sourceTree = "<group>"; };
 		65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAudioRecorderViewController.xib; sourceTree = "<group>"; };
 		65816BAF1C750756004F9DEB /* URAudioRecorderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioRecorderManager.swift; sourceTree = "<group>"; };
 		65816BB31C756C58004F9DEB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
+		6585BB0F1CCFD606000FA60E /* URStoryContributionViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryContributionViewIPadController.xib; sourceTree = "<group>"; };
 		658949BC1B83E1740087F361 /* ISMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenuViewController.swift; sourceTree = "<group>"; };
 		658949BD1B83E1740087F361 /* ISMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ISMenuViewController.xib; sourceTree = "<group>"; };
 		658949C01B83E1A60087F361 /* ISMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenu.swift; sourceTree = "<group>"; };
@@ -381,6 +411,17 @@
 		658949D51B861B5E0087F361 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		658949D81B8623CF0087F361 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		658949D91B8623CF0087F361 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		658D14A71C99EF2C009A63A5 /* URMediaAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaAudioView.xib; sourceTree = "<group>"; };
+		658D14AA1C99EF64009A63A5 /* URMediaAudioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaAudioView.swift; sourceTree = "<group>"; };
+		658D14AE1C99F482009A63A5 /* URAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAudioView.xib; sourceTree = "<group>"; };
+		658D14B11C99F497009A63A5 /* URAudioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioView.swift; sourceTree = "<group>"; };
+		658D14BB1C9B4DB7009A63A5 /* URMediaFileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaFileView.swift; sourceTree = "<group>"; };
+		658D14BC1C9B4DB7009A63A5 /* URMediaFileView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaFileView.xib; sourceTree = "<group>"; };
+		658D14C21C9B54A2009A63A5 /* URMediaVideoPhoneView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaVideoPhoneView.xib; sourceTree = "<group>"; };
+		658D14C51C9B54EE009A63A5 /* URMediaVideoPhoneView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaVideoPhoneView.swift; sourceTree = "<group>"; };
+		658D14C81C9C3201009A63A5 /* URMediaImageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaImageView.xib; sourceTree = "<group>"; };
+		658D14CB1C9C322B009A63A5 /* URMediaImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaImageView.swift; sourceTree = "<group>"; };
+		658D14CD1C9C8DA8009A63A5 /* URChatImageItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatImageItem.swift; sourceTree = "<group>"; };
 		658D35A51C73ABDA00173DCB /* ISImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISImageExtension.swift; sourceTree = "<group>"; };
 		658D85791B5457CC00DFB949 /* URLoginCredentialsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginCredentialsViewController.swift; sourceTree = "<group>"; };
 		658D857A1B5457CC00DFB949 /* URLoginCredentialsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLoginCredentialsViewController.xib; sourceTree = "<group>"; };
@@ -396,6 +437,7 @@
 		659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		659A20D21B7ECD6C00D02C69 /* URClosedPollTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URClosedPollTableViewController.xib; sourceTree = "<group>"; };
 		659A7A921B4F6C3100B56983 /* URDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDateUtil.swift; sourceTree = "<group>"; };
+		659A7A991B51EFE100B56983 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		659A7A9B1B51F6F700B56983 /* UITextField+Keyboard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Keyboard.swift"; sourceTree = "<group>"; };
 		65A45CCB1B868481001C6808 /* URUserLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URUserLoginManager.swift; path = ureport/Classes/UserLoginManager/URUserLoginManager.swift; sourceTree = SOURCE_ROOT; };
 		65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -412,7 +454,6 @@
 		65B16FDB1BB5E7AB00BDBDEE /* URProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URProfileViewController.xib; sourceTree = "<group>"; };
 		65B16FDF1BB9F53300BDBDEE /* URRankingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRankingTableViewCell.swift; sourceTree = "<group>"; };
 		65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URRankingTableViewCell.xib; sourceTree = "<group>"; };
-		65C03BDA1CB1A100001070C0 /* ISScrollViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISScrollViewPage.swift; sourceTree = "<group>"; };
 		65C234031BACB89D002DB994 /* PhotoShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoShow.swift; sourceTree = "<group>"; };
 		65C234051BAE0843002DB994 /* ISLabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISLabelExtension.swift; sourceTree = "<group>"; };
 		65C55FDD1BBCD174007F66FA /* URModalProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModalProfileViewController.swift; sourceTree = "<group>"; };
@@ -421,6 +462,7 @@
 		65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerTableViewController.xib; sourceTree = "<group>"; };
 		65D0F3991BA7625000E5D367 /* URMediaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaView.xib; sourceTree = "<group>"; };
 		65D0F39C1BA7627800E5D367 /* URMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaView.swift; sourceTree = "<group>"; };
+		65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISScrollViewPage.swift; sourceTree = "<group>"; };
 		65D0F3A61BA8792D00E5D367 /* URAWSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAWSManager.swift; sourceTree = "<group>"; };
 		65D0F3A91BA8E13500E5D367 /* URMyChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMyChatsViewController.swift; sourceTree = "<group>"; };
 		65D0F3AA1BA8E13500E5D367 /* URMyChatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMyChatsViewController.xib; sourceTree = "<group>"; };
@@ -432,14 +474,13 @@
 		65D563071BA9EF3B001AEF54 /* URContributionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URContributionManager.swift; sourceTree = "<group>"; };
 		65D61BA91C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URWriteStoryTableViewCell.swift; sourceTree = "<group>"; };
 		65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URWriteStoryTableViewCell.xib; sourceTree = "<group>"; };
-		65DE347A1C96EFF7009D6188 /* URTermsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URTermsViewController.swift; sourceTree = "<group>"; };
-		65DE347B1C96EFF7009D6188 /* URTermsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URTermsViewController.xib; sourceTree = "<group>"; };
-		65DE347F1C984993009D6188 /* URReviewModeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
 		65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginAlertController.swift; sourceTree = "<group>"; };
 		65EA8C191BAFAEA900F2E29E /* URCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountry.swift; sourceTree = "<group>"; };
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
 		65EA8C1E1BB0792800F2E29E /* URAboutViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAboutViewController.swift; sourceTree = "<group>"; };
 		65EA8C1F1BB0792800F2E29E /* URAboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAboutViewController.xib; sourceTree = "<group>"; };
+		65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatAudioItem.swift; sourceTree = "<group>"; };
+		65F077261CB5AA4700A1D608 /* URChatFileItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatFileItem.swift; sourceTree = "<group>"; };
 		65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLocalMedia.swift; sourceTree = "<group>"; };
 		65F47F4F1C654517009A2066 /* URVideoMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoMedia.swift; sourceTree = "<group>"; };
 		65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URVideoPhoneMedia.swift; sourceTree = "<group>"; };
@@ -457,7 +498,7 @@
 		65FAF0CD1BC2DA0000F8B380 /* URPointsScoredViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPointsScoredViewController.xib; sourceTree = "<group>"; };
 		65FAF0D11BC41AF300F8B380 /* URGroupDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupDetailsViewController.swift; sourceTree = "<group>"; };
 		65FAF0D21BC41AF300F8B380 /* URGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupDetailsViewController.xib; sourceTree = "<group>"; };
-		80289A0F74769B82DBFF3EA2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.debug.xcconfig"; sourceTree = "<group>"; };
 		9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAlamofireLogExtension.swift; sourceTree = "<group>"; };
 		972817A81BFF9C3000FBD20E /* URChoiceResponseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = URChoiceResponseView.xib; path = ChoiceResponse/URChoiceResponseView.xib; sourceTree = "<group>"; };
 		972817AA1BFFCA0800FBD20E /* URResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URResponseView.swift; path = PollResponse/URResponseView.swift; sourceTree = "<group>"; };
@@ -508,7 +549,7 @@
 				658949D41B85775A0087F361 /* Accounts.framework in Frameworks */,
 				658949D21B8577530087F361 /* Social.framework in Frameworks */,
 				65409FF11B4C977600344D75 /* Foundation.framework in Frameworks */,
-				279A47B6F10766742C161C79 /* Pods.framework in Frameworks */,
+				9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -604,8 +645,8 @@
 				65409FBD1B4C842700344D75 /* ureport */,
 				65409FD31B4C842700344D75 /* ureportTests */,
 				65409FBC1B4C842700344D75 /* Products */,
-				D5ED8585E64D1E84BEC33676 /* Pods */,
 				765863F8BACD5E4ED452B82C /* Frameworks */,
+				CFA94116CFAD1BE71524C9A7 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -662,7 +703,6 @@
 		65409FE01B4C845200344D75 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				65DE347E1C98497C009D6188 /* ReviewMode */,
 				65816BAE1C750739004F9DEB /* AudioRecorderManager */,
 				65F7DA281C073544001AFA22 /* Firebase */,
 				9742492B1BFBD04E0024384E /* FlowManager */,
@@ -702,7 +742,7 @@
 		65409FE21B4C845200344D75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				65DE34791C96EEB0009D6188 /* Terms */,
+				6566A5C71CD262DF00A0730F /* IPadPoll */,
 				65816BA91C74C208004F9DEB /* AudioRecorder */,
 				655532361C51682C002F6AFC /* MediaSource */,
 				97B2FABD1C061E44000820BD /* Tutorial */,
@@ -797,9 +837,12 @@
 				65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */,
 				65F47F531C654B79009A2066 /* URImageMedia.swift */,
 				65F47F551C658C71009A2066 /* URMediaUpload.swift */,
-				65075AF21C7F8A50008CF8F3 /* URState.swift */,
-				65075AF41C7F8CCC008CF8F3 /* URDistrict.swift */,
-				6533853A1CACB0FB00169BCA /* URServerDateTime.swift */,
+				6547D3D91C76324E00938236 /* URAudioMedia.swift */,
+				658D14CD1C9C8DA8009A63A5 /* URChatImageItem.swift */,
+				6567C1CF1CB5A4D10041F004 /* URChatVideoPhoneItem.swift */,
+				6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */,
+				65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */,
+				65F077261CB5AA4700A1D608 /* URChatFileItem.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -837,6 +880,8 @@
 				6555323B1C518376002F6AFC /* ISCircleButton.swift */,
 				65780CB91C61064A0025398D /* URVideoUtil.swift */,
 				658D35A51C73ABDA00173DCB /* ISImageExtension.swift */,
+				6547D3D71C762FDB00938236 /* URFileUtil.swift */,
+				65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -844,8 +889,8 @@
 		65409FE71B4C845200344D75 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				65C03BD91CB1A100001070C0 /* ISScrollViewPage */,
 				97FBAA541C0643940012D752 /* NSLocaleISO639_2 */,
+				65D0F3A21BA774C500E5D367 /* ISScrollViewPage */,
 				6530BE671B974AD400C9707C /* SWRevealViewController */,
 				658949D71B8623C50087F361 /* TwitterHelper */,
 				658949C91B8571CF0087F361 /* ProgressHUD */,
@@ -856,6 +901,8 @@
 		65409FE81B4C845200344D75 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				658D14AC1C99F467009A63A5 /* Audio */,
+				658D14A41C99EECB009A63A5 /* Chat */,
 				65609F281C7266100039A8AB /* PlayMedia */,
 				97B2FAC21C061EB2000820BD /* Tutorial */,
 				974249471BFE0C790024384E /* PollResponse */,
@@ -893,7 +940,7 @@
 				6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */,
 				6515FB791B881AE100CEEC3B /* Images.xcassets */,
 				6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */,
-				6547D3DF1C77AB5F00938236 /* Localizable.strings */,
+				659A7A981B51EFA800B56983 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -928,6 +975,7 @@
 			isa = PBXGroup;
 			children = (
 				6548506E1BB1FADA0002A3D5 /* URPollResultTableViewController.swift */,
+				6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */,
 			);
 			path = PollResult;
 			sourceTree = "<group>";
@@ -955,6 +1003,7 @@
 			children = (
 				655532371C51683E002F6AFC /* URMediaSourceViewController.swift */,
 				655532381C51683E002F6AFC /* URMediaSourceViewController.xib */,
+				6566A5C31CD24ECC00A0730F /* URMediaSourceViewIPadController.xib */,
 			);
 			path = MediaSource;
 			sourceTree = "<group>";
@@ -976,6 +1025,8 @@
 				6556916E1B7D3DA800525E00 /* URClosedPollTableViewCell.xib */,
 				654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */,
 				6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */,
+				6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */,
+				65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */,
 			);
 			path = Poll;
 			sourceTree = "<group>";
@@ -1041,6 +1092,23 @@
 				656562011BD5912500EBA9BD /* URNotificationViewController.xib */,
 			);
 			path = Notification;
+			sourceTree = "<group>";
+		};
+		6566A5C71CD262DF00A0730F /* IPadPoll */ = {
+			isa = PBXGroup;
+			children = (
+				6566A5C81CD2634400A0730F /* URPollViewIPadController.xib */,
+				6566A5CA1CD2635E00A0730F /* URPollViewIPadController.swift */,
+			);
+			path = IPadPoll;
+			sourceTree = "<group>";
+		};
+		6567C1D11CB5A7B10041F004 /* Video */ = {
+			isa = PBXGroup;
+			children = (
+				6523C2111CBD8C72007523CB /* URMediaVideoView.swift */,
+			);
+			path = Video;
 			sourceTree = "<group>";
 		};
 		65685AD81BA224AE00099CFB /* RapidProManager */ = {
@@ -1144,6 +1212,63 @@
 			);
 			name = UserLoginManager;
 			path = SocialNetworkManager;
+			sourceTree = "<group>";
+		};
+		658D14A41C99EECB009A63A5 /* Chat */ = {
+			isa = PBXGroup;
+			children = (
+				6567C1D11CB5A7B10041F004 /* Video */,
+				658D14C01C9B545B009A63A5 /* VideoPhone */,
+				658D14BF1C9B543C009A63A5 /* Image */,
+				658D14BA1C9B4DB7009A63A5 /* File */,
+				658D14A51C99EED9009A63A5 /* Audio */,
+			);
+			path = Chat;
+			sourceTree = "<group>";
+		};
+		658D14A51C99EED9009A63A5 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				658D14A71C99EF2C009A63A5 /* URMediaAudioView.xib */,
+				658D14AA1C99EF64009A63A5 /* URMediaAudioView.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		658D14AC1C99F467009A63A5 /* Audio */ = {
+			isa = PBXGroup;
+			children = (
+				658D14AE1C99F482009A63A5 /* URAudioView.xib */,
+				658D14B11C99F497009A63A5 /* URAudioView.swift */,
+			);
+			path = Audio;
+			sourceTree = "<group>";
+		};
+		658D14BA1C9B4DB7009A63A5 /* File */ = {
+			isa = PBXGroup;
+			children = (
+				658D14BB1C9B4DB7009A63A5 /* URMediaFileView.swift */,
+				658D14BC1C9B4DB7009A63A5 /* URMediaFileView.xib */,
+			);
+			path = File;
+			sourceTree = "<group>";
+		};
+		658D14BF1C9B543C009A63A5 /* Image */ = {
+			isa = PBXGroup;
+			children = (
+				658D14C81C9C3201009A63A5 /* URMediaImageView.xib */,
+				658D14CB1C9C322B009A63A5 /* URMediaImageView.swift */,
+			);
+			path = Image;
+			sourceTree = "<group>";
+		};
+		658D14C01C9B545B009A63A5 /* VideoPhone */ = {
+			isa = PBXGroup;
+			children = (
+				658D14C21C9B54A2009A63A5 /* URMediaVideoPhoneView.xib */,
+				658D14C51C9B54EE009A63A5 /* URMediaVideoPhoneView.swift */,
+			);
+			path = VideoPhone;
 			sourceTree = "<group>";
 		};
 		658D85781B5457AD00DFB949 /* LoginCredentials */ = {
@@ -1268,14 +1393,6 @@
 			path = Ranking;
 			sourceTree = "<group>";
 		};
-		65C03BD91CB1A100001070C0 /* ISScrollViewPage */ = {
-			isa = PBXGroup;
-			children = (
-				65C03BDA1CB1A100001070C0 /* ISScrollViewPage.swift */,
-			);
-			path = ISScrollViewPage;
-			sourceTree = "<group>";
-		};
 		65C55FDC1BBCD167007F66FA /* ModalProfile */ = {
 			isa = PBXGroup;
 			children = (
@@ -1300,6 +1417,14 @@
 				65D0F39C1BA7627800E5D367 /* URMediaView.swift */,
 			);
 			path = Cover;
+			sourceTree = "<group>";
+		};
+		65D0F3A21BA774C500E5D367 /* ISScrollViewPage */ = {
+			isa = PBXGroup;
+			children = (
+				65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */,
+			);
+			path = ISScrollViewPage;
 			sourceTree = "<group>";
 		};
 		65D0F3A51BA8791700E5D367 /* AWSManager */ = {
@@ -1332,6 +1457,7 @@
 			children = (
 				65D562FD1BA9E8A1001AEF54 /* URStoryContributionViewController.swift */,
 				65D562FE1BA9E8A1001AEF54 /* URStoryContributionViewController.xib */,
+				6585BB0F1CCFD606000FA60E /* URStoryContributionViewIPadController.xib */,
 			);
 			path = StoryContribution;
 			sourceTree = "<group>";
@@ -1360,23 +1486,6 @@
 				65D61BAA1C111EBD0059F1B0 /* URWriteStoryTableViewCell.xib */,
 			);
 			path = WriteStory;
-			sourceTree = "<group>";
-		};
-		65DE34791C96EEB0009D6188 /* Terms */ = {
-			isa = PBXGroup;
-			children = (
-				65DE347A1C96EFF7009D6188 /* URTermsViewController.swift */,
-				65DE347B1C96EFF7009D6188 /* URTermsViewController.xib */,
-			);
-			path = Terms;
-			sourceTree = "<group>";
-		};
-		65DE347E1C98497C009D6188 /* ReviewMode */ = {
-			isa = PBXGroup;
-			children = (
-				65DE347F1C984993009D6188 /* URReviewModeManager.swift */,
-			);
-			path = ReviewMode;
 			sourceTree = "<group>";
 		};
 		65EA8C1D1BB0791300F2E29E /* About */ = {
@@ -1441,6 +1550,7 @@
 				658949D31B85775A0087F361 /* Accounts.framework */,
 				658949D11B8577530087F361 /* Social.framework */,
 				30D4A2F49216E9109C180A69 /* Pods.framework */,
+				48CB42E22540D34F256E8133 /* Pods_ureport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1493,11 +1603,11 @@
 			name = NSLocaleISO639_2;
 			sourceTree = "<group>";
 		};
-		D5ED8585E64D1E84BEC33676 /* Pods */ = {
+		CFA94116CFAD1BE71524C9A7 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				507D21513E08C736F7EBC680 /* Pods.debug.xcconfig */,
-				80289A0F74769B82DBFF3EA2 /* Pods.release.xcconfig */,
+				7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */,
+				1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1509,13 +1619,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65409FDA1B4C842700344D75 /* Build configuration list for PBXNativeTarget "ureport" */;
 			buildPhases = (
-				7FB3A07882291C0A60E57C0A /* Check Pods Manifest.lock */,
+				50C28071DEE32473E2626A8F /* 📦 Check Pods Manifest.lock */,
 				65409FB71B4C842700344D75 /* Sources */,
 				65409FB81B4C842700344D75 /* Frameworks */,
 				65409FB91B4C842700344D75 /* Resources */,
-				7ECA642C23543487AD57E114 /* Copy Pods Resources */,
 				65894A061B8652E10087F361 /* Embed Frameworks */,
-				BF5C24C5BAF04F948CDDCD0B /* Embed Pods Frameworks */,
+				450D4BBB81DED4C784503883 /* 📦 Embed Pods Frameworks */,
+				24E1E8C688478972448154BC /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1563,9 +1673,6 @@
 							com.apple.BackgroundModes = {
 								enabled = 1;
 							};
-							com.apple.Push = {
-								enabled = 0;
-							};
 							com.apple.iCloud = {
 								enabled = 1;
 							};
@@ -1586,7 +1693,7 @@
 				en,
 				"pt-BR",
 				es,
-				Base,
+				pt,
 			);
 			mainGroup = 65409FB21B4C842700344D75;
 			productRefGroup = 65409FBC1B4C842700344D75 /* Products */;
@@ -1604,14 +1711,17 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,
 				65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */,
 				9742494D1BFE0DE10024384E /* UROpenFieldResponseView.xib in Resources */,
+				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
 				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
+				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
@@ -1619,13 +1729,13 @@
 				65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
-				65DE347D1C96EFF7009D6188 /* URTermsViewController.xib in Resources */,
 				65D61BAC1C111EBE0059F1B0 /* URWriteStoryTableViewCell.xib in Resources */,
+				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
 				974249261BFB76570024384E /* Key-debug.plist in Resources */,
-				6547D3DD1C77AB5F00938236 /* Localizable.strings in Resources */,
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
 				65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */,
+				658D14C41C9B54A2009A63A5 /* URMediaVideoPhoneView.xib in Resources */,
 				658D85811B54597700DFB949 /* URForgotPasswordViewController.xib in Resources */,
 				972817A91BFF9C3000FBD20E /* URChoiceResponseView.xib in Resources */,
 				97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */,
@@ -1633,9 +1743,13 @@
 				65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */,
 				65FAF0CA1BC2C2E200F8B380 /* URPasswordEditViewController.xib in Resources */,
 				65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */,
+				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
+				65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */,
+				658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */,
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
 				65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */,
 				655691701B7D3DA800525E00 /* URClosedPollTableViewCell.xib in Resources */,
+				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65409FF61B4C9E7C00344D75 /* URUserRegisterViewController.xib in Resources */,
@@ -1658,6 +1772,7 @@
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				974249441BFCFD920024384E /* URCurrentPollView.xib in Resources */,
+				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1671,49 +1786,49 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		7ECA642C23543487AD57E114 /* Copy Pods Resources */ = {
+		24E1E8C688478972448154BC /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		7FB3A07882291C0A60E57C0A /* Check Pods Manifest.lock */ = {
+		450D4BBB81DED4C784503883 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		50C28071DEE32473E2626A8F /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-		BF5C24C5BAF04F948CDDCD0B /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -1725,22 +1840,22 @@
 			files = (
 				974249331BFBD93D0024384E /* URFlowAction.swift in Sources */,
 				6556916F1B7D3DA800525E00 /* URClosedPollTableViewCell.swift in Sources */,
-				65075AF51C7F8CCC008CF8F3 /* URDistrict.swift in Sources */,
 				65A45CE71B880C3B001C6808 /* URGroupsTableViewCell.swift in Sources */,
 				65FAF0CE1BC2DA0000F8B380 /* URPointsScoredViewController.swift in Sources */,
 				656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */,
 				658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */,
 				65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */,
 				65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */,
+				65F077271CB5AA4700A1D608 /* URChatFileItem.swift in Sources */,
 				655690851B7D0F6700525E00 /* URPoll.swift in Sources */,
 				658949DA1B8623CF0087F361 /* TwitterAuthHelper.m in Sources */,
 				65609F2A1C7266100039A8AB /* URPlayMediaView.swift in Sources */,
 				6555323C1C518376002F6AFC /* ISCircleButton.swift in Sources */,
-				65DE34801C984993009D6188 /* URReviewModeManager.swift in Sources */,
 				658D85901B554D3700DFB949 /* URStoriesTableViewCell.swift in Sources */,
 				65816BB01C750756004F9DEB /* URAudioRecorderManager.swift in Sources */,
 				652F8B0A1BA207250096C8DC /* URChatMessageManager.swift in Sources */,
 				6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */,
+				658D14CE1C9C8DA8009A63A5 /* URChatImageItem.swift in Sources */,
 				974249551BFE5FC00024384E /* URFlowTypeManager.swift in Sources */,
 				974249491BFE0CE50024384E /* URChoiceResponseView.swift in Sources */,
 				9742494B1BFE0D010024384E /* UROpenFieldResponseView.swift in Sources */,
@@ -1760,6 +1875,7 @@
 				65F8B3031BE2CA7F009F9CAB /* URAPIResponse.swift in Sources */,
 				658D85801B54597700DFB949 /* URForgotPasswordViewController.swift in Sources */,
 				6556908F1B7D135C00525E00 /* URNotification.swift in Sources */,
+				6566A5CB1CD2635E00A0730F /* URPollViewIPadController.swift in Sources */,
 				652F8B041BA205560096C8DC /* URUserManager.swift in Sources */,
 				658D85971B558A6700DFB949 /* URAddStoryViewController.swift in Sources */,
 				974249391BFBE0AF0024384E /* URFlowRuleTest.swift in Sources */,
@@ -1771,6 +1887,7 @@
 				97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */,
 				656562051BD5962400EBA9BD /* URSettings.swift in Sources */,
 				65F47F561C658C71009A2066 /* URMediaUpload.swift in Sources */,
+				65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */,
 				6515FBA01B8B9FCD00CEEC3B /* URChatCellType.swift in Sources */,
 				97B2FABC1C061C83000820BD /* URYoutubeUtil.swift in Sources */,
 				65A45CDB1B879551001C6808 /* URMainChatViewController.swift in Sources */,
@@ -1792,25 +1909,27 @@
 				655690891B7D11E700525E00 /* URPollQuestion.swift in Sources */,
 				655690971B7D144C00525E00 /* URMultipleChoiceQuestion.swift in Sources */,
 				655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */,
+				6567C1D31CB5A8990041F004 /* URChatVideoItem.swift in Sources */,
+				6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */,
 				65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */,
+				65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */,
 				652F8AA81BA0D8C10096C8DC /* URCountryProgramManager.swift in Sources */,
-				65075AF31C7F8A50008CF8F3 /* URState.swift in Sources */,
 				65F8B3221BE92EB9009F9CAB /* URStringExtension.swift in Sources */,
-				6533853B1CACB0FB00169BCA /* URServerDateTime.swift in Sources */,
 				9742493E1BFCE2F00024384E /* URCurrentPollView.swift in Sources */,
 				97B2FAB71C03938B000820BD /* URRulesetResponse.swift in Sources */,
 				65685ADE1BA23C4C00099CFB /* URPollResponse.swift in Sources */,
 				658949C11B83E1A60087F361 /* ISMenu.swift in Sources */,
 				65A45CEB1B880D81001C6808 /* URGroupsTableViewController.swift in Sources */,
+				658D14CC1C9C322B009A63A5 /* URMediaImageView.swift in Sources */,
 				65F47F501C654517009A2066 /* URVideoMedia.swift in Sources */,
 				655690AB1B7D170100525E00 /* ISRoundedButton.swift in Sources */,
 				655690811B7D0AF200525E00 /* URGender.swift in Sources */,
 				658D85931B554FD600DFB949 /* URStory.swift in Sources */,
+				6551A6971CD79369004F5009 /* URPollResultCollectionViewCell.swift in Sources */,
 				6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */,
 				65F8B3071BE2D712009F9CAB /* URNewsDetailViewController.swift in Sources */,
 				6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */,
 				6556907D1B7D083500525E00 /* URCountryProgram.swift in Sources */,
-				65DE347C1C96EFF7009D6188 /* URTermsViewController.swift in Sources */,
 				655690911B7D138400525E00 /* URNews.swift in Sources */,
 				6515FB991B8B98C500CEEC3B /* URChatTableViewController.swift in Sources */,
 				6554D0981B934CCB009C5E89 /* URNewGroupViewController.swift in Sources */,
@@ -1826,6 +1945,7 @@
 				65780CBA1C61064A0025398D /* URVideoUtil.swift in Sources */,
 				65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */,
 				655691831B7E668B00525E00 /* URMarkerTableViewCell.swift in Sources */,
+				658D14AB1C99EF64009A63A5 /* URMediaAudioView.swift in Sources */,
 				9725C5961C0EAE1A00EE1237 /* URAlamofireLogExtension.swift in Sources */,
 				655690711B7CFA0B00525E00 /* URConstant.swift in Sources */,
 				652F8B111BA214810096C8DC /* URPollQuestionViewController.swift in Sources */,
@@ -1836,6 +1956,7 @@
 				97B2FAC51C061EC0000820BD /* URTutoView.swift in Sources */,
 				655690A71B7D15BA00525E00 /* URChatMessage.swift in Sources */,
 				65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */,
+				6551A6911CD78DCD004F5009 /* URPollResultCollectionViewController.swift in Sources */,
 				6556916B1B7D398900525E00 /* URMainViewController.swift in Sources */,
 				974249371BFBDDA20024384E /* URFlowRule.swift in Sources */,
 				65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */,
@@ -1850,13 +1971,17 @@
 				65A45CEF1B8810DE001C6808 /* URInviteTableViewCell.swift in Sources */,
 				658D858C1B554C9000DFB949 /* URStoriesTableViewController.swift in Sources */,
 				974249311BFBD81B0024384E /* URFlowActionSet.swift in Sources */,
+				6547D3DA1C76324E00938236 /* URAudioMedia.swift in Sources */,
 				6556918A1B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift in Sources */,
+				658D14BD1C9B4DB7009A63A5 /* URMediaFileView.swift in Sources */,
 				6548506F1BB1FADA0002A3D5 /* URPollResultTableViewController.swift in Sources */,
 				65F7DA2A1C073544001AFA22 /* URFireBaseManager.swift in Sources */,
 				656561FE1BD58E9600EBA9BD /* URSettingsTableViewController.swift in Sources */,
 				65B16FDC1BB5E7AB00BDBDEE /* URProfileViewController.swift in Sources */,
+				65F077251CB5A9BF00A1D608 /* URChatAudioItem.swift in Sources */,
 				655690A11B7D150D00525E00 /* URChatRoom.swift in Sources */,
 				6530BE6A1B974ADB00C9707C /* SWRevealViewController.m in Sources */,
+				658D14C61C9B54EE009A63A5 /* URMediaVideoPhoneView.swift in Sources */,
 				6515FBA21B8CA4D000CEEC3B /* URChatRoomType.swift in Sources */,
 				65409FF51B4C9E7C00344D75 /* URUserRegisterViewController.swift in Sources */,
 				9742492F1BFBD4FE0024384E /* URFlowDefinition.swift in Sources */,
@@ -1868,6 +1993,7 @@
 				6556907F1B7D0A5200525E00 /* URUser.swift in Sources */,
 				659A7A931B4F6C3100B56983 /* URDateUtil.swift in Sources */,
 				65D61BAB1C111EBD0059F1B0 /* URWriteStoryTableViewCell.swift in Sources */,
+				6523C2121CBD8C72007523CB /* URMediaVideoView.swift in Sources */,
 				65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */,
 				97A5A6F61C0E2B3A006CBA25 /* URGcmNotification.swift in Sources */,
 				97B2FABB1C061C83000820BD /* NSUserDefaults+DemoSettings.m in Sources */,
@@ -1876,7 +2002,7 @@
 				656562021BD5912500EBA9BD /* URNotificationViewController.swift in Sources */,
 				974249281BFBB6D40024384E /* URFlowRun.swift in Sources */,
 				656A2BE41B98C7780079BD6A /* URGCMManager.swift in Sources */,
-				65C03BDB1CB1A100001070C0 /* ISScrollViewPage.swift in Sources */,
+				658D14B21C99F497009A63A5 /* URAudioView.swift in Sources */,
 				9742492D1BFBD08B0024384E /* URFlowManager.swift in Sources */,
 				65A45CD21B8768D8001C6808 /* URNewsTableViewCell.swift in Sources */,
 				65F8B3011BE2A76A009F9CAB /* URNewsCategory.swift in Sources */,
@@ -1884,6 +2010,7 @@
 				657629161BE135010095772F /* URModerationViewController.swift in Sources */,
 				65A45CCC1B868481001C6808 /* URUserLoginManager.swift in Sources */,
 				9742492A1BFBCEB90024384E /* URRapidPRODateTransform.swift in Sources */,
+				6567C1D01CB5A4D10041F004 /* URChatVideoPhoneItem.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1906,13 +2033,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		6547D3DF1C77AB5F00938236 /* Localizable.strings */ = {
+		659A7A981B51EFA800B56983 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				6547D3DE1C77AB5F00938236 /* en */,
-				6547D3E01C77AB6500938236 /* pt-BR */,
-				6547D3E11C77AB6900938236 /* es */,
-				6581159F1C77B1A0001AC7EA /* Base */,
+				659A7A991B51EFE100B56983 /* pt-BR */,
+				65711A2C1C40502500E05BBD /* es */,
+				65609F141C714E130039A8AB /* en */,
+				65609F151C71517B0039A8AB /* pt */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
@@ -1937,8 +2064,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (3R99K72W3Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1960,7 +2086,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "4245c382-0b92-41ea-a61d-1dfb749c4353";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1984,8 +2110,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (3R99K72W3Z)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2000,7 +2125,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "4245c382-0b92-41ea-a61d-1dfb749c4353";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2009,7 +2134,7 @@
 		};
 		65409FDB1B4C842700344D75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 507D21513E08C736F7EBC680 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2027,13 +2152,13 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
 		65409FDC1B4C842700344D75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 80289A0F74769B82DBFF3EA2 /* Pods.release.xcconfig */;
+			baseConfigurationReference = 1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2051,7 +2176,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

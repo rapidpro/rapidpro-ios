@@ -30,6 +30,10 @@ class URStoryManager: NSObject {
         return "story_moderate"
     }
     
+    class func pathStoryLike() -> String {
+        return "story_like"
+    }
+    
     func getStories(storiesToModerate:Bool) {
                 
         URFireBaseManager.sharedInstance()
@@ -67,7 +71,12 @@ class URStoryManager: NSObject {
                                 story.contributions = total
                                 story.userObject = user
                                 
-                                delegate.newStoryReceived(story)
+                                URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
+
+                                    story.like = likeCount
+                                    delegate.newStoryReceived(story)
+                                    
+                                })
                             })
                         }
                     })
@@ -75,8 +84,50 @@ class URStoryManager: NSObject {
             })
     }
     
+    class func getStoryLikes(storyKey:String,completion:(likeCount:Int) -> Void) {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(self.pathStoryLike())
+            .childByAppendingPath(storyKey)
+            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
+                completion(likeCount: Int(snapshot.childrenCount))
+            })
+    }
+    
+    class func checkIfStoryWasLiked(storyKey:String,completion:(liked:Bool) -> Void) {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(self.pathStoryLike())
+            .childByAppendingPath(storyKey)
+            .childByAppendingPath(URUser.activeUser()?.key)
+            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
+                completion(liked: snapshot.exists())
+            })
+    }
+    
+    class func saveStoryLike(key:String) -> Void {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(self.pathStoryLike())
+            .childByAppendingPath(key)
+            .setValue([URUser.activeUser()!.key:true])
+    }
+    
+    class func removeStoryLike(key:String) -> Void {
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(self.pathStoryLike())
+            .childByAppendingPath(key)
+            .childByAppendingPath(URUser.activeUser()!.key)
+            .removeValue()
+    }
+    
     class func saveStory(story:URStory,isModerator:Bool, completion:(Bool) -> Void) {
-                
+        
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URPollViewIPadController" customModule="ureport" customModuleProvider="target">
+            <connections>
+                <outlet property="contentLeftView" destination="qPo-gG-QDb" id="sn1-1I-rTO"/>
+                <outlet property="leftView" destination="Pqp-EW-lcx" id="gNh-j2-QcA"/>
+                <outlet property="rightView" destination="nPy-wG-MYW" id="erp-F1-Z1a"/>
+                <outlet property="view" destination="iN0-l3-epB" id="R6n-v0-axe"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="1024" height="619"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ijL-5i-ogK">
+                    <rect key="frame" x="0.0" y="0.0" width="1024" height="619"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pqp-EW-lcx">
+                            <rect key="frame" x="0.0" y="0.0" width="485" height="619"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qPo-gG-QDb">
+                                    <rect key="frame" x="23" y="0.0" width="438" height="619"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="qPo-gG-QDb" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="leading" constant="23" id="7M6-FP-FhW"/>
+                                <constraint firstItem="qPo-gG-QDb" firstAttribute="top" secondItem="Pqp-EW-lcx" secondAttribute="top" id="9W0-ht-sOs"/>
+                                <constraint firstAttribute="trailing" secondItem="qPo-gG-QDb" secondAttribute="trailing" constant="24" id="Lf2-JZ-0TX"/>
+                                <constraint firstAttribute="bottom" secondItem="qPo-gG-QDb" secondAttribute="bottom" id="k0b-lp-1fH"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nPy-wG-MYW">
+                            <rect key="frame" x="485" y="0.0" width="515" height="619"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="nPy-wG-MYW" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="0Tn-dc-w4m"/>
+                        <constraint firstItem="nPy-wG-MYW" firstAttribute="width" secondItem="Pqp-EW-lcx" secondAttribute="width" multiplier="2:1.8" constant="-23.888888888888914" id="1an-pV-NrM"/>
+                        <constraint firstItem="Pqp-EW-lcx" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="QVO-q7-C2p"/>
+                        <constraint firstItem="nPy-wG-MYW" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="trailing" id="Ut7-Zt-YeG"/>
+                        <constraint firstAttribute="bottom" secondItem="nPy-wG-MYW" secondAttribute="bottom" id="bjk-Wn-cFw"/>
+                        <constraint firstAttribute="trailing" secondItem="nPy-wG-MYW" secondAttribute="trailing" constant="24" id="er9-zS-plk"/>
+                        <constraint firstAttribute="bottom" secondItem="Pqp-EW-lcx" secondAttribute="bottom" id="oIW-GW-aSC"/>
+                        <constraint firstItem="Pqp-EW-lcx" firstAttribute="leading" secondItem="ijL-5i-ogK" secondAttribute="leading" id="rLG-0M-Mg1"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="ijL-5i-ogK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IWE-hq-F0n"/>
+                <constraint firstAttribute="trailing" secondItem="ijL-5i-ogK" secondAttribute="trailing" id="NvU-6r-bJa"/>
+                <constraint firstAttribute="bottom" secondItem="ijL-5i-ogK" secondAttribute="bottom" id="n9O-K5-BLk"/>
+                <constraint firstItem="ijL-5i-ogK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v3q-3T-08Q"/>
+            </constraints>
+            <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="401" y="-70.5"/>
+        </view>
+    </objects>
+</document>

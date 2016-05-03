@@ -86,7 +86,7 @@
 "profile_ranking" = "Ranking";
 "list_stories_error" = "No has publicado historias";
 "profile_polls" = "Encuesta: %d";
-"profile_stories" = "Historias: %d";
+"profile_stories" = "Historias: %d$s";
 "menu_points" = "Puntos: %d";
 "label_chat_groups" = "Grupos abiertos";
 "chat_groups_join" = "Unirse";
@@ -296,6 +296,8 @@
 "file" = "Archivo";
 "camera" = "Cámara";
 "video" = "Vídeo";
+"attachments" = "%d anexos";
+"likes" = "%d curtidas";
 
 //TUTORIAL
 

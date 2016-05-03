@@ -17,9 +17,40 @@ enum URUploadPath:String {
 
 class URAWSManager: NSObject {
    
+    class func uploadAudio(audioMedia:URAudioMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
+        
+        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))-iOS-audio.m4a")
+        
+        let transferManager = AWSS3TransferManager.defaultS3TransferManager()
+        let uploadRequest = AWSS3TransferManagerUploadRequest()
+        
+        uploadRequest.body = NSURL(fileURLWithPath: audioMedia.path)
+        uploadRequest.key = fileName
+        uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
+        
+        transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
+            ProgressHUD.dismiss()
+            if task!.error != nil{
+                print("Error on send file to AWS \(task!.error)")
+            }else {
+                
+                let file = URMedia()
+                
+                file.type = URConstant.Media.AUDIO
+                file.id = fileName
+                file.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                file.metadata = audioMedia.metadata
+                
+                completion(file)
+            }
+            return nil
+        }
+        
+    }
+    
     class func uploadFile(localMedia:URLocalMedia,uploadPath:URUploadPath,completion:(URMedia?) -> Void) {
         
-        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))\(localMedia.fileName)")
+        let fileName = NSProcessInfo.processInfo().globallyUniqueString.stringByAppendingString("-\(NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000)))\(localMedia.metadata!["filename"] as! String)")
         
         let transferManager = AWSS3TransferManager.defaultS3TransferManager()
         let uploadRequest = AWSS3TransferManagerUploadRequest()
@@ -39,6 +70,7 @@ class URAWSManager: NSObject {
                 file.type = URConstant.Media.FILE
                 file.id = fileName
                 file.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
+                file.metadata = localMedia.metadata
                 
                 completion(file)
             }

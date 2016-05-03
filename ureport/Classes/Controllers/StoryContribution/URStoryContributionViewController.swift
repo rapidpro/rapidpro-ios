@@ -12,7 +12,7 @@ import youtube_ios_player_helper
 import SDWebImage
 import MediaPlayer
 
-class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, NYTPhotosViewControllerDelegate, URStoryContributionTableViewCellDelegate {
+class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URStoryContributionTableViewCellDelegate {
     
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbMarkers: UILabel!
@@ -20,16 +20,21 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     @IBOutlet weak var lbContributions: UILabel!
+    @IBOutlet weak var lbLike: UILabel?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtContribute: UITextField!
-    @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var imgLike: UIImageView?
+    @IBOutlet weak var imgProfile: UIImageView?
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var roundedView: UIView!
+    @IBOutlet weak var roundedView: UIView?
     @IBOutlet weak var bottomView: UIView!
+    @IBOutlet weak var btLike: UIButton!
     @IBOutlet weak var contributionView: UIView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewMediaHeight: NSLayoutConstraint!
+    @IBOutlet weak var lbNoContributions: UILabel?
+    @IBOutlet weak var viewNoContribution: ISRoundedView?
     @IBOutlet weak var lbContentHeight: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
@@ -38,10 +43,13 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     var listContribution:[URContribution] = []
     var story:URStory!
     var photos:[PhotoShow] = []
-    var photosViewController:NYTPhotosViewController!
     
     init(story:URStory) {
-        super.init(nibName: "URStoryContributionViewController", bundle: nil)
+        if URConstant.isIpad {
+            super.init(nibName: "URStoryContributionViewIPadController", bundle: nil)
+        }else {
+            super.init(nibName: "URStoryContributionViewController", bundle: nil)
+        }
         self.story = story
     }
 
@@ -62,8 +70,12 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Clear)
-        URNavigationManager.navigation.followScrollView(self.scrollView, delay: 50.0)
+        
+        URNavigationManager.setupNavigationBarWithType(URConstant.isIpad ? .Blue : .Clear)
+        
+        if !URConstant.isIpad {
+            URNavigationManager.navigation.followScrollView(self.scrollView, delay: 50.0)
+        }
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Story Detail")
@@ -84,19 +96,18 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
         self.lbContent.setSizeFont(14)
         
-        if story.medias == nil {
-            self.scrollViewMediaHeight.constant = 0
+        if !URConstant.isIpad {
+            if story.medias == nil {
+                self.scrollViewMediaHeight.constant = 0
+            }
+            
+            let scrollViewHeight = self.tableView.contentSize.height + self.tableView.frame.origin.y
+            
+            self.tableViewHeight.constant = self.tableView.contentSize.height
+            self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
+            self.contentViewHeight.constant = self.scrollView.contentSize.height + contributionView.frame.size.height + 10
+            
         }
-        
-        var scrollViewHeight = self.lbContent.frame.size.height + self.contributionView.frame.height + self.topView.frame.size.height + self.scrollViewMedias.frame.height + 70
-
-        self.tableViewHeight.constant = self.tableView.contentSize.height
-        scrollViewHeight = scrollViewHeight + self.tableView.contentSize.height
-        
-        self.contentViewHeight.constant = scrollViewHeight
-        self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
-        
-        self.view.layoutIfNeeded()
     }
     
     //MARK: Class Methods
@@ -110,17 +121,40 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.lbContent.text = story.content
         
         if story.userObject!.picture == nil{
-            self.imgProfile.contentMode = UIViewContentMode.Center
-            self.imgProfile.image = UIImage(named: "ic_person")
+            self.imgProfile?.contentMode = UIViewContentMode.Center
+            self.imgProfile?.image = UIImage(named: "ic_person")
             
-            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+            self.roundedView?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
         }else{
-            self.imgProfile.sd_setImageWithURL(NSURL(string: story.userObject!.picture))
+            self.imgProfile?.sd_setImageWithURL(NSURL(string: story.userObject!.picture))
+        }
+
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like]), forState: UIControlState.Normal)
+        
+        URStoryManager.checkIfStoryWasLiked(story.key) { (liked) -> Void in
+             self.btLike.enabled = true
+             self.setupLikeButtonAsLiked(liked)
         }
         
     }
     
+    func incrementLikeButton() {
+        let likeCount = story.like + 1
+        story.like = likeCount
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
+    }
+    
+    func decrementLikeButton() {
+        let likeCount = story.like - 1
+        story.like = likeCount
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
+    }
+    
     func setupTableView() {
+        
+        if URConstant.isIpad {
+            self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
+        }
         
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
@@ -152,7 +186,55 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
     }
     
+    //MARK: Button Events
+    
+    @IBAction func btSendTapped(button:UIButton) {
+        sendContribution(self.txtContribute)
+    }
+    
+    @IBAction func btLikeTapped(button:UIButton) {
+        if button.selected == true {
+            URStoryManager.removeStoryLike(self.story.key)
+            setupLikeButtonAsLiked(false)
+            decrementLikeButton()
+        }else{
+            URStoryManager.saveStoryLike(self.story.key)
+            setupLikeButtonAsLiked(true)
+            incrementLikeButton()
+        }
+    }
+    
     //MARK: Class Methods
+    
+    func sendContribution(textField:UITextField) {
+        if !textField.text!.isEmpty{
+            
+            let user = URUser()
+            user.key = URUser.activeUser()!.key
+            
+            let contribution = URContribution()
+            contribution.content = textField.text!
+            contribution.author = user
+            contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+            
+            URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
+                URUserManager.incrementUserContributions(user.key)
+                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: self.listContribution.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                textField.text = ""
+                textField.resignFirstResponder()
+            })
+        }
+    }
+    
+    func setupLikeButtonAsLiked(liked:Bool) {
+        if liked == true {
+            self.btLike.selected = true
+            self.btLike.setImage(UIImage(named: "likeBigPressed"), forState: UIControlState.Selected)
+        }else{
+            self.btLike.selected = false
+            self.btLike.setImage(UIImage(named: "likeBig"), forState: UIControlState.Normal)
+        }
+    }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
@@ -178,17 +260,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func setupScrollView() {
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-    }
-    
-    func imgViewTapped(sender:UITapGestureRecognizer) {
-        
-        photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
-        photosViewController.delegate = self
-        
-        presentViewController(photosViewController, animated: true) { () -> Void in
-           UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-        }
-        
     }
     
     //MARK: URStoryContributionTableViewCellDelegate
@@ -221,6 +292,8 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     //MARK: ContributionManagerDelegate
     
     func newContributionReceived(contribution: URContribution) {
+        self.viewNoContribution?.hidden = true
+        self.lbNoContributions?.hidden = true
         listContribution.append(contribution)
         self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [listContribution.count])
         tableView.reloadData()
@@ -230,23 +303,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     //MARK: TextFieldDelegate
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if !textField.text!.isEmpty{
-            
-            let user = URUser()
-            user.key = URUser.activeUser()!.key
-            
-            let contribution = URContribution()
-            contribution.content = textField.text!
-            contribution.author = user
-            contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
-            
-            URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
-                URUserManager.incrementUserContributions(user.key)
-                textField.text = ""
-                textField.resignFirstResponder()
-            })
-        }
-        
+        sendContribution(textField)
         return true
     }
 
@@ -258,75 +315,5 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             return false
         }
     }
-    
-    // MARK: - NYTPhotosViewControllerDelegate
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, didDisplayPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
 
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, handleActionButtonTappedForPhoto photo: NYTPhoto!) -> Bool {
-        
-        if UIDevice.currentDevice().userInterfaceIdiom == .Pad {
-            
-            let shareActivityViewController = UIActivityViewController(activityItems: [photo.image], applicationActivities: nil)
-            
-            shareActivityViewController.completionWithItemsHandler = { (activity, success, items, error) in
-                if success {
-                    photosViewController.delegate?.photosViewController!(photosViewController, actionCompletedWithActivityType: activity)
-                }
-            }
-            
-            shareActivityViewController.popoverPresentationController?.barButtonItem = photosViewController.rightBarButtonItem
-            photosViewController.presentViewController(shareActivityViewController, animated: true, completion: nil)
-            
-            return true
-        }
-        
-        return false
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, referenceViewForPhoto photo: NYTPhoto!) -> UIView! {
-        if photo as? PhotoShow == photos[0] {
-            /** Swift 1.2
-            *  if photo as! ExamplePhoto == photos[PhotosProvider.NoReferenceViewPhotoIndex]
-            */
-            return nil
-        }
-        return nil
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, loadingViewForPhoto photo: NYTPhoto!) -> UIView! {
-        if let _ = photo as? PhotoShow {
-            let label = UILabel()
-//            label.text = "Custom Loading..."
-//            label.textColor = UIColor.greenColor()
-            return label
-        }
-        return nil
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, captionViewForPhoto photo: NYTPhoto!) -> UIView! {
-        if let _ = photo as? PhotoShow {
-            let label = UILabel()
-            label.text = photo.attributedCaptionTitle.string
-            label.textColor = UIColor.whiteColor()
-            label.backgroundColor = UIColor.clearColor()
-            return label
-        }
-        return nil
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, didNavigateToPhoto photo: NYTPhoto!, atIndex photoIndex: UInt) {
-        print("Did Navigate To Photo: \(photo) identifier: \(photoIndex)")
-    }
-    
-    func photosViewController(photosViewController: NYTPhotosViewController!, actionCompletedWithActivityType activityType: String!) {
-        print("Action Completed With Activity Type: \(activityType)")
-    }
-    
-    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
-    }
-    
 }

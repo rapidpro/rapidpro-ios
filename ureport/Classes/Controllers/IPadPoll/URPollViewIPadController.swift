@@ -1,0 +1,101 @@
+//
+//  URPollViewIPadController.swift
+//  ureport
+//
+//  Created by Daniel Amaral on 28/04/16.
+//  Copyright © 2016 ilhasoft. All rights reserved.
+//
+
+import UIKit
+
+class URPollViewIPadController: UIViewController, URClosedPollTableViewControllerDelegate {
+    
+    @IBOutlet weak var leftView: UIView!
+    @IBOutlet weak var contentLeftView: UIView!
+    @IBOutlet weak var rightView: UIView!
+    
+    var poll:URPoll?
+    
+    init() {
+        super.init(nibName: "URPollViewIPadController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    let closedPollTableViewController = URClosedPollTableViewController()
+    let pollResultTableViewController = URPollResultTableViewController()
+    let pollResultCollectionViewController = URPollResultCollectionViewController()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupUI()
+        closedPollTableViewController.delegate = self
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.leftView.setNeedsLayout()
+        self.leftView.layoutIfNeeded()
+        
+        self.rightView.setNeedsLayout()
+        self.rightView.layoutIfNeeded()
+        
+        self.contentLeftView.setNeedsLayout()
+        self.contentLeftView.layoutIfNeeded()
+        
+        closedPollTableViewController.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
+        closedPollTableViewController.tableView.contentSize = CGSize(width: contentLeftView.bounds.size.width, height: closedPollTableViewController.tableView.contentSize.height)
+        pollResultCollectionViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+        pollResultTableViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+        
+        closedPollTableViewController.onBoundsChanged()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        URNavigationManager.setupNavigationBarWithType(.Blue)
+    }
+    
+    //MARK: URClosedPollTableViewControllerDelegate
+    
+    func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
+        self.poll = cell.poll
+        
+        if UIDevice.currentDevice().orientation.isLandscape {
+            pollResultCollectionViewController.setPoll(self.poll!, frame: CGRect(x: 0, y: 0, width: self.rightView.frame.size.width, height: self.rightView.frame.size.height))
+        }else {
+            pollResultTableViewController.reloadWithPoll(self.poll!)
+        }
+    }
+    
+    //MARK: Class Methods
+    
+    func displayLeftContentController(content: UIViewController) {
+        self.addChildViewController(content)
+        content.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
+        content.view.backgroundColor = UIColor.clearColor()
+        self.contentLeftView.addSubview(content.view)
+        content.didMoveToParentViewController(self)
+    }
+    
+    func displayRightContentController(content: UIViewController) {
+        self.addChildViewController(content)
+        content.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+        self.rightView.addSubview(content.view)
+        content.didMoveToParentViewController(self)
+    }
+    
+    func setupUI() {
+        displayLeftContentController(closedPollTableViewController)
+        if UIDevice.currentDevice().orientation.isLandscape {
+            displayRightContentController(pollResultCollectionViewController)
+        }else{
+            displayRightContentController(pollResultTableViewController)
+        }
+    }
+    
+}
+

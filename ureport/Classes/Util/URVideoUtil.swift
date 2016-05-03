@@ -11,18 +11,17 @@ import AVFoundation
 
 class URVideoUtil: NSObject {
 
-    static let outPutURLDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString
-    static let outputURLFile = NSURL(fileURLWithPath: outPutURLDirectory.stringByAppendingPathComponent("video.mp4"))
+    static let outputURLFile = NSURL(fileURLWithPath: URFileUtil.outPutURLDirectory.stringByAppendingPathComponent("video.mp4"))
     
     class func compressVideo(inputURL: NSURL, handler:(session: AVAssetExportSession) -> Void) {
         
         let urlAsset = AVURLAsset(URL: inputURL, options: nil)
         let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality)!
         
-        URVideoUtil.removeFile(outputURLFile)
+        URFileUtil.removeFile(outputURLFile)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(outPutURLDirectory as String, withIntermediateDirectories: true, attributes: nil)
+            try NSFileManager.defaultManager().createDirectoryAtPath(URFileUtil.outPutURLDirectory as String, withIntermediateDirectories: true, attributes: nil)
             
             exportSession.outputURL = outputURLFile
             exportSession.shouldOptimizeForNetworkUse = true
@@ -36,22 +35,6 @@ class URVideoUtil: NSObject {
             print("Creating 'upload' directory failed. Error: \(error)")
         }
         
-    }
-    
-    class func removeFile(fileURL: NSURL) {
-        let filePath = fileURL.path
-        let fileManager = NSFileManager.defaultManager()
-        
-        if fileManager.fileExistsAtPath(filePath!) {
-            do {
-                try fileManager.removeItemAtPath(filePath!)
-            }catch let error as NSError {
-                print("Can't remove file \(error.localizedDescription)")
-            }
-
-        }else{
-            print("file doesn't exist")
-        }
     }
     
     class func generateThumbnail(url : NSURL) -> UIImage?{

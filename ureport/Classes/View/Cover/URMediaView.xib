@@ -41,6 +41,12 @@
                     </subviews>
                     <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
                 </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="09" lineBreakMode="middleTruncation" baselineAdjustment="alignBaselines" minimumFontSize="5" translatesAutoresizingMaskIntoConstraints="NO" id="15F-Jt-01b">
+                    <rect key="frame" x="9" y="56" width="32" height="21"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <nil key="highlightedColor"/>
+                </label>
                 <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MKz-AH-QvD" userLabel="ButtonTap">
                     <rect key="frame" x="0.0" y="0.0" width="84" height="98"/>
                     <state key="normal">
@@ -68,6 +74,7 @@
                 <outlet property="imgActive" destination="mh1-cV-bqB" id="Eqp-pS-5cS"/>
                 <outlet property="imgMedia" destination="mXW-UI-ki5" id="Aq8-1C-pnh"/>
                 <outlet property="lbCover" destination="byO-la-ROD" id="X9R-Vi-CwB"/>
+                <outlet property="lbDuration" destination="15F-Jt-01b" id="rEh-Qa-8B7"/>
                 <outlet property="lbFileName" destination="SuW-v2-zzk" id="okq-lC-wof"/>
                 <outlet property="viewBottom" destination="FiE-Vi-Edd" id="425-Nz-4ea"/>
             </connections>

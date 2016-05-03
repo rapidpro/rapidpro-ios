@@ -135,13 +135,6 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     
                     URUserManager.getByKey(authData.uid, completion: { (user,exists) -> Void in
                         if (user != nil && exists) {
-                            
-                            URRapidProManager.saveUser(user!, country: URCountry(code:user!.country),setupGroups: false, completion: { (response) -> Void in
-                                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                                URRapidProContactUtil.groupList = []
-                                print(response)
-                            })
-                            
                             URUserLoginManager.setUserAndCountryProgram(user!)
                             completion(nil,true)
                         }else{

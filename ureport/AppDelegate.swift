@@ -9,7 +9,6 @@
 import UIKit
 import Firebase
 import ObjectMapper
-import AudioToolbox
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
@@ -34,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         NSUserDefaults.saveIncomingAvatarSetting(true)
         NSUserDefaults.saveOutgoingAvatarSetting(true)
         
+        NSUserDefaults.standardUserDefaults().removeObjectForKey("audioViews")
+        
         URCountryProgramManager.deactivateSwitchCountryProgram()
         Firebase.defaultConfig().persistenceEnabled = false
         setupGoogle()
@@ -41,17 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         setupGCM(application)
         setupAWS()
         createDirectoryToImageUploads()
-        
-        URReviewModeManager.checkIfIsInReviewMode { (reviewMode) -> Void in
-            
-            let settings = URSettings.getSettings()
-            settings.reviewMode = reviewMode
-            
-            URSettings.saveSettingsLocaly(settings)
-        }
-        
         checkMainViewControllerToShow(launchOptions)
-        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
@@ -98,7 +89,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
-        let gai: GAI = GAI.sharedInstance()
+        var gai: GAI = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true
     }
     
@@ -123,23 +114,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
             URNavigationManager.setupNavigationControllerWithTutorialViewController()
         }else {
             if URUser.activeUser() != nil {
-                 if let launchOptions = launchOptions {
-                    if let userInfo = launchOptions[UIApplicationLaunchOptionsRemoteNotificationKey] as? NSDictionary{
-                        openNotification(userInfo)
-                    }
-                }else {                    
-                    URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+                var mainController: URMainViewController
+                
+                if let chatRoomKey = getChatRoomKey(launchOptions) {
+                    mainController = URMainViewController(chatRoomKey: chatRoomKey)
+                } else {
+                    mainController = URMainViewController()
                 }
+                URNavigationManager.setupNavigationControllerWithMainViewController(mainController)
             }else {
                 URNavigationManager.setupNavigationControllerWithLoginViewController()
             }
         }
     }
     
-    func getChatRoomKey(userInfo:NSDictionary) -> String? {
-        if userInfo["chatRoom"] != nil {
-            let chatRoom = convertStringToDictionary(userInfo["chatRoom"] as! String)
-            return chatRoom!["key"] as? String
+    func getChatRoomKey(launchOptions: [NSObject: AnyObject]?) -> String? {
+        if launchOptions != nil {
+            let notificationData = launchOptions![UIApplicationLaunchOptionsRemoteNotificationKey]
+            
+            if notificationData != nil && notificationData!["chatRoom"] != nil {
+                let chatRoom = convertStringToDictionary(notificationData!["chatRoom"] as! String)
+                return chatRoom!["key"] as? String
+            }
         }
         return nil
     }
@@ -168,50 +164,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         print("The GCM registration token needs to be changed.")
     }
     
-    //MARK: Notification Methods
-    
-    func openNotification(userInfo:NSDictionary) {
-        
-        var notificationType:String? = nil
-        
-        if let type = userInfo["type"] as? String {
-            notificationType = type
-        }else if let type = userInfo["gcm.notification.type"] as? String {
-            notificationType = type
-        }
-        
-        if let notificationType = notificationType {
-            switch notificationType {
-            case URConstant.NotificationType.CHAT:
-                
-                if let chatRoomKey = getChatRoomKey(userInfo) {
-                    if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
-                        URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
-                    }else{
-                        if let visibleViewController = URNavigationManager.navigation.visibleViewController {
-                            if !(visibleViewController is URMessagesViewController) {
-//                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                            }
-                        }
-                    }
-                }
-                
-                break
-            case URConstant.NotificationType.RAPIDPRO:
-                
-                if URRapidProManager.sendingAnswers {
-                    break
-                }
-                
-                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(viewControllerToShow: URClosedPollTableViewController()))
-                break
-            default:
-                break
-            }
-        }
-        
-    }
-    
     //MARK: Application Methods
     
     func applicationDidBecomeActive(application: UIApplication) {
@@ -234,17 +186,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
 
     func application(application: UIApplication, didReceiveRemoteNotification userInfo: [NSObject : AnyObject], fetchCompletionHandler completionHandler: (UIBackgroundFetchResult) -> Void) {
-        
-        if let _ = URUser.activeUser() {
-            openNotification(userInfo)
-        }
-        
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
         completionHandler(.NewData)
     }
     
     func application(application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: NSData) {
-        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken, kGGLInstanceIDAPNSServerTypeSandboxOption:URFireBaseManager.GCM_DEBUG_MODE]
+        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken, kGGLInstanceIDAPNSServerTypeSandboxOption:true]
         GGLInstanceID.sharedInstance().tokenWithAuthorizedEntity(gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions, handler: URGCMManager.registrationHandler)
     }
     

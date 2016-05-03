@@ -49,10 +49,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     var gender:String?
     let genders:[String]? = ["user_gender_male".localized,"user_gender_female".localized]
     var countries:[URCountry]!
-    var states:[URState]!
-    var districts:[URDistrict] = [URDistrict]()
-    var auxDistricts:[URDistrict] = [URDistrict]()
-    var stateBoundary:String!
+    var states:[String]!
+    var districts:[String]!
     
     var hasDistrict:Bool!
     
@@ -114,96 +112,83 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             showEmptyTextFieldAlert(self.txtDistrict)
             return
         }else if let textField = self.view.findTextFieldEmptyInView(self.view) {
-            
-            if !(URSettings.getSettings().reviewMode == true && (textField == self.txtBirthDay || textField == self.txtState || textField == self.txtGender)) {
-                showEmptyTextFieldAlert(textField)
-                return
-            }
+            showEmptyTextFieldAlert(textField)
+            return
         }
         
         self.view.endEditing(true)
         
-        if URSettings.checkIfTermsIsAccepted() == true {
+        let user:URUser = URUser()
+        
+        user.nickname = self.txtNick.text
+        user.email = self.txtEmail.text
+        user.gender = gender
+        user.gender = user.gender == URGender.Male ? "Male" : "Female"
+        user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
+        user.country = countryISO3!.code
+        user.state = self.txtState.text
+        user.publicProfile = true
+        user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code
+        URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
+        
+        ProgressHUD.show(nil)
+        
+        if (self.userInput != nil) {
+            user.key = userInput!.key
+            user.picture = userInput!.picture
+            user.type = userInput!.type
             
-            let user:URUser = URUser()
+            self.saveUser(user)
+
+        }else {
             
-            if URSettings.getSettings().reviewMode == true {
-                gender = gender == nil ? "" : gender
-                self.birthDay = self.birthDay == nil ? NSDate() : self.birthDay
-                self.txtState.text = self.txtState.text == nil ? "" : self.txtState.text
-            }
+            user.type = URType.UReport
             
-            user.nickname = self.txtNick.text
-            user.email = self.txtEmail.text
-            user.district = self.txtDistrict.text != nil ? self.txtDistrict.text : nil
-            user.gender = gender
-            user.gender = user.gender == URGender.Male ? "Male" : "Female"
-            user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
-            user.country = countryISO3!.code
-            user.state = self.txtState.text
-            user.publicProfile = true
-            user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code
-            URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
-            
-            ProgressHUD.show(nil)
-            
-            if (self.userInput != nil) {
-                user.key = userInput!.key
-                user.picture = userInput!.picture
-                user.type = userInput!.type
-                
-                self.saveUser(user)
-                
-            }else {
-                
-                user.type = URType.UReport
-                
-                URFireBaseManager.sharedInstance().createUser(user.email, password: self.txtPassword.text,
-                    withValueCompletionBlock: { error, result in
-                        ProgressHUD.dismiss()
-                        if error != nil {
-                            var msg = ""
-                            
-                            switch (error.code) {
-                            case -9:
-                                msg = "error_email_already_exists".localized
-                                break;
-                            case -5:
-                                msg = "error_valid_email".localized
-                                break;
-                            default:
-                                break
-                            }
-                            
-                            if msg.isEmpty {
-                                print(error)
-                                UIAlertView(title: "Error", message: "error_no_internet".localized, delegate: self, cancelButtonTitle: "OK").show()
-                            }else {
-                                UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "OK").show()
-                            }
-                            
-                        } else {
-                            let uid = result["uid"] as? String
-                            user.key = uid
-                            
-                            if (error != nil) {
-                                print(error)
-                            }else{
-                                
-                                self.saveUser(user)
-                                
-                                URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-                                    ProgressHUD.dismiss()
-                                    if success {
-                                        URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
-                                    }
-                                })
-                            }
+            URFireBaseManager.sharedInstance().createUser(user.email, password: self.txtPassword.text,
+                withValueCompletionBlock: { error, result in
+            ProgressHUD.dismiss()
+                    if error != nil {
+                        var msg = ""
+                        print(error.code)
+                        
+                        switch (error.code) {
+                        case -9:
+                            msg = "error_email_already_exists".localized
+                            break;
+                        case -5:
+                            msg = "error_valid_email".localized
+                            break;
+                        default:
+                            break
                         }
-                })
-                
-            }
-            
+                        
+                        if msg.isEmpty {
+                            print(error)
+                            UIAlertView(title: "Error", message: "error_no_internet".localized, delegate: self, cancelButtonTitle: "OK").show()
+                        }else {
+                            UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "OK").show()
+                        }
+                        
+                    } else {
+                        let uid = result["uid"] as? String
+                        user.key = uid
+                        
+                        if (error != nil) {
+                            print(error)
+                        }else{
+                        
+                            self.saveUser(user)
+                            
+                            URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
+                                ProgressHUD.dismiss()
+                                if success {
+                                    URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+                                }
+                            })
+                        }
+                    }
+            })
+        
         }
         
     }
@@ -221,21 +206,19 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         URUserManager.save(user)
         ProgressHUD.dismiss()
         
-        if updateMode == true {
-            UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
-            URNavigationManager.navigation.popViewControllerAnimated(true)
-        }
+        if updateMode == false {
         
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary:NSDictionary) -> Void in
-            
-            URRapidProManager.saveUser(user, country: URCountry(code:user.country),setupGroups: !self.updateMode, completion: { (response) -> Void in
-                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                URRapidProContactUtil.groupList = []
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:user.country)) { (rapidProUserDictionary:NSDictionary) -> Void in
+            URRapidProManager.saveUser(user, country: URCountry(code:user.country), completion: { (response) -> Void in
                 print(response)
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             })
         }
-        
+            
+        }else {
+            UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
+            URNavigationManager.navigation.popViewControllerAnimated(true)
+        }
     }
     
     func setupUIWithUserData() {
@@ -276,17 +259,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     private func checkUserCountry() {
+        self.country = URCountry.getCurrentURCountry()
+        self.countryISO3 = URCountry(code:URCountry.getISO3CountryCodeByISO2Code(self.country!.code!))
+        self.txtCountry.text = self.country?.name
         
         self.txtState.enabled = true
-        
-        if updateMode != nil && updateMode == true {
-            self.country = URCountry(code: URCountry.getISO2CountryCodeByISO3Code(self.userInput!.country))
-            self.txtCountry.text = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: self.userInput!.country)).name
-        }else{
-            self.country = URCountry.getCurrentURCountry()
-            self.countryISO3 = URCountry(code:URCountry.getISO3CountryCodeByISO2Code(self.country!.code!))
-            self.txtCountry.text = self.country?.name
-        }
         
         if self.userInput != nil{
             loadState(false)
@@ -355,10 +332,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         if data.value!.objectForKey("geonames") != nil {
                             for index in 0...data.value!.objectForKey("geonames")!.count-1 {
                                 let geoName:NSDictionary = data.value!.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
-                                self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))
+                                self.states.append(geoName["adminName1"] as! String)
                             }
                             
-                            self.states = self.states.sort(){$0.name < $1.name}
+                            self.states = self.states.sort(){$0 < $1}
                             
                             self.pickerStates?.reloadAllComponents()
                         }else {
@@ -429,42 +406,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
     }
     
-    func setNeedDistrict(needDistrict:Bool) {
-        if needDistrict == true {
-            self.hasDistrict = true
-            
-            self.txtDistrict.placeholder = "district".localized
-            
-            self.topDisctrictView.constant = 8
-            self.heightDisctrictView.constant = 50
-            
-            self.pickerDistricts!.reloadAllComponents()
-        }else {
-            self.hasDistrict = false
-            self.txtDistrict.placeholder = nil
-            self.topDisctrictView.constant = 0
-            self.heightDisctrictView.constant = 0
-        }
-        
-        self.view.layoutIfNeeded()
-        
-    }
-    
-    func filterDistricts() {
-        
-        self.txtDistrict.text = ""
-        
-        districts = auxDistricts.filter {
-            return $0.parent == stateBoundary
-        }
-
-        if districts.isEmpty {
-            setNeedDistrict(false)
-        }else{
-            setNeedDistrict(true)
-        }
-    }
-    
     func dateChanged(sender:AnyObject) {
         let datePicker:UIDatePicker? = sender as? UIDatePicker
         self.birthDay = datePicker!.date
@@ -514,13 +455,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.txtGender.text = (row == 0) ? URGender.Male : URGender.Female
             return self.genders![row]
         }else if pickerView == self.pickerStates {
-            self.stateBoundary = self.states[row].boundary
-            self.txtState.text = self.states[row].name
-            filterDistricts()            
-            return self.states[row].name
+            self.txtState.text = self.states[row]
+            return self.states[row]
         }else if pickerView == self.pickerDistricts {
-            self.txtDistrict.text = self.districts[row].name
-            return self.districts[row].name
+            self.txtDistrict.text = self.districts[row]
+            return self.districts[row]
         }else{
             return ""
         }
@@ -541,7 +480,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             self.txtState.text = ""
             self.txtDistrict.text = ""
             
-            URRapidProManager.getStatesByCountry(countryISO3!, completion: { (states:[URState]?, districts:[URDistrict]?) -> Void in
+            URRapidProManager.getStatesByCountry(countryISO3!, completion: { (states:[String]?, districts:[String]?) -> Void in
                 
                 self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                 
@@ -553,13 +492,23 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 }
                 
                 if let districts = districts {
-                    if !districts.isEmpty {
-                        self.districts = districts
-                        self.auxDistricts = self.districts
-                    }
+                    self.hasDistrict = true
+                    self.districts = districts
+                    
+                    self.txtDistrict.placeholder = "district".localized
+                    
+                    self.topDisctrictView.constant = 8
+                    self.heightDisctrictView.constant = 50
+                    
+                    self.pickerDistricts!.reloadAllComponents()
                 }else {
-                    self.setNeedDistrict(false)
+                    self.hasDistrict = false
+                    self.txtDistrict.placeholder = nil
+                    self.topDisctrictView.constant = 0
+                    self.heightDisctrictView.constant = 0
                 }
+                
+                self.view.layoutIfNeeded()
                 
             })
             
@@ -572,11 +521,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
             self.txtGender.text = self.genders![row]
         }else if pickerView == self.pickerStates {
-            self.stateBoundary = self.states[row].boundary
-            self.txtState.text = self.states[row].name
-            
-            filterDistricts()
-            
+            self.txtState.text = self.states[row]
         }
     }
     

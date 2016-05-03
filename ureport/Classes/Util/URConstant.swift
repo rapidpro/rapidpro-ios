@@ -13,6 +13,8 @@ struct URConstant {
     static let keyPath = NSBundle.mainBundle().pathForResource("Key", ofType: "plist")
     static let keyDictionary = NSDictionary(contentsOfFile: URConstant.keyPath!)
     
+    static let isIpad = UIDevice.currentDevice().userInterfaceIdiom == .Pad
+    
     struct Color {
         static let PRIMARY = UIColor(rgba: "#42b6e7")
         static let PRIMARY_DARK = UIColor(rgba: "#3aadda")
@@ -31,6 +33,12 @@ struct URConstant {
         static let SIGNUP_PRIMARY_DARK = UIColor(rgba: "#f7bb01")
         static let CONFIRM_INFO_PRIMARY = UIColor(rgba: "#01d1db")
         static let CONFIRM_INFO_PRIMARY_DARK = UIColor(rgba: "#00bbc2")
+        static let MEDIA_CAMERA = UIColor(rgba: "#16B1F0")
+        static let MEDIA_GALLERY = UIColor(rgba: "#FFBB42")
+        static let MEDIA_VIDEOPHONE = UIColor(rgba: "#B438CE")
+        static let MEDIA_FILE = UIColor(rgba: "#FA741A")
+        static let MEDIA_AUDIO = UIColor(rgba: "#1CD355")
+        static let MEDIA_YOUTUBE = UIColor(rgba: "#F13A41")
     }
 
     struct Gamefication {
@@ -121,13 +129,8 @@ struct URConstant {
     
     struct RapidPro {
         static let GLOBAL = "GLOBAL"
-        static let API_URL = "https://rapidpro.io/api/v1/"
+        static let API_URL = "https://api.rapidpro.io/api/v1/"
         static let API_NEWS = "http://ureport.in/api/v1/stories/org/"
-    }
-    
-    struct NotificationType {
-        static let RAPIDPRO = "Rapidpro"
-        static let CHAT = "Chat"
     }
     
     struct Gcm {

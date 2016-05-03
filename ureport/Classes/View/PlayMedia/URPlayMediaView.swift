@@ -11,12 +11,14 @@ import SDWebImage
 import MediaPlayer
 import youtube_ios_player_helper
 import NYTPhotoViewer
+import AVFoundation
+import AVKit
 
 protocol URPlayMediaViewDelegate {
     func playMediaViewDidTap(playMediaView:URPlayMediaView)
 }
 
-class URPlayMediaView: UIView {
+class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
 
     static let defaultFrame = CGRect(x: 0, y: 0, width: 100, height: 100)
     
@@ -42,36 +44,6 @@ class URPlayMediaView: UIView {
         imgView.contentMode = UIViewContentMode.ScaleAspectFill
         imgView.userInteractionEnabled = true
         return imgView
-    }
-    
-    func videoHasFinishedPlaying(notification: NSNotification){
-        
-        print("Video finished playing")
-        
-        /* Find out what the reason was for the player to stop */
-        let reason =
-        notification.userInfo![MPMoviePlayerPlaybackDidFinishReasonUserInfoKey]
-            as! NSNumber?
-        
-        if let theReason = reason{
-            
-            let reasonValue = MPMovieFinishReason(rawValue: theReason.integerValue)
-            
-            switch reasonValue!{
-            case .PlaybackEnded:
-                /* The movie ended normally */
-                print("Playback Ended")
-            case .PlaybackError:
-                /* An error happened and the movie ended */
-                print("Error happened")
-            case .UserExited:
-                /* The user exited the player */
-                print("User exited")
-            }
-            
-            print("Finish Reason = \(theReason)")
-        }
-        
     }
     
     func setupViewWithMedia(viewController:UIViewController,media:URMedia) {
@@ -113,12 +85,37 @@ class URPlayMediaView: UIView {
             })
         }else if media.type == URConstant.Media.FILE {
             let backgroundView = UIView(frame: URPlayMediaView.defaultFrame)
-            backgroundView.backgroundColor = UIColor.orangeColor()
+            backgroundView.backgroundColor = URConstant.Color.MEDIA_FILE
             
             let fileIconImgView = UIImageView(image: UIImage(named: "icon_file"))
             fileIconImgView.contentMode = UIViewContentMode.Center
             fileIconImgView.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
             backgroundView.addSubview(fileIconImgView)
+            self.addSubview(backgroundView)
+            
+        }else if media.type == URConstant.Media.AUDIO {
+
+            let backgroundView = UIView(frame: URPlayMediaView.defaultFrame)
+            backgroundView.backgroundColor = URConstant.Color.MEDIA_AUDIO
+            
+            let audioIconImgView = UIImageView(image: UIImage(named: "ic_music_note_white"))
+            audioIconImgView.contentMode = UIViewContentMode.Center
+            audioIconImgView.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
+            backgroundView.addSubview(audioIconImgView)
+            
+            let lbDuration = UILabel(frame: CGRect(x: 2, y: 75, width: 20, height: 30))
+            lbDuration.textAlignment = NSTextAlignment.Left
+            lbDuration.adjustsFontSizeToFitWidth = true
+            lbDuration.font = lbDuration.font.fontWithSize(12)
+            lbDuration.textColor = UIColor.whiteColor()
+            
+            if media.metadata != nil && media.metadata!["duration"] != nil {
+                print("\(media.metadata!["duration"])")
+                lbDuration.text = "\(media.metadata!["duration"]!)"
+            }
+            
+            backgroundView.addSubview(lbDuration)
+            
             self.addSubview(backgroundView)
             
         }
@@ -139,8 +136,10 @@ class URPlayMediaView: UIView {
             let photo = PhotoShow(image: image, attributedCaptionTitle: title)
             
             let photosViewController = NYTPhotosViewController(photos: [photo])
+            photosViewController.delegate = self
             
             self.parentViewController.presentViewController(photosViewController, animated: true) { () -> Void in
+                UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
             }
             
         }else if media.type == URConstant.Media.VIDEO {
@@ -154,15 +153,12 @@ class URPlayMediaView: UIView {
                 object: nil)
             
             let url = NSURL(string: media.url)!
-
-            let moviePlayer = MPMoviePlayerViewController(contentURL: url)
-
-            moviePlayer.moviePlayer.controlStyle = .Fullscreen
-            moviePlayer.moviePlayer.prepareToPlay()
-            moviePlayer.moviePlayer.play()
-            moviePlayer.moviePlayer.setFullscreen(false, animated: true)
-
-            self.parentViewController.presentMoviePlayerViewControllerAnimated(moviePlayer)
+            
+            let playerController = AVPlayerViewController()
+            playerController.player = AVPlayer(URL: url)
+            playerController.player!.play()
+            
+            self.parentViewController.presentViewController(playerController, animated: true, completion: nil)
             
         }else if media.type == URConstant.Media.FILE {
             
@@ -174,8 +170,25 @@ class URPlayMediaView: UIView {
                 print("invalid url")
             }
             
+        }else if media.type == URConstant.Media.AUDIO {
+            
+            let audioRecorderViewController = URAudioRecorderViewController(audioURL: media.url)
+            
+            audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            URNavigationManager.navigation.presentViewController(audioRecorderViewController, animated: true) { () -> Void in
+                UIView.animateWithDuration(0.3) { () -> Void in
+                    audioRecorderViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
+                }
+            }
+            
         }
         
+    }
+    
+    //MARK: PhotosViewControllerDelegate
+    
+    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController) {
+        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
     }
     
 }

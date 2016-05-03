@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate {
     
     let imgViewHistoryHeight:CGFloat = 188.0
-    let fullHeightTableViewCell:CGFloat = 471
+    let fullHeightTableViewCell:CGFloat = 489
     let contentViewBottom = 2
     let storyManager = URStoryManager()
     var storyList:[URStory] = []
@@ -93,17 +93,17 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
-        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true {
+        if indexPath.row == 0 && filterStoriesToModerate == false{
             return 75
         }
         
-        if indexPath.row < self.storyList.count {
-            let story = storyList[indexPath.row]
+        if indexPath.row <= self.storyList.count {
+            let story = storyList[filterStoriesToModerate == false ? (indexPath.row - 1) : indexPath.row]
             
             if story.cover != nil && story.cover.url != nil {
-                return 471
+                return fullHeightTableViewCell
             }else {
-                return 471 - imgViewHistoryHeight
+                return fullHeightTableViewCell - imgViewHistoryHeight
             }
         }else {
             return 245
@@ -113,14 +113,14 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true{
+        if indexPath.row == 0 && filterStoriesToModerate == false {
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URWriteStoryTableViewCell.self), forIndexPath: indexPath) as! URWriteStoryTableViewCell
             return cell
-        }else if indexPath.row < self.storyList.count {
+        }else if self.storyList.count >= indexPath.row {
         
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
             
-            let story = storyList[indexPath.row]
+            let story = storyList[filterStoriesToModerate == false ? (indexPath.row - 1) : indexPath.row]
             cell.delegate = self
             cell.viewController = self
             cell.setupCellWith(story,moderateUserMode: self.filterStoriesToModerate)
@@ -159,7 +159,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     func loadNews() {
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
-            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
+            let url = "\(URConstant.RapidPro.API_NEWS)\(org)"
             Alamofire.request(.GET, url, headers: nil).responseObject({ (response:URAPIResponse<URNews>?, error:ErrorType?) -> Void in
                 if let response = response {
                     self.newsList = response.results
@@ -200,15 +200,6 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     func newStoryReceived(story: URStory) {
-        
-        if story.medias != nil {
-            for media in story.medias {
-                if media.type == URConstant.Media.AUDIO {
-                    return
-                }
-            }
-        }
-        
         storyList.insert(story, atIndex: 0)
         if filterStoriesToModerate == false {
             self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: (storyList.count - index)+1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)

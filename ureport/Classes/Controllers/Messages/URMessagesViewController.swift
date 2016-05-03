@@ -17,7 +17,7 @@ protocol URMessagesViewControllerDelegate {
     func didDismissJSQDemoViewController(messagesViewController:URMessagesViewController)
 }
 
-class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, NYTPhotosViewControllerDelegate {
+class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaSourceViewControllerDelegate, URAudioRecorderViewControllerDelegate {
     
     var chatRoom:URChatRoom!
     let chatMessage:URChatMessageManager = URChatMessageManager()
@@ -39,6 +39,15 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     var mediaCount:Int!
     var userBlocked:Bool!
     
+    var audioViews:[URAudioView] = []
+    
+    var messageIndex = 0
+    var chatMessageList:[URChatMessage] = []
+    let mediaSourceViewController = URMediaSourceViewController()
+    
+    var sendButton:UIButton!
+    var keyboardIsVisible:Bool!
+    
     init(chatRoom:URChatRoom!,chatMembers:[URUser],title:String){
         self.chatMembers = chatMembers
         self.chatRoom = chatRoom
@@ -53,24 +62,34 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        sendButton = self.inputToolbar.contentView.rightBarButtonItem
         self.mediaCount = 1
         self.navigationItem.title = navigationTitle
         
         setupRightButtons()
         setupJSQMessageLayout()
         
-        setupAvatarImages()        
+        keyboardDidHide()
         
-        UIMenuController.sharedMenuController().menuItems = [UIMenuItem(title: "Custom Action", action: "customAction:")]
+        setupAvatarImages()
         
         chatMessage.delegate = self
         chatMessage.getMessages(self.chatRoom)
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidHide), name: UIKeyboardDidHideNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidShow), name: UIKeyboardDidShowNotification, object: nil)
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(audioDidStartPlaying), name:"didStartPlaying", object: nil)
+        
     }
-    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         collectionView!.collectionViewLayout.springinessEnabled = false
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -88,7 +107,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -102,77 +120,154 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             URMessageRead.saveMessageReadLocaly(messageRead)
         })
     }
+
     
-    //MARK: Action
+    //MARK: MediaSourceViewControllerDelegate
     
-    func addPhotoMediaMessage() {
-//        let photoItem: JSQPhotoMediaItem = JSQPhotoMediaItem(image: UIImage(named: "goldengate"))
-//        var photoMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: photoItem)
-//        messages.addObject(photoMessage)
-    }
-    
-    func addLocationMediaMessageCompletion(completion: JSQLocationMediaItemCompletionBlock) {
-//        let ferryBuildingInSF: CLLocation = CLLocation(latitude: 37.795313, longitude: -122.393757)
-//        let locationItem: JSQLocationMediaItem = JSQLocationMediaItem()
-//        locationItem.setLocation(ferryBuildingInSF, withCompletionHandler: completion)
-//        var locationMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: locationItem)
-//        messages.addObject(locationMessage)
-    }
-    
-    func addVideoMediaMessage() {
-//        var videoURL: NSURL = NSURL(string: "file://")
-//        var videoItem: JSQVideoMediaItem = JSQVideoMediaItem(fileURL: videoURL, isReadyToPlay: true)
-//        var videoMessage: JSQMessage = JSQMessage.messageWithSenderId(kJSQDemoAvatarIdSquires, displayName: kJSQDemoAvatarDisplayNameSquires, media: videoItem)
-//        messages.addObject(videoMessage)
+    func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
+        
+        self.mediaSourceViewController.toggleView({ (finish) in })
+        
+        ProgressHUD.show(nil)
+        URMediaUpload.uploadMedias([media]) { (medias) -> Void in
+            self.sendMediaMessage(medias[0])
+        }
     }
     
     //MARK: ChatMessageDelegate
     
     func newMessageReceived(chatMessage: URChatMessage) {
-        
-        let date =  NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date!.doubleValue/1000) as NSTimeInterval)
+        setupChatMessage(chatMessage)
+    }
     
-        if chatMessage.media != nil && chatMessage.media!.url != nil {
-
-            SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:chatMessage.media!.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                
-                }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    
-                    let mediaItem = JSQPhotoMediaItem(image: image)
-                    
-                    self.mediaList.append(chatMessage.media!)
-                    mediaItem.mediaView().tag = self.mediaCount
-                    
-                    self.mediaCount = self.mediaCount + 1
-                    
-                    if chatMessage.media!.type == URConstant.Media.PICTURE {
-                        self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media: mediaItem))
-                    }else{
-                        
-                        let frame = CGRect(x: 0, y: 0, width: mediaItem.mediaView().frame.size.width, height: mediaItem.mediaView().frame.size.height)
-                        let playerView = YTPlayerView(frame: frame)
-                        mediaItem.mediaView().addSubview(playerView)
-                        playerView.loadWithVideoId(chatMessage.media!.id)
-                        
-                        self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:                     mediaItem))
-                    }
-
-                    self.finishReceivingMessage()
-                    
-            })
-            
-        }else{
-            self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
-            self.finishReceivingMessage()
+    //MARK URAudioRecorderViewControllerDelegate
+    
+    func newAudioRecorded(audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
+        ProgressHUD.show(nil)
+        URMediaUpload.uploadMedias([media]) { (medias) -> Void in
+            self.sendMediaMessage(medias[0])
         }
-        
     }
     
     //MARK: Class Methods
     
+    func audioDidStartPlaying(notification:NSNotification) {
+        for jsqMessage in jsqMessages {
+            if jsqMessage.isMediaMessage {
+                if jsqMessage.media is URChatAudioItem {
+                    if let audioMediaView = jsqMessage.media.mediaView() as? URMediaAudioView {
+                        if audioMediaView.audioView != notification.object as! URAudioView {
+                            if audioMediaView.audioView.player != nil && audioMediaView.audioView.player.playing {
+                                audioMediaView.audioView.play()
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func keyboardDidShow() {
+        keyboardIsVisible = true
+        self.inputToolbar.contentView.rightBarButtonItem = sendButton
+    }
+    
+    func keyboardDidHide() {
+        keyboardIsVisible = false
+        let micButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
+        micButton.setImage(UIImage(named: "icon_mic_blue"), forState: UIControlState.Normal)
+        micButton.addTarget(self, action: #selector(openAudioRecorderController), forControlEvents: UIControlEvents.TouchUpInside)
+        self.inputToolbar.contentView.rightBarButtonItem = micButton
+        self.inputToolbar.contentView.rightBarButtonItem.enabled = true
+    }
+    
+    func openAudioRecorderController() {
+        
+        let audioRecorderViewController = URAudioRecorderViewController(audioURL: nil)
+        audioRecorderViewController.delegate = self
+        
+        audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        URNavigationManager.navigation.presentViewController(audioRecorderViewController, animated: true) { () -> Void in
+            UIView.animateWithDuration(0.3) { () -> Void in
+                audioRecorderViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
+            }
+        }
+    }
+    
+    func setupChatMessage(chatMessage:URChatMessage) {
+        
+        let date =  NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date!.doubleValue/1000) as NSTimeInterval)
+        let maskAsOutgoing = URUser.activeUser()!.key == chatMessage.user.key
+        chatMessageList.append(chatMessage)
+        
+        if let media = chatMessage.media {
+            
+            if media.type != nil {
+                
+                switch media.type {
+                case URConstant.Media.PICTURE:
+
+                    let chatImageItem = URChatImageItem(media: media, viewController: self, maskAsOutgoing: maskAsOutgoing)
+                    self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media: chatImageItem))
+                    self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                    self.scrollToBottomAnimated(true)
+                    
+                    break
+                case URConstant.Media.AUDIO:
+                    let chatAudioItem = URChatAudioItem(media:media,maskAsOutgoing: maskAsOutgoing)
+                    self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media: chatAudioItem))
+                    self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                    self.scrollToBottomAnimated(true)
+                    break
+                case URConstant.Media.FILE:
+//                    
+                    self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:URChatFileItem(media: media, maskAsOutgoing: maskAsOutgoing)))
+                    
+                    self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                    self.scrollToBottomAnimated(true)
+                    
+                    break
+                case URConstant.Media.VIDEO:
+                    
+                    let mediaItem = URChatVideoItem(media: media, maskAsOutgoing: maskAsOutgoing)
+                                        
+                    self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media:mediaItem))
+                    
+                    self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                    self.scrollToBottomAnimated(true)
+                    break
+                case URConstant.Media.VIDEOPHONE:
+                    
+                    if media.thumbnail != nil {
+                        let chatVideoItem = URChatVideoPhoneItem(media: media, maskAsOutgoing: maskAsOutgoing, viewController: self)
+                        self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, media: chatVideoItem))
+                        
+                        self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                        self.scrollToBottomAnimated(true)
+                    }
+                    break
+                default:
+                    break
+                }
+            }else if chatMessage.message != nil {
+                
+                self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
+                self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+                self.scrollToBottomAnimated(true)
+            }
+            
+        }else{
+            
+            self.jsqMessages.append(JSQMessage(senderId: chatMessage.user.key, senderDisplayName: chatMessage.user.nickname, date: date, text: chatMessage.message))
+            self.collectionView.insertItemsAtIndexPaths([NSIndexPath(forItem: self.jsqMessages.count-1, inSection: 0)])
+            self.scrollToBottomAnimated(true)
+        }
+        
+    }
+    
     func setupJSQMessageLayout() {
         self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
-        automaticallyScrollsToMostRecentMessage = true
+//        automaticallyScrollsToMostRecentMessage = true
         
         self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
         self.senderId = URUser.activeUser()!.key
@@ -250,6 +345,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         for user in chatMembers {
             
             if let picture = user.picture {
+                
                 SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: picture), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
                     
                     }, completed: { (image, error, cache, finish, url) -> Void in
@@ -381,92 +477,27 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
-                
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
-            dispatch_async(dispatch_get_main_queue(), {
-                ProgressHUD.dismiss()
-                })
-            })
-    }
-    
-    //MARK: ImagePickerControllerDelegate
-    
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
-            ProgressHUD.show(nil)
-            URAWSManager.uploadImage(pickedImage, uploadPath: .Chat, completion: { (media:URMedia?) -> Void in
-                self.sendMediaMessage(media!)
-                self.dismissViewControllerAnimated(true, completion: nil)
-            })
-        }
+        ProgressHUD.dismiss()
     }
     
     //MARK: JSQMessagesViewController method overrides
     
     override func didPressSendButton(button: UIButton, withMessageText text: String, senderId: String, senderDisplayName: String, date: NSDate) {
-        JSQSystemSoundPlayer.jsq_playMessageSentSound()
-        self.sendTextMessage(text)
-        finishSendingMessageAnimated(true)
+        if keyboardIsVisible == true {
+            JSQSystemSoundPlayer.jsq_playMessageSentSound()
+            self.sendTextMessage(text)
+            finishSendingMessageAnimated(true)
+        }
     }
     
     override func didPressAccessoryButton(sender: UIButton) {
-//        let sheet = UIActionSheet(title: "Media messages", delegate: self, cancelButtonTitle: "Cancel", destructiveButtonTitle: nil, otherButtonTitles: "Send photo", "Send youtube video", "")
-//        sheet.showFromToolbar(inputToolbar!)
-        let alertController = UIAlertController(title: "", message: "title_media_source".localized, preferredStyle: .ActionSheet)
-
-        alertController.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
         
-        alertController.addAction(UIAlertAction(title: "choose_take_picture".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
-            let imagePicker = UIImagePickerController()
-            
-            imagePicker.delegate = self
-            imagePicker.sourceType = .Camera
-            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
-            imagePicker.showsCameraControls = true
-            imagePicker.allowsEditing = true
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }))
+        self.inputToolbar.contentView.textView.resignFirstResponder()
         
-        alertController.addAction(UIAlertAction(title: "choose_camera".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
-            let imagePicker = UIImagePickerController()
-            imagePicker.delegate = self
-            imagePicker.allowsEditing = false
-            imagePicker.sourceType = .PhotoLibrary
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-        }))
-
-        alertController.addAction(UIAlertAction(title: "hint_youtube_link".localized, style: UIAlertActionStyle.Default, handler: { (alertAction) -> Void in
-            
-            let alertControllerTextField = UIAlertController(title: nil, message: "message_youtube_link".localized, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
-            
-            alertControllerTextField.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
-            
-            alertControllerTextField.addAction(UIAlertAction(title: "sign_up_confirm".localized, style: .Default, handler: { (alertAction) -> Void in
-                
-                let urlVideo = alertControllerTextField.textFields![0].text!
-                
-                if urlVideo.isEmpty {
-                    UIAlertView(title: nil, message: "error_empty_link".localized, delegate: self, cancelButtonTitle: "OK").show()
-                    return
-                }
-                
-                let media = URMedia()
-                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
-                media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
-                media.type = URConstant.Media.VIDEO
-                self.sendMediaMessage(media)
-            }))
-            
-            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
-        }))
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.view.addSubview(mediaSourceViewController.view)
+        mediaSourceViewController.delegate = self
+        mediaSourceViewController.toggleView { (finish) -> Void in}
         
     }
     
@@ -555,28 +586,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         return cell
     }
     
-    //MARK: Custom menu items
-    
-//    func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject) -> Bool {
-//        if action == "customAction:" {
-//            return true
-//        }
-//        return super.collectionView(collectionView, canPerformAction: action, forItemAtIndexPath: indexPath, withSender: sender)
-//    }
-//    
-//    func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject) {
-//        if action == "customAction:" {
-//            customAction(sender)
-//            return
-//        }
-//        super.collectionView(collectionView, performAction: action, forItemAtIndexPath: indexPath, withSender: sender)
-//    }
-    
-    func customAction(sender: AnyObject) {
-//        NSLog("Custom action received! Sender: %@", sender)
-        UIAlertView(title: "Custom Action", message: "Custom action received", delegate: nil, cancelButtonTitle: nil, otherButtonTitles: "OK").show()
-    }
-    
     //MARK: Adjusting cell label heights
     
     override func collectionView(collectionView: JSQMessagesCollectionView, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath) -> CGFloat {
@@ -604,12 +613,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         return 0.0
     }
     
-    //MARK: PhotosViewControllerDelegate
-    
-    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
-    }
-    
     //MARK: Responding to collection view tap events
     
     override func collectionView(collectionView: JSQMessagesCollectionView, header headerView: JSQMessagesLoadEarlierHeaderView, didTapLoadEarlierMessagesButton sender: UIButton) {
@@ -623,30 +626,9 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     override func collectionView(collectionView: JSQMessagesCollectionView, didTapMessageBubbleAtIndexPath indexPath: NSIndexPath) {
         let jsqMessage = self.jsqMessages[indexPath.item]
         
-        if jsqMessage.isMediaMessage == true {
-            let index = (jsqMessage.media.mediaView().tag) - 1
-            
-            let media = self.mediaList[index] as URMedia
-            
-            if (media.type == URConstant.Media.PICTURE) {
-                SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string: media.url), options: SDWebImageOptions.CacheMemoryOnly, progress: { (size, expectedSize) -> Void in
-                    
-                    }, completed: { (image, error, cache, finish, url) -> Void in
-                        
-                        let photosViewController = NYTPhotosViewController(photos: [PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: ""))])
-                        photosViewController.delegate = self
-                        
-                        self.presentViewController(photosViewController, animated: true, completion: { () -> Void in
-                            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
-                        })
-   
-                })
-            }else{
-                (jsqMessage.media.mediaView().subviews[jsqMessage.media.mediaView().subviews.count-1] as! YTPlayerView).playVideo()
-            }
+        if jsqMessage.media is URChatVideoItem {
+            print("URChatVideoItem tapped")
         }
-        
-        NSLog("Tapped message bubble!")
     }
     
     override func collectionView(collectionView: JSQMessagesCollectionView, didTapCellAtIndexPath indexPath: NSIndexPath, touchLocation: CGPoint) {

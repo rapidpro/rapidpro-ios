@@ -8,6 +8,7 @@
 
 import UIKit
 import youtube_ios_player_helper
+import SDWebImage
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate, URMediaSourceViewControllerDelegate {
 
@@ -17,7 +18,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     @IBOutlet weak var txtHistory: UITextView!
     @IBOutlet weak var btAddMarkers: UIButton!
     @IBOutlet weak var btAddMedia: UIButton!
-    @IBOutlet var scrollViewMedias: ISScrollViewPage!
+    @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     
     var indexImgCover:Int!
     var mediaViewCover: URMediaView?
@@ -78,11 +79,10 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
 
     @IBAction func btAddMediaTapped(sender: AnyObject) {
         self.view.endEditing(true)
-//        actionSheetPicture.showInView(self.view)
         
         self.view.addSubview(mediaSourceViewController.view)
         mediaSourceViewController.delegate = self
-        mediaSourceViewController.toggleView()
+        mediaSourceViewController.toggleView { (finish) -> Void in}
     }
     
     //MARK: MediaSourceViewControllerDelegate
@@ -113,17 +113,21 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             return
         }
         
-        if !scrollViewMedias.views!.isEmpty && indexImgCover == -1 {
-            UIAlertView(title: nil, message: "create_story_insert_cover".localized, delegate: self, cancelButtonTitle: "OK").show()
-            return
-        }
-        
         if !self.mediaList.isEmpty {
+            
+            for media in self.mediaList {
+                if (!(media.type == URConstant.Media.AUDIO || media.type == URConstant.Media.FILE) && indexImgCover == nil) {
+                    UIAlertView(title: nil, message: "create_story_insert_cover".localized, delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
+            }
+            
             ProgressHUD.show(nil)
             URMediaUpload.uploadMedias(self.mediaList) { (medias) -> Void in
-            ProgressHUD.dismiss()
+                ProgressHUD.dismiss()
                 self.saveStory(medias)
             }
+            
         }else{
             saveStory(nil)
         }
@@ -146,10 +150,6 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                 media.isCover = nil
             }
             
-        }
-        
-        if story.cover == nil && story.medias != nil && story.medias.count > 0 {
-            story.cover = story.medias[0]
         }
         
         story.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
@@ -219,15 +219,15 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         self.txtHistory.textColor = UIColor.lightGrayColor()
     }
     
-    func setupMediaViewMediaObject(media:URMedia?) {
+    func setupMediaViewMediaObject(media:URMedia) {
         let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as! URMediaView
         
-        viewMedia.setupWithMediaObject(media!)
+        viewMedia.setupWithMediaObject(media)
         viewMedia.delegate = self
         
         scrollViewMedias.addCustomView(viewMedia)
         
-        if scrollViewMedias.views!.count == 1 {
+        if scrollViewMedias.views!.count == 1 && !(media.type == URConstant.Media.AUDIO || media.type == URConstant.Media.FILE){
             indexImgCover = 0
             viewMedia.isCover = true
             self.mediaViewCover = viewMedia
@@ -236,7 +236,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             viewMedia.isCover = false
         }
         
-        self.mediaList.append(media!)
+        self.mediaList.append(media)
         
     }
     
@@ -271,74 +271,6 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         var markersString = "\(markers)".stringByReplacingOccurrencesOfString("[", withString: "", options: [], range: nil)
         markersString = "\(markersString)".stringByReplacingOccurrencesOfString("]", withString: "", options: [], range: nil)
         txtMarkers.text = markersString
-    }
-    
-    //MARK: UIActionSheetDelegate
-    
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
-        
-        let imagePicker = UIImagePickerController()
-        imagePicker.delegate = self
-        
-        switch buttonIndex {
-            
-        case 0:
-            break;
-        case 1:
-            
-            imagePicker.allowsEditing = false;
-            imagePicker.sourceType = .PhotoLibrary
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-            
-            break;
-        case 2:
-            
-            imagePicker.sourceType = .Camera
-            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
-            imagePicker.showsCameraControls = true
-            imagePicker.allowsEditing = true
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
-            
-            break;
-            
-        case 3:
-            
-            let alertControllerTextField = UIAlertController(title: nil, message: "message_youtube_link".localized, preferredStyle: UIAlertControllerStyle.Alert)
-            
-            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
-            alertControllerTextField.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
-            alertControllerTextField.addAction(UIAlertAction(title: "sign_up_confirm".localized, style: .Default, handler: { (alertAction) -> Void in
-                
-                let urlVideo = alertControllerTextField.textFields![0].text!
-                
-                if urlVideo.isEmpty {
-                    UIAlertView(title: nil, message: "error_empty_link".localized, delegate: self, cancelButtonTitle: "OK").show()
-                    return
-                }
-                
-                let media = URVideoMedia()
-                let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo)
-                media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: videoID!)
-                media.type = URConstant.Media.VIDEO
-                
-                self.youtubeMediaList.append(media)
-                
-                self.setupMediaViewMediaObject(media)
-
-            }))
-
-            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
-            
-            break
-        default:
-            print("Default")
-            break;
-            
-        }
-        
     }
     
     //MARK: URMediaViewDelegate

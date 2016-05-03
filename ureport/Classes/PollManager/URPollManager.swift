@@ -51,7 +51,7 @@ class URPollManager: NSObject {
                     poll.category = category
                     delegate.newPollReceived(poll)
                     
-                    self.pollIndex += 1
+                    self.pollIndex++
                 }
             })
     }
@@ -78,7 +78,7 @@ class URPollManager: NSObject {
             })
     }
  
-    class func getAvailableColorToCategory(pollCategory:URPollCategory, var index:Int) -> UIColor {
+    class func getAvailableColorToCategory(pollCategory:URPollCategory,var index:Int) -> UIColor {
         
         let filtered = categoryAndColorList.filter {
             if $0.objectForKey(pollCategory.name) != nil {
@@ -91,7 +91,7 @@ class URPollManager: NSObject {
         if !filtered.isEmpty {
             return UIColor(rgba: filtered[0].objectForKey(pollCategory.name) as! String)
         }else {
-            if index >= URPollManager.getColors().count {
+            if index > URPollManager.getColors().count {
                 index = Int(arc4random_uniform(UInt32(self.colors.count)))
             }
             categoryAndColorList.append([pollCategory.name:URPollManager.getColors()[index]])

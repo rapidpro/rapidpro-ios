@@ -12,6 +12,7 @@ import MessageUI
 
 class URInviteTableViewController: UITableViewController, MFMessageComposeViewControllerDelegate, URInviteTableViewCellDelegate {
     
+    let addressBook : SwiftAddressBook? = swiftAddressBook
     var addressBookList:[NSDictionary] = []
     let inviteMessage = "invite_message".localized
     

@@ -19,7 +19,10 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var lbAuthorName: UILabel!
     @IBOutlet weak var lbContributions: UILabel!
     @IBOutlet weak var lbMarkers: UILabel!
+    @IBOutlet weak var lbLikes: UILabel!
+    @IBOutlet weak var lbAttachments: UILabel!
     @IBOutlet weak var imgStory: UIImageView!
+    @IBOutlet weak var imgLike: UIImageView!
     @IBOutlet weak var lbDescription: UILabel!
     @IBOutlet weak var btContribute: UIButton!
     @IBOutlet weak var imgUser: UIImageView!
@@ -27,29 +30,29 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var moderationView: UIView!
     @IBOutlet weak var markerView: UIView!
+    @IBOutlet weak var attachmentView: UIView!
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
-    @IBOutlet weak var btReportContent: UIButton!
 
     @IBOutlet weak var lbContentTop: NSLayoutConstraint!
     @IBOutlet weak var contentViewBottom: NSLayoutConstraint!
     @IBOutlet weak var lbTitleHeight: NSLayoutConstraint!
     @IBOutlet weak var viewMarkerHeight: NSLayoutConstraint!
+    @IBOutlet weak var viewAttachmentHeight: NSLayoutConstraint!
     @IBOutlet weak var imgStoryHeight: NSLayoutConstraint!
     
     var story:URStory!
     let imgViewHistoryHeight:CGFloat = 188.0
     let lbDefaultTitleHeight:CGFloat = 45.0
-    let viewMarkerDefautlHeight:CGFloat = 25.0
+    let viewMarkerDefautlHeight:CGFloat = 18.0
+    let viewAttachmentDefaultHeight:CGFloat = 18.0
     
     var viewController:UIViewController?
     var delegate:URStoriesTableViewCellDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.btReportContent.hidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         self.viewSeparator.layer.cornerRadius = 7
@@ -71,28 +74,6 @@ class URStoriesTableViewCell: UITableViewCell {
     }
     
     //MARK: Button Events
-    
-    @IBAction func btReportContentTapped(sender: AnyObject) {
-        
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .ActionSheet)
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
-            
-        }
-        
-        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .Default) { action -> Void in
-        }
-
-        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .Default) { action -> Void in
-        }
-        
-        reportContentAlertController.addAction(spamAction)
-        reportContentAlertController.addAction(inappropriateContentAction)
-        reportContentAlertController.addAction(cancelAction)
-        
-        URNavigationManager.navigation.presentViewController(reportContentAlertController, animated: true, completion: nil)
-        
-    }
     
     @IBAction func btContributeTapped(sender: AnyObject) {
         if let _ = URUser.activeUser() {
@@ -148,11 +129,21 @@ class URStoriesTableViewCell: UITableViewCell {
             self.markerView.hidden = true
             self.viewMarkerHeight.constant = 0
         }
+        
+        if story.medias != nil && !story.medias.isEmpty {
+            self.lbAttachments.text = String(format: "attachments".localized, arguments: [story.medias.count])
+            self.attachmentView.hidden = false
+            self.viewAttachmentHeight.constant = viewAttachmentDefaultHeight
+        }else {
+            self.attachmentView.hidden = true
+            self.viewAttachmentHeight.constant = 0
+        }
 
+        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like])
+        
         self.contentView.layoutIfNeeded()
         
-        self.lbTitle.text = story.title!        
-        
+        self.lbTitle.text = story.title!
         self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
         
         if let userObject = story.userObject {
@@ -168,26 +159,12 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
             }
         }
-
-        if let fileIconImgView = self.imgStory.viewWithTag(10) {
-            fileIconImgView.removeFromSuperview()
-        }
         
         if story.cover != nil && story.cover.url != nil {
             
             if story.cover.type == URConstant.Media.VIDEOPHONE {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.thumbnail))
                 
-            }else if story.cover.type == URConstant.Media.FILE {
-
-                self.imgStory.image = UIImage(color: UIColor.orangeColor())
-                
-                let fileIconImgView = UIImageView(image: UIImage(named: "icon_file"))
-                fileIconImgView.tag = 10
-                fileIconImgView.contentMode = UIViewContentMode.Center
-                fileIconImgView.frame = CGRect(x: (self.imgStory.bounds.size.width - 50) / 2, y: (self.imgStory.bounds.size.height - 50) / 2, width: 50, height: 50)
-                self.imgStory.addSubview(fileIconImgView)
-
             } else if story.cover.type == URConstant.Media.PICTURE || story.cover.type == URConstant.Media.VIDEO {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
             }

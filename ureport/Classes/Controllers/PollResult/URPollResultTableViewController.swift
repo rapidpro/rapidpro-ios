@@ -13,13 +13,17 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     let pollManager = URPollManager()
     var pollResultList:[URPollResult] = []
     
-    var poll:URPoll!
+    var poll:URPoll?
     
     init(poll:URPoll) {
         self.poll = poll
         super.init(nibName: nil, bundle: nil)
     }
 
+    init() {
+        super.init(nibName:nil, bundle:nil)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,7 +38,10 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
         pollManager.delegate = self
-        pollManager.getPollsResults(poll.key)
+        
+        if let poll = poll {
+            pollManager.getPollsResults(poll.key)
+        }
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Poll Results")
@@ -92,6 +99,11 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     }
     
     //MARK: Class Methods
+    
+    func reloadWithPoll(poll:URPoll) {
+        self.poll = poll
+        pollManager.getPollsResults(poll.key)
+    }
     
     private func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
