@@ -64,6 +64,9 @@ xcuserdata
 #
 Pods/
 
+ureport/Key-debug.plist
+ureport/Key.plist
+
 # Carthage
 #
 # Add this line if you want to avoid checking in source code from Carthage dependencies.
@@ -104,14 +107,6 @@ xcuserdata
 ## Obj-C/Swift specific
 *.hmap
 *.ipa
-
-# CocoaPods
-#
-# We recommend against adding the Pods directory to your .gitignore. However
-# you should judge for yourself, the pros and cons are mentioned at:
-# http://guides.cocoapods.org/using/using-cocoapods.html#should-i-ignore-the-pods-directory-in-source-control
-#
-# Pods/
 
 # Carthage
 #
