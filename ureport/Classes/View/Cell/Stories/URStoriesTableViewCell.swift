@@ -151,22 +151,32 @@ class URStoriesTableViewCell: UITableViewCell {
 
         self.contentView.layoutIfNeeded()
         
-        self.lbTitle.text = story.title!        
+        self.lbTitle.text = story.title!
         
-        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
-        
-        if let userObject = story.userObject {
-            
-            self.lbAuthorName.text = "\(userObject.nickname!)"
-            
-            if userObject.picture != nil {
-                self.imgUser.sd_setImageWithURL(NSURL(string: userObject.picture))
-            }else{
-                self.imgUser.contentMode = UIViewContentMode.Center
-                self.imgUser.image = UIImage(named: "ic_person")
-                
-                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-            }
+        if self.lbAuthorName.text?.characters.count == 0 {
+            URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
+                if user != nil && user!.nickname != nil {
+                    URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
+                        
+                        story.contributions = total
+                        story.userObject = user
+                        
+                        self.lbAuthorName.text = "\(user!.nickname!)"
+                        
+                        if user!.picture != nil {
+                            self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
+                        }else{
+                            self.imgUser.contentMode = UIViewContentMode.Center
+                            self.imgUser.image = UIImage(named: "ic_person")
+                            
+                            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+                        }
+                        
+                        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
+                        
+                    })
+                }
+            })
         }
 
         if let fileIconImgView = self.imgStory.viewWithTag(10) {

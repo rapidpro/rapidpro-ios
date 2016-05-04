@@ -7,22 +7,15 @@ PODS:
   - AWSCore (2.2.4)
   - AWSS3 (2.2.4):
     - AWSCore (= 2.2.4)
-  - Bolts (1.2.2):
-    - Bolts/AppLinks (= 1.2.2)
-    - Bolts/Tasks (= 1.2.2)
-  - Bolts/AppLinks (1.2.2):
+  - Bolts (1.7.0):
+    - Bolts/AppLinks (= 1.7.0)
+    - Bolts/Tasks (= 1.7.0)
+  - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
-  - Bolts/Tasks (1.2.2)
-  - FBSDKCoreKit (4.6.0):
-    - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc (= 4.6.0)
-    - FBSDKCoreKit/no-arc (= 4.6.0)
-  - FBSDKCoreKit/arc (4.6.0):
-    - Bolts (~> 1.1)
-  - FBSDKCoreKit/no-arc (4.6.0):
-    - Bolts (~> 1.1)
-    - FBSDKCoreKit/arc
-  - FBSDKLoginKit (4.6.0):
+  - Bolts/Tasks (1.7.0)
+  - FBSDKCoreKit (4.11.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.11.0):
     - FBSDKCoreKit
   - Firebase (2.3.3)
   - GGLInstanceID (1.1.6)
@@ -94,7 +87,7 @@ DEPENDENCIES:
   - NYTPhotoViewer
   - SDWebImage
   - SwiftAddressBook
-  - TagListView (= 0.3)
+  - TagListView
   - TPKeyboardAvoiding
   - youtube-ios-player-helper (= 0.1.4)
 
@@ -104,9 +97,9 @@ SPEC CHECKSUMS:
   AMScrollingNavbar: f6714dc654a41019ab6a57b792b092853455e007
   AWSCore: 483fa0f25c8508e3364f818e9b941c6204619afa
   AWSS3: da758d5a95e65bb9e6e718245c1a86b6f63de9ae
-  Bolts: 20a2bd788273360cb1e31530dc19b8544eef2544
-  FBSDKCoreKit: 9954492d90c5fd65ae831395697a1660360d61f1
-  FBSDKLoginKit: 3d07febbfa884b9878cacba54f705bb41f07d4b6
+  Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
+  FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
   GGLInstanceID: f92465924a9b8a48f712829d22e223653ab8dc72
   Google: 97618e118111b998cce1d8dd1bd98b82301d72db
@@ -130,4 +123,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-COCOAPODS: 0.39.0
+PODFILE CHECKSUM: 66efc369dc93aee413855bddf42236a1ac353cac
+
+COCOAPODS: 1.0.0.rc.1

@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 
-class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate {
+class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
     let imgViewHistoryHeight:CGFloat = 188.0
     let fullHeightTableViewCell:CGFloat = 471
@@ -62,6 +62,16 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
     }
     
+    //MARK: URWriteStoryTableViewCellDelegate
+    
+    func writeStoryDidTap(cell: URWriteStoryView) {
+        if URUser.activeUser() != nil {
+            self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
+        }else{
+            URLoginAlertController.show(self)
+        }
+    }
+    
     //MARK: URStoriesTableViewCellDelegate
     
     func openProfile(user: URUser) {
@@ -83,6 +93,28 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     // MARK: - Table view data source
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (filterStoriesToModerate == false){
+            return 70
+        }else{
+            return 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader =  NSBundle.mainBundle().loadNibNamed("URWriteStoryView", owner: 0, options: nil)[0] as! URWriteStoryView
+        viewHeader.delegate = self
+        
+        if (filterStoriesToModerate == false){
+            self.tableView.tableHeaderView = viewHeader
+            sizeHeaderToFit()
+        }else{
+            viewHeader.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+        }
+        
+        return viewHeader
+    }
+    
     override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -91,11 +123,11 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         return self.storyList.count + self.newsList.count
     }
     
+    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 0.0
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        
-        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true {
-            return 75
-        }
         
         if indexPath.row < self.storyList.count {
             let story = storyList[indexPath.row]
@@ -113,10 +145,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        if indexPath.row == 0 && filterStoriesToModerate == false && URUserManager.userHasPermissionToAccessTheFeature(false) == true{
-            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URWriteStoryTableViewCell.self), forIndexPath: indexPath) as! URWriteStoryTableViewCell
-            return cell
-        }else if indexPath.row < self.storyList.count {
+        if indexPath.row < self.storyList.count {
         
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
             
@@ -144,17 +173,24 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             }
         }else if cell is URNewsTableViewCell {
             self.navigationController?.pushViewController(URNewsDetailViewController(news:(cell as! URNewsTableViewCell).news),animated: true)
-        }else if cell is URWriteStoryTableViewCell {
-            if URUser.activeUser() != nil {
-                self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
-            }else{
-                URLoginAlertController.show(self)
-            }
         }
-        
     }
     
     //MARK: Class Methods
+    
+    func sizeHeaderToFit() {
+        let headerView = self.tableView.tableHeaderView!
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        self.tableView.tableHeaderView = headerView
+    }
     
     func loadNews() {
         
@@ -164,9 +200,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
                 if let response = response {
                     self.newsList = response.results
                     self.tableView.reloadData()
-                    
                     self.reloadDataWithStories()
-                    
                 }
             })
             
@@ -181,13 +215,14 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     private func setupTableView() {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
         self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 49, right: 0)
         
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
-        self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
+//        self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
         self.tableView.separatorColor = UIColor.clearColor()
     }
     
@@ -199,7 +234,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
-    func newStoryReceived(story: URStory) {
+    func newStoryReceived(story: URStory) {                
         
         if story.medias != nil {
             for media in story.medias {
@@ -210,11 +245,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
         
         storyList.insert(story, atIndex: 0)
-        if filterStoriesToModerate == false {
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: (storyList.count - index)+1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }else{
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
+        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
         index += 1
     }
     

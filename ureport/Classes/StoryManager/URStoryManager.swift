@@ -36,11 +36,12 @@ class URStoryManager: NSObject {
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
             .childByAppendingPath(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
-            .queryOrderedByChild("createdDate")
             .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
                 if let delegate = self.delegate {
                     
                     let story = URStory(jsonDict: snapshot.value as? NSDictionary)                    
+                    
+                    story.key = snapshot.key
                     
                     if (snapshot.value as! NSDictionary).objectForKey("cover") != nil {
                         let cover = URMedia(jsonDict:((snapshot.value as! NSDictionary).objectForKey("cover") as? NSDictionary)!)
@@ -57,20 +58,9 @@ class URStoryManager: NSObject {
                         }
                         
                         story.medias = medias
-                    }
-
-                    story.key = snapshot.key
-                    
-                    URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
-                        if user != nil && user!.nickname != nil{
-                            URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
-                                story.contributions = total
-                                story.userObject = user
-                                
-                                delegate.newStoryReceived(story)
-                            })
-                        }
-                    })
+                        
+                        delegate.newStoryReceived(story)                        
+                    }                    
                 }
             })
     }
