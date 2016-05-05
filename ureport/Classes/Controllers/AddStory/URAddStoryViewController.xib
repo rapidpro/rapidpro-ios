@@ -86,7 +86,7 @@
                                                         <constraint firstAttribute="height" constant="1" id="PQI-8U-QQX"/>
                                                     </constraints>
                                                 </view>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag_newstory" translatesAutoresizingMaskIntoConstraints="NO" id="78P-PC-BH0">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_marker.png" translatesAutoresizingMaskIntoConstraints="NO" id="78P-PC-BH0">
                                                     <rect key="frame" x="0.0" y="7" width="15" height="14"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="15" id="0Xr-31-YEK"/>
@@ -313,6 +313,6 @@
     </objects>
     <resources>
         <image name="ic_add_box_grey_" width="36" height="36"/>
-        <image name="icon_tag_newstory" width="15" height="14"/>
+        <image name="icon_marker.png" width="12" height="12"/>
     </resources>
 </document>

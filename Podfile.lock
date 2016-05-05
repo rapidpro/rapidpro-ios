@@ -65,6 +65,7 @@ PODS:
   - GoogleSymbolUtilities (1.0.3)
   - GoogleUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0.0)
+  - IlhasoftCore (0.0.2)
   - JSQMessagesViewController (7.2.0):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -95,6 +96,7 @@ DEPENDENCIES:
   - Google/Analytics
   - Google/CloudMessaging
   - Google/SignIn
+  - IlhasoftCore (from `../IlhasoftCore`)
   - JSQMessagesViewController
   - NYTPhotoViewer (= 1.1.0)
   - SDWebImage
@@ -104,6 +106,8 @@ DEPENDENCIES:
   - youtube-ios-player-helper (= 0.1.4)
 
 EXTERNAL SOURCES:
+  IlhasoftCore:
+    :path: ../IlhasoftCore
   TagListView:
     :git: https://github.com/xhacker/TagListView
 
@@ -135,6 +139,7 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
+  IlhasoftCore: 1baaab574820c114dc14f1b7f6fbde09d271bf2e
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
@@ -145,6 +150,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: b832fba87b06db525c69c57732f8de0efff21c2b
+PODFILE CHECKSUM: 66cef482c584f3c20f50ab36bd57c46fa3ed991e
 
 COCOAPODS: 1.0.0.rc.1

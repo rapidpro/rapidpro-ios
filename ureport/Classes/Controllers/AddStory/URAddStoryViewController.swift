@@ -30,6 +30,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     var videoMediaList:[URMedia]!
     var appDelegate:AppDelegate!
     let markerTableViewController = URMarkerTableViewController()
+    let markerViewIPadController = URMarkerViewIPadController()
     let mediaSourceViewController = URMediaSourceViewController()
     
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
@@ -49,7 +50,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         setupActionSheet()
         addRightButtonItem()
         markerTableViewController.delegate = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "pointsScoredDidClosed:", name:"pointsScoredDidClosed", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pointsScoredDidClosed), name:"pointsScoredDidClosed", object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -74,7 +75,12 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     @IBAction func btAddMarkersTapped(sender: AnyObject) {
-        self.navigationController?.pushViewController(markerTableViewController, animated: true)
+        if URConstant.isIpad {
+            markerViewIPadController.viewController = self
+            markerViewIPadController.show(true, inViewController: self)
+        }else{
+            self.navigationController?.pushViewController(markerTableViewController, animated: true)
+        }
     }
 
     @IBAction func btAddMediaTapped(sender: AnyObject) {
@@ -98,7 +104,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func addRightButtonItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "action_title_publish".localized, style: UIBarButtonItemStyle.Done, target: self, action: "buildStory")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "action_title_publish".localized, style: UIBarButtonItemStyle.Done, target: self, action: #selector(buildStory))
     }
     
     func buildStory() {
