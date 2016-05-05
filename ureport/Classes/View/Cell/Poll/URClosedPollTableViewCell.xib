@@ -95,7 +95,7 @@
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MS8-QK-Tmu" secondAttribute="trailing" constant="5" id="Cea-Wu-Q4n"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bXQ-8X-yHD"/>
@@ -106,7 +106,7 @@
                     <constraint firstAttribute="bottom" secondItem="xGr-7P-obE" secondAttribute="bottom" constant="3.5" id="yNB-6P-LKd"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
             <connections>
                 <outlet property="containerView" destination="MS8-QK-Tmu" id="gKY-xB-DCq"/>
                 <outlet property="lbCategoryName" destination="2dl-1s-znp" id="RkB-c7-rUd"/>

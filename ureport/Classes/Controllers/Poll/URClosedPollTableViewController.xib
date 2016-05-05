@@ -73,7 +73,7 @@
                     </variation>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="qvQ-tK-8VQ" secondAttribute="trailing" id="Cjb-hO-cPK"/>
                 <constraint firstItem="qvQ-tK-8VQ" firstAttribute="leading" secondItem="O8o-Ow-kye" secondAttribute="leading" id="VqZ-GK-3T0"/>

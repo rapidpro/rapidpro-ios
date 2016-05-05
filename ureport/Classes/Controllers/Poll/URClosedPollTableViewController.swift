@@ -143,7 +143,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         self.tableView.dataSource = self
         self.tableView.backgroundColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 220;
         

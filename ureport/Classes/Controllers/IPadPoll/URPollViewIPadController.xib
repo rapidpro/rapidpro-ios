@@ -2,13 +2,15 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10116"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URPollViewIPadController" customModule="ureport" customModuleProvider="target">
             <connections>
                 <outlet property="contentLeftView" destination="qPo-gG-QDb" id="sn1-1I-rTO"/>
+                <outlet property="imgMessage" destination="d11-dp-Ded" id="5Fd-Gc-h6U"/>
+                <outlet property="lbMessage" destination="vns-GQ-8R7" id="diR-xP-HFN"/>
                 <outlet property="leftView" destination="Pqp-EW-lcx" id="gNh-j2-QcA"/>
                 <outlet property="rightView" destination="nPy-wG-MYW" id="erp-F1-Z1a"/>
                 <outlet property="view" destination="iN0-l3-epB" id="R6n-v0-axe"/>
@@ -30,7 +32,7 @@
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                             </subviews>
-                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstItem="qPo-gG-QDb" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="leading" constant="23" id="7M6-FP-FhW"/>
                                 <constraint firstItem="qPo-gG-QDb" firstAttribute="top" secondItem="Pqp-EW-lcx" secondAttribute="top" id="9W0-ht-sOs"/>
@@ -39,24 +41,49 @@
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nPy-wG-MYW">
-                            <rect key="frame" x="485" y="0.0" width="515" height="619"/>
+                            <rect key="frame" x="485" y="0.0" width="516" height="619"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tap the previous poll to see results" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vns-GQ-8R7">
+                                    <rect key="frame" x="125" y="327" width="266" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="Jb4-Uy-dkW"/>
+                                        <constraint firstAttribute="width" constant="266" id="hra-n0-67B"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="img_logo_polls.png" translatesAutoresizingMaskIntoConstraints="NO" id="d11-dp-Ded">
+                                    <rect key="frame" x="232" y="271" width="53" height="38"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="53" id="FNk-4S-ak1"/>
+                                        <constraint firstAttribute="height" constant="38" id="ls6-zu-jQa"/>
+                                    </constraints>
+                                </imageView>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="d11-dp-Ded" firstAttribute="centerX" secondItem="nPy-wG-MYW" secondAttribute="centerX" constant="0.5" id="GwO-cl-Xq2"/>
+                                <constraint firstItem="vns-GQ-8R7" firstAttribute="centerY" secondItem="nPy-wG-MYW" secondAttribute="centerY" constant="28" id="Ieh-JO-8ju"/>
+                                <constraint firstItem="vns-GQ-8R7" firstAttribute="centerX" secondItem="nPy-wG-MYW" secondAttribute="centerX" id="fn2-7O-ikh"/>
+                                <constraint firstItem="d11-dp-Ded" firstAttribute="centerY" secondItem="nPy-wG-MYW" secondAttribute="centerY" constant="-19.5" id="nLa-Yh-wW8"/>
+                            </constraints>
                         </view>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="nPy-wG-MYW" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="0Tn-dc-w4m"/>
-                        <constraint firstItem="nPy-wG-MYW" firstAttribute="width" secondItem="Pqp-EW-lcx" secondAttribute="width" multiplier="2:1.8" constant="-23.888888888888914" id="1an-pV-NrM"/>
+                        <constraint firstItem="nPy-wG-MYW" firstAttribute="width" secondItem="Pqp-EW-lcx" secondAttribute="width" multiplier="2:1.8" constant="-22.888888888888914" id="1an-pV-NrM"/>
                         <constraint firstItem="Pqp-EW-lcx" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="QVO-q7-C2p"/>
                         <constraint firstItem="nPy-wG-MYW" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="trailing" id="Ut7-Zt-YeG"/>
                         <constraint firstAttribute="bottom" secondItem="nPy-wG-MYW" secondAttribute="bottom" id="bjk-Wn-cFw"/>
-                        <constraint firstAttribute="trailing" secondItem="nPy-wG-MYW" secondAttribute="trailing" constant="24" id="er9-zS-plk"/>
+                        <constraint firstAttribute="trailing" secondItem="nPy-wG-MYW" secondAttribute="trailing" constant="23" id="er9-zS-plk"/>
                         <constraint firstAttribute="bottom" secondItem="Pqp-EW-lcx" secondAttribute="bottom" id="oIW-GW-aSC"/>
                         <constraint firstItem="Pqp-EW-lcx" firstAttribute="leading" secondItem="ijL-5i-ogK" secondAttribute="leading" id="rLG-0M-Mg1"/>
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="ijL-5i-ogK" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="IWE-hq-F0n"/>
                 <constraint firstAttribute="trailing" secondItem="ijL-5i-ogK" secondAttribute="trailing" id="NvU-6r-bJa"/>
@@ -68,4 +95,7 @@
             <point key="canvasLocation" x="401" y="-70.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="img_logo_polls.png" width="35" height="35"/>
+    </resources>
 </document>

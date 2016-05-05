@@ -174,6 +174,7 @@
 		65C234061BAE0843002DB994 /* ISLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C234051BAE0843002DB994 /* ISLabelExtension.swift */; };
 		65C55FDF1BBCD174007F66FA /* URModalProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C55FDD1BBCD174007F66FA /* URModalProfileViewController.swift */; };
 		65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65C55FDE1BBCD174007F66FA /* URModalProfileViewController.xib */; };
+		65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 65C5A8641CDAC7C500158B0C /* ImagesV2.xcassets */; };
 		65D0F35C1BA72E8D00E5D367 /* URMarkerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F35B1BA72E8C00E5D367 /* URMarkerManager.swift */; };
 		65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */; };
 		65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F3991BA7625000E5D367 /* URMediaView.xib */; };
@@ -458,6 +459,7 @@
 		65C234051BAE0843002DB994 /* ISLabelExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISLabelExtension.swift; sourceTree = "<group>"; };
 		65C55FDD1BBCD174007F66FA /* URModalProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModalProfileViewController.swift; sourceTree = "<group>"; };
 		65C55FDE1BBCD174007F66FA /* URModalProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URModalProfileViewController.xib; sourceTree = "<group>"; };
+		65C5A8641CDAC7C500158B0C /* ImagesV2.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ImagesV2.xcassets; sourceTree = "<group>"; };
 		65D0F35B1BA72E8C00E5D367 /* URMarkerManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerManager.swift; sourceTree = "<group>"; };
 		65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerTableViewController.xib; sourceTree = "<group>"; };
 		65D0F3991BA7625000E5D367 /* URMediaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaView.xib; sourceTree = "<group>"; };
@@ -941,6 +943,7 @@
 				6515FB791B881AE100CEEC3B /* Images.xcassets */,
 				6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */,
 				659A7A981B51EFA800B56983 /* Localizable.strings */,
+				65C5A8641CDAC7C500158B0C /* ImagesV2.xcassets */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -1772,6 +1775,7 @@
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				974249441BFCFD920024384E /* URCurrentPollView.xib in Resources */,
+				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

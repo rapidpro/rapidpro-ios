@@ -101,15 +101,16 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     //MARK: Class Methods
     
     func reloadWithPoll(poll:URPoll) {
+        self.pollResultList = []
         self.poll = poll
         pollManager.getPollsResults(poll.key)
     }
     
     private func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 189;
     }

@@ -13,6 +13,8 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     @IBOutlet weak var leftView: UIView!
     @IBOutlet weak var contentLeftView: UIView!
     @IBOutlet weak var rightView: UIView!
+    @IBOutlet weak var lbMessage: UILabel!
+    @IBOutlet weak var imgMessage: UIImageView!
     
     var poll:URPoll?
     
@@ -48,9 +50,9 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
         
         closedPollTableViewController.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
         closedPollTableViewController.tableView.contentSize = CGSize(width: contentLeftView.bounds.size.width, height: closedPollTableViewController.tableView.contentSize.height)
-        pollResultCollectionViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+//        pollResultCollectionViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
         pollResultTableViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
-        
+        pollResultTableViewController.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         closedPollTableViewController.onBoundsChanged()
     }
     
@@ -64,11 +66,14 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
         self.poll = cell.poll
         
-        if UIDevice.currentDevice().orientation.isLandscape {
-            pollResultCollectionViewController.setPoll(self.poll!, frame: CGRect(x: 0, y: 0, width: self.rightView.frame.size.width, height: self.rightView.frame.size.height))
-        }else {
-            pollResultTableViewController.reloadWithPoll(self.poll!)
-        }
+//        if UIDevice.currentDevice().orientation.isLandscape {
+//            pollResultCollectionViewController.setPoll(self.poll!, frame: CGRect(x: 0, y: 0, width: self.rightView.frame.size.width, height: self.rightView.frame.size.height))
+//        }else {
+//            pollResultTableViewController.reloadWithPoll(self.poll!)
+//        }
+        self.lbMessage.hidden = true
+        self.imgMessage.hidden = true
+        pollResultTableViewController.reloadWithPoll(self.poll!)
     }
     
     //MARK: Class Methods
@@ -84,17 +89,19 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     func displayRightContentController(content: UIViewController) {
         self.addChildViewController(content)
         content.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
-        self.rightView.addSubview(content.view)
+        self.rightView.insertSubview(content.view, atIndex: 0)
         content.didMoveToParentViewController(self)
     }
     
     func setupUI() {
         displayLeftContentController(closedPollTableViewController)
-        if UIDevice.currentDevice().orientation.isLandscape {
-            displayRightContentController(pollResultCollectionViewController)
-        }else{
-            displayRightContentController(pollResultTableViewController)
-        }
+        
+//        if UIDevice.currentDevice().orientation.isLandscape {
+//            displayRightContentController(pollResultCollectionViewController)
+//        }else{
+//            displayRightContentController(pollResultTableViewController)
+//        }
+        displayRightContentController(pollResultTableViewController)
     }
     
 }

@@ -18,6 +18,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     @IBOutlet weak var lbFlowName: UILabel!
     @IBOutlet weak var btNext: UIButton!
     @IBOutlet weak var viewResponses: UIView!
+    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var tvQuestion: UITextView!
     @IBOutlet weak var constraintQuestionHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintResponseHeight: NSLayoutConstraint!
@@ -43,6 +44,8 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        self.bgView.layer.cornerRadius = 5
         
         self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
         self.lbCurrentPoll.text = "polls_current".localized

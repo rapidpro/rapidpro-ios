@@ -117,7 +117,7 @@
                         </constraints>
                     </view>
                 </subviews>
-                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MS8-QK-Tmu" secondAttribute="trailing" constant="5" id="Cea-Wu-Q4n"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bXQ-8X-yHD"/>
@@ -126,6 +126,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
+                <outlet property="bgView" destination="MS8-QK-Tmu" id="kDQ-rl-Vcp"/>
                 <outlet property="btNext" destination="aPK-c7-Zsd" id="ETp-Kz-aGc"/>
                 <outlet property="btSwitchLanguage" destination="OUA-a7-jbk" id="JfS-OY-UnB"/>
                 <outlet property="constraintQuestionHeight" destination="1Sg-OB-XL4" id="PMj-2J-2DX"/>
