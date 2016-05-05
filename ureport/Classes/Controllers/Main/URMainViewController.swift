@@ -83,13 +83,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     func setupViewControllers() {
         
         storiesTableViewController.title = "stories_moderation".localized
-        storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories.png")
+        storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories")
         
         closedPollViewController.title = "poll_results".localized
-        closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls.png")
+        closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
         myChatsViewController.title = "chat_rooms".localized
-        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chats.png")
+        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chats")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
             self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
@@ -108,19 +108,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     func addRightBarButtons() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
-        let btnCreateChat: UIButton = UIButton(type: UIButtonType.Custom)
-        btnCreateChat.frame = CGRectMake(0, 0, 23, 23)
-        btnCreateChat.setBackgroundImage(UIImage(named:"iconNewMessage"), forState: UIControlState.Normal)
-        btnCreateChat.addTarget(self, action: #selector(createChatRoom), forControlEvents: UIControlEvents.TouchUpInside)
-        let container: UIView = UIView(frame: CGRectMake(0, 0, 23, 23))
-        container.addSubview(btnCreateChat)
-        let chatButtonItem = UIBarButtonItem(customView: container)
+        
+        let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(createChatRoom))
         
         let btnInvite: UIButton = UIButton(type: UIButtonType.Custom)
-        btnInvite.frame = CGRectMake(0, 0, 23, 23)
-        btnInvite.setBackgroundImage(UIImage(named:"icon_invite_white"), forState: UIControlState.Normal)
+        btnInvite.frame = CGRectMake(0, 0, 30, 20)
+        btnInvite.setBackgroundImage(UIImage(named:"icon_invite_friend"), forState: UIControlState.Normal)
         btnInvite.addTarget(self, action: #selector(invitePeople), forControlEvents: UIControlEvents.TouchUpInside)
-        let container2: UIView = UIView(frame: CGRectMake(0, 0, 30, 23))
+        let container2: UIView = UIView(frame: CGRectMake(0, 0, 30, 30))
         container2.addSubview(btnInvite)
         let inviteButtonItem = UIBarButtonItem(customView: container2)
         
@@ -172,7 +167,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
             }
         }
         
-        if viewController is URClosedPollTableViewController{
+        if viewController is URClosedPollTableViewController || viewController is URPollViewIPadController {
             self.title = "poll_results".localized
             self.navigationItem.rightBarButtonItems = nil
         }

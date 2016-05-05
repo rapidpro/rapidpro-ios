@@ -28,6 +28,7 @@
                                 <constraint firstAttribute="width" constant="76" id="dTz-CF-mDh"/>
                                 <constraint firstAttribute="height" constant="30" id="eA7-s1-GjM"/>
                             </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
                             <state key="normal" title="Ok"/>
                             <connections>
                                 <action selector="btSaveTapped:" destination="-1" eventType="touchUpInside" id="h7c-Zv-lO9"/>
@@ -40,16 +41,28 @@
                                 <constraint firstAttribute="height" constant="596" id="K8c-sk-iAl"/>
                             </constraints>
                         </view>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Add Marker" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PVQ-aC-fqj">
+                            <rect key="frame" x="192" y="18" width="118" height="21"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="21" id="Px2-rd-vCm"/>
+                                <constraint firstAttribute="width" constant="118" id="oWw-nf-OXV"/>
+                            </constraints>
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
                     </subviews>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="6D5-3Q-PSk" firstAttribute="leading" secondItem="YSY-PV-Ynw" secondAttribute="leading" id="Ayv-dJ-WFG"/>
                         <constraint firstAttribute="width" constant="503" id="BU1-Sx-8FO"/>
+                        <constraint firstItem="PVQ-aC-fqj" firstAttribute="centerX" secondItem="YSY-PV-Ynw" secondAttribute="centerX" id="Cxb-QC-qYi"/>
                         <constraint firstItem="JM1-G7-2B3" firstAttribute="top" secondItem="YSY-PV-Ynw" secondAttribute="top" constant="14" id="Nmo-n0-UZh"/>
                         <constraint firstAttribute="bottom" secondItem="6D5-3Q-PSk" secondAttribute="bottom" id="kdQ-mF-mHe"/>
                         <constraint firstAttribute="height" constant="653" id="svn-bH-OeJ"/>
                         <constraint firstAttribute="trailing" secondItem="6D5-3Q-PSk" secondAttribute="trailing" id="u67-u9-ZjW"/>
                         <constraint firstAttribute="trailing" secondItem="JM1-G7-2B3" secondAttribute="trailing" id="ySi-mb-a1X"/>
+                        <constraint firstItem="PVQ-aC-fqj" firstAttribute="centerY" secondItem="YSY-PV-Ynw" secondAttribute="centerY" constant="-298" id="yVy-H0-d21"/>
                     </constraints>
                     <userDefinedRuntimeAttributes>
                         <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">

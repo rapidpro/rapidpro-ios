@@ -96,7 +96,7 @@ DEPENDENCIES:
   - Google/Analytics
   - Google/CloudMessaging
   - Google/SignIn
-  - IlhasoftCore (from `../IlhasoftCore`)
+  - IlhasoftCore (from `https://bitbucket.org/ilhasoft/ilhasoft-core-ios`)
   - JSQMessagesViewController
   - NYTPhotoViewer (= 1.1.0)
   - SDWebImage
@@ -107,11 +107,14 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   IlhasoftCore:
-    :path: ../IlhasoftCore
+    :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
   TagListView:
     :git: https://github.com/xhacker/TagListView
 
 CHECKOUT OPTIONS:
+  IlhasoftCore:
+    :commit: c4425d4ef9fd0bb21e44d20bfe747590cb116d13
+    :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
   TagListView:
     :commit: ca88d2e83ddd9b77dc6f255946b291375d5d3fde
     :git: https://github.com/xhacker/TagListView
@@ -150,6 +153,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 66cef482c584f3c20f50ab36bd57c46fa3ed991e
+PODFILE CHECKSUM: 66878c6b45ed48fa090017dd6d974306f146146e
 
 COCOAPODS: 1.0.0.rc.1
