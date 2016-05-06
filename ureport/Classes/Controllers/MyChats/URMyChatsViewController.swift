@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol URMyChatsViewControllerDelegate {
+    func openChatRoomWith(chatRoom:URChatRoom,chatMembers:[URUser],title:String)
+}
+
 class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
 
     @IBOutlet weak var btSee: UIButton!
@@ -18,6 +22,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     var listChatRoom:[URChatRoom] = []
     var chatRoomKeyToOpen:String?
+    var delegate:URMyChatsViewControllerDelegate?
     
     init() {
         super.init(nibName: "URMyChatsViewController", bundle: nil)
@@ -110,7 +115,10 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
                 chatName = (chatRoom as! URGroupChatRoom).title
             }
             
-            self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:chatName), animated: true)
+            if let delegate = self.delegate {
+                delegate.openChatRoomWith(chatRoom, chatMembers: users, title: chatName)
+            }
+            
         })
     }
     
@@ -144,6 +152,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
             ProgressHUD.dismiss()
+            
             if chatRooms != nil {
                 self.lbMessage.hidden = true
                 self.listChatRoom = chatRooms!

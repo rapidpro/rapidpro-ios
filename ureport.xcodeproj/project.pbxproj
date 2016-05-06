@@ -40,7 +40,6 @@
 		6540EA531CDB9D45006287D3 /* URMarkerViewIPadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */; };
 		6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */; };
 		6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */; };
-		6540EA581CDBB66D006287D3 /* URMyChatsIPadViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6540EA561CDBB66D006287D3 /* URMyChatsIPadViewController.xib */; };
 		6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D71C762FDB00938236 /* URFileUtil.swift */; };
 		6547D3DA1C76324E00938236 /* URAudioMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D91C76324E00938236 /* URAudioMedia.swift */; };
 		654850631BB1D7390002A3D5 /* URPollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850621BB1D7390002A3D5 /* URPollManager.swift */; };
@@ -322,7 +321,6 @@
 		6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerViewIPadController.swift; sourceTree = "<group>"; };
 		6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerViewIPadController.xib; sourceTree = "<group>"; };
 		6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMyChatsIPadViewController.swift; sourceTree = "<group>"; };
-		6540EA561CDBB66D006287D3 /* URMyChatsIPadViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMyChatsIPadViewController.xib; sourceTree = "<group>"; };
 		6547D3D71C762FDB00938236 /* URFileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFileUtil.swift; sourceTree = "<group>"; };
 		6547D3D91C76324E00938236 /* URAudioMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioMedia.swift; sourceTree = "<group>"; };
 		654850621BB1D7390002A3D5 /* URPollManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollManager.swift; sourceTree = "<group>"; };
@@ -1454,7 +1452,6 @@
 				65D0F3A91BA8E13500E5D367 /* URMyChatsViewController.swift */,
 				65D0F3AA1BA8E13500E5D367 /* URMyChatsViewController.xib */,
 				6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */,
-				6540EA561CDBB66D006287D3 /* URMyChatsIPadViewController.xib */,
 			);
 			path = MyChats;
 			sourceTree = "<group>";
@@ -1775,7 +1772,6 @@
 				656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */,
 				6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */,
 				658949CD1B8571FB0087F361 /* ProgressHUD.bundle in Resources */,
-				6540EA581CDBB66D006287D3 /* URMyChatsIPadViewController.xib in Resources */,
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,

@@ -8,13 +8,13 @@
 
 import UIKit
 
-class URMainViewController: UITabBarController, UITabBarControllerDelegate, URClosedPollTableViewControllerDelegate {
+class URMainViewController: UITabBarController, UITabBarControllerDelegate, URClosedPollTableViewControllerDelegate, URMyChatsViewControllerDelegate {
     
     var appDelegate:AppDelegate!
     var chatRoomKey:String?
     
     let storiesTableViewController = URStoriesTableViewController(filterStoriesToModerate: false)
-    let myChatsViewController = URMyChatsViewController()
+    let myChatsViewController = URConstant.isIpad ? URMyChatsIPadViewController() : URMyChatsViewController()
     let closedPollViewController = URConstant.isIpad ? URPollViewIPadController() : URClosedPollTableViewController()
     
     init() {
@@ -41,6 +41,12 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
             closedPollViewController.delegate = self
         }
         
+        if let myChatsViewController = myChatsViewController as? URMyChatsViewController {
+            myChatsViewController.delegate = self
+        }else if let myChatsViewController = myChatsViewController as? URMyChatsIPadViewController {
+            myChatsViewController.myChatsBarButtonItens = self.addRightBarButtons()
+        }
+        
         tabBarController(self, didSelectViewController: storiesTableViewController)
         setupViewControllers()
         self.title = "U-Report"
@@ -59,6 +65,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         tracker.send(builder.build() as [NSObject : AnyObject])
         
     }
+    
+    //MARK: URMyChatsViewControllerDelegate
+    
+    func openChatRoomWith(chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
+        self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title), animated: true)
+    }
+    
     //MARK: URClosedPollTableViewControllerDelegate
     
     func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
@@ -95,9 +108,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
             self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
             
             if chatRoomKey != nil {
-                myChatsViewController.chatRoomKeyToOpen = chatRoomKey
-                tabBarController(self, didSelectViewController: myChatsViewController)
-                self.selectedIndex = 2
+                
+                if let myChatsViewController = myChatsViewController as? URMyChatsViewController {
+                
+                    myChatsViewController.chatRoomKeyToOpen = chatRoomKey
+                    tabBarController(self, didSelectViewController: myChatsViewController)
+                    self.selectedIndex = 2
+                    
+                }
             }
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]
@@ -172,7 +190,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
             self.navigationItem.rightBarButtonItems = nil
         }
         
-        if viewController is URMyChatsViewController {
+        if viewController is URMyChatsViewController || viewController is URMyChatsIPadViewController {
             self.title = "U-Report"
             self.navigationItem.rightBarButtonItems = addRightBarButtons()
         }

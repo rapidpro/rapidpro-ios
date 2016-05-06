@@ -19,36 +19,31 @@ protocol URMessagesViewControllerDelegate {
 
 class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaSourceViewControllerDelegate, URAudioRecorderViewControllerDelegate {
     
-    var chatRoom:URChatRoom!
+    var chatRoom:URChatRoom?
     let chatMessage:URChatMessageManager = URChatMessageManager()
     var chatMembers:[URUser] = []
     
     var jsqMessages = [JSQMessage]()
-    var mediaList = [URMedia]()
     var users = Dictionary<String, String>()
     var avatars = Dictionary<String, JSQMessagesAvatarImage>()
 
     var senderImageUrl: String!
     var delegate: URMessagesViewControllerDelegate!
     var batchMessages = true
-    var navigationTitle:String!
+    var navigationTitle:String?
 
     var outgoingBubbleImageData:JSQMessagesBubbleImage!
     var incomingBubbleImageData:JSQMessagesBubbleImage!
     
-    var mediaCount:Int!
     var userBlocked:Bool!
     
-    var audioViews:[URAudioView] = []
-    
-    var messageIndex = 0
     var chatMessageList:[URChatMessage] = []
     let mediaSourceViewController = URMediaSourceViewController()
     
     var sendButton:UIButton!
     var keyboardIsVisible:Bool!
     
-    init(chatRoom:URChatRoom!,chatMembers:[URUser],title:String){
+    init(chatRoom:URChatRoom?,chatMembers:[URUser],title:String?){
         self.chatMembers = chatMembers
         self.chatRoom = chatRoom
         self.navigationTitle = title
@@ -60,10 +55,12 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()
-        
+        super.viewDidLoad()        
+        loadMessagesController()
+    }
+    
+    func loadMessagesController() {
         sendButton = self.inputToolbar.contentView.rightBarButtonItem
-        self.mediaCount = 1
         self.navigationItem.title = navigationTitle
         
         setupRightButtons()
@@ -74,14 +71,17 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         setupAvatarImages()
         
         chatMessage.delegate = self
-        chatMessage.getMessages(self.chatRoom)
+        
+        if self.chatRoom != nil {
+            chatMessage.getMessages(self.chatRoom!)
+        }
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidHide), name: UIKeyboardDidHideNotification, object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardDidShow), name: UIKeyboardDidShowNotification, object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(audioDidStartPlaying), name:"didStartPlaying", object: nil)
-        
     }
+    
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         collectionView!.collectionViewLayout.springinessEnabled = false
@@ -94,11 +94,12 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        
         URNavigationManager.setupNavigationBarWithType(.Blue)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         
         if let _ = self.delegate {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: "closePressed:")
+            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: #selector(closePressed))
         }
         
         let tracker = GAI.sharedInstance().defaultTracker
@@ -111,14 +112,16 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        URChatMessageManager.getTotalMessages(chatRoom, completion: { (totalMessages:Int) -> Void in
-            
-            let messageRead = URMessageRead()
-            messageRead.totalMessages = totalMessages
-            messageRead.roomKey = self.chatRoom.key
-            
-            URMessageRead.saveMessageReadLocaly(messageRead)
-        })
+        if chatRoom != nil {
+            URChatMessageManager.getTotalMessages(chatRoom!, completion: { (totalMessages:Int) -> Void in
+                
+                let messageRead = URMessageRead()
+                messageRead.totalMessages = totalMessages
+                messageRead.roomKey = self.chatRoom!.key
+                
+                URMessageRead.saveMessageReadLocaly(messageRead)
+            })
+        }
     }
 
     
@@ -305,13 +308,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                     if blocked == URUser.activeUser()!.key {
                         userBlocked = true
                         
-                        self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()                        
+                        self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
                         
                         let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
                         
                         alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
                         alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
-                            URChatRoomManager.unblockUser(self.chatRoom.key)
+                            URChatRoomManager.unblockUser(self.chatRoom!.key)
                             self.userBlocked = false
                             self.collectionView!.userInteractionEnabled = true
                             self.inputToolbar!.userInteractionEnabled = true
@@ -324,7 +327,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                         
                     }else {
                         
-                        let alertController = UIAlertController(title: nil, message: String(format: "message_individual_chat_blocked".localized, arguments: [self.navigationTitle]), preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: nil, message: String(format: "message_individual_chat_blocked".localized, arguments: [self.navigationTitle!]), preferredStyle: .Alert)
                         
                         alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (alertAction) -> Void in
                             self.navigationController!.popViewControllerAnimated(true)
@@ -386,7 +389,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             container.layer.cornerRadius = 0
         }
         
-        btnInfo.addTarget(self, action: "openGroupDetail", forControlEvents: UIControlEvents.TouchUpInside)
+        btnInfo.addTarget(self, action: #selector(openGroupDetail), forControlEvents: UIControlEvents.TouchUpInside)
         
         container.clipsToBounds = true
         container.addSubview(btnInfo)
@@ -408,7 +411,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         btnInfo.setBackgroundImage(UIImage(named: userBlocked == true ?  "icon_unblock" : "icon_block"), forState: UIControlState.Normal)
         container.layer.cornerRadius = 0
         
-        btnInfo.addTarget(self, action: "blockUserIfNeccessary", forControlEvents: UIControlEvents.TouchUpInside)
+        btnInfo.addTarget(self, action: #selector(blockUserIfNeccessary), forControlEvents: UIControlEvents.TouchUpInside)
         
         container.clipsToBounds = true
         container.addSubview(btnInfo)
@@ -429,7 +432,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     func blockUser() {
         let alertController = UIAlertController(title: nil, message: "message_confirm_block_user".localized, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "block_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
-            URChatRoomManager.blockUser(self.chatRoom.key)
+            URChatRoomManager.blockUser(self.chatRoom!.key)
             self.collectionView!.userInteractionEnabled = false
             self.inputToolbar!.userInteractionEnabled = false
             self.userBlocked = true
@@ -443,7 +446,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     func unblockUser() {
         let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
         alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
-            URChatRoomManager.unblockUser(self.chatRoom.key)
+            URChatRoomManager.unblockUser(self.chatRoom!.key)
             self.collectionView!.userInteractionEnabled = true
             self.inputToolbar!.userInteractionEnabled = true
             self.userBlocked = false
@@ -465,7 +468,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.message = text
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
-        URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
+        URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom!)
         self.finishSendingMessage()        
     }
     
@@ -476,7 +479,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.media = media
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
-        URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom)
+        URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom!)
         
         ProgressHUD.dismiss()
     }
