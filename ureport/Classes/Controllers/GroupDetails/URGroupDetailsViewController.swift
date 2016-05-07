@@ -70,7 +70,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
-        cell.setupCellWithUserList(self.listUser,createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: false)
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: false)
         
         return cell
     }
@@ -89,15 +89,8 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     func addRightBarButtons() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
-        let btnInfo: UIButton = UIButton(type: UIButtonType.Custom)
-        btnInfo.frame = CGRectMake(0, 0, 6, 20)
-        btnInfo.setBackgroundImage(UIImage(named:"icon_overflow"), forState: UIControlState.Normal)
-        btnInfo.addTarget(self, action: "openActionSheet", forControlEvents: UIControlEvents.TouchUpInside)
-        let container: UIView = UIView(frame: CGRectMake(0, 0, 23, 23))
-        container.addSubview(btnInfo)
-//        let infoItem = UIBarButtonItem(customView: container)
         
-        let infoButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: "openActionSheet")
+        let infoButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: #selector(openActionSheet))
         
         return [infoButtonItem]
     }
@@ -105,9 +98,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     func openActionSheet() {
         let alertController: UIAlertController = UIAlertController(title: nil, message: "choose_option".localized, preferredStyle: .ActionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
-            
-        }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in }
         
         let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "remove_group".localized : "label_leave_group".localized , style: .Default) { action -> Void in
             if self.isUserAdmin == true {
@@ -127,13 +118,19 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         if isUserAdmin == true {
             alertController.addAction(editAction)
         }
+        if URConstant.isIpad {
+            alertController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            alertController.popoverPresentationController!.sourceView = (self.navigationItem.rightBarButtonItem!.valueForKey("view") as! UIView)
+            alertController.popoverPresentationController!.sourceRect = (self.navigationItem.rightBarButtonItem!.valueForKey("view") as! UIView).bounds
+            
+        }
         
-        URNavigationManager.navigation.presentViewController(alertController, animated: true, completion: nil)
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }

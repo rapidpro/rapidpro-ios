@@ -100,6 +100,7 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     func setupAudioPlayerWithURL(url:NSURL) {
         do {
             player = try AVAudioPlayer(contentsOfURL: url)
+            
             player.delegate = self
             player.prepareToPlay()
             player.volume = 1.0

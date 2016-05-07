@@ -8,7 +8,12 @@
 
 import UIKit
 
-class URChatTableViewController: UITableViewController {
+protocol URChatTableViewControllerDelegate {
+    func openChatRoom(chatRoom: URChatRoom,chatMembers:[URUser], title:String)
+    func openNewGroupViewController(newGroupViewController:URNewGroupViewController)
+}
+
+class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate {
 
     var createGroupOption:Bool!
     var myChatsMode:Bool!
@@ -16,12 +21,18 @@ class URChatTableViewController: UITableViewController {
     var listChatRoom:[URChatRoom] = []
     var listMembers:[URUser] = []
     
+    var chatRoomManager = URChatRoomManager()
+    var delegate:URChatTableViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        
+        chatRoomManager.delegate = self
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,6 +63,14 @@ class URChatTableViewController: UITableViewController {
 
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
+    }        
+    
+    //MARK: URChatRoomManagerDelegate
+    
+    func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
+        if let delegate = delegate {
+            delegate.openChatRoom(chatRoom, chatMembers: members, title: title)
+        }
     }
     
     // MARK: - Table view data source
@@ -68,9 +87,13 @@ class URChatTableViewController: UITableViewController {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
 
         if self.myChatsMode == false {
-            cell.setupCellWithUserList(self.listUser,createGroupOption: self.createGroupOption, myChatsMode: self.myChatsMode, indexPath: indexPath, checkGroupOption: false)
+            if listUser.count > 0 {
+                cell.setupCellWithUser(self.listUser[indexPath.row > 1 ? indexPath.row - 1 : indexPath.row],createGroupOption: self.createGroupOption, myChatsMode: self.myChatsMode, indexPath: indexPath, checkGroupOption: false)
+            }else{
+                cell.setupCellWithUser(nil,createGroupOption: self.createGroupOption, myChatsMode: self.myChatsMode, indexPath: indexPath, checkGroupOption: false)
+            }
         }else {
-            cell.setupCellWithChatRoomList(self.listChatRoom, indexPath: indexPath)
+            cell.setupCellWithChatRoom(self.listChatRoom[indexPath.row])
         }
         return cell
     }
@@ -85,13 +108,15 @@ class URChatTableViewController: UITableViewController {
             let groupViewController = URNewGroupViewController()
             groupViewController.listUser = self.listUser
             
-            self.navigationController?.pushViewController(groupViewController, animated: true)
+            if let delegate = self.delegate {
+                delegate.openNewGroupViewController(groupViewController)
+            }
             
         } else if (self.myChatsMode == false && (cell.type != .Group || cell.type != .Individual)) && cell.chatRoom == nil{
 
             ProgressHUD.show(nil)
             
-            URChatRoomManager.createIndividualChatRoomIfPossible(cell.user!)
+            chatRoomManager.createIndividualChatRoomIfPossible(cell.user!)
             
         }else {
             if let chatRoom = cell.chatRoom {
@@ -108,7 +133,10 @@ class URChatTableViewController: UITableViewController {
                         chatName = (chatRoom as! URGroupChatRoom).title
                     }
                     
-                    self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users, title:chatName), animated: true)
+                    if let delegate = self.delegate {
+                        delegate.openChatRoom(chatRoom, chatMembers: users, title: chatName)
+                    }
+                    
                 })
             }
         }
@@ -165,8 +193,8 @@ class URChatTableViewController: UITableViewController {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 64, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
+        self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
     }
 }

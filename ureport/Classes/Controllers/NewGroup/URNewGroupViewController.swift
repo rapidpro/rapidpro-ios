@@ -91,7 +91,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
         cell.delegate = self
-        cell.setupCellWithUserList(self.listUser,createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: true)
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: true)
         
         let filtered = self.listUserSelectedToGroup.filter {
             return $0.key == self.listUser[indexPath.row].key
@@ -240,7 +240,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
 
     private func setupTableView() {
         self.scrollView.contentInset = UIEdgeInsetsMake(0, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.separatorColor = UIColor.clearColor()
     }
     

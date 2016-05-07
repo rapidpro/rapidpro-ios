@@ -8,10 +8,11 @@
 
 import UIKit
 
-class URGroupsTableViewController: UITableViewController, URChatRoomManagerDelegate {
+class URGroupsTableViewController: UITableViewController, URChatRoomManagerDelegate, URGroupsTableViewCellDelegate {
 
     let chatRoomManager = URChatRoomManager()
     var listGroups:[URGroupChatRoom] = []
+    var myChatsViewController:URMyChatsViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,6 +23,7 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         listGroups = []
+        
         chatRoomManager.delegate = self
         chatRoomManager.getOpenGroups()
         
@@ -45,11 +47,22 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URGroupsTableViewCell.self), forIndexPath: indexPath) as! URGroupsTableViewCell
-
-        cell.viewController = self
+        
+        if !URConstant.isIpad {
+            cell.delegate = self
+        }else{
+            cell.delegate = myChatsViewController
+        }
+        
         cell.setupCellWithData(listGroups[indexPath.row])
         
         return cell
+    }
+    
+    //MARK: URGroupsTableViewCellDelegate
+    
+    func btJoinDidTap(cell: URGroupsTableViewCell, groupChatRoom: URGroupChatRoom, members: [URUser], title:String) {
+        self.navigationController?.pushViewController(URMessagesViewController(chatRoom: groupChatRoom, chatMembers: members, title: title),animated:true)
     }
     
     //MARK: UTChatRoomManagerDelegate
@@ -63,8 +76,8 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
     
     private func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URGroupsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URGroupsTableViewCell.self))
-        self.tableView.separatorColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
     }
 }

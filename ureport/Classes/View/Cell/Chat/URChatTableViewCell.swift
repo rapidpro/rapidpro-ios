@@ -38,8 +38,14 @@ class URChatTableViewCell: UITableViewCell {
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
-        // Configure the view for the selected state
+        if !URConstant.isIpad {
+            super.selectionStyle = UITableViewCellSelectionStyle.None
+        }else{
+            super.selectionStyle = UITableViewCellSelectionStyle.Blue
+            let view = UIView(frame: self.frame)
+            view.backgroundColor = UIColor(rgba: "#DAF8FE")
+            self.selectedBackgroundView = view
+        }        
     }
     
     //MARK: Class Methods
@@ -54,25 +60,22 @@ class URChatTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCellWithUserList(list:[URUser],createGroupOption:Bool, myChatsMode:Bool,indexPath:NSIndexPath, checkGroupOption:Bool) {
-        
-        var user:URUser
+    func setupCellWithUser(user:URUser?,createGroupOption:Bool, myChatsMode:Bool,indexPath:NSIndexPath, checkGroupOption:Bool) {
         
         if createGroupOption == true && indexPath.row == 0 && (URUserManager.userHasPermissionToAccessTheFeature(true)) {
             self.lbName.text = "new_group".localized
             self.img.image = UIImage(named: "icon_group_add_grey")
             self.roundedView.backgroundColor = UIColor.whiteColor()
             self.type = .CreateGroup
-        }else {
-            user = (createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)) ? list[indexPath.row - 1] : list[indexPath.row]
+        }else {            
             self.user = user
-            self.lbName.text = user.nickname
+            self.lbName.text = user!.nickname
             self.type = URChatCellType.CreateIndividualChat
             
-            if user.picture != nil && !(user.picture.isEmpty) {
+            if user!.picture != nil && !(user!.picture.isEmpty) {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
                 self.img.contentMode = UIViewContentMode.ScaleAspectFit
-                self.img.sd_setImageWithURL(NSURL(string: user.picture))
+                self.img.sd_setImageWithURL(NSURL(string: user!.picture))
             }else{
                 self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
                 self.img.contentMode = UIViewContentMode.Center
@@ -89,9 +92,7 @@ class URChatTableViewCell: UITableViewCell {
         
     }
     
-    func setupCellWithChatRoomList(list:[URChatRoom], indexPath:NSIndexPath) {
-        
-        let chatRoom:URChatRoom = list[indexPath.row]
+    func setupCellWithChatRoom(chatRoom:URChatRoom) {                
         self.chatRoom = chatRoom
         
         if chatRoom is URGroupChatRoom {

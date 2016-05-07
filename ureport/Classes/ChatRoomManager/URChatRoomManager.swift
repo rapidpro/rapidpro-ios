@@ -10,6 +10,7 @@ import Firebase
 
 @objc protocol URChatRoomManagerDelegate {
     optional func newOpenGroupReceived(groupChatRoom:URGroupChatRoom)
+    optional func openChatRoom(chatRoom:URChatRoom, members:[URUser], title:String)
 }
 
 class URChatRoomManager: NSObject {
@@ -21,7 +22,7 @@ class URChatRoomManager: NSObject {
         return "chat_room"
     }
     
-    class func createIndividualChatRoomIfPossible(user:URUser) {
+    func createIndividualChatRoomIfPossible(user:URUser) {
         if let chatRooms = user.chatRooms {
             for chatRoomKey in chatRooms.allKeys {
                 
@@ -32,14 +33,23 @@ class URChatRoomManager: NSObject {
                 if !filtered.isEmpty {
                     URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
                         URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
-                            URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:user.nickname),animated:true)
+                            
+                            ProgressHUD.dismiss()
+                            
+                            if let delegate = self.delegate {
+                                delegate.openChatRoom!(chatRoom!,members:users,title:user.nickname)
+                            }
                         })
                     })
                 }else {
                     ProgressHUD.show(nil)
                     URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
                         ProgressHUD.dismiss()
-                        URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
+                        
+                        if let delegate = self.delegate {
+                            delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                        }
+
                     })
                 }
                 
@@ -48,7 +58,11 @@ class URChatRoomManager: NSObject {
             ProgressHUD.show(nil)
             URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
                 ProgressHUD.dismiss()
-                URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
+                
+                if let delegate = self.delegate {
+                    delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                }
+
             })
         }
         
@@ -229,8 +243,6 @@ class URChatRoomManager: NSObject {
     class func getChatRooms(user:URUser,completion:([URChatRoom]?) -> Void){
         
         var chatRoomList:[URChatRoom] = []
-        var totalChatRooms = 0
-        var currentChatRoom = 0
         
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URUserManager.path())
@@ -239,10 +251,7 @@ class URChatRoomManager: NSObject {
             .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
                 if ((snapshot != nil) && !(snapshot.value is NSNull)) {
                     
-                    totalChatRooms = snapshot.children.allObjects.count
-                    
                     for rest in snapshot.children.allObjects as! [FDataSnapshot] {
-                        currentChatRoom++
                         
                         URChatMemberManager.getByKey(rest.key, completion: { (snapshot:FDataSnapshot?, exists:Bool) -> Void in
                             if exists == true && snapshot?.childrenCount > 0 {
@@ -271,35 +280,26 @@ class URChatRoomManager: NSObject {
                                                     }
                                                     
                                                     chatRoom!.totalUnreadMessages = totalUnreadMessages
-                                                    
                                                     chatRoomList.append(chatRoom!)
-                                                    
-                                                    if currentChatRoom == totalChatRooms {
-                                                        completion(chatRoomList)
-                                                    }
+                                                    completion(chatRoomList)
                                                     
                                                 })
                                                 
                                             }else{
                                                 chatRoomList.append(chatRoom!)
-                                                if currentChatRoom == totalChatRooms {
-                                                    completion(chatRoomList)
-                                                }
+                                                completion(chatRoomList)
                                             }
                                             
                                         })
                                     })
-                                    
                                 } else if snapshot?.childrenCount == 2 {
                                     //IndividualChat
                                     var userKey:String = ""
-                                    
                                     if ((snapshot!.children.allObjects[0] as! FDataSnapshot).key != user.key){
                                         userKey = (snapshot!.children.allObjects[0] as! FDataSnapshot).key
                                     } else {
                                         userKey = (snapshot!.children.allObjects[1] as! FDataSnapshot).key
                                     }
-                                    
                                     URUserManager.getByKey(userKey, completion: { (user:URUser?, exists:Bool) -> Void in
                                         if exists == true && user != nil {
                                             
@@ -326,20 +326,13 @@ class URChatRoomManager: NSObject {
                                                                 }
                                                                 
                                                                 individualChatRoom.totalUnreadMessages = totalUnreadMessages
-                                                                
                                                                 chatRoomList.append(individualChatRoom)
-                                                                
-                                                                if currentChatRoom == totalChatRooms {
-                                                                    completion(chatRoomList)
-                                                                }
-                                                                
+                                                                completion(chatRoomList)
                                                             })
                                                             
                                                         }else{
                                                             chatRoomList.append(individualChatRoom)
-                                                            if currentChatRoom == totalChatRooms {
-                                                                completion(chatRoomList)
-                                                            }
+                                                            completion(chatRoomList)
                                                         }
                                                         
                                                     })
@@ -349,11 +342,7 @@ class URChatRoomManager: NSObject {
                                             })
                                         }
                                     })
-                                    
                                 }
-                                
-                                completion(chatRoomList)
-                                
                             }
                         })
                         

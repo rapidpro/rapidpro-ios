@@ -43,8 +43,6 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
         if let myChatsViewController = myChatsViewController as? URMyChatsViewController {
             myChatsViewController.delegate = self
-        }else if let myChatsViewController = myChatsViewController as? URMyChatsIPadViewController {
-            myChatsViewController.myChatsBarButtonItens = self.addRightBarButtons()
         }
         
         tabBarController(self, didSelectViewController: storiesTableViewController)

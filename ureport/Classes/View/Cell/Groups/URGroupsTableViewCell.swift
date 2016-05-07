@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol URGroupsTableViewCellDelegate {
+    func btJoinDidTap(cell:URGroupsTableViewCell, groupChatRoom:URGroupChatRoom, members:[URUser], title:String)
+}
+
 class URGroupsTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lbTitle: UILabel!
@@ -15,9 +19,10 @@ class URGroupsTableViewCell: UITableViewCell {
     @IBOutlet weak var btJoin: UIButton!
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var imageViewGroup: UIImageView!
-
-    var viewController:UIViewController!
+    
     var groupChatRoom:URGroupChatRoom!
+    
+    var delegate:URGroupsTableViewCellDelegate!?
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -54,10 +59,6 @@ class URGroupsTableViewCell: UITableViewCell {
         
     }
     
-    func openMessagesViewController(chatRoom:URChatRoom, chatMembers:[URUser]) {
-        self.viewController.navigationController?.pushViewController(URMessagesViewController(chatRoom: self.groupChatRoom, chatMembers: chatMembers, title: ""),animated:true)
-    }
-    
     //MARK: Button Events
     
     @IBAction func btJoinTapped(sender: AnyObject) {
@@ -68,7 +69,9 @@ class URGroupsTableViewCell: UITableViewCell {
             ProgressHUD.dismiss()
             
             if self.groupChatRoom.userIsMember != nil && self.groupChatRoom.userIsMember == true {
-                self.openMessagesViewController(self.groupChatRoom,chatMembers: users)
+                if let delegate = self.delegate {
+                    delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text! )
+                }
             }else {
                 let chatMember = URChatMember(key: self.groupChatRoom.key)
                 
@@ -77,7 +80,9 @@ class URGroupsTableViewCell: UITableViewCell {
                         URGCMManager.registerUserInTopic(user, chatRoom: self.groupChatRoom)
                         URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
                         
-                        self.openMessagesViewController(self.groupChatRoom,chatMembers: users)
+                        if let delegate = self.delegate {
+                            delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text!)
+                        }
                         
                     }
                 })

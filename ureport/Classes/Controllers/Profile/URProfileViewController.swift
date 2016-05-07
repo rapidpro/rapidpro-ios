@@ -143,14 +143,14 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
     }
     
     func setupTableView() {
-        self.tableviewAnsweredPoll.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableviewAnsweredPoll.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableviewAnsweredPoll.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
          self.tableviewAnsweredPoll.separatorColor = UIColor.clearColor()
         
         self.tableviewAnsweredPoll.rowHeight = UITableViewAutomaticDimension
         self.tableviewAnsweredPoll.estimatedRowHeight = 220.0
         
-        self.tableviewMyStories.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableviewMyStories.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableviewMyStories.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
          self.tableviewMyStories.separatorColor = UIColor.clearColor()
         
@@ -340,6 +340,13 @@ class URProfileViewController: UIViewController, URPollManagerDelegate, URStoryM
             alertController.addAction(passwordUpdateAction)
             alertController.addAction(profileUpdateAction)
             alertController.addAction(cancelAction)
+            
+            if URConstant.isIpad {
+                alertController.modalPresentationStyle = UIModalPresentationStyle.Popover
+                alertController.popoverPresentationController!.sourceView = (sender as! UIButton)
+                alertController.popoverPresentationController!.sourceRect = (sender as! UIButton).bounds
+                
+            }
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }

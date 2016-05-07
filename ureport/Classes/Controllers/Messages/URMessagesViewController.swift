@@ -14,7 +14,7 @@ import NYTPhotoViewer
 import youtube_ios_player_helper
 
 protocol URMessagesViewControllerDelegate {
-    func didDismissJSQDemoViewController(messagesViewController:URMessagesViewController)
+    func mediaButtonDidTap()
 }
 
 class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaSourceViewControllerDelegate, URAudioRecorderViewControllerDelegate {
@@ -55,24 +55,24 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
+        sendButton = self.inputToolbar.contentView.rightBarButtonItem        
+        
+        setupJSQMessageLayout()
         loadMessagesController()
     }
     
     func loadMessagesController() {
-        sendButton = self.inputToolbar.contentView.rightBarButtonItem
         self.navigationItem.title = navigationTitle
         
         setupRightButtons()
-        setupJSQMessageLayout()
-        
         keyboardDidHide()
-        
         setupAvatarImages()
         
-        chatMessage.delegate = self
-        
         if self.chatRoom != nil {
+            self.jsqMessages = []
+            self.collectionView.reloadData()
+            chatMessage.delegate = self
             chatMessage.getMessages(self.chatRoom!)
         }
         
@@ -98,10 +98,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         URNavigationManager.setupNavigationBarWithType(.Blue)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         
-        if let _ = self.delegate {
-            self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Stop, target: self, action: #selector(closePressed))
-        }
-        
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Chat Messages")
         
@@ -112,16 +108,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        if chatRoom != nil {
-            URChatMessageManager.getTotalMessages(chatRoom!, completion: { (totalMessages:Int) -> Void in
-                
-                let messageRead = URMessageRead()
-                messageRead.totalMessages = totalMessages
-                messageRead.roomKey = self.chatRoom!.key
-                
-                URMessageRead.saveMessageReadLocaly(messageRead)
-            })
-        }
+        updateReadMessages()
     }
 
     
@@ -154,6 +141,19 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     //MARK: Class Methods
     
+    func updateReadMessages() {
+        if chatRoom != nil {
+            URChatMessageManager.getTotalMessages(chatRoom!, completion: { (totalMessages:Int) -> Void in
+                
+                let messageRead = URMessageRead()
+                messageRead.totalMessages = totalMessages
+                messageRead.roomKey = self.chatRoom!.key
+                
+                URMessageRead.saveMessageReadLocaly(messageRead)
+            })
+        }
+    }
+    
     func audioDidStartPlaying(notification:NSNotification) {
         for jsqMessage in jsqMessages {
             if jsqMessage.isMediaMessage {
@@ -180,6 +180,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let micButton = UIButton(frame: CGRect(x: 0, y: 0, width: 25, height: 25))
         micButton.setImage(UIImage(named: "icon_mic_blue"), forState: UIControlState.Normal)
         micButton.addTarget(self, action: #selector(openAudioRecorderController), forControlEvents: UIControlEvents.TouchUpInside)
+        self.inputToolbar.contentView.rightBarButtonItem = nil
         self.inputToolbar.contentView.rightBarButtonItem = micButton
         self.inputToolbar.contentView.rightBarButtonItem.enabled = true
     }
@@ -270,7 +271,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     
     func setupJSQMessageLayout() {
         self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
-//        automaticallyScrollsToMostRecentMessage = true
         
         self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
         self.senderId = URUser.activeUser()!.key
@@ -361,12 +361,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                 
             }
             
-        }
-    }
-    
-    func closePressed(sender: UIBarButtonItem) {
-        if let delegate = self.delegate {
-            delegate.didDismissJSQDemoViewController(self)
         }
     }
     
@@ -469,6 +463,8 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom!)
+        updateReadMessages()
+        
         self.finishSendingMessage()        
     }
     
@@ -480,7 +476,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         newMessage.date = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom!)
-        
+        updateReadMessages()
         ProgressHUD.dismiss()
     }
     
@@ -498,10 +494,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         
         self.inputToolbar.contentView.textView.resignFirstResponder()
         
-        self.view.addSubview(mediaSourceViewController.view)
-        mediaSourceViewController.delegate = self
-        mediaSourceViewController.toggleView { (finish) -> Void in}
-        
+        if let delegate = self.delegate {
+            delegate.mediaButtonDidTap()
+        }else {
+            self.view.addSubview(mediaSourceViewController.view)
+            mediaSourceViewController.delegate = self
+            mediaSourceViewController.toggleView { (finish) -> Void in}
+        }
     }
     
     //MARK: JSQMessages CollectionView DataSource

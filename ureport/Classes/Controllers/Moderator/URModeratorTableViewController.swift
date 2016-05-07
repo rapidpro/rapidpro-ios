@@ -20,7 +20,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     override func viewDidLoad() {
         super.viewDidLoad()
         isOptionSelectedUserAsModeratorActive = false
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
@@ -55,7 +55,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
         cell.delegate = self
-        cell.setupCellWithUserList(self.listUser,createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: true)
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: true)
         
         let filtered = self.listUserSelectedAsModerator.filter {
             return $0 == self.listUser[indexPath.row].key
@@ -164,7 +164,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
 
     private func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(64, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.separatorColor = UIColor.clearColor()
     }
 }

@@ -130,7 +130,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     
     class func addLeftButtonMenuInViewController(viewController:UIViewController){
         let image:UIImage = ISImageUtil.resizeImage(UIImage(named: "icon_burgermenu")!,scaledToSize: CGSize(width: 20, height: 16))
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: "toggleMenu")
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(toggleMenu))
     }
     
     class func toggleMenu() {

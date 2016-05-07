@@ -74,6 +74,14 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     //MARK: Actions
     
     @IBAction func switchLanguage(sender: AnyObject) {
+        
+        if URConstant.isIpad {
+            actionSheetLanguage.modalPresentationStyle = UIModalPresentationStyle.Popover
+            actionSheetLanguage.popoverPresentationController!.sourceView = (sender as! UIButton)
+            actionSheetLanguage.popoverPresentationController!.sourceRect = (sender as! UIButton).bounds
+            
+        }
+        
         viewController.presentViewController(actionSheetLanguage, animated: true, completion: nil)
     }
     

@@ -49,8 +49,8 @@ class URChatVideoPhoneItem: JSQMediaItem {
         return nil
     }
     
-    @objc override func mediaHash() -> UInt {
-        return UInt(self.hash)
-    }
+//    @objc override func mediaHash() -> UInt {
+//        return UInt(self.hash)
+//    }
     
 }

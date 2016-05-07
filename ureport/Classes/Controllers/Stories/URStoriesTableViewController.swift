@@ -182,7 +182,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     private func setupTableView() {
         self.tableView.delegate = self
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 49, right: 0)
         
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))

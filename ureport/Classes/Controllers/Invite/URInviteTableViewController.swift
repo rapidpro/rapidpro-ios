@@ -104,7 +104,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     private func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.registerNib(UINib(nibName: "URInviteTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URInviteTableViewCell.self))
         self.tableView.separatorColor = UIColor.clearColor()
     }

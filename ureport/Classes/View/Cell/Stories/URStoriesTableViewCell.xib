@@ -14,11 +14,11 @@
                 <rect key="frame" x="0.0" y="0.0" width="1025" height="510.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="vXB-VX-G3Z">
-                        <rect key="frame" x="0.0" y="0.0" width="1025" height="488.5"/>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vXB-VX-G3Z">
+                        <rect key="frame" x="0.0" y="0.0" width="1025" height="510.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="446-AE-Sl4" userLabel="ViewSeparator">
-                                <rect key="frame" x="5" y="480" width="1014" height="6"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="446-AE-Sl4" userLabel="ViewSeparator">
+                                <rect key="frame" x="5" y="502" width="1014" height="6"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="6" id="Dsr-sE-ptW"/>
@@ -36,8 +36,8 @@
                                     </mask>
                                 </variation>
                             </view>
-                            <view clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-9A-e87">
-                                <rect key="frame" x="5" y="5" width="1014" height="479"/>
+                            <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-9A-e87">
+                                <rect key="frame" x="5" y="5" width="1014" height="501"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="coD-VO-YzA">
                                         <rect key="frame" x="162" y="398" width="140" height="23"/>
@@ -65,8 +65,8 @@
                                             </mask>
                                         </variation>
                                     </label>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5C-91-wQf">
-                                        <rect key="frame" x="8" y="434" width="998" height="39"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P5C-91-wQf">
+                                        <rect key="frame" x="8" y="456" width="998" height="39"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="39" id="xbU-pp-KXz"/>
@@ -241,8 +241,8 @@
                                         <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view hidden="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-OJ-i8J" userLabel="ViewModeration">
-                                        <rect key="frame" x="0.0" y="437" width="1014" height="41"/>
+                                    <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3z0-OJ-i8J" userLabel="ViewModeration">
+                                        <rect key="frame" x="0.0" y="459" width="1014" height="41"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B0g-cu-HpE">
                                                 <rect key="frame" x="510" y="0.0" width="496" height="34"/>

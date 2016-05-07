@@ -87,10 +87,10 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
     //MARK: Class Methods
     
     private func setupTableView() {
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         
         self.tableView.registerNib(UINib(nibName: "URSettingsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URSettingsTableViewCell.self))
-        self.tableView.separatorColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
     }
 
 }
