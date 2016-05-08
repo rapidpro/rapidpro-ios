@@ -30,6 +30,8 @@ class URClosedPollTableViewCell: UITableViewCell {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         super.selectionStyle = UITableViewCellSelectionStyle.None
+        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsetsZero
         // Configure the view for the selected state
     }        
     

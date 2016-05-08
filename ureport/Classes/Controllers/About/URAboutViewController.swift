@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import youtube_ios_player_helper
 
 class URAboutViewController: UIViewController {
 
@@ -15,6 +16,15 @@ class URAboutViewController: UIViewController {
     @IBOutlet weak var btTwitter: UIButton!
     @IBOutlet weak var lbAboutContent: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var youtubeView: YTPlayerView!
+
+    init() {
+        super.init(nibName: URConstant.isIpad ? "URAboutViewIPadController" : "URAboutViewController", bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,6 +53,9 @@ class URAboutViewController: UIViewController {
         self.btFacebook.layer.cornerRadius = self.btTwitter.frame.height / CGFloat(2.0)
         self.lbAboutContent.text = "about_content".localized
         self.lbVoiceMatters.text = "about_subtitle".localized
+        
+        self.youtubeView.loadWithVideoId("pDa9OjtJhSo")
+        
     }
     
     //MARK: Button Events

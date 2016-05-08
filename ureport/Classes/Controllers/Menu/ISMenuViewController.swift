@@ -97,7 +97,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             break
         case .About:
             URNavigationManager.toggleMenu()
-            URNavigationManager.setFrontViewController(URAboutViewController(nibName:"URAboutViewController",bundle:nil))
+            URNavigationManager.setFrontViewController(URAboutViewController())
             break
         case .Settings:
             URNavigationManager.toggleMenu()

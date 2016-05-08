@@ -188,7 +188,9 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsetsZero
     }
     
     //MARK: StoryManagerDelegate

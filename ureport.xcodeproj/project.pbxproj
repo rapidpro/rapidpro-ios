@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
+		650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
 		65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */; };
 		6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */; };
 		6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB791B881AE100CEEC3B /* Images.xcassets */; };
@@ -284,6 +285,7 @@
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDownloader.swift; sourceTree = "<group>"; };
+		650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAboutViewIPadController.xib; sourceTree = "<group>"; };
 		65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchImages.xcassets; sourceTree = "<group>"; };
 		6515FB791B881AE100CEEC3B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
@@ -1505,6 +1507,7 @@
 			children = (
 				65EA8C1E1BB0792800F2E29E /* URAboutViewController.swift */,
 				65EA8C1F1BB0792800F2E29E /* URAboutViewController.xib */,
+				650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */,
 			);
 			path = About;
 			sourceTree = "<group>";
@@ -1758,6 +1761,7 @@
 				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
 				65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */,
 				658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */,
+				650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */,
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
 				65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */,
 				655691701B7D3DA800525E00 /* URClosedPollTableViewCell.xib in Resources */,

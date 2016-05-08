@@ -31,8 +31,11 @@ class URChatRoomManager: NSObject {
                 }
                 
                 if !filtered.isEmpty {
+                    
                     URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
                         URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
+                            
+                            chatRoom!.key = chatRoomKey as! String
                             
                             ProgressHUD.dismiss()
                             
@@ -41,6 +44,7 @@ class URChatRoomManager: NSObject {
                             }
                         })
                     })
+                    break
                 }else {
                     ProgressHUD.show(nil)
                     URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
@@ -51,6 +55,7 @@ class URChatRoomManager: NSObject {
                         }
 
                     })
+                    break
                 }
                 
             }

@@ -40,6 +40,8 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         super.selectionStyle = UITableViewCellSelectionStyle.None
+        self.layoutMargins = UIEdgeInsetsZero
+        self.separatorInset = UIEdgeInsetsZero
     }
     
     //MARK: Class Methods

@@ -145,7 +145,9 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         self.tableView.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 220;
+        self.tableView.estimatedRowHeight = 220;        
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsetsZero
         
         pollManager.delegate = self
         URNavigationManager.setupNavigationBarWithType(.Blue)

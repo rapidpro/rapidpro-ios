@@ -70,6 +70,8 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
         if let delegate = delegate {
             delegate.openChatRoom(chatRoom, chatMembers: members, title: title)
+        }else{
+            self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom, chatMembers: members, title: title), animated: true)
         }
     }
     
@@ -110,6 +112,8 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
             
             if let delegate = self.delegate {
                 delegate.openNewGroupViewController(groupViewController)
+            }else{
+                self.navigationController?.pushViewController(groupViewController, animated: true)
             }
             
         } else if (self.myChatsMode == false && (cell.type != .Group || cell.type != .Individual)) && cell.chatRoom == nil{
@@ -135,6 +139,8 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
                     
                     if let delegate = self.delegate {
                         delegate.openChatRoom(chatRoom, chatMembers: users, title: chatName)
+                    }else{
+                        self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom, chatMembers: users, title: chatName), animated: true)
                     }
                     
                 })

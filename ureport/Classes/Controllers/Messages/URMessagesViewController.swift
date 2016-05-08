@@ -11,7 +11,6 @@ import Foundation
 import JSQMessagesViewController
 import SDWebImage
 import NYTPhotoViewer
-import youtube_ios_player_helper
 
 protocol URMessagesViewControllerDelegate {
     func mediaButtonDidTap()
@@ -69,7 +68,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         keyboardDidHide()
         setupAvatarImages()
         
-        if self.chatRoom != nil {
+        if self.chatRoom != nil && self.chatRoom!.key != nil && self.chatRoom!.key.characters.count > 0{
             self.jsqMessages = []
             self.collectionView.reloadData()
             chatMessage.delegate = self

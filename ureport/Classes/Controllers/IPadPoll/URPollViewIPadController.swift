@@ -65,12 +65,6 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     
     func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
         self.poll = cell.poll
-        
-//        if UIDevice.currentDevice().orientation.isLandscape {
-//            pollResultCollectionViewController.setPoll(self.poll!, frame: CGRect(x: 0, y: 0, width: self.rightView.frame.size.width, height: self.rightView.frame.size.height))
-//        }else {
-//            pollResultTableViewController.reloadWithPoll(self.poll!)
-//        }
         self.lbMessage.hidden = true
         self.imgMessage.hidden = true
         pollResultTableViewController.reloadWithPoll(self.poll!)
@@ -95,12 +89,6 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     
     func setupUI() {
         displayLeftContentController(closedPollTableViewController)
-        
-//        if UIDevice.currentDevice().orientation.isLandscape {
-//            displayRightContentController(pollResultCollectionViewController)
-//        }else{
-//            displayRightContentController(pollResultTableViewController)
-//        }
         displayRightContentController(pollResultTableViewController)
     }
     

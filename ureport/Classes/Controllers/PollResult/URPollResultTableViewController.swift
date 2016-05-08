@@ -113,5 +113,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 189;
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsetsZero
     }
 }
