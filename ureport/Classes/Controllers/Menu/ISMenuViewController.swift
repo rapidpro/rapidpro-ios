@@ -19,6 +19,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSwitchCountryProgram: UITextField!
     @IBOutlet weak var imgProfile: UIImageView!
+    @IBOutlet weak var bgImageProfile: UIImageView!
     @IBOutlet weak var btLogin: UIButton!
         
     var countryProgramChanged:URCountryProgram!
@@ -52,6 +53,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         setupTableViewCell()
         setupGestureRecognizer()
         self.txtSwitchCountryProgram.tintColor = UIColor.clearColor()
+        self.txtSwitchCountryProgram.textColor = URConstant.Color.PRIMARY
         NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardHideNotification:"), name:   UIKeyboardWillHideNotification, object: nil);
         self.appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     }    
@@ -88,9 +90,10 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let menu:ISMenu! = (tableView.cellForRowAtIndexPath(indexPath) as! ISMenuTableViewCell).menu
+        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ISMenuTableViewCell
+        let menu = cell.menu
         
-        switch menu.menuItem as URMenuItem {
+        switch menu!.menuItem as URMenuItem {
         case .Main:
             URNavigationManager.toggleMenu()
             URNavigationManager.setFrontViewController(URMainViewController())
@@ -100,8 +103,24 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             URNavigationManager.setFrontViewController(URAboutViewController())
             break
         case .Settings:
-            URNavigationManager.toggleMenu()
-            URNavigationManager.setFrontViewController(URSettingsTableViewController())
+            
+            let settingsTableViewController = URSettingsTableViewController()
+            
+            if !URConstant.isIpad {
+                URNavigationManager.toggleMenu()
+                URNavigationManager.setFrontViewController(settingsTableViewController)
+            }else{
+                settingsTableViewController.view.backgroundColor = UIColor.whiteColor()
+                var popOverViewController = UIPopoverController(contentViewController: settingsTableViewController)
+                
+                popOverViewController = UIPopoverController(contentViewController: settingsTableViewController)
+                popOverViewController.popoverContentSize = CGSize(width: 320, height: 300)
+                
+                var frame = cell.frame
+                frame.origin.x = frame.origin.x - 20
+                
+                popOverViewController.presentPopoverFromRect(frame, inView: self.tableView, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+            }
             break
         case .Moderation:
             
@@ -203,7 +222,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         self.pickerCountryProgram!.delegate = self
         self.pickerCountryProgram!.showsSelectionIndicator = true
         self.txtSwitchCountryProgram.inputView = self.pickerCountryProgram
-        self.txtSwitchCountryProgram.attributedPlaceholder = NSAttributedString(string: "switch_country_program".localized, attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+        self.txtSwitchCountryProgram.attributedPlaceholder = NSAttributedString(string: "switch_country_program".localized, attributes: [NSForegroundColorAttributeName: URConstant.Color.PRIMARY])
         
         self.btLogin.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
@@ -237,9 +256,11 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
                 self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFit
                 self.imgProfile.sd_setImageWithURL(NSURL(string: picture))
+                self.bgImageProfile.contentMode = UIViewContentMode.ScaleAspectFill
+                self.bgImageProfile.sd_setImageWithURL(NSURL(string: picture))
             }else{
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-                self.imgProfile.contentMode = UIViewContentMode.Center
+                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.imgProfile.image = UIImage(named: "ic_person")
             }
             
@@ -254,7 +275,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             self.btLogin.hidden = false
             
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-            self.imgProfile.contentMode = UIViewContentMode.Center
+            self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
             self.imgProfile.image = UIImage(named: "ic_person")
         }
         

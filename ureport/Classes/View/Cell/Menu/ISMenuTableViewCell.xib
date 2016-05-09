@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -16,16 +16,26 @@
                 <subviews>
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nJe-Yw-Sqn">
                         <rect key="frame" x="12" y="8" width="180" height="38.5"/>
-                        <fontDescription key="fontDescription" name="HelveticaNeue-Medium" family="Helvetica Neue" pointSize="14"/>
-                        <color key="textColor" red="0.18909143518518523" green="0.18909143518518523" blue="0.18909143518518523" alpha="1" colorSpace="calibratedRGB"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vIa-Zw-5Ng">
+                        <rect key="frame" x="0.0" y="53" width="200" height="1"/>
+                        <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="gXT-Ix-q5S"/>
+                        </constraints>
+                    </view>
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="bottom" secondItem="nJe-Yw-Sqn" secondAttribute="bottom" constant="8" id="14u-jQ-4Ug"/>
                     <constraint firstItem="nJe-Yw-Sqn" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="12" id="GGc-fE-RFm"/>
+                    <constraint firstItem="vIa-Zw-5Ng" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="JSC-Oc-HR3"/>
                     <constraint firstAttribute="trailing" secondItem="nJe-Yw-Sqn" secondAttribute="trailing" constant="8" id="Lcf-33-Ubd"/>
                     <constraint firstItem="nJe-Yw-Sqn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="8" id="TIj-iN-jYy"/>
+                    <constraint firstAttribute="bottom" secondItem="vIa-Zw-5Ng" secondAttribute="bottom" constant="0.5" id="Wva-0S-OOR"/>
+                    <constraint firstAttribute="trailing" secondItem="vIa-Zw-5Ng" secondAttribute="trailing" id="c6q-wQ-W2s"/>
                 </constraints>
             </tableViewCellContentView>
             <connections>

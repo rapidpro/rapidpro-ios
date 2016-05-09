@@ -19,7 +19,7 @@ class ISMenuTableViewCell: UITableViewCell {
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
+        super.setSelected(selected, animated: animated)        
         super.selectionStyle = UITableViewCellSelectionStyle.None
     }        
     
