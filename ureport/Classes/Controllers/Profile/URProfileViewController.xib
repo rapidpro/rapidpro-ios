@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9532" systemVersion="15D21" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9530"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URProfileViewController" customModule="ureport" customModuleProvider="target">
             <connections>
-                <outlet property="btAnsweredPolls" destination="UBY-KT-QzR" id="MeV-h0-Jj6"/>
                 <outlet property="btEdit" destination="9JT-kq-LHY" id="gMw-VS-b2T"/>
                 <outlet property="btLogout" destination="4iz-2Q-0eb" id="UZz-Jr-X7F"/>
                 <outlet property="btMyStories" destination="JdZ-79-q9z" id="bMj-L5-RWS"/>
@@ -16,7 +15,6 @@
                 <outlet property="lbProfileDetails" destination="c3R-f6-bo3" id="oEK-vA-ANj"/>
                 <outlet property="roundedView" destination="J1S-bJ-2dI" id="HwX-Sd-pAH"/>
                 <outlet property="scrollView" destination="IK4-6v-YnD" id="Mhz-lT-Erv"/>
-                <outlet property="tableviewAnsweredPoll" destination="iZO-4q-mZB" id="BZ7-Jy-HeI"/>
                 <outlet property="tableviewMyStories" destination="WBD-jw-ykB" id="vdp-0E-gb5"/>
                 <outlet property="tableviewRanking" destination="5TG-88-QWc" id="4P2-22-Npr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -140,10 +138,10 @@
                                     </variation>
                                 </view>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="JdZ-79-q9z">
-                                    <rect key="frame" x="0.0" y="190" width="107" height="43"/>
+                                    <rect key="frame" x="0.0" y="190" width="160" height="43"/>
                                     <color key="backgroundColor" red="0.25882352941176467" green="0.71372549019607845" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="43" id="O48-lJ-UFh"/>
+                                        <constraint firstAttribute="height" constant="43" id="hec-xD-4k7"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <state key="normal" title="My Stories">
@@ -153,25 +151,11 @@
                                         <action selector="btMyStoriesTapped:" destination="-1" eventType="touchUpInside" id="BHi-eR-ih9"/>
                                     </connections>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="UBY-KT-QzR">
-                                    <rect key="frame" x="107" y="190" width="106" height="43"/>
-                                    <color key="backgroundColor" red="0.25882352941176467" green="0.71372549019607845" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
-                                    <constraints>
-                                        <constraint firstAttribute="height" constant="43" id="c3K-oH-mgd"/>
-                                    </constraints>
-                                    <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                    <state key="normal" title="Answred Polls">
-                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    </state>
-                                    <connections>
-                                        <action selector="btAnsweredPollsTapped:" destination="-1" eventType="touchUpInside" id="M1G-By-PW7"/>
-                                    </connections>
-                                </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="3So-dw-nfH">
-                                    <rect key="frame" x="213" y="190" width="107" height="43"/>
+                                    <rect key="frame" x="160" y="190" width="160" height="43"/>
                                     <color key="backgroundColor" red="0.25882352941176467" green="0.71372549019607845" blue="0.90588235294117647" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="43" id="2xg-5Z-pUH"/>
+                                        <constraint firstAttribute="height" constant="43" id="Saz-Us-sPh"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                     <state key="normal" title="Ranking">
@@ -181,16 +165,8 @@
                                         <action selector="btRankingTapped:" destination="-1" eventType="touchUpInside" id="kj4-Pw-uFx"/>
                                     </connections>
                                 </button>
-                                <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="iZO-4q-mZB">
-                                    <rect key="frame" x="0.0" y="232" width="320" height="327"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <connections>
-                                        <outlet property="dataSource" destination="-1" id="Nt1-Qq-ZSQ"/>
-                                        <outlet property="delegate" destination="-1" id="4jt-xA-V7e"/>
-                                    </connections>
-                                </tableView>
                                 <tableView hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="WBD-jw-ykB">
-                                    <rect key="frame" x="0.0" y="232" width="320" height="327"/>
+                                    <rect key="frame" x="0.0" y="238" width="320" height="327"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <connections>
                                         <outlet property="dataSource" destination="-1" id="J45-Tp-MWZ"/>
@@ -208,37 +184,27 @@
                             </subviews>
                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             <constraints>
+                                <constraint firstItem="JdZ-79-q9z" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" id="0Oi-YZ-rLa"/>
                                 <constraint firstAttribute="trailing" secondItem="Mb2-Qq-rLg" secondAttribute="trailing" id="84W-zR-WJF"/>
-                                <constraint firstAttribute="bottom" secondItem="iZO-4q-mZB" secondAttribute="bottom" constant="9" id="9h1-9Q-2cY"/>
-                                <constraint firstItem="3So-dw-nfH" firstAttribute="leading" secondItem="UBY-KT-QzR" secondAttribute="trailing" id="CgY-xz-pde"/>
-                                <constraint firstItem="UBY-KT-QzR" firstAttribute="leading" secondItem="JdZ-79-q9z" secondAttribute="trailing" id="CrJ-dc-PBb"/>
+                                <constraint firstItem="3So-dw-nfH" firstAttribute="top" secondItem="Mb2-Qq-rLg" secondAttribute="bottom" id="Cyh-xf-9KS"/>
                                 <constraint firstItem="Mb2-Qq-rLg" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" id="FNg-e5-j4a"/>
-                                <constraint firstItem="WBD-jw-ykB" firstAttribute="top" secondItem="3So-dw-nfH" secondAttribute="bottom" constant="-1" id="FPT-gV-O7K"/>
+                                <constraint firstItem="5TG-88-QWc" firstAttribute="top" secondItem="3So-dw-nfH" secondAttribute="bottom" constant="5" id="Ije-Yo-7g4"/>
                                 <constraint firstItem="Mb2-Qq-rLg" firstAttribute="top" secondItem="bsu-rW-ume" secondAttribute="top" id="Iu2-L6-Ogd"/>
                                 <constraint firstItem="5TG-88-QWc" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" constant="5" id="IuC-l9-YJ7"/>
-                                <constraint firstItem="iZO-4q-mZB" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" id="MXj-Ja-Xy0"/>
-                                <constraint firstItem="3So-dw-nfH" firstAttribute="width" secondItem="JdZ-79-q9z" secondAttribute="width" id="ObU-ba-25q"/>
-                                <constraint firstItem="UBY-KT-QzR" firstAttribute="width" secondItem="JdZ-79-q9z" secondAttribute="width" constant="-1" id="T70-or-V37"/>
+                                <constraint firstItem="3So-dw-nfH" firstAttribute="width" secondItem="JdZ-79-q9z" secondAttribute="width" id="KcK-TM-2hB"/>
+                                <constraint firstItem="3So-dw-nfH" firstAttribute="leading" secondItem="JdZ-79-q9z" secondAttribute="trailing" id="Q6i-cQ-kHA"/>
+                                <constraint firstAttribute="trailing" secondItem="3So-dw-nfH" secondAttribute="trailing" id="SXI-oB-VVC"/>
+                                <constraint firstItem="JdZ-79-q9z" firstAttribute="top" secondItem="Mb2-Qq-rLg" secondAttribute="bottom" id="TlV-tQ-2Rf"/>
                                 <constraint firstAttribute="trailing" secondItem="5TG-88-QWc" secondAttribute="trailing" constant="5" id="ZHX-7q-p1y"/>
-                                <constraint firstItem="JdZ-79-q9z" firstAttribute="top" secondItem="Mb2-Qq-rLg" secondAttribute="bottom" id="ZVx-c8-k8L"/>
                                 <constraint firstItem="3So-dw-nfH" firstAttribute="leading" secondItem="JdZ-79-q9z" secondAttribute="trailing" constant="106" id="abj-r2-OQy"/>
-                                <constraint firstAttribute="trailing" secondItem="iZO-4q-mZB" secondAttribute="trailing" id="fE3-Bt-oMP"/>
-                                <constraint firstAttribute="trailing" secondItem="UBY-KT-QzR" secondAttribute="trailing" constant="106" id="g1V-Qg-nr2"/>
                                 <constraint firstItem="WBD-jw-ykB" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" id="h5A-7W-71Y"/>
-                                <constraint firstItem="3So-dw-nfH" firstAttribute="top" secondItem="Mb2-Qq-rLg" secondAttribute="bottom" id="hZl-t8-sT8"/>
-                                <constraint firstItem="iZO-4q-mZB" firstAttribute="top" secondItem="3So-dw-nfH" secondAttribute="bottom" constant="-1" id="i5b-PX-d93"/>
-                                <constraint firstItem="3So-dw-nfH" firstAttribute="leading" secondItem="UBY-KT-QzR" secondAttribute="trailing" id="iyi-yb-EDU"/>
+                                <constraint firstItem="WBD-jw-ykB" firstAttribute="top" secondItem="5TG-88-QWc" secondAttribute="top" id="juG-ti-pD6"/>
                                 <constraint firstAttribute="trailing" secondItem="WBD-jw-ykB" secondAttribute="trailing" id="mAu-7f-9QL"/>
-                                <constraint firstItem="JdZ-79-q9z" firstAttribute="leading" secondItem="bsu-rW-ume" secondAttribute="leading" id="oRL-3Y-CZb"/>
                                 <constraint firstAttribute="bottom" secondItem="5TG-88-QWc" secondAttribute="bottom" constant="3" id="qST-1U-WHa"/>
-                                <constraint firstItem="UBY-KT-QzR" firstAttribute="top" secondItem="Mb2-Qq-rLg" secondAttribute="bottom" id="rZy-rP-rD9"/>
-                                <constraint firstAttribute="trailing" secondItem="3So-dw-nfH" secondAttribute="trailing" id="v0w-0w-mIf"/>
-                                <constraint firstItem="5TG-88-QWc" firstAttribute="top" secondItem="3So-dw-nfH" secondAttribute="bottom" constant="5" id="vEY-23-hOp"/>
-                                <constraint firstAttribute="bottom" secondItem="WBD-jw-ykB" secondAttribute="bottom" constant="9" id="xAl-N4-caG"/>
+                                <constraint firstAttribute="bottom" secondItem="WBD-jw-ykB" secondAttribute="bottom" constant="3" id="xAl-N4-caG"/>
                             </constraints>
                             <variation key="default">
                                 <mask key="constraints">
-                                    <exclude reference="g1V-Qg-nr2"/>
                                     <exclude reference="abj-r2-OQy"/>
                                 </mask>
                             </variation>

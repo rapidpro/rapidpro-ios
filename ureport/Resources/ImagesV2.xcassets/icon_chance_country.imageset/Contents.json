@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "icon_chance_country.png.png",
+      "filename" : "icon_chance_country.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_chance_country.png@2x.png",
+      "filename" : "icon_chance_country@2x.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "icon_chance_country.png@3x.png",
+      "filename" : "icon_chance_country@3x.png",
       "scale" : "3x"
     }
   ],

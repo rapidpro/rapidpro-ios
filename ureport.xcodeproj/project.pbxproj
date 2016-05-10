@@ -37,7 +37,6 @@
 		65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65409FED1B4C84DE00344D75 /* URLoginViewController.xib */; };
 		65409FF11B4C977600344D75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65409FF01B4C977600344D75 /* Foundation.framework */; };
 		65409FF51B4C9E7C00344D75 /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FF31B4C9E7C00344D75 /* URUserRegisterViewController.swift */; };
-		65409FF61B4C9E7C00344D75 /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65409FF41B4C9E7C00344D75 /* URUserRegisterViewController.xib */; };
 		6540EA531CDB9D45006287D3 /* URMarkerViewIPadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */; };
 		6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */; };
 		6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */; };
@@ -171,7 +170,6 @@
 		65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CEE1B8810DE001C6808 /* URInviteTableViewCell.xib */; };
 		65A45CF31B8812D1001C6808 /* URInviteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CF21B8812D1001C6808 /* URInviteTableViewController.swift */; };
 		65B16FDC1BB5E7AB00BDBDEE /* URProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B16FDA1BB5E7AB00BDBDEE /* URProfileViewController.swift */; };
-		65B16FDD1BB5E7AB00BDBDEE /* URProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FDB1BB5E7AB00BDBDEE /* URProfileViewController.xib */; };
 		65B16FE11BB9F53300BDBDEE /* URRankingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65B16FDF1BB9F53300BDBDEE /* URRankingTableViewCell.swift */; };
 		65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */; };
 		65C234041BACB89D002DB994 /* PhotoShow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65C234031BACB89D002DB994 /* PhotoShow.swift */; };
@@ -200,6 +198,8 @@
 		65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF11CE242BE00E4DFD9 /* URWriteStoryView.xib */; };
 		65DFCCF51CE248D900E4DFD9 /* URServerDateTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFCCF41CE248D900E4DFD9 /* URServerDateTime.swift */; };
 		65DFCCF71CE24EC700E4DFD9 /* terms.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF61CE24EC700E4DFD9 /* terms.rtf */; };
+		65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */; };
+		65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */; };
 		65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */; };
 		65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C191BAFAEA900F2E29E /* URCountry.swift */; };
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
@@ -324,7 +324,6 @@
 		65409FED1B4C84DE00344D75 /* URLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
 		65409FF01B4C977600344D75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		65409FF31B4C9E7C00344D75 /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
-		65409FF41B4C9E7C00344D75 /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerViewIPadController.swift; sourceTree = "<group>"; };
 		6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerViewIPadController.xib; sourceTree = "<group>"; };
 		6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMyChatsIPadViewController.swift; sourceTree = "<group>"; };
@@ -465,7 +464,6 @@
 		65A45CEE1B8810DE001C6808 /* URInviteTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URInviteTableViewCell.xib; sourceTree = "<group>"; };
 		65A45CF21B8812D1001C6808 /* URInviteTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URInviteTableViewController.swift; sourceTree = "<group>"; };
 		65B16FDA1BB5E7AB00BDBDEE /* URProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URProfileViewController.swift; sourceTree = "<group>"; };
-		65B16FDB1BB5E7AB00BDBDEE /* URProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URProfileViewController.xib; sourceTree = "<group>"; };
 		65B16FDF1BB9F53300BDBDEE /* URRankingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRankingTableViewCell.swift; sourceTree = "<group>"; };
 		65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URRankingTableViewCell.xib; sourceTree = "<group>"; };
 		65C234031BACB89D002DB994 /* PhotoShow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoShow.swift; sourceTree = "<group>"; };
@@ -494,6 +492,8 @@
 		65DFCCF11CE242BE00E4DFD9 /* URWriteStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URWriteStoryView.xib; sourceTree = "<group>"; };
 		65DFCCF41CE248D900E4DFD9 /* URServerDateTime.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URServerDateTime.swift; sourceTree = "<group>"; };
 		65DFCCF61CE24EC700E4DFD9 /* terms.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = terms.rtf; sourceTree = "<group>"; };
+		65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
+		65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URProfileViewController.xib; sourceTree = "<group>"; };
 		65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginAlertController.swift; sourceTree = "<group>"; };
 		65EA8C191BAFAEA900F2E29E /* URCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountry.swift; sourceTree = "<group>"; };
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
@@ -983,8 +983,8 @@
 		65409FF21B4C9E5C00344D75 /* UserRegister */ = {
 			isa = PBXGroup;
 			children = (
+				65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */,
 				65409FF31B4C9E7C00344D75 /* URUserRegisterViewController.swift */,
-				65409FF41B4C9E7C00344D75 /* URUserRegisterViewController.xib */,
 			);
 			path = UserRegister;
 			sourceTree = "<group>";
@@ -1406,8 +1406,8 @@
 		65B16FD91BB5E79A00BDBDEE /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */,
 				65B16FDA1BB5E7AB00BDBDEE /* URProfileViewController.swift */,
-				65B16FDB1BB5E7AB00BDBDEE /* URProfileViewController.xib */,
 			);
 			path = Profile;
 			sourceTree = "<group>";
@@ -1764,6 +1764,7 @@
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
+				65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */,
 				65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
@@ -1791,7 +1792,7 @@
 				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
-				65409FF61B4C9E7C00344D75 /* URUserRegisterViewController.xib in Resources */,
+				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
 				656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */,
 				65685ADC1BA230DA00099CFB /* Key.plist in Resources */,
@@ -1805,7 +1806,6 @@
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
-				65B16FDD1BB5E7AB00BDBDEE /* URProfileViewController.xib in Resources */,
 				65D563001BA9E8A1001AEF54 /* URStoryContributionViewController.xib in Resources */,
 				65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */,
 				65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */,

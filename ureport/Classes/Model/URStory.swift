@@ -9,7 +9,7 @@
 import UIKit
 
 class URStory: Serializable {
-   
+    
     var key:String!
     var title:String!
     var content:String!

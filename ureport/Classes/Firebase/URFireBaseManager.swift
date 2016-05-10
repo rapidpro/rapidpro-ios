@@ -11,13 +11,13 @@ import Firebase
 
 class URFireBaseManager: NSObject {
     
-    static let Properties = "Key"
-    static let Path = "https://u-report.firebaseio.com/"
-    static let GCM_DEBUG_MODE = false
+//    static let Properties = "Key"
+//    static let Path = "https://u-report.firebaseio.com/"
+//    static let GCM_DEBUG_MODE = false
     
-    //    static let GCM_DEBUG_MODE = true
-    //    static let Path = "https://u-report-dev.firebaseio.com/"
-    //    static let Properties = "Key-debug"
+        static let GCM_DEBUG_MODE = true
+        static let Path = "https://u-report-dev.firebaseio.com/"
+        static let Properties = "Key-debug"
     
     static let Reference = Firebase(url: Path)
     

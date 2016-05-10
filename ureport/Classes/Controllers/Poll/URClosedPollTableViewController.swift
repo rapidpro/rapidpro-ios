@@ -108,7 +108,9 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     //MARK: URCurrentPollViewDelegate
     
     func onBoundsChanged() {
-        reloadCurrentFlowSection()
+        if let _ = URUser.activeUser() {
+            reloadCurrentFlowSection()
+        }
     }
     
     //MARK: Class Methods

@@ -155,6 +155,7 @@
                                             <color key="backgroundColor" red="0.9246128736" green="0.9246128736" blue="0.9246128736" alpha="1" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="78" id="H6Z-qe-h8S"/>
+                                                <constraint firstAttribute="height" constant="78" id="YlA-pc-ERJ"/>
                                             </constraints>
                                             <state key="normal" image="ic_add_box_grey_">
                                                 <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -182,7 +183,6 @@
                                         <constraint firstItem="wGx-6L-syJ" firstAttribute="top" secondItem="vEd-aS-RAt" secondAttribute="bottom" constant="8" id="1b3-Ir-M2x"/>
                                         <constraint firstAttribute="trailing" secondItem="x8L-eA-bOU" secondAttribute="trailing" constant="8" id="6bU-Ia-DmE"/>
                                         <constraint firstAttribute="trailing" secondItem="wGx-6L-syJ" secondAttribute="trailing" constant="8" id="810-S1-bmZ"/>
-                                        <constraint firstAttribute="bottom" secondItem="3cp-Ml-5Jt" secondAttribute="bottom" constant="106" id="Bng-1E-5qe"/>
                                         <constraint firstItem="WX5-2D-cBu" firstAttribute="top" secondItem="x8L-eA-bOU" secondAttribute="bottom" constant="14" id="FXx-CE-f3b"/>
                                         <constraint firstItem="eqO-vr-DgG" firstAttribute="leading" secondItem="6Nl-bW-ihj" secondAttribute="leading" constant="8" id="Mhh-dd-rP1"/>
                                         <constraint firstAttribute="trailing" secondItem="eNN-OZ-jF5" secondAttribute="trailing" constant="8" id="NIk-y7-PWx"/>

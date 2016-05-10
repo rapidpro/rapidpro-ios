@@ -132,13 +132,25 @@
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
+                                        <constraint firstItem="6Jq-BI-Dex" firstAttribute="top" secondItem="cOh-j1-NA7" secondAttribute="top" id="1aP-8R-JlR"/>
                                         <constraint firstAttribute="bottom" secondItem="6Jq-BI-Dex" secondAttribute="bottom" id="Bx5-B3-hZ1"/>
                                         <constraint firstItem="6Jq-BI-Dex" firstAttribute="top" secondItem="cOh-j1-NA7" secondAttribute="top" id="Hut-yf-fVq"/>
                                         <constraint firstAttribute="trailing" secondItem="6Jq-BI-Dex" secondAttribute="trailing" id="UbG-d7-z3S">
                                             <variation key="heightClass=regular" constant="-253"/>
                                         </constraint>
                                         <constraint firstItem="6Jq-BI-Dex" firstAttribute="leading" secondItem="cOh-j1-NA7" secondAttribute="leading" id="ZSb-BY-lZ3"/>
+                                        <constraint firstAttribute="bottom" secondItem="6Jq-BI-Dex" secondAttribute="bottom" id="mAN-S6-1Ks"/>
+                                        <constraint firstItem="6Jq-BI-Dex" firstAttribute="leading" secondItem="cOh-j1-NA7" secondAttribute="leading" id="reQ-vS-epq"/>
+                                        <constraint firstAttribute="trailing" secondItem="6Jq-BI-Dex" secondAttribute="trailing" id="yVo-e3-aop"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="Bx5-B3-hZ1"/>
+                                            <exclude reference="Hut-yf-fVq"/>
+                                            <exclude reference="UbG-d7-z3S"/>
+                                            <exclude reference="ZSb-BY-lZ3"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyP-tq-cWb" userLabel="ViewContribution">
                                     <rect key="frame" x="8" y="388" width="1008" height="45"/>

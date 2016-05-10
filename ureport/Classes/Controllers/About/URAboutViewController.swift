@@ -16,7 +16,7 @@ class URAboutViewController: UIViewController {
     @IBOutlet weak var btTwitter: UIButton!
     @IBOutlet weak var lbAboutContent: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var youtubeView: YTPlayerView!
+    @IBOutlet weak var youtubeView: YTPlayerView?
 
     init() {
         super.init(nibName: URConstant.isIpad ? "URAboutViewIPadController" : "URAboutViewController", bundle: nil)
@@ -54,7 +54,7 @@ class URAboutViewController: UIViewController {
         self.lbAboutContent.text = "about_content".localized
         self.lbVoiceMatters.text = "about_subtitle".localized
         
-        self.youtubeView.loadWithVideoId("pDa9OjtJhSo")
+        self.youtubeView?.loadWithVideoId("pDa9OjtJhSo")
         
     }
     

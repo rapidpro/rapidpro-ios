@@ -20,10 +20,8 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     @IBOutlet weak var lbContributions: UILabel!
-    @IBOutlet weak var lbLike: UILabel?
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtContribute: UITextField!
-    @IBOutlet weak var imgLike: UIImageView?
     @IBOutlet weak var imgProfile: UIImageView?
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var topView: UIView!
@@ -35,7 +33,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollViewMediaHeight: NSLayoutConstraint!
     @IBOutlet weak var lbNoContributions: UILabel?
     @IBOutlet weak var viewNoContribution: ISRoundedView?
-    @IBOutlet weak var lbContentHeight: NSLayoutConstraint!
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     let contributionManager = URContributionManager()
@@ -128,8 +125,12 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         }else{
             self.imgProfile?.sd_setImageWithURL(NSURL(string: story.userObject!.picture))
         }
+        
+        if story.like == nil {
+            story.like = 0
+        }
 
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like]), forState: UIControlState.Normal)
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? story.like : 0]), forState: UIControlState.Normal)
         
         URStoryManager.checkIfStoryWasLiked(story.key) { (liked) -> Void in
              self.btLike.enabled = true

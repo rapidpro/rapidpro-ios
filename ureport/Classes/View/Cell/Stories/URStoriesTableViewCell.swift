@@ -164,7 +164,7 @@ class URStoriesTableViewCell: UITableViewCell {
             self.viewAttachmentHeight.constant = 0
         }
 
-        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like])
+        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like != nil ? story.like : 0])
         
         self.contentView.layoutIfNeeded()
         
@@ -177,6 +177,10 @@ class URStoriesTableViewCell: UITableViewCell {
                         
                         story.contributions = total
                         story.userObject = user
+                        
+                        URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
+                            story.like = likeCount
+                        })
                         
                         self.lbAuthorName.text = "\(user!.nickname!)"
                         
