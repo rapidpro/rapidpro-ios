@@ -18,20 +18,24 @@ PODS:
   - FBSDKLoginKit (4.11.0):
     - FBSDKCoreKit
   - Firebase (2.3.3)
-  - GGLInstanceID (1.1.6)
-  - Google/Analytics (1.3.2):
+  - FLAnimatedImage (1.0.12)
+  - GGLInstanceID (1.1.1):
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
+  - Google/Analytics (1.2.1):
     - Google/Core
     - GoogleAnalytics (~> 3.12)
-  - Google/CloudMessaging (1.3.2):
+  - Google/CloudMessaging (1.2.1):
     - GGLInstanceID (~> 1.0)
     - Google/Core
     - GoogleCloudMessaging (~> 1.0)
-  - Google/Core (1.3.2):
+  - Google/Core (1.2.1):
     - GoogleInterchangeUtilities (~> 1.0)
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.1)
-  - Google/SignIn (1.3.2):
+  - Google/SignIn (1.2.1):
     - Google/Core
     - GoogleSignIn (~> 2.0)
   - GoogleAnalytics (3.14.0)
@@ -40,13 +44,15 @@ PODS:
   - GoogleAuthUtilities (1.0.1):
     - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleCloudMessaging (1.2.0):
+  - GoogleCloudMessaging (1.1.0):
     - GoogleInterchangeUtilities (~> 1.0)
     - GoogleIPhoneUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
     - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
   - GoogleInterchangeUtilities (1.1.0):
     - GoogleSymbolUtilities (~> 1.0)
-  - GoogleIPhoneUtilities (1.2.0):
+  - GoogleIPhoneUtilities (1.0.0):
     - GoogleSymbolUtilities (~> 1.0)
     - GoogleUtilities (~> 1.0)
   - GoogleNetworkingUtilities (1.0.0):
@@ -92,10 +98,14 @@ DEPENDENCIES:
   - Google/SignIn
   - IlhasoftCore (from `https://bitbucket.org/ilhasoft/ilhasoft-core-ios`)
   - JSQMessagesViewController
-  - NYTPhotoViewer
+  - NYTPhotoViewer (= 1.1.0)
   - SDWebImage
   - SwiftAddressBook
+<<<<<<< HEAD
+  - TagListView (from `https://github.com/xhacker/TagListView`)
+=======
   - TagListView
+>>>>>>> master
   - TPKeyboardAvoiding
   - youtube-ios-player-helper (= 0.1.4)
 
@@ -147,6 +157,10 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
+<<<<<<< HEAD
+PODFILE CHECKSUM: 66878c6b45ed48fa090017dd6d974306f146146e
+=======
 PODFILE CHECKSUM: 66efc369dc93aee413855bddf42236a1ac353cac
+>>>>>>> master
 
 COCOAPODS: 1.0.0.rc.1

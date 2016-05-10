@@ -45,6 +45,8 @@ class URStoryManager: NSObject {
                     
                     let story = URStory(jsonDict: snapshot.value as? NSDictionary)                    
                     
+                    story.key = snapshot.key
+                    
                     if (snapshot.value as! NSDictionary).objectForKey("cover") != nil {
                         let cover = URMedia(jsonDict:((snapshot.value as! NSDictionary).objectForKey("cover") as? NSDictionary)!)
                         story.cover = cover
@@ -60,6 +62,7 @@ class URStoryManager: NSObject {
                         }
                         
                         story.medias = medias
+<<<<<<< HEAD
                     }
 
                     story.key = snapshot.key
@@ -79,6 +82,11 @@ class URStoryManager: NSObject {
                             })
                         }
                     })
+=======
+                        
+                        delegate.newStoryReceived(story)                        
+                    }                    
+>>>>>>> master
                 }
             })
     }

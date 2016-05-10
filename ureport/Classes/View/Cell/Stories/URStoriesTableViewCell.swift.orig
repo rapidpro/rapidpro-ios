@@ -34,7 +34,6 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
-    @IBOutlet weak var btReportContent: UIButton!
 
     @IBOutlet weak var lbContentTop: NSLayoutConstraint!
     @IBOutlet weak var contentViewBottom: NSLayoutConstraint!
@@ -54,8 +53,6 @@ class URStoriesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.btReportContent.hidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         self.viewSeparator.layer.cornerRadius = 7
@@ -77,28 +74,6 @@ class URStoriesTableViewCell: UITableViewCell {
     }
     
     //MARK: Button Events
-    
-    @IBAction func btReportContentTapped(sender: AnyObject) {
-        
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .ActionSheet)
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
-            
-        }
-        
-        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .Default) { action -> Void in
-        }
-
-        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .Default) { action -> Void in
-        }
-        
-        reportContentAlertController.addAction(spamAction)
-        reportContentAlertController.addAction(inappropriateContentAction)
-        reportContentAlertController.addAction(cancelAction)
-        
-        URNavigationManager.navigation.presentViewController(reportContentAlertController, animated: true, completion: nil)
-        
-    }
     
     @IBAction func btContributeTapped(sender: AnyObject) {
         if let _ = URUser.activeUser() {
@@ -166,8 +141,25 @@ class URStoriesTableViewCell: UITableViewCell {
 
         self.lbLikes.text = String(format: "likes".localized, arguments: [story.like])
         
+<<<<<<< HEAD
         self.contentView.layoutIfNeeded()
         
+        self.lbTitle.text = story.title!
+        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
+        
+        if let userObject = story.userObject {
+            
+            self.lbAuthorName.text = "\(userObject.nickname!)"
+            
+            if userObject.picture != nil {
+                self.imgUser.sd_setImageWithURL(NSURL(string: userObject.picture))
+            }else{
+                self.imgUser.contentMode = UIViewContentMode.Center
+                self.imgUser.image = UIImage(named: "ic_person")
+                
+                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+            }
+=======
         self.lbTitle.text = story.title!
         
         if self.lbAuthorName.text?.characters.count == 0 {
@@ -194,6 +186,7 @@ class URStoriesTableViewCell: UITableViewCell {
                     })
                 }
             })
+>>>>>>> master
         }
         
         if story.cover != nil && story.cover.url != nil {

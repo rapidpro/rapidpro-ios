@@ -8,7 +8,11 @@
 
 import UIKit
 
-class URWriteStoryTableViewCell: UITableViewCell {
+protocol URWriteStoryViewDelegate {
+    func writeStoryDidTap(cell:URWriteStoryView)
+}
+
+class URWriteStoryView: UIView {
     
     @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var imgProfile: UIImageView!
@@ -17,22 +21,21 @@ class URWriteStoryTableViewCell: UITableViewCell {
     @IBOutlet weak var btWrite: ISRoundedButton!
     @IBOutlet weak var separatorView: UIView!
     
+    var delegate:URWriteStoryViewDelegate?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
-    }
-
-    override func setSelected(selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
         
-        self.bgView.layer.cornerRadius = 5
-        self.separatorView.layer.cornerRadius = 5
-    }    
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(callDelegate))
+        self.addGestureRecognizer(gesture)
+    }
     
     //MARK: Class Methods
     
     func setupLayout() {
+        self.separatorView.layer.cornerRadius = 5
+        
         if let user = URUser.activeUser() {
             self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
             
@@ -51,4 +54,12 @@ class URWriteStoryTableViewCell: UITableViewCell {
         }
     }
     
+    //MARK: ButtonEvents
+    
+    func callDelegate() {
+        if let delegate = self.delegate {
+            delegate.writeStoryDidTap(self)
+        }
+    }
+
 }

@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
     let imgViewHistoryHeight:CGFloat = 188.0
-    let fullHeightTableViewCell:CGFloat = 471
+    let fullHeightTableViewCell:CGFloat = 489
     let contentViewBottom = 2
     let storyManager = URStoryManager()
     var storyList:[URStory] = []
@@ -129,8 +129,17 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         
+<<<<<<< HEAD
+        if indexPath.row == 0 && filterStoriesToModerate == false{
+            return 75
+        }
+        
+        if indexPath.row <= self.storyList.count {
+            let story = storyList[filterStoriesToModerate == false ? (indexPath.row - 1) : indexPath.row]
+=======
         if indexPath.row < self.storyList.count {
             let story = storyList[indexPath.row]
+>>>>>>> master
             
             if story.cover != nil && story.cover.url != nil {
                 return fullHeightTableViewCell
@@ -145,11 +154,18 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
+<<<<<<< HEAD
+        if indexPath.row == 0 && filterStoriesToModerate == false {
+            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URWriteStoryTableViewCell.self), forIndexPath: indexPath) as! URWriteStoryTableViewCell
+            return cell
+        }else if self.storyList.count >= indexPath.row {
+=======
         if indexPath.row < self.storyList.count {
+>>>>>>> master
         
             let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
             
-            let story = storyList[indexPath.row]
+            let story = storyList[filterStoriesToModerate == false ? (indexPath.row - 1) : indexPath.row]
             cell.delegate = self
             cell.viewController = self
             cell.setupCellWith(story,moderateUserMode: self.filterStoriesToModerate)
@@ -195,7 +211,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     func loadNews() {
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
-            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
+            let url = "\(URConstant.RapidPro.API_NEWS)\(org)"
             Alamofire.request(.GET, url, headers: nil).responseObject({ (response:URAPIResponse<URNews>?, error:ErrorType?) -> Void in
                 if let response = response {
                     self.newsList = response.results
@@ -222,10 +238,15 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
+<<<<<<< HEAD
         self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.layoutMargins = UIEdgeInsetsZero
         self.tableView.separatorInset = UIEdgeInsetsZero
+=======
+//        self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
+        self.tableView.separatorColor = UIColor.clearColor()
+>>>>>>> master
     }
     
     //MARK: StoryManagerDelegate
@@ -236,7 +257,20 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
     }
     
+<<<<<<< HEAD
     func newStoryReceived(story: URStory) {
+=======
+    func newStoryReceived(story: URStory) {                
+        
+        if story.medias != nil {
+            for media in story.medias {
+                if media.type == URConstant.Media.AUDIO {
+                    return
+                }
+            }
+        }
+        
+>>>>>>> master
         storyList.insert(story, atIndex: 0)
         self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
         
