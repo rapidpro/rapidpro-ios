@@ -43,8 +43,6 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         loadData()
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
-        openChatRoomWithKey(chatRoomKeyToOpen)
-        
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "My Chats")
         
@@ -54,6 +52,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         
     }
 
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        openChatRoomWithKey(chatRoomKeyToOpen)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)    
     }
@@ -165,6 +168,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         }
         
         self.listChatRoom = []
+        self.tableView.reloadData()
         
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
             ProgressHUD.dismiss()

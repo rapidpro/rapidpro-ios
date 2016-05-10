@@ -200,6 +200,7 @@
 		65DFCCF71CE24EC700E4DFD9 /* terms.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF61CE24EC700E4DFD9 /* terms.rtf */; };
 		65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */; };
 		65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */; };
+		65DFCCFF1CE2916500E4DFD9 /* URCurrentPollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCFE1CE2916500E4DFD9 /* URCurrentPollView.xib */; };
 		65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */; };
 		65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C191BAFAEA900F2E29E /* URCountry.swift */; };
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
@@ -239,7 +240,6 @@
 		974249391BFBE0AF0024384E /* URFlowRuleTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249381BFBE0AF0024384E /* URFlowRuleTest.swift */; };
 		9742493B1BFBE2C00024384E /* URFlowMetadata.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742493A1BFBE2C00024384E /* URFlowMetadata.swift */; };
 		9742493E1BFCE2F00024384E /* URCurrentPollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742493D1BFCE2F00024384E /* URCurrentPollView.swift */; };
-		974249441BFCFD920024384E /* URCurrentPollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 974249431BFCFD920024384E /* URCurrentPollView.xib */; };
 		974249491BFE0CE50024384E /* URChoiceResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249481BFE0CE50024384E /* URChoiceResponseView.swift */; };
 		9742494B1BFE0D010024384E /* UROpenFieldResponseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9742494A1BFE0D010024384E /* UROpenFieldResponseView.swift */; };
 		9742494D1BFE0DE10024384E /* UROpenFieldResponseView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9742494C1BFE0DE10024384E /* UROpenFieldResponseView.xib */; };
@@ -494,6 +494,7 @@
 		65DFCCF61CE24EC700E4DFD9 /* terms.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = terms.rtf; sourceTree = "<group>"; };
 		65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URProfileViewController.xib; sourceTree = "<group>"; };
+		65DFCCFE1CE2916500E4DFD9 /* URCurrentPollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URCurrentPollView.xib; sourceTree = "<group>"; };
 		65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginAlertController.swift; sourceTree = "<group>"; };
 		65EA8C191BAFAEA900F2E29E /* URCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountry.swift; sourceTree = "<group>"; };
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
@@ -534,7 +535,6 @@
 		974249381BFBE0AF0024384E /* URFlowRuleTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlowRuleTest.swift; sourceTree = "<group>"; };
 		9742493A1BFBE2C00024384E /* URFlowMetadata.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlowMetadata.swift; sourceTree = "<group>"; };
 		9742493D1BFCE2F00024384E /* URCurrentPollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URCurrentPollView.swift; path = ../../Poll/URCurrentPollView.swift; sourceTree = "<group>"; };
-		974249431BFCFD920024384E /* URCurrentPollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = URCurrentPollView.xib; path = ../../Poll/URCurrentPollView.xib; sourceTree = "<group>"; };
 		974249481BFE0CE50024384E /* URChoiceResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URChoiceResponseView.swift; path = ChoiceResponse/URChoiceResponseView.swift; sourceTree = "<group>"; };
 		9742494A1BFE0D010024384E /* UROpenFieldResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UROpenFieldResponseView.swift; path = OpenFieldResponse/UROpenFieldResponseView.swift; sourceTree = "<group>"; };
 		9742494C1BFE0DE10024384E /* UROpenFieldResponseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = UROpenFieldResponseView.xib; path = OpenFieldResponse/UROpenFieldResponseView.xib; sourceTree = "<group>"; };
@@ -1046,7 +1046,7 @@
 			isa = PBXGroup;
 			children = (
 				9742493D1BFCE2F00024384E /* URCurrentPollView.swift */,
-				974249431BFCFD920024384E /* URCurrentPollView.xib */,
+				65DFCCFE1CE2916500E4DFD9 /* URCurrentPollView.xib */,
 				6556916D1B7D3DA800525E00 /* URClosedPollTableViewCell.swift */,
 				6556916E1B7D3DA800525E00 /* URClosedPollTableViewCell.xib */,
 				654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */,
@@ -1753,6 +1753,7 @@
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,
 				65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */,
+				65DFCCFF1CE2916500E4DFD9 /* URCurrentPollView.xib in Resources */,
 				9742494D1BFE0DE10024384E /* UROpenFieldResponseView.xib in Resources */,
 				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
@@ -1811,7 +1812,6 @@
 				65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */,
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
-				974249441BFCFD920024384E /* URCurrentPollView.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,

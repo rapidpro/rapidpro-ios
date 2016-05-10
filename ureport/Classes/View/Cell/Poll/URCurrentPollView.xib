@@ -126,7 +126,7 @@
             </tableViewCellContentView>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <connections>
-                <outlet property="backgroundView" destination="MS8-QK-Tmu" id="EVv-Ia-1vO"/>
+                <outlet property="backgroundView" destination="H2p-sc-9uM" id="MNq-h4-li4"/>
                 <outlet property="btNext" destination="aPK-c7-Zsd" id="ETp-Kz-aGc"/>
                 <outlet property="btSwitchLanguage" destination="OUA-a7-jbk" id="JfS-OY-UnB"/>
                 <outlet property="constraintQuestionHeight" destination="1Sg-OB-XL4" id="PMj-2J-2DX"/>

@@ -211,7 +211,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             })
         }
         
-        headerCell.frame = CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, currentPollHeight)
+        headerCell.frame = CGRectMake(0, 0, self.view.bounds.size.width, currentPollHeight)
         updateTopViewHeight(currentPollHeight)
         fitScrollSize()
     }
