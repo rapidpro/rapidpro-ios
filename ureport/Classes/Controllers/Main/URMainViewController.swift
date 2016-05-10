@@ -17,7 +17,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     let myChatsViewController = URConstant.isIpad ? URMyChatsIPadViewController() : URMyChatsViewController()
     let closedPollViewController = URConstant.isIpad ? URPollViewIPadController() : URClosedPollTableViewController()
     
+    var viewControllerToShow:UIViewController?
+    
     init() {
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(viewControllerToShow:UIViewController?) {
+        self.viewControllerToShow = viewControllerToShow
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -45,7 +52,6 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
             myChatsViewController.delegate = self
         }
         
-        tabBarController(self, didSelectViewController: storiesTableViewController)
         setupViewControllers()
         self.title = "U-Report"
     }
@@ -96,24 +102,37 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         storiesTableViewController.title = "stories_moderation".localized
         storiesTableViewController.tabBarItem.image = UIImage(named: "icon_stories")
         
-        closedPollViewController.title = "poll_results".localized
+        closedPollViewController.title = "main_polls".localized
         closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
         myChatsViewController.title = "chat_rooms".localized
-        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chats")
+        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chat")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
             self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
             
             if chatRoomKey != nil {
                 
+                //TODO
                 if let myChatsViewController = myChatsViewController as? URMyChatsViewController {
-                
                     myChatsViewController.chatRoomKeyToOpen = chatRoomKey
-                    tabBarController(self, didSelectViewController: myChatsViewController)
-                    self.selectedIndex = 2
-                    
                 }
+                chatRoomKey = nil
+                tabBarController(self, didSelectViewController: myChatsViewController)
+                self.selectedIndex = 2
+            }else if let viewControllerToShow = self.viewControllerToShow {
+                
+                if viewControllerToShow is URClosedPollTableViewController {
+                    self.selectedIndex = 1
+                    tabBarController(self, didSelectViewController: closedPollViewController)
+                }else if viewControllerToShow is URStoriesTableViewController {
+                    self.selectedIndex = 0
+                    tabBarController(self, didSelectViewController: storiesTableViewController)
+                }
+                
+            }else{
+                self.selectedIndex = 0
+                tabBarController(self, didSelectViewController: storiesTableViewController)
             }
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]

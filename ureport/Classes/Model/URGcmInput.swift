@@ -10,11 +10,12 @@ import UIKit
 import ObjectMapper
 
 class URGcmInput : Mappable {
-
+    
     var to:String?
     var data:[String : AnyObject] = [:]
     var priority:URGcmPriority? = URGcmPriority.high
     var notification:URGcmNotification?
+    var type:String!
     
     init(to:String?, data:[String : AnyObject]) {
         self.to = to

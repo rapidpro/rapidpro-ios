@@ -118,7 +118,7 @@ class URNewsDetailViewController: UIViewController {
                     
                     self.photos.append(photo)
                     
-                    photoIndex++
+                    photoIndex += 1
                 })
                 
             }

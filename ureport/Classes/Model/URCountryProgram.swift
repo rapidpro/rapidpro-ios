@@ -9,21 +9,27 @@
 import UIKit
 
 class URCountryProgram: Serializable {
-   
+    
     var code:String!
     var themeColor:UIColor?
     var name:String!
     var org:NSNumber?
+    var rapidProHostAPI:String!
+    var ureportHostAPI:String!
     var twitter:String!
     var facebook:String!
+    var groupName:String!
     
-    init (code:String!,themeColor:UIColor?,org:NSNumber?,name:String!,twitter:String?,facebook:String?) {
+    init (code:String!,themeColor:UIColor?,org:NSNumber?,name:String!,twitter:String?,facebook:String?,rapidProHostAPI:String!,ureportHostAPI:String!,groupName:String!) {
         self.code = code
         self.themeColor = themeColor
         self.org = org
         self.name = name
         self.twitter = twitter
         self.facebook = facebook
+        self.rapidProHostAPI = rapidProHostAPI
+        self.ureportHostAPI = ureportHostAPI
+        self.groupName = groupName
     }
     
     override init () {

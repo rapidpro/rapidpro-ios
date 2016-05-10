@@ -22,6 +22,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     var listChatRoom:[URChatRoom] = []
     var chatRoomKeyToOpen:String?
+    
     var delegate:URMyChatsViewControllerDelegate?
     
     init() {

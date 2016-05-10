@@ -14,7 +14,7 @@ enum URCountryCodeType {
 }
 
 class URCountry: NSObject {
-
+    
     var code:String?
     var name:String?
     
@@ -24,6 +24,7 @@ class URCountry: NSObject {
     }
     
     override init() {
+        
     }
     
     class func getLanguageDescription(var languageCode:String, type:URCountryCodeType) -> String? {
@@ -37,7 +38,7 @@ class URCountry: NSObject {
     }
     
     class func getCountries(type:URCountryCodeType) -> [URCountry] {
-
+        
         var countries: [URCountry] = []
         
         for code in NSLocale.ISOCountryCodes() {
@@ -52,11 +53,11 @@ class URCountry: NSObject {
                 country!.code = code
             }
             
-            country!.name = name            
+            country!.name = name
             countries.append(country!)
         }
         
-
+        
         let sortedCountries = countries.sort({ $0.name < $1.name })
         
         return sortedCountries
@@ -71,16 +72,42 @@ class URCountry: NSObject {
         country!.name = locale.displayNameForKey(NSLocaleCountryCode, value: country!.code!)
         return country!
     }
-
+    
     class func getISO3CountryCodeByISO2Code(code:String) -> String{
         if let path = NSBundle.mainBundle().pathForResource("iso3-country-code", ofType: "json") {
             do {
                 let jsonData = try NSData(contentsOfFile: path, options: NSDataReadingOptions.DataReadingMappedIfSafe)
                 do {
                     let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers)
-                    if let ISO3Code : String = jsonResult[code] as? String {
+                    if let ISO3Code = jsonResult[code] as? String {
                         return ISO3Code
                     }
+                    
+                } catch let error as NSError {
+                    print("error2 \(error.localizedDescription)")
+                }
+            }catch let error as NSError {
+                print("error1 \(error.localizedDescription)")
+            }
+            
+        }
+        
+        return ""
+    }
+    
+    class func getISO2CountryCodeByISO3Code(code:String) -> String{
+        if let path = NSBundle.mainBundle().pathForResource("iso3-country-code", ofType: "json") {
+            do {
+                let jsonData = try NSData(contentsOfFile: path, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                do {
+                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers)
+                    
+                    let filtered = (jsonResult as! NSDictionary).filter({ $0.1 as! String == code })
+                    
+                    if !filtered.isEmpty {
+                        return filtered[0].key as! String
+                    }
+                    
                 } catch let error as NSError {
                     print("error2 \(error.localizedDescription)")
                 }

@@ -7,13 +7,16 @@
 //
 
 import UIKit
+import IlhasoftCore
 
 class URSettings: Serializable {
-
-    var notifications:NSNumber!
-    var chatNotifications:NSNumber!
-    var availableInChat:NSNumber!
-    var preferredLanguage:NSString!
+    
+    var notifications:NSNumber?
+    var chatNotifications:NSNumber?
+    var availableInChat:NSNumber?
+    var preferredLanguage:NSString?
+    var firstRun:NSNumber?
+    var reviewMode:NSNumber?
     
     class func saveSettingsLocaly(settings:URSettings) {
         let defaults = NSUserDefaults.standardUserDefaults()
@@ -23,35 +26,63 @@ class URSettings: Serializable {
     
     class func buildSettingsValues(settings:URSettings) -> URSettings{
         
-        if let savedSettings = URSettings.getSettings() {
-
-            if settings.notifications == nil && savedSettings.notifications != nil{
-                settings.notifications = savedSettings.notifications
-            }
-            
-            if settings.chatNotifications == nil && savedSettings.chatNotifications != nil{
-                settings.chatNotifications = savedSettings.chatNotifications
-            }
-            
-            if settings.availableInChat == nil && savedSettings.availableInChat != nil{
-                settings.availableInChat = savedSettings.availableInChat
-            }
-            
-            if settings.preferredLanguage == nil && savedSettings.preferredLanguage != nil{
-                settings.preferredLanguage = savedSettings.preferredLanguage
-            }
+        let savedSettings = URSettings.getSettings()
+        
+        if settings.notifications == nil && savedSettings.notifications != nil{
+            settings.notifications = savedSettings.notifications
         }
+        
+        if settings.chatNotifications == nil && savedSettings.chatNotifications != nil{
+            settings.chatNotifications = savedSettings.chatNotifications
+        }
+        
+        if settings.availableInChat == nil && savedSettings.availableInChat != nil{
+            settings.availableInChat = savedSettings.availableInChat
+        }
+        
+        if settings.preferredLanguage == nil && savedSettings.preferredLanguage != nil{
+            settings.preferredLanguage = savedSettings.preferredLanguage
+        }
+        
+        if settings.firstRun == nil && savedSettings.firstRun != nil{
+            settings.firstRun = savedSettings.firstRun
+        }
+        
+        if settings.reviewMode == nil && savedSettings.reviewMode != nil{
+            settings.reviewMode = savedSettings.reviewMode
+        }
+        
         return settings
     }
     
-    class func getSettings() -> URSettings?{
+    class func getSettings() -> URSettings{
         
         let defaults = NSUserDefaults.standardUserDefaults()
         
         if let settingsDictionary = defaults.objectForKey("settings") as? NSDictionary {
             return URSettings(jsonDict:(settingsDictionary))
         }
-        return nil;
+        return URSettings();
+    }
+    
+    class func checkIfTermsIsAccepted(termsViewController:ISTermsViewController,viewController:UIViewController) -> Bool {
+        
+        if URSettings.getSettings().firstRun == nil {
+            
+            if let viewController = viewController as? URLoginViewController {
+                termsViewController.delegate = viewController
+            }else if let viewController = viewController as? URUserRegisterViewController {
+                termsViewController.delegate = viewController
+            }
+            
+            termsViewController.show(true, inViewController: viewController)
+            
+            return false
+            
+        }else{
+            return true
+        }
+        
     }
     
 }

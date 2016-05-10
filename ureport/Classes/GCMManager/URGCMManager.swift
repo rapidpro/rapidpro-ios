@@ -11,7 +11,7 @@ import Alamofire
 import ObjectMapper
 
 class URGCMManager: NSObject {
- 
+    
     static let chatTopic = "/topics/chats-"
     
     static let registrationKey = "onRegistrationCompleted"
@@ -49,17 +49,17 @@ class URGCMManager: NSObject {
     class func registerUserInTopic(user:URUser,chatRoom:URChatRoom) {
         if user.pushIdentity != nil {
             GCMPubSub.sharedInstance().subscribeWithToken(user.pushIdentity, topic: "\(self.chatTopic)\(chatRoom.key)",
-                options: nil, handler: {(error) -> Void in
-                    if (error != nil) {
-                        // Treat the "already subscribed" error more gently
-                        if error.code == 3001 {
-                            print("Already subscribed to topic")
-                        } else {
-                            print("Subscription failed: \(error.localizedDescription)");
-                        }
-                    } else {
-                        NSLog("Subscribed to topic");
-                    }
+                                                          options: nil, handler: {(error) -> Void in
+                                                            if (error != nil) {
+                                                                // Treat the "already subscribed" error more gently
+                                                                if error.code == 3001 {
+                                                                    print("Already subscribed to topic")
+                                                                } else {
+                                                                    print("Subscription failed: \(error.localizedDescription)");
+                                                                }
+                                                            } else {
+                                                                NSLog("Subscribed to topic");
+                                                            }
             })
         }
     }
@@ -73,7 +73,7 @@ class URGCMManager: NSObject {
         chatMessage.message = message
         
         let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
-        input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname): \(chatMessage.message!)",type: "")
+        input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname): \(chatMessage.message!)",type: URConstant.NotificationType.CHAT)
         
         let param = Mapper<URGcmInput>().toJSON(input)
         

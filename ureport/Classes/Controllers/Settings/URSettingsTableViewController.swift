@@ -59,21 +59,23 @@ class URSettingsTableViewController: UITableViewController, URSettingsTableViewC
         cell.index = indexPath.row
         
         switch indexPath.row {
-            case 0:
-                cell.switchEnable.hidden = false
-                if let settings = URSettings.getSettings() {
-                    cell.switchEnable.on = settings.availableInChat.boolValue
-                }else {
-                    cell.switchEnable.on = true
-                }
-                cell.lbSettingName.text = "title_pref_chat_available".localized
-                break
-            case 1:
-                cell.switchEnable.hidden = true
-                cell.lbSettingName.text = "OpenSource License"
+        case 0:
+            cell.switchEnable.hidden = false
+            
+            if let availAbleInChat = URSettings.getSettings().availableInChat {
+                cell.switchEnable.on = availAbleInChat.boolValue
+            }else{
+                cell.switchEnable.on = true
+            }
+            
+            cell.lbSettingName.text = "title_pref_chat_available".localized
             break
-            default:
-                break
+        case 1:
+            cell.switchEnable.hidden = true
+            cell.lbSettingName.text = "OpenSource License"
+            break
+        default:
+            break
         }
         
         return cell

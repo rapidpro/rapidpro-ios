@@ -13,12 +13,11 @@ public protocol URCurrentPollViewDelegate {
 }
 
 class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldResponseDelegate {
-
+    
     @IBOutlet weak var lbCurrentPoll: UILabel!
     @IBOutlet weak var lbFlowName: UILabel!
     @IBOutlet weak var btNext: UIButton!
     @IBOutlet weak var viewResponses: UIView!
-    @IBOutlet weak var bgView: UIView!
     @IBOutlet weak var tvQuestion: UITextView!
     @IBOutlet weak var constraintQuestionHeight: NSLayoutConstraint!
     @IBOutlet weak var constraintResponseHeight: NSLayoutConstraint!
@@ -45,15 +44,13 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.bgView.layer.cornerRadius = 5
-        
         self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
         self.lbCurrentPoll.text = "polls_current".localized
         self.btSwitchLanguage.setTitle("switch_language".localized, forState: UIControlState.Normal)
         
         btNext.layer.cornerRadius = 5
         
-        let preferredLanguage = URSettings.getSettings()?.preferredLanguage
+        let preferredLanguage = URSettings.getSettings().preferredLanguage
         selectedLanguage = preferredLanguage != nil ? String(preferredLanguage!) : nil
     }
     
@@ -74,14 +71,6 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     //MARK: Actions
     
     @IBAction func switchLanguage(sender: AnyObject) {
-        
-        if URConstant.isIpad {
-            actionSheetLanguage.modalPresentationStyle = UIModalPresentationStyle.Popover
-            actionSheetLanguage.popoverPresentationController!.sourceView = (sender as! UIButton)
-            actionSheetLanguage.popoverPresentationController!.sourceRect = (sender as! UIButton).bounds
-            
-        }
-        
         viewController.presentViewController(actionSheetLanguage, animated: true, completion: nil)
     }
     
@@ -108,7 +97,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         var response = rule.test?.base
         if response == nil && rule.test?.test != nil
             && rule.test?.test.values.count > 0 {
-                response = rule.test?.test[(flowDefinition?.baseLanguage)!]
+            response = rule.test?.test[(flowDefinition?.baseLanguage)!]
         }
         return response!
     }
@@ -122,8 +111,28 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         self.flowRuleset = flowRuleset
         self.flowActionSet = flowActionSet
         self.lbFlowName.text = flowDefinition.metadata?.name
-
+        
+        self.btNext.hidden = false
+        
         setupNextStep()
+    }
+    
+    func setupDataWithNoAnswer(flowDefinition: URFlowDefinition?, flowActionSet: URFlowActionSet?, flowRuleset:URFlowRuleset?, contact:URContact?) {
+        self.flowRule = nil
+        self.response = nil
+        
+        self.contact = contact
+        self.flowDefinition = flowDefinition
+        self.flowRuleset = flowRuleset
+        self.flowActionSet = flowActionSet
+        self.lbFlowName.text = flowDefinition?.metadata?.name
+        
+        removeAnswersViewOfLastQuestion()
+        setupLanguages()
+        setupQuestionTitle()
+        
+        self.btNext.hidden = true
+        self.constraintResponseHeight.constant = CGFloat(viewResponses.subviews.count * responseHeight)
     }
     
     func setupNextStep() {
@@ -185,16 +194,21 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     }
     
     private func setupQuestionTitle() {
-        self.tvQuestion.text = URFlowManager.translateFields(contact, message: (flowActionSet?.actions?[0].message[getSelectedLanguage()])!)
+        self.tvQuestion.text = URFlowManager.translateFields(contact, message: (flowActionSet?.actions?[0].message == nil || flowActionSet?.actions?[0].message.count == 0 ? "answer_poll_greeting_message".localized : flowActionSet?.actions?[0].message[getSelectedLanguage()])!)
         let sizeThatFitsTextView = tvQuestion.sizeThatFits(CGSizeMake(tvQuestion.frame.size.width, CGFloat.max));
         constraintQuestionHeight.constant = sizeThatFitsTextView.height;
     }
     
-    private func setupQuestionAnswers() {
+    private func removeAnswersViewOfLastQuestion() {
         let array = self.viewResponses.subviews as [UIView]
         for view in array {
             view.removeFromSuperview()
         }
+    }
+    
+    private func setupQuestionAnswers() {
+        
+        removeAnswersViewOfLastQuestion()
         
         for flowRule in (flowRuleset?.rules)! {
             if !URFlowManager.hasRecursiveDestination(flowDefinition, ruleSet: flowRuleset!, rule: flowRule) {
@@ -215,7 +229,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
                     break
                 default: break
                 }
-            
+                
                 responseView?.setFlowRule(flowDefinition, flowRule: flowRule)
                 responseView?.selectedLanguage = self.selectedLanguage
                 self.viewResponses.addSubview(responseView!)

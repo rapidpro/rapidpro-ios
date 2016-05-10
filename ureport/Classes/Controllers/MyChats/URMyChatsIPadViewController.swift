@@ -14,6 +14,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     var messagesViewController = URMessagesViewController(chatRoom: nil, chatMembers: [], title: nil)
     
     var popOverViewController:UIPopoverController?
+    var chatRoomKeyToOpen:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -29,7 +29,6 @@ class URChatMessageManager: NSObject {
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
             .childByAppendingPath(URChatMessageManager.path())
             .childByAppendingPath(chatRoom.key)
-            .queryOrderedByChild("date")
             .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
                 if let delegate = self.delegate {
                     
@@ -39,6 +38,8 @@ class URChatMessageManager: NSObject {
                     chatMessage.message = snapshot.value.objectForKey("message") as? String
                     chatMessage.media = URMedia(jsonDict:snapshot.value.objectForKey("media") as? NSDictionary)
                     chatMessage.date = snapshot.value.objectForKey("date") as! NSNumber
+                    
+                    print(snapshot.childrenCount)
                     
                     if chatMessage.user.nickname != nil {
                         delegate.newMessageReceived(chatMessage)
@@ -65,10 +66,6 @@ class URChatMessageManager: NSObject {
     
     class func sendChatMessage(chatMessage:URChatMessage, chatRoom:URChatRoom) {
         URGCMManager.notifyChatMessage(chatRoom, chatMessage: chatMessage)
-        
-        if chatMessage.media != nil {
-            chatMessage.message = nil
-        }
         
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())

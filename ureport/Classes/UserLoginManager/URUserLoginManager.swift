@@ -21,7 +21,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     var loginViewController:UIViewController?
     var delegate:URUserLoginManagerDelegate?
     var googleSignIn: GIDSignIn!
-
+    
     override init() {
         super.init()
         self.googleSignIn = GIDSignIn.sharedInstance()
@@ -67,7 +67,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     class func loginWithTwitter(completion:(URUser?) ->Void ) {
         let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedInstance(), apiKey: URConstant.SocialNetwork.FACEBOOK_APP_ID())
-
+        
         twitterAuthHelper.selectTwitterAccountWithCallback { (error, accounts:[AnyObject]!) -> Void in
             
             if error != nil {
@@ -115,33 +115,40 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     class func login(email:String,password:String,completion:(FAuthenticationError?,Bool) -> Void) {
         URFireBaseManager.sharedInstance().authUser(email, password: password,
-            withCompletionBlock: { error, authData in
-                if error != nil {
-                    
-                    if let errorCode = FAuthenticationError(rawValue: error.code) {
-                        switch (errorCode) {
-                        case .UserDoesNotExist:
-                            completion(FAuthenticationError.UserDoesNotExist,false)
-                        case .InvalidEmail:
-                            completion(FAuthenticationError.InvalidEmail,false)
-                        case .InvalidPassword:
-                            completion(FAuthenticationError.InvalidPassword,false)
-                        default:
-                            completion(FAuthenticationError.Unknown,false)
-                        }
-                        print(error)
-                    }
-                } else {
-                    
-                    URUserManager.getByKey(authData.uid, completion: { (user,exists) -> Void in
-                        if (user != nil && exists) {
-                            URUserLoginManager.setUserAndCountryProgram(user!)
-                            completion(nil,true)
-                        }else{
-                            completion(nil,false)
-                        }
-                    })
-                }
+                                                    withCompletionBlock: { error, authData in
+                                                        if error != nil {
+                                                            
+                                                            if let errorCode = FAuthenticationError(rawValue: error.code) {
+                                                                switch (errorCode) {
+                                                                case .UserDoesNotExist:
+                                                                    completion(FAuthenticationError.UserDoesNotExist,false)
+                                                                case .InvalidEmail:
+                                                                    completion(FAuthenticationError.InvalidEmail,false)
+                                                                case .InvalidPassword:
+                                                                    completion(FAuthenticationError.InvalidPassword,false)
+                                                                default:
+                                                                    completion(FAuthenticationError.Unknown,false)
+                                                                }
+                                                                print(error)
+                                                            }
+                                                        } else {
+                                                            
+                                                            URUserManager.getByKey(authData.uid, completion: { (user,exists) -> Void in
+                                                                if (user != nil && exists) {
+                                                                    
+                                                                    URRapidProManager.saveUser(user!, country: URCountry(code:user!.country),setupGroups: false, completion: { (response) -> Void in
+                                                                        URRapidProContactUtil.rapidProUser = NSMutableDictionary()
+                                                                        URRapidProContactUtil.groupList = []
+                                                                        print(response)
+                                                                    })
+                                                                    
+                                                                    URUserLoginManager.setUserAndCountryProgram(user!)
+                                                                    completion(nil,true)
+                                                                }else{
+                                                                    completion(nil,false)
+                                                                }
+                                                            })
+                                                        }
         })
     }
     
@@ -198,7 +205,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func setUserAndCountryProgram(user:URUser) {
-//        user.chatRooms = nil
+        //        user.chatRooms = nil
         URUser.setActiveUser(user)
         URUserLoginManager.setLoggedUser(user)
         
