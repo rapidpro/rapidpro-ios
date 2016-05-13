@@ -8,7 +8,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URUserRegisterViewController" customModule="ureport" customModuleProvider="target">
             <connections>
                 <outlet property="btNext" destination="tpG-II-qEK" id="fuM-Su-Lii"/>
-                <outlet property="heightDisctrictView" destination="tbk-sM-q45" id="UdD-ku-5kW"/>
+                <outlet property="heightDisctrictView" destination="zta-DY-dgE" id="b8n-a3-l0U"/>
                 <outlet property="topDisctrictView" destination="8CS-J0-DHh" id="jXi-f8-O9Z"/>
                 <outlet property="txtBirthDay" destination="pbb-vd-JsN" id="fra-Uv-XlI"/>
                 <outlet property="txtCountry" destination="Ide-rF-MSC" id="FxF-Ko-lS7"/>
@@ -324,8 +324,8 @@
                                         <constraint firstItem="AUx-ou-xlh" firstAttribute="leading" secondItem="wif-Lr-V0p" secondAttribute="leading" id="Yy2-0E-YIm"/>
                                         <constraint firstAttribute="trailing" secondItem="Mhm-4y-IvC" secondAttribute="trailing" id="iyU-yP-gNg"/>
                                         <constraint firstItem="Mhm-4y-IvC" firstAttribute="top" secondItem="AUx-ou-xlh" secondAttribute="bottom" constant="4" id="oPo-yc-hYg"/>
-                                        <constraint firstAttribute="height" priority="999" constant="50" id="tbk-sM-q45"/>
                                         <constraint firstAttribute="width" constant="450" id="yNO-Nu-79H"/>
+                                        <constraint firstAttribute="height" constant="50" id="zta-DY-dgE"/>
                                     </constraints>
                                     <variation key="default">
                                         <mask key="constraints">
@@ -340,7 +340,6 @@
                                     <variation key="widthClass=regular">
                                         <mask key="constraints">
                                             <include reference="S7P-c9-6fM"/>
-                                            <exclude reference="tbk-sM-q45"/>
                                             <include reference="yNO-Nu-79H"/>
                                         </mask>
                                     </variation>
@@ -717,13 +716,17 @@
             </variation>
             <variation key="widthClass=regular">
                 <mask key="constraints">
+                    <exclude reference="Rxb-Zt-UB1"/>
                     <exclude reference="dxv-D2-Qcw"/>
                     <include reference="fdk-D1-ipp"/>
+                    <exclude reference="r22-6k-eFD"/>
                     <exclude reference="MMJ-gj-Fvk"/>
                     <include reference="NDI-vC-XmS"/>
                     <include reference="QIT-U0-svB"/>
                     <exclude reference="V3e-GA-YXa"/>
+                    <exclude reference="adD-t4-Buu"/>
                     <include reference="deN-91-Jdz"/>
+                    <exclude reference="rb6-HT-v4E"/>
                 </mask>
             </variation>
             <point key="canvasLocation" x="340" y="326"/>

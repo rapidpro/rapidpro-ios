@@ -140,6 +140,9 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     }
     
     func loadUserInfo() {
+        
+        URUserManager.reloadUserInfoWithCompletion { (finish) in }
+        
         if let user = URUser.activeUser() {
             if let picture = user.picture {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
@@ -304,6 +307,12 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             alertController.addAction(passwordUpdateAction)
             alertController.addAction(profileUpdateAction)
             alertController.addAction(cancelAction)
+            
+            if URConstant.isIpad {
+                alertController.modalPresentationStyle = UIModalPresentationStyle.Popover
+                alertController.popoverPresentationController!.sourceView = self.btEdit
+                alertController.popoverPresentationController!.sourceRect = self.btEdit.bounds
+            }
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }

@@ -23,6 +23,8 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     var listChatRoom:[URChatRoom] = []
     var chatRoomKeyToOpen:String?
     
+    var currentChatRoom:URChatRoom?
+    
     var delegate:URMyChatsViewControllerDelegate?
     
     init() {
@@ -82,13 +84,23 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
-        cell.setupCellWithChatRoom(self.listChatRoom[indexPath.row])
+        cell.setupCellWithChatRoom(self.listChatRoom[indexPath.row])        
+        
+        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        
+        if currentChatRoom != nil {
+            if cell.chatRoom?.key == currentChatRoom?.key {
+                self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+            }
+        }
         
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
+        
+        self.currentChatRoom = cell.chatRoom
         
         cell.viewUnreadMessages.hidden = true
         
@@ -160,6 +172,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+    }
+    
+    func markCellThatChatIsOpen(chatRoom:URChatRoom) {        
+        self.currentChatRoom = chatRoom
+        loadData()
     }
     
     func loadData() {

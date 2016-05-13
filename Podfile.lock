@@ -72,6 +72,7 @@ PODS:
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.1.0)
   - ObjectMapper (0.17)
+  - Proposer (0.9.0)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -94,6 +95,7 @@ DEPENDENCIES:
   - IlhasoftCore (from `https://bitbucket.org/ilhasoft/ilhasoft-core-ios`)
   - JSQMessagesViewController
   - NYTPhotoViewer
+  - Proposer
   - SDWebImage
   - SwiftAddressBook
   - TagListView
@@ -106,7 +108,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   IlhasoftCore:
-    :commit: c4425d4ef9fd0bb21e44d20bfe747590cb116d13
+    :commit: 95badd6fa6eb8654ad7d2218f0b8ed47328c5a2a
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
 
 SPEC CHECKSUMS:
@@ -137,12 +139,13 @@ SPEC CHECKSUMS:
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   ObjectMapper: fa286b7cb5a398f1b0d8d64d0dd33fd1b307022c
+  Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
   TagListView: 6bf4bded034c4c90b1e90d8cd3d8e1d852dba0a8
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 5d0778f335441a9e5fc62505062e27263da86c3a
+PODFILE CHECKSUM: 9296de94e165e67eda162e8183da787964e278f9
 
 COCOAPODS: 1.0.0.rc.1

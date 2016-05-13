@@ -54,7 +54,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         setupGestureRecognizer()
         self.txtSwitchCountryProgram.tintColor = UIColor.clearColor()
         self.txtSwitchCountryProgram.textColor = URConstant.Color.PRIMARY
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("keyboardHideNotification:"), name:   UIKeyboardWillHideNotification, object: nil);
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardHideNotification(_:)), name:   UIKeyboardWillHideNotification, object: nil);
         self.appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
     }    
 
@@ -96,7 +96,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         switch menu!.menuItem as URMenuItem {
         case .Main:
             URNavigationManager.toggleMenu()
-            URNavigationManager.setFrontViewController(URMainViewController())
+            URNavigationManager.setFrontViewController(URMainViewController.sharedInstance)
             break
         case .About:
             URNavigationManager.toggleMenu()
@@ -117,7 +117,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
                 popOverViewController.popoverContentSize = CGSize(width: 320, height: 300)
                 
                 var frame = cell.frame
-                frame.origin.x = frame.origin.x - 20
+                frame.origin.x = frame.origin.x - 50
                 
                 popOverViewController.presentPopoverFromRect(frame, inView: self.tableView, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
             }
@@ -183,9 +183,9 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     //MARK: Class Methods
     
     func setupGestureRecognizer() {
-        let gesture = UITapGestureRecognizer(target: self, action: "openProfile")
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(openProfile))
         gesture.numberOfTapsRequired = 1
-        self.roundedView.addGestureRecognizer(gesture)
+        self.topView.addGestureRecognizer(gesture)
     }
     
     func openProfile() {
@@ -259,9 +259,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
                 self.bgImageProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.bgImageProfile.sd_setImageWithURL(NSURL(string: picture))
             }else{
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
-                self.imgProfile.image = UIImage(named: "ic_person")
+                setupUserImageAsDefault()
             }
             
             self.lbStoriesAndPolls.hidden = false
@@ -274,13 +272,17 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             self.lbNickName.hidden = true
             self.btLogin.hidden = false
             
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-            self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
-            self.imgProfile.image = UIImage(named: "ic_person")
+            setupUserImageAsDefault()
         }
         
         self.txtSwitchCountryProgram.text = (URCountryProgramManager.activeCountryProgram()!.name!)
         
+    }
+    
+    func setupUserImageAsDefault() {
+        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
+        self.imgProfile.image = UIImage(named: "ic_person")
     }
     
     private func setupMenu() {

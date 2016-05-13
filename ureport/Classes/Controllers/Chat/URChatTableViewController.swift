@@ -126,6 +126,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
             if let chatRoom = cell.chatRoom {
                 ProgressHUD.show(nil)
                 URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
+                URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
                 ProgressHUD.dismiss()
                     

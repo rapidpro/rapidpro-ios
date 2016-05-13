@@ -40,6 +40,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         pollManager.delegate = self
         
         if let poll = poll {
+            self.pollResultList = []
             pollManager.getPollsResults(poll.key)
         }
         

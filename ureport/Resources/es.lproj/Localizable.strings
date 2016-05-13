@@ -298,6 +298,10 @@
 "video" = "Vídeo";
 "attachments" = "%d anexos";
 "likes" = "%d curtidas";
+"no_hardware_permission_photo" = "Para completar esta acción por favor proporcione permiso para acceder a la biblioteca";
+"no_hardware_permission_camera" = "To complete this please acción provides permiso to acceder a la camara";
+"no_hardware_permission_microphone" = "Para completar esta acción por favor proporcione el permiso de acceso micrófono";
+"no_hardware_permission_contact" = "Para completar esta acción por favor proporcione permiso para acceder a la lista de contactos";
 
 //TUTORIAL
 

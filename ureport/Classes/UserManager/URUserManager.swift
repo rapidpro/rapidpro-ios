@@ -26,7 +26,19 @@ class URUserManager: NSObject {
         return "user_moderator"
     }
     
-    class func save(user:URUser) {
+    class func reloadUserInfoWithCompletion(completion:(finish:Bool) -> Void) {
+        if let user = URUser.activeUser() {
+            URUserManager.getByKey(user.key, completion: { (userFromDB, exists) -> Void in
+                if let userFromDB = userFromDB {
+                    URUser.setActiveUser(userFromDB)
+                    URUserLoginManager.setLoggedUser(userFromDB)
+                    completion(finish: true)
+                }
+            })
+        }
+    }
+    
+    class func save(user:URUser) {        
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(self.path())
             .childByAppendingPath(user.key)

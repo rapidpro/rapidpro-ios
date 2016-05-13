@@ -35,6 +35,9 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
         self.tagView.textFont = UIFont(name: "Helvetica Neue", size: 15)!
         self.viewSeparator.layer.cornerRadius = 5
         self.containerView.layer.cornerRadius = 5
+        self.containerView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.containerView.layer.borderWidth = 0.5
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

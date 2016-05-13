@@ -13,7 +13,7 @@ import AlamofireObjectMapper
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
     let imgViewHistoryHeight:CGFloat = 188.0
-    let fullHeightTableViewCell:CGFloat = 471
+    let fullHeightTableViewCell:CGFloat = 497
     let contentViewBottom = 2
     let storyManager = URStoryManager()
     var storyList:[URStory] = []
@@ -66,7 +66,15 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     func writeStoryDidTap(cell: URWriteStoryView) {
         if URUser.activeUser() != nil {
-            self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
+            
+            if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
+                self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
+            }else {
+                let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .Alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                self.presentViewController(alertController, animated: true, completion: {})
+            }
+            
         }else{
             URLoginAlertController.show(self)
         }
@@ -95,7 +103,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (filterStoriesToModerate == false){
-            return 70
+            return 58
         }else{
             return 0
         }
@@ -217,12 +225,11 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     private func setupTableView() {
         self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
         self.tableView.delegate = self
-        self.tableView.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 49, right: 0)
         
         self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
-        //        self.tableView.registerNib(UINib(nibName: "URWriteStoryTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URWriteStoryTableViewCell.self))
         self.tableView.separatorColor = UIColor.clearColor()
     }
     

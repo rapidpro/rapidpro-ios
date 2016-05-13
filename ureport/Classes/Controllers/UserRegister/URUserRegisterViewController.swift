@@ -47,6 +47,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     var country:URCountry?
     var countryISO3:URCountry?
     var birthDay:NSDate?
+    var localizedGender:String?
     var gender:String?
     let genders:[String]? = ["user_gender_male".localized,"user_gender_female".localized]
     var countries:[URCountry]!
@@ -141,7 +142,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
             
-            let user:URUser = URUser()
+            var user:URUser = URUser()
             
             if URSettings.getSettings().reviewMode == true {
                 gender = gender == nil ? "" : gender
@@ -149,29 +150,15 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.txtState.text = self.txtState.text == nil ? "" : self.txtState.text
             }
             
-            user.nickname = self.txtNick.text
-            user.email = self.txtEmail.text
-            user.district = self.txtDistrict.text != nil ? self.txtDistrict.text : nil
-            user.gender = gender
-            user.gender = user.gender == URGender.Male ? "Male" : "Female"
-            user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
-            user.country = countryISO3!.code
-            user.state = self.txtState.text
-            user.publicProfile = true
-            user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code
-            URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
-            
             ProgressHUD.show(nil)
             
             if (self.userInput != nil) {
-                user.key = userInput!.key
-                user.picture = userInput!.picture
-                user.type = userInput!.type
-                
-                self.saveUser(user)
+                user = self.userInput!
+                self.saveUser(buildUserFields(user))
                 
             }else {
                 
+                user = buildUserFields(user)
                 user.type = URType.UReport
                 
                 URFireBaseManager.sharedInstance().createUser(user.email, password: self.txtPassword.text,
@@ -185,7 +172,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                         msg = "error_email_already_exists".localized
                                                                         break;
                                                                     case -5:
-                                                                        msg = "error_valid_email".localized
+                                                                        msg = "2".localized
                                                                         break;
                                                                     default:
                                                                         break
@@ -225,6 +212,20 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     //MARK: Class Methods
+    
+    func buildUserFields(user:URUser) -> URUser {
+        user.nickname = self.txtNick.text
+        user.email = self.txtEmail.text
+        user.district = self.txtDistrict.text != nil ? self.txtDistrict.text : nil
+        user.gender = gender
+        user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
+        user.country = countryISO3?.code
+        user.state = self.txtState.text
+        user.publicProfile = true
+        user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code
+        URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
+        return user
+    }
     
     func showEmptyTextFieldAlert(textField:UITextField) {
         print(textField.placeholder!)
@@ -270,7 +271,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if let gender = self.userInput!.gender {
                 
-                self.gender = gender
+                self.localizedGender = gender
                 
                 if gender == "Male" {
                     self.txtGender.text = URGender.Male
@@ -298,6 +299,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         if updateMode != nil && updateMode == true {
             self.country = URCountry(code: URCountry.getISO2CountryCodeByISO3Code(self.userInput!.country))
             self.txtCountry.text = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: self.userInput!.country)).name
+            self.countryISO3 = URCountry(code:URCountry.getISO3CountryCodeByISO2Code(self.country!.code!))
         }else{
             self.country = URCountry.getCurrentURCountry()
             self.countryISO3 = URCountry(code:URCountry.getISO3CountryCodeByISO2Code(self.country!.code!))
@@ -526,8 +528,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             //            self.txtCountry.text = self.countries![row].name
             return self.countries![row].name
         }else if pickerView == self.pickerGender {
-            gender = (row == 0) ? URGender.Male : URGender.Male
-            self.txtGender.text = (row == 0) ? URGender.Male : URGender.Female
+            localizedGender = (row == 0) ? URGender.Male : URGender.Male
+            gender = row == 0 ? "Male" : "Female"
+            self.txtGender.text = localizedGender
             return self.genders![row]
         }else if pickerView == self.pickerStates {
             self.stateBoundary = self.states[row].boundary
@@ -582,9 +585,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
         }else if pickerView == self.pickerGender {
             if row == 0 {
-                gender = URGender.Male
+                localizedGender = URGender.Male
+                gender = "Male"
             }else {
-                gender = URGender.Female
+                localizedGender = URGender.Female
+                gender = "Female"
             }
             self.txtGender.text = self.genders![row]
         }else if pickerView == self.pickerStates {

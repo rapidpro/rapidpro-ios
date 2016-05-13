@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Proposer
 
 class URMainViewController: UITabBarController, UITabBarControllerDelegate, URClosedPollTableViewControllerDelegate, URMyChatsViewControllerDelegate {
     
@@ -18,6 +19,8 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     let closedPollViewController = URConstant.isIpad ? URPollViewIPadController() : URClosedPollTableViewController()
     
     var viewControllerToShow:UIViewController?
+    
+    static let sharedInstance = URMainViewController()
     
     init() {
         super.init(nibName: nil, bundle: nil)
@@ -58,7 +61,9 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        reloadUserInfo()
+        
+        URUserManager.reloadUserInfoWithCompletion { (finish) in }
+        
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -84,18 +89,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         }
     }
     
-    //MARK: Class Methods    
-    
-    func reloadUserInfo() {
-        if let user = URUser.activeUser() {
-            URUserManager.getByKey(user.key, completion: { (userFromDB, exists) -> Void in
-                if let userFromDB = userFromDB {
-                    URUser.setActiveUser(userFromDB)
-                    URUserLoginManager.setLoggedUser(userFromDB)
-                }
-            })
-        }
-    }
+    //MARK: Class Methods
     
     func setupViewControllers() {
         
@@ -106,18 +100,21 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         closedPollViewController.tabBarItem.image = UIImage(named: "icon_polls")
         
         myChatsViewController.title = "chat_rooms".localized
-        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chat")
+        myChatsViewController.tabBarItem.image = UIImage(named: "icon_chats")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
             self.viewControllers = [storiesTableViewController,closedPollViewController, myChatsViewController]
             
             if chatRoomKey != nil {
                 
-                //TODO
                 if let myChatsViewController = myChatsViewController as? URMyChatsViewController {
                     myChatsViewController.chatRoomKeyToOpen = chatRoomKey
+                }else if let myChatsViewController = myChatsViewController as? URMyChatsIPadViewController {
+                    myChatsViewController.chatRoomKeyToOpen = chatRoomKey
                 }
+                
                 chatRoomKey = nil
+                
                 tabBarController(self, didSelectViewController: myChatsViewController)
                 self.selectedIndex = 2
             }else if let viewControllerToShow = self.viewControllerToShow {
@@ -164,7 +161,14 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     }
     
     func invitePeople() {
-        URNavigationManager.navigation.pushViewController(URInviteTableViewController(), animated: true)
+        
+        proposeToAccess(PrivateResource.Contacts, agreed: {
+          
+            URNavigationManager.navigation.pushViewController(URInviteTableViewController(), animated: true)            
+            
+            }, rejected: {
+                self.alertNoPermissionToAccess(PrivateResource.Contacts)
+        })
     }
     
     func newStory() {
@@ -203,7 +207,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         }
         
         if viewController is URClosedPollTableViewController || viewController is URPollViewIPadController {
-            self.title = "poll_results".localized
+            self.title = "main_polls".localized
             self.navigationItem.rightBarButtonItems = nil
         }
         

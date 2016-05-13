@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Proposer
 
 class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControllerDelegate, URChatTableViewControllerDelegate, URMessagesViewControllerDelegate {
 
@@ -16,6 +17,8 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     var popOverViewController:UIPopoverController?
     var chatRoomKeyToOpen:String?
     
+    var currentChatRoom:URChatRoom?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -24,6 +27,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         
         myChatsViewController.delegate = self
         messagesViewController.delegate = self
+        messagesViewController.view.userInteractionEnabled = false
         
         setupViewControllers()
     }
@@ -32,6 +36,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         super.viewDidAppear(animated)
         self.tabBarController?.tabBar.translucent = false
         self.navigationController!.setNavigationBarHidden(true, animated: false)
+        checkIfNeedOpenChatRoomByKey()
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -41,7 +46,6 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-//        self.tabBarController?.tabBar.translucent = false
     }
     
     //MARK: URMessagesViewControllerDelegate
@@ -55,6 +59,8 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     //MARK: URChatTableViewControllerDelegate
     
     func openChatRoom(chatRoom: URChatRoom, chatMembers members: [URUser], title: String) {
+        messagesViewController.view.userInteractionEnabled = true
+        self.myChatsViewController.markCellThatChatIsOpen(chatRoom)
         self.popOverViewController?.dismissPopoverAnimated(true)
         self.messagesViewController.chatRoom = chatRoom
         self.messagesViewController.chatMembers = members
@@ -71,6 +77,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     //MARK: URChatTableViewControllerDelegate
     
     func openChatRoomWith(chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
+        messagesViewController.view.userInteractionEnabled = true
         self.popOverViewController?.dismissPopoverAnimated(true)
         self.messagesViewController.chatRoom = chatRoom
         self.messagesViewController.chatMembers = chatMembers
@@ -98,10 +105,50 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         popOverViewController = UIPopoverController(contentViewController: inviteTableViewController)
         popOverViewController!.popoverContentSize = CGSize(width: 320, height: 500)
         
-        presentPopOver(barButtonItem)
+        proposeToAccess(PrivateResource.Contacts, agreed: {
+            
+            self.presentPopOver(barButtonItem)
+            
+            }, rejected: {
+                self.alertNoPermissionToAccess(PrivateResource.Contacts)
+        })
     }
     
     //MARK: Class Methods
+    
+    func checkIfNeedOpenChatRoomByKey() {
+        if let chatRoomKeyToOpen = chatRoomKeyToOpen {
+            URChatRoomManager.getByKey(chatRoomKeyToOpen, completion: { (chatRoom) -> Void in
+                
+                ProgressHUD.show(nil)
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
+                    ProgressHUD.dismiss()
+                    
+                    var chatName = ""
+                    
+                    if chatRoom is URIndividualChatRoom {
+                        let friend = self.getFriend(users)
+                        chatName = friend!.nickname
+                    }else if chatRoom is URGroupChatRoom {
+                        chatName = (chatRoom as! URGroupChatRoom).title
+                    }
+                    
+                    self.openChatRoomWith(chatRoom!, chatMembers: users, title: chatName)
+                })
+                
+            })
+        }
+    }
+    
+    func getFriend(users:[URUser]) -> URUser? {
+        for user in users {
+            if user.key != URUser.activeUser()?.key {
+                return user
+            }
+        }
+        
+        return nil
+    }
     
     func presentPopOver(anyObject:AnyObject) {
         
@@ -148,7 +195,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
                                                               NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as! AnyObject
         ]
         
-        navigationController.navigationBar.barTintColor = URConstant.Color.PRIMARY
+        navigationController.navigationBar.barTintColor = URCountryProgramManager.activeCountryProgram()?.themeColor
         navigationController.navigationBar.tintColor = UIColor.whiteColor()
         navigationController.navigationBar.translucent = true
     }

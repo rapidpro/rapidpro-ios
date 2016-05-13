@@ -115,7 +115,7 @@
                                 <constraint firstAttribute="width" constant="76" id="0ab-jV-0pZ"/>
                                 <constraint firstAttribute="height" constant="76" id="z0b-mU-74v"/>
                             </constraints>
-                            <state key="normal" image="icon_play"/>
+                            <state key="normal" image="icon_youtube"/>
                             <connections>
                                 <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="lds-1j-D5u"/>
                             </connections>
@@ -150,7 +150,7 @@
                                 <constraint firstAttribute="width" constant="76" id="Msx-w4-PXp"/>
                                 <constraint firstAttribute="height" constant="76" id="XQ7-Z6-5Qw"/>
                             </constraints>
-                            <state key="normal" image="icon_image"/>
+                            <state key="normal" image="icon_gallery"/>
                             <connections>
                                 <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="A68-Qm-Wsu"/>
                             </connections>
@@ -220,7 +220,7 @@
                                 <constraint firstAttribute="width" constant="76" id="UM6-05-8H9"/>
                                 <constraint firstAttribute="height" constant="76" id="u4A-zI-Sue"/>
                             </constraints>
-                            <state key="normal" image="icon_mic_white"/>
+                            <state key="normal" image="icon_audio"/>
                             <connections>
                                 <action selector="btMediaSourceTapped:" destination="-1" eventType="touchUpInside" id="Oh0-2q-kyz"/>
                             </connections>
@@ -302,11 +302,11 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_camera" width="20" height="18"/>
-        <image name="icon_file" width="23" height="20"/>
-        <image name="icon_image" width="20" height="20"/>
-        <image name="icon_mic_white" width="15" height="25"/>
-        <image name="icon_play" width="14" height="18"/>
-        <image name="icon_video" width="26" height="17"/>
+        <image name="icon_audio" width="16" height="31"/>
+        <image name="icon_camera" width="33" height="24"/>
+        <image name="icon_file" width="33" height="25"/>
+        <image name="icon_gallery" width="32" height="28"/>
+        <image name="icon_video" width="35" height="23"/>
+        <image name="icon_youtube" width="18" height="30"/>
     </resources>
 </document>

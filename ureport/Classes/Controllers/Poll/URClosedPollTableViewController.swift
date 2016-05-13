@@ -48,7 +48,11 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         setupTableView()
         setupHeaderCell()
         
-        self.title = "poll_results".localized
+        self.pollList = []
+        pollManager.delegate = self
+        pollManager.getPolls()
+        
+        self.title = "main_polls".localized
     }
     
     override func viewDidLayoutSubviews() {
@@ -130,21 +134,21 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     private func setupHeaderCell() {
         headerCell = NSBundle.mainBundle().loadNibNamed("URCurrentPollView", owner: 0, options: nil)[0] as! URCurrentPollView
         headerCell.viewController = self
-        headerCell.btNext.addTarget(self, action: "moveToNextStep", forControlEvents: UIControlEvents.TouchUpInside)
+        headerCell.btNext.addTarget(self, action: #selector(moveToNextStep), forControlEvents: UIControlEvents.TouchUpInside)
     }
     
     private func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.clearColor()
+        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 220;
+        self.tableView.layoutMargins = UIEdgeInsetsZero
+        self.tableView.separatorInset = UIEdgeInsetsZero
         
-        pollManager.delegate = self
         URNavigationManager.setupNavigationBarWithType(.Blue)
-        pollManager.getPolls()
     }
     
     private func loadCurrentFlow() {

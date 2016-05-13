@@ -98,10 +98,20 @@
             </subviews>
             <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="xe9-8G-a6q" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="43e-A2-MUT"/>
+                <constraint firstItem="xe9-8G-a6q" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="43e-A2-MUT">
+                    <variation key="widthClass=regular" constant="0.0"/>
+                </constraint>
+                <constraint firstItem="xe9-8G-a6q" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="22" id="8dX-Ik-yF6"/>
+                <constraint firstAttribute="trailing" secondItem="xe9-8G-a6q" secondAttribute="trailing" constant="22" id="Djo-Uf-IBs"/>
                 <constraint firstItem="xe9-8G-a6q" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" constant="-50" id="pRe-Dk-do8"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="8dX-Ik-yF6"/>
+                    <exclude reference="Djo-Uf-IBs"/>
+                </mask>
+            </variation>
         </view>
     </objects>
 </document>

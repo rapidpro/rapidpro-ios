@@ -35,7 +35,7 @@ class URStoryManager: NSObject {
     }
     
     func getStories(storiesToModerate:Bool) {
-        
+                
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
@@ -62,9 +62,10 @@ class URStoryManager: NSObject {
                         }
                         
                         story.medias = medias
-                        
-                        delegate.newStoryReceived(story)
                     }
+                    
+                    delegate.newStoryReceived(story)
+                    
                 }
             })
     }

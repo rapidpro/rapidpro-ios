@@ -48,7 +48,7 @@
                                     <constraint firstAttribute="trailing" secondItem="i9b-Q7-FZn" secondAttribute="trailing" constant="8" id="sVT-BB-tiW"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
                                 <rect key="frame" x="0.0" y="144" width="310" height="2"/>
                                 <color key="backgroundColor" red="0.81960784313725488" green="0.81960784313725488" blue="0.81960784313725488" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>

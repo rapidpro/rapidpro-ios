@@ -29,6 +29,7 @@ class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
     ]
     
     func startAudioRecord() {
+        
         do {
             
             URFileUtil.removeFile(URAudioRecorderManager.outputURLFile)

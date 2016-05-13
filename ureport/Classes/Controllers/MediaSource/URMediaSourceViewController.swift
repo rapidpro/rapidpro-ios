@@ -9,6 +9,7 @@
 import UIKit
 import SDWebImage
 import MobileCoreServices
+import Proposer
 
 protocol URMediaSourceViewControllerDelegate {
     func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, media:URMedia)
@@ -180,33 +181,52 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
          
         case btCamera:
             
-            imagePicker.sourceType = .Camera
-            imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
-            imagePicker.showsCameraControls = true
-            imagePicker.allowsEditing = true
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+            proposeToAccess(PrivateResource.Camera, agreed: {
+                
+                imagePicker.sourceType = .Camera
+                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
+                imagePicker.showsCameraControls = true
+                imagePicker.allowsEditing = true
+                
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+                
+                }, rejected: {
+                    self.alertNoPermissionToAccess(PrivateResource.Camera)
+            })
             
             break
             
         case btGallery:
             
-            imagePicker.allowsEditing = false;
-            imagePicker.sourceType = .PhotoLibrary
-            
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+            proposeToAccess(PrivateResource.Photos, agreed: {
+                
+                imagePicker.allowsEditing = false;
+                imagePicker.sourceType = .PhotoLibrary
+                
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+                
+                }, rejected: {
+                    self.alertNoPermissionToAccess(PrivateResource.Photos)
+            })
             
             break
             
         case btVideo:
-            imagePicker.sourceType = .Camera
-            imagePicker.mediaTypes = [kUTTypeMovie as String]
-            imagePicker.videoQuality = .Type640x480
-            imagePicker.videoMaximumDuration = 20
             
-            imagePicker.allowsEditing = false
+            proposeToAccess(PrivateResource.Camera, agreed: {
             
-            self.presentViewController(imagePicker, animated: true, completion: nil)
+                imagePicker.sourceType = .Camera
+                imagePicker.mediaTypes = [kUTTypeMovie as String]
+                imagePicker.videoQuality = .Type640x480
+                imagePicker.videoMaximumDuration = 20
+                
+                imagePicker.allowsEditing = false
+                
+                self.presentViewController(imagePicker, animated: true, completion: nil)
+                
+                }, rejected: {
+                    self.alertNoPermissionToAccess(PrivateResource.Camera)
+            })
             
             break
             
@@ -223,9 +243,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             let audioRecorderViewController = URAudioRecorderViewController(audioURL: nil)
             audioRecorderViewController.delegate = self
             
-            self.toggleView({ (finish) -> Void in
-                
-            })
+            self.toggleView({ (finish) -> Void in })
             
             audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
             URNavigationManager.navigation.presentViewController(audioRecorderViewController, animated: true) { () -> Void in

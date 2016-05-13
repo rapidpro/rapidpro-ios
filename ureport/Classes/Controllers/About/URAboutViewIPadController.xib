@@ -94,6 +94,9 @@
                                                 <constraint firstAttribute="width" constant="30" id="wcM-tx-bBo"/>
                                             </constraints>
                                             <state key="normal" image="ic_twitter"/>
+                                            <connections>
+                                                <action selector="btTwitterTapped:" destination="-1" eventType="touchUpInside" id="gz1-1x-0CF"/>
+                                            </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h3E-Bo-eKT" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                                             <rect key="frame" x="141" y="450" width="30" height="30"/>
@@ -102,6 +105,9 @@
                                                 <constraint firstAttribute="width" constant="30" id="AZd-2J-CUt"/>
                                             </constraints>
                                             <state key="normal" image="ic_facebook"/>
+                                            <connections>
+                                                <action selector="btFacebookTapped:" destination="-1" eventType="touchUpInside" id="vsc-hd-DMz"/>
+                                            </connections>
                                         </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

@@ -117,7 +117,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.lbMarkers.text = story.markers
         self.lbContent.text = story.content
         
-        if story.userObject!.picture == nil{
+        if story.userObject != nil && story.userObject!.picture == nil{
             self.imgProfile?.contentMode = UIViewContentMode.Center
             self.imgProfile?.image = UIImage(named: "ic_person")
             
@@ -208,22 +208,33 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     //MARK: Class Methods
     
     func sendContribution(textField:UITextField) {
-        if !textField.text!.isEmpty{
+        if !textField.text!.isEmpty {
             
-            let user = URUser()
-            user.key = URUser.activeUser()!.key
+            if URUserManager.userHasPermissionToAccessTheFeature(false) {
+                
+                let user = URUser()
+                user.key = URUser.activeUser()!.key
+                
+                let contribution = URContribution()
+                contribution.content = textField.text!
+                contribution.author = user
+                contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+                
+                URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
+                    URUserManager.incrementUserContributions(user.key)
+                    self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: self.listContribution.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
+                    textField.text = ""
+                    textField.resignFirstResponder()
+                })
+                
+            }else {
+                if URUserManager.userHasPermissionToAccessTheFeature(false) == false {
+                    let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .Alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
+                    self.presentViewController(alertController, animated: true, completion: {})
+                }
+            }
             
-            let contribution = URContribution()
-            contribution.content = textField.text!
-            contribution.author = user
-            contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
-            
-            URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
-                URUserManager.incrementUserContributions(user.key)
-                self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: self.listContribution.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
-                textField.text = ""
-                textField.resignFirstResponder()
-            })
         }
     }
     

@@ -206,6 +206,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_chance_country" width="11" height="14"/>
+        <image name="icon_chance_country" width="15" height="19"/>
     </resources>
 </document>

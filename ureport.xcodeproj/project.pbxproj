@@ -201,6 +201,7 @@
 		65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */; };
 		65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */; };
 		65DFCCFF1CE2916500E4DFD9 /* URCurrentPollView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DFCCFE1CE2916500E4DFD9 /* URCurrentPollView.xib */; };
+		65DFCD021CE3CFE900E4DFD9 /* UIViewController+Proposer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFCD011CE3CFE900E4DFD9 /* UIViewController+Proposer.swift */; };
 		65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */; };
 		65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65EA8C191BAFAEA900F2E29E /* URCountry.swift */; };
 		65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */ = {isa = PBXBuildFile; fileRef = 65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */; };
@@ -495,6 +496,7 @@
 		65DFCCF81CE26BD900E4DFD9 /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		65DFCCFA1CE273B600E4DFD9 /* URProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URProfileViewController.xib; sourceTree = "<group>"; };
 		65DFCCFE1CE2916500E4DFD9 /* URCurrentPollView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URCurrentPollView.xib; sourceTree = "<group>"; };
+		65DFCD011CE3CFE900E4DFD9 /* UIViewController+Proposer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIViewController+Proposer.swift"; sourceTree = "<group>"; };
 		65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginAlertController.swift; sourceTree = "<group>"; };
 		65EA8C191BAFAEA900F2E29E /* URCountry.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountry.swift; sourceTree = "<group>"; };
 		65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "iso3-country-code.json"; sourceTree = "<group>"; };
@@ -913,6 +915,7 @@
 		65409FE71B4C845200344D75 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				65DFCD001CE3CFDE00E4DFD9 /* Proposer */,
 				97FBAA541C0643940012D752 /* NSLocaleISO639_2 */,
 				65D0F3A21BA774C500E5D367 /* ISScrollViewPage */,
 				6530BE671B974AD400C9707C /* SWRevealViewController */,
@@ -1525,6 +1528,14 @@
 			path = ReviewMode;
 			sourceTree = "<group>";
 		};
+		65DFCD001CE3CFDE00E4DFD9 /* Proposer */ = {
+			isa = PBXGroup;
+			children = (
+				65DFCD011CE3CFE900E4DFD9 /* UIViewController+Proposer.swift */,
+			);
+			path = Proposer;
+			sourceTree = "<group>";
+		};
 		65EA8C1D1BB0791300F2E29E /* About */ = {
 			isa = PBXGroup;
 			children = (
@@ -1960,6 +1971,7 @@
 				65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */,
 				65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */,
 				652F8AA81BA0D8C10096C8DC /* URCountryProgramManager.swift in Sources */,
+				65DFCD021CE3CFE900E4DFD9 /* UIViewController+Proposer.swift in Sources */,
 				65F8B3221BE92EB9009F9CAB /* URStringExtension.swift in Sources */,
 				9742493E1BFCE2F00024384E /* URCurrentPollView.swift in Sources */,
 				97B2FAB71C03938B000820BD /* URRulesetResponse.swift in Sources */,

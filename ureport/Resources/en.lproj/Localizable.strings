@@ -296,6 +296,10 @@
 "video" = "Movie";
 "attachments" = "%d attachments";
 "likes" = "%d likes";
+"no_hardware_permission_photo" = "To complete this action please provide permission to access the library";
+"no_hardware_permission_camera" = "To complete this action please provide permission to access the camera";
+"no_hardware_permission_microphone" = "To complete this action please provide the microphone access permission";
+"no_hardware_permission_contact" = "To complete this action please provide permission to access the contact list";
 
 //TUTORIAL
 

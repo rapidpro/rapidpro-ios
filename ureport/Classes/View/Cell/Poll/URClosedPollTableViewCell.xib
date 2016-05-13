@@ -14,13 +14,6 @@
                 <rect key="frame" x="0.0" y="0.0" width="320" height="204.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGr-7P-obE" userLabel="ViewSeparator">
-                        <rect key="frame" x="5" y="193" width="310" height="8"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstAttribute="height" constant="8" id="tbj-Sc-9LB"/>
-                        </constraints>
-                    </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MS8-QK-Tmu">
                         <rect key="frame" x="5" y="5" width="310" height="194.5"/>
                         <subviews>
@@ -99,11 +92,8 @@
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="MS8-QK-Tmu" secondAttribute="trailing" constant="5" id="Cea-Wu-Q4n"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="5" id="bXQ-8X-yHD"/>
-                    <constraint firstAttribute="trailing" secondItem="xGr-7P-obE" secondAttribute="trailing" constant="5" id="f5h-dx-uSh"/>
                     <constraint firstItem="MS8-QK-Tmu" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="htg-zv-IAS"/>
                     <constraint firstAttribute="bottom" secondItem="MS8-QK-Tmu" secondAttribute="bottom" constant="5" id="kX9-QR-hSX"/>
-                    <constraint firstItem="xGr-7P-obE" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="nmA-kd-fRJ"/>
-                    <constraint firstAttribute="bottom" secondItem="xGr-7P-obE" secondAttribute="bottom" constant="3.5" id="yNB-6P-LKd"/>
                 </constraints>
             </tableViewCellContentView>
             <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -113,7 +103,6 @@
                 <outlet property="lbClosedDate" destination="Ca7-KB-Mba" id="KzU-22-QB1"/>
                 <outlet property="lbDescr" destination="DvK-6A-gYh" id="zyS-te-XwR"/>
                 <outlet property="lbSeeResults" destination="PAf-cd-B0R" id="ucv-5N-ASu"/>
-                <outlet property="viewSeparator" destination="xGr-7P-obE" id="0oq-Nc-7sX"/>
                 <outlet property="viewTop" destination="8eT-yU-F9i" id="W48-ws-JSH"/>
             </connections>
             <point key="canvasLocation" x="248" y="470.5"/>

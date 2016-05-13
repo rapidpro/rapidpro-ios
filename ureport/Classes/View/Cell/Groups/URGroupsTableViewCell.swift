@@ -68,6 +68,8 @@ class URGroupsTableViewCell: UITableViewCell {
         URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key, completionWithUsers: { (users:[URUser]) -> Void in
             ProgressHUD.dismiss()
             
+            URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
+            
             if self.groupChatRoom.userIsMember != nil && self.groupChatRoom.userIsMember == true {
                 if let delegate = self.delegate {
                     delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text! )
@@ -77,8 +79,7 @@ class URGroupsTableViewCell: UITableViewCell {
                 
                 URChatMemberManager.save(chatMember, user: user, completion: { (success:Bool) -> Void in
                     if success == true {
-                        URGCMManager.registerUserInTopic(user, chatRoom: self.groupChatRoom)
-                        URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
+                        URGCMManager.registerUserInTopic(user, chatRoom: self.groupChatRoom)                        
                         
                         if let delegate = self.delegate {
                             delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text!)

@@ -51,7 +51,7 @@ class URPollManager: NSObject {
                     poll.category = category
                     delegate.newPollReceived(poll)
                     
-                    self.pollIndex++
+                    self.pollIndex += 1
                 }
             })
     }

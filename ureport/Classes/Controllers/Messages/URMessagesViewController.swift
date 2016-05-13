@@ -289,56 +289,56 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     func setupRightButtons() {
-        if self.chatRoom is URGroupChatRoom {
+        if chatRoom == nil {
+            return
+        }else if self.chatRoom!.type == URChatRoomType.Group {
             self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForGroupChatRoom()
         }else {
-            if self.chatRoom is URIndividualChatRoom {
-                let individualChatRoom = self.chatRoom as? URIndividualChatRoom
+            let individualChatRoom = self.chatRoom as? URIndividualChatRoom
+            
+            userBlocked = false
+            
+            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
+            
+            if let blocked = individualChatRoom?.blocked {
                 
-                userBlocked = false
+                self.collectionView!.userInteractionEnabled = false
+                self.inputToolbar!.userInteractionEnabled = false
                 
-                self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
-                
-                if let blocked = individualChatRoom?.blocked {
+                if blocked == URUser.activeUser()!.key {
+                    userBlocked = true
                     
-                    self.collectionView!.userInteractionEnabled = false
-                    self.inputToolbar!.userInteractionEnabled = false
+                    self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
                     
-                    if blocked == URUser.activeUser()!.key {
-                        userBlocked = true
+                    let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
+                    alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
+                        URChatRoomManager.unblockUser(self.chatRoom!.key)
+                        self.userBlocked = false
+                        self.collectionView!.userInteractionEnabled = true
+                        self.inputToolbar!.userInteractionEnabled = true
                         
                         self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
                         
-                        let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .Alert)
-                        
-                        alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: nil))
-                        alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .Default, handler: { (alertAction) -> Void in
-                            URChatRoomManager.unblockUser(self.chatRoom!.key)
-                            self.userBlocked = false
-                            self.collectionView!.userInteractionEnabled = true
-                            self.inputToolbar!.userInteractionEnabled = true
-                            
-                            self.navigationItem.rightBarButtonItems = self.addRightBarButtonsForIndividualChatRoom()
-                            
-                        }))
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                        
-                    }else {
-                        
-                        let alertController = UIAlertController(title: nil, message: String(format: "message_individual_chat_blocked".localized, arguments: [self.navigationTitle!]), preferredStyle: .Alert)
-                        
-                        alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (alertAction) -> Void in
-                            self.navigationController!.popViewControllerAnimated(true)
-                        }))
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
-                        
-                    }
+                    }))
                     
-                }else{
-                    userBlocked = false
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
+                }else {
+                    
+                    let alertController = UIAlertController(title: nil, message: String(format: "message_individual_chat_blocked".localized, arguments: [self.navigationTitle!]), preferredStyle: .Alert)
+                    
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .Cancel, handler: { (alertAction) -> Void in
+                        self.navigationController!.popViewControllerAnimated(true)
+                    }))
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                    
                 }
+                
+            }else{
+                userBlocked = false
             }
         }
     }

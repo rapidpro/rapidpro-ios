@@ -101,6 +101,8 @@ class URRapidProContactUtil: NSObject {
                 URRapidProContactUtil.rapidProUser.setValue(dateFormat.stringFromDate(registrationDate), forKey: "registration_date")
                 completion(rootDicionary: rootDictionary)
             })
+        }else{
+            completion(rootDicionary: rootDictionary)
         }
     }
     

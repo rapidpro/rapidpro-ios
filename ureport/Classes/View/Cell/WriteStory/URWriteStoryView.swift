@@ -18,15 +18,13 @@ class URWriteStoryView: UIView {
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var lbMsg: UILabel!
-    @IBOutlet weak var btWrite: ISRoundedButton!
-    @IBOutlet weak var separatorView: UIView!
     
     var delegate:URWriteStoryViewDelegate?
     
     override func awakeFromNib() {
         super.awakeFromNib()
         setupLayout()
-        
+        self.bgView.layer.cornerRadius = 5
         let gesture = UITapGestureRecognizer(target: self, action: #selector(callDelegate))
         self.addGestureRecognizer(gesture)
     }
@@ -34,7 +32,6 @@ class URWriteStoryView: UIView {
     //MARK: Class Methods
     
     func setupLayout() {
-        self.separatorView.layer.cornerRadius = 5
         
         if let user = URUser.activeUser() {
             self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
@@ -44,14 +41,19 @@ class URWriteStoryView: UIView {
                 self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFit
                 self.imgProfile.sd_setImageWithURL(NSURL(string: user.picture))
             }else{
-                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                self.imgProfile.contentMode = UIViewContentMode.Center
-                self.imgProfile.image = UIImage(named: "ic_person")
+                setupUserImageAsDefault()
             }
             
         }else{
             self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [""])
+            setupUserImageAsDefault()
         }
+    }
+    
+    func setupUserImageAsDefault() {
+        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        self.imgProfile.contentMode = UIViewContentMode.Center
+        self.imgProfile.image = UIImage(named: "ic_person")
     }
     
     //MARK: ButtonEvents

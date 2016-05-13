@@ -40,15 +40,18 @@ class URChatTableViewCell: UITableViewCell {
         super.setSelected(selected, animated: animated)
         if !URConstant.isIpad {
             super.selectionStyle = UITableViewCellSelectionStyle.None
-        }else{
-            super.selectionStyle = UITableViewCellSelectionStyle.Blue
-            let view = UIView(frame: self.frame)
-            view.backgroundColor = UIColor(rgba: "#DAF8FE")
-            self.selectedBackgroundView = view
-        }        
+        }else{            
+            self.setSelectedBackgroundView()
+        }
     }
     
     //MARK: Class Methods
+    
+    func setSelectedBackgroundView() {
+        let view = UIView(frame: self.frame)
+        view.backgroundColor = UIColor(rgba: "#DAF8FE")
+        self.selectedBackgroundView = view
+    }
     
     func setBtCheckSelected(selected:Bool) {
         if selected == true {

@@ -124,7 +124,7 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
             self.btPlay.setImage(UIImage(named: "ic_pause_blue"), forState: UIControlState.Normal)
             startTimePlayBack = CFAbsoluteTimeGetCurrent()
             player.play()
-            timerPlayback = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: "timerCheckOnPlayBlack", userInfo: nil, repeats: true)
+            timerPlayback = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerCheckOnPlayBlack), userInfo: nil, repeats: true)
             timerPlayback.fire()
         }else{
             self.btPlay.setImage(UIImage(named: "play_audio"), forState: UIControlState.Normal)

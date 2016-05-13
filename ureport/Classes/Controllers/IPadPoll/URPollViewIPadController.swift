@@ -50,8 +50,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
         
         closedPollTableViewController.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
         closedPollTableViewController.tableView.contentSize = CGSize(width: contentLeftView.bounds.size.width, height: closedPollTableViewController.tableView.contentSize.height)
-//        pollResultCollectionViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
-        pollResultTableViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+//        pollResultTableViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
         pollResultTableViewController.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
         closedPollTableViewController.onBoundsChanged()
     }
@@ -90,6 +89,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     func setupUI() {
         displayLeftContentController(closedPollTableViewController)
         displayRightContentController(pollResultTableViewController)
+        pollResultTableViewController.tableView.alwaysBounceVertical = false
     }
     
 }

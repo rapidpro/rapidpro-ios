@@ -23,5 +23,5 @@ pod 'JSQMessagesViewController'
 pod 'youtube-ios-player-helper', ‘0.1.4’
 pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'
 #pod 'IlhasoftCore', :path => '../IlhasoftCore'
-
+pod 'Proposer'
 end

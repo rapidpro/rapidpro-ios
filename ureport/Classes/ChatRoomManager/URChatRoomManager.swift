@@ -35,6 +35,8 @@ class URChatRoomManager: NSObject {
                     URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
                         URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
                             
+                            URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom!)
+                            
                             chatRoom!.key = chatRoomKey as! String
                             
                             ProgressHUD.dismiss()
@@ -92,12 +94,14 @@ class URChatRoomManager: NSObject {
                         groupChatRoom.createdDate = (snapshot.value as! NSDictionary).objectForKey("createdDate") as! NSNumber
                         groupChatRoom.administrator = administrator
                         groupChatRoom.picture = picture
+                        groupChatRoom.type = URChatRoomType.Group
                         
                         completion(groupChatRoom)
                         
                     }else {
                         let individualChatRoom = URIndividualChatRoom(jsonDict: (snapshot.value as! NSDictionary))
                         individualChatRoom.key = snapshot.key
+                        individualChatRoom.type = URChatRoomType.Individual
                         
                         completion(individualChatRoom)
                     }
@@ -136,7 +140,7 @@ class URChatRoomManager: NSObject {
                 }else if !(firebase!.key.isEmpty) {
                     
                     let chatMembers:URChatMember = URChatMember(key:firebase.key)
-                    chatRoom.key = chatMembers.key
+                    chatRoom.key = chatMembers.key                                        
                     
                     for user in members {
                         
@@ -208,6 +212,7 @@ class URChatRoomManager: NSObject {
                     
                     group.administrator = administrator
                     group.key = snapshot.key
+                    group.type = URChatRoomType.Group
                     
                     URChatMemberManager.getByKey(group.key, completion: { (data, exists) -> Void in
                         if exists == true{

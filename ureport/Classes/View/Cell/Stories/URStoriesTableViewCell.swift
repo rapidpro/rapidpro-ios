@@ -27,7 +27,6 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var btContribute: UIButton!
     @IBOutlet weak var imgUser: UIImageView!
     @IBOutlet weak var bgView: UIView!
-    @IBOutlet weak var viewSeparator: UIView!
     @IBOutlet weak var moderationView: UIView!
     @IBOutlet weak var markerView: UIView!
     @IBOutlet weak var attachmentView: UIView!
@@ -58,7 +57,6 @@ class URStoriesTableViewCell: UITableViewCell {
         self.btReportContent.hidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
-        self.viewSeparator.layer.cornerRadius = 7
         btDisapprove.layer.cornerRadius = 5
         btPublish.layer.cornerRadius = 5
         btContribute.setTitle("story_item_contribute_to_story".localized, forState: UIControlState.Normal)
@@ -147,6 +145,9 @@ class URStoriesTableViewCell: UITableViewCell {
             self.lbContentTop.constant = 0
         }
         
+        self.contentView.layoutIfNeeded()
+        self.contentView.setNeedsLayout()
+        
         if story.markers != nil && !story.markers.isEmpty {
             self.markerView.hidden = false
             self.viewMarkerHeight.constant = viewMarkerDefautlHeight
@@ -165,8 +166,6 @@ class URStoriesTableViewCell: UITableViewCell {
         }
 
         self.lbLikes.text = String(format: "likes".localized, arguments: [story.like != nil ? story.like : 0])
-        
-        self.contentView.layoutIfNeeded()
         
         self.lbTitle.text = story.title!
         

@@ -36,6 +36,8 @@ class URAboutViewController: UIViewController {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
+        self.navigationController!.setNavigationBarHidden(false, animated: false)        
+        
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "About")
         
