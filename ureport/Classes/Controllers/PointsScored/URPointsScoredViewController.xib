@@ -133,6 +133,12 @@
                 </constraint>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="widthClass=regular">
+                <mask key="constraints">
+                    <exclude reference="Yu1-fe-3rF"/>
+                    <exclude reference="jjP-t2-zmf"/>
+                </mask>
+            </variation>
             <point key="canvasLocation" x="293.5" y="289"/>
         </view>
     </objects>
