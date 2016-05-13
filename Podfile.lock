@@ -13,6 +13,7 @@ PODS:
   - Bolts/AppLinks (1.7.0):
     - Bolts/Tasks
   - Bolts/Tasks (1.7.0)
+  - DBSphereTagCloud (1.0.0)
   - FBSDKCoreKit (4.11.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.11.0):
@@ -86,6 +87,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - AMScrollingNavbar (~> 2.0.0)
   - AWSS3 (~> 2.2.0)
+  - DBSphereTagCloud
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase (>= 2.3.3)
@@ -118,6 +120,7 @@ SPEC CHECKSUMS:
   AWSCore: 483fa0f25c8508e3364f818e9b941c6204619afa
   AWSS3: da758d5a95e65bb9e6e718245c1a86b6f63de9ae
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
+  DBSphereTagCloud: 57b9571e93b3565fc22cd65040eabbada06b56f2
   FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
   FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
@@ -146,6 +149,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 9296de94e165e67eda162e8183da787964e278f9
+PODFILE CHECKSUM: 581cfff5e3b7e3fdfe8c28576614cfaee1b48b15
 
 COCOAPODS: 1.0.0.rc.1

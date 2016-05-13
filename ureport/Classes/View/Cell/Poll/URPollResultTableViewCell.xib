@@ -43,7 +43,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa" customClass="TagListView" customModule="TagListView">
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa">
                                 <rect key="frame" x="7" y="142" width="297" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -107,7 +107,7 @@
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="4Pv-Ca-wcv" secondAttribute="trailing" constant="5" id="BVb-gQ-ROj"/>
                     <constraint firstAttribute="bottom" secondItem="1Jw-H1-BNh" secondAttribute="bottom" constant="6" id="E1r-01-8Fe"/>
@@ -118,14 +118,14 @@
                     <constraint firstItem="4Pv-Ca-wcv" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="5" id="ygq-8w-pVO"/>
                 </constraints>
             </tableViewCellContentView>
-            <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="choiceView" destination="vwj-Rq-juA" id="uC8-Yp-iWZ"/>
                 <outlet property="containerView" destination="1Jw-H1-BNh" id="cBt-86-SdL"/>
                 <outlet property="lbDate" destination="FUY-ie-8Wj" id="27E-Dt-KAQ"/>
                 <outlet property="lbDetails" destination="bAG-aK-sFJ" id="tue-Nv-L3e"/>
                 <outlet property="lbTitle" destination="5U8-7c-Jzc" id="tBI-Z4-JeT"/>
-                <outlet property="tagView" destination="zMW-Ja-Daa" id="aN1-MV-T8c"/>
+                <outlet property="sphereView" destination="zMW-Ja-Daa" id="urZ-8X-Xsu"/>
                 <outlet property="viewSeparator" destination="4Pv-Ca-wcv" id="UJk-z5-LaH"/>
             </connections>
             <point key="canvasLocation" x="269" y="365"/>

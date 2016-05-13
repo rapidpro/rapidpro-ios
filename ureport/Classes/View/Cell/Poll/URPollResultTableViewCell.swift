@@ -8,13 +8,14 @@
 
 import UIKit
 import TagListView
+import DBSphereTagCloud
 
 class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
 
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbDetails: UILabel!
-    @IBOutlet var tagView: TagListView!
+    @IBOutlet var sphereView: DBSphereView!
     @IBOutlet var viewSeparator: UIView!
     @IBOutlet var choiceView: UIView!
     @IBOutlet var containerView: UIView!
@@ -26,13 +27,6 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.tagView.tagBackgroundColor = URConstant.Color.PRIMARY
-        self.tagView.cornerRadius = 12
-        self.tagView.marginX = 3
-        self.tagView.marginY = 3
-        self.tagView.paddingX = 8
-        self.tagView.paddingY = 8
-        self.tagView.textFont = UIFont(name: "Helvetica Neue", size: 15)!
         self.viewSeparator.layer.cornerRadius = 5
         self.containerView.layer.cornerRadius = 5
         self.containerView.layer.borderColor = UIColor.lightGrayColor().CGColor
@@ -55,28 +49,41 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
         self.lbDetails.text = String(format: "polls_responded_info".localized, arguments: [pollResult.responded,pollResult.polled])
         self.lbTitle.text = pollResult.title
         
+        self.sphereView.frame = CGRect(x: self.sphereView.bounds.origin.x, y: self.sphereView.bounds.origin.y, width: self.contentView.bounds.size.width, height: 300)
+        self.sphereView.backgroundColor = UIColor.grayColor()
+        
         if pollResult.type == "Keywords" {
             var indexKeywords = 1
-            self.tagView.hidden = false
+            self.sphereView.hidden = false
             self.choiceView.hidden = true
-            
+            var tagList = [UIButton]()
             var results = pollResult.results
             
             if results.count > 10 {
                 results.removeRange(Range(start: 10, end: pollResult.results.count))
             }
             
-            self.tagView.removeAllTags()
+            for view in self.sphereView.subviews {
+                view.removeFromSuperview()
+            }
             
             for dictionary in results {
                 let tag = dictionary.objectForKey("keyword") as! String
-                self.tagView.addTag("\(indexKeywords).\(tag)")
-                indexKeywords++
+                let btnTag = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
+                btnTag.layer.cornerRadius = 40
+                btnTag.backgroundColor = URConstant.Color.PRIMARY
+                let buttonTitle = "\(indexKeywords). \(tag)"
+                btnTag.setTitle(buttonTitle, forState: UIControlState.Normal)
+                tagList.append(btnTag)
+                self.sphereView.addSubview(btnTag)
+                indexKeywords += 1
             }
+            
+            self.sphereView.setCloudTags(tagList)
             
         } else if pollResult.type == "Choices"{
             var indexChoices = 0
-            self.tagView.hidden = true
+            self.sphereView.hidden = true
             self.choiceView.hidden = false
             
             let array = self.choiceView.subviews as [UIView];

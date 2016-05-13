@@ -83,7 +83,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         if pollResult.type == "Choices" {
             return 189 + CGFloat(pollResult.results.count * 61)
         }else {
-            return UITableViewAutomaticDimension
+            return 444
         }
         
     }
