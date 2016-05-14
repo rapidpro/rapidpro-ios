@@ -28,7 +28,6 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     
     let closedPollTableViewController = URClosedPollTableViewController()
     let pollResultTableViewController = URPollResultTableViewController()
-    let pollResultCollectionViewController = URPollResultCollectionViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()

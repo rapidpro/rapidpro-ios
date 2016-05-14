@@ -55,6 +55,7 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        
     }
     
     // MARK: - Table view data source
@@ -112,8 +113,8 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.rowHeight = UITableViewAutomaticDimension;
-        self.tableView.estimatedRowHeight = 189;
+//        self.tableView.rowHeight = UITableViewAutomaticDimension;
+//        self.tableView.estimatedRowHeight = 189;
         self.tableView.layoutMargins = UIEdgeInsetsZero
         self.tableView.separatorInset = UIEdgeInsetsZero
     }

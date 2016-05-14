@@ -7,10 +7,9 @@
 //
 
 import UIKit
-import TagListView
 import DBSphereTagCloud
 
-class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
+class URPollResultTableViewCell: UITableViewCell {
 
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var lbTitle: UILabel!
@@ -32,6 +31,9 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
         self.containerView.layer.borderColor = UIColor.lightGrayColor().CGColor
         self.containerView.layer.borderWidth = 0.5
         
+        let panGesture = UIPanGestureRecognizer(target: sphereView, action: #selector(DBSphereView.handlePanGesture(_:)))
+        sphereView.addGestureRecognizer(panGesture)
+        
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -48,10 +50,7 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
         self.lbDate.text = pollResult.date
         self.lbDetails.text = String(format: "polls_responded_info".localized, arguments: [pollResult.responded,pollResult.polled])
         self.lbTitle.text = pollResult.title
-        
-        self.sphereView.frame = CGRect(x: self.sphereView.bounds.origin.x, y: self.sphereView.bounds.origin.y, width: self.contentView.bounds.size.width, height: 300)
-        self.sphereView.backgroundColor = UIColor.grayColor()
-        
+                
         if pollResult.type == "Keywords" {
             var indexKeywords = 1
             self.sphereView.hidden = false
@@ -63,23 +62,26 @@ class URPollResultTableViewCell: UITableViewCell, TagListViewDelegate {
                 results.removeRange(Range(start: 10, end: pollResult.results.count))
             }
             
-            for view in self.sphereView.subviews {
+            for view in sphereView.subviews {
                 view.removeFromSuperview()
             }
             
             for dictionary in results {
+                let tagSize = CGFloat(150 - (indexKeywords * 5))
                 let tag = dictionary.objectForKey("keyword") as! String
-                let btnTag = UIButton(frame: CGRect(x: 0, y: 0, width: 80, height: 80))
-                btnTag.layer.cornerRadius = 40
+                let btnTag = UIButton(frame: CGRect(x: 0, y: 0, width: tagSize, height: tagSize))
+                btnTag.layer.cornerRadius = tagSize/2
                 btnTag.backgroundColor = URConstant.Color.PRIMARY
                 let buttonTitle = "\(indexKeywords). \(tag)"
                 btnTag.setTitle(buttonTitle, forState: UIControlState.Normal)
+                btnTag.titleLabel!.numberOfLines = 2
+                btnTag.titleLabel!.lineBreakMode = NSLineBreakMode.ByClipping
                 tagList.append(btnTag)
-                self.sphereView.addSubview(btnTag)
+                sphereView.addSubview(btnTag)
                 indexKeywords += 1
             }
             
-            self.sphereView.setCloudTags(tagList)
+            sphereView.setCloudTags(tagList)
             
         } else if pollResult.type == "Choices"{
             var indexChoices = 0

@@ -15,7 +15,6 @@ pod 'AWSS3', '~> 2.2.0'
 pod 'Google/CloudMessaging'
 pod 'Alamofire'
 pod 'NYTPhotoViewer'
-pod 'TagListView'
 pod 'AMScrollingNavbar', '~> 2.0.0'
 pod 'SwiftAddressBook'
 pod 'AlamofireObjectMapper'
@@ -24,6 +23,7 @@ pod 'youtube-ios-player-helper', ‘0.1.4’
 pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'
 #pod 'IlhasoftCore', :path => '../IlhasoftCore'
 pod 'Proposer'
-pod 'DBSphereTagCloud'
+#pod 'DBSphereTagCloud'
+pod 'DBSphereTagCloud', :path => '../DBSphereTagCloud'
 
 end

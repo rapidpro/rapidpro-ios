@@ -43,7 +43,7 @@
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa">
+                            <view hidden="YES" clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zMW-Ja-Daa" customClass="DBSphereView">
                                 <rect key="frame" x="7" y="142" width="297" height="119"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -125,7 +125,7 @@
                 <outlet property="lbDate" destination="FUY-ie-8Wj" id="27E-Dt-KAQ"/>
                 <outlet property="lbDetails" destination="bAG-aK-sFJ" id="tue-Nv-L3e"/>
                 <outlet property="lbTitle" destination="5U8-7c-Jzc" id="tBI-Z4-JeT"/>
-                <outlet property="sphereView" destination="zMW-Ja-Daa" id="urZ-8X-Xsu"/>
+                <outlet property="sphereView" destination="zMW-Ja-Daa" id="8Bh-Gb-62V"/>
                 <outlet property="viewSeparator" destination="4Pv-Ca-wcv" id="UJk-z5-LaH"/>
             </connections>
             <point key="canvasLocation" x="269" y="365"/>

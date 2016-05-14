@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
 		650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
-		65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */; };
 		6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */; };
 		6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB791B881AE100CEEC3B /* Images.xcassets */; };
 		6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */; };
@@ -49,8 +48,6 @@
 		654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654850721BB209C80002A3D5 /* URChoiceResultView.xib */; };
 		654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850751BB209E70002A3D5 /* URChoiceResultView.swift */; };
 		654CB3C51BAB632100D8803B /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CB3C41BAB632100D8803B /* Serializable.swift */; };
-		6551A6911CD78DCD004F5009 /* URPollResultCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */; };
-		6551A6971CD79369004F5009 /* URPollResultCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */; };
 		6554D0981B934CCB009C5E89 /* URNewGroupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */; };
 		6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */; };
 		6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6554D09A1B94AE4A009C5E89 /* URMedia.swift */; };
@@ -292,7 +289,6 @@
 		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDownloader.swift; sourceTree = "<group>"; };
 		650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAboutViewIPadController.xib; sourceTree = "<group>"; };
-		65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultCollectionViewCell.xib; sourceTree = "<group>"; };
 		6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = LaunchImages.xcassets; sourceTree = "<group>"; };
 		6515FB791B881AE100CEEC3B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		6515FB7A1B881AE100CEEC3B /* ExampleImages.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = ExampleImages.xcassets; sourceTree = "<group>"; };
@@ -337,8 +333,6 @@
 		654850721BB209C80002A3D5 /* URChoiceResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URChoiceResultView.xib; sourceTree = "<group>"; };
 		654850751BB209E70002A3D5 /* URChoiceResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChoiceResultView.swift; sourceTree = "<group>"; };
 		654CB3C41BAB632100D8803B /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
-		6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultCollectionViewController.swift; sourceTree = "<group>"; };
-		6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultCollectionViewCell.swift; sourceTree = "<group>"; };
 		6554D0961B934CCB009C5E89 /* URNewGroupViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewGroupViewController.swift; sourceTree = "<group>"; };
 		6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewGroupViewController.xib; sourceTree = "<group>"; };
 		6554D09A1B94AE4A009C5E89 /* URMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMedia.swift; sourceTree = "<group>"; };
@@ -1004,7 +998,6 @@
 			isa = PBXGroup;
 			children = (
 				6548506E1BB1FADA0002A3D5 /* URPollResultTableViewController.swift */,
-				6551A6901CD78DCD004F5009 /* URPollResultCollectionViewController.swift */,
 			);
 			path = PollResult;
 			sourceTree = "<group>";
@@ -1054,8 +1047,6 @@
 				6556916E1B7D3DA800525E00 /* URClosedPollTableViewCell.xib */,
 				654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */,
 				6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */,
-				6551A6961CD79369004F5009 /* URPollResultCollectionViewCell.swift */,
-				65140A6F1CD7D5F200595A2F /* URPollResultCollectionViewCell.xib */,
 			);
 			path = Poll;
 			sourceTree = "<group>";
@@ -1795,7 +1786,6 @@
 				65FAF0CA1BC2C2E200F8B380 /* URPasswordEditViewController.xib in Resources */,
 				65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */,
 				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
-				65140A701CD7D5F200595A2F /* URPollResultCollectionViewCell.xib in Resources */,
 				658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */,
 				650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */,
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
@@ -1984,7 +1974,6 @@
 				655690AB1B7D170100525E00 /* ISRoundedButton.swift in Sources */,
 				655690811B7D0AF200525E00 /* URGender.swift in Sources */,
 				658D85931B554FD600DFB949 /* URStory.swift in Sources */,
-				6551A6971CD79369004F5009 /* URPollResultCollectionViewCell.swift in Sources */,
 				6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */,
 				65F8B3071BE2D712009F9CAB /* URNewsDetailViewController.swift in Sources */,
 				6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */,
@@ -2016,7 +2005,6 @@
 				97B2FAC51C061EC0000820BD /* URTutoView.swift in Sources */,
 				655690A71B7D15BA00525E00 /* URChatMessage.swift in Sources */,
 				65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */,
-				6551A6911CD78DCD004F5009 /* URPollResultCollectionViewController.swift in Sources */,
 				6556916B1B7D398900525E00 /* URMainViewController.swift in Sources */,
 				974249371BFBDDA20024384E /* URFlowRule.swift in Sources */,
 				65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */,

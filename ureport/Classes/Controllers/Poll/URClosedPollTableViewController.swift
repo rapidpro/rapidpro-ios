@@ -33,8 +33,6 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     
     var delegate:URClosedPollTableViewControllerDelegate?
     
-    let pollResultCollectionView = URPollResultCollectionViewController()
-    
     init() {
         super.init(nibName: "URClosedPollTableViewController", bundle: nil)
     }

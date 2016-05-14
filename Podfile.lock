@@ -78,7 +78,6 @@ PODS:
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
   - SwiftAddressBook (0.6.2)
-  - TagListView (1.0.0)
   - TPKeyboardAvoiding (1.2.8)
   - youtube-ios-player-helper (0.1.4)
 
@@ -87,7 +86,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - AMScrollingNavbar (~> 2.0.0)
   - AWSS3 (~> 2.2.0)
-  - DBSphereTagCloud
+  - DBSphereTagCloud (from `../DBSphereTagCloud`)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase (>= 2.3.3)
@@ -100,11 +99,12 @@ DEPENDENCIES:
   - Proposer
   - SDWebImage
   - SwiftAddressBook
-  - TagListView
   - TPKeyboardAvoiding
   - youtube-ios-player-helper (= 0.1.4)
 
 EXTERNAL SOURCES:
+  DBSphereTagCloud:
+    :path: ../DBSphereTagCloud
   IlhasoftCore:
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
 
@@ -120,7 +120,7 @@ SPEC CHECKSUMS:
   AWSCore: 483fa0f25c8508e3364f818e9b941c6204619afa
   AWSS3: da758d5a95e65bb9e6e718245c1a86b6f63de9ae
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
-  DBSphereTagCloud: 57b9571e93b3565fc22cd65040eabbada06b56f2
+  DBSphereTagCloud: b7f8b02fa136adc011abb839c66081b0c4beb002
   FBSDKCoreKit: 686ac982723a14ec9ddb85e2f81235d7706c891b
   FBSDKLoginKit: bade9fc78277764149ccc5bfaadbf13c83175c6a
   Firebase: 2db60272f68ce40c7d47e5ae6eddc16977c65d4c
@@ -145,10 +145,9 @@ SPEC CHECKSUMS:
   Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
-  TagListView: 6bf4bded034c4c90b1e90d8cd3d8e1d852dba0a8
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 581cfff5e3b7e3fdfe8c28576614cfaee1b48b15
+PODFILE CHECKSUM: 7abab8df594552433fbffa3fdab066541c1d362f
 
 COCOAPODS: 1.0.0.rc.1
