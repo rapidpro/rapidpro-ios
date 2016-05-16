@@ -32,7 +32,7 @@
                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dJM-8e-8H8">
                     <rect key="frame" x="18" y="110" width="991" height="365"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8k9-r2-pUc">
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8k9-r2-pUc">
                             <rect key="frame" x="-7" y="0.0" width="991" height="157"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Xi9-QR-oYo" customClass="ISRoundedView" customModule="ureport" customModuleProvider="target">

@@ -12,7 +12,7 @@ import youtube_ios_player_helper
 import SDWebImage
 import MediaPlayer
 
-class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URStoryContributionTableViewCellDelegate {
+class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URContributionTableViewCellDelegate {
     
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbMarkers: UILabel!
@@ -159,7 +159,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URStoryContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoryContributionTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URStoryContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
@@ -176,7 +176,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoryContributionTableViewCell.self), forIndexPath: indexPath) as! URStoryContributionTableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URContributionTableViewCell.self), forIndexPath: indexPath) as! URContributionTableViewCell
         
         cell.setupCellWith(self.listContribution[indexPath.row], indexPath: indexPath)
         cell.delegate = self
@@ -276,7 +276,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     //MARK: URStoryContributionTableViewCellDelegate
     
-    func contributionTableViewCellDeleteButtonTapped(cell: URStoryContributionTableViewCell) {
+    func contributionTableViewCellDeleteButtonTapped(cell: URContributionTableViewCell) {
         
         let alert = UIAlertController(title: nil, message: "message_remove_chat_message".localized, preferredStyle: UIAlertControllerStyle.ActionSheet)
 

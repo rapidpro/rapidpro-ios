@@ -185,9 +185,12 @@
 		65D4215F1BBB0A6F0057EE39 /* URNavigationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D4215E1BBB0A6F0057EE39 /* URNavigationManager.swift */; };
 		65D562FF1BA9E8A1001AEF54 /* URStoryContributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D562FD1BA9E8A1001AEF54 /* URStoryContributionViewController.swift */; };
 		65D563001BA9E8A1001AEF54 /* URStoryContributionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D562FE1BA9E8A1001AEF54 /* URStoryContributionViewController.xib */; };
-		65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563021BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift */; };
-		65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D563031BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib */; };
 		65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563071BA9EF3B001AEF54 /* URContributionManager.swift */; };
+		65DBAEBA1CEA45EC00A8B514 /* URContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBAEB81CEA45EC00A8B514 /* URContributionTableViewCell.swift */; };
+		65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBAEB91CEA45EC00A8B514 /* URContributionTableViewCell.xib */; };
+		65DBAEBE1CEA5DD300A8B514 /* URPollContributionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBAEBD1CEA5DD300A8B514 /* URPollContributionTableViewController.swift */; };
+		65DBAEC21CEA5E1900A8B514 /* URPollContributionModalViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBAEC01CEA5E1900A8B514 /* URPollContributionModalViewController.swift */; };
+		65DBAEC31CEA5E1900A8B514 /* URPollContributionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBAEC11CEA5E1900A8B514 /* URPollContributionModalViewController.xib */; };
 		65DFCCEA1CE23D9C00E4DFD9 /* URDistrict.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFCCE91CE23D9C00E4DFD9 /* URDistrict.swift */; };
 		65DFCCEC1CE23DAC00E4DFD9 /* URState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFCCEB1CE23DAC00E4DFD9 /* URState.swift */; };
 		65DFCCEF1CE23F9C00E4DFD9 /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DFCCEE1CE23F9C00E4DFD9 /* URReviewModeManager.swift */; };
@@ -477,9 +480,12 @@
 		65D4215E1BBB0A6F0057EE39 /* URNavigationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNavigationManager.swift; sourceTree = "<group>"; };
 		65D562FD1BA9E8A1001AEF54 /* URStoryContributionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryContributionViewController.swift; sourceTree = "<group>"; };
 		65D562FE1BA9E8A1001AEF54 /* URStoryContributionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryContributionViewController.xib; sourceTree = "<group>"; };
-		65D563021BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryContributionTableViewCell.swift; sourceTree = "<group>"; };
-		65D563031BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryContributionTableViewCell.xib; sourceTree = "<group>"; };
 		65D563071BA9EF3B001AEF54 /* URContributionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URContributionManager.swift; sourceTree = "<group>"; };
+		65DBAEB81CEA45EC00A8B514 /* URContributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URContributionTableViewCell.swift; sourceTree = "<group>"; };
+		65DBAEB91CEA45EC00A8B514 /* URContributionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URContributionTableViewCell.xib; sourceTree = "<group>"; };
+		65DBAEBD1CEA5DD300A8B514 /* URPollContributionTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollContributionTableViewController.swift; sourceTree = "<group>"; };
+		65DBAEC01CEA5E1900A8B514 /* URPollContributionModalViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollContributionModalViewController.swift; sourceTree = "<group>"; };
+		65DBAEC11CEA5E1900A8B514 /* URPollContributionModalViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollContributionModalViewController.xib; sourceTree = "<group>"; };
 		65DFCCE91CE23D9C00E4DFD9 /* URDistrict.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDistrict.swift; sourceTree = "<group>"; };
 		65DFCCEB1CE23DAC00E4DFD9 /* URState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URState.swift; sourceTree = "<group>"; };
 		65DFCCEE1CE23F9C00E4DFD9 /* URReviewModeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
@@ -759,6 +765,8 @@
 		65409FE21B4C845200344D75 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				65DBAEBF1CEA5DF500A8B514 /* PollContributionModal */,
+				65DBAEBC1CEA5DD300A8B514 /* PollContributionTable */,
 				6566A5C71CD262DF00A0730F /* IPadPoll */,
 				65816BA91C74C208004F9DEB /* AudioRecorder */,
 				655532361C51682C002F6AFC /* MediaSource */,
@@ -937,10 +945,10 @@
 		65409FE91B4C845200344D75 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				65DBAEB71CEA45EC00A8B514 /* Contribution */,
 				65D61BA81C111EAB0059F1B0 /* WriteStory */,
 				656561F71BD58DC000EBA9BD /* Settings */,
 				65B16FDE1BB9F52600BDBDEE /* Ranking */,
-				65D563011BA9EDCA001AEF54 /* StoryContribution */,
 				6515FB9A1B8B996800CEEC3B /* Chat */,
 				65A45CEC1B8810C9001C6808 /* Invite */,
 				65A45CE41B880C25001C6808 /* Groups */,
@@ -1485,15 +1493,6 @@
 			path = StoryContribution;
 			sourceTree = "<group>";
 		};
-		65D563011BA9EDCA001AEF54 /* StoryContribution */ = {
-			isa = PBXGroup;
-			children = (
-				65D563021BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift */,
-				65D563031BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib */,
-			);
-			path = StoryContribution;
-			sourceTree = "<group>";
-		};
 		65D563061BA9EF21001AEF54 /* ContributionManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -1509,6 +1508,32 @@
 				65DFCCF11CE242BE00E4DFD9 /* URWriteStoryView.xib */,
 			);
 			path = WriteStory;
+			sourceTree = "<group>";
+		};
+		65DBAEB71CEA45EC00A8B514 /* Contribution */ = {
+			isa = PBXGroup;
+			children = (
+				65DBAEB81CEA45EC00A8B514 /* URContributionTableViewCell.swift */,
+				65DBAEB91CEA45EC00A8B514 /* URContributionTableViewCell.xib */,
+			);
+			path = Contribution;
+			sourceTree = "<group>";
+		};
+		65DBAEBC1CEA5DD300A8B514 /* PollContributionTable */ = {
+			isa = PBXGroup;
+			children = (
+				65DBAEBD1CEA5DD300A8B514 /* URPollContributionTableViewController.swift */,
+			);
+			path = PollContributionTable;
+			sourceTree = "<group>";
+		};
+		65DBAEBF1CEA5DF500A8B514 /* PollContributionModal */ = {
+			isa = PBXGroup;
+			children = (
+				65DBAEC01CEA5E1900A8B514 /* URPollContributionModalViewController.swift */,
+				65DBAEC11CEA5E1900A8B514 /* URPollContributionModalViewController.xib */,
+			);
+			path = PollContributionModal;
 			sourceTree = "<group>";
 		};
 		65DFCCED1CE23F9400E4DFD9 /* ReviewMode */ = {
@@ -1768,7 +1793,6 @@
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
 				65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */,
-				65D563051BA9EDDF001AEF54 /* URStoryContributionTableViewCell.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
 				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
@@ -1776,6 +1800,7 @@
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
 				65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */,
+				65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */,
 				658D14C41C9B54A2009A63A5 /* URMediaVideoPhoneView.xib in Resources */,
 				658D85811B54597700DFB949 /* URForgotPasswordViewController.xib in Resources */,
 				972817A91BFF9C3000FBD20E /* URChoiceResponseView.xib in Resources */,
@@ -1815,6 +1840,7 @@
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
+				65DBAEC31CEA5E1900A8B514 /* URPollContributionModalViewController.xib in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1925,6 +1951,7 @@
 				6566A5CB1CD2635E00A0730F /* URPollViewIPadController.swift in Sources */,
 				652F8B041BA205560096C8DC /* URUserManager.swift in Sources */,
 				658D85971B558A6700DFB949 /* URAddStoryViewController.swift in Sources */,
+				65DBAEC21CEA5E1900A8B514 /* URPollContributionModalViewController.swift in Sources */,
 				974249391BFBE0AF0024384E /* URFlowRuleTest.swift in Sources */,
 				65F47F4E1C653FB2009A2066 /* URLocalMedia.swift in Sources */,
 				655690781B7CFF5100525E00 /* ISViewExtension.swift in Sources */,
@@ -1946,6 +1973,7 @@
 				658949CE1B8571FB0087F361 /* ProgressHUD.m in Sources */,
 				655690A51B7D159C00525E00 /* URContact.swift in Sources */,
 				65D0F35C1BA72E8D00E5D367 /* URMarkerManager.swift in Sources */,
+				65DBAEBE1CEA5DD300A8B514 /* URPollContributionTableViewController.swift in Sources */,
 				65D4215F1BBB0A6F0057EE39 /* URNavigationManager.swift in Sources */,
 				974249511BFE5EFA0024384E /* URFlowType.swift in Sources */,
 				655690991B7D147900525E00 /* URMarker.swift in Sources */,
@@ -1979,6 +2007,7 @@
 				6554D09B1B94AE4A009C5E89 /* URMedia.swift in Sources */,
 				6556907D1B7D083500525E00 /* URCountryProgram.swift in Sources */,
 				65DFCCEC1CE23DAC00E4DFD9 /* URState.swift in Sources */,
+				65DBAEBA1CEA45EC00A8B514 /* URContributionTableViewCell.swift in Sources */,
 				655690911B7D138400525E00 /* URNews.swift in Sources */,
 				6515FB991B8B98C500CEEC3B /* URChatTableViewController.swift in Sources */,
 				6554D0981B934CCB009C5E89 /* URNewGroupViewController.swift in Sources */,
@@ -1992,7 +2021,6 @@
 				97A5A6F21C0E2970006CBA25 /* URGcmInput.swift in Sources */,
 				65EA8C201BB0792800F2E29E /* URAboutViewController.swift in Sources */,
 				65780CBA1C61064A0025398D /* URVideoUtil.swift in Sources */,
-				65D563041BA9EDDF001AEF54 /* URStoryContributionTableViewCell.swift in Sources */,
 				655691831B7E668B00525E00 /* URMarkerTableViewCell.swift in Sources */,
 				658D14AB1C99EF64009A63A5 /* URMediaAudioView.swift in Sources */,
 				9725C5961C0EAE1A00EE1237 /* URAlamofireLogExtension.swift in Sources */,

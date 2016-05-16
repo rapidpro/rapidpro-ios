@@ -14,9 +14,11 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     @IBOutlet weak var contentLeftView: UIView!
     @IBOutlet weak var rightView: UIView!
     @IBOutlet weak var lbMessage: UILabel!
+    @IBOutlet weak var btComment: UIButton!
     @IBOutlet weak var imgMessage: UIImageView!
     
     var poll:URPoll?
+    var pollContributionModal = URPollContributionModalViewController()
     
     init() {
         super.init(nibName: "URPollViewIPadController", bundle: nil)
@@ -62,11 +64,20 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     //MARK: URClosedPollTableViewControllerDelegate
     
     func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
+        self.btComment.hidden = false
         self.poll = cell.poll
+        pollContributionModal.poll = poll
         self.lbMessage.hidden = true
         self.imgMessage.hidden = true
         pollResultTableViewController.reloadWithPoll(self.poll!)
     }
+    
+    //MARK: Button Events
+    
+    @IBAction func btCommentTapped(sender: AnyObject) {
+        pollContributionModal.show(true, inViewController: self)
+    }
+    
     
     //MARK: Class Methods
     
@@ -86,6 +97,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     }
     
     func setupUI() {
+        btComment.hidden = true
         displayLeftContentController(closedPollTableViewController)
         displayRightContentController(pollResultTableViewController)
         pollResultTableViewController.tableView.alwaysBounceVertical = false

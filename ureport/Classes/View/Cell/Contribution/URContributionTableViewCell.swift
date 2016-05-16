@@ -8,11 +8,11 @@
 
 import UIKit
 
-protocol URStoryContributionTableViewCellDelegate {
-    func contributionTableViewCellDeleteButtonTapped(cell:URStoryContributionTableViewCell)
+protocol URContributionTableViewCellDelegate {
+    func contributionTableViewCellDeleteButtonTapped(cell:URContributionTableViewCell)
 }
 
-class URStoryContributionTableViewCell: UITableViewCell {
+class URContributionTableViewCell: UITableViewCell {
 
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var imgUser: UIImageView!
@@ -21,7 +21,7 @@ class URStoryContributionTableViewCell: UITableViewCell {
     @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var btDelete: UIButton!
     
-    var delegate:URStoryContributionTableViewCellDelegate?
+    var delegate:URContributionTableViewCellDelegate?
     var contribution:URContribution!
     
     override func awakeFromNib() {

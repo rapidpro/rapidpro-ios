@@ -86,7 +86,7 @@ DEPENDENCIES:
   - AlamofireObjectMapper
   - AMScrollingNavbar (~> 2.0.0)
   - AWSS3 (~> 2.2.0)
-  - DBSphereTagCloud (from `../DBSphereTagCloud`)
+  - DBSphereTagCloud (from `https://github.com/danielblx/DBSphereTagCloud.git`)
   - FBSDKCoreKit
   - FBSDKLoginKit
   - Firebase (>= 2.3.3)
@@ -104,11 +104,14 @@ DEPENDENCIES:
 
 EXTERNAL SOURCES:
   DBSphereTagCloud:
-    :path: ../DBSphereTagCloud
+    :git: https://github.com/danielblx/DBSphereTagCloud.git
   IlhasoftCore:
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
 
 CHECKOUT OPTIONS:
+  DBSphereTagCloud:
+    :commit: 2523dfdaf0bb9b2830d95400b8e8a9c259f62333
+    :git: https://github.com/danielblx/DBSphereTagCloud.git
   IlhasoftCore:
     :commit: 95badd6fa6eb8654ad7d2218f0b8ed47328c5a2a
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
@@ -148,6 +151,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 7abab8df594552433fbffa3fdab066541c1d362f
+PODFILE CHECKSUM: 71ff1460cd25d7120ff9dc608f3dac444212856b
 
-COCOAPODS: 1.0.0.rc.1
+COCOAPODS: 1.0.0

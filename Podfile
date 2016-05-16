@@ -24,6 +24,6 @@ pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'
 #pod 'IlhasoftCore', :path => '../IlhasoftCore'
 pod 'Proposer'
 #pod 'DBSphereTagCloud'
-pod 'DBSphereTagCloud', :path => '../DBSphereTagCloud'
+pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'
 
 end

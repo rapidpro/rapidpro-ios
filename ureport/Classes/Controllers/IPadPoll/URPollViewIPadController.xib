@@ -8,6 +8,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URPollViewIPadController" customModule="ureport" customModuleProvider="target">
             <connections>
+                <outlet property="btComment" destination="FAx-Mq-E1c" id="6kc-IJ-JDn"/>
                 <outlet property="contentLeftView" destination="qPo-gG-QDb" id="sn1-1I-rTO"/>
                 <outlet property="imgMessage" destination="d11-dp-Ded" id="5Fd-Gc-h6U"/>
                 <outlet property="lbMessage" destination="vns-GQ-8R7" id="diR-xP-HFN"/>
@@ -69,17 +70,53 @@
                                 <constraint firstItem="d11-dp-Ded" firstAttribute="centerY" secondItem="nPy-wG-MYW" secondAttribute="centerY" constant="-19.5" id="nLa-Yh-wW8"/>
                             </constraints>
                         </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="byL-x0-f2U">
+                            <rect key="frame" x="485" y="521" width="516" height="48"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FAx-Mq-E1c">
+                                    <rect key="frame" x="3" y="0.0" width="510" height="48"/>
+                                    <color key="backgroundColor" red="0.11930310099999999" green="0.93830605160000002" blue="0.56131890780000004" alpha="1" colorSpace="calibratedRGB"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                    <state key="normal" title="Comment">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="btCommentTapped:" destination="-1" eventType="touchUpInside" id="Gnv-qH-fB2"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="FAx-Mq-E1c" secondAttribute="bottom" id="BBs-yD-AfN"/>
+                                <constraint firstItem="FAx-Mq-E1c" firstAttribute="top" secondItem="byL-x0-f2U" secondAttribute="top" id="NjD-qt-hWQ"/>
+                                <constraint firstAttribute="height" constant="48" id="SLc-dL-o90"/>
+                                <constraint firstItem="FAx-Mq-E1c" firstAttribute="leading" secondItem="byL-x0-f2U" secondAttribute="leading" constant="3" id="dzG-by-ykH"/>
+                                <constraint firstAttribute="trailing" secondItem="FAx-Mq-E1c" secondAttribute="trailing" constant="3" id="klA-oK-aT3"/>
+                                <constraint firstAttribute="height" constant="48" id="mU6-kx-hzw"/>
+                                <constraint firstAttribute="height" constant="48" id="qxS-Ya-119"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="SLc-dL-o90"/>
+                                    <exclude reference="mU6-kx-hzw"/>
+                                </mask>
+                            </variation>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                     <constraints>
                         <constraint firstItem="nPy-wG-MYW" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="0Tn-dc-w4m"/>
                         <constraint firstItem="nPy-wG-MYW" firstAttribute="width" secondItem="Pqp-EW-lcx" secondAttribute="width" multiplier="2:1.8" constant="-22.888888888888914" id="1an-pV-NrM"/>
+                        <constraint firstItem="byL-x0-f2U" firstAttribute="width" secondItem="nPy-wG-MYW" secondAttribute="width" id="6UF-JY-1l0"/>
                         <constraint firstItem="Pqp-EW-lcx" firstAttribute="top" secondItem="ijL-5i-ogK" secondAttribute="top" id="QVO-q7-C2p"/>
                         <constraint firstItem="nPy-wG-MYW" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="trailing" id="Ut7-Zt-YeG"/>
                         <constraint firstAttribute="bottom" secondItem="nPy-wG-MYW" secondAttribute="bottom" id="bjk-Wn-cFw"/>
+                        <constraint firstAttribute="bottom" secondItem="byL-x0-f2U" secondAttribute="bottom" constant="50" id="cVW-0w-QZx"/>
                         <constraint firstAttribute="trailing" secondItem="nPy-wG-MYW" secondAttribute="trailing" constant="23" id="er9-zS-plk"/>
                         <constraint firstAttribute="bottom" secondItem="Pqp-EW-lcx" secondAttribute="bottom" id="oIW-GW-aSC"/>
                         <constraint firstItem="Pqp-EW-lcx" firstAttribute="leading" secondItem="ijL-5i-ogK" secondAttribute="leading" id="rLG-0M-Mg1"/>
+                        <constraint firstAttribute="trailing" secondItem="byL-x0-f2U" secondAttribute="trailing" constant="23" id="v8z-M3-J7p"/>
+                        <constraint firstItem="byL-x0-f2U" firstAttribute="leading" secondItem="Pqp-EW-lcx" secondAttribute="trailing" id="zTF-3y-KAQ"/>
                     </constraints>
                 </view>
             </subviews>
@@ -91,6 +128,7 @@
                 <constraint firstItem="ijL-5i-ogK" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="v3q-3T-08Q"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
+            <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="401" y="-70.5"/>
         </view>
