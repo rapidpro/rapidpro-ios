@@ -14,7 +14,6 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     @IBOutlet weak var contentLeftView: UIView!
     @IBOutlet weak var rightView: UIView!
     @IBOutlet weak var lbMessage: UILabel!
-    @IBOutlet weak var btComment: UIButton!
     @IBOutlet weak var imgMessage: UIImageView!
     
     var poll:URPoll?
@@ -29,12 +28,12 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     }
     
     let closedPollTableViewController = URClosedPollTableViewController()
-    let pollResultTableViewController = URPollResultTableViewController()
+    let pollResultViewController = URPollResultViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupUI()
         closedPollTableViewController.delegate = self
+        setupUI()
     }
     
     override func viewDidLayoutSubviews() {
@@ -52,24 +51,25 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
         closedPollTableViewController.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
         closedPollTableViewController.tableView.contentSize = CGSize(width: contentLeftView.bounds.size.width, height: closedPollTableViewController.tableView.contentSize.height)
 //        pollResultTableViewController.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
-        pollResultTableViewController.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 0, right: 0)
+        pollResultViewController.tableView.contentInset = UIEdgeInsets(top: 64, left: 0, bottom: 50, right: 0)
         closedPollTableViewController.onBoundsChanged()
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        self.navigationController!.setNavigationBarHidden(false, animated: false)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
     }
     
     //MARK: URClosedPollTableViewControllerDelegate
     
     func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
-        self.btComment.hidden = false
+        pollResultViewController.btComment.hidden = false
         self.poll = cell.poll
         pollContributionModal.poll = poll
         self.lbMessage.hidden = true
         self.imgMessage.hidden = true
-        pollResultTableViewController.reloadWithPoll(self.poll!)
+        pollResultViewController.reloadWithPoll(self.poll!)
     }
     
     //MARK: Button Events
@@ -91,16 +91,15 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     
     func displayRightContentController(content: UIViewController) {
         self.addChildViewController(content)
-        content.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height)
+        content.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height - 50)
         self.rightView.insertSubview(content.view, atIndex: 0)
         content.didMoveToParentViewController(self)
     }
     
-    func setupUI() {
-        btComment.hidden = true
+    func setupUI() {        
         displayLeftContentController(closedPollTableViewController)
-        displayRightContentController(pollResultTableViewController)
-        pollResultTableViewController.tableView.alwaysBounceVertical = false
+        displayRightContentController(pollResultViewController)
+        pollResultViewController.tableView.alwaysBounceVertical = false
     }
     
 }

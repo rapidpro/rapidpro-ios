@@ -66,8 +66,8 @@
                                                     <variation key="default">
                                                         <mask key="constraints">
                                                             <exclude reference="0fm-Yt-oPA"/>
-                                                            <exclude reference="Uix-ah-R2R"/>
                                                             <exclude reference="P6d-Nx-uQ8"/>
+                                                            <exclude reference="Uix-ah-R2R"/>
                                                         </mask>
                                                     </variation>
                                                 </view>
@@ -138,12 +138,12 @@
                                                 <mask key="constraints">
                                                     <exclude reference="RXB-Do-hdC"/>
                                                     <exclude reference="uNY-M0-zEB"/>
-                                                    <exclude reference="Eab-Jy-24i"/>
                                                     <exclude reference="6RS-Kj-L6z"/>
-                                                    <exclude reference="rKb-eT-gxX"/>
-                                                    <exclude reference="ReW-Dq-VAB"/>
-                                                    <exclude reference="ss9-J5-lIL"/>
                                                     <exclude reference="C0A-ov-7Uo"/>
+                                                    <exclude reference="Eab-Jy-24i"/>
+                                                    <exclude reference="ReW-Dq-VAB"/>
+                                                    <exclude reference="rKb-eT-gxX"/>
+                                                    <exclude reference="ss9-J5-lIL"/>
                                                 </mask>
                                             </variation>
                                         </view>

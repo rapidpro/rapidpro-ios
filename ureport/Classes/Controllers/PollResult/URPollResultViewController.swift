@@ -8,20 +8,24 @@
 
 import UIKit
 
-class URPollResultTableViewController: UITableViewController, URPollManagerDelegate {
+class URPollResultViewController: UIViewController, URPollManagerDelegate {
 
+    @IBOutlet var tableView:UITableView!
+    @IBOutlet var btComment:UIButton!
+    
     let pollManager = URPollManager()
     var pollResultList:[URPollResult] = []
     
     var poll:URPoll?
+    var pollContributionModal = URPollContributionModalViewController()
     
     init(poll:URPoll) {
         self.poll = poll
-        super.init(nibName: nil, bundle: nil)
+        super.init(nibName: "URPollResultViewController", bundle: nil)
     }
 
     init() {
-        super.init(nibName:nil, bundle:nil)
+        super.init(nibName:"URPollResultViewController", bundle:nil)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -50,7 +54,6 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         
-        
     }
     
     override func viewDidLayoutSubviews() {
@@ -60,11 +63,11 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pollResultList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URPollResultTableViewCell.self), forIndexPath: indexPath) as! URPollResultTableViewCell
         
         cell.setupCellWithData(self.pollResultList[indexPath.row])
@@ -72,12 +75,12 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
 //        let cell = tableView.cellForRowAtIndexPath(indexPath) as? URPollResultTableViewCell
         
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
 
         let pollResult = pollResultList[indexPath.row]
         
@@ -102,6 +105,11 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     
     //MARK: Class Methods
     
+    func openPollContribution() {
+        pollContributionModal.poll = self.poll
+        pollContributionModal.show(true, inViewController: self)
+    }
+    
     func reloadWithPoll(poll:URPoll) {
         self.pollResultList = []
         self.poll = poll
@@ -109,13 +117,17 @@ class URPollResultTableViewController: UITableViewController, URPollManagerDeleg
     }
     
     private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 50);
         self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
-//        self.tableView.rowHeight = UITableViewAutomaticDimension;
-//        self.tableView.estimatedRowHeight = 189;
         self.tableView.layoutMargins = UIEdgeInsetsZero
         self.tableView.separatorInset = UIEdgeInsetsZero
+    }
+    
+    //MARK: Button Events
+    
+    @IBAction func btCommentTapped(button:UIButton) {
+        openPollContribution()
     }
 }

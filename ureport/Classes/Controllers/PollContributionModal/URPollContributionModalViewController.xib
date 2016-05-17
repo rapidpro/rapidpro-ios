@@ -30,16 +30,16 @@
                             </connections>
                         </button>
                         <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gep-5e-13j">
-                            <rect key="frame" x="53" y="71" width="920" height="459"/>
+                            <rect key="frame" x="16" y="71" width="993" height="459"/>
                             <subviews>
                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7vv-eJ-ZFI">
-                                    <rect key="frame" x="0.0" y="0.0" width="920" height="414"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="993" height="414"/>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SKd-kp-2de" userLabel="ViewContribution">
-                                    <rect key="frame" x="0.0" y="414" width="920" height="45"/>
+                                    <rect key="frame" x="0.0" y="414" width="993" height="45"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MMh-yb-zbF">
-                                            <rect key="frame" x="850" y="9" width="55" height="26"/>
+                                            <rect key="frame" x="923" y="9" width="55" height="26"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="55" id="Hja-j2-55B"/>
                                                 <constraint firstAttribute="height" constant="26" id="It9-0V-Zri"/>
@@ -53,13 +53,16 @@
                                                 <action selector="btSendTapped:" destination="-1" eventType="touchUpInside" id="XQV-FP-SCz"/>
                                             </connections>
                                         </button>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contribute with the story" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gck-GS-2cy">
-                                            <rect key="frame" x="8" y="2" width="835" height="39"/>
+                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Comment the result" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="gck-GS-2cy">
+                                            <rect key="frame" x="8" y="2" width="908" height="39"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="39" id="qcf-ai-bG2"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <textInputTraits key="textInputTraits" returnKeyType="send"/>
+                                            <connections>
+                                                <outlet property="delegate" destination="-1" id="UgT-su-iGF"/>
+                                            </connections>
                                         </textField>
                                     </subviews>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -111,7 +114,7 @@
                         <constraint firstItem="X1Y-Jg-iun" firstAttribute="width" secondItem="3VY-DO-UNb" secondAttribute="width" id="2le-1C-lfv"/>
                         <constraint firstItem="gep-5e-13j" firstAttribute="centerX" secondItem="3VY-DO-UNb" secondAttribute="centerX" id="D3w-Xt-tXS"/>
                         <constraint firstAttribute="trailing" secondItem="gep-5e-13j" secondAttribute="trailing" constant="165" id="Pvh-pD-pY4"/>
-                        <constraint firstAttribute="trailing" secondItem="gep-5e-13j" secondAttribute="trailing" constant="52" id="QzI-rQ-7YL"/>
+                        <constraint firstAttribute="trailing" secondItem="gep-5e-13j" secondAttribute="trailing" constant="16" id="QzI-rQ-7YL"/>
                         <constraint firstItem="gep-5e-13j" firstAttribute="top" secondItem="3VY-DO-UNb" secondAttribute="top" constant="71" id="RYw-W1-hBl"/>
                         <constraint firstAttribute="bottom" secondItem="gep-5e-13j" secondAttribute="bottom" constant="70" id="SgA-hp-bLY"/>
                         <constraint firstItem="gep-5e-13j" firstAttribute="centerX" secondItem="3VY-DO-UNb" secondAttribute="centerX" id="W2h-in-ljg"/>
@@ -125,7 +128,7 @@
                         <constraint firstAttribute="bottom" secondItem="gep-5e-13j" secondAttribute="bottom" constant="70" id="jlg-Hy-xgQ"/>
                         <constraint firstItem="gep-5e-13j" firstAttribute="leading" secondItem="3VY-DO-UNb" secondAttribute="leading" constant="164" id="jtP-Ux-R9Y"/>
                         <constraint firstItem="X1Y-Jg-iun" firstAttribute="height" secondItem="3VY-DO-UNb" secondAttribute="height" id="n4U-by-I3i"/>
-                        <constraint firstItem="gep-5e-13j" firstAttribute="leading" secondItem="3VY-DO-UNb" secondAttribute="leading" constant="53" id="n7x-H8-3ii"/>
+                        <constraint firstItem="gep-5e-13j" firstAttribute="leading" secondItem="3VY-DO-UNb" secondAttribute="leading" constant="16" id="n7x-H8-3ii"/>
                         <constraint firstAttribute="trailing" secondItem="gep-5e-13j" secondAttribute="trailing" constant="165" id="qUI-6f-JUX"/>
                         <constraint firstItem="X1Y-Jg-iun" firstAttribute="width" secondItem="3VY-DO-UNb" secondAttribute="width" id="xWY-bR-AWZ"/>
                         <constraint firstAttribute="bottom" secondItem="X1Y-Jg-iun" secondAttribute="bottom" id="xwP-e8-ig6"/>

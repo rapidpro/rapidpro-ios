@@ -34,7 +34,6 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        self.tabBarController?.tabBar.translucent = false
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         checkIfNeedOpenChatRoomByKey()
     }

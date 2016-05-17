@@ -83,6 +83,20 @@ class URPollContributionModalViewController: ISModalViewController {
         content.didMoveToParentViewController(self)
     }
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        sendContribution(textField)
+        return true
+    }
+    
+    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        if let _ = URUser.activeUser() {
+            return true
+        }else {
+            URLoginAlertController.show(self)
+            return false
+        }
+    }
+    
     //MARK: Button Events
     
     @IBAction func btSendTapped(sender: AnyObject) {

@@ -57,6 +57,12 @@ class URPollContributionTableViewController: UITableViewController, URContributi
             URContributionManager.removePollContribution(self.poll.key, contributionKey: cell.contribution.key)
         }))
         
+        if URConstant.isIpad {
+            alert.modalPresentationStyle = UIModalPresentationStyle.Popover
+            alert.popoverPresentationController!.sourceView = cell.btDelete
+            alert.popoverPresentationController!.sourceRect = cell.btDelete.bounds
+        }
+        
         alert.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
         
         self.presentViewController(alert, animated: true, completion: nil)

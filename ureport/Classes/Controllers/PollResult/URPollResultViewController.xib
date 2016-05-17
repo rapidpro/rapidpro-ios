@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URPollResultViewController" customModule="ureport" customModuleProvider="target">
+            <connections>
+                <outlet property="btComment" destination="j0O-Nl-TuS" id="usm-i3-5XG"/>
+                <outlet property="tableView" destination="S94-Q1-yq8" id="NlE-kQ-es0"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="utZ-DD-wcE"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S94-Q1-yq8" customClass="TPKeyboardAvoidingTableView">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="550"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="pbL-jq-aYb"/>
+                        <outlet property="delegate" destination="-1" id="bXa-rV-XTM"/>
+                    </connections>
+                </tableView>
+                <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j0O-Nl-TuS">
+                    <rect key="frame" x="5" y="550" width="590" height="50"/>
+                    <color key="backgroundColor" red="0.11930310099999999" green="0.93830605160000002" blue="0.56131890780000004" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="50" id="l4g-yl-yNs"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <state key="normal" title="Comment">
+                        <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <connections>
+                        <action selector="btCommentTapped:" destination="-1" eventType="touchUpInside" id="XxE-4S-3jF"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <constraints>
+                <constraint firstItem="j0O-Nl-TuS" firstAttribute="top" secondItem="S94-Q1-yq8" secondAttribute="bottom" id="0Be-bp-vlD"/>
+                <constraint firstAttribute="bottom" secondItem="j0O-Nl-TuS" secondAttribute="bottom" id="0WB-2s-W69"/>
+                <constraint firstItem="S94-Q1-yq8" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="5BI-uQ-zyK"/>
+                <constraint firstAttribute="trailing" secondItem="S94-Q1-yq8" secondAttribute="trailing" id="EXR-uo-brq"/>
+                <constraint firstItem="j0O-Nl-TuS" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="5" id="azN-H4-Eex"/>
+                <constraint firstAttribute="trailing" secondItem="j0O-Nl-TuS" secondAttribute="trailing" constant="5" id="fSY-qv-bjr"/>
+                <constraint firstItem="S94-Q1-yq8" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="sIf-cO-QLv"/>
+            </constraints>
+        </view>
+    </objects>
+</document>

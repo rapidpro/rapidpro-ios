@@ -61,8 +61,11 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
                 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    
-                    self.addSubview(URPlayMediaView.buildImageView(image))
+                    if let image = image {
+                        self.addSubview(URPlayMediaView.buildImageView(image))
+                    }else{
+                        print("error on image download")
+                    }
             })
             
         }else if media.type == URConstant.Media.VIDEO {
@@ -77,10 +80,14 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
                 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
                     
-                    self.addSubview(URPlayMediaView.buildImageView(image))
-                    let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
-                    playImage.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
-                    self.addSubview(playImage)
+                    if let image = image {
+                        self.addSubview(URPlayMediaView.buildImageView(image))
+                        let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
+                        playImage.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
+                        self.addSubview(playImage)
+                    }else{
+                        print("error on image download")
+                    }
                     
             })
         }else if media.type == URConstant.Media.FILE {

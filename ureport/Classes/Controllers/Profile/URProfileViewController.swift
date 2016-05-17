@@ -229,7 +229,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if cell is URStoriesTableViewCell {
             self.navigationController?.pushViewController(URStoryContributionViewController(story: (cell as! URStoriesTableViewCell).story), animated: true)
         }else if cell is URClosedPollTableViewCell {
-            self.navigationController?.pushViewController(URPollResultTableViewController(poll: (cell as! URClosedPollTableViewCell).poll), animated: true)
+            self.navigationController?.pushViewController(URPollResultViewController(poll: (cell as! URClosedPollTableViewCell).poll), animated: true)
         }else {
             
             let modalProfileViewController = URModalProfileViewController(user: (cell as! URRankingTableViewCell).user)

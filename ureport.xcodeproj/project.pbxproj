@@ -44,7 +44,7 @@
 		654850631BB1D7390002A3D5 /* URPollManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850621BB1D7390002A3D5 /* URPollManager.swift */; };
 		6548506B1BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */; };
 		6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */; };
-		6548506F1BB1FADA0002A3D5 /* URPollResultTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548506E1BB1FADA0002A3D5 /* URPollResultTableViewController.swift */; };
+		6548506F1BB1FADA0002A3D5 /* URPollResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6548506E1BB1FADA0002A3D5 /* URPollResultViewController.swift */; };
 		654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654850721BB209C80002A3D5 /* URChoiceResultView.xib */; };
 		654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850751BB209E70002A3D5 /* URChoiceResultView.swift */; };
 		654CB3C51BAB632100D8803B /* Serializable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654CB3C41BAB632100D8803B /* Serializable.swift */; };
@@ -129,6 +129,7 @@
 		658949D41B85775A0087F361 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D31B85775A0087F361 /* Accounts.framework */; };
 		658949D61B861B5E0087F361 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D51B861B5E0087F361 /* Security.framework */; };
 		658949DA1B8623CF0087F361 /* TwitterAuthHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 658949D91B8623CF0087F361 /* TwitterAuthHelper.m */; };
+		658BD0321CEBB0540019E885 /* URPollResultViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658BD0301CEBB0540019E885 /* URPollResultViewController.xib */; };
 		658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14A71C99EF2C009A63A5 /* URMediaAudioView.xib */; };
 		658D14AB1C99EF64009A63A5 /* URMediaAudioView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658D14AA1C99EF64009A63A5 /* URMediaAudioView.swift */; };
 		658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14AE1C99F482009A63A5 /* URAudioView.xib */; };
@@ -332,7 +333,7 @@
 		654850621BB1D7390002A3D5 /* URPollManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollManager.swift; sourceTree = "<group>"; };
 		654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultTableViewCell.swift; sourceTree = "<group>"; };
 		6548506A1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultTableViewCell.xib; sourceTree = "<group>"; };
-		6548506E1BB1FADA0002A3D5 /* URPollResultTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultTableViewController.swift; sourceTree = "<group>"; };
+		6548506E1BB1FADA0002A3D5 /* URPollResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultViewController.swift; sourceTree = "<group>"; };
 		654850721BB209C80002A3D5 /* URChoiceResultView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URChoiceResultView.xib; sourceTree = "<group>"; };
 		654850751BB209E70002A3D5 /* URChoiceResultView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChoiceResultView.swift; sourceTree = "<group>"; };
 		654CB3C41BAB632100D8803B /* Serializable.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Serializable.swift; sourceTree = "<group>"; };
@@ -422,6 +423,7 @@
 		658949D51B861B5E0087F361 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
 		658949D81B8623CF0087F361 /* TwitterAuthHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TwitterAuthHelper.h; sourceTree = "<group>"; };
 		658949D91B8623CF0087F361 /* TwitterAuthHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TwitterAuthHelper.m; sourceTree = "<group>"; };
+		658BD0301CEBB0540019E885 /* URPollResultViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollResultViewController.xib; sourceTree = "<group>"; };
 		658D14A71C99EF2C009A63A5 /* URMediaAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaAudioView.xib; sourceTree = "<group>"; };
 		658D14AA1C99EF64009A63A5 /* URMediaAudioView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaAudioView.swift; sourceTree = "<group>"; };
 		658D14AE1C99F482009A63A5 /* URAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAudioView.xib; sourceTree = "<group>"; };
@@ -1005,7 +1007,8 @@
 		6548506D1BB1FACA0002A3D5 /* PollResult */ = {
 			isa = PBXGroup;
 			children = (
-				6548506E1BB1FADA0002A3D5 /* URPollResultTableViewController.swift */,
+				6548506E1BB1FADA0002A3D5 /* URPollResultViewController.swift */,
+				658BD0301CEBB0540019E885 /* URPollResultViewController.xib */,
 			);
 			path = PollResult;
 			sourceTree = "<group>";
@@ -1785,6 +1788,7 @@
 				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
+				658BD0321CEBB0540019E885 /* URPollResultViewController.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
 				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
 				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
@@ -2051,7 +2055,7 @@
 				65DFCCEA1CE23D9C00E4DFD9 /* URDistrict.swift in Sources */,
 				6556918A1B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift in Sources */,
 				658D14BD1C9B4DB7009A63A5 /* URMediaFileView.swift in Sources */,
-				6548506F1BB1FADA0002A3D5 /* URPollResultTableViewController.swift in Sources */,
+				6548506F1BB1FADA0002A3D5 /* URPollResultViewController.swift in Sources */,
 				65F7DA2A1C073544001AFA22 /* URFireBaseManager.swift in Sources */,
 				656561FE1BD58E9600EBA9BD /* URSettingsTableViewController.swift in Sources */,
 				65B16FDC1BB5E7AB00BDBDEE /* URProfileViewController.swift in Sources */,

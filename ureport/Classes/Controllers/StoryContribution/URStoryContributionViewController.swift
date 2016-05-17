@@ -159,7 +159,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URStoryContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
@@ -294,6 +294,12 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.view.layoutIfNeeded()
             
         }))
+        
+        if URConstant.isIpad {
+            alert.modalPresentationStyle = UIModalPresentationStyle.Popover
+            alert.popoverPresentationController!.sourceView = cell.btDelete
+            alert.popoverPresentationController!.sourceRect = cell.btDelete.bounds
+        }
 
         alert.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
         
