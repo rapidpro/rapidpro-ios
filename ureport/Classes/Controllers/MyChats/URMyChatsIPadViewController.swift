@@ -29,6 +29,8 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         messagesViewController.delegate = self
         messagesViewController.view.userInteractionEnabled = false
         
+        messagesViewController.edgesForExtendedLayout = UIRectEdge.None
+        
         setupViewControllers()
     }
     
