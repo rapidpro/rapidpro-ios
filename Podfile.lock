@@ -74,6 +74,7 @@ PODS:
   - NYTPhotoViewer/Core (1.1.0)
   - ObjectMapper (0.17)
   - Proposer (0.9.0)
+  - QRCodeReader.swift (6.0.0)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
@@ -97,6 +98,7 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - NYTPhotoViewer
   - Proposer
+  - QRCodeReader.swift
   - SDWebImage
   - SwiftAddressBook
   - TPKeyboardAvoiding
@@ -146,11 +148,12 @@ SPEC CHECKSUMS:
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   ObjectMapper: fa286b7cb5a398f1b0d8d64d0dd33fd1b307022c
   Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
+  QRCodeReader.swift: 4aa8b0f88847a51312d6ffd2cafc387962da9dd8
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 71ff1460cd25d7120ff9dc608f3dac444212856b
+PODFILE CHECKSUM: 646c5b46634a3d0e290d7b9d1474d693e317869d
 
 COCOAPODS: 1.0.0

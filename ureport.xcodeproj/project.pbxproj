@@ -109,6 +109,7 @@
 		65685ADE1BA23C4C00099CFB /* URPollResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65685ADD1BA23C4C00099CFB /* URPollResponse.swift */; };
 		65685B4D1BA6686300099CFB /* URStoryManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65685B4C1BA6686300099CFB /* URStoryManager.swift */; };
 		656A2BE41B98C7780079BD6A /* URGCMManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656A2BE31B98C7780079BD6A /* URGCMManager.swift */; };
+		656AAD001CEFAA4D00426ADB /* URBackendAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656AACFF1CEFAA4D00426ADB /* URBackendAuthManager.swift */; };
 		657629161BE135010095772F /* URModerationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629151BE135010095772F /* URModerationViewController.swift */; };
 		657629191BE13A360095772F /* URModeratorTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 657629181BE13A360095772F /* URModeratorTableViewController.swift */; };
 		65780CB81C5FFF150025398D /* MobileCoreServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65780CB71C5FFF150025398D /* MobileCoreServices.framework */; };
@@ -400,6 +401,7 @@
 		65685ADD1BA23C4C00099CFB /* URPollResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResponse.swift; sourceTree = "<group>"; };
 		65685B4C1BA6686300099CFB /* URStoryManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryManager.swift; sourceTree = "<group>"; };
 		656A2BE31B98C7780079BD6A /* URGCMManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGCMManager.swift; sourceTree = "<group>"; };
+		656AACFF1CEFAA4D00426ADB /* URBackendAuthManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URBackendAuthManager.swift; sourceTree = "<group>"; };
 		65711A2C1C40502500E05BBD /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = es.lproj/Localizable.strings; sourceTree = "<group>"; };
 		657629151BE135010095772F /* URModerationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModerationViewController.swift; sourceTree = "<group>"; };
 		657629181BE13A360095772F /* URModeratorTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URModeratorTableViewController.swift; sourceTree = "<group>"; };
@@ -727,6 +729,7 @@
 		65409FE01B4C845200344D75 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				656AACFE1CEFAA2600426ADB /* BackendAuthManager */,
 				65DFCCED1CE23F9400E4DFD9 /* ReviewMode */,
 				65816BAE1C750739004F9DEB /* AudioRecorderManager */,
 				65F7DA281C073544001AFA22 /* Firebase */,
@@ -1166,6 +1169,14 @@
 				656A2BE31B98C7780079BD6A /* URGCMManager.swift */,
 			);
 			path = GCMManager;
+			sourceTree = "<group>";
+		};
+		656AACFE1CEFAA2600426ADB /* BackendAuthManager */ = {
+			isa = PBXGroup;
+			children = (
+				656AACFF1CEFAA4D00426ADB /* URBackendAuthManager.swift */,
+			);
+			path = BackendAuthManager;
 			sourceTree = "<group>";
 		};
 		657629141BE134EA0095772F /* Moderation */ = {
@@ -1956,6 +1967,7 @@
 				652F8B041BA205560096C8DC /* URUserManager.swift in Sources */,
 				658D85971B558A6700DFB949 /* URAddStoryViewController.swift in Sources */,
 				65DBAEC21CEA5E1900A8B514 /* URPollContributionModalViewController.swift in Sources */,
+				656AAD001CEFAA4D00426ADB /* URBackendAuthManager.swift in Sources */,
 				974249391BFBE0AF0024384E /* URFlowRuleTest.swift in Sources */,
 				65F47F4E1C653FB2009A2066 /* URLocalMedia.swift in Sources */,
 				655690781B7CFF5100525E00 /* ISViewExtension.swift in Sources */,
