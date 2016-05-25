@@ -34,9 +34,13 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
     
     func openQRCodeReader() {
         readerVC.completionBlock = { (result: QRCodeReaderResult?) in
-            URBackendAuthManager.saveAuthToken(result!.value, completion: { (success) in
-                self.readerVC.dismissViewControllerAnimated(true, completion: { })
-            })
+            
+            self.readerVC.dismissViewControllerAnimated(true, completion: { })
+            
+            if result != nil {
+                URBackendAuthManager.saveAuthToken(result!.value, completion: { (success) in
+                })
+            }
         }
         
         readerVC.modalPresentationStyle = .FormSheet
