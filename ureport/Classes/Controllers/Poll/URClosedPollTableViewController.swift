@@ -118,15 +118,19 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     //MARK: Class Methods
     
     func moveToNextStep() {
-        if headerCell.flowRule != nil {
-            responses.append(headerCell.getResponse())
-            setupNextStep(headerCell.flowRule?.destination)
-            
-            reloadCurrentFlowSection()
-            
-        } else {
+        
+        if self.currentActionSet != nil && headerCell.getResponse() == nil && currentRuleset != nil {
             UIAlertView(title: nil, message: "answer_poll_choose_error".localized, delegate: self, cancelButtonTitle: "OK").show()
+            return
+        }else {
+            if let response = headerCell.getResponse() {
+                responses.append(response)
+            }
+            
+            setupNextStep(currentActionSet?.destination)
+            reloadCurrentFlowSection()
         }
+
     }
     
     private func setupHeaderCell() {
@@ -168,7 +172,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     private func setupNextStep(destination:String?) {
-        self.currentActionSet = URFlowManager.getFlowActionSetByUuid(currentFlow!, destination: destination)
+        self.currentActionSet = URFlowManager.getFlowActionSetByUuid(currentFlow!, destination: destination, currentActionSet: currentActionSet)
         self.currentRuleset = URFlowManager.getRulesetForAction(currentFlow!, actionSet: currentActionSet)
     }
     
@@ -179,7 +183,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         var currentPollHeight:CGFloat = 0.0
         
         if !URFlowManager.isLastActionSet(currentActionSet) {
-            headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset!, contact: contact!)
+            headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset, contact: contact!)
             currentPollHeight = headerCell.getCurrentPollHeight()
             
         }else if currentActionSet == nil {

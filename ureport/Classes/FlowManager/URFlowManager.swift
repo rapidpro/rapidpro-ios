@@ -26,20 +26,33 @@ class URFlowManager {
     
     class func hasRecursiveDestination(flowDefinition:URFlowDefinition, ruleSet:URFlowRuleset, rule:URFlowRule) -> Bool {
             if rule.destination != nil {
-                let actionSet = getFlowActionSetByUuid(flowDefinition,  destination: rule.destination!);
+                let actionSet = getFlowActionSetByUuid(flowDefinition,  destination: rule.destination!, currentActionSet: nil);
                 return actionSet != nil && actionSet?.destination != nil
                     && actionSet?.destination == ruleSet.uuid!
             }
         return false;
     }
     
-    class func getFlowActionSetByUuid(flowDefinition: URFlowDefinition, destination: String?) -> URFlowActionSet? {
+    class func getFlowActionSetByUuid(flowDefinition: URFlowDefinition, destination: String?, currentActionSet:URFlowActionSet?) -> URFlowActionSet? {
         for actionSet in flowDefinition.actionSets! {
             if destination != nil && destination == actionSet.uuid! {
                 return actionSet
             }
         }
-        return nil
+        
+        if let currentActionSet = currentActionSet {
+            let i = flowDefinition.actionSets?.indexOf({$0.uuid == currentActionSet.uuid})
+            
+            if flowDefinition.actionSets?.count >= i!+1 {
+                return flowDefinition.actionSets?[i!+1]
+            }else {
+                return nil
+            }
+            
+        }else {
+            return nil
+        }
+
     }
     
     class func getRulesetForAction(flowDefinition: URFlowDefinition, actionSet: URFlowActionSet?) -> URFlowRuleset? {

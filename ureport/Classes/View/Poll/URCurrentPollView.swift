@@ -89,8 +89,12 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         return constraintQuestionHeight.constant + constraintResponseHeight.constant + 127 + btSwitchLanguage.frame.size.height
     }
     
-    func getResponse() -> URRulesetResponse {
-        return URRulesetResponse(rule: self.flowRule!, response: self.response!)
+    func getResponse() -> URRulesetResponse? {
+        if !(self.flowRule == nil && self.response == nil) {
+            return URRulesetResponse(rule: self.flowRule!, response: self.response!)
+        }else {
+            return nil
+        }
     }
     
     private func getResponseFromRule(rule:URFlowRule) -> String {
@@ -102,7 +106,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         return response!
     }
     
-    func setupData(flowDefinition: URFlowDefinition, flowActionSet: URFlowActionSet, flowRuleset:URFlowRuleset, contact:URContact) {
+    func setupData(flowDefinition: URFlowDefinition, flowActionSet: URFlowActionSet, flowRuleset:URFlowRuleset?, contact:URContact) {
         self.flowRule = nil
         self.response = nil
         
@@ -210,8 +214,13 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         
         removeAnswersViewOfLastQuestion()
         
-        for flowRule in (flowRuleset?.rules)! {
-            if !URFlowManager.hasRecursiveDestination(flowDefinition, ruleSet: flowRuleset!, rule: flowRule) {
+        guard let flowRuleset = flowRuleset else {
+            self.constraintResponseHeight.constant = 0
+            return
+        }
+        
+        for flowRule in (flowRuleset.rules)! {
+            if !URFlowManager.hasRecursiveDestination(flowDefinition, ruleSet: flowRuleset, rule: flowRule) {
                 
                 let frame = CGRectMake(0, CGFloat(viewResponses.subviews.count * responseHeight), viewResponses.frame.width, CGFloat(responseHeight))
                 var responseView:URResponseView?
