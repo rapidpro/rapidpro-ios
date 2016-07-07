@@ -34,7 +34,6 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         self.title = "poll_results".localized
     }
     
@@ -47,6 +46,8 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
             self.pollResultList = []
             pollManager.getPollsResults(poll.key)
         }
+        
+        setupTableView()
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "Poll Results")
@@ -117,7 +118,7 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 50);
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
         self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()

@@ -127,7 +127,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
                 responses.append(response)
             }
             
-            setupNextStep(currentActionSet?.destination)
+            setupNextStep(headerCell.flowRule?.destination ?? currentActionSet?.destination)
             reloadCurrentFlowSection()
         }
 

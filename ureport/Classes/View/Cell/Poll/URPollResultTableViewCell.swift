@@ -106,7 +106,7 @@ class URPollResultTableViewCell: UITableViewCell {
                     choiceResultView!.lbChoice.text = title
                     choiceResultView!.lbPercent.text = "\(percent!)%"
                     
-                    if indexChoices > URPollManager.getColors().count {
+                    if indexChoices >= URPollManager.getColors().count {
                         color = UIColor.yellowColor()
                     }else {
                         color = UIColor(rgba:URPollManager.getColors()[indexChoices])
