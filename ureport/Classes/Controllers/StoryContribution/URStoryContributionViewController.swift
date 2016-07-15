@@ -122,8 +122,8 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.imgProfile?.image = UIImage(named: "ic_person")
             
             self.roundedView?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        }else{
-            self.imgProfile?.sd_setImageWithURL(NSURL(string: story.userObject!.picture))
+        }else if let userObject = story.userObject {
+            self.imgProfile?.sd_setImageWithURL(NSURL(string: userObject.picture))
         }
         
         if story.like == nil {

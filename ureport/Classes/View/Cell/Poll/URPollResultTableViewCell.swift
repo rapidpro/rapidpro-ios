@@ -126,7 +126,7 @@ class URPollResultTableViewCell: UITableViewCell {
                     self.choiceView.addSubview(choiceResultView!)
                     choiceResultView!.viewPercentWidth.constant = (CGFloat(percentValue!/100)) * widthCell
                     
-                    indexChoices++                
+                    indexChoices += 1                
                 }
         }
         

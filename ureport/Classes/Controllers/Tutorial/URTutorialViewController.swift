@@ -101,9 +101,7 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
         
     }
     
-    func scrollViewPageDidScroll(scrollView: UIScrollView) {
-        
-        let value = scrollView.contentOffset.x / UIScreen.mainScreen().bounds.size.width
+    func scrollViewPageDidScroll(scrollView: UIScrollView) {        
         
     }
     

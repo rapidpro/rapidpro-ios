@@ -96,7 +96,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
         
-        var gai: GAI = GAI.sharedInstance()
+        let gai: GAI = GAI.sharedInstance()
         gai.trackUncaughtExceptions = true
     }
     

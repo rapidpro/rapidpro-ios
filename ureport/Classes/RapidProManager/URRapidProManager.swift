@@ -249,7 +249,7 @@ class URRapidProManager: NSObject {
                     case 0:
                         break
                     case 1:
-                        let state = URState(name: name, boundary: dictionary.objectForKey("boundary") as! String)
+                        let state = URState(name: name, boundary: dictionary.objectForKey("boundary") as? String)
                         states.append(state)
                         break
                     case 2:
@@ -280,7 +280,7 @@ class URRapidProManager: NSObject {
         
         URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
             
-            Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as! [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+            Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
                 
                 if JSON.isFailure == true {
                     print("error: \(JSON)")

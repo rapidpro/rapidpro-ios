@@ -66,7 +66,7 @@ class URMainChatViewController: UITabBarController, UITabBarControllerDelegate {
         let btnLogout: UIButton = UIButton(type: UIButtonType.Custom)
         btnLogout.frame = CGRectMake(0, 0, 23, 23)
         btnLogout.setBackgroundImage(UIImage(named:"iconNewMessage"), forState: UIControlState.Normal)
-        btnLogout.addTarget(self, action: "createChatRoom", forControlEvents: UIControlEvents.TouchUpInside)
+        btnLogout.addTarget(self, action: #selector(createChatRoom), forControlEvents: UIControlEvents.TouchUpInside)
         let container: UIView = UIView(frame: CGRectMake(0, 0, 23, 23))
         container.addSubview(btnLogout)
         let chatButtonItem = UIBarButtonItem(customView: container)

@@ -156,7 +156,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         var objectView:UIView?
         
         if let view = anyObject as? UIBarButtonItem {
-            objectView = view.valueForKey("view") as! UIView
+            objectView = view.valueForKey("view") as? UIView
         }else {
             return
         }

@@ -109,7 +109,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func buildStory() {
         
-        if let textField = self.view.findTextFieldEmptyInView(self.view) {
+        if let textField = self.view.findTextFieldEmptyInView(self.view) where textField != self.txtMarkers {
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }

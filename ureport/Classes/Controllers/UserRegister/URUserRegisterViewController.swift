@@ -412,7 +412,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.pickerDistricts = UIPickerView()
         
         self.pickerDate!.datePickerMode = UIDatePickerMode.Date
-        self.pickerDate!.addTarget(self, action: Selector("dateChanged:"), forControlEvents: UIControlEvents.ValueChanged)
+        self.pickerDate!.addTarget(self, action: #selector(dateChanged), forControlEvents: UIControlEvents.ValueChanged)
         self.txtBirthDay.inputView = self.pickerDate!
         
         self.pickerGender!.dataSource = self

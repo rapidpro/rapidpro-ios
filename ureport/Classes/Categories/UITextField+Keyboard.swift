@@ -36,7 +36,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
         keyboardToolBar!.barStyle = UIBarStyle.Default
         
         let arrayButtonItem:[UIBarButtonItem]! = [UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FlexibleSpace, target: nil, action: nil),
-            UIBarButtonItem(title: NSLocalizedString("points_earning_close".localized, comment: ""), style: UIBarButtonItemStyle.Done, target: self, action: "closeKeyBoard")]
+                                                  UIBarButtonItem(title: NSLocalizedString("points_earning_close".localized, comment: ""), style: UIBarButtonItemStyle.Done, target: self, action: #selector(closeKeyBoard))]
         
         keyboardToolBar?.setItems(arrayButtonItem, animated: true)
         

@@ -103,7 +103,7 @@ class URNewsDetailViewController: UIViewController {
                 imgView.contentMode = UIViewContentMode.ScaleAspectFill
                 imgView.userInteractionEnabled = true
                 
-                let tapGesture = UITapGestureRecognizer(target: self, action: "imgViewTapped:")
+                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imgViewTapped))
                 tapGesture.numberOfTouchesRequired = 1
                 
                 imgView.addGestureRecognizer(tapGesture)

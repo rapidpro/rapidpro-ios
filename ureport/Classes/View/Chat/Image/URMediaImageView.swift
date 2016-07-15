@@ -47,7 +47,7 @@ class URMediaImageView: UIView, NYTPhotosViewControllerDelegate {
     
     //MARK: NYTPhotosViewControllerDelegate
     
-    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController!) {
+    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController) {
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
     }
 

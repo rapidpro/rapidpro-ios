@@ -52,7 +52,7 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
         self.media = media
         self.frame = URPlayMediaView.defaultFrame
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "openMedia:")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openMedia))
         tapGesture.numberOfTapsRequired = 1
         self.addGestureRecognizer(tapGesture)
         
@@ -153,11 +153,6 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             
             
         }else if media.type == URConstant.Media.VIDEOPHONE {
-
-            NSNotificationCenter.defaultCenter().addObserver(self,
-                selector: "videoHasFinishedPlaying:",
-                name: MPMoviePlayerPlaybackDidFinishNotification,
-                object: nil)
             
             let url = NSURL(string: media.url)!
             

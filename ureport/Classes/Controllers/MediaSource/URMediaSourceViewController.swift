@@ -269,8 +269,14 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                     return
                 }
                 
+                guard let videoID = URYoutubeUtil.getYoutubeVideoID(urlVideo) else {
+                    UIAlertView(title: nil, message: "error_empty_link".localized, delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
+                
                 let media = URVideoMedia()
-                media.id = URYoutubeUtil.getYoutubeVideoID(urlVideo)
+                
+                media.id = videoID
                 media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: media.id)
                 media.type = URConstant.Media.VIDEO
                 

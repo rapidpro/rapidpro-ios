@@ -100,7 +100,7 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     }
     
     func newPollResultReceived(pollResult: URPollResult) {
-        pollResultList.insert(pollResult, atIndex: 0)
+        pollResultList.insert(pollResult, atIndex: pollResultList.count)        
         self.tableView.reloadData()
     }
     

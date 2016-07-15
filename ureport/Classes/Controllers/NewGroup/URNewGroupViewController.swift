@@ -167,7 +167,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             
         txtTitleGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
         txtDescriptionGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_save".localized, style: UIBarButtonItemStyle.Done, target: self, action: "newGroup")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_save".localized, style: UIBarButtonItemStyle.Done, target: self, action: #selector(newGroup))
     }
     
     func newGroup() {

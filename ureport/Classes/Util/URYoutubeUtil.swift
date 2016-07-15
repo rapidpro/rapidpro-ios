@@ -10,8 +10,10 @@ import UIKit
 
 class URYoutubeUtil: NSObject {
 
-    class func getYoutubeVideoID(var strVideoUrl:String) -> String?{
+    class func getYoutubeVideoID(strVideoUrl:String) -> String?{
+        
         if !strVideoUrl.containsString("http://") && !strVideoUrl.containsString("https://") {
+            var strVideoUrl = strVideoUrl
             strVideoUrl = "https://\(strVideoUrl)"
         }
         let URLVideo = NSURL(string: strVideoUrl)

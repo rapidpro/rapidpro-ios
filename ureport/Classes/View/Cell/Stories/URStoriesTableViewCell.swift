@@ -63,7 +63,7 @@ class URStoriesTableViewCell: UITableViewCell {
         btDisapprove.setTitle("button_title_disapprove".localized, forState: UIControlState.Normal)
         btPublish.setTitle("button_title_publish".localized, forState: UIControlState.Normal)
         
-        let tapGesture = UITapGestureRecognizer(target: self, action: "openModalProfile")
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openModalProfile))
         tapGesture.numberOfTouchesRequired = 1
         self.imgUser.addGestureRecognizer(tapGesture)
     }

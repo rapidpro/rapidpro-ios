@@ -27,7 +27,8 @@ class URCountry: NSObject {
         
     }
     
-    class func getLanguageDescription(var languageCode:String, type:URCountryCodeType) -> String? {
+    class func getLanguageDescription(languageCode:String, type:URCountryCodeType) -> String? {
+        var languageCode = languageCode
         if type == .ISO3 {
             let keys = (NSLocale.ISO639_2Dictionary() as NSDictionary).allKeysForObject(languageCode)
             languageCode = keys.count > 0 ? keys.first as! String : languageCode

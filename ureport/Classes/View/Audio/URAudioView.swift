@@ -191,7 +191,8 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
         
     }
     
-    func getDurationString(var seconds:Int) -> String{
+    func getDurationString(seconds:Int) -> String{
+        var seconds = seconds
         let minutes = (seconds % 3600) / 60
         seconds = seconds % 60
         return "\(URAudioView.getTwoDigitString(minutes)):\(URAudioView.getTwoDigitString(seconds))"

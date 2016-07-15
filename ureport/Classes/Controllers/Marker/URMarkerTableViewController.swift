@@ -20,8 +20,6 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        markerList = URMarkerManager.getMarkers()
-        setupTableView()
     }
     
     override func viewDidDisappear(animated: Bool) {
@@ -43,6 +41,9 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        markerList = URMarkerManager.getMarkers()
+        setupTableView()
         
     }
     
@@ -102,21 +103,24 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
     func newMarkerAdded(marker: URMarker) {
         URMarkerManager.saveMarker(marker)
         markerList.append(marker)
-        let indexPath = NSIndexPath(forRow: markerList.count-1, inSection: 0)
-        tableView.insertRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        self.tableView.reloadData()
     }
     
     //MARK: MarkerTableViewCellDelegate
     
     func markerHasTapped(cell:URMarkerTableViewCell) {
-        
-        if let index = markerListTapped.indexOf(cell.marker) {
-            markerListTapped.removeAtIndex(index)
-            cell.setBtCheckSelected(false)
+        if !markerListTapped.isEmpty {
+            if let index = markerListTapped.indexOf(cell.marker) {
+                markerListTapped.removeAtIndex(index)
+                cell.setBtCheckSelected(false)
+            }else {
+                cell.setBtCheckSelected(true)
+                markerListTapped.append(cell.marker)
+            }
         }else {
             cell.setBtCheckSelected(true)
             markerListTapped.append(cell.marker)
-        }        
+        }
     }
     
 }
