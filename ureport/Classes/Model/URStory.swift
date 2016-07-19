@@ -20,6 +20,6 @@ class URStory: Serializable {
     var cover:URMedia!
     var medias:[URMedia]!
     var userObject:URUser?
-    var like:Int!
+    var like:NSNumber!
     
 }

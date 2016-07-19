@@ -114,9 +114,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     //MARK: MediaSourceViewControllerDelegate
     
     func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
-        
-        self.mediaSourceViewController.toggleView({ (finish) in })
-        
         ProgressHUD.show(nil)
         URMediaUpload.uploadMedias([media]) { (medias) -> Void in
             self.sendMediaMessage(medias[0])
@@ -476,7 +473,13 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         
         URChatMessageManager.sendChatMessage(newMessage, chatRoom: chatRoom!)
         updateReadMessages()
-        ProgressHUD.dismiss()
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            ProgressHUD.dismiss()
+            if media.type != URConstant.Media.AUDIO {
+                self.mediaSourceViewController.toggleView({ (finish) in })
+            }
+        }
     }
     
     //MARK: JSQMessagesViewController method overrides

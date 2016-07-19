@@ -165,39 +165,37 @@ class URStoriesTableViewCell: UITableViewCell {
             self.viewAttachmentHeight.constant = 0
         }
 
-        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like != nil ? story.like : 0])
+        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0])
         
         self.lbTitle.text = story.title!
         
-        if self.lbAuthorName.text?.characters.count == 0 {
-            URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
-                if user != nil && user!.nickname != nil {
-                    URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
-                        
-                        story.contributions = total
-                        story.userObject = user
-                        
-                        URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
-                            story.like = likeCount
-                        })
-                        
-                        self.lbAuthorName.text = "\(user!.nickname!)"
-                        
-                        if user!.picture != nil {
-                            self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
-                        }else{
-                            self.imgUser.contentMode = UIViewContentMode.Center
-                            self.imgUser.image = UIImage(named: "ic_person")
-                            
-                            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                        }
-                        
-                        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
-                        
+        URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
+            if user != nil && user!.nickname != nil {
+                URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
+                    
+                    story.contributions = total
+                    story.userObject = user
+                    
+                    URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
+                        story.like = likeCount
                     })
-                }
-            })
-        }
+                    
+                    self.lbAuthorName.text = "\(user!.nickname!)"
+                    
+                    if user!.picture != nil {
+                        self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
+                    }else{
+                        self.imgUser.contentMode = UIViewContentMode.Center
+                        self.imgUser.image = UIImage(named: "ic_person")
+                        
+                        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+                    }
+                    
+                    self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
+                    
+                })
+            }
+        })
         
         if story.cover != nil && story.cover.url != nil {
             

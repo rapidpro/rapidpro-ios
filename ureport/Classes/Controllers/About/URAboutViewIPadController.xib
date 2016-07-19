@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -104,7 +104,7 @@
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="30" id="AZd-2J-CUt"/>
                                             </constraints>
-                                            <state key="normal" image="ic_facebook"/>
+                                            <state key="normal" image="ic_facebook2"/>
                                             <connections>
                                                 <action selector="btFacebookTapped:" destination="-1" eventType="touchUpInside" id="vsc-hd-DMz"/>
                                             </connections>
@@ -161,7 +161,7 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_facebook" width="11" height="24"/>
+        <image name="ic_facebook2" width="11" height="24"/>
         <image name="ic_twitter" width="24" height="20"/>
     </resources>
 </document>

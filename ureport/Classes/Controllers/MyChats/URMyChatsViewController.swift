@@ -180,7 +180,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func loadData() {
-        if listChatRoom.count == 0 {
+        if listChatRoom.count == 0 && URUser.activeUser()?.chatRooms?.count > 0{
             ProgressHUD.show(nil)
         }
         

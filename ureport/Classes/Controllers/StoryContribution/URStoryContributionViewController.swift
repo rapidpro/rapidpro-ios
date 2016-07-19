@@ -130,7 +130,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             story.like = 0
         }
 
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? story.like : 0]), forState: UIControlState.Normal)
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0]), forState: UIControlState.Normal)
         
         URStoryManager.checkIfStoryWasLiked(story.key) { (liked) -> Void in
              self.btLike.enabled = true
@@ -140,13 +140,13 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func incrementLikeButton() {
-        let likeCount = story.like + 1
+        let likeCount = Int(story.like) + 1
         story.like = likeCount
         self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
     }
     
     func decrementLikeButton() {
-        let likeCount = story.like - 1
+        let likeCount = Int(story.like) - 1
         story.like = likeCount
         self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
     }

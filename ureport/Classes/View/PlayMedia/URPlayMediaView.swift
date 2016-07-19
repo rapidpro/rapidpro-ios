@@ -72,8 +72,11 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             
             let youtubePlayerView = YTPlayerView(frame: URPlayMediaView.defaultFrame)
             youtubePlayerView.loadWithVideoId(media.id)
-            self.addSubview(youtubePlayerView)
+            youtubePlayerView.layer.borderWidth = 2
+            youtubePlayerView.layer.borderColor = UIColor.whiteColor().CGColor
             
+            self.addSubview(youtubePlayerView)
+
         }else if media.type == URConstant.Media.VIDEOPHONE {
             
             SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.thumbnail), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
@@ -98,6 +101,9 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             fileIconImgView.contentMode = UIViewContentMode.Center
             fileIconImgView.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
             backgroundView.addSubview(fileIconImgView)
+            backgroundView.layer.borderWidth = 2
+            backgroundView.layer.borderColor = UIColor.whiteColor().CGColor
+            
             self.addSubview(backgroundView)
             
         }else if media.type == URConstant.Media.AUDIO {
@@ -122,6 +128,8 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             }
             
             backgroundView.addSubview(lbDuration)
+            backgroundView.layer.borderWidth = 2
+            backgroundView.layer.borderColor = UIColor.whiteColor().CGColor
             
             self.addSubview(backgroundView)
             
