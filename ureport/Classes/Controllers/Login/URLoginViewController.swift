@@ -140,6 +140,12 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 ProgressHUD.dismiss()
                 if user == nil || user!.key.isEmpty {
                     
+                    let alert = UIAlertController(title: nil, message: "twitter_error_message".localized, preferredStyle: .Alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .Default, handler: { (action) in
+                        UIApplication.sharedApplication().openURL(NSURL(string:"prefs:root=TWITTER")!)
+                    }))
+                    
+                    self.presentViewController(alert, animated: true, completion: nil)
                 }else{
                     ProgressHUD.show(nil)
                     URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in

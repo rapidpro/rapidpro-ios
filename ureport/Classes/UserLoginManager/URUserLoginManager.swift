@@ -66,7 +66,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func loginWithTwitter(completion:(URUser?) ->Void ) {
-        let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedInstance(), apiKey: URConstant.SocialNetwork.FACEBOOK_APP_ID())
+        let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
         
         twitterAuthHelper.selectTwitterAccountWithCallback { (error, accounts:[AnyObject]!) -> Void in
             

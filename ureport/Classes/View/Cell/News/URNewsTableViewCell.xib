@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -53,17 +53,6 @@
                                         <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increasing Immunization Coverage in Uganda: The Community Problem-solving and Strategy Development Approach" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-UX-FRj">
-                                        <rect key="frame" x="13" y="163" width="994" height="73"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="73" id="g7D-5u-DZs">
-                                                <variation key="widthClass=regular" constant="69"/>
-                                            </constraint>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hashtags" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OMZ-5J-ArV">
                                         <rect key="frame" x="13" y="124" width="994" height="19"/>
                                         <constraints>
@@ -103,6 +92,17 @@
                                             </mask>
                                         </variation>
                                     </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increasing Immunization Coverage in Uganda: The Community Problem-solving and Strategy Development Approach" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-UX-FRj">
+                                        <rect key="frame" x="13" y="163" width="994" height="63"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="63" id="g7D-5u-DZs">
+                                                <variation key="widthClass=regular" constant="63"/>
+                                            </constraint>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -208,12 +208,12 @@
                         <exclude reference="JZh-Td-nWv"/>
                     </mask>
                     <mask key="constraints">
-                        <exclude reference="FDA-ne-K4Q"/>
-                        <exclude reference="eP3-W0-aOP"/>
-                        <exclude reference="nwV-va-YHB"/>
                         <exclude reference="Vdf-SW-DjR"/>
                         <exclude reference="mut-02-XMH"/>
                         <exclude reference="sCJ-Fm-jVD"/>
+                        <exclude reference="FDA-ne-K4Q"/>
+                        <exclude reference="eP3-W0-aOP"/>
+                        <exclude reference="nwV-va-YHB"/>
                     </mask>
                 </variation>
                 <variation key="widthClass=regular">
@@ -221,6 +221,9 @@
                         <include reference="JZh-Td-nWv"/>
                     </mask>
                     <mask key="constraints">
+                        <include reference="Vdf-SW-DjR"/>
+                        <include reference="mut-02-XMH"/>
+                        <include reference="sCJ-Fm-jVD"/>
                         <exclude reference="0hF-kt-tst"/>
                         <include reference="FDA-ne-K4Q"/>
                         <exclude reference="WwD-bW-R81"/>
@@ -228,9 +231,6 @@
                         <exclude reference="evC-MN-V6J"/>
                         <exclude reference="lS4-nG-myh"/>
                         <include reference="nwV-va-YHB"/>
-                        <include reference="Vdf-SW-DjR"/>
-                        <include reference="mut-02-XMH"/>
-                        <include reference="sCJ-Fm-jVD"/>
                     </mask>
                 </variation>
             </tableViewCellContentView>

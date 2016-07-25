@@ -228,7 +228,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     }
     
     func showEmptyTextFieldAlert(textField:UITextField) {
-        print(textField.placeholder!)
         UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
     }
     
@@ -370,7 +369,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                             self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                         }
                         
-                        if data.value!.objectForKey("geonames") != nil {
+                        if data.value!.objectForKey("geonames") != nil && data.value!.objectForKey("totalResultsCount") as! Int > 0 {
+                            
                             for index in 0...data.value!.objectForKey("geonames")!.count-1 {
                                 let geoName:NSDictionary = data.value!.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
                                 self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))

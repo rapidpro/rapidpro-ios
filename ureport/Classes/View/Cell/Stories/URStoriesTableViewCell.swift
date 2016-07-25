@@ -67,6 +67,11 @@ class URStoriesTableViewCell: UITableViewCell {
         tapGesture.numberOfTouchesRequired = 1
         self.imgUser.addGestureRecognizer(tapGesture)
     }
+    
+    override func prepareForReuse() {
+        self.lbAuthorName.text = ""
+        self.imgUser.image = nil
+    }
 
     override func setSelected(selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

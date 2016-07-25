@@ -53,9 +53,17 @@
 				<string>in.ureport</string>
 			</array>
 		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>prefs</string>
+			</array>
+		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>3</string>
 	<key>FacebookAppID</key>
 	<string>1021658627874726</string>
 	<key>FacebookDisplayName</key>

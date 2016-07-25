@@ -301,6 +301,7 @@
 "no_hardware_permission_camera" = "Para concluir esta ação por favor forneça permissão de acesso a câmera";
 "no_hardware_permission_microphone" = "Para concluir esta ação por favor forneça permissão de acesso ao microfone";
 "no_hardware_permission_contact" = "Para concluir esta ação por favor forneça permissão de acesso a lista de contatos";
+"twitter_error_message" = "Parar entrar com o Twitter, adicione uma conta antes nas configurações do seu iPhone.";
 
 //TUTORIAL
 

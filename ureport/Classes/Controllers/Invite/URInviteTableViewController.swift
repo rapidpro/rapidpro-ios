@@ -98,6 +98,10 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
                 }
             }
             
+            addressBookList = addressBookList.sort({ (dictionary1, dictionary2) -> Bool in
+                return (dictionary1["name"] as! String) < (dictionary2["name"] as! String)
+            })
+            
             self.tableView.reloadData()
         }
     }
