@@ -88,6 +88,30 @@ struct URConstant {
             return ""
         }
         
+        static func ACCESS_KEY() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["S3_BUCKET_ACCESS_KEY"] != nil {
+                    return dictionary["S3_BUCKET_ACCESS_KEY"] as! String
+                }else{
+                    print("S3_BUCKET_ACCESS_KEY doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func ACCESS_SECRET() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["S3_BUCKET_ACCESS_SECRET"] != nil {
+                    return dictionary["S3_BUCKET_ACCESS_SECRET"] as! String
+                }else{
+                    print("S3_BUCKET_ACCESS_SECRET doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
         static func S3_BUCKET_NAME(path:URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
