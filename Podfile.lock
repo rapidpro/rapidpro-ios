@@ -3,7 +3,6 @@ PODS:
   - AlamofireObjectMapper (1.0):
     - Alamofire (~> 2.0.0)
     - ObjectMapper (= 0.17)
-  - AMScrollingNavbar (2.0.0)
   - AWSCore (2.2.4)
   - AWSS3 (2.2.4):
     - AWSCore (= 2.2.4)
@@ -85,7 +84,6 @@ PODS:
 DEPENDENCIES:
   - Alamofire
   - AlamofireObjectMapper
-  - AMScrollingNavbar (~> 2.0.0)
   - AWSS3 (~> 2.2.0)
   - DBSphereTagCloud (from `https://github.com/danielblx/DBSphereTagCloud.git`)
   - FBSDKCoreKit
@@ -98,7 +96,7 @@ DEPENDENCIES:
   - JSQMessagesViewController
   - NYTPhotoViewer
   - Proposer
-  - QRCodeReader.swift
+  - QRCodeReader.swift (= 6.0.0)
   - SDWebImage
   - SwiftAddressBook
   - TPKeyboardAvoiding
@@ -121,7 +119,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: 1d8e208d616fbbfd2391b15eae766d07c96cdc49
   AlamofireObjectMapper: 4f9d766a4742bb69258921723bafc260849f216c
-  AMScrollingNavbar: f6714dc654a41019ab6a57b792b092853455e007
   AWSCore: 483fa0f25c8508e3364f818e9b941c6204619afa
   AWSS3: da758d5a95e65bb9e6e718245c1a86b6f63de9ae
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
@@ -154,6 +151,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 646c5b46634a3d0e290d7b9d1474d693e317869d
+PODFILE CHECKSUM: bd3574ea9a8a2b28fc93eeb1ade934b56e4269c6
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.1

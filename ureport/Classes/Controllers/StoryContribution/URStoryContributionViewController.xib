@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -10,7 +10,6 @@
                 <outlet property="btLike" destination="poC-s0-TMD" id="2Ql-Uk-xLi"/>
                 <outlet property="contentView" destination="EdV-zF-7Om" id="U0I-9D-7Yf"/>
                 <outlet property="contentViewHeight" destination="dfK-dG-okM" id="Gqa-F8-1mX"/>
-                <outlet property="contributionView" destination="oyP-tq-cWb" id="Qmb-v9-w4l"/>
                 <outlet property="imgProfile" destination="IXr-3d-O5q" id="yts-Um-Obo"/>
                 <outlet property="lbContent" destination="6Jq-BI-Dex" id="RhR-eb-Lxh"/>
                 <outlet property="lbContributions" destination="vA8-jd-igy" id="Hij-nq-hBS"/>
@@ -23,7 +22,6 @@
                 <outlet property="tableView" destination="XtD-yc-Uzw" id="00g-y7-mfl"/>
                 <outlet property="tableViewHeight" destination="IoN-7v-6BC" id="Mpe-qS-gG3"/>
                 <outlet property="topView" destination="tMl-65-lLz" id="HnQ-wR-Sq9"/>
-                <outlet property="txtContribute" destination="l8G-36-C7a" id="6I8-cu-f6h"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -152,50 +150,7 @@
                                         </mask>
                                     </variation>
                                 </view>
-                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oyP-tq-cWb" userLabel="ViewContribution">
-                                    <rect key="frame" x="8" y="388" width="1008" height="45"/>
-                                    <subviews>
-                                        <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalHuggingPriority="249" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Contribute with the story" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="l8G-36-C7a">
-                                            <rect key="frame" x="37" y="0.0" width="963" height="39"/>
-                                            <constraints>
-                                                <constraint firstAttribute="height" constant="38.5" id="09E-0S-Gvb"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                            <textInputTraits key="textInputTraits" returnKeyType="send"/>
-                                            <connections>
-                                                <outlet property="delegate" destination="-1" id="gVa-2L-h5V"/>
-                                            </connections>
-                                        </textField>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8h-f4-RNO">
-                                            <rect key="frame" x="3" y="7" width="26" height="26"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="26" id="GeC-1F-H7C"/>
-                                                <constraint firstAttribute="height" constant="26" id="kP1-4B-SlF"/>
-                                            </constraints>
-                                            <state key="normal" image="icon_add_circle_grey">
-                                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                            </state>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                    <constraints>
-                                        <constraint firstAttribute="trailing" secondItem="l8G-36-C7a" secondAttribute="trailing" constant="8" id="4d4-Sv-7zG">
-                                            <variation key="heightClass=regular" constant="-250"/>
-                                        </constraint>
-                                        <constraint firstItem="l8G-36-C7a" firstAttribute="leading" secondItem="u8h-f4-RNO" secondAttribute="trailing" constant="10" id="7uq-Qo-3fm"/>
-                                        <constraint firstItem="l8G-36-C7a" firstAttribute="leading" secondItem="u8h-f4-RNO" secondAttribute="trailing" constant="8" id="Ly9-mn-g0B"/>
-                                        <constraint firstAttribute="height" constant="45" id="SPp-Tq-2Mx"/>
-                                        <constraint firstItem="u8h-f4-RNO" firstAttribute="leading" secondItem="oyP-tq-cWb" secondAttribute="leading" constant="3" id="V1p-rN-UHW"/>
-                                        <constraint firstItem="u8h-f4-RNO" firstAttribute="top" secondItem="oyP-tq-cWb" secondAttribute="top" constant="6.5" id="nYu-Lg-sdq"/>
-                                        <constraint firstItem="l8G-36-C7a" firstAttribute="top" secondItem="oyP-tq-cWb" secondAttribute="top" id="qBX-hP-pVR"/>
-                                    </constraints>
-                                    <variation key="default">
-                                        <mask key="constraints">
-                                            <exclude reference="7uq-Qo-3fm"/>
-                                        </mask>
-                                    </variation>
-                                </view>
-                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-yc-Uzw">
+                                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-yc-Uzw" customClass="TPKeyboardAvoidingTableView">
                                     <rect key="frame" x="8" y="364" width="1008" height="14"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <constraints>
@@ -241,14 +196,10 @@
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="oyP-tq-cWb" secondAttribute="trailing" constant="8" id="1zm-WL-cX8">
-                                    <variation key="heightClass=regular" constant="8"/>
-                                </constraint>
                                 <constraint firstItem="8Hi-m6-8ft" firstAttribute="leading" secondItem="poC-s0-TMD" secondAttribute="trailing" constant="13" id="2Gs-Yz-hP4"/>
                                 <constraint firstItem="XtD-yc-Uzw" firstAttribute="leading" secondItem="EdV-zF-7Om" secondAttribute="leading" constant="8" id="3zn-tV-TqL"/>
                                 <constraint firstItem="aG1-Fb-sEP" firstAttribute="top" secondItem="cOh-j1-NA7" secondAttribute="bottom" constant="8" id="4O4-2P-IbF"/>
                                 <constraint firstItem="tMl-65-lLz" firstAttribute="top" secondItem="EdV-zF-7Om" secondAttribute="top" id="9l2-vR-9ok"/>
-                                <constraint firstItem="oyP-tq-cWb" firstAttribute="top" secondItem="XtD-yc-Uzw" secondAttribute="bottom" constant="10" id="Iag-j5-7iq"/>
                                 <constraint firstAttribute="trailing" secondItem="aG1-Fb-sEP" secondAttribute="trailing" constant="8" id="JbQ-ee-wTb">
                                     <variation key="heightClass=regular" constant="8"/>
                                 </constraint>
@@ -256,7 +207,6 @@
                                 <constraint firstItem="vA8-jd-igy" firstAttribute="leading" secondItem="8Hi-m6-8ft" secondAttribute="trailing" constant="8" id="NCP-lN-cQP"/>
                                 <constraint firstItem="poC-s0-TMD" firstAttribute="leading" secondItem="EdV-zF-7Om" secondAttribute="leading" constant="8" id="Pbj-On-B7m"/>
                                 <constraint firstItem="cOh-j1-NA7" firstAttribute="leading" secondItem="EdV-zF-7Om" secondAttribute="leading" constant="8" id="XkT-dS-BxN"/>
-                                <constraint firstItem="oyP-tq-cWb" firstAttribute="leading" secondItem="EdV-zF-7Om" secondAttribute="leading" constant="8" id="Ybt-8t-eim"/>
                                 <constraint firstItem="cOh-j1-NA7" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="bottom" constant="9" id="bI4-dG-BKl"/>
                                 <constraint firstItem="8Hi-m6-8ft" firstAttribute="top" secondItem="aG1-Fb-sEP" secondAttribute="bottom" constant="19" id="bX4-a2-dus"/>
                                 <constraint firstAttribute="trailing" secondItem="XtD-yc-Uzw" secondAttribute="trailing" constant="8" id="cqx-vL-14j">
@@ -297,7 +247,6 @@
         </view>
     </objects>
     <resources>
-        <image name="icon_add_circle_grey" width="26" height="26"/>
         <image name="icon_person_black" width="12" height="12"/>
         <image name="icon_tag_white" width="9" height="9"/>
         <image name="likeBig" width="21" height="18"/>

@@ -51,7 +51,7 @@ class URNewsDetailViewController: UIViewController {
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithType(.Clear)
-        URNavigationManager.navigation.followScrollView(self.scrollView, delay: 50.0)
+        self.navigationController?.hidesBarsOnSwipe = true
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker.set(kGAIScreenName, value: "News")
@@ -63,7 +63,8 @@ class URNewsDetailViewController: UIViewController {
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        URNavigationManager.navigation.stopFollowingScrollView()
+        self.navigationController?.hidesBarsOnSwipe = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     //MARK: Class Methods

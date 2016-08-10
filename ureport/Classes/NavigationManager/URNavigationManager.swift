@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AMScrollingNavbar
 
 enum URNavigationBarType {
     case Clear
@@ -17,7 +16,7 @@ enum URNavigationBarType {
 
 class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
 
-    static var navigation:ScrollingNavigationController!
+    static var navigation:UINavigationController!
     static var revealController:SWRevealViewController!
     static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
     var sidebarMenuOpen:Bool!
@@ -34,7 +33,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
         URNavigationManager.addLeftButtonMenuInViewController(viewController)
         
-        self.navigation = ScrollingNavigationController(rootViewController: viewController)
+        self.navigation = UINavigationController(rootViewController: viewController)
         URNavigationManager.setupNavigationDefaultAtrributes()
         self.navigation!.navigationBar.translucent = true
         
@@ -60,7 +59,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     
     class func setupNavigationControllerWithLoginViewController() {
         
-        self.navigation = ScrollingNavigationController(rootViewController: URLoginViewController())
+        self.navigation = UINavigationController(rootViewController: URLoginViewController())
         URNavigationManager.setupNavigationDefaultAtrributes()
         self.navigation!.navigationBar.translucent = false
         self.navigation!.setNavigationBarHidden(true, animated: false)
@@ -73,7 +72,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
         let tutorialViewController = URTutorialViewController()
         
-        self.navigation = ScrollingNavigationController(rootViewController: tutorialViewController)
+        self.navigation = UINavigationController(rootViewController: tutorialViewController)
         URNavigationManager.setupNavigationDefaultAtrributes()
         self.navigation!.navigationBar.translucent = false
         self.navigation!.setNavigationBarHidden(true, animated: false)

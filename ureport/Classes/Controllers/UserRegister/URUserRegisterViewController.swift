@@ -273,8 +273,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.localizedGender = gender
                 
                 if gender == "Male" {
+                    self.gender = URGender.Male
                     self.txtGender.text = URGender.Male
                 }else{
+                    self.gender = URGender.Female
                     self.txtGender.text = URGender.Female
                 }
             }

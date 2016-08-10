@@ -12,7 +12,7 @@ import youtube_ios_player_helper
 import SDWebImage
 import MediaPlayer
 
-class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URContributionTableViewCellDelegate {
+class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URContributionTableViewCellDelegate, URAddContributionTableViewCellDelegate {
     
     @IBOutlet weak var lbTitle: UILabel!
     @IBOutlet weak var lbMarkers: UILabel!
@@ -21,18 +21,17 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     @IBOutlet weak var scrollViewMedias: ISScrollViewPage!
     @IBOutlet weak var lbContributions: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var txtContribute: UITextField!
     @IBOutlet weak var imgProfile: UIImageView?
     @IBOutlet weak var contentView: UIView!
     @IBOutlet weak var topView: UIView!
     @IBOutlet weak var roundedView: UIView?
     @IBOutlet weak var bottomView: UIView!
     @IBOutlet weak var btLike: UIButton!
-    @IBOutlet weak var contributionView: UIView!
     @IBOutlet weak var tableViewHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollViewMediaHeight: NSLayoutConstraint!
     @IBOutlet weak var lbNoContributions: UILabel?
     @IBOutlet weak var viewNoContribution: ISRoundedView?
+    @IBOutlet weak var txtContribute: UITextField?
     @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     
     let contributionManager = URContributionManager()
@@ -71,7 +70,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         URNavigationManager.setupNavigationBarWithType(URConstant.isIpad ? .Blue : .Clear)
         
         if !URConstant.isIpad {
-            URNavigationManager.navigation.followScrollView(self.scrollView, delay: 50.0)
+            self.navigationController?.hidesBarsOnSwipe = true
         }
         
         let tracker = GAI.sharedInstance().defaultTracker
@@ -85,7 +84,8 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        URNavigationManager.navigation.stopFollowingScrollView()
+        self.navigationController?.hidesBarsOnSwipe = false
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,7 +102,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             
             self.tableViewHeight.constant = self.tableView.contentSize.height
             self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
-            self.contentViewHeight.constant = self.scrollView.contentSize.height + contributionView.frame.size.height + 10
+            self.contentViewHeight.constant = self.scrollView.contentSize.height
             
         }
     }
@@ -112,7 +112,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     func setupStory() {
         
         self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [0])
-        self.txtContribute.placeholder = "story_item_contribute_to_story".localized
         self.lbTitle.text = story.title
         self.lbMarkers.text = story.markers
         self.lbContent.text = story.content
@@ -160,12 +159,35 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URAddMarkerTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URAddMarkerTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
     }
 
     // MARK: - Table view data source
+    
+    
+    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return URConstant.isIpad ? 0 : 50
+    }
+    
+    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        
+        if URConstant.isIpad {
+            return nil
+        }
+        
+        let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
+        viewFooter.delegate = self
+        viewFooter.parentViewController = self
+        self.tableView.tableFooterView = viewFooter
+        
+//        tableView.tableFooterView = UIView(frame: CGRect.zero)
+        
+        return viewFooter
+    }
+    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -187,10 +209,17 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
     }
     
+    //MARK: URContributionTableViewCellDelegate
+    
+    func newContributionAdded(cell: URAddContributionTableViewCell) {
+        sendContribution(cell.txtContribution)
+    }
+    
     //MARK: Button Events
     
+    
     @IBAction func btSendTapped(button:UIButton) {
-        sendContribution(self.txtContribute)
+        sendContribution(self.txtContribute!)
     }
     
     @IBAction func btLikeTapped(button:UIButton) {
@@ -207,6 +236,20 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     //MARK: Class Methods
     
+    func sizeHeaderToFit() {
+        let headerView = self.tableView.tableFooterView!
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        self.tableView.tableFooterView = headerView
+    }
+    
     func sendContribution(textField:UITextField) {
         if !textField.text!.isEmpty {
             
@@ -222,9 +265,11 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 
                 URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
                     URUserManager.incrementUserContributions(user.key)
-                    self.tableView.scrollToRowAtIndexPath(NSIndexPath(forItem: self.listContribution.count - 1, inSection: 0), atScrollPosition: UITableViewScrollPosition.Top, animated: true)
                     textField.text = ""
                     textField.resignFirstResponder()
+                    let bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+                    self.scrollView.setContentOffset(bottomOffset, animated: true)
+
                 })
                 
             }else {
