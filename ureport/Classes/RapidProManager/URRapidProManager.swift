@@ -272,7 +272,7 @@ class URRapidProManager: NSObject {
         
     }
     
-    class func saveUser(user:URUser,country:URCountry,setupGroups:Bool,completion:(response:NSDictionary) -> Void) {
+    class func saveUser(user:URUser,country:URCountry,setupGroups:Bool,completion:(response:NSDictionary?) -> Void) {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
@@ -280,10 +280,19 @@ class URRapidProManager: NSObject {
         
         URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
             
+            print("===============")
+            print(rootDicionary.copy())
+            print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json")
+            print(headers)
+            print("===============")
+            
             Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+                
+                print(JSON)
                 
                 if JSON.isFailure == true {
                     print("error: \(JSON)")
+                    completion(response: nil)
                 }else{
                     completion(response: JSON.value as! NSDictionary)
                 }

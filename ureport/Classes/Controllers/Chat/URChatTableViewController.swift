@@ -13,16 +13,19 @@ protocol URChatTableViewControllerDelegate {
     func openNewGroupViewController(newGroupViewController:URNewGroupViewController)
 }
 
-class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate {
+class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate {
 
     var createGroupOption:Bool!
     var myChatsMode:Bool!
     var listUser:[URUser] = []
+    var listFilteredUser:[URUser] = []
+    var listAuxUser:[URUser] = []
     var listChatRoom:[URChatRoom] = []
-    var listMembers:[URUser] = []
     
     var chatRoomManager = URChatRoomManager()
     var delegate:URChatTableViewControllerDelegate?
+    
+    let searchController = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,7 +35,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
         
         chatRoomManager.delegate = self
-        
+        addSearchController()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -64,6 +67,28 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)!
     }        
+    
+    //MARK: SearchBarDelegate
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if !searchController.searchBar.text!.isEmpty {
+            
+            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController.searchBar.text!) != nil})
+            
+            if !listFiltered.isEmpty {
+                listUser = listFiltered
+            }else {
+                listUser = listAuxUser
+            }
+            
+        }else {
+            listUser = listAuxUser
+        }
+        
+        self.tableView.reloadData()
+        
+    }
     
     //MARK: URChatRoomManagerDelegate
     
@@ -179,8 +204,14 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
                         }else {
                             self.listUser.removeAtIndex(i)                            
                         }
-                    }                
+                    }
                     
+                    let userSortedList = self.listUser.sort({ (user1, user2) -> Bool in
+                        return user1.nickname < user2.nickname
+                    })
+                    
+                    self.listUser = userSortedList
+                    self.listAuxUser = self.listUser
                     self.tableView.reloadData()
                 }
             })
@@ -197,6 +228,14 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
                 }
             })
         }
+    }
+    
+    func addSearchController() {
+        searchController.hidesNavigationBarDuringPresentation = false
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.sizeToFit()
+        searchController.searchBar.delegate = self
+        self.tableView.tableHeaderView = searchController.searchBar
     }
     
     private func setupTableView() {

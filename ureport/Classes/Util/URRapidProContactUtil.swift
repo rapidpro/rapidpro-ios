@@ -54,7 +54,7 @@ class URRapidProContactUtil: NSObject {
                     URRapidProContactUtil.putValueIfExists(String(URDateUtil.getYear(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["year_of_birth","born"])
                 }
                 
-                URRapidProContactUtil.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
+//                URRapidProContactUtil.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
                 URRapidProContactUtil.putValueIfExists(user.nickname, countryProgramContactFields: contactFields, possibleFields: ["nickname","nick_name"])
                 URRapidProContactUtil.putValueIfExists(user.gender, countryProgramContactFields: contactFields, possibleFields: ["gender"])
                 URRapidProContactUtil.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: ["state","region","province","county"])
@@ -79,6 +79,7 @@ class URRapidProContactUtil: NSObject {
         rootDictionary.setValue(URRapidProContactUtil.rapidProUser, forKey: "fields")
         rootDictionary.setValue(["ext:\(URUserManager.formatExtUserId(user.key))"], forKey: "urns")
         rootDictionary.setValue(user.nickname, forKey:"name")
+        rootDictionary.setValue(user.email, forKey:"email")
         
         if setupGroups == true {
             rootDictionary.setValue(groupList, forKey: "groups")
