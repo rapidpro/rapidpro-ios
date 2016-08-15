@@ -10,7 +10,7 @@ import UIKit
 
 struct URConstant {
    
-    static let keyPath = NSBundle.mainBundle().pathForResource("Key", ofType: "plist")
+    static let keyPath = NSBundle.mainBundle().pathForResource(URFireBaseManager.Properties, ofType: "plist")
     static let keyDictionary = NSDictionary(contentsOfFile: URConstant.keyPath!)
     
     static let isIpad = UIDevice.currentDevice().userInterfaceIdiom == .Pad

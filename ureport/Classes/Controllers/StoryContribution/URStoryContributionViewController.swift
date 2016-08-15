@@ -159,7 +159,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
-        self.tableView.registerNib(UINib(nibName: "URAddMarkerTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URAddMarkerTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URAddContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URAddContributionTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
@@ -181,9 +181,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
         viewFooter.delegate = self
         viewFooter.parentViewController = self
-        self.tableView.tableFooterView = viewFooter
-        
-//        tableView.tableFooterView = UIView(frame: CGRect.zero)
+//        self.tableView.tableFooterView = viewFooter
         
         return viewFooter
     }
@@ -198,6 +196,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URContributionTableViewCell.self), forIndexPath: indexPath) as! URContributionTableViewCell
         
         cell.setupCellWith(self.listContribution[indexPath.row], indexPath: indexPath)
@@ -206,7 +205,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
+        self.view.endEditing(true)
     }
     
     //MARK: URContributionTableViewCellDelegate
