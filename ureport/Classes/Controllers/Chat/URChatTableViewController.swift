@@ -25,7 +25,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     var chatRoomManager = URChatRoomManager()
     var delegate:URChatTableViewControllerDelegate?
     
-    let searchController = UISearchController(searchResultsController: nil)
+    var searchController:UISearchController? = UISearchController(searchResultsController: nil)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +36,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
         chatRoomManager.delegate = self
         addSearchController()
+        self.definesPresentationContext = true
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -51,6 +52,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
+        
         ProgressHUD.dismiss()
     }
     
@@ -72,9 +74,9 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         
-        if !searchController.searchBar.text!.isEmpty {
+        if !searchController!.searchBar.text!.isEmpty {
             
-            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController.searchBar.text!) != nil})
+            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController!.searchBar.text!) != nil})
             
             if !listFiltered.isEmpty {
                 listUser = listFiltered
@@ -127,8 +129,6 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
-        
-        self.view.endEditing(true)
         
         if (cell.type == URChatCellType.CreateGroup){
             
@@ -231,11 +231,11 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     }
     
     func addSearchController() {
-        searchController.hidesNavigationBarDuringPresentation = false
-        searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.sizeToFit()
-        searchController.searchBar.delegate = self
-        self.tableView.tableHeaderView = searchController.searchBar
+        searchController!.hidesNavigationBarDuringPresentation = false
+        searchController!.dimsBackgroundDuringPresentation = false
+        searchController!.searchBar.sizeToFit()
+        searchController!.searchBar.delegate = self
+        self.tableView.tableHeaderView = searchController!.searchBar
     }
     
     private func setupTableView() {

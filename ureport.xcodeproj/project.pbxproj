@@ -2164,7 +2164,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2186,7 +2186,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "abbc1e81-16b3-462c-8868-aa92abbebb7c";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2210,7 +2210,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2225,7 +2225,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "abbc1e81-16b3-462c-8868-aa92abbebb7c";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
@@ -2239,8 +2239,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2250,7 +2250,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "abbc1e81-16b3-462c-8868-aa92abbebb7c";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2263,8 +2263,8 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Amaral (2TAYENB4M3)";
 				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2274,7 +2274,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "bee70085-f161-47ad-9ade-864e7c58d7aa";
+				PROVISIONING_PROFILE = "abbc1e81-16b3-462c-8868-aa92abbebb7c";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
