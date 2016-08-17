@@ -70,7 +70,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: false)
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, indexPath: indexPath, checkGroupOption: false)
         
         return cell
     }

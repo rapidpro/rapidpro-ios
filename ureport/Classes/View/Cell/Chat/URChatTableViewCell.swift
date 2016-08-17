@@ -63,31 +63,24 @@ class URChatTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCellWithUser(user:URUser?,createGroupOption:Bool, myChatsMode:Bool,indexPath:NSIndexPath, checkGroupOption:Bool) {
+    func setupCellWithUser(user:URUser?,createGroupOption:Bool,indexPath:NSIndexPath, checkGroupOption:Bool) {
         
-        if createGroupOption == true && indexPath.row == 0 && (URUserManager.userHasPermissionToAccessTheFeature(true)) {
-            self.lbName.text = "new_group".localized
-            self.img.image = UIImage(named: "icon_group_add_grey")
-            self.roundedView.backgroundColor = UIColor.whiteColor()
-            self.type = .CreateGroup
-        }else {            
-            self.user = user
-            self.lbName.text = user!.nickname
-            self.type = URChatCellType.CreateIndividualChat
-            
-            if user!.picture != nil && !(user!.picture.isEmpty) {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.img.contentMode = UIViewContentMode.ScaleAspectFit
-                self.img.sd_setImageWithURL(NSURL(string: user!.picture))
-            }else{
-                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                self.img.contentMode = UIViewContentMode.Center
-                self.img.image = UIImage(named: "ic_person")
-            }
-            
+        self.user = user
+        self.lbName.text = user!.nickname
+        self.type = URChatCellType.CreateIndividualChat
+        
+        if user!.picture != nil && !(user!.picture.isEmpty) {
+            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
+            self.img.contentMode = UIViewContentMode.ScaleAspectFit
+            self.img.sd_setImageWithURL(NSURL(string: user!.picture))
+        }else{
+            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+            self.img.contentMode = UIViewContentMode.Center
+            self.img.image = UIImage(named: "ic_person")
         }
+        
         if !checkGroupOption{
-            self.viewLastMessage.hidden = !myChatsMode
+            self.viewLastMessage.hidden = true
         }else {
             self.viewLastMessage.hidden = true
             self.viewCheckGroup.hidden = false

@@ -13,19 +13,18 @@ protocol URChatTableViewControllerDelegate {
     func openNewGroupViewController(newGroupViewController:URNewGroupViewController)
 }
 
-class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate {
+class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate, URNewGroupTableViewCellDelegate {
 
     var createGroupOption:Bool!
     var myChatsMode:Bool!
     var listUser:[URUser] = []
     var listFilteredUser:[URUser] = []
     var listAuxUser:[URUser] = []
-    var listChatRoom:[URChatRoom] = []
     
     var chatRoomManager = URChatRoomManager()
     var delegate:URChatTableViewControllerDelegate?
     
-    var searchController:UISearchController? = UISearchController(searchResultsController: nil)
+    var searchController:UISearchController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,10 +32,11 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.registerNib(UINib(nibName: "URNewGroupTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewGroupTableViewCell.self))
         
         chatRoomManager.delegate = self
-        addSearchController()
         self.definesPresentationContext = true
+        self.tableView.tableHeaderView = addSearchController()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -60,8 +60,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         super.init(nibName: nil, bundle:nil)
     }
     
-    init(createGroupOption:Bool,myChatsMode:Bool) {
-        self.myChatsMode = myChatsMode
+    init(createGroupOption:Bool) {
         self.createGroupOption = createGroupOption
         super.init(nibName: nil, bundle:nil)
     }
@@ -76,7 +75,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
         if !searchController!.searchBar.text!.isEmpty {
             
-            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController!.searchBar.text!) != nil})
+            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController!.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch) != nil})
             
             if !listFiltered.isEmpty {
                 listUser = listFiltered
@@ -92,6 +91,11 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        listUser = listAuxUser
+        self.tableView.reloadData()
+    }
+    
     //MARK: URChatRoomManagerDelegate
     
     func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
@@ -104,44 +108,52 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     // MARK: - Table view data source
     
+    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        if (self.createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)){
+            return 65
+        }else{
+            return 0
+        }
+    }
+    
+    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader =  NSBundle.mainBundle().loadNibNamed("URNewGroupTableViewCell", owner: 0, options: nil)[0] as! URNewGroupTableViewCell
+        viewHeader.delegate = self
+
+        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 0))
+        
+        if ((self.createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true))){
+            
+            let frame = CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 65)
+            viewHeader.frame = frame
+            
+            view.addSubview(viewHeader)
+            
+        }
+        
+        return view
+    }
+    
     override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return 65
     }
     
     override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {                
-        return self.myChatsMode == false ? (self.createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)) ? self.listUser.count + 1 : self.listUser.count : self.listChatRoom.count
+        return self.listUser.count
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
 
-        if self.myChatsMode == false {
-            if listUser.count > 0 {
-                cell.setupCellWithUser(self.listUser[indexPath.row > 1 ? indexPath.row - 1 : indexPath.row],createGroupOption: self.createGroupOption, myChatsMode: self.myChatsMode, indexPath: indexPath, checkGroupOption: false)
-            }else{
-                cell.setupCellWithUser(nil,createGroupOption: self.createGroupOption, myChatsMode: self.myChatsMode, indexPath: indexPath, checkGroupOption: false)
-            }
-        }else {
-            cell.setupCellWithChatRoom(self.listChatRoom[indexPath.row])
-        }
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: self.createGroupOption, indexPath: indexPath, checkGroupOption: false)
+        
         return cell
     }
     
     override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
         
-        if (cell.type == URChatCellType.CreateGroup){
-            
-            let groupViewController = URNewGroupViewController()
-            groupViewController.listUser = self.listUser
-            
-            if let delegate = self.delegate {
-                delegate.openNewGroupViewController(groupViewController)
-            }else{
-                self.navigationController?.pushViewController(groupViewController, animated: true)
-            }
-            
-        } else if (self.myChatsMode == false && (cell.type != .Group || cell.type != .Individual)) && cell.chatRoom == nil{
+        if (cell.type != .Group || cell.type != .Individual) && cell.chatRoom == nil{
 
             ProgressHUD.show(nil)
             
@@ -175,67 +187,84 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
     }
     
-    //MARK: Class Methods
+    //MARK: URNewGroupTableViewCellDelegate
     
-    func loadData() {
-        if self.myChatsMode == false {
-            if listUser.count == 0 {
-                ProgressHUD.show(nil)
-            }
-            URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
-                ProgressHUD.dismiss()
-                
-                if users != nil && !users!.isEmpty {
-                    self.listUser = users!
-                    
-                    for i in 0...self.listUser.count-1 {
-                        
-                        let user = self.listUser[i]
-                        
-                        if self.listUser[i].key == URUser.activeUser()!.key {
-                            self.listUser.removeAtIndex(i)
-                            break
-                        }
-                        
-                        if let publicProfile = user.publicProfile {
-                            if (Bool(publicProfile) == false) {
-                                self.listUser.removeAtIndex(i)
-                            }
-                        }else {
-                            self.listUser.removeAtIndex(i)                            
-                        }
-                    }
-                    
-                    let userSortedList = self.listUser.sort({ (user1, user2) -> Bool in
-                        return user1.nickname < user2.nickname
-                    })
-                    
-                    self.listUser = userSortedList
-                    self.listAuxUser = self.listUser
-                    self.tableView.reloadData()
-                }
-            })
-        }else {
-            if listChatRoom.count == 0 {
-                ProgressHUD.show(nil)
-            }
-            URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
-                ProgressHUD.dismiss()
-                if chatRooms != nil {
-                    self.listChatRoom = chatRooms!
-                    
-                    self.tableView.reloadData()
-                }
-            })
+    func createNewGroupCellDidTap(cell: URNewGroupTableViewCell) {
+        let groupViewController = URNewGroupViewController()
+        groupViewController.listUser = self.listUser
+        
+        if let delegate = self.delegate {
+            delegate.openNewGroupViewController(groupViewController)
+        }else{
+            self.navigationController?.pushViewController(groupViewController, animated: true)
         }
     }
     
-    func addSearchController() {
-        searchController!.hidesNavigationBarDuringPresentation = false
-        searchController!.dimsBackgroundDuringPresentation = false
-        searchController!.searchBar.sizeToFit()
-        searchController!.searchBar.delegate = self
-        self.tableView.tableHeaderView = searchController!.searchBar
+    //MARK: Class Methods
+    
+    func sizeHeaderToFit() {
+        let headerView = self.tableView.tableHeaderView!
+        headerView.setNeedsLayout()
+        headerView.layoutIfNeeded()
+        
+        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        
+        var frame = headerView.frame
+        frame.size.height = height
+        headerView.frame = frame
+        
+        self.tableView.tableHeaderView = headerView
+    }
+    
+    func loadData() {
+        if listUser.count == 0 {
+            ProgressHUD.show(nil)
+        }
+        URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
+            ProgressHUD.dismiss()
+            
+            if users != nil && !users!.isEmpty {
+                self.listUser = users!
+                
+                for i in 0...self.listUser.count-1 {
+                    
+                    let user = self.listUser[i]
+                    
+                    if self.listUser[i].key == URUser.activeUser()!.key {
+                        self.listUser.removeAtIndex(i)
+                        break
+                    }
+                    
+                    if let publicProfile = user.publicProfile {
+                        if (Bool(publicProfile) == false) {
+                            self.listUser.removeAtIndex(i)
+                        }
+                    }else {
+                        self.listUser.removeAtIndex(i)
+                    }
+                }
+                
+                let userSortedList = self.listUser.sort({ (user1, user2) -> Bool in
+                    return user1.nickname < user2.nickname
+                })
+                
+                self.listUser = userSortedList
+                self.listAuxUser = self.listUser
+                self.tableView.reloadData()
+            }
+        })
+    }
+    
+    func addSearchController() -> UISearchBar {
+        
+        if searchController == nil {
+            searchController = UISearchController(searchResultsController: nil)
+            searchController!.hidesNavigationBarDuringPresentation = false
+            searchController!.dimsBackgroundDuringPresentation = false
+            searchController!.searchBar.sizeToFit()
+            searchController!.searchBar.delegate = self
+        }
+        return searchController!.searchBar
     }
     
     private func setupTableView() {

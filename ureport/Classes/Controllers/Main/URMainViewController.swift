@@ -157,7 +157,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     //MARK: SelectorMethods
     
     func createChatRoom() {
-        URNavigationManager.navigation.pushViewController(URChatTableViewController(createGroupOption: true,myChatsMode:false), animated: true)
+        URNavigationManager.navigation.pushViewController(URChatTableViewController(createGroupOption: true), animated: true)
     }
     
     func invitePeople() {

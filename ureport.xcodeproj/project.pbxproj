@@ -29,6 +29,8 @@
 		652F8B0D1BA207EC0096C8DC /* URChatMemberManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F8B0C1BA207EC0096C8DC /* URChatMemberManager.swift */; };
 		652F8B111BA214810096C8DC /* URPollQuestionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 652F8B0F1BA214810096C8DC /* URPollQuestionViewController.swift */; };
 		652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 652F8B101BA214810096C8DC /* URPollQuestionViewController.xib */; };
+		6530577A1D64DE3C00B53524 /* URNewGroupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653057781D64DE3C00B53524 /* URNewGroupTableViewCell.swift */; };
+		6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 653057791D64DE3C00B53524 /* URNewGroupTableViewCell.xib */; };
 		6530BE6A1B974ADB00C9707C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE691B974ADB00C9707C /* SWRevealViewController.m */; };
 		6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE6B1B974E0F00C9707C /* URMessageRead.swift */; };
 		6533CF441C496627009DF49C /* URRapidProContactUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533CF431C496627009DF49C /* URRapidProContactUtil.swift */; };
@@ -163,7 +165,6 @@
 		65A45CCE1B8694AE001C6808 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */; };
 		65A45CD21B8768D8001C6808 /* URNewsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CD01B8768D8001C6808 /* URNewsTableViewCell.swift */; };
 		65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CD11B8768D8001C6808 /* URNewsTableViewCell.xib */; };
-		65A45CDB1B879551001C6808 /* URMainChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CDA1B879551001C6808 /* URMainChatViewController.swift */; };
 		65A45CE71B880C3B001C6808 /* URGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */; };
 		65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CE61B880C3B001C6808 /* URGroupsTableViewCell.xib */; };
 		65A45CEB1B880D81001C6808 /* URGroupsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CEA1B880D81001C6808 /* URGroupsTableViewController.swift */; };
@@ -316,6 +317,8 @@
 		652F8B0C1BA207EC0096C8DC /* URChatMemberManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatMemberManager.swift; sourceTree = "<group>"; };
 		652F8B0F1BA214810096C8DC /* URPollQuestionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollQuestionViewController.swift; sourceTree = "<group>"; };
 		652F8B101BA214810096C8DC /* URPollQuestionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPollQuestionViewController.xib; sourceTree = "<group>"; };
+		653057781D64DE3C00B53524 /* URNewGroupTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewGroupTableViewCell.swift; sourceTree = "<group>"; };
+		653057791D64DE3C00B53524 /* URNewGroupTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewGroupTableViewCell.xib; sourceTree = "<group>"; };
 		6530BE681B974ADB00C9707C /* SWRevealViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SWRevealViewController.h; sourceTree = "<group>"; };
 		6530BE691B974ADB00C9707C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		6530BE6B1B974E0F00C9707C /* URMessageRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessageRead.swift; sourceTree = "<group>"; };
@@ -462,7 +465,6 @@
 		65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65A45CD01B8768D8001C6808 /* URNewsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URNewsTableViewCell.swift; sourceTree = "<group>"; };
 		65A45CD11B8768D8001C6808 /* URNewsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URNewsTableViewCell.xib; sourceTree = "<group>"; };
-		65A45CDA1B879551001C6808 /* URMainChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMainChatViewController.swift; sourceTree = "<group>"; };
 		65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupsTableViewCell.swift; sourceTree = "<group>"; };
 		65A45CE61B880C3B001C6808 /* URGroupsTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupsTableViewCell.xib; sourceTree = "<group>"; };
 		65A45CEA1B880D81001C6808 /* URGroupsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupsTableViewController.swift; sourceTree = "<group>"; };
@@ -598,6 +600,8 @@
 			children = (
 				6515FB9B1B8B996800CEEC3B /* URChatTableViewCell.swift */,
 				6515FB9C1B8B996800CEEC3B /* URChatTableViewCell.xib */,
+				653057781D64DE3C00B53524 /* URNewGroupTableViewCell.swift */,
+				653057791D64DE3C00B53524 /* URNewGroupTableViewCell.xib */,
 			);
 			path = Chat;
 			sourceTree = "<group>";
@@ -800,7 +804,6 @@
 				65A45CF11B8812BD001C6808 /* Invite */,
 				65A45CE91B880D6F001C6808 /* Groups */,
 				65A45CE11B879B2C001C6808 /* Chat */,
-				65A45CD91B87953D001C6808 /* MainChat */,
 				658949BB1B83E1690087F361 /* Menu */,
 				655691851B7E679800525E00 /* Marker */,
 				655691791B7D85DD00525E00 /* Poll */,
@@ -1372,14 +1375,6 @@
 			path = News;
 			sourceTree = "<group>";
 		};
-		65A45CD91B87953D001C6808 /* MainChat */ = {
-			isa = PBXGroup;
-			children = (
-				65A45CDA1B879551001C6808 /* URMainChatViewController.swift */,
-			);
-			path = MainChat;
-			sourceTree = "<group>";
-		};
 		65A45CE11B879B2C001C6808 /* Chat */ = {
 			isa = PBXGroup;
 			children = (
@@ -1859,6 +1854,7 @@
 				65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */,
 				65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */,
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
+				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
@@ -1987,7 +1983,6 @@
 				65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */,
 				6515FBA01B8B9FCD00CEEC3B /* URChatCellType.swift in Sources */,
 				97B2FABC1C061C83000820BD /* URYoutubeUtil.swift in Sources */,
-				65A45CDB1B879551001C6808 /* URMainChatViewController.swift in Sources */,
 				655690791B7CFF5100525E00 /* UIColorExtension.swift in Sources */,
 				655690831B7D0EA200525E00 /* URType.swift in Sources */,
 				654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */,
@@ -2109,6 +2104,7 @@
 				658D857B1B5457CC00DFB949 /* URLoginCredentialsViewController.swift in Sources */,
 				657629161BE135010095772F /* URModerationViewController.swift in Sources */,
 				65A45CCC1B868481001C6808 /* URUserLoginManager.swift in Sources */,
+				6530577A1D64DE3C00B53524 /* URNewGroupTableViewCell.swift in Sources */,
 				9742492A1BFBCEB90024384E /* URRapidPRODateTransform.swift in Sources */,
 				6567C1D01CB5A4D10041F004 /* URChatVideoPhoneItem.swift in Sources */,
 			);

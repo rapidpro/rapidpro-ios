@@ -90,7 +90,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     //MARK: SelectorMethods
     
     func createChatRoom(barButtonItem:UIBarButtonItem) {
-        let chatTableViewController = URChatTableViewController(createGroupOption: true,myChatsMode:false)
+        let chatTableViewController = URChatTableViewController(createGroupOption: true)
         chatTableViewController.delegate = self
         
         chatTableViewController.view.backgroundColor = UIColor.whiteColor()

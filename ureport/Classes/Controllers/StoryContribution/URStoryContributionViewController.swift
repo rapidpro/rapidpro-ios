@@ -163,29 +163,17 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
+        
+        if !URConstant.isIpad {
+            let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
+            viewFooter.delegate = self
+            viewFooter.parentViewController = self
+            self.tableView.tableFooterView = viewFooter
+        }
+        
     }
 
     // MARK: - Table view data source
-    
-    
-    func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return URConstant.isIpad ? 0 : 50
-    }
-    
-    func tableView(tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        
-        if URConstant.isIpad {
-            return nil
-        }
-        
-        let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
-        viewFooter.delegate = self
-        viewFooter.parentViewController = self
-//        self.tableView.tableFooterView = viewFooter
-        
-        return viewFooter
-    }
-    
     
     func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
@@ -234,20 +222,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     //MARK: Class Methods
-    
-    func sizeHeaderToFit() {
-        let headerView = self.tableView.tableFooterView!
-        headerView.setNeedsLayout()
-        headerView.layoutIfNeeded()
-        
-        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
-        
-        var frame = headerView.frame
-        frame.size.height = height
-        headerView.frame = frame
-        
-        self.tableView.tableFooterView = headerView
-    }
     
     func sendContribution(textField:UITextField) {
         if !textField.text!.isEmpty {

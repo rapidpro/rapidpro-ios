@@ -91,7 +91,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
         
         cell.delegate = self
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, myChatsMode: false, indexPath: indexPath, checkGroupOption: true)
+        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, indexPath: indexPath, checkGroupOption: true)
         
         let filtered = self.listUserSelectedToGroup.filter {
             return $0.key == self.listUser[indexPath.row].key
