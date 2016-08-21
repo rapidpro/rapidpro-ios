@@ -57,6 +57,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         openChatRoomWithKey(chatRoomKeyToOpen)
+        chatRoomKeyToOpen = nil
     }
     
     override func viewWillDisappear(animated: Bool) {

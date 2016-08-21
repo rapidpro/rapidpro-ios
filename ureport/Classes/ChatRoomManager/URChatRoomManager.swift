@@ -24,9 +24,27 @@ class URChatRoomManager: NSObject {
     
     func createIndividualChatRoomIfPossible(user:URUser) {
         if let chatRooms = user.chatRooms {
+            
+            var currentChatRoomVerify = 0
+            
             for chatRoomKey in chatRooms.allKeys {
                 
-                let filtered = user.chatRooms.filter {
+                currentChatRoomVerify += 1
+                
+                guard let userActiveChatRooms = URUser.activeUser()?.chatRooms else {
+                    ProgressHUD.show(nil)
+                    URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
+                        ProgressHUD.dismiss()
+                        
+                        if let delegate = self.delegate {
+                            delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                        }
+                        
+                    })
+                    return
+                }
+                
+                let filtered = userActiveChatRooms.filter {
                     return $0.key as! String == chatRoomKey as! String
                 }
                 
@@ -47,7 +65,7 @@ class URChatRoomManager: NSObject {
                         })
                     })
                     break
-                }else {
+                }else if currentChatRoomVerify == chatRooms.allKeys.count {
                     ProgressHUD.show(nil)
                     URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
                         ProgressHUD.dismiss()
@@ -58,6 +76,8 @@ class URChatRoomManager: NSObject {
 
                     })
                     break
+                }else {
+                    continue
                 }
                 
             }

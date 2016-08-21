@@ -17,7 +17,7 @@ class URFireBaseManager: NSObject {
 //    static let Path = "https://u-report-dev.firebaseio.com/"
 //    static let Path = "https://u-report-beta.firebaseio.com"
     
-    static let GCM_DEBUG_MODE = true
+    static let GCM_DEBUG_MODE = false
     
 //    Production
     static let region = AWSRegionType.EUWest1
