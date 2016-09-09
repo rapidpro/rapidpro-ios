@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import MBProgressHUD
 
 protocol URAudioViewDelegate {
     func finishRecord()
@@ -57,16 +58,16 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     func playAudioImmediately(audioURL:String,showPreloading:Bool) {
         if showPreloading == true {
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self, animated: true)
         }
         URDownloader.download(NSURL(string: audioURL)!) { (data) -> Void in
             if let data = data {
                 dispatch_async(dispatch_get_main_queue(), {
-                    ProgressHUD.dismiss()
+                    MBProgressHUD.hideHUDForView(self, animated: true)
                     self.setupAudioPlayerWithURL(NSURL(string: URFileUtil.writeFile(data))!)
                 })
             }else{
-                ProgressHUD.showError("Error")
+                print("playAudioImmediately error")
             }
         }
     }
@@ -113,7 +114,7 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
             
         }catch let error as NSError {
             self.btPlay.enabled = false
-            ProgressHUD.showError("Error on load Audio, try again.", interaction: true)
+            print("Error on load Audio, try again.")
             print(error.localizedDescription)
         }
     }

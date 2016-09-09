@@ -8,6 +8,7 @@
 
 import UIKit
 import Proposer
+import MBProgressHUD
 
 class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControllerDelegate, URChatTableViewControllerDelegate, URMessagesViewControllerDelegate {
 
@@ -121,9 +122,9 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         if let chatRoomKeyToOpen = chatRoomKeyToOpen {
             URChatRoomManager.getByKey(chatRoomKeyToOpen, completion: { (chatRoom) -> Void in
                 
-                ProgressHUD.show(nil)
+                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
-                    ProgressHUD.dismiss()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                     
                     var chatName = ""
                     

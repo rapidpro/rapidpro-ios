@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class URPasswordEditViewController: UIViewController {
 
@@ -46,6 +47,7 @@ class URPasswordEditViewController: UIViewController {
     func setupUI() {
         self.txtCurrentPassword.placeholder = "old_password_title".localized
         self.txtNewPassword.placeholder = "new_password".localized
+        self.lbConfirmBelow.text = "label_reset_password".localized
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)        
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         URNavigationManager.setupNavigationBarWithType(.Blue)
@@ -54,14 +56,14 @@ class URPasswordEditViewController: UIViewController {
     //MARK: Button Events
     
     @IBAction func btConfirmTapped(sender: AnyObject) {
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URFireBaseManager.sharedInstance().changePasswordForUser(URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:NSError?) -> Void in
-                ProgressHUD.dismiss()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 self.view.endEditing(true)
             if error != nil {
-                UIAlertView(title: nil, message: "An error has occurred, try again!", delegate: self, cancelButtonTitle: "OK").show()
+                UIAlertView(title: nil, message: "unknown_error".localized, delegate: self, cancelButtonTitle: "OK").show()
             }else {
-                UIAlertView(title: nil, message: "Your password has changed!", delegate: self, cancelButtonTitle: "OK").show()
+                UIAlertView(title: nil, message: "password_updated".localized, delegate: self, cancelButtonTitle: "OK").show()
                 URNavigationManager.navigation.popViewControllerAnimated(true)
             }
         }

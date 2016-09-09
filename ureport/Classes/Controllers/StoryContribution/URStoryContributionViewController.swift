@@ -11,6 +11,7 @@ import NYTPhotoViewer
 import youtube_ios_player_helper
 import SDWebImage
 import MediaPlayer
+import ISScrollViewPageSwift
 
 class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URContributionTableViewCellDelegate, URAddContributionTableViewCellDelegate {
     
@@ -59,6 +60,11 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         setupTableView()
         setupScrollView()
         setupScrollViewMedias()
+        
+        if !URConstant.isIpad {
+            setupFooterView()
+        }
+        
         self.title = story.userObject!.nickname
         contributionManager.getContributions(story.key)
         contributionManager.delegate = self
@@ -159,7 +165,6 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.tableView.backgroundColor = UIColor.whiteColor()
         self.tableView.separatorColor = UIColor.clearColor()
         self.tableView.registerNib(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
-        self.tableView.registerNib(UINib(nibName: "URAddContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URAddContributionTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
@@ -222,6 +227,14 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     //MARK: Class Methods
+    
+    func setupFooterView() {
+        let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
+        viewFooter.delegate = self
+        viewFooter.txtContribution.delegate = self
+        viewFooter.parentViewController = self
+        self.tableView.tableFooterView = viewFooter.contentView
+    }
     
     func sendContribution(textField:UITextField) {
         if !textField.text!.isEmpty {

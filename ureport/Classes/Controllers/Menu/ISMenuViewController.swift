@@ -8,6 +8,7 @@
 
 import UIKit
 import FBSDKLoginKit
+import MBProgressHUD
 
 class ISMenuViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource {
     
@@ -233,7 +234,6 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.lbPoints.text = String(format: "menu_points".localized, arguments: [0])
         self.lbStoriesAndPolls.text = String(format: "profile_stories".localized, arguments: [0])
-        self.lbStoriesAndPolls.text = "\(self.lbStoriesAndPolls.text!) \(String(format: "profile_polls".localized, arguments: [0]))"
         
         if let user = URUser.activeUser() {
             self.user = user
@@ -254,7 +254,6 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             if let picture = user.picture {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFit
                 self.imgProfile.sd_setImageWithURL(NSURL(string: picture))
                 self.bgImageProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.bgImageProfile.sd_setImageWithURL(NSURL(string: picture))

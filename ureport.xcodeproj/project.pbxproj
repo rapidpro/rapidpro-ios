@@ -128,8 +128,6 @@
 		658949C11B83E1A60087F361 /* ISMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949C01B83E1A60087F361 /* ISMenu.swift */; };
 		658949C51B83E1D30087F361 /* ISMenuTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949C31B83E1D30087F361 /* ISMenuTableViewCell.swift */; };
 		658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949C41B83E1D30087F361 /* ISMenuTableViewCell.xib */; };
-		658949CD1B8571FB0087F361 /* ProgressHUD.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 658949CA1B8571FB0087F361 /* ProgressHUD.bundle */; };
-		658949CE1B8571FB0087F361 /* ProgressHUD.m in Sources */ = {isa = PBXBuildFile; fileRef = 658949CC1B8571FB0087F361 /* ProgressHUD.m */; };
 		658949D21B8577530087F361 /* Social.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D11B8577530087F361 /* Social.framework */; };
 		658949D41B85775A0087F361 /* Accounts.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D31B85775A0087F361 /* Accounts.framework */; };
 		658949D61B861B5E0087F361 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 658949D51B861B5E0087F361 /* Security.framework */; };
@@ -183,7 +181,6 @@
 		65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */; };
 		65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F3991BA7625000E5D367 /* URMediaView.xib */; };
 		65D0F39D1BA7627800E5D367 /* URMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F39C1BA7627800E5D367 /* URMediaView.swift */; };
-		65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */; };
 		65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A61BA8792D00E5D367 /* URAWSManager.swift */; };
 		65D0F3AB1BA8E13500E5D367 /* URMyChatsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D0F3A91BA8E13500E5D367 /* URMyChatsViewController.swift */; };
 		65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D0F3AA1BA8E13500E5D367 /* URMyChatsViewController.xib */; };
@@ -424,9 +421,6 @@
 		658949C01B83E1A60087F361 /* ISMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenu.swift; sourceTree = "<group>"; };
 		658949C31B83E1D30087F361 /* ISMenuTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenuTableViewCell.swift; sourceTree = "<group>"; };
 		658949C41B83E1D30087F361 /* ISMenuTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ISMenuTableViewCell.xib; sourceTree = "<group>"; };
-		658949CA1B8571FB0087F361 /* ProgressHUD.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = ProgressHUD.bundle; sourceTree = "<group>"; };
-		658949CB1B8571FB0087F361 /* ProgressHUD.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProgressHUD.h; sourceTree = "<group>"; };
-		658949CC1B8571FB0087F361 /* ProgressHUD.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProgressHUD.m; sourceTree = "<group>"; };
 		658949D11B8577530087F361 /* Social.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Social.framework; path = System/Library/Frameworks/Social.framework; sourceTree = SDKROOT; };
 		658949D31B85775A0087F361 /* Accounts.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accounts.framework; path = System/Library/Frameworks/Accounts.framework; sourceTree = SDKROOT; };
 		658949D51B861B5E0087F361 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
@@ -483,7 +477,6 @@
 		65D0F35E1BA73A4D00E5D367 /* URMarkerTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerTableViewController.xib; sourceTree = "<group>"; };
 		65D0F3991BA7625000E5D367 /* URMediaView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMediaView.xib; sourceTree = "<group>"; };
 		65D0F39C1BA7627800E5D367 /* URMediaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaView.swift; sourceTree = "<group>"; };
-		65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISScrollViewPage.swift; sourceTree = "<group>"; };
 		65D0F3A61BA8792D00E5D367 /* URAWSManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAWSManager.swift; sourceTree = "<group>"; };
 		65D0F3A91BA8E13500E5D367 /* URMyChatsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMyChatsViewController.swift; sourceTree = "<group>"; };
 		65D0F3AA1BA8E13500E5D367 /* URMyChatsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMyChatsViewController.xib; sourceTree = "<group>"; };
@@ -931,10 +924,8 @@
 			children = (
 				65DFCD001CE3CFDE00E4DFD9 /* Proposer */,
 				97FBAA541C0643940012D752 /* NSLocaleISO639_2 */,
-				65D0F3A21BA774C500E5D367 /* ISScrollViewPage */,
 				6530BE671B974AD400C9707C /* SWRevealViewController */,
 				658949D71B8623C50087F361 /* TwitterHelper */,
-				658949C91B8571CF0087F361 /* ProgressHUD */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -1237,16 +1228,6 @@
 			path = Menu;
 			sourceTree = "<group>";
 		};
-		658949C91B8571CF0087F361 /* ProgressHUD */ = {
-			isa = PBXGroup;
-			children = (
-				658949CA1B8571FB0087F361 /* ProgressHUD.bundle */,
-				658949CB1B8571FB0087F361 /* ProgressHUD.h */,
-				658949CC1B8571FB0087F361 /* ProgressHUD.m */,
-			);
-			path = ProgressHUD;
-			sourceTree = "<group>";
-		};
 		658949D71B8623C50087F361 /* TwitterHelper */ = {
 			isa = PBXGroup;
 			children = (
@@ -1460,14 +1441,6 @@
 				65D0F39C1BA7627800E5D367 /* URMediaView.swift */,
 			);
 			path = Cover;
-			sourceTree = "<group>";
-		};
-		65D0F3A21BA774C500E5D367 /* ISScrollViewPage */ = {
-			isa = PBXGroup;
-			children = (
-				65D0F3A31BA774C500E5D367 /* ISScrollViewPage.swift */,
-			);
-			path = ISScrollViewPage;
 			sourceTree = "<group>";
 		};
 		65D0F3A51BA8791700E5D367 /* AWSManager */ = {
@@ -1843,7 +1816,6 @@
 				65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */,
 				656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */,
 				6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */,
-				658949CD1B8571FB0087F361 /* ProgressHUD.bundle in Resources */,
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
@@ -1980,7 +1952,6 @@
 				97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */,
 				656562051BD5962400EBA9BD /* URSettings.swift in Sources */,
 				65F47F561C658C71009A2066 /* URMediaUpload.swift in Sources */,
-				65D0F3A41BA774C500E5D367 /* ISScrollViewPage.swift in Sources */,
 				6515FBA01B8B9FCD00CEEC3B /* URChatCellType.swift in Sources */,
 				97B2FABC1C061C83000820BD /* URYoutubeUtil.swift in Sources */,
 				655690791B7CFF5100525E00 /* UIColorExtension.swift in Sources */,
@@ -1988,7 +1959,6 @@
 				654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */,
 				65C55FDF1BBCD174007F66FA /* URModalProfileViewController.swift in Sources */,
 				65C234061BAE0843002DB994 /* ISLabelExtension.swift in Sources */,
-				658949CE1B8571FB0087F361 /* ProgressHUD.m in Sources */,
 				655690A51B7D159C00525E00 /* URContact.swift in Sources */,
 				65D0F35C1BA72E8D00E5D367 /* URMarkerManager.swift in Sources */,
 				65DBAEBE1CEA5DD300A8B514 /* URPollContributionTableViewController.swift in Sources */,

@@ -8,6 +8,7 @@
 
 import UIKit
 import AWSS3
+import MBProgressHUD
 
 class URNewGroupViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UISearchBarDelegate, UIActionSheetDelegate, URChatTableViewCellDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
@@ -73,7 +74,6 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        ProgressHUD.dismiss()
     }
     
     
@@ -193,7 +193,6 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
 //        }
         
         if imgPicture.image != nil {
-            ProgressHUD.show(nil)
             URAWSManager.uploadImage(imgPicture.image!, uploadPath:.Chat, completion: { (picture:URMedia?) -> Void in
                 self.save(picture)
             })
@@ -219,19 +218,25 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
 
         self.listUserSelectedToGroup += [URUser.activeUser()!]
         
-        let main = URMainViewController()
-        URNavigationManager.addLeftButtonMenuInViewController(main)
-        
         if self.groupChatRoom == nil {
             
             URChatRoomManager.save(groupChatRoom, members: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
-                ProgressHUD.show(nil)
+                
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                
+                let main = URMainViewController()
+                URNavigationManager.addLeftButtonMenuInViewController(main)
+                
                 URNavigationManager.navigation.setViewControllers([main,URMessagesViewController(chatRoom: chatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
             }
         }else {
             groupChatRoom.key = self.groupChatRoom.key
             URChatRoomManager.update(groupChatRoom, newMembers: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
-                ProgressHUD.show(nil)
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                
+                let main = URMainViewController()
+                URNavigationManager.addLeftButtonMenuInViewController(main)
+                
                 URNavigationManager.navigation.setViewControllers([main,URMessagesViewController(chatRoom: groupChatRoom, chatMembers: self.listUserSelectedToGroup,title: groupChatRoom.title)], animated: true)
             }
         }

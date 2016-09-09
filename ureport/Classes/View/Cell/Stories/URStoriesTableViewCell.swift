@@ -153,13 +153,13 @@ class URStoriesTableViewCell: UITableViewCell {
         self.contentView.layoutIfNeeded()
         self.contentView.setNeedsLayout()
         
-        if story.markers != nil && !story.markers.isEmpty {
-            self.markerView.hidden = false
-            self.viewMarkerHeight.constant = viewMarkerDefautlHeight
-        }else {
-            self.markerView.hidden = true
-            self.viewMarkerHeight.constant = 0
-        }
+//        if story.markers != nil && !story.markers.isEmpty {
+//            self.markerView.hidden = false
+//            self.viewMarkerHeight.constant = viewMarkerDefautlHeight
+//        }else {
+//            self.markerView.hidden = true
+//            self.viewMarkerHeight.constant = 0
+//        }
         
         if story.medias != nil && !story.medias.isEmpty {
             self.lbAttachments.text = String(format: "attachments".localized, arguments: [story.medias.count])
@@ -169,36 +169,32 @@ class URStoriesTableViewCell: UITableViewCell {
             self.attachmentView.hidden = true
             self.viewAttachmentHeight.constant = 0
         }
-
-        self.lbLikes.text = String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0])
         
-        self.lbTitle.text = story.title!
+        URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
+            story.like = likeCount
+            self.lbLikes.text = String(format: "likes".localized, arguments: [likeCount])
+        })
+        
+        URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
+            story.contributions = total
+            self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
+        })
         
         URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
             if user != nil && user!.nickname != nil {
-                URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
+                story.userObject = user
+                
+                self.lbAuthorName.text = "\(user!.nickname!)"
+                
+                if user!.picture != nil {
+                    self.imgUser.contentMode = UIViewContentMode.ScaleAspectFill
+                    self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
+                }else{
+                    self.imgUser.contentMode = UIViewContentMode.Center
+                    self.imgUser.image = UIImage(named: "ic_person")
                     
-                    story.contributions = total
-                    story.userObject = user
-                    
-                    URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
-                        story.like = likeCount
-                    })
-                    
-                    self.lbAuthorName.text = "\(user!.nickname!)"
-                    
-                    if user!.picture != nil {
-                        self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
-                    }else{
-                        self.imgUser.contentMode = UIViewContentMode.Center
-                        self.imgUser.image = UIImage(named: "ic_person")
-                        
-                        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                    }
-                    
-                    self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
-                    
-                })
+                    self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+                }
             }
         })
         
@@ -211,6 +207,8 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
             }
         }
+        
+        self.lbTitle.text = story.title!        
         
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content

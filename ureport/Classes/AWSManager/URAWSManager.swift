@@ -12,6 +12,7 @@ import AWSS3
 enum URUploadPath:String {
     case Chat = "CHAT"
     case Stories = "STORIES"
+    case User = "USER"
 }
 
 
@@ -29,7 +30,6 @@ class URAWSManager: NSObject {
         uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
         transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
-            ProgressHUD.dismiss()
             if task!.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
@@ -60,7 +60,6 @@ class URAWSManager: NSObject {
         uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
         transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
-            ProgressHUD.dismiss()
             if task!.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
@@ -94,7 +93,6 @@ class URAWSManager: NSObject {
         uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
         transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
-            ProgressHUD.dismiss()
             if task!.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
@@ -128,7 +126,6 @@ class URAWSManager: NSObject {
                 uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
                 
                 transferManager.upload(uploadRequest).continueWithBlock { (task:AWSTask?) -> AnyObject! in
-                    ProgressHUD.dismiss()
                     if task!.error != nil{
                         print("Error on send file to AWS \(task!.error)")
                     }else {

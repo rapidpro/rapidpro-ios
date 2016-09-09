@@ -11,6 +11,7 @@ import Foundation
 import JSQMessagesViewController
 import SDWebImage
 import NYTPhotoViewer
+import MBProgressHUD
 
 protocol URMessagesViewControllerDelegate {
     func mediaButtonDidTap()
@@ -114,7 +115,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     //MARK: MediaSourceViewControllerDelegate
     
     func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URMediaUpload.uploadMedias([media]) { (medias) -> Void in
             self.sendMediaMessage(medias[0])
         }
@@ -129,7 +130,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     //MARK URAudioRecorderViewControllerDelegate
     
     func newAudioRecorded(audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URMediaUpload.uploadMedias([media]) { (medias) -> Void in
             self.sendMediaMessage(medias[0])
         }
@@ -370,7 +371,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let container = UIView(frame: CGRectMake(0, 0, 36, 36))
         
         if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
-            btnInfo.frame = CGRectMake(0, 7, 21, 21)
+            btnInfo.frame = CGRectMake(0, 0, 36, 36)
             btnInfo.sd_setBackgroundImageWithURL(NSURL(string: groupChatRoom.picture.url), forState: UIControlState.Normal)
             container.layer.cornerRadius = 18
         }else {
@@ -475,7 +476,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         updateReadMessages()
         
         dispatch_async(dispatch_get_main_queue()) {
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             if media.type != URConstant.Media.AUDIO {
                 self.mediaSourceViewController.toggleView({ (finish) in })
             }

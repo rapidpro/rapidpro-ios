@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import MBProgressHUD
 
-class URModalProfileViewController: UIViewController {
+class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate {
 
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var viewTop: UIView!
@@ -16,8 +17,6 @@ class URModalProfileViewController: UIViewController {
     @IBOutlet weak var lbNickName: UILabel!
     @IBOutlet weak var lbStories: UILabel!
     @IBOutlet weak var lbStoriesValue: UILabel!
-    @IBOutlet weak var lbPolls: UILabel!
-    @IBOutlet weak var lbPollsValue: UILabel!
     @IBOutlet weak var lbPoints: UILabel!
     @IBOutlet weak var lbPointsValue: UILabel!
     @IBOutlet weak var lbContributions: UILabel!
@@ -26,12 +25,15 @@ class URModalProfileViewController: UIViewController {
     @IBOutlet weak var btClose: UIButton!
     
     var user:URUser!
+    let chatRoomManager = URChatRoomManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.backgroundView.layer.cornerRadius = 5
         self.btInviteToChat.layer.cornerRadius = 4
+        
+        chatRoomManager.delegate = self
         
         setupUserInfo()
         setupLayout()
@@ -63,7 +65,6 @@ class URModalProfileViewController: UIViewController {
     func setupLayout() {
         self.lbPoints.text = "label_view_points".localized
         self.lbStories.text = "main_stories".localized
-        self.lbPolls.text = "main_polls".localized
     }
     
     func setupUserInfo() {
@@ -86,7 +87,6 @@ class URModalProfileViewController: UIViewController {
         
         if let picture = user.picture {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFit
             self.imageProfile.sd_setImageWithURL(NSURL(string: picture))
         }else{
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
@@ -112,6 +112,14 @@ class URModalProfileViewController: UIViewController {
         }
         
     }
+    
+    //MARK: URChatRoomManagerDelegate
+    
+    func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom, chatMembers: members, title: title), animated: true)
+    }
+    
     
     //MARK: Button Events
     

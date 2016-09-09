@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol URMyChatsViewControllerDelegate {
     func openChatRoomWith(chatRoom:URChatRoom,chatMembers:[URUser],title:String)
@@ -37,6 +38,9 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:"newChatReceived", object: nil)
+        
         setupUI()
     }
     
@@ -123,6 +127,10 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     //MARK: Class Methods
     
+    func addBadgeMyChatsViewController() {
+        loadData()
+    }
+    
     func openChatRoomWithKey(chatRoomKey: String?) {
         if chatRoomKey != nil {
             URChatRoomManager.getByKey(chatRoomKey!, completion: { (chatRoom) -> Void in
@@ -132,9 +140,9 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
     
     func openChatRoom(chatRoom: URChatRoom) {
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             var chatName = ""
             
@@ -182,20 +190,37 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     func loadData() {
         if listChatRoom.count == 0 && URUser.activeUser()?.chatRooms?.count > 0{
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         }
         
-        self.listChatRoom = []
+//        self.listChatRoom = []
         self.tableView.reloadData()
         
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             if chatRooms != nil {
+                
                 self.lbMessage.hidden = true
-                self.listChatRoom.insert(chatRooms!.last!, atIndex: self.listChatRoom.count)
-                                
-                self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.listChatRoom.count - 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                
+                let index = self.listChatRoom.indexOf{($0.key == chatRooms!.last!.key)}
+                
+                if index == nil {
+                    self.listChatRoom.insert(chatRooms!.last!, atIndex: self.listChatRoom.count)
+                    
+                    self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.listChatRoom.count - 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                    
+                }else {
+                    self.listChatRoom.removeAtIndex(index!)
+                    self.listChatRoom.insert(chatRooms!.last!, atIndex: index!)
+                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                }
+                
+                if self.listChatRoom.count == chatRooms?.count {
+                    self.listChatRoom = self.listChatRoom.sort{($0.0.lastMessage?.date.integerValue > $0.1.lastMessage?.date.integerValue)}
+                    self.tableView.reloadData()
+                }
+                
             }else{
                 self.lbMessage.hidden = false
             }

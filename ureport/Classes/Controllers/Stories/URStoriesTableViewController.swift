@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import AlamofireObjectMapper
+import MBProgressHUD
 
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
@@ -21,7 +22,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     var filterStoriesToModerate:Bool!
     var modalProfileViewController:URModalProfileViewController!
     var index = 1
-
+    var lastQueryItemIndex = 0
+    
     init (filterStoriesToModerate:Bool) {
         self.storyList.removeAll()
         self.filterStoriesToModerate = filterStoriesToModerate
@@ -96,7 +98,11 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     func countryProgramDidChanged(countryProgram: URCountryProgram) {
         storyList.removeAll()
-        storyManager.getStories(false)
+        storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
+            self.storyList = storyList.reverse()
+            self.tableView.reloadData()
+            self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: storyList.count)
+        }
     }
     
     // MARK: - Table view data source
@@ -149,6 +155,15 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             return 245
         }
         
+    }
+    
+    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.row == storyList.count - 1 && storyList.count >= storyManager.itensByQuery {
+            storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
+                self.storyList = storyList.reverse()
+                self.tableView.reloadData()
+            }
+        }
     }
     
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -218,8 +233,16 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     func reloadDataWithStories() {
         storyManager.delegate = self
+        
         storyList.removeAll()
-        storyManager.getStories(self.filterStoriesToModerate)        
+        self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)
+        
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            self.storyList = storyList.reverse()
+            self.tableView.reloadData()
+        }
     }
     
     private func setupTableView() {
@@ -242,10 +265,13 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     func newStoryReceived(story: URStory) {
-        storyList.insert(story, atIndex: 0)
-        self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+        let hasStory = self.storyList.indexOf{($0.key == story.key)}
         
-        index += 1
+        if hasStory == nil {
+            storyList.insert(story, atIndex: 0)
+            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+            index += 1
+        }
     }
     
 }

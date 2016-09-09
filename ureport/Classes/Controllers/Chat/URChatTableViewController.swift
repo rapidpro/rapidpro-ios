@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol URChatTableViewControllerDelegate {
     func openChatRoom(chatRoom: URChatRoom,chatMembers:[URUser], title:String)
@@ -16,7 +17,6 @@ protocol URChatTableViewControllerDelegate {
 class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate, URNewGroupTableViewCellDelegate {
 
     var createGroupOption:Bool!
-    var myChatsMode:Bool!
     var listUser:[URUser] = []
     var listFilteredUser:[URUser] = []
     var listAuxUser:[URUser] = []
@@ -53,7 +53,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
         
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     init() {
@@ -99,6 +99,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     //MARK: URChatRoomManagerDelegate
     
     func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         if let delegate = delegate {
             delegate.openChatRoom(chatRoom, chatMembers: members, title: title)
         }else{
@@ -155,17 +156,17 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
         if (cell.type != .Group || cell.type != .Individual) && cell.chatRoom == nil{
 
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             
-            chatRoomManager.createIndividualChatRoomIfPossible(cell.user!)
+            chatRoomManager.createIndividualChatRoomIfPossible(cell.user!, isIndividualChatRoom: true)
             
         }else {
             if let chatRoom = cell.chatRoom {
-                ProgressHUD.show(nil)
+                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                 URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
                 URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
-                ProgressHUD.dismiss()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                     
                     var chatName = ""
                     
@@ -221,28 +222,10 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
             ProgressHUD.show(nil)
         }
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             if users != nil && !users!.isEmpty {
                 self.listUser = users!
-                
-                for i in 0...self.listUser.count-1 {
-                    
-                    let user = self.listUser[i]
-                    
-                    if self.listUser[i].key == URUser.activeUser()!.key {
-                        self.listUser.removeAtIndex(i)
-                        break
-                    }
-                    
-                    if let publicProfile = user.publicProfile {
-                        if (Bool(publicProfile) == false) {
-                            self.listUser.removeAtIndex(i)
-                        }
-                    }else {
-                        self.listUser.removeAtIndex(i)
-                    }
-                }
                 
                 let userSortedList = self.listUser.sort({ (user1, user2) -> Bool in
                     return user1.nickname < user2.nickname

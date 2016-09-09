@@ -8,6 +8,7 @@
 
 import UIKit
 import IlhasoftCore
+import MBProgressHUD
 
 class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTermsViewControllerDelegate {
     
@@ -62,7 +63,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: UIStatusBarAnimation.Fade)
     }
     
@@ -82,7 +83,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     //MARK: URUserLoginManagerDelegate
     
     func userHasLoggedInGoogle(user: URUser) {
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         if user.key.isEmpty {
         }else{
             
@@ -135,9 +136,9 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     @IBAction func btTwitterTapped(sender: AnyObject) {
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             URUserLoginManager.loginWithTwitter { (user) -> Void in
-                ProgressHUD.dismiss()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 if user == nil || user!.key.isEmpty {
                     
                     let alert = UIAlertController(title: nil, message: "twitter_error_message".localized, preferredStyle: .Alert)
@@ -147,9 +148,9 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                     
                     self.presentViewController(alert, animated: true, completion: nil)
                 }else{
-                    ProgressHUD.show(nil)
+                    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                     URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        ProgressHUD.dismiss()
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
                         if exists {
                             
                             self.updateUserDataInRapidPro(userById!)
@@ -172,15 +173,15 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     @IBAction func btFacebookTapped(sender: AnyObject) {
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
-                ProgressHUD.dismiss()
+                MBProgressHUD.hideHUDForView(self.view, animated: true)
                 if user == nil || user!.key.isEmpty {
                     
                 }else{
-                    ProgressHUD.show(nil)
+                    MBProgressHUD.showHUDAddedTo(self.view, animated: true)
                     URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        ProgressHUD.dismiss()
+                        MBProgressHUD.hideHUDForView(self.view, animated: true)
                         if exists {
                             
                             self.updateUserDataInRapidPro(userById!)
@@ -199,7 +200,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     @IBAction func btGooglePlusTapped(sender: AnyObject) {
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             userLoginManager.loginViewController = self
             userLoginManager.loginWithGoogle(self)
             userLoginManager.delegate = self

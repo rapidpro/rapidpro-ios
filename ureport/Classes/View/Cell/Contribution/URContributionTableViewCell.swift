@@ -56,7 +56,6 @@ class URContributionTableViewCell: UITableViewCell {
         
         if let picture = contribution.author.picture {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imgUser.contentMode = UIViewContentMode.ScaleAspectFit
             self.imgUser.sd_setImageWithURL(NSURL(string: picture))
         }else{
             self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)

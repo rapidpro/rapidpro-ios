@@ -15,6 +15,8 @@ protocol URStoryManagerDelegate {
 
 class URStoryManager: NSObject {
  
+    let itensByQuery = 5
+
     var delegate:URStoryManagerDelegate?
     
     //MARK: FireBase Methods
@@ -34,12 +36,13 @@ class URStoryManager: NSObject {
         return "story_like"
     }
     
-    func getStories(storiesToModerate:Bool) {
+    func getStories(storiesToModerate:Bool, initQueryFromItem:Int) {
                 
         URFireBaseManager.sharedInstance()
             .childByAppendingPath(URCountryProgram.path())
             .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
             .childByAppendingPath(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
+            .queryLimitedToLast(UInt(initQueryFromItem + itensByQuery))
             .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
                 if let delegate = self.delegate {
                     
@@ -67,6 +70,52 @@ class URStoryManager: NSObject {
                     delegate.newStoryReceived(story)
                     
                 }
+            })
+    }
+    
+    func getStoriesWithCompletion(storiesToModerate:Bool, initQueryFromItem:Int,completion:(storyList:[URStory]) -> Void) {
+        
+        URFireBaseManager.sharedInstance()
+            .childByAppendingPath(URCountryProgram.path())
+            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
+            .childByAppendingPath(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
+            .queryLimitedToLast(UInt(initQueryFromItem + itensByQuery))
+            .observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot) in
+                
+                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+                    
+                    var storyList = [URStory]()
+                    
+                    for data in snapshot.children.allObjects as! [FDataSnapshot]{
+                        let story = URStory(jsonDict: data.value as? NSDictionary)
+                        
+                        story.key = data.key
+                        
+                        if (data.value as! NSDictionary).objectForKey("cover") != nil {
+                            let cover = URMedia(jsonDict:((data.value as! NSDictionary).objectForKey("cover") as? NSDictionary)!)
+                            story.cover = cover
+                        }
+                        
+                        var medias:[URMedia] = []
+                        
+                        if let mediaArray = (data.value as! NSDictionary).objectForKey("medias") as? NSArray {
+                            
+                            for value in mediaArray {
+                                let media = URMedia(jsonDict:value as? NSDictionary)
+                                medias.append(media)
+                            }
+                            
+                            story.medias = medias
+                        }
+                        storyList.append(story)
+                    }
+                    
+                    completion(storyList: storyList)
+                    
+                }else {
+                    completion(storyList: [])
+                }
+                
             })
     }
     

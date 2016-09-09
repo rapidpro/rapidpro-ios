@@ -66,6 +66,9 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
+        
+        self.navigationController!.setNavigationBarHidden(false, animated: true)
+        self.automaticallyAdjustsScrollViewInsets = true
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -116,6 +119,13 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     //MARK: Class Methods
+    
+    func addBadgeMyChatsViewController() {
+        visibleViewController = self.navigationController?.visibleViewController
+        if !(visibleViewController is URMyChatsViewController || self.selectedViewController is URMyChatsViewController) {
+            myChatsViewController.tabBarItem.badgeValue = "1"
+        }
+    }
     
     func moveToNextStep() {
         

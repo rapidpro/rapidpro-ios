@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 import Alamofire
 import IlhasoftCore
+import MBProgressHUD
 
 class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, ISTermsViewControllerDelegate {
     
@@ -87,7 +88,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     init(color:UIColor,user:URUser,updateMode:Bool) {
@@ -150,7 +151,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.txtState.text = self.txtState.text == nil ? "" : self.txtState.text
             }
             
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
             
             if (self.userInput != nil) {
                 user = self.userInput!
@@ -163,7 +164,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 
                 URFireBaseManager.sharedInstance().createUser(user.email, password: self.txtPassword.text,
                                                               withValueCompletionBlock: { error, result in
-                                                                ProgressHUD.dismiss()
+                                                                MBProgressHUD.hideHUDForView(self.view, animated: true)
                                                                 if error != nil {
                                                                     var msg = ""
                                                                     
@@ -233,9 +234,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func saveUser(user:URUser) {
         
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URUserManager.save(user)
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
         
         if updateMode == true {
             UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
@@ -270,15 +271,14 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if let gender = self.userInput!.gender {
                 
-                self.localizedGender = gender
-                
                 if gender == "Male" {
-                    self.gender = URGender.Male
-                    self.txtGender.text = URGender.Male
+                    self.localizedGender = URGender.Male
                 }else{
-                    self.gender = URGender.Female
-                    self.txtGender.text = URGender.Female
+                    self.localizedGender = URGender.Female
                 }
+                
+                self.txtGender.text = self.localizedGender
+                
             }
             
             if let birthDay = self.userInput!.birthday {
@@ -530,7 +530,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             //            self.txtCountry.text = self.countries![row].name
             return self.countries![row].name
         }else if pickerView == self.pickerGender {
-            localizedGender = (row == 0) ? URGender.Male : URGender.Male
+            localizedGender = (row == 0) ? URGender.Male : URGender.Female
             gender = row == 0 ? "Male" : "Female"
             self.txtGender.text = localizedGender
             return self.genders![row]

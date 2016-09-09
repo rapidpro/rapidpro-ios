@@ -22,74 +22,62 @@ class URChatRoomManager: NSObject {
         return "chat_room"
     }
     
-    func createIndividualChatRoomIfPossible(user:URUser) {
-        if let chatRooms = user.chatRooms {
+    func createIndividualChatRoomIfPossible(friend:URUser,isIndividualChatRoom:Bool) {
+        
+        let group = dispatch_group_create()
+        
+        var equalsChatRoomKeyList = [String]()
+        var equalsChatRoomList = [URChatRoom]()
+        var equalsGroupChatRoomList = [URChatRoom]()
+        
+        if let friendChatRooms = friend.chatRooms,  myChatRooms = URUser.activeUser()?.chatRooms {
             
-            var currentChatRoomVerify = 0
-            
-            for chatRoomKey in chatRooms.allKeys {
-                
-                currentChatRoomVerify += 1
-                
-                guard let userActiveChatRooms = URUser.activeUser()?.chatRooms else {
-                    ProgressHUD.show(nil)
-                    URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
-                        ProgressHUD.dismiss()
-                        
-                        if let delegate = self.delegate {
-                            delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
-                        }
-                        
-                    })
-                    return
-                }
-                
-                let filtered = userActiveChatRooms.filter {
-                    return $0.key as! String == chatRoomKey as! String
-                }
-                
-                if !filtered.isEmpty {
+            for friendChatRoomKey in friendChatRooms.allKeys {
+                for myChatRoomKey in myChatRooms.allKeys {
                     
-                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
-                        URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
-                            
-                            URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom!)
-                            
-                            chatRoom!.key = chatRoomKey as! String
-                            
-                            ProgressHUD.dismiss()
-                            
-                            if let delegate = self.delegate {
-                                delegate.openChatRoom!(chatRoom!,members:users,title:user.nickname)
-                            }
-                        })
-                    })
-                    break
-                }else if currentChatRoomVerify == chatRooms.allKeys.count {
-                    ProgressHUD.show(nil)
-                    URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
-                        ProgressHUD.dismiss()
-                        
-                        if let delegate = self.delegate {
-                            delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
-                        }
-
-                    })
-                    break
-                }else {
-                    continue
+                    if myChatRoomKey as! String == friendChatRoomKey as! String {
+                        equalsChatRoomKeyList.append(myChatRoomKey as! String)
+                    }
+                    
                 }
+            }
+            
+            for chatRoomKey in equalsChatRoomKeyList {
+                dispatch_group_enter(group)
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey, completionWithUsers: { (users:[URUser]) -> Void in
+                    URChatRoomManager.getByKey(chatRoomKey, completion: { (chatRoom:URChatRoom?) -> Void in
+                        
+                        chatRoom!.key = chatRoomKey
+                        
+                        if chatRoom?.type == URChatRoomType.Group {
+                            equalsGroupChatRoomList.append(chatRoom!)
+                        }else {
+                            equalsChatRoomList.append(chatRoom!)
+                        }
+                        dispatch_group_leave(group)
+                    })
+                    
+                })
                 
             }
-        }else {
-            ProgressHUD.show(nil)
-            URChatRoomManager.createIndividualChatRoom(user, completion: { (chatRoom, chatMembers, title) -> Void in
-                ProgressHUD.dismiss()
+            
+            dispatch_group_notify(group, dispatch_get_main_queue(), {
                 
-                if let delegate = self.delegate {
-                    delegate.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                if equalsChatRoomList.count > 0 {
+                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname)
+                }else {
+                    URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
+                        self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                        
+                    })
                 }
-
+                
+            })
+            
+        }else {
+            URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
+                self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                
             })
         }
         
@@ -115,6 +103,7 @@ class URChatRoomManager: NSObject {
                         groupChatRoom.administrator = administrator
                         groupChatRoom.picture = picture
                         groupChatRoom.type = URChatRoomType.Group
+                        groupChatRoom.key = snapshot.key
                         
                         completion(groupChatRoom)
                         
@@ -136,12 +125,9 @@ class URChatRoomManager: NSObject {
         chatRoom.type = "Individual"
         chatRoom.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
         
-        ProgressHUD.show(nil)
         URChatRoomManager.save(chatRoom, members: [user,URUser.activeUser()!]) { (chatRoom:URChatRoom?) -> Void in
             if chatRoom != nil{
-                ProgressHUD.show(nil)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
-                    ProgressHUD.dismiss()
                     completion(chatRoom: chatRoom!,chatMembers:users,title:user.nickname)
                 })
             }

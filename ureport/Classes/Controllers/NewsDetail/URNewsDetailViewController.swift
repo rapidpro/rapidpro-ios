@@ -8,6 +8,7 @@
 
 import UIKit
 import NYTPhotoViewer
+import ISScrollViewPageSwift
 
 class URNewsDetailViewController: UIViewController {
 

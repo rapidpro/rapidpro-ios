@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class URModeratorTableViewController: UITableViewController, URChatTableViewCellDelegate {
 
@@ -125,10 +126,10 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     }
     
     func loadData() {
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             
             if users != nil && !users!.isEmpty {
                 self.listUser = users!.sort({$0.nickname < $1.nickname})

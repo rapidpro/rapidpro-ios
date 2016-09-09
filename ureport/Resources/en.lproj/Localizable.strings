@@ -301,6 +301,10 @@
 "no_hardware_permission_microphone" = "To complete this action please provide the microphone access permission";
 "no_hardware_permission_contact" = "To complete this action please provide permission to access the contact list";
 "twitter_error_message" = "To login with Twitter, add an account before the settings of your iPhone.";
+"label_no_chats" = "There is no chat or group that you are participating";
+"label_reset_password" = "Enter your current password and the new password you want.";
+"unknown_error" = "Unknown error, try again.";
+"password_updated" = "Password successfully updated!";
 
 //TUTORIAL
 

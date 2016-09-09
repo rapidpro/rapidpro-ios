@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol URGroupsTableViewCellDelegate {
     func btJoinDidTap(cell:URGroupsTableViewCell, groupChatRoom:URGroupChatRoom, members:[URUser], title:String)
@@ -64,9 +65,9 @@ class URGroupsTableViewCell: UITableViewCell {
     @IBAction func btJoinTapped(sender: AnyObject) {
         let user = URUser.activeUser()!
         
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.window!, animated: true)
         URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key, completionWithUsers: { (users:[URUser]) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.window!, animated: true)
             
             URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
             

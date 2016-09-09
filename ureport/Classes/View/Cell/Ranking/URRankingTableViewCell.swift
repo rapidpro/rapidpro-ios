@@ -37,7 +37,7 @@ class URRankingTableViewCell: UITableViewCell {
 
         if user.picture != nil && !(user.picture.isEmpty) {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFit
+            self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFill
             self.imageProfile.sd_setImageWithURL(NSURL(string: user.picture))
         }else{
             self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)

@@ -71,7 +71,7 @@ class URChatTableViewCell: UITableViewCell {
         
         if user!.picture != nil && !(user!.picture.isEmpty) {
             self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.img.contentMode = UIViewContentMode.ScaleAspectFit
+            self.img.contentMode = UIViewContentMode.ScaleAspectFill
             self.img.sd_setImageWithURL(NSURL(string: user!.picture))
         }else{
             self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)

@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import IlhasoftCore
+import MBProgressHUD
 
 enum TabType {
     case MyStories
@@ -17,6 +19,7 @@ enum TabType {
 class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate {
     
     @IBOutlet weak var roundedView: ISRoundedView!
+    @IBOutlet weak var imageProfile: ISImageViewPicker!
     @IBOutlet weak var imageProfile: UIImageView!
     @IBOutlet weak var lbProfileDetails: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
@@ -32,13 +35,12 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     var tabType:TabType!
     
     var isBtMyStoriesTapped = false
-    var isBtAnsweredPollsTapped = false
     var isBtRankingTapped = false
     
     let imgViewHistoryHeight:CGFloat = 188.0
+    let fullHeightTableViewCell:CGFloat = 497
     
     var storyList:[URStory] = []
-    var pollList:[URPoll] = []
     var userList:[URUser] = []
     
     var pollManager = URPollManager()
@@ -61,6 +63,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         setupTableView()
         loadUserInfo()
         selectTabType(self.tabType)
+        
+        self.imageProfile.delegate = self
+        self.imageProfile.parentViewController = self
+        
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
     }
     
@@ -81,7 +87,25 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        self.navigationController?.setNavigationBarHidden(true, animated: true)
+        self.navigationController?.setNavigationBarHidden(false, animated: true)
+        
+        if imageProfile.image == nil {
+            let user = URUser.activeUser()
+            user!.picture = nil
+            URUserManager.save(user!)
+        }
+    }
+    
+    //MARK: ISImageViewPickerDelegate
+    
+    func mediaDidLoad(imageView: ISImageViewPicker, image: UIImage) {
+        URAWSManager.uploadImage(image, uploadPath:.User, completion: { (picture:URMedia?) -> Void in
+            if let media = picture {
+                let user = URUser.activeUser()
+                user!.picture = media.url
+                URUserManager.save(user!)
+            }
+        })
     }
     
     //MARK: StoryManagerDelegate
@@ -89,6 +113,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     func newStoryReceived(story: URStory) {
         if story.user == URUser.activeUser()?.key {
             storyList.insert(story, atIndex: 0)
+            userList.sortInPlace{($0.points.integerValue > $1.points.integerValue)}
             self.tableviewMyStories.reloadData()
         }
     }
@@ -122,7 +147,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         pollList = []
         userList = []
         pollManager.getPolls()
-        storyManager.getStories(false)
+        storyManager.getStories(false,initQueryFromItem: storyList.count)
         storyManager.delegate = self
         userManager.delegate = self
         userManager.getUsersByPoints()
@@ -146,7 +171,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if let user = URUser.activeUser() {
             if let picture = user.picture {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFit
+                self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.imageProfile.sd_setImageWithURL(NSURL(string: picture))
             }else{
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
@@ -191,9 +216,9 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             let story = storyList[indexPath.row]
             
             if story.cover != nil && story.cover.url != nil {
-                return 471
+                return fullHeightTableViewCell
             }else {
-                return 471 - imgViewHistoryHeight
+                return fullHeightTableViewCell - imgViewHistoryHeight
             }
         }else {
             return 65
@@ -255,19 +280,6 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             self.tableviewRanking.hidden = true
             btMyStories.backgroundColor = URConstant.Color.DARK_BLUE
             btRanking.backgroundColor = URConstant.Color.PRIMARY
-            isBtAnsweredPollsTapped = false
-            isBtRankingTapped = false
-        }
-    }
-    
-    @IBAction func btAnsweredPollsTapped(sender: AnyObject) {
-        if isBtAnsweredPollsTapped == false {
-            isBtAnsweredPollsTapped = true
-            self.tableviewMyStories.hidden = true
-            self.tableviewRanking.hidden = true
-            btMyStories.backgroundColor = URConstant.Color.PRIMARY
-            btRanking.backgroundColor = URConstant.Color.PRIMARY
-            isBtMyStoriesTapped = false
             isBtRankingTapped = false
         }
     }
@@ -280,7 +292,6 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             btMyStories.backgroundColor = URConstant.Color.PRIMARY
             btRanking.backgroundColor = URConstant.Color.DARK_BLUE
             isBtMyStoriesTapped = false
-            isBtAnsweredPollsTapped = false
         }
     }
     
@@ -290,7 +301,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             URNavigationManager.navigation.pushViewController(URUserRegisterViewController(color: URConstant.Color.PRIMARY, user: URUser.activeUser()!,updateMode:true), animated: true)
         }else {
             
-            let alertController = UIAlertController(title: nil, message: "title_media_source".localized, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
             
             let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
                 

@@ -190,7 +190,10 @@ class URUserManager: NSObject {
                     var userList:[URUser] = []
                     
                     for rest in snapshot.children.allObjects as! [FDataSnapshot] {
-                        userList.append(URUser(jsonDict: rest.value as? NSDictionary))
+                        let user = URUser(jsonDict: rest.value as? NSDictionary)
+                        if user.publicProfile.boolValue == true && user.key != URUser.activeUser()!.key {
+                            userList.append(user)
+                        }
                     }
                     
                     completion(userList)

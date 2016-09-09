@@ -9,6 +9,8 @@
 import UIKit
 import youtube_ios_player_helper
 import SDWebImage
+import MBProgressHUD
+import ISScrollViewPageSwift
 
 class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDelegate, ISScrollViewPageDelegate, UIActionSheetDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaViewDelegate, URMediaSourceViewControllerDelegate {
 
@@ -128,9 +130,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                 }
             }
             
-            ProgressHUD.show(nil)
             URMediaUpload.uploadMedias(self.mediaList) { (medias) -> Void in
-                ProgressHUD.dismiss()
                 self.saveStory(medias)
             }
             
@@ -142,7 +142,6 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func saveStory(medias:[URMedia]?) {
         self.view.endEditing(true)                
-        ProgressHUD.show(nil)
         
         let story = URStory()
         
@@ -169,7 +168,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             (URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true)
         
         URStoryManager.saveStory(story, isModerator:isModerator, completion: { (success:Bool) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view.window!, animated: true)
             
             dispatch_async(dispatch_get_main_queue(), {
                 
@@ -208,7 +207,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func setupScrollViewPage() {
-        scrollViewMedias.scrollViewPageDelegate = self;
+        scrollViewMedias.scrollViewPageDelegate = self
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)

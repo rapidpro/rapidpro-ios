@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import MBProgressHUD
 
 class URLoginCredentialsViewController: UIViewController {
 
@@ -48,7 +49,7 @@ class URLoginCredentialsViewController: UIViewController {
 
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        ProgressHUD.dismiss()        
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     //MARK: Button Events
@@ -65,9 +66,9 @@ class URLoginCredentialsViewController: UIViewController {
         }
         
         self.view.endEditing(true)
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             }else {

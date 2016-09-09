@@ -113,7 +113,7 @@
                                         </mask>
                                     </variation>
                                 </view>
-                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG1-Fb-sEP" customClass="ISScrollViewPage" customModule="ureport" customModuleProvider="target">
+                                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG1-Fb-sEP" customClass="ISScrollViewPage" customModule="ISScrollViewPageSwift">
                                     <rect key="frame" x="8" y="215" width="1008" height="100"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="E5L-Nk-Ao0"/>

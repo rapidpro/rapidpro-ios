@@ -303,6 +303,10 @@
 "no_hardware_permission_microphone" = "Para completar esta acción por favor proporcione el permiso de acceso micrófono";
 "no_hardware_permission_contact" = "Para completar esta acción por favor proporcione permiso para acceder a la lista de contactos";
 "twitter_error_message" = "Para iniciar la sesión con Twitter, añadir una cuenta antes de la configuración de tu iPhone.";
+"label_no_chats" = "Usted no tiene ninguna sala de chat sin embargo.";
+"label_reset_password" = "Introduzca a continuación su contraseña actual y la nueva contraseña que desea.";
+"unknown_error" = "Error desconocido, inténtelo de nuevo.";
+"password_updated" = "Contraseña actualizada correctamente!";
 
 //TUTORIAL
 

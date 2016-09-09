@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 class URForgotPasswordViewController: UIViewController {
 
@@ -51,9 +52,9 @@ class URForgotPasswordViewController: UIViewController {
         }
         
         self.view.endEditing(true)
-        ProgressHUD.show(nil)
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         URUserLoginManager.resetPassword(self.txtEmail.text!, completion: { (success:Bool) -> Void in
-            ProgressHUD.dismiss()
+            MBProgressHUD.hideHUDForView(self.view, animated: true)
             if success == true {
                 UIAlertView(title: nil, message: "error_email_check".localized, delegate: self, cancelButtonTitle: "OK").show()
             }else {

@@ -190,6 +190,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                     if UIApplication.sharedApplication().applicationState != UIApplicationState.Active {
                         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
                     }else{
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName("newChatReceived", object: userInfo)
+                        
                         if let visibleViewController = URNavigationManager.navigation.visibleViewController {
                             if !(visibleViewController is URMessagesViewController) {
                                 //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
