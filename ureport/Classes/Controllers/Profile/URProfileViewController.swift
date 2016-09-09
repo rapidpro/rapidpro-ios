@@ -16,11 +16,10 @@ enum TabType {
     case Ranking
 }
 
-class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate {
+class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate, ISImageViewPickerDelegate {
     
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var imageProfile: ISImageViewPicker!
-    @IBOutlet weak var imageProfile: UIImageView!
     @IBOutlet weak var lbProfileDetails: UILabel!
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var btEdit: UIButton!
@@ -144,7 +143,6 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     func setupDelegates() {
         storyList = []
-        pollList = []
         userList = []
         pollManager.getPolls()
         storyManager.getStories(false,initQueryFromItem: storyList.count)

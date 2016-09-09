@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ISScrollViewPageSwift
 
 class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
 

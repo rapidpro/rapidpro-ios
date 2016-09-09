@@ -19,6 +19,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     let closedPollViewController = URConstant.isIpad ? URPollViewIPadController() : URClosedPollTableViewController()
     
     var viewControllerToShow:UIViewController?
+    var visibleViewController:UIViewController?
     
     static let sharedInstance = URMainViewController()
     
@@ -90,6 +91,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     }
     
     //MARK: Class Methods
+    
+    func addBadgeMyChatsViewController() {
+        visibleViewController = self.navigationController?.visibleViewController
+        if !(visibleViewController is URMyChatsViewController || self.selectedViewController is URMyChatsViewController) {
+            myChatsViewController.tabBarItem.badgeValue = "1"
+        }
+    }
     
     func setupViewControllers() {
         

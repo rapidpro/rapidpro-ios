@@ -8,6 +8,7 @@
 
 import UIKit
 import SDWebImage
+import MBProgressHUD
 
 protocol URMediaViewDelegate {
     func mediaViewTapped(mediaView:URMediaView)
@@ -54,11 +55,11 @@ class URMediaView: UIView {
         
         if let media = media as? URVideoMedia {
 
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self, animated: true)
             SDWebImageManager.sharedManager().downloadImageWithURL(NSURL(string:media.url), options: SDWebImageOptions.AvoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    ProgressHUD.dismiss()
+                    MBProgressHUD.hideHUDForView(self, animated: true)
                     self.imgMedia.image = image
             })
             

@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class URAPIResponse<T:Mappable>: Mappable {
+class URAPIResponse<T:Mappable,error:NSError>: Mappable {
 
     var results:[T]!
     

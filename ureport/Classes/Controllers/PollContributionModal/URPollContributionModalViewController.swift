@@ -104,7 +104,9 @@ class URPollContributionModalViewController: ISModalViewController {
     }
     
     @IBAction func btDismissTapped(sender: AnyObject) {
-        self.close { (finish) in }
+        self.closeWithCompletion { (closed) in
+            
+        }
     }
     
 }

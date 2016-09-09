@@ -86,11 +86,11 @@ class URRapidProContactUtil: NSObject {
             
             let timeZone = NSTimeZone.localTimeZone().name
             
-            Alamofire.request(.GET, "http://api.timezonedb.com/?zone=\(timeZone)&format=json&key=8JU9ZQELCDX6", parameters: nil, encoding: .JSON, headers: nil).responseObject({ (response:URServerDateTime?, error:ErrorType?) -> Void in
+            Alamofire.request(.GET, "http://api.timezonedb.com/?zone=\(timeZone)&format=json&key=8JU9ZQELCDX6", parameters: nil, encoding: .JSON, headers: nil).responseObject(completionHandler: { (response:Response<URServerDateTime,NSError>) -> Void in
                 
                 var registrationDate = NSDate()
                 
-                if let serverDateTime = response {
+                if let serverDateTime = response.result.value {
                     if serverDateTime.status != nil && serverDateTime.status != "FAIL" {
                         registrationDate = NSDate(timeIntervalSince1970: Double(serverDateTime.timestamp))
                     }

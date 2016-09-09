@@ -72,8 +72,8 @@ class URRapidProManager: NSObject {
         
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)flow_definition.json?uuid=\(flowUuid)"
         
-        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject({ (response:URFlowDefinition?, error:ErrorType?) -> Void in
-            if let flowDefinition = response {
+        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject(completionHandler: { (response:Response<URFlowDefinition,NSError>) -> Void in
+            if let flowDefinition = response.result.value {
                 completion(flowDefinition)
             }
         })
@@ -87,10 +87,10 @@ class URRapidProManager: NSObject {
         let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
         
-        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject({ (response:URAPIResponse<URFlowRun>?, error:ErrorType?) -> Void in
-            if let response = response {
-                if response.results.count > 0 {
-                    completion(response.results)
+        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseArray(completionHandler:{ (response:Response<[URFlowRun],NSError>) -> Void in
+            if let response = response.result.value {
+                if response.count > 0 {
+                    completion(response)
                 }else{
                     completion(nil)
                 }
@@ -119,11 +119,22 @@ class URRapidProManager: NSObject {
         let userId = "ext:" + URUserManager.formatExtUserId(user.key)
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)contacts.json?urns=\(userId)"
         
-        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
-            
-            if !JSON.isFailure {
-                
-                let response = JSON.value as! NSDictionary
+//        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseJSON{ (_, _, JSON) -> Void in
+//            
+//            if !JSON.isFailure {
+//                
+//                let response = JSON.value as! NSDictionary
+//                if let results = response.objectForKey("results") as? [NSDictionary] {
+//                    for object in results {
+//                        let contact = URContact(jsonDict: object)
+//                        completion(contact)
+//                    }
+//                }
+//            }
+//            
+//        }
+        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseJSON { (response:Response<AnyObject,NSError>) in
+            if let response = response.result.value as? NSDictionary {
                 if let results = response.objectForKey("results") as? [NSDictionary] {
                     for object in results {
                         let contact = URContact(jsonDict: object)
@@ -131,7 +142,6 @@ class URRapidProManager: NSObject {
                     }
                 }
             }
-            
         }
     }
     

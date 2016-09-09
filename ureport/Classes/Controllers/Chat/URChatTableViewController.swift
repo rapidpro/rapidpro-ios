@@ -219,7 +219,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     func loadData() {
         if listUser.count == 0 {
-            ProgressHUD.show(nil)
+            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         }
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
             MBProgressHUD.hideHUDForView(self.view, animated: true)

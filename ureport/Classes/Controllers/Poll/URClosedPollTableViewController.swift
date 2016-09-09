@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MBProgressHUD
 
 protocol URClosedPollTableViewControllerDelegate {
     func tableViewCellDidTap(cell:URClosedPollTableViewCell,isIPad:Bool)
@@ -118,14 +119,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         }
     }
     
-    //MARK: Class Methods
-    
-    func addBadgeMyChatsViewController() {
-        visibleViewController = self.navigationController?.visibleViewController
-        if !(visibleViewController is URMyChatsViewController || self.selectedViewController is URMyChatsViewController) {
-            myChatsViewController.tabBarItem.badgeValue = "1"
-        }
-    }
+    //MARK: Class Methods    
     
     func moveToNextStep() {
         
@@ -198,13 +192,14 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             
         }else if currentActionSet == nil {
             
-            ProgressHUD.show("message_send_poll".localized)
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.label.text = "message_send_poll".localized
             
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     self.responses = []
-                    ProgressHUD.dismiss()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
             })
             
@@ -216,13 +211,15 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             headerCell.setupDataWithNoAnswer(currentFlow, flowActionSet: currentActionSet, flowRuleset: currentRuleset, contact: contact)
             
             currentPollHeight = headerCell.getCurrentPollHeight() - 30
-            ProgressHUD.show("message_send_poll".localized)
+            
+            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            hud.label.text = "message_send_poll".localized
             
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
                 dispatch_async(dispatch_get_main_queue()) {
                     self.responses = []
-                    ProgressHUD.dismiss()
+                    MBProgressHUD.hideHUDForView(self.view, animated: true)
                 }
             })
         }

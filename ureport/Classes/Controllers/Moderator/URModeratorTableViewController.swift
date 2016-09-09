@@ -39,7 +39,7 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     
     override func viewDidDisappear(animated: Bool) {
         super.viewDidDisappear(animated)
-        ProgressHUD.dismiss()
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
     }
     
     // MARK: - Table view data source

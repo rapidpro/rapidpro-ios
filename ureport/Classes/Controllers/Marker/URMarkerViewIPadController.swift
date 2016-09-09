@@ -51,7 +51,8 @@ class URMarkerViewIPadController: ISModalViewController {
     //MARK: Button Events
     
     @IBAction func btSaveTapped(button:UIButton) {
-        self.close { (finish) in }
+        self.closeWithCompletion { (closed) in            
+        }
     }
     
 }

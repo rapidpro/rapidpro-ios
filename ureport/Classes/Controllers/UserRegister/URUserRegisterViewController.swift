@@ -112,7 +112,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func userDidAcceptTerms(accept: Bool) {
         
-        self.termsViewController.close { (finish) in }
+        self.termsViewController.closeWithCompletion { (closed) in
+        }
         
         if accept == true {
             let settings = URSettings.getSettings()
@@ -197,7 +198,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                         self.saveUser(user)
                                                                         
                                                                         URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-                                                                            ProgressHUD.dismiss()
+                                                                            MBProgressHUD.hideHUDForView(self.view, animated: true)
                                                                             if success {
                                                                                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                                                                             }

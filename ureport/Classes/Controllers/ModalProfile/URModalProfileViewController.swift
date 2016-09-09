@@ -124,42 +124,9 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
     //MARK: Button Events
     
     @IBAction func btInviteToChatTapped(sender: AnyObject) {
-        
-        URUserManager.getByKey(self.user.key) { (user, exists) -> Void in
-            if let chatRooms = user!.chatRooms {
-                for chatRoomKey in chatRooms.allKeys {
-                    
-                    let filtered = user!.chatRooms.filter {
-                        return $0.key as! String == chatRoomKey as! String
-                    }
-                    
-                    if !filtered.isEmpty {
-                        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey as! String, completionWithUsers: { (users:[URUser]) -> Void in
-                            URChatRoomManager.getByKey(chatRoomKey as! String, completion: { (chatRoom) -> Void in
-                                self.dismissViewControllerAnimated(true, completion: nil)
-                                URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:users,title:user!.nickname),animated:true)
-                            })
-                        })
-                    }else {
-                        ProgressHUD.show(nil)
-                        URChatRoomManager.createIndividualChatRoom(user!, completion: { (chatRoom, chatMembers, title) -> Void in
-                            ProgressHUD.dismiss()
-                            self.dismissViewControllerAnimated(true, completion: nil)
-                            URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
-                        })
-                    }
-                    
-                }
-            }else {
-                ProgressHUD.show(nil)
-                URChatRoomManager.createIndividualChatRoom(user!, completion: { (chatRoom, chatMembers, title) -> Void in
-                    ProgressHUD.dismiss()
-                    self.dismissViewControllerAnimated(true, completion: nil)
-                    URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title),animated:true)
-                })
-            }
-        }
-        
+        self.close()
+        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        chatRoomManager.createIndividualChatRoomIfPossible(user,isIndividualChatRoom: true)
     }
     
     @IBAction func btCloseTapped(sender: AnyObject) {

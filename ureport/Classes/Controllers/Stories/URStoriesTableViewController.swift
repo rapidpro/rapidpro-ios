@@ -48,7 +48,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        ProgressHUD.dismiss()
+        MBProgressHUD.hideHUDForView(self.view, animated: true)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -219,14 +219,13 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
             let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
-            Alamofire.request(.GET, url, headers: nil).responseObject({ (response:URAPIResponse<URNews>?, error:ErrorType?) -> Void in
-                if let response = response {
-                    self.newsList = response.results
+            Alamofire.request(.GET, url, headers: nil).responseArray(completionHandler: { (response:Response<[URNews],NSError>) -> Void in
+                if let response = response.result.value {
+                    self.newsList = response
                     self.tableView.reloadData()
                     self.reloadDataWithStories()
                 }
-            })
-            
+            })                        
         }
         
     }
