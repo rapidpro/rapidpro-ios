@@ -13,11 +13,11 @@ class URFireBaseManager: NSObject {
     
     static let Properties = "Key"
 //    static let Properties = "Key-debug"
-    static let Path = "https://u-report.firebaseio.com/"
-//    static let Path = "https://u-report-dev.firebaseio.com/"
+//    static let Path = "https://u-report.firebaseio.com/"
+    static let Path = "https://u-report-dev.firebaseio.com/"
 //    static let Path = "https://u-report-beta.firebaseio.com"
     
-    static let GCM_DEBUG_MODE = false
+    static let GCM_DEBUG_MODE = true
     
 //    Production
     static let region = AWSRegionType.EUWest1

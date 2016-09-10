@@ -209,21 +209,21 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
-        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)fields.json", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
-            
-            if JSON.isSuccess {
-                let response = JSON.value as! NSDictionary
+        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)fields.json", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (response:Response<AnyObject, NSError>) in
+         
+            if let response = response.result.value as? NSDictionary {
                 var arrayFields:[String] = []
                 if let results = response.objectForKey("results") as? [NSDictionary] {
-                    
+
                     for dictionary in results {
                         arrayFields.append(dictionary.objectForKey("key") as! String)
                     }
-                    
+
                     completion(arrayFields)
                 }else {
                     completion(arrayFields)
                 }
+                
             }
             
         }
@@ -234,48 +234,50 @@ class URRapidProManager: NSObject {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
-        ]
+        ]        
         
-        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)boundaries.json?aliases=true", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+        Alamofire.request(.GET, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)boundaries.json?aliases=true", parameters: nil, encoding: .JSON, headers: headers).responseJSON { (response: Response<AnyObject, NSError>) in
             
-            let response = JSON.value as! NSDictionary
-            
-            var states:[URState] = []
-            var districts:[URDistrict] = []
-            
-            if let results = response.objectForKey("results") as? [NSDictionary] {
+            if let response = response.result.value as? NSDictionary {
                 
-                if results.isEmpty {
-                    completion(states: nil,districts:nil)
-                    return
-                }
-                
-                for dictionary in results {
-                    
-                    let level = dictionary.objectForKey("level") as! Int
-                    let name = dictionary.objectForKey("name") as! String
-                    
-                    switch level {
-                    case 0:
-                        break
-                    case 1:
-                        let state = URState(name: name, boundary: dictionary.objectForKey("boundary") as? String)
-                        states.append(state)
-                        break
-                    case 2:
-                        let district = URDistrict(name: name, parent: dictionary.objectForKey("parent") as! String)
-                        districts.append(district)
-                        break
-                    default:
-                        break
+                var states:[URState] = []
+                var districts:[URDistrict] = []
+
+                if let results = response.objectForKey("results") as? [NSDictionary] {
+
+                    if results.isEmpty {
+                        completion(states: nil,districts:nil)
+                        return
+                    }
+
+                    for dictionary in results {
+
+                        let level = dictionary.objectForKey("level") as! Int
+                        let name = dictionary.objectForKey("name") as! String
+
+                        switch level {
+                        case 0:
+                            break
+                        case 1:
+                            let state = URState(name: name, boundary: dictionary.objectForKey("boundary") as? String)
+                            states.append(state)
+                            break
+                        case 2:
+                            let district = URDistrict(name: name, parent: dictionary.objectForKey("parent") as! String)
+                            districts.append(district)
+                            break
+                        default:
+                            break
+                        }
+                        
                     }
                     
+                    completion(states: states,districts:districts)
+                    
+                }else {
+                    completion(states: nil,districts:nil)
                 }
                 
-                completion(states: states,districts:districts)
-                
-            }else {
-                completion(states: nil,districts:nil)
             }
             
         }
@@ -295,19 +297,19 @@ class URRapidProManager: NSObject {
             print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json")
             print(headers)
             print("===============")
-            
-            Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON { (_, _, JSON) -> Void in
+                        
+            Alamofire.request(.POST, "\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: .JSON, headers: headers).responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
                 
-                print(JSON)
-                
-                if JSON.isFailure == true {
-                    print("error: \(JSON)")
+                if response.result.isFailure {
+                    print("error \(response.result.value)")
                     completion(response: nil)
-                }else{
-                    completion(response: JSON.value as! NSDictionary)
                 }
                 
-            }
+                if let response = response.result.value as? NSDictionary {
+                    completion(response: response)
+                }
+                
+            })
             
         }
     }

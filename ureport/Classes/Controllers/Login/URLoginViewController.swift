@@ -71,7 +71,8 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     func userDidAcceptTerms(accept: Bool) {
         
-        self.termsViewController.close { (finish) in }
+        self.termsViewController.closeWithCompletion { (closed) in            
+        }
         
         if accept == true {
             let settings = URSettings.getSettings()

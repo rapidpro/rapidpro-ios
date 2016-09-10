@@ -219,15 +219,19 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
             let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
-            Alamofire.request(.GET, url, headers: nil).responseArray(completionHandler: { (response:Response<[URNews],NSError>) -> Void in
-                if let response = response.result.value {
+            Alamofire.request(.GET, url, headers: nil).responseObject(completionHandler: { (response:Response<URAPIResponse<URNews,NSError>, NSError>) in
+                if let response = response.result.value?.results {
                     self.newsList = response
                     self.tableView.reloadData()
                     self.reloadDataWithStories()
                 }
-            })                        
+            })
         }
-        
+//        if let response = response.result.value as? NSDictionary{
+//            self.newsList = response.objectForKey("results")
+//            self.tableView.reloadData()
+//            self.reloadDataWithStories()
+//        }
     }
     
     func reloadDataWithStories() {

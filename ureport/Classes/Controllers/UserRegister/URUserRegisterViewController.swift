@@ -357,25 +357,26 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             setupTextFieldLoading(self.txtState)
         }
         
-        Alamofire.request(.GET, "http://api.geonames.org/countryInfoJSON?country=\(self.country!.code!)&username=ureport").responseJSON() {
-            (_, _, JSON) in
-            if let dictionary = (JSON.value as? NSDictionary)?.objectForKey("geonames") {
+        Alamofire.request(.GET, "http://api.geonames.org/countryInfoJSON?country=\(self.country!.code!)&username=ureport").responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+            
+            if let dictionary = (response.result.value as? NSDictionary)?.objectForKey("geonames") {
                 
                 let geonameId:Int = dictionary.objectAtIndex(0)["geonameId"]! as! Int
                 
-                Alamofire.request(.GET, "http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON() {
-                    (_, _, data) in
+                Alamofire.request(.GET, "http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON(completionHandler: { (data: Response<AnyObject, NSError>) in
                     
-                    if data.value != nil {
+                    if data.result.value != nil && data.result.value is NSDictionary {
                         
                         if updateUI == true {
                             self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                         }
                         
-                        if data.value!.objectForKey("geonames") != nil && data.value!.objectForKey("totalResultsCount") as! Int > 0 {
+                        let data = data.result.value as! NSDictionary
+                        
+                        if data.objectForKey("geonames") != nil && data.objectForKey("totalResultsCount") as! Int > 0 {
                             
-                            for index in 0...data.value!.objectForKey("geonames")!.count-1 {
-                                let geoName:NSDictionary = data.value!.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
+                            for index in 0...data.objectForKey("geonames")!.count-1 {
+                                let geoName:NSDictionary = data.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
                                 self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))
                             }
                             
@@ -388,10 +389,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                     }else {
                         print("error on http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport")
                     }
-                }
+                })
             }
-            
-        }
+        
+        })
     }
     
     private func setupUI() {
