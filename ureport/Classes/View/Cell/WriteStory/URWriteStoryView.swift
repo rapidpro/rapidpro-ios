@@ -38,7 +38,7 @@ class URWriteStoryView: UIView {
             
             if user.picture != nil && user.picture.characters.count > 0 {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFit
+                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.imgProfile.sd_setImageWithURL(NSURL(string: user.picture))
             }else{
                 setupUserImageAsDefault()
