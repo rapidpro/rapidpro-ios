@@ -193,9 +193,6 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             MBProgressHUD.showHUDAddedTo(self.view, animated: true)
         }
         
-//        self.listChatRoom = []
-        self.tableView.reloadData()
-        
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
             MBProgressHUD.hideHUDForView(self.view, animated: true)
             

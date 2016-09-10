@@ -227,11 +227,6 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
                 }
             })
         }
-//        if let response = response.result.value as? NSDictionary{
-//            self.newsList = response.objectForKey("results")
-//            self.tableView.reloadData()
-//            self.reloadDataWithStories()
-//        }
     }
     
     func reloadDataWithStories() {

@@ -121,6 +121,8 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             return
         }
         
+        MBProgressHUD.showHUDAddedTo(self.view.window!, animated: true)
+        
         if !self.mediaList.isEmpty {
             
             for media in self.mediaList {

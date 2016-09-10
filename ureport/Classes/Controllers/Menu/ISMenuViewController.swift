@@ -28,6 +28,8 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     var appDelegate:AppDelegate!
     var menuList:[ISMenu] = []
     
+    var lastCountryProgramIndexSelected = 0
+    
     var pickerCountryProgram:UIPickerView?
 //    let countries:[URCountry]? = URCountry.getCountries(URCountryCodeType.ISO3) as? [URCountry]
     let countryPrograms:[URCountryProgram] = URCountryProgramManager.getAvailableCountryPrograms()
@@ -155,6 +157,12 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         return false
     }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField == self.txtSwitchCountryProgram {
+            self.pickerCountryProgram!.selectRow(lastCountryProgramIndexSelected, inComponent: 0, animated: true)
+        }
+    }
+    
     //MARK: Picker DataSource and Delegate
     
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
@@ -170,6 +178,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        self.lastCountryProgramIndexSelected = row
         countryProgramChanged = self.countryPrograms[row] 
         txtSwitchCountryProgram.text = countryProgramChanged.name!
     }
@@ -254,6 +263,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             if let picture = user.picture {
                 self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
+                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.imgProfile.sd_setImageWithURL(NSURL(string: picture))
                 self.bgImageProfile.contentMode = UIViewContentMode.ScaleAspectFill
                 self.bgImageProfile.sd_setImageWithURL(NSURL(string: picture))
@@ -275,12 +285,14 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         self.txtSwitchCountryProgram.text = (URCountryProgramManager.activeCountryProgram()!.name!)
-        
+        if !countryPrograms.isEmpty {
+            lastCountryProgramIndexSelected = self.countryPrograms.indexOf({$0.code == URCountryProgramManager.activeCountryProgram()?.code})!
+        }
     }
     
     func setupUserImageAsDefault() {
         self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
+        self.imgProfile.contentMode = UIViewContentMode.Center
         self.imgProfile.image = UIImage(named: "ic_person")
     }
     

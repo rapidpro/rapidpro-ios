@@ -118,7 +118,7 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     }
     
     private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
+        self.tableView.contentInset = UIEdgeInsetsMake(0, 0, URConstant.isIpad ? 49 : 0, 0);
         self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
         self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
         self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
