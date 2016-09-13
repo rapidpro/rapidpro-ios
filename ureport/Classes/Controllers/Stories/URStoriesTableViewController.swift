@@ -23,6 +23,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     var modalProfileViewController:URModalProfileViewController!
     var index = 1
     var lastQueryItemIndex = 0
+    var isLastPost = false
     
     init (filterStoriesToModerate:Bool) {
         self.storyList.removeAll()
@@ -158,8 +159,9 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == storyList.count - 1 && storyList.count >= storyManager.itensByQuery {
+        if indexPath.row == storyList.count - 1 && storyList.count >= storyManager.itensByQuery && isLastPost == false {
             storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
+                self.isLastPost = self.storyList.last?.key == storyList.first?.key
                 self.storyList = storyList.reverse()
                 self.tableView.reloadData()
             }
