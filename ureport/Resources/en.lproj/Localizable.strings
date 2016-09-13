@@ -40,6 +40,7 @@
 "base_menu_close_drawer" = "Close Menu";
 "stories_list_item_author" = "by %d";
 "stories_list_item_contributions" = "%d contributions";
+"no_contributions" = "No contributions";
 "story_item_read_full_story" = "See full story";
 "label_new_story" = "New Story";
 "create_story_insert_cover" = "Insert a cover picture";

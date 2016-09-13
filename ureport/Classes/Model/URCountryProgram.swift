@@ -19,8 +19,18 @@ class URCountryProgram: Serializable {
     var twitter:String!
     var facebook:String!
     var groupName:String!
+    var stateField:String!
     
-    init (code:String!,themeColor:UIColor?,org:NSNumber?,name:String!,twitter:String?,facebook:String?,rapidProHostAPI:String!,ureportHostAPI:String!,groupName:String!) {
+    init (code:String!,
+          themeColor:UIColor?,
+          org:NSNumber?,
+          name:String!,
+          twitter:String?,
+          facebook:String?,
+          rapidProHostAPI:String!,
+          ureportHostAPI:String!,
+          groupName:String!,
+          stateField:String? = nil) {
         self.code = code
         self.themeColor = themeColor
         self.org = org
@@ -30,6 +40,7 @@ class URCountryProgram: Serializable {
         self.rapidProHostAPI = rapidProHostAPI
         self.ureportHostAPI = ureportHostAPI
         self.groupName = groupName
+        self.stateField = stateField
     }
     
     override init () {

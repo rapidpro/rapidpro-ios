@@ -41,6 +41,7 @@
 "base_menu_close_drawer" = "Cerrar menú";
 "stories_list_item_author" = "por %d";
 "stories_list_item_contributions" = "%d aportes";
+"no_contributions" = "No hay ninguna contribución";
 "story_item_read_full_story" = "Ver historia completa";
 "label_new_story" = "Nueva hisoria";
 "create_story_insert_cover" = "Insertar una imagen de portada";

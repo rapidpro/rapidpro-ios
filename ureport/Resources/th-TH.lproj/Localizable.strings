@@ -39,6 +39,9 @@
 "main_menu_subitem_embassadors" = "ทูต";
 "base_menu_open_drawer" = "เปิดเมนู";
 "base_menu_close_drawer" = "ปิดเมนู";
+"stories_list_item_author" = "โดย %d";
+"stories_list_item_contributions" = "%d การมีส่วนร่วม";
+"no_contributions" = "ไม่มีผลงาน";
 "story_item_read_full_story" = "อ่านเรื่องราวแบบเต็มๆ";
 "label_new_story" = "เรื่องใหม่";
 "create_story_insert_cover" = "ใส่ภาพปก";
@@ -216,6 +219,7 @@
 "label_last_polls" = "ผลโพลก่อนหน้า";
 "choice_result_value" = "%1$s %%";
 "stories_moderation" = "เรื่องราว";
+"label_moderation" = "ปริมาณที่พอเหมาะ";
 "button_title_disapprove" = "ปฏิเสธ";
 "button_title_publish" = "เผยแพร่";
 "success_story_update_message" = "อัพเดตเรื่องราวเรียบร้อย!";

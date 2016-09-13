@@ -63,6 +63,7 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
     //MARK: Class Methods
     
     func setupLayout() {
+        self.btInviteToChat.setTitle("label_chat".localized, forState: UIControlState.Normal)
         self.lbPoints.text = "label_view_points".localized
         self.lbStories.text = "main_stories".localized
     }
@@ -72,6 +73,8 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
         
         if let contributions = user.contributions {
             self.lbContributions.text! = String(format: "stories_list_item_contributions".localized, arguments: [Int(contributions)])
+        }else {
+            self.lbContributions.text! = "no_contributions".localized
         }
         
         if let points = user.points {

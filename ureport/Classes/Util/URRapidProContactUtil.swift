@@ -44,6 +44,8 @@ class URRapidProContactUtil: NSObject {
         URRapidProManager.getContactFields(URCountry(code: user.country)) { (contactFields:[String]) -> Void in
             if !contactFields.isEmpty {
                 
+                let countryProgram = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country))
+                
                 var age = 0
                 
                 if user.birthday != nil {
@@ -57,7 +59,7 @@ class URRapidProContactUtil: NSObject {
 //                URRapidProContactUtil.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
                 URRapidProContactUtil.putValueIfExists(user.nickname, countryProgramContactFields: contactFields, possibleFields: ["nickname","nick_name"])
                 URRapidProContactUtil.putValueIfExists(user.gender, countryProgramContactFields: contactFields, possibleFields: ["gender"])
-                URRapidProContactUtil.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: ["state","region","province","county"])
+                URRapidProContactUtil.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: countryProgram.stateField != nil ? [countryProgram.stateField] : ["state","region","province","county"])
                 URRapidProContactUtil.putValueIfExists(user.district, countryProgramContactFields: contactFields, possibleFields: ["location","district","lga"])
                 URRapidProContactUtil.putValueIfExists(country.code, countryProgramContactFields: contactFields, possibleFields: ["country"])
                 completion(URRapidProContactUtil.rapidProUser)
