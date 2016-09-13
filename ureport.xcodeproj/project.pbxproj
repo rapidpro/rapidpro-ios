@@ -524,6 +524,8 @@
 		65FAF0CD1BC2DA0000F8B380 /* URPointsScoredViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URPointsScoredViewController.xib; sourceTree = "<group>"; };
 		65FAF0D11BC41AF300F8B380 /* URGroupDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URGroupDetailsViewController.swift; sourceTree = "<group>"; };
 		65FAF0D21BC41AF300F8B380 /* URGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupDetailsViewController.xib; sourceTree = "<group>"; };
+		65FF45CA1D88426300A06460 /* th-TH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "th-TH"; path = "th-TH.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		65FF45CB1D8843F500A06460 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
 		7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.debug.xcconfig"; sourceTree = "<group>"; };
 		9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAlamofireLogExtension.swift; sourceTree = "<group>"; };
 		972817A81BFF9C3000FBD20E /* URChoiceResponseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = URChoiceResponseView.xib; path = ChoiceResponse/URChoiceResponseView.xib; sourceTree = "<group>"; };
@@ -1747,6 +1749,8 @@
 				"pt-BR",
 				es,
 				pt,
+				"th-TH",
+				th,
 			);
 			mainGroup = 65409FB21B4C842700344D75;
 			productRefGroup = 65409FBC1B4C842700344D75 /* Products */;
@@ -2106,6 +2110,8 @@
 				65711A2C1C40502500E05BBD /* es */,
 				65609F141C714E130039A8AB /* en */,
 				65609F151C71517B0039A8AB /* pt */,
+				65FF45CA1D88426300A06460 /* th-TH */,
+				65FF45CB1D8843F500A06460 /* th */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

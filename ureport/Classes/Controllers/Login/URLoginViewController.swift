@@ -91,7 +91,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
             URUserManager.getByKey(user.key, completion: { (userById,exists) -> Void in
                 if exists {
                     
-                    self.updateUserDataInRapidPro(userById!)
+                    URLoginViewController.updateUserDataInRapidPro(userById!)
                     
                     URUserLoginManager.setUserAndCountryProgram(userById!)
                 }else {
@@ -103,7 +103,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     //MARK: Class Methods
     
-    func updateUserDataInRapidPro(user:URUser) {
+    class func updateUserDataInRapidPro(user:URUser) {
         
         URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary) -> Void in
             URRapidProManager.saveUser(user, country: URCountry(code:user.country),setupGroups: false, completion: { (response) -> Void in
@@ -154,7 +154,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         if exists {
                             
-                            self.updateUserDataInRapidPro(userById!)
+                            URLoginViewController.updateUserDataInRapidPro(userById!)
                             URUserLoginManager.setUserAndCountryProgram(userById!)
                             
                         }else {
@@ -185,7 +185,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                         MBProgressHUD.hideHUDForView(self.view, animated: true)
                         if exists {
                             
-                            self.updateUserDataInRapidPro(userById!)
+                            URLoginViewController.updateUserDataInRapidPro(userById!)
                             
                             URUserLoginManager.setUserAndCountryProgram(userById!)
                             

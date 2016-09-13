@@ -87,10 +87,10 @@ class URRapidProManager: NSObject {
         let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
         
-        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseArray(completionHandler:{ (response:Response<[URFlowRun],NSError>) -> Void in
+        Alamofire.request(.GET, url, parameters: nil, encoding: .JSON, headers: headers).responseObject(completionHandler:{ (response:Response<URAPIResponse<URFlowRun,NSError>, NSError>) -> Void in
             if let response = response.result.value {
-                if response.count > 0 {
-                    completion(response)
+                if response.results.count > 0 {
+                    completion(response.results)
                 }else{
                     completion(nil)
                 }
@@ -101,7 +101,7 @@ class URRapidProManager: NSObject {
     }
     
     class func getMinimumDate() -> NSDate {
-        let date = NSDate()
+        let date = URDateUtil.currentDate()
         let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         
         let offsetComponents = NSDateComponents();

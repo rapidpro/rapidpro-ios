@@ -47,7 +47,7 @@ class URRapidProContactUtil: NSObject {
                 var age = 0
                 
                 if user.birthday != nil {
-                    age = NSCalendar.currentCalendar().components(.Year, fromDate: NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval), toDate: NSDate(), options: []).year
+                    age = NSCalendar.currentCalendar().components(.Year, fromDate: NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval), toDate: URDateUtil.currentDate(), options: []).year
                     
                     URRapidProContactUtil.putValueIfExists(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: user.birthday.doubleValue/1000) as NSTimeInterval)), countryProgramContactFields: contactFields, possibleFields: ["birthday","birthdate","birth_day","date_of_birth"])
                     URRapidProContactUtil.putValueIfExists(String(age), countryProgramContactFields: contactFields, possibleFields: ["age"])
@@ -88,7 +88,7 @@ class URRapidProContactUtil: NSObject {
             
             Alamofire.request(.GET, "http://api.timezonedb.com/?zone=\(timeZone)&format=json&key=8JU9ZQELCDX6", parameters: nil, encoding: .JSON, headers: nil).responseObject(completionHandler: { (response:Response<URServerDateTime,NSError>) -> Void in
                 
-                var registrationDate = NSDate()
+                var registrationDate = URDateUtil.currentDate()
                 
                 if let serverDateTime = response.result.value {
                     if serverDateTime.status != nil && serverDateTime.status != "FAIL" {

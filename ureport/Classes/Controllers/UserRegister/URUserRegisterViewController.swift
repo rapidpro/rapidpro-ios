@@ -490,7 +490,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     func dateChanged(sender:AnyObject) {
         let datePicker:UIDatePicker? = sender as? UIDatePicker
         self.birthDay = datePicker!.date
-        self.txtBirthDay.text = URDateUtil.birthDayFormatter(self.birthDay!)
+        self.txtBirthDay.text = URDateUtil.birthDayFormatter(self.birthDay!)        
     }
     
     //MARK: TextFieldDelegate

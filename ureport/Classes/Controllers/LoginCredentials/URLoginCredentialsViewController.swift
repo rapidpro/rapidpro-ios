@@ -80,6 +80,7 @@ class URLoginCredentialsViewController: UIViewController {
     //MARK: Class Methods
     
     func setupUI() {
+        self.btLogin.setTitle("login".localized, forState: UIControlState.Normal)
         self.btForgotPassword.setTitle("login_forgot_password".localized, forState: UIControlState.Normal)
         
         self.txtLogin.placeholder = "login_email".localized

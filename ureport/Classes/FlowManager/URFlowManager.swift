@@ -17,7 +17,7 @@ class URFlowManager {
     }
     
     class func isFlowExpired(flowRun:URFlowRun) -> Bool {
-        return flowRun.expired_on != nil && (flowRun.expires_on.compare(NSDate()) == NSComparisonResult.OrderedDescending)
+        return flowRun.expired_on != nil && (flowRun.expires_on.compare(URDateUtil.currentDate()) == NSComparisonResult.OrderedDescending)
     }
     
     class func isLastActionSet(actionSet:URFlowActionSet?) -> Bool {
