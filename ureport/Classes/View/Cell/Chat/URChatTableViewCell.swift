@@ -113,6 +113,7 @@ class URChatTableViewCell: UITableViewCell {
                     self.img.sd_setImageWithURL(NSURL(string: picture.url))
                 }else{
                     self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+                    self.img.contentMode = UIViewContentMode.Center
                     self.img.image = UIImage(named: "default_group")
                 }
             }

@@ -48,6 +48,8 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
         
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:"newChatReceived", object: nil)
+        
         if let closedPollViewController = closedPollViewController as? URClosedPollTableViewController {
             closedPollViewController.delegate = self
         }
@@ -221,6 +223,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
         if viewController is URMyChatsViewController || viewController is URMyChatsIPadViewController {
             self.title = "U-Report"
+            viewController.tabBarItem.badgeValue = nil
             self.navigationItem.rightBarButtonItems = addRightBarButtons()
         }
         
