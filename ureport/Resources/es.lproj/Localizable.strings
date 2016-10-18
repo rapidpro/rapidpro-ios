@@ -308,6 +308,7 @@
 "label_reset_password" = "Introduzca a continuación su contraseña actual y la nueva contraseña que desea.";
 "unknown_error" = "Error desconocido, inténtelo de nuevo.";
 "password_updated" = "Contraseña actualizada correctamente!";
+"syria_vpn_required" = "Usuarios sirios se deben activar una VPN para realizar la autenticación de la aplicación, después de realizar la autenticación se puede desactivar la VPN.";
 
 //TUTORIAL
 

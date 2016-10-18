@@ -33,6 +33,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         NSUserDefaults.saveIncomingAvatarSetting(true)
         NSUserDefaults.saveOutgoingAvatarSetting(true)
         
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in
+            if let countryCode = countryCode {
+                print(countryCode)
+            }
+        }
+        
         URCountryProgramManager.deactivateSwitchCountryProgram()
         Firebase.defaultConfig().persistenceEnabled = false
         setupGoogle()

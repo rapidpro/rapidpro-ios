@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 import MBProgressHUD
+import IlhasoftCore
 
 class URLoginCredentialsViewController: UIViewController {
 
@@ -43,8 +44,7 @@ class URLoginCredentialsViewController: UIViewController {
         tracker.set(kGAIScreenName, value: "Login Credentials")
         
         let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
-        
+        tracker.send(builder.build() as [NSObject : AnyObject])        
     }
 
     override func viewDidDisappear(animated: Bool) {

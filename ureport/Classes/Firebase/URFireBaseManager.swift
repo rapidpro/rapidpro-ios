@@ -13,8 +13,8 @@ class URFireBaseManager: NSObject {
     
     static let Properties = "Key"
 //    static let Properties = "Key-debug"
-    static let Path = "https://u-report.firebaseio.com/"
-//    static let Path = "https://u-report-dev.firebaseio.com/"
+//    static let Path = "https://u-report.firebaseio.com/"
+    static let Path = "https://u-report-dev.firebaseio.com/"
 //    static let Path = "https://u-report-beta.firebaseio.com"
     
     static let GCM_DEBUG_MODE = false
@@ -32,6 +32,16 @@ class URFireBaseManager: NSObject {
     static let Reference = Firebase(url: Path)
     
     static func sharedInstance() -> Firebase {
+        
+        if let countryCode = URIPCheckManager.countryCode where countryCode == URIPCheckManager.syriaCountryCode {
+            return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
+            
+        }else {
+            return Reference
+        }
+    }
+    
+    static func sharedLoginInstance() -> Firebase {
         return Reference
     }
     

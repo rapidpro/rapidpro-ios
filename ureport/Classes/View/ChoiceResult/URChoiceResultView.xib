@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URChoiceResultViewController" customModule="ureport" customModuleProvider="target"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT" customClass="URChoiceResultView" customModule="ureport" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="320" height="57"/>
+            <rect key="frame" x="0.0" y="0.0" width="290" height="57"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="qwr-gY-pAo">
-                    <rect key="frame" x="8" y="4" width="151" height="24"/>
+                    <rect key="frame" x="8" y="4" width="274" height="24"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="24" id="ANp-lr-4nv"/>
                     </constraints>
@@ -44,7 +44,7 @@
                 <constraint firstItem="KXL-T5-xjV" firstAttribute="top" secondItem="qwr-gY-pAo" secondAttribute="bottom" constant="3" id="Pu2-Sx-eis"/>
                 <constraint firstAttribute="bottom" secondItem="uw7-cg-Szf" secondAttribute="bottom" constant="8" id="VcW-wb-8wD"/>
                 <constraint firstItem="uw7-cg-Szf" firstAttribute="top" secondItem="qwr-gY-pAo" secondAttribute="bottom" constant="4" id="a6U-1S-enJ"/>
-                <constraint firstAttribute="trailing" secondItem="qwr-gY-pAo" secondAttribute="trailing" constant="161" id="fYg-CC-KP0"/>
+                <constraint firstAttribute="trailing" secondItem="qwr-gY-pAo" secondAttribute="trailing" constant="8" id="fYg-CC-KP0"/>
                 <constraint firstItem="qwr-gY-pAo" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="hfO-qH-hta"/>
                 <constraint firstItem="qwr-gY-pAo" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="4" id="pLo-XG-I5f"/>
                 <constraint firstItem="uw7-cg-Szf" firstAttribute="leading" secondItem="KXL-T5-xjV" secondAttribute="trailing" constant="8" id="uUp-Ov-m9L"/>

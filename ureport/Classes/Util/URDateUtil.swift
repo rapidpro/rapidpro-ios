@@ -39,6 +39,7 @@ class URDateUtil: NSObject {
         let dateFormatter = NSDateFormatter()
         dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS'Z'"
+        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
         dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
         return dateFormatter.stringFromDate(date)
     }

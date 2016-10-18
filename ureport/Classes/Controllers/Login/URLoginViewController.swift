@@ -53,6 +53,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         let builder = GAIDictionaryBuilder.createScreenView()
         tracker.send(builder.build() as [NSObject : AnyObject])
         
+        checkIfIsSyriaUser()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -102,6 +103,14 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     //MARK: Class Methods
+    
+    func checkIfIsSyriaUser() {
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in
+            if let countryCode = countryCode where countryCode == URIPCheckManager.syriaCountryCode {
+                ISAlertMessages.displaySimpleMessage("syria_vpn_required".localized, fromController: self)
+            }
+        }
+    }
     
     class func updateUserDataInRapidPro(user:URUser) {
         

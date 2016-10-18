@@ -306,6 +306,7 @@
 "label_reset_password" = "Enter your current password and the new password you want.";
 "unknown_error" = "Unknown error, try again.";
 "password_updated" = "Password successfully updated!";
+"syria_vpn_required" = "Syrian users you must activate a VPN to perform authentication on the application, after performing the authentication you can disable the VPN.";
 
 //TUTORIAL
 

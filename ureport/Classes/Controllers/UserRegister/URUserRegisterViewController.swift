@@ -163,7 +163,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 user = buildUserFields(user)
                 user.type = URType.UReport
                 
-                URFireBaseManager.sharedInstance().createUser(user.email, password: self.txtPassword.text,
+                URFireBaseManager.sharedLoginInstance().createUser(user.email, password: self.txtPassword.text,
                                                               withValueCompletionBlock: { error, result in
                                                                 MBProgressHUD.hideHUDForView(self.view, animated: true)
                                                                 if error != nil {

@@ -32,7 +32,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     class func logoutFromSocialNetwork() {
         GIDSignIn.sharedInstance().disconnect()
         FBSDKLoginManager().logOut()
-        URFireBaseManager.sharedInstance().unauth()
+        URFireBaseManager.sharedLoginInstance().unauth()
     }
     
     class func loginWithFacebook(viewController:UIViewController, completion:(URUser?) -> Void ) {
@@ -49,7 +49,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(nil)
                 } else {
                     if FBSDKAccessToken.currentAccessToken() != nil {
-                        URFireBaseManager.sharedInstance().authWithOAuthProvider(URType.Facebook, token: FBSDKAccessToken.currentAccessToken().tokenString, withCompletionBlock: { (error, authData) -> Void in
+                        URFireBaseManager.sharedLoginInstance().authWithOAuthProvider(URType.Facebook, token: FBSDKAccessToken.currentAccessToken().tokenString, withCompletionBlock: { (error, authData) -> Void in
                             if error != nil {
                                 print(error)
                             }else{
@@ -66,7 +66,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func loginWithTwitter(completion:(URUser?) ->Void ) {
-        let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
+        let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedLoginInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
         
         twitterAuthHelper.selectTwitterAccountWithCallback { (error, accounts:[AnyObject]!) -> Void in
             
@@ -98,7 +98,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         if error != nil {
             print(error)
         }else{
-            URFireBaseManager.sharedInstance().authWithOAuthProvider(URType.Google, token: user.authentication.accessToken, withCompletionBlock: { (error, authData) -> Void in
+            URFireBaseManager.sharedLoginInstance().authWithOAuthProvider(URType.Google, token: user.authentication.accessToken, withCompletionBlock: { (error, authData) -> Void in
                 if error != nil {
                     print(error)
                 }else{
@@ -114,7 +114,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     //MARK: auth Methods
     
     class func login(email:String,password:String,completion:(FAuthenticationError?,Bool) -> Void) {
-        URFireBaseManager.sharedInstance().authUser(email, password: password,
+        URFireBaseManager.sharedLoginInstance().authUser(email, password: password,
                                                     withCompletionBlock: { error, authData in
                                                         if error != nil {
                                                             
@@ -149,7 +149,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func resetPassword(email:String,completion:(Bool) -> Void) {
-        URFireBaseManager.sharedInstance().resetPasswordForUser(email, withCompletionBlock: { error in
+        URFireBaseManager.sharedLoginInstance().resetPasswordForUser(email, withCompletionBlock: { error in
             if error != nil {
                 completion(false)
             } else {
