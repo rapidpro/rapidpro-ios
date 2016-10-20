@@ -21,6 +21,7 @@
 		6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBA31B8CADB900CEEC3B /* URChatMember.swift */; };
 		6515FBAF1B8D6E2600CEEC3B /* ISDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */; };
 		6515FBB91B8E0B4000CEEC3B /* URMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */; };
+		65180BD81DB6EEBA008306D0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65180BD71DB6EEBA008306D0 /* CloudKit.framework */; };
 		651EC7161D5B9D20008695E3 /* URAddContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651EC7141D5B9D20008695E3 /* URAddContributionTableViewCell.swift */; };
 		651EC7171D5B9D20008695E3 /* URAddContributionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 651EC7151D5B9D20008695E3 /* URAddContributionTableViewCell.xib */; };
 		6523C2121CBD8C72007523CB /* URMediaVideoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6523C2111CBD8C72007523CB /* URMediaVideoView.swift */; };
@@ -122,7 +123,6 @@
 		65816BAC1C74C26D004F9DEB /* URAudioRecorderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65816BAA1C74C26D004F9DEB /* URAudioRecorderViewController.swift */; };
 		65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */; };
 		65816BB01C750756004F9DEB /* URAudioRecorderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65816BAF1C750756004F9DEB /* URAudioRecorderManager.swift */; };
-		65816BB41C756C58004F9DEB /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65816BB31C756C58004F9DEB /* CloudKit.framework */; };
 		6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6585BB0F1CCFD606000FA60E /* URStoryContributionViewIPadController.xib */; };
 		658949BE1B83E1740087F361 /* ISMenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 658949BC1B83E1740087F361 /* ISMenuViewController.swift */; };
 		658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
@@ -307,6 +307,7 @@
 		6515FBA31B8CADB900CEEC3B /* URChatMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatMember.swift; sourceTree = "<group>"; };
 		6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISDateExtension.swift; sourceTree = "<group>"; };
 		6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessagesViewController.swift; sourceTree = "<group>"; };
+		65180BD71DB6EEBA008306D0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		651EC7141D5B9D20008695E3 /* URAddContributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddContributionTableViewCell.swift; sourceTree = "<group>"; };
 		651EC7151D5B9D20008695E3 /* URAddContributionTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAddContributionTableViewCell.xib; sourceTree = "<group>"; };
 		6523C2111CBD8C72007523CB /* URMediaVideoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMediaVideoView.swift; sourceTree = "<group>"; };
@@ -417,7 +418,6 @@
 		65816BAA1C74C26D004F9DEB /* URAudioRecorderViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioRecorderViewController.swift; sourceTree = "<group>"; };
 		65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAudioRecorderViewController.xib; sourceTree = "<group>"; };
 		65816BAF1C750756004F9DEB /* URAudioRecorderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioRecorderManager.swift; sourceTree = "<group>"; };
-		65816BB31C756C58004F9DEB /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		6585BB0F1CCFD606000FA60E /* URStoryContributionViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryContributionViewIPadController.xib; sourceTree = "<group>"; };
 		658949BC1B83E1740087F361 /* ISMenuViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISMenuViewController.swift; sourceTree = "<group>"; };
 		658949BD1B83E1740087F361 /* ISMenuViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ISMenuViewController.xib; sourceTree = "<group>"; };
@@ -573,7 +573,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65816BB41C756C58004F9DEB /* CloudKit.framework in Frameworks */,
+				65180BD81DB6EEBA008306D0 /* CloudKit.framework in Frameworks */,
 				65780CB81C5FFF150025398D /* MobileCoreServices.framework in Frameworks */,
 				658949D61B861B5E0087F361 /* Security.framework in Frameworks */,
 				658949D41B85775A0087F361 /* Accounts.framework in Frameworks */,
@@ -1611,7 +1611,7 @@
 		765863F8BACD5E4ED452B82C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				65816BB31C756C58004F9DEB /* CloudKit.framework */,
+				65180BD71DB6EEBA008306D0 /* CloudKit.framework */,
 				65780CB71C5FFF150025398D /* MobileCoreServices.framework */,
 				658949D51B861B5E0087F361 /* Security.framework */,
 				658949D31B85775A0087F361 /* Accounts.framework */,
@@ -1738,6 +1738,9 @@
 						DevelopmentTeam = 5DSXDX2N9P;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
 								enabled = 1;
 							};
 							com.apple.iCloud = {
@@ -2151,7 +2154,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DANIEL L R AMARAL (ZE9A9HAM9Z)";
+				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -2173,7 +2177,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "01b382f4-bbf9-4c14-961f-aa07792c84d2";
+				PROVISIONING_PROFILE = "c496423b-e0cd-45ad-9a64-a3fa17e8c8f4";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -2197,7 +2201,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution: DANIEL L R AMARAL (ZE9A9HAM9Z)";
+				CODE_SIGN_ENTITLEMENTS = ureport/ureport.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: UNICEF (5DSXDX2N9P)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -2212,7 +2217,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "01b382f4-bbf9-4c14-961f-aa07792c84d2";
+				PROVISIONING_PROFILE = "c496423b-e0cd-45ad-9a64-a3fa17e8c8f4";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
