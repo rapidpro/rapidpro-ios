@@ -20,9 +20,9 @@ class URNews: Mappable {
     var tags:String!
     var category:URNewsCategory!
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.id         <- map["id"]
         self.title      <- map["title"]
         self.featured   <- map["featured"]

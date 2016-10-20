@@ -13,38 +13,38 @@ extension PrivateResource {
 
     var proposeMessage: String {
         switch self {
-        case .Photos:
+        case .photos:
             return "no_hardware_permission_photo".localized
-        case .Camera:
+        case .camera:
             return "no_hardware_permission_camera".localized
-        case .Microphone:
+        case .microphone:
             return "no_hardware_permission_microphone".localized
-        case .Contacts:
+        case .contacts:
             return "no_hardware_permission_contact".localized
-        case .Reminders:
+        case .reminders:
             return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
-        case .Calendar:
+        case .calendar:
             return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
-        case .Location:
+        case .location:
             return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
         }
     }
     
     var noPermissionMessage: String {
         switch self {
-        case .Photos:
+        case .photos:
             return "no_hardware_permission_photo".localized
-        case .Camera:
+        case .camera:
             return "no_hardware_permission_camera".localized
-        case .Microphone:
+        case .microphone:
             return "no_hardware_permission_microphone".localized
-        case .Contacts:
+        case .contacts:
             return "no_hardware_permission_contact".localized
-        case .Reminders:
+        case .reminders:
             return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
-        case .Calendar:
+        case .calendar:
             return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
-        case .Location:
+        case .location:
             return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
         }
     }

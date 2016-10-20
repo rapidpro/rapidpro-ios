@@ -14,19 +14,20 @@ class URDownloader: NSObject {
         
         let sessionConfig = URLSessionConfiguration.default
         let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let request = NSMutableURLRequest(url: URL)
+        var request = URLRequest(url: URL)
         request.httpMethod = "GET"
         
-        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
-            if (error == nil) {
-                print((response as! HTTPURLResponse).statusCode)
-                completion(data: data!)
-            } else {
-                print("Faulure: %@", error!.localizedDescription);
-                completion(data: nil)
-            }
-        }) 
+        let task = session.dataTask(with: request) { (data: Data?, response: URLResponse?, error: Error?) in
+                if (error == nil) {
+                    print((response as! HTTPURLResponse).statusCode)
+                    completion(data!)
+                } else {
+                    print("Faulure: %@", error!.localizedDescription);
+                    completion(nil)
+                }
+        }
         task.resume()
+        
     }
     
 }

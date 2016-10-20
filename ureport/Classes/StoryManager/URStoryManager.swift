@@ -209,9 +209,9 @@ class URStoryManager: NSObject {
             .child(byAppendingPath: self.pathStoryDisapproved())
             .child(byAppendingPath: story.key)
             .setValue(story.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
-                completion(finished: true)                
+                completion(true)                
                 if error != nil {
-                    print(error.localizedDescription)
+                    print(error?.localizedDescription)
                 }
             })
         

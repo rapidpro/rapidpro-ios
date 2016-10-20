@@ -22,7 +22,7 @@ class URFlowDefinition: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.baseLanguage    <- map["base_language"]
         self.actionSets      <- map["action_sets"]
         self.version         <- map["version"]

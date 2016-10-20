@@ -19,7 +19,7 @@ class URFlowRun: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.flow_uuid  <- map["flow_uuid"]
         self.flow       <- map["flow"]
         self.completed  <- map["completed"]

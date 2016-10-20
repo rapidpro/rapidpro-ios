@@ -57,7 +57,7 @@ class URPasswordEditViewController: UIViewController {
     
     @IBAction func btConfirmTapped(_ sender: AnyObject) {
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        URFireBaseManager.sharedInstance().changePassword(forUser: URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:NSError?) -> Void in
+        URFireBaseManager.sharedInstance().changePassword(forUser: URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:Error?) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
                 self.view.endEditing(true)
             if error != nil {

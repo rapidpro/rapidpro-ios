@@ -231,15 +231,15 @@ class URUserManager: NSObject {
             .child(byAppendingPath: self.path())
             .child(byAppendingPath: userKey)
             .child(byAppendingPath: "stories")
-            .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+            .runTransactionBlock { (currentData:FMutableData?) -> FTransactionResult! in
                 
                 var storiesCount = 1
                 
-                if currentData == nil || currentData.value is NSNull{
-                    currentData.value = storiesCount
+                if currentData == nil || currentData?.value is NSNull{
+                    currentData?.value = storiesCount
                 }else{
-                    storiesCount = currentData.value as! Int + 1
-                    currentData.value = storiesCount
+                    storiesCount = currentData?.value as! Int + 1
+                    currentData?.value = storiesCount
                 }                
                 
                 URUserManager.incrementUserPointsUsingStoryCriteria(userKey)
@@ -253,15 +253,15 @@ class URUserManager: NSObject {
             .child(byAppendingPath: self.path())
             .child(byAppendingPath: userKey)
             .child(byAppendingPath: "contributions")
-            .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+            .runTransactionBlock { (currentData:FMutableData?) -> FTransactionResult! in
                 
                 var contributionsCount = 1
                 
-                if currentData == nil || currentData.value is NSNull{
-                    currentData.value = contributionsCount
+                if currentData == nil || currentData?.value is NSNull{
+                    currentData?.value = contributionsCount
                 }else{
-                    contributionsCount = currentData.value as! Int + 1
-                    currentData.value = contributionsCount
+                    contributionsCount = currentData?.value as! Int + 1
+                    currentData?.value = contributionsCount
                 }
                 
                 URUserManager.incrementUserPointsUsingContributionCriteria(userKey)
@@ -275,18 +275,18 @@ class URUserManager: NSObject {
             .child(byAppendingPath: self.path())
             .child(byAppendingPath: userKey)
             .child(byAppendingPath: "points")
-            .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+            .runTransactionBlock { (currentData:FMutableData?) -> FTransactionResult! in
                 
                 var pointsCount = URConstant.Gamefication.StoryPoints
                 
-                if currentData == nil || currentData.value is NSNull{
-                    currentData.value = pointsCount
+                if currentData == nil || currentData?.value is NSNull{
+                    currentData?.value = pointsCount
                 }else{
-                    pointsCount = currentData.value as! Int + URConstant.Gamefication.StoryPoints
-                    currentData.value = pointsCount
+                    pointsCount = currentData?.value as! Int + URConstant.Gamefication.StoryPoints
+                    currentData?.value = pointsCount
                 }
                 
-                let totalPoints = currentData.value as! NSNumber
+                let totalPoints = currentData?.value as! NSNumber
                 
                 let user = URUser.activeUser()
                 user!.points = totalPoints
@@ -302,18 +302,18 @@ class URUserManager: NSObject {
             .child(byAppendingPath: self.path())
             .child(byAppendingPath: userKey)
             .child(byAppendingPath: "points")
-            .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
+            .runTransactionBlock { (currentData:FMutableData?) -> FTransactionResult! in
                 
                 var pointsCount = URConstant.Gamefication.ContributionPoints
                 
-                if currentData == nil || currentData.value is NSNull{
-                    currentData.value = pointsCount
+                if currentData == nil || currentData?.value is NSNull{
+                    currentData?.value = pointsCount
                 }else{
-                    pointsCount = currentData.value as! Int + URConstant.Gamefication.ContributionPoints
-                    currentData.value = pointsCount
+                    pointsCount = currentData?.value as! Int + URConstant.Gamefication.ContributionPoints
+                    currentData?.value = pointsCount
                 }
                 
-                let totalPoints = currentData.value as! NSNumber
+                let totalPoints = currentData?.value as! NSNumber
                 
                 let user = URUser.activeUser()
                 user!.points = totalPoints

@@ -165,7 +165,7 @@ class URChatRoomManager: NSObject {
                     print(error?.localizedDescription)
                 }else if !(firebase!.key.isEmpty) {
                     
-                    let chatMembers:URChatMember = URChatMember(key:firebase.key)
+                    let chatMembers:URChatMember = URChatMember(key:firebase!.key)
                     chatRoom.key = chatMembers.key                                        
                     
                     for user in members {

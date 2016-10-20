@@ -14,7 +14,11 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
 
     var appDelegate:AppDelegate!
     
-    lazy var readerVC = QRCodeReaderViewController(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
+    lazy var reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
+        $0.reader          = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
+        $0.showTorchButton = true
+    })
+    
     let storyViewController:URStoriesTableViewController = URStoriesTableViewController(filterStoriesToModerate: true)
     let moderatorViewController:URModeratorTableViewController = URModeratorTableViewController()
     
@@ -33,9 +37,9 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
     //MARK: Class Methods
     
     func openQRCodeReader() {
-        readerVC.completionBlock = { (result: QRCodeReaderResult?) in
+        reader.completionBlock = { (result: QRCodeReaderResult?) in
             
-            self.readerVC.dismissViewControllerAnimated(true, completion: { })
+            self.reader.dismiss(animated: true, completion: { })
             
             if result != nil {
                 URBackendAuthManager.saveAuthToken(result!.value, completion: { (success) in
@@ -43,8 +47,8 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
             }
         }
         
-        readerVC.modalPresentationStyle = .FormSheet
-        self.presentViewController(readerVC, animated: true) { }
+        reader.modalPresentationStyle = .formSheet
+        self.present(reader, animated: true) { }
     }
     
     func setupViewControllers() {

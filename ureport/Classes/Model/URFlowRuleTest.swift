@@ -17,9 +17,9 @@ class URFlowRuleTest: Mappable {
     var min:String?
     var max:String?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.test        <- map["test"]
         self.base        <- map["base"]
         self.type        <- map["type"]

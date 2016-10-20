@@ -99,10 +99,10 @@ class URRapidProContactUtil: NSObject {
                 }
                 
                 let dateFormat = DateFormatter()
-                dateFormat.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+                dateFormat.calendar = NSCalendar(calendarIdentifier: NSCalendar.Identifier.gregorian) as Calendar!
                 dateFormat.dateFormat = "MM/dd/yyyy"
                 
-                URRapidProContactUtil.rapidProUser.setValue(dateFormat.stringFromDate(registrationDate), forKey: "registration_date")
+                URRapidProContactUtil.rapidProUser.setValue(dateFormat.string(from: registrationDate), forKey: "registration_date")
                 completion(rootDictionary)
             })
         }else{

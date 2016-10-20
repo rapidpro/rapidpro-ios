@@ -29,7 +29,8 @@ class URAWSManager: NSObject {
         uploadRequest?.key = fileName
         uploadRequest?.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
-        transferManager.upload(uploadRequest).continue { (task:AWSTask?) -> AnyObject! in
+        transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
+          
             if task!.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
@@ -44,7 +45,8 @@ class URAWSManager: NSObject {
                 completion(file)
             }
             return nil
-        }
+            
+        })
         
     }
     
@@ -59,7 +61,8 @@ class URAWSManager: NSObject {
         uploadRequest?.key = fileName
         uploadRequest?.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
-        transferManager.upload(uploadRequest).continue { (task:AWSTask?) -> AnyObject! in
+        transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
+            
             if task!.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
@@ -74,7 +77,9 @@ class URAWSManager: NSObject {
                 completion(file)
             }
             return nil
-        }
+            
+        })
+        
         
     }
     

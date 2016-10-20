@@ -16,7 +16,7 @@ class URNewsCategory: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.imageUrl    <- map["image_url"]
         self.name        <- map["name"]
     }

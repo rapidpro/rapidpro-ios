@@ -213,7 +213,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.ISScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
     }
     
     func setupUI() {

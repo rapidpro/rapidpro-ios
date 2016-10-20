@@ -79,9 +79,9 @@ class URCountry: NSObject {
     class func getCurrentURCountry() -> URCountry {
         let country:URCountry? = URCountry()
         
-        let locale:Locale! = Locale.current
-        country!.code = locale.object(forKey: Locale.Key.countryCode) as? String
-        country!.name = locale.displayName(forKey: Locale.Key.countryCode, value: country!.code!)
+        let locale = Locale.current
+        country!.code = locale.currencyCode
+        country!.name = locale.localizedString(forCurrencyCode: locale.currencyCode!)
         return country!
     }
     
@@ -90,7 +90,7 @@ class URCountry: NSObject {
             do {
                 let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: Data.ReadingOptions.mappedIfSafe)
                 do {
-                    let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers)
+                    let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers) as AnyObject
                     if let ISO3Code = jsonResult[code] as? String {
                         return ISO3Code
                     }

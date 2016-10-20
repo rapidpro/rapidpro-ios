@@ -22,9 +22,9 @@ class URBackendAuthManager: NSObject {
             .child(byAppendingPath: token)
             .setValue(["checked":true,"user":URUser.activeUser()!.key], withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
-                    completion(success: false)
+                    completion(false)
                 }else {
-                    completion(success: true)
+                    completion(true)
                 }
             })
     }

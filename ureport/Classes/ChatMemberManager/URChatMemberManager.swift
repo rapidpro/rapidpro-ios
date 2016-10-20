@@ -90,7 +90,7 @@ class URChatMemberManager: NSObject {
             .child(byAppendingPath: memberKey)
             .removeValue { (error:Error?, firebase:Firebase?) -> Void in                
                 if error != nil {
-                    print(error.localizedDescription)
+                    print(error?.localizedDescription)
                 }else {
                     print("the user was removed from group")
                     
@@ -114,7 +114,7 @@ class URChatMemberManager: NSObject {
             .child(byAppendingPath: chatRoomKey)
             .removeValue { (error:Error?, firebase:Firebase?) -> Void in
                 if error != nil {
-                    print(error.localizedDescription)
+                    print(error?.localizedDescription)
                 }else {
                     
                     print("removed chatroom from chatMember")
@@ -132,7 +132,7 @@ class URChatMemberManager: NSObject {
                         .child(byAppendingPath: chatRoomKey)
                         .removeValue { (error:Error?, firebase:Firebase?) -> Void in
                             if error != nil {
-                                print(error.localizedDescription)
+                                print(error?.localizedDescription)
                             }else {
                                 print("removed chatroom from chatMessage")
                             }
@@ -146,7 +146,7 @@ class URChatMemberManager: NSObject {
                         .child(byAppendingPath: chatRoomKey)
                         .removeValue { (error:Error?, firebase:Firebase?) -> Void in
                             if error != nil {
-                                print(error.localizedDescription)
+                                print(error?.localizedDescription)
                             }else {
                                 print("removed chatroom")
                             }

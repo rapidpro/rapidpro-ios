@@ -17,7 +17,7 @@ protocol URMessagesViewControllerDelegate {
     func mediaButtonDidTap()
 }
 
-class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate,JSQMessagesComposerTextViewPasteDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaSourceViewControllerDelegate, URAudioRecorderViewControllerDelegate {
+class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerDelegate, UIActionSheetDelegate,UIImagePickerControllerDelegate, UINavigationControllerDelegate, URMediaSourceViewControllerDelegate, URAudioRecorderViewControllerDelegate {
     
     var chatRoom:URChatRoom?
     let chatMessage:URChatMessageManager = URChatMessageManager()
@@ -267,7 +267,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     func setupJSQMessageLayout() {
-        self.inputToolbar!.contentView!.textView!.pasteDelegate = self;
         
         self.senderDisplayName = (senderDisplayName != nil) ? URUser.activeUser()?.nickname : "Anonymous"
         self.senderId = URUser.activeUser()!.key

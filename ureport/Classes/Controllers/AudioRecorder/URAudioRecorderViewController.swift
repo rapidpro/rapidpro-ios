@@ -106,19 +106,19 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
             audioView.needFinishRecord()
         }else{
             
-            proposeToAccess(PrivateResource.Microphone, agreed: {
+            proposeToAccess(PrivateResource.microphone, agreed: {
                 
                 self.audioView.isRecording = true
                 self.audioView.audioRecorder = URAudioRecorderManager()
                 self.audioView.audioRecorder.delegate = self
-                self.btRecording.setTitle("Stop", forState: UIControlState.Normal)
+                self.btRecording.setTitle("Stop", for: UIControlState.normal)
                 self.audioView.startTimeRecording = CFAbsoluteTimeGetCurrent()
                 self.audioView.audioRecorder.startAudioRecord()
-                self.audioView.timerRecording = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self.audioView, selector: #selector(self.audioView.timerCheckOnRecording), userInfo: nil, repeats: true)
+                self.audioView.timerRecording = Timer.scheduledTimer(timeInterval: 1.0, target: self.audioView, selector: #selector(self.audioView.timerCheckOnRecording), userInfo: nil, repeats: true)
                 self.audioView.timerRecording.fire()
                 
                 }, rejected: {
-                    self.alertNoPermissionToAccess(PrivateResource.Microphone)
+                    self.alertNoPermissionToAccess(PrivateResource.microphone)
             })
             
         }

@@ -38,9 +38,11 @@ class URMediaImageView: UIView, NYTPhotosViewControllerDelegate {
     
     func setupWithMedia(_ media:URMedia,viewController:UIViewController) {
         self.imageURL = media.url
-        self.imageView.sd_setImage(with: URL(string: self.imageURL), placeholderImage: nil) { (image:UIImage!, error:NSError!, SDImageCacheType, url:URL!) in
+        
+        self.imageView.sd_setImage(with: URL(string: self.imageURL)) { (image, error, SDImageCacheType, url) in
             self.image = image
         }
+        
         self.media = media
         self.viewController = viewController
     }

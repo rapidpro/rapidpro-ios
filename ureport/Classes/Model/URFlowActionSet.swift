@@ -19,7 +19,7 @@ class URFlowActionSet: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(_ map: Map) {
+    func mapping(map: Map) {
         self.positionX    <- map["x"]
         self.positionY    <- map["y"]
         self.destination  <- map["destination"]
