@@ -21,23 +21,23 @@ class URMediaVideoPhoneView: UIView {
     
     //MARK: Button Events
     
-    @IBAction func btPlayTapped(sender: AnyObject) {
+    @IBAction func btPlayTapped(_ sender: AnyObject) {
         
-        let url = NSURL(string: media.url)!
+        let url = URL(string: media.url)!
         
         let playerController = AVPlayerViewController()
-        playerController.player = AVPlayer(URL: url)
+        playerController.player = AVPlayer(url: url)
         playerController.player!.play()
         
-        self.viewController.presentViewController(playerController, animated: true, completion: nil)
+        self.viewController.present(playerController, animated: true, completion: nil)
     }
     
     //MARK: Class Methods
     
-    func setupWithMedia(media:URMedia,andImageURL:String,viewController:UIViewController) {
+    func setupWithMedia(_ media:URMedia,andImageURL:String,viewController:UIViewController) {
         self.media = media
         self.viewController = viewController
-        self.thumbnail.sd_setImageWithURL(NSURL(string: andImageURL))
+        self.thumbnail.sd_setImage(with: URL(string: andImageURL))
     }
     
 }

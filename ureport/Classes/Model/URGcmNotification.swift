@@ -25,7 +25,7 @@ class URGcmNotification : Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.title       <- map["title"]
         self.body        <- map["body"]
         self.type        <- map["type"]

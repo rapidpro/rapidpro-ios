@@ -23,14 +23,14 @@ class URMediaVideoView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupWithMedia(media:URMedia) {
+    func setupWithMedia(_ media:URMedia) {
         self.media = media
         
         let frame = CGRect(x: 0, y: 0, width: 230, height: 230)
         let playerView = YTPlayerView(frame: frame)
         
         self.addSubview(playerView)
-        playerView.loadWithVideoId(media.id)
+        playerView.load(withVideoId: media.id)
         
     }
 }

@@ -12,7 +12,7 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 
 protocol URUserLoginManagerDelegate {
-    func userHasLoggedInGoogle(user:URUser)
+    func userHasLoggedInGoogle(_ user:URUser)
 }
 
 class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
@@ -35,25 +35,25 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         URFireBaseManager.sharedLoginInstance().unauth()
     }
     
-    class func loginWithFacebook(viewController:UIViewController, completion:(URUser?) -> Void ) {
+    class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?) -> Void ) {
         
         let login: FBSDKLoginManager = FBSDKLoginManager()
         
-        login.logInWithReadPermissions(["email","user_birthday"], fromViewController: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
+        login.logIn(withReadPermissions: ["email","user_birthday"], from: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
                 print(error)
                 completion(nil)
             }
             else {
-                if FBSDKLoginManagerLoginResult.isCancelled {
+                if (FBSDKLoginManagerLoginResult?.isCancelled)! {
                     completion(nil)
                 } else {
-                    if FBSDKAccessToken.currentAccessToken() != nil {
-                        URFireBaseManager.sharedLoginInstance().authWithOAuthProvider(URType.Facebook, token: FBSDKAccessToken.currentAccessToken().tokenString, withCompletionBlock: { (error, authData) -> Void in
+                    if FBSDKAccessToken.current() != nil {
+                        URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Facebook, token: FBSDKAccessToken.current().tokenString, withCompletionBlock: { (error, authData) -> Void in
                             if error != nil {
                                 print(error)
                             }else{
-                                let user: URUser = URUserLoginManager.getFacebookUserData(authData)
+                                let user: URUser = URUserLoginManager.getFacebookUserData(authData!)
                                 completion(user)
                             }
                         })
@@ -65,10 +65,10 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         
     }
     
-    class func loginWithTwitter(completion:(URUser?) ->Void ) {
+    class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {
         let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedLoginInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
         
-        twitterAuthHelper.selectTwitterAccountWithCallback { (error, accounts:[AnyObject]!) -> Void in
+        twitterAuthHelper.selectTwitterAccount { (error, accounts:[AnyObject]!) -> Void in
             
             if error != nil {
                 completion(nil)
@@ -85,24 +85,24 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     //MARK: GoogleSigninDelegate
     
-    func loginWithGoogle(viewController:UIViewController) {
+    func loginWithGoogle(_ viewController:UIViewController) {
         googleSignIn.signIn()
     }
     
-    func signIn(signIn: GIDSignIn!, presentViewController viewController: UIViewController!) {
-        self.loginViewController!.presentViewController(viewController, animated: true, completion: nil)
+    func sign(_ signIn: GIDSignIn!, present viewController: UIViewController!) {
+        self.loginViewController!.present(viewController, animated: true, completion: nil)
     }
     
-    func signIn(signIn: GIDSignIn!, didSignInForUser user: GIDGoogleUser!, withError error: NSError!) {
+    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: NSError!) {
         
         if error != nil {
             print(error)
         }else{
-            URFireBaseManager.sharedLoginInstance().authWithOAuthProvider(URType.Google, token: user.authentication.accessToken, withCompletionBlock: { (error, authData) -> Void in
+            URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Google, token: user.authentication.accessToken, withCompletionBlock: { (error, authData) -> Void in
                 if error != nil {
                     print(error)
                 }else{
-                    let user: URUser = URUserLoginManager.getGoogleUserData(authData)
+                    let user: URUser = URUserLoginManager.getGoogleUserData(authData!)
                     if self.delegate != nil {
                         self.delegate?.userHasLoggedInGoogle(user)
                     }
@@ -113,27 +113,27 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     //MARK: auth Methods
     
-    class func login(email:String,password:String,completion:(FAuthenticationError?,Bool) -> Void) {
+    class func login(_ email:String,password:String,completion:@escaping (FAuthenticationError?,Bool) -> Void) {
         URFireBaseManager.sharedLoginInstance().authUser(email, password: password,
                                                     withCompletionBlock: { error, authData in
                                                         if error != nil {
                                                             
                                                             if let errorCode = FAuthenticationError(rawValue: error.code) {
                                                                 switch (errorCode) {
-                                                                case .UserDoesNotExist:
-                                                                    completion(FAuthenticationError.UserDoesNotExist,false)
-                                                                case .InvalidEmail:
-                                                                    completion(FAuthenticationError.InvalidEmail,false)
-                                                                case .InvalidPassword:
-                                                                    completion(FAuthenticationError.InvalidPassword,false)
+                                                                case .userDoesNotExist:
+                                                                    completion(FAuthenticationError.userDoesNotExist,false)
+                                                                case .invalidEmail:
+                                                                    completion(FAuthenticationError.invalidEmail,false)
+                                                                case .invalidPassword:
+                                                                    completion(FAuthenticationError.invalidPassword,false)
                                                                 default:
-                                                                    completion(FAuthenticationError.Unknown,false)
+                                                                    completion(FAuthenticationError.unknown,false)
                                                                 }
                                                                 print(error)
                                                             }
                                                         } else {
                                                             
-                                                            URUserManager.getByKey(authData.uid, completion: { (user,exists) -> Void in
+                                                            URUserManager.getByKey((authData?.uid)!, completion: { (user,exists) -> Void in
                                                                 if (user != nil && exists) {
                                                                     
                                                                     URLoginViewController.updateUserDataInRapidPro(user!)
@@ -148,8 +148,8 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         })
     }
     
-    class func resetPassword(email:String,completion:(Bool) -> Void) {
-        URFireBaseManager.sharedLoginInstance().resetPasswordForUser(email, withCompletionBlock: { error in
+    class func resetPassword(_ email:String,completion:@escaping (Bool) -> Void) {
+        URFireBaseManager.sharedLoginInstance().resetPassword(forUser: email, withCompletionBlock: { error in
             if error != nil {
                 completion(false)
             } else {
@@ -158,7 +158,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         })
     }
     
-    class func setLoggedUser(user:URUser) {
+    class func setLoggedUser(_ user:URUser) {
         URUserManager.checkIfUserIsMasterModerator(user.key) { (isMasterModerator) -> Void in
             if isMasterModerator == true {
                 user.masterModerator = true
@@ -168,7 +168,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                 
                 URUserManager.checkIfUserIsCountryProgramModerator(user.key, completion: { (isModerator) -> Void in
                     if isModerator == true {
-                        user.moderator = isModerator
+                        user.moderator = isModerator as NSNumber!
                     }
                     
                     URUser.setActiveUser(user)
@@ -178,29 +178,29 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
     
-    class func setLoggedUserWithCompletion(user:URUser,mainCompletion:(finish:Bool) -> Void) {
+    class func setLoggedUserWithCompletion(_ user:URUser,mainCompletion:@escaping (_ finish:Bool) -> Void) {
         URUserManager.checkIfUserIsMasterModerator(user.key) { (isMasterModerator) -> Void in
             if isMasterModerator == true {
                 user.masterModerator = true
                 
                 URUser.setActiveUser(user)
-                mainCompletion(finish: true)
+                mainCompletion(true)
             }else {
                 
                 URUserManager.checkIfUserIsCountryProgramModerator(user.key, completion: { (isModerator) -> Void in
                     if isModerator == true {
-                        user.moderator = isModerator
+                        user.moderator = isModerator as NSNumber!
                     }
                     
                     URUser.setActiveUser(user)
-                    mainCompletion(finish: true)
+                    mainCompletion(true)
                 })
                 
             }
         }
     }
     
-    class func setUserAndCountryProgram(user:URUser) {
+    class func setUserAndCountryProgram(_ user:URUser) {
         //        user.chatRooms = nil
         URUser.setActiveUser(user)
         URUserLoginManager.setLoggedUser(user)
@@ -210,20 +210,20 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     //MARK: GetUserData Methods
-    class func getFacebookUserData(authData:FAuthData) -> URUser{
+    class func getFacebookUserData(_ authData:FAuthData) -> URUser{
         let user = URUser()
         
         user.key = authData.uid
-        user.nickname = (authData.providerData["displayName"] as? String)?.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil)
+        user.nickname = (authData.providerData["displayName"] as? String)?.replacingOccurrences(of: " ", with: "", options: [], range: nil)
         user.email = authData.providerData["email"] as? String
         user.picture = authData.providerData["profileImageURL"] as? String
-        user.gender = (authData.providerData["cachedUserProfile"]!.objectForKey("gender") as! String) == "male" ? URGender.Male : URGender.Female
+        user.gender = ((authData.providerData["cachedUserProfile"]! as AnyObject).object(forKey: "gender") as! String) == "male" ? URGender.Male : URGender.Female
         user.type = URType.Facebook
         
         return user
     }
     
-    class func getTwitterUserData(authData:FAuthData) -> URUser{
+    class func getTwitterUserData(_ authData:FAuthData) -> URUser{
         let user = URUser()
         
         user.key = authData.uid
@@ -235,11 +235,11 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         return user
     }
     
-    class func getGoogleUserData(authData:FAuthData) -> URUser{
+    class func getGoogleUserData(_ authData:FAuthData) -> URUser{
         let user = URUser()
         
         user.key = authData.uid
-        user.nickname = (authData.providerData["displayName"] as? String)?.stringByReplacingOccurrencesOfString(" ", withString: "", options: [], range: nil)
+        user.nickname = (authData.providerData["displayName"] as? String)?.replacingOccurrences(of: " ", with: "", options: [], range: nil)
         user.email = authData.providerData["email"] as? String
         user.picture = authData.providerData["profileImageURL"] as? String
         user.type = URType.Google

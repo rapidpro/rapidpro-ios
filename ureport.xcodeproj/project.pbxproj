@@ -37,7 +37,6 @@
 		6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE6B1B974E0F00C9707C /* URMessageRead.swift */; };
 		6533CF441C496627009DF49C /* URRapidProContactUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533CF431C496627009DF49C /* URRapidProContactUtil.swift */; };
 		65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FC01B4C842700344D75 /* AppDelegate.swift */; };
-		65409FD71B4C842700344D75 /* ureportTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FD61B4C842700344D75 /* ureportTests.swift */; };
 		65409FEE1B4C84DE00344D75 /* URLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FEC1B4C84DE00344D75 /* URLoginViewController.swift */; };
 		65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65409FED1B4C84DE00344D75 /* URLoginViewController.xib */; };
 		65409FF11B4C977600344D75 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65409FF01B4C977600344D75 /* Foundation.framework */; };
@@ -327,8 +326,6 @@
 		65409FBF1B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65409FC01B4C842700344D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65409FD01B4C842700344D75 /* ureportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ureportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		65409FD51B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		65409FD61B4C842700344D75 /* ureportTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ureportTests.swift; sourceTree = "<group>"; };
 		65409FEC1B4C84DE00344D75 /* URLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginViewController.swift; sourceTree = "<group>"; };
 		65409FED1B4C84DE00344D75 /* URLoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
 		65409FF01B4C977600344D75 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -683,7 +680,6 @@
 			children = (
 				65409FF01B4C977600344D75 /* Foundation.framework */,
 				65409FBD1B4C842700344D75 /* ureport */,
-				65409FD31B4C842700344D75 /* ureportTests */,
 				65409FBC1B4C842700344D75 /* Products */,
 				765863F8BACD5E4ED452B82C /* Frameworks */,
 				CFA94116CFAD1BE71524C9A7 /* Pods */,
@@ -719,23 +715,6 @@
 				65409FBF1B4C842700344D75 /* Info.plist */,
 				65685ADB1BA230DA00099CFB /* Key.plist */,
 				974249251BFB76570024384E /* Key-debug.plist */,
-			);
-			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		65409FD31B4C842700344D75 /* ureportTests */ = {
-			isa = PBXGroup;
-			children = (
-				65409FD61B4C842700344D75 /* ureportTests.swift */,
-				65409FD41B4C842700344D75 /* Supporting Files */,
-			);
-			path = ureportTests;
-			sourceTree = "<group>";
-		};
-		65409FD41B4C842700344D75 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				65409FD51B4C842700344D75 /* Info.plist */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -1736,6 +1715,7 @@
 					65409FBA1B4C842700344D75 = {
 						CreatedOnToolsVersion = 6.4;
 						DevelopmentTeam = 5DSXDX2N9P;
+						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2105,7 +2085,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				65409FD71B4C842700344D75 /* ureportTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2239,11 +2218,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ureport/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -2263,11 +2243,12 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = ureport/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ureport/ureport-Bridging-Header.h";
+				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;

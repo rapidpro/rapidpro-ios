@@ -15,31 +15,31 @@ class URReviewModeManager: NSObject {
         return "review"
     }
     
-    class func checkIfIsInReviewMode(completion:(reviewMode:Bool) -> Void) {
+    class func checkIfIsInReviewMode(_ completion:@escaping (_ reviewMode:Bool) -> Void) {
         
         let settings = URSettings.getSettings()
         settings.reviewMode = false
         
-        var version = NSBundle.mainBundle().infoDictionary!["CFBundleShortVersionString"] as! String
-        version = version.stringByReplacingOccurrencesOfString(".", withString: "")
+        var version = Bundle.main.infoDictionary!["CFBundleShortVersionString"] as! String
+        version = version.replacingOccurrences(of: ".", with: "")
         
 //        URFireBaseManager.sharedInstance()
 //            .childByAppendingPath(self.path())
 //            .childByAppendingPath(version)
-//            .setValue(["active":true], withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+//            .setValue(["active":true], withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
 //                
 //            })
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(version)
-            .childByAppendingPath("active")
-            .observeSingleEventOfType(.Value, withBlock: { snapshot in
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: version)
+            .child(byAppendingPath: "active")
+            .observeSingleEvent(of: .value, with: { snapshot in
                 
-                if let active = snapshot.value as? Bool {
-                    completion(reviewMode: active)
+                if let active = snapshot?.value as? Bool {
+                    completion(active)
                 }else{
-                    completion(reviewMode: false)
+                    completion(false)
                 }
                 
             })

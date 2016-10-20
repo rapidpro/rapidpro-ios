@@ -25,7 +25,7 @@ class URGcmInput : Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.to             <- map["to"]
         self.data           <- map["data"]
         self.priority       <- map["priority"]

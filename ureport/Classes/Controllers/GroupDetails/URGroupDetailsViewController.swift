@@ -28,7 +28,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         super.viewDidLoad()
         
         self.isUserAdmin = false
-        URNavigationManager.setupNavigationBarWithType(.Clear)
+        URNavigationManager.setupNavigationBarWithType(.clear)
         setupTableView()
         setupUI()
         setupGroupInfo()
@@ -40,15 +40,15 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         super.init(nibName: "URGroupDetailsViewController", bundle: nil)
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationItem.rightBarButtonItems = self.addRightBarButtons()
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Group Details")
+        tracker?.set(kGAIScreenName, value: "Group Details")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
@@ -59,23 +59,23 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listUser.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
         
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, indexPath: indexPath, checkGroupOption: false)
+        cell.setupCellWithUser(self.listUser[(indexPath as NSIndexPath).row],createGroupOption: false, indexPath: indexPath, checkGroupOption: false)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         self.view.endEditing(true)
         //        let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
     }
@@ -83,24 +83,24 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     //MARK: Class Methods
     
     func setupUI() {
-        self.btAddUreporter.setTitle("group_info_add_ureporter".localized, forState: UIControlState.Normal)
+        self.btAddUreporter.setTitle("group_info_add_ureporter".localized, for: UIControlState())
     }
     
     func addRightBarButtons() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
         
-        let infoButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.Organize, target: self, action: #selector(openActionSheet))
+        let infoButtonItem = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.organize, target: self, action: #selector(openActionSheet))
         
         return [infoButtonItem]
     }
     
     func openActionSheet() {
-        let alertController: UIAlertController = UIAlertController(title: nil, message: "choose_option".localized, preferredStyle: .ActionSheet)
+        let alertController: UIAlertController = UIAlertController(title: nil, message: "choose_option".localized, preferredStyle: .actionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in }
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) { action -> Void in }
         
-        let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "remove_group".localized : "label_leave_group".localized , style: .Default) { action -> Void in
+        let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "remove_group".localized : "label_leave_group".localized , style: .default) { action -> Void in
             if self.isUserAdmin == true {
                 URChatMemberManager.removeChatRoom(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key)
             }else {
@@ -108,7 +108,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
             }
         }
         
-        let editAction: UIAlertAction = UIAlertAction(title: "label_edit".localized, style: .Default) { action -> Void in
+        let editAction: UIAlertAction = UIAlertAction(title: "label_edit".localized, style: .default) { action -> Void in
             URNavigationManager.navigation.pushViewController(URNewGroupViewController(groupChatRoom: self.groupChatRoom, members: self.listUser), animated: true)
         }
         
@@ -119,20 +119,20 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
             alertController.addAction(editAction)
         }
         if URConstant.isIpad {
-            alertController.modalPresentationStyle = UIModalPresentationStyle.Popover
-            alertController.popoverPresentationController!.sourceView = (self.navigationItem.rightBarButtonItem!.valueForKey("view") as! UIView)
-            alertController.popoverPresentationController!.sourceRect = (self.navigationItem.rightBarButtonItem!.valueForKey("view") as! UIView).bounds
+            alertController.modalPresentationStyle = UIModalPresentationStyle.popover
+            alertController.popoverPresentationController!.sourceView = (self.navigationItem.rightBarButtonItem!.value(forKey: "view") as! UIView)
+            alertController.popoverPresentationController!.sourceRect = (self.navigationItem.rightBarButtonItem!.value(forKey: "view") as! UIView).bounds
             
         }
         
-        self.presentViewController(alertController, animated: true, completion: nil)
+        self.present(alertController, animated: true, completion: nil)
     }
     
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
-        self.tableView.backgroundColor = UIColor.whiteColor()
-        self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.backgroundColor = UIColor.white
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
     
     func setupGroupInfo() {
@@ -141,7 +141,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
             self.isUserAdmin = true
         }else {
             self.btAddUreporterHeight.constant = 0
-            self.btAddUreporter.hidden = true
+            self.btAddUreporter.isHidden = true
         }
         
         self.lbGroupTitle.text = groupChatRoom.title
@@ -149,15 +149,15 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname])
         
         if let createdDate = groupChatRoom.createdDate {
-             self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) \(URDateUtil.birthDayFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: createdDate.doubleValue/1000) as NSTimeInterval)))"
+             self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) \(URDateUtil.birthDayFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: createdDate.doubleValue/1000 as Double) as TimeInterval)))"
         }
         
         if self.groupChatRoom.picture != nil && self.groupChatRoom.picture.url != nil {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imgGroupPic.contentMode = UIViewContentMode.ScaleAspectFill
-            self.imgGroupPic.sd_setImageWithURL(NSURL(string: self.groupChatRoom.picture.url))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.imgGroupPic.contentMode = UIViewContentMode.scaleAspectFill
+            self.imgGroupPic.sd_setImage(with: URL(string: self.groupChatRoom.picture.url))
         }else {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
             self.imgGroupPic.image = UIImage(named: "default_group")
         }
         
@@ -165,7 +165,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
     
     //MARK: Button Events
     
-    @IBAction func btAddUreporterTapped(sender: AnyObject) {
+    @IBAction func btAddUreporterTapped(_ sender: AnyObject) {
         URNavigationManager.navigation.pushViewController(URNewGroupViewController(groupChatRoom: self.groupChatRoom, members: self.listUser), animated: true)
     }
     

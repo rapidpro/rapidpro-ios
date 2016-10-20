@@ -45,10 +45,10 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         super.viewDidLoad()
         
         self.delegate = self
-        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        self.appDelegate.requestPermissionForPushNotification(UIApplication.sharedApplication())
+        self.appDelegate = UIApplication.shared.delegate as! AppDelegate
+        self.appDelegate.requestPermissionForPushNotification(UIApplication.shared)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:"newChatReceived", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:NSNotification.Name(rawValue: "newChatReceived"), object: nil)
         
         if let closedPollViewController = closedPollViewController as? URClosedPollTableViewController {
             closedPollViewController.delegate = self
@@ -62,7 +62,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         self.title = "U-Report"
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         URUserManager.reloadUserInfoWithCompletion { (finish) in }
@@ -71,22 +71,22 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Main")
+        tracker?.set(kGAIScreenName, value: "Main")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
     //MARK: URMyChatsViewControllerDelegate
     
-    func openChatRoomWith(chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
+    func openChatRoomWith(_ chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
         self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom,chatMembers:chatMembers,title:title), animated: true)
     }
     
     //MARK: URClosedPollTableViewControllerDelegate
     
-    func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
+    func tableViewCellDidTap(_ cell: URClosedPollTableViewCell, isIPad:Bool) {
         if !isIPad {
             self.navigationController?.pushViewController(URPollResultViewController(poll: cell.poll), animated: true)
         }
@@ -125,21 +125,21 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
                 
                 chatRoomKey = nil
                 
-                tabBarController(self, didSelectViewController: myChatsViewController)
+                tabBarController(self, didSelect: myChatsViewController)
                 self.selectedIndex = 2
             }else if let viewControllerToShow = self.viewControllerToShow {
                 
                 if viewControllerToShow is URClosedPollTableViewController {
                     self.selectedIndex = 1
-                    tabBarController(self, didSelectViewController: closedPollViewController)
+                    tabBarController(self, didSelect: closedPollViewController)
                 }else if viewControllerToShow is URStoriesTableViewController {
                     self.selectedIndex = 0
-                    tabBarController(self, didSelectViewController: storiesTableViewController)
+                    tabBarController(self, didSelect: storiesTableViewController)
                 }
                 
             }else{
                 self.selectedIndex = 0
-                tabBarController(self, didSelectViewController: storiesTableViewController)
+                tabBarController(self, didSelect: storiesTableViewController)
             }
         }else {
             self.viewControllers = [storiesTableViewController,closedPollViewController]
@@ -151,13 +151,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
         self.navigationItem.rightBarButtonItem = nil
         
-        let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(createChatRoom))
+        let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(createChatRoom))
         
-        let btnInvite: UIButton = UIButton(type: UIButtonType.Custom)
-        btnInvite.frame = CGRectMake(0, 0, 30, 20)
-        btnInvite.setBackgroundImage(UIImage(named:"icon_invite_friend"), forState: UIControlState.Normal)
-        btnInvite.addTarget(self, action: #selector(invitePeople), forControlEvents: UIControlEvents.TouchUpInside)
-        let container2: UIView = UIView(frame: CGRectMake(0, 0, 30, 30))
+        let btnInvite: UIButton = UIButton(type: UIButtonType.custom)
+        btnInvite.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
+        btnInvite.setBackgroundImage(UIImage(named:"icon_invite_friend"), for: UIControlState())
+        btnInvite.addTarget(self, action: #selector(invitePeople), for: UIControlEvents.touchUpInside)
+        let container2: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         container2.addSubview(btnInvite)
         let inviteButtonItem = UIBarButtonItem(customView: container2)
         
@@ -191,7 +191,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     
     //MARK: TabBarControllerDelegate
     
-    func tabBarController(tabBarController: UITabBarController, shouldSelectViewController viewController: UIViewController) -> Bool {
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
         if viewController is URClosedPollTableViewController || viewController is URMyChatsViewController {
             if let _ = URUser.activeUser() {
@@ -206,13 +206,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
     }
     
-    func tabBarController(tabBarController: UITabBarController, didSelectViewController viewController: UIViewController) {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if viewController is URStoriesTableViewController {
             self.title = "U-Report"            
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationItem.rightBarButtonItems = nil
-                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(newStory))
+                self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(newStory))
             }
         }
         

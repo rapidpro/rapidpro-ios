@@ -11,7 +11,7 @@ import Alamofire
 import Firebase
 
 protocol URRapidProManagerDelegate {
-    func newMessageReceived(message:String)
+    func newMessageReceived(_ message:String)
 }
 
 class URRapidProManager: NSObject {
@@ -27,35 +27,35 @@ class URRapidProManager: NSObject {
     func getPollMessage() {
         
         var userKey = URUser.activeUser()!.key
-        userKey = userKey?.stringByReplacingOccurrencesOfString("-", withString: "", options: [], range: nil)
-        userKey = userKey?.stringByReplacingOccurrencesOfString(":", withString: "", options: [], range: nil)
+        userKey = userKey?.replacingOccurrences(of: "-", with: "", options: [], range: nil)
+        userKey = userKey?.replacingOccurrences(of: ":", with: "", options: [], range: nil)
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URRapidProManager.path())
-            .childByAppendingPath("message")
-            .childByAppendingPath(userKey)
-            .queryLimitedToLast(1)
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URRapidProManager.path())
+            .child(byAppendingPath: "message")
+            .child(byAppendingPath: userKey)
+            .queryLimited(toLast: 1)
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 
-                print(snapshot.value)
+                print(snapshot?.value)
                 
                 if let delegate = self.delegate {
-                    delegate.newMessageReceived((snapshot.value as! NSDictionary).objectForKey("text") as! String)
+                    delegate.newMessageReceived((snapshot?.value as! NSDictionary).object(forKey: "text") as! String)
                 }
             })
     }
     
     
     
-    class func sendPollResponse(text:String!) {
+    class func sendPollResponse(_ text:String!) {
         
         let pollResponse = URPollResponse(channel: URCountryProgramManager.getChannelOfCurrentCountryProgram(), from:URUser.activeUser()!.key, text: text)
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URRapidProManager.path())
-            .childByAppendingPath("response")
+            .child(byAppendingPath: URRapidProManager.path())
+            .child(byAppendingPath: "response")
             .childByAutoId()
-            .setValue(pollResponse.toDictionary(), withCompletionBlock: { (error:NSError!, firebase:Firebase!) -> Void in
+            .setValue(pollResponse.toDictionary(), withCompletionBlock: { (error:Error?, firebase:Firebase?) -> Void in
                 if error != nil {
                     print(error?.localizedDescription)
                 }else if !(firebase!.key.isEmpty) {
@@ -65,7 +65,7 @@ class URRapidProManager: NSObject {
             })
     }
     
-    class func getFlowDefinition(flowUuid: String, completion:(URFlowDefinition) -> Void) {
+    class func getFlowDefinition(_ flowUuid: String, completion:@escaping (URFlowDefinition) -> Void) {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
@@ -79,7 +79,7 @@ class URRapidProManager: NSObject {
         })
     }
     
-    class func getFlowRuns(contact: URContact, completion:([URFlowRun]?) -> Void) {
+    class func getFlowRuns(_ contact: URContact, completion:@escaping ([URFlowRun]?) -> Void) {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
@@ -100,18 +100,18 @@ class URRapidProManager: NSObject {
         })
     }
     
-    class func getMinimumDate() -> NSDate {
+    class func getMinimumDate() -> Date {
         let date = URDateUtil.currentDate()
-        let gregorian = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+        let gregorian = Calendar(identifier: Calendar.Identifier.gregorian)
         
-        let offsetComponents = NSDateComponents();
+        var offsetComponents = DateComponents();
         offsetComponents.month = -1;
         
-        return gregorian!.dateByAddingComponents(offsetComponents, toDate: date, options: [])!;
+        return (gregorian as NSCalendar).date(byAdding: offsetComponents, to: date as Date, options: [])!;
         
     }
     
-    class func getContact(user:URUser, completion:(URContact) -> Void) {
+    class func getContact(_ user:URUser, completion:@escaping (URContact) -> Void) {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
@@ -145,47 +145,47 @@ class URRapidProManager: NSObject {
         }
     }
     
-    class func sendRulesetResponses(user:URUser, responses:[URRulesetResponse], completion:() -> Void) {
+    class func sendRulesetResponses(_ user:URUser, responses:[URRulesetResponse], completion:@escaping () -> Void) {
         let token = URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
         
         let userId = URUserManager.formatExtUserId(user.key)
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)external/received/\(channel)/"
         
-        let group = dispatch_group_create();
-        let queue = dispatch_queue_create("in.ureport-poll-responses", DISPATCH_QUEUE_SERIAL);
+        let group = DispatchGroup();
+        let queue = DispatchQueue(label: "in.ureport-poll-responses", attributes: []);
         
         self.sendingAnswers = true
         
         for response in responses {
-            dispatch_group_async(group, queue, { () -> Void in
-                let request = NSMutableURLRequest(URL: NSURL(string: url)!)
-                request.HTTPMethod = "POST"
+            queue.async(group: group, execute: { () -> Void in
+                let request = NSMutableURLRequest(url: URL(string: url)!)
+                request.httpMethod = "POST"
                 request.setValue(token, forHTTPHeaderField: "Authorization")
                 request.timeoutInterval = 15
                 
                 let postString = "from=\(userId)&text=\(response.response)"
-                request.HTTPBody = postString.dataUsingEncoding(NSUTF8StringEncoding)
-                var httpResponse: NSURLResponse?
+                request.httpBody = postString.data(using: String.Encoding.utf8)
+                var httpResponse: URLResponse?
                 
                 do {
-                    try NSURLConnection.sendSynchronousRequest(request, returningResponse: &httpResponse)
+                    try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &httpResponse)
                     print("Sent: \(response.response!)")
                 } catch {
                     print("Error on sending poll response")
                 }
                 
-                NSThread.sleepForTimeInterval(2)
+                Thread.sleep(forTimeInterval: 2)
             })
         }
         
-        dispatch_group_notify(group, queue) { () -> Void in
+        group.notify(queue: queue) { () -> Void in
             self.sendingAnswers = false
             completion()
         }
     }
     
-    class func sendReceivedMessage(user:URUser, text:String) {
+    class func sendReceivedMessage(_ user:URUser, text:String) {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
@@ -203,7 +203,7 @@ class URRapidProManager: NSObject {
         Alamofire.request(.POST, url, parameters: parameters, encoding: .URLEncodedInURL, headers: headers).response
     }
     
-    class func getContactFields(country:URCountry, completion:([String]) -> Void) {
+    class func getContactFields(_ country:URCountry, completion:@escaping ([String]) -> Void) {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
@@ -230,7 +230,7 @@ class URRapidProManager: NSObject {
         
     }
     
-    class func getStatesByCountry(country:URCountry, completion:(states:[URState]?,districts:[URDistrict]?) -> Void) {
+    class func getStatesByCountry(_ country:URCountry, completion:@escaping (_ states:[URState]?,_ districts:[URDistrict]?) -> Void) {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
@@ -284,7 +284,7 @@ class URRapidProManager: NSObject {
         
     }
     
-    class func saveUser(user:URUser,country:URCountry,setupGroups:Bool,completion:(response:NSDictionary?) -> Void) {
+    class func saveUser(_ user:URUser,country:URCountry,setupGroups:Bool,completion:@escaping (_ response:NSDictionary?) -> Void) {
         
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!

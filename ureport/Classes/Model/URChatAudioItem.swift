@@ -12,7 +12,7 @@ import AVFoundation
 
 class URChatAudioItem: JSQMediaItem {
     
-    let mediaAudioView = NSBundle.mainBundle().loadNibNamed("URMediaAudioView", owner: nil, options: nil)[0] as! URMediaAudioView
+    let mediaAudioView = Bundle.main.loadNibNamed("URMediaAudioView", owner: nil, options: nil)?[0] as! URMediaAudioView
     var maskAsOutgoing:Bool!
     var media:URMedia!
     
@@ -32,7 +32,7 @@ class URChatAudioItem: JSQMediaItem {
     
     @objc override func mediaView() -> UIView! {
         if mediaAudioView.media == nil {
-            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMaskToMediaView(mediaAudioView, isOutgoing: maskAsOutgoing)        
+            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMask(toMediaView: mediaAudioView, isOutgoing: maskAsOutgoing)        
             mediaAudioView.setupWithMedia(media)
         }
         return mediaAudioView

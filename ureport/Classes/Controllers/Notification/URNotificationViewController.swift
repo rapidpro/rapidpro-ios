@@ -29,7 +29,7 @@ class URNotificationViewController: UIViewController {
     //MARK: Button Events
     
     
-    @IBAction func btSettingsTapped(sender: AnyObject) {
+    @IBAction func btSettingsTapped(_ sender: AnyObject) {
         URNavigationManager.setFrontViewController(URSettingsTableViewController())
     }
 

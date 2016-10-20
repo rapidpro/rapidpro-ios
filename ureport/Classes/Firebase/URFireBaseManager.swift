@@ -20,7 +20,7 @@ class URFireBaseManager: NSObject {
     static let GCM_DEBUG_MODE = false
     
 //    Production
-    static let region = AWSRegionType.EUWest1
+    static let region = AWSRegionType.euWest1
 //    Debug
 //    static let region = AWSRegionType.USEast1
 
@@ -33,16 +33,16 @@ class URFireBaseManager: NSObject {
     
     static func sharedInstance() -> Firebase {
         
-        if let countryCode = URIPCheckManager.countryCode where countryCode == URIPCheckManager.syriaCountryCode {
+        if let countryCode = URIPCheckManager.countryCode , countryCode == URIPCheckManager.syriaCountryCode {
             return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
             
         }else {
-            return Reference
+            return Reference!
         }
     }
     
     static func sharedLoginInstance() -> Firebase {
-        return Reference
+        return Reference!
     }
     
 }

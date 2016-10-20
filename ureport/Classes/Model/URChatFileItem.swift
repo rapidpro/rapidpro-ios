@@ -11,7 +11,7 @@ import JSQMessagesViewController
 
 class URChatFileItem: JSQMediaItem {
     
-    let mediaFileView = NSBundle.mainBundle().loadNibNamed("URMediaFileView", owner: nil, options: nil)[0] as! URMediaFileView
+    let mediaFileView = Bundle.main.loadNibNamed("URMediaFileView", owner: nil, options: nil)?[0] as! URMediaFileView
     var maskAsOutgoing:Bool!
     var media:URMedia!
     
@@ -32,7 +32,7 @@ class URChatFileItem: JSQMediaItem {
     
     @objc override func mediaView() -> UIView! {
         if mediaFileView.media == nil {
-            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMaskToMediaView(mediaFileView, isOutgoing: maskAsOutgoing)
+            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMask(toMediaView: mediaFileView, isOutgoing: maskAsOutgoing)
             mediaFileView.setupWithMedia(media)
         }
         return mediaFileView

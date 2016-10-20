@@ -31,14 +31,14 @@ class URPasswordEditViewController: UIViewController {
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Password Edit")
+        tracker?.set(kGAIScreenName, value: "Password Edit")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
@@ -50,21 +50,21 @@ class URPasswordEditViewController: UIViewController {
         self.lbConfirmBelow.text = "label_reset_password".localized
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)        
         self.navigationController!.setNavigationBarHidden(false, animated: false)
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        URNavigationManager.setupNavigationBarWithType(.blue)
     }    
 
     //MARK: Button Events
     
-    @IBAction func btConfirmTapped(sender: AnyObject) {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        URFireBaseManager.sharedInstance().changePasswordForUser(URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:NSError?) -> Void in
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+    @IBAction func btConfirmTapped(_ sender: AnyObject) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        URFireBaseManager.sharedInstance().changePassword(forUser: URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:NSError?) -> Void in
+                MBProgressHUD.hide(for: self.view, animated: true)
                 self.view.endEditing(true)
             if error != nil {
                 UIAlertView(title: nil, message: "unknown_error".localized, delegate: self, cancelButtonTitle: "OK").show()
             }else {
                 UIAlertView(title: nil, message: "password_updated".localized, delegate: self, cancelButtonTitle: "OK").show()
-                URNavigationManager.navigation.popViewControllerAnimated(true)
+                URNavigationManager.navigation.popViewController(animated: true)
             }
         }
         

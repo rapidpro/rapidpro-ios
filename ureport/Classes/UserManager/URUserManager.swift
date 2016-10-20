@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 @objc protocol URUserManagerDelegate {
-    optional func newUserReceived(user:URUser)
+    @objc optional func newUserReceived(_ user:URUser)
 }
 
 class URUserManager: NSObject {
@@ -26,82 +26,82 @@ class URUserManager: NSObject {
         return "user_moderator"
     }
     
-    class func reloadUserInfoWithCompletion(completion:(finish:Bool) -> Void) {
+    class func reloadUserInfoWithCompletion(_ completion:@escaping (_ finish:Bool) -> Void) {
         if let user = URUser.activeUser() {
             URUserManager.getByKey(user.key, completion: { (userFromDB, exists) -> Void in
                 if let userFromDB = userFromDB {
                     URUser.setActiveUser(userFromDB)
                     URUserLoginManager.setLoggedUser(userFromDB)
-                    completion(finish: true)
+                    completion(true)
                 }
             })
         }
     }
     
-    class func save(user:URUser) {        
+    class func save(_ user:URUser) {        
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(user.key)
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: user.key)
             .setValue(user.toDictionary())
         
         URUser.setActiveUser(user)
     }
     
-    class func updatePushIdentity(user:URUser) {
+    class func updatePushIdentity(_ user:URUser) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(user.key)
-            .childByAppendingPath("pushIdentity")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: user.key)
+            .child(byAppendingPath: "pushIdentity")
             .setValue(user.pushIdentity)
         
         URUserLoginManager.setLoggedUser(user)
 
     }
     
-    class func updateAvailableInChat(user:URUser,publicProfile:Bool) {
+    class func updateAvailableInChat(_ user:URUser,publicProfile:Bool) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(user.key)
-            .childByAppendingPath("publicProfile")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: user.key)
+            .child(byAppendingPath: "publicProfile")
             .setValue(publicProfile)
         
         URUserLoginManager.setLoggedUser(user)
         
     }
     
-    class func setUserAsModerator(userKey:String) {
+    class func setUserAsModerator(_ userKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URUserManager.pathUserModerator())
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URUserManager.pathUserModerator())
             .setValue([userKey:true])
     }
 
-    class func removeModerateUser(userKey:String) {
+    class func removeModerateUser(_ userKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URUserManager.pathUserModerator())
-            .childByAppendingPath(userKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URUserManager.pathUserModerator())
+            .child(byAppendingPath: userKey)
             .removeValue()
     }
     
-    class func updateChatroom(user:URUser,chatRoom:URChatRoom) {
+    class func updateChatroom(_ user:URUser,chatRoom:URChatRoom) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(user.key)
-            .childByAppendingPath("chatRooms")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: user.key)
+            .child(byAppendingPath: "chatRooms")
             .updateChildValues([chatRoom.key! : true])
     }
     
-    class func removeChatroom(user:URUser,chatRoomKey:String) {
+    class func removeChatroom(_ user:URUser,chatRoomKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URUserManager.path())
-            .childByAppendingPath("chatRooms")
-            .childByAppendingPath(chatRoomKey)
-            .removeValueWithCompletionBlock { (error:NSError!, firebase:Firebase!) -> Void in
+            .child(byAppendingPath: URUserManager.path())
+            .child(byAppendingPath: "chatRooms")
+            .child(byAppendingPath: chatRoomKey)
+            .removeValue { (error:Error?, firebase:Firebase?) -> Void in
                 if error != nil {
-                    print(error.localizedDescription)
+                    print(error?.localizedDescription)
                 }else {
                     print("the user was removed from group")
                 }
@@ -110,13 +110,13 @@ class URUserManager: NSObject {
     
     func getUsersByPoints() {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URUserManager.path())
-            .queryOrderedByChild("points")
-            .observeEventType(FEventType.ChildAdded, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URUserManager.path())
+            .queryOrdered(byChild: "points")
+            .observe(FEventType.childAdded, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     
                     if let delegate = self.delegate {                        
-                        delegate.newUserReceived!(URUser(jsonDict: snapshot.value as? NSDictionary))
+                        delegate.newUserReceived!(URUser(jsonDict: snapshot?.value as? NSDictionary))
                     }
                 }else {
                     
@@ -124,18 +124,18 @@ class URUserManager: NSObject {
             })
     }
     
-    class func getByKey(key:String,completion:(URUser?,Bool) -> Void){
+    class func getByKey(_ key:String,completion:@escaping (URUser?,Bool) -> Void){
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(key)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: key)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
                 
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     
-                    let user = URUser(jsonDict: (snapshot.value as? NSDictionary))
+                    let user = URUser(jsonDict: (snapshot?.value as? NSDictionary))
                     
-                    if let chatRooms = (snapshot.value as? NSDictionary)?.objectForKey("chatRooms") {
+                    if let chatRooms = (snapshot?.value as? NSDictionary)?.object(forKey: "chatRooms") {
                         user.chatRooms = chatRooms as! NSDictionary
                     }
                     
@@ -146,12 +146,12 @@ class URUserManager: NSObject {
             })
     }
     
-    class func checkIfUserIsMasterModerator(key:String,completion:(Bool) -> Void){
+    class func checkIfUserIsMasterModerator(_ key:String,completion:@escaping (Bool) -> Void){
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URUserManager.pathUserModerator())
-            .childByAppendingPath(key)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in                
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URUserManager.pathUserModerator())
+            .child(byAppendingPath: key)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in                
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     completion(true)
                 }else {
                     completion(false)
@@ -159,15 +159,15 @@ class URUserManager: NSObject {
             })
     }
     
-    class func checkIfUserIsCountryProgramModerator(key:String,completion:(Bool) -> Void){
+    class func checkIfUserIsCountryProgramModerator(_ key:String,completion:@escaping (Bool) -> Void){
 
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URUserManager.pathUserModerator())
-            .childByAppendingPath(key)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in                
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URUserManager.pathUserModerator())
+            .child(byAppendingPath: key)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in                
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     completion(true)
                 }else {
                     completion(false)
@@ -176,20 +176,20 @@ class URUserManager: NSObject {
     }
     
     
-    class func getAllUserByCountryProgram(completion:([URUser]?) -> Void){
+    class func getAllUserByCountryProgram(_ completion:@escaping ([URUser]?) -> Void){
         
         let countryProgram = URCountryProgramManager.activeCountryProgram()!.code!
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .queryOrderedByChild("countryProgram")
-            .queryEqualToValue(countryProgram)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: self.path())
+            .queryOrdered(byChild: "countryProgram")
+            .queryEqual(toValue: countryProgram)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     
                     var userList:[URUser] = []
                     
-                    for rest in snapshot.children.allObjects as! [FDataSnapshot] {
+                    for rest in snapshot?.children.allObjects as! [FDataSnapshot] {
                         let user = URUser(jsonDict: rest.value as? NSDictionary)
                         if user.publicProfile != nil && user.publicProfile.boolValue == true && user.key != URUser.activeUser()!.key {
                             userList.append(user)
@@ -204,16 +204,16 @@ class URUserManager: NSObject {
         
     }
     
-    class func getAllModertorUsers(completion:([String]?) -> Void){
+    class func getAllModertorUsers(_ completion:@escaping ([String]?) -> Void){
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URUserManager.pathUserModerator())
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URUserManager.pathUserModerator())
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     var userKeysList:[String] = []
-                    for rest in snapshot.children.allObjects as! [FDataSnapshot] {
+                    for rest in snapshot?.children.allObjects as! [FDataSnapshot] {
                        userKeysList.append(rest.key)
                     }
                     
@@ -226,11 +226,11 @@ class URUserManager: NSObject {
         
     }
             
-    class func incrementUserStories(userKey:String){
+    class func incrementUserStories(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(userKey)
-            .childByAppendingPath("stories")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: userKey)
+            .child(byAppendingPath: "stories")
             .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
                 
                 var storiesCount = 1
@@ -244,15 +244,15 @@ class URUserManager: NSObject {
                 
                 URUserManager.incrementUserPointsUsingStoryCriteria(userKey)
                 
-                return FTransactionResult.successWithValue(currentData)
+                return FTransactionResult.success(withValue: currentData)
         }
     }
     
-    class func incrementUserContributions(userKey:String){
+    class func incrementUserContributions(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(userKey)
-            .childByAppendingPath("contributions")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: userKey)
+            .child(byAppendingPath: "contributions")
             .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
                 
                 var contributionsCount = 1
@@ -266,15 +266,15 @@ class URUserManager: NSObject {
                 
                 URUserManager.incrementUserPointsUsingContributionCriteria(userKey)
                 
-                return FTransactionResult.successWithValue(currentData)
+                return FTransactionResult.success(withValue: currentData)
         }
     }
     
-    class func incrementUserPointsUsingStoryCriteria(userKey:String){
+    class func incrementUserPointsUsingStoryCriteria(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(userKey)
-            .childByAppendingPath("points")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: userKey)
+            .child(byAppendingPath: "points")
             .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
                 
                 var pointsCount = URConstant.Gamefication.StoryPoints
@@ -293,15 +293,15 @@ class URUserManager: NSObject {
                 
                 URUser.setActiveUser(user)
                 
-                return FTransactionResult.successWithValue(currentData)
+                return FTransactionResult.success(withValue: currentData)
         }
     }
     
-    class func incrementUserPointsUsingContributionCriteria(userKey:String){
+    class func incrementUserPointsUsingContributionCriteria(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(userKey)
-            .childByAppendingPath("points")
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: userKey)
+            .child(byAppendingPath: "points")
             .runTransactionBlock { (currentData:FMutableData!) -> FTransactionResult! in
                 
                 var pointsCount = URConstant.Gamefication.ContributionPoints
@@ -320,11 +320,11 @@ class URUserManager: NSObject {
                 
                 URUser.setActiveUser(user)
                 
-                return FTransactionResult.successWithValue(currentData)
+                return FTransactionResult.success(withValue: currentData)
         }
     }
     
-    class func fetchUser(user:URUser) {
+    class func fetchUser(_ user:URUser) {
         URUserManager.getByKey(user.key) { (user:URUser?, exists:Bool) -> Void in
             if user != nil {
                 URUserLoginManager.setLoggedUser(user!)
@@ -332,7 +332,7 @@ class URUserManager: NSObject {
         }
     }
 
-    class func fetchUserWithCompletion(user:URUser, completion:(URUser) -> Void) {
+    class func fetchUserWithCompletion(_ user:URUser, completion:@escaping (URUser) -> Void) {
         URUserManager.getByKey(user.key) { (user:URUser?, exists:Bool) -> Void in
             if user != nil {
                 URUserLoginManager.setLoggedUser(user!)
@@ -341,7 +341,7 @@ class URUserManager: NSObject {
         }
     }
     
-    class func userHasPermissionToAccessTheFeature(featureNeedModeratorPermission:Bool) -> Bool {
+    class func userHasPermissionToAccessTheFeature(_ featureNeedModeratorPermission:Bool) -> Bool {
         
         let user = URUser.activeUser()
         
@@ -359,8 +359,8 @@ class URUserManager: NSObject {
         }
     }
     
-    class func formatExtUserId(key:String) -> String {
-        return key.stringByReplacingOccurrencesOfString(":", withString: "") .stringByReplacingOccurrencesOfString("-", withString: "")
+    class func formatExtUserId(_ key:String) -> String {
+        return key.replacingOccurrences(of: ":", with: "") .replacingOccurrences(of: "-", with: "")
     }
     
     class func isUserInYourOwnCountryProgram() -> Bool {

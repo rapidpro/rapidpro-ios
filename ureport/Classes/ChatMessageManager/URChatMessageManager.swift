@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol URChatMessageManagerDelegate {
-    func newMessageReceived(chatMessage:URChatMessage)
+    func newMessageReceived(_ chatMessage:URChatMessage)
 }
 
 
@@ -23,23 +23,23 @@ class URChatMessageManager: NSObject {
         return "chat_messages"
     }
     
-    func getMessages(chatRoom:URChatRoom) {
+    func getMessages(_ chatRoom:URChatRoom) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
-            .childByAppendingPath(URChatMessageManager.path())
-            .childByAppendingPath(chatRoom.key)
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
+            .child(byAppendingPath: URChatMessageManager.path())
+            .child(byAppendingPath: chatRoom.key)
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
                     let chatMessage = URChatMessage()
                     
-                    chatMessage.user = URUser(jsonDict: snapshot.value.objectForKey("user") as? NSDictionary)
-                    chatMessage.message = snapshot.value.objectForKey("message") as? String
-                    chatMessage.media = URMedia(jsonDict:snapshot.value.objectForKey("media") as? NSDictionary)
-                    chatMessage.date = snapshot.value.objectForKey("date") as! NSNumber
+                    chatMessage.user = URUser(jsonDict: (snapshot?.value as AnyObject).object(forKey: "user") as? NSDictionary)
+                    chatMessage.message = (snapshot?.value as AnyObject).object(forKey: "message") as? String
+                    chatMessage.media = URMedia(jsonDict:(snapshot?.value as AnyObject).object(forKey: "media") as? NSDictionary)
+                    chatMessage.date = (snapshot?.value as AnyObject).object(forKey: "date") as! NSNumber
                     
-                    print(snapshot.childrenCount)
+                    print(snapshot?.childrenCount)
                     
                     if chatMessage.user.nickname != nil {
                         delegate.newMessageReceived(chatMessage)
@@ -48,32 +48,32 @@ class URChatMessageManager: NSObject {
             })
     }
     
-    class func getLastMessage(key:String,completion:(URChatMessage?) -> Void) {
+    class func getLastMessage(_ key:String,completion:@escaping (URChatMessage?) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(key)
-            .queryLimitedToLast(1)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
-                    completion(URChatMessage(jsonDict:((snapshot.children.allObjects[0] as! FDataSnapshot).value as? NSDictionary)))
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: key)
+            .queryLimited(toLast: 1)
+            .observeSingleEvent(of: FEventType.value, with: { (snapshot:FDataSnapshot?) -> Void in
+                if ((snapshot != nil) && !(snapshot!.value is NSNull)) {
+                    completion(URChatMessage(jsonDict:((snapshot!.children.allObjects[0] as! FDataSnapshot).value as? NSDictionary)))
                 }else {
                     completion(nil)
                 }
             })
     }
     
-    class func sendChatMessage(chatMessage:URChatMessage, chatRoom:URChatRoom) {
+    class func sendChatMessage(_ chatMessage:URChatMessage, chatRoom:URChatRoom) {
         URGCMManager.notifyChatMessage(chatRoom, chatMessage: chatMessage)
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(chatRoom.key)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: chatRoom.key)
             .childByAutoId()
-            .setValue(chatMessage.toDictionary(), withCompletionBlock: { (error:NSError!, firebase:Firebase!) -> Void in
+            .setValue(chatMessage.toDictionary(), withCompletionBlock: { (error:Error?, firebase:Firebase?) -> Void in
                 if error != nil {
                     print(error?.localizedDescription)
                 }else if !(firebase!.key.isEmpty) {
@@ -83,15 +83,15 @@ class URChatMessageManager: NSObject {
             })
     }
     
-    class func getTotalMessages(chatRoom:URChatRoom,completion:(Int)-> Void) {
+    class func getTotalMessages(_ chatRoom:URChatRoom,completion:@escaping (Int)-> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(chatRoom.key)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { (snapshot:FDataSnapshot!) -> Void in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
-                    completion(Int(snapshot.childrenCount))
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: chatRoom.key)
+            .observeSingleEvent(of: FEventType.value, with: { (snapshot:FDataSnapshot?) -> Void in
+                if ((snapshot != nil) && !(snapshot!.value is NSNull)) {
+                    completion(Int(snapshot!.childrenCount))
                 }else {
                     completion(0)
                 }

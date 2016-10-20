@@ -12,7 +12,7 @@ import MobileCoreServices
 import Proposer
 
 protocol URMediaSourceViewControllerDelegate {
-    func newMediaAdded(mediaSourceViewController:URMediaSourceViewController, media:URMedia)
+    func newMediaAdded(_ mediaSourceViewController:URMediaSourceViewController, media:URMedia)
 }
 
 class URMediaSourceViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, UIDocumentPickerDelegate, URAudioRecorderViewControllerDelegate {
@@ -48,7 +48,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
         }
         isVisible = false
         
-        let frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height, width: UIScreen.mainScreen().bounds.size.width, height: self.view.frame.size.height)
+        let frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: self.view.frame.size.height)
         self.view.frame = frame
         
     }
@@ -71,47 +71,47 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
 
     //MARK: Class Methods
     
-    func toggleView(animationFinish:(finish:Bool!) -> Void) {
+    func toggleView(_ animationFinish:@escaping (_ finish:Bool?) -> Void) {
 
         if !isVisible {
             
-            UIView.animateWithDuration(0.5, animations: { () -> Void in
-                let frame = CGRect(x: 0, y: 0, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
+            UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                let frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                 self.view.frame = frame
-                }) { (finish) -> Void in
-                    UIView.animateWithDuration(0.3, animations: { () -> Void in
+                }, completion: { (finish) -> Void in
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
                         self.btDismiss.layer.opacity = 0.5
                         }, completion: { (finish) -> Void in
                             self.isVisible = true
-                            animationFinish(finish: true)
+                            animationFinish(true)
                     })
-            }
+            }) 
         }else{
 
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     self.btDismiss.layer.opacity = 0
-                }) { (finish) -> Void in
-                    UIView.animateWithDuration(0.5, animations: { () -> Void in
-                        let frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.size.height, width: UIScreen.mainScreen().bounds.size.width, height: UIScreen.mainScreen().bounds.size.height)
+                }, completion: { (finish) -> Void in
+                    UIView.animate(withDuration: 0.5, animations: { () -> Void in
+                        let frame = CGRect(x: 0, y: UIScreen.main.bounds.size.height, width: UIScreen.main.bounds.size.width, height: UIScreen.main.bounds.size.height)
                         self.view.frame = frame
                         }, completion: { (finish:Bool) -> Void in
                             self.isVisible = false
-                            animationFinish(finish: true)
+                            animationFinish(true)
                     })
-            }
+            }) 
         }
         
     }
     
     //MARK: UIDocumentPickerDelegate
     
-    func documentPicker(controller: UIDocumentPickerViewController, didPickDocumentAtURL url: NSURL) {
+    func documentPicker(_ controller: UIDocumentPickerViewController, didPickDocumentAt url: URL) {
         
         if let delegate = self.delegate {
             
             let media = URLocalMedia()
-            media.metadata = ["filename":url.lastPathComponent!.stringByReplacingOccurrencesOfString(" ", withString: "_") as String]
-            media.path = url.path!
+            media.metadata = ["filename":url.lastPathComponent.replacingOccurrences(of: " ", with: "_") as String as AnyObject]
+            media.path = url.path
             media.type = URConstant.Media.FILE
             
             delegate.newMediaAdded(self, media: media)
@@ -122,17 +122,17 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     //MARK: ImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         let mediaType = info[UIImagePickerControllerMediaType] as! NSString
         
         if let delegate = delegate {
         
             if mediaType == kUTTypeMovie {
-                let mediaURL = (info[UIImagePickerControllerMediaURL] as! NSURL)
+                let mediaURL = (info[UIImagePickerControllerMediaURL] as! URL)
                 let path = mediaURL.path
                 
-                if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path!) {}
+                if UIVideoAtPathIsCompatibleWithSavedPhotosAlbum(path) {}
                 
                 let media = URVideoPhoneMedia()
                 media.path = path
@@ -154,12 +154,12 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             }
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: AudioRecorderViewControllerDelegate
     
-    func newAudioRecorded(audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
+    func newAudioRecorded(_ audioRecorderViewController: URAudioRecorderViewController, media: URMedia) {
         if let delegate = delegate {
             media.type = URConstant.Media.AUDIO
             delegate.newMediaAdded(self, media: media)
@@ -168,11 +168,11 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
     
     //MARK: Button Events
     
-    @IBAction func btDismissTapped(sender: AnyObject) {
+    @IBAction func btDismissTapped(_ sender: AnyObject) {
         self.toggleView { (finish) -> Void in }
     }
     
-    @IBAction func btMediaSourceTapped(sender: AnyObject) {
+    @IBAction func btMediaSourceTapped(_ sender: AnyObject) {
         
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -181,60 +181,60 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
          
         case btCamera:
             
-            proposeToAccess(PrivateResource.Camera, agreed: {
+            proposeToAccess(PrivateResource.camera, agreed: {
                 
-                imagePicker.sourceType = .Camera
-                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
+                imagePicker.sourceType = .camera
+                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
                 imagePicker.showsCameraControls = true
                 imagePicker.allowsEditing = true
                 
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
                 
                 }, rejected: {
-                    self.alertNoPermissionToAccess(PrivateResource.Camera)
+                    self.alertNoPermissionToAccess(PrivateResource.camera)
             })
             
             break
             
         case btGallery:
             
-            proposeToAccess(PrivateResource.Photos, agreed: {
+            proposeToAccess(PrivateResource.photos, agreed: {
                 
                 imagePicker.allowsEditing = false;
-                imagePicker.sourceType = .PhotoLibrary
+                imagePicker.sourceType = .photoLibrary
                 
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
                 
                 }, rejected: {
-                    self.alertNoPermissionToAccess(PrivateResource.Photos)
+                    self.alertNoPermissionToAccess(PrivateResource.photos)
             })
             
             break
             
         case btVideo:
             
-            proposeToAccess(PrivateResource.Camera, agreed: {
+            proposeToAccess(PrivateResource.camera, agreed: {
             
-                imagePicker.sourceType = .Camera
+                imagePicker.sourceType = .camera
                 imagePicker.mediaTypes = [kUTTypeMovie as String]
-                imagePicker.videoQuality = .Type640x480
+                imagePicker.videoQuality = .type640x480
                 imagePicker.videoMaximumDuration = 20
                 
                 imagePicker.allowsEditing = false
                 
-                self.presentViewController(imagePicker, animated: true, completion: nil)
+                self.present(imagePicker, animated: true, completion: nil)
                 
                 }, rejected: {
-                    self.alertNoPermissionToAccess(PrivateResource.Camera)
+                    self.alertNoPermissionToAccess(PrivateResource.camera)
             })
             
             break
             
         case btFile:
             
-            let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], inMode: .Import)
+            let documentPicker = UIDocumentPickerViewController(documentTypes: [kUTTypeData as String], in: .import)
             documentPicker.delegate = self
-            self.presentViewController(documentPicker, animated: true, completion: nil)
+            self.present(documentPicker, animated: true, completion: nil)
             
             break
             
@@ -245,22 +245,22 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
             
             self.toggleView({ (finish) -> Void in })
             
-            audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-            URNavigationManager.navigation.presentViewController(audioRecorderViewController, animated: true) { () -> Void in
-                UIView.animateWithDuration(0.3) { () -> Void in
-                    audioRecorderViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
-                }
+            audioRecorderViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+            URNavigationManager.navigation.present(audioRecorderViewController, animated: true) { () -> Void in
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                    audioRecorderViewController.view.backgroundColor  = UIColor.black.withAlphaComponent(0.5)
+                }) 
             }
             
             break
             
         case btYoutube:
             
-            let alertControllerTextField = UIAlertController(title: nil, message: "message_youtube_link".localized, preferredStyle: UIAlertControllerStyle.Alert)
+            let alertControllerTextField = UIAlertController(title: nil, message: "message_youtube_link".localized, preferredStyle: UIAlertControllerStyle.alert)
             
-            alertControllerTextField.addTextFieldWithConfigurationHandler(nil)
-            alertControllerTextField.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil))
-            alertControllerTextField.addAction(UIAlertAction(title: "sign_up_confirm".localized, style: .Default, handler: { (alertAction) -> Void in
+            alertControllerTextField.addTextField(configurationHandler: nil)
+            alertControllerTextField.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel, handler: nil))
+            alertControllerTextField.addAction(UIAlertAction(title: "sign_up_confirm".localized, style: .default, handler: { (alertAction) -> Void in
                 
                 let urlVideo = alertControllerTextField.textFields![0].text!
                 
@@ -277,7 +277,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 let media = URVideoMedia()
                 
                 media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.stringByReplacingOccurrencesOfString("%@", withString: media.id)
+                media.url = URConstant.Youtube.COVERIMAGE.replacingOccurrences(of: "%@", with: media.id)
                 media.type = URConstant.Media.VIDEO
                 
                 if let delegate = self.delegate {
@@ -286,7 +286,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 
             }))
             
-            self.presentViewController(alertControllerTextField, animated: true, completion: nil)
+            self.present(alertControllerTextField, animated: true, completion: nil)
             
             break
             

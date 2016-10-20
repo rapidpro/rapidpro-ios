@@ -10,60 +10,60 @@ import UIKit
 
 class URDateUtil: NSObject {
    
-    class func birthDayFormatter(date:NSDate) -> String{
-        return NSDateFormatter.localizedStringFromDate(date, dateStyle: NSDateFormatterStyle.MediumStyle, timeStyle: NSDateFormatterStyle.NoStyle)
+    class func birthDayFormatter(_ date:Date) -> String{
+        return DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none)
     }
     
-    class func birthDayFormatterRapidPro(date:NSDate) -> String{
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func birthDayFormatterRapidPro(_ date:Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm" //format style. Browse online to get a format that fits your needs.
-        return dateFormatter.stringFromDate(date)
+        return dateFormatter.string(from: date)
     }
     
-    class func birthDayFormatterToGregorianCalendar(date:NSDate) -> NSDate{
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func birthDayFormatterToGregorianCalendar(_ date:Date) -> Date{
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return dateFormatter.dateFromString(dateFormatter.stringFromDate(date))!
+        return dateFormatter.date(from: dateFormatter.string(from: date))!
     }
     
-    class func currentDate() -> NSDate {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func currentDate() -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "MM-dd-yyyy HH:mm"
-        return dateFormatter.dateFromString(dateFormatter.stringFromDate(NSDate()))!
+        return dateFormatter.date(from: dateFormatter.string(from: Date()))!
     }
     
-    class func dateFormatterRapidPro(date:NSDate) -> String{
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func dateFormatterRapidPro(_ date:Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS'Z'"
-        dateFormatter.locale = NSLocale(localeIdentifier: "en_US")
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        return dateFormatter.stringFromDate(date)
+        dateFormatter.locale = Locale(identifier: "en_US")
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.string(from: date)
     }
     
-    class func dateParserRapidPro(date:String) -> NSDate {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func dateParserRapidPro(_ date:String) -> Date {
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SS'Z'"
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        return dateFormatter.dateFromString(date)!
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.date(from: date)!
     }
     
-    class func UTCDateFormatter(date:NSDate) -> String{
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
+    class func UTCDateFormatter(_ date:Date) -> String{
+        let dateFormatter = DateFormatter()
+        dateFormatter.calendar = Calendar(identifier: Calendar.Identifier.gregorian)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss"
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        return dateFormatter.stringFromDate(date)
+        dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+        return dateFormatter.string(from: date)
     }
     
-    class func getYear(date:NSDate) -> Int {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)
-        let components = calendar!.components(NSCalendarUnit.Year, fromDate: date)
-        return components.year        
+    class func getYear(_ date:Date) -> Int {
+        let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
+        let components = (calendar as NSCalendar).components(Calendar.Unit.year, from: date)
+        return components.year!        
     }
     
 }

@@ -10,22 +10,22 @@ import UIKit
 
 class URDownloader: NSObject {
 
-    class func download(URL: NSURL, completion:(data:NSData?) -> Void) {
+    class func download(_ URL: Foundation.URL, completion:@escaping (_ data:Data?) -> Void) {
         
-        let sessionConfig = NSURLSessionConfiguration.defaultSessionConfiguration()
-        let session = NSURLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
-        let request = NSMutableURLRequest(URL: URL)
-        request.HTTPMethod = "GET"
+        let sessionConfig = URLSessionConfiguration.default
+        let session = URLSession(configuration: sessionConfig, delegate: nil, delegateQueue: nil)
+        let request = NSMutableURLRequest(url: URL)
+        request.httpMethod = "GET"
         
-        let task = session.dataTaskWithRequest(request) { (data: NSData?, response: NSURLResponse?, error: NSError?) -> Void in
+        let task = session.dataTask(with: request, completionHandler: { (data: Data?, response: URLResponse?, error: NSError?) -> Void in
             if (error == nil) {
-                print((response as! NSHTTPURLResponse).statusCode)
+                print((response as! HTTPURLResponse).statusCode)
                 completion(data: data!)
             } else {
                 print("Faulure: %@", error!.localizedDescription);
                 completion(data: nil)
             }
-        }
+        }) 
         task.resume()
     }
     

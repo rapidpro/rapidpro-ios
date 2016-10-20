@@ -11,7 +11,7 @@ import AVFoundation
 import Proposer
 
 protocol URAudioRecorderViewControllerDelegate {
-    func newAudioRecorded(audioRecorderViewController:URAudioRecorderViewController,media:URMedia)
+    func newAudioRecorded(_ audioRecorderViewController:URAudioRecorderViewController,media:URMedia)
 }
 
 class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDelegate, AVAudioPlayerDelegate, URAudioViewDelegate {
@@ -23,7 +23,7 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
     
     var delegate:URAudioRecorderViewControllerDelegate?
     
-    let audioView = NSBundle.mainBundle().loadNibNamed("URAudioView", owner: nil, options: nil)[0] as! URAudioView
+    let audioView = Bundle.main.loadNibNamed("URAudioView", owner: nil, options: nil)?[0] as! URAudioView
     let maximumTime = 50
     
     var audioMedia:URAudioMedia?
@@ -40,15 +40,15 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0)
+        self.view.backgroundColor = UIColor.black.withAlphaComponent(0)
         
         audioView.audioViewdelegate = self
         
         if let audioRemoteURL = audioView.audioRemoteURL {
             audioView.playAudioImmediately(audioRemoteURL,showPreloading: true)
         }else{
-            self.btRecording.hidden = false
-            audioView.btPlay.enabled = false
+            self.btRecording.isHidden = false
+            audioView.btPlay.isEnabled = false
             audioView.setupSlider()
             audioView.lbMaxTime.text = audioView.getDurationString(maximumTime)
         }
@@ -65,12 +65,12 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
         bgAudioView.layoutSubviews()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
         audioMedia = nil
 
-        if audioView.player != nil && audioView.player.playing == true {
+        if audioView.player != nil && audioView.player.isPlaying == true {
             audioView.player.stop()
         }
 
@@ -83,21 +83,21 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
     }
     
     @IBAction func btCancelTapped() {
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-            }) { (finished) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("modalProfileDidClosed", object: nil)
-                self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0)
+            }, completion: { (finished) -> Void in
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "modalProfileDidClosed"), object: nil)
+                self.dismiss(animated: true, completion: nil)
+        }) 
     }
     
     @IBAction func btRecordTapped() {
         
         if let audioMedia = audioMedia {
             if let delegate = delegate {
-                audioMedia.metadata = ["duration":Int(audioView.player.duration)]
+                audioMedia.metadata = ["duration":Int(audioView.player.duration) as AnyObject]
                 delegate.newAudioRecorded(self, media: audioMedia)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.dismiss(animated: true, completion: nil)
                 return
             }
         }
@@ -128,16 +128,16 @@ class URAudioRecorderViewController: UIViewController, URAudioRecorderManagerDel
     //MARK: AudioViewDelegate
     
     func finishRecord() {
-        self.btRecording.setTitle("Send", forState: UIControlState.Normal)        
+        self.btRecording.setTitle("Send", for: UIControlState())        
     }
     
-    func didStartPlaying(view: URAudioView) {
+    func didStartPlaying(_ view: URAudioView) {
         
     }
     
     //MARK: AudioRecorderManagerDelegate
     
-    func audioRecorderDidFinish(path: String) {
+    func audioRecorderDidFinish(_ path: String) {
         
         audioMedia = URAudioMedia()
         audioMedia!.path = path

@@ -9,16 +9,16 @@
 import UIKit
 
 enum URNavigationBarType {
-    case Clear
-    case Blue
-    case Yellow
+    case clear
+    case blue
+    case yellow
 }
 
 class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
 
     static var navigation:UINavigationController!
     static var revealController:SWRevealViewController!
-    static let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
     var sidebarMenuOpen:Bool!
     
     static let instance = URNavigationManager()
@@ -27,7 +27,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         return instance
     }
     
-    class func setupNavigationControllerWithMainViewController(viewController:UIViewController) {
+    class func setupNavigationControllerWithMainViewController(_ viewController:UIViewController) {
         
         let menuViewController:ISMenuViewController = ISMenuViewController()
         
@@ -35,13 +35,13 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
         self.navigation = UINavigationController(rootViewController: viewController)
         URNavigationManager.setupNavigationDefaultAtrributes()
-        self.navigation!.navigationBar.translucent = true
+        self.navigation!.navigationBar.isTranslucent = true
         
         self.revealController = SWRevealViewController(rearViewController: menuViewController, frontViewController: self.navigation)
         self.revealController!.rearViewRevealWidth = 250
         self.revealController!.delegate = URNavigationManager.sharedInstance()
         
-        viewController.view.userInteractionEnabled = true
+        viewController.view.isUserInteractionEnabled = true
         viewController.view.addGestureRecognizer(self.revealController!.panGestureRecognizer())
         
         URNavigationManager.switchRootViewController(self.revealController!, animated: true, completion: nil)
@@ -49,8 +49,8 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
     }
     
-    class func setFrontViewController(viewController:UIViewController){
-        viewController.view.userInteractionEnabled = true
+    class func setFrontViewController(_ viewController:UIViewController){
+        viewController.view.isUserInteractionEnabled = true
         viewController.view.addGestureRecognizer(self.revealController!.panGestureRecognizer())
         URNavigationManager.addLeftButtonMenuInViewController(viewController)
         self.navigation?.viewControllers = [viewController]
@@ -61,7 +61,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
         self.navigation = UINavigationController(rootViewController: URLoginViewController())
         URNavigationManager.setupNavigationDefaultAtrributes()
-        self.navigation!.navigationBar.translucent = false
+        self.navigation!.navigationBar.isTranslucent = false
         self.navigation!.setNavigationBarHidden(true, animated: false)
         
         URNavigationManager.switchRootViewController(self.navigation!, animated: true, completion: nil)
@@ -74,7 +74,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         
         self.navigation = UINavigationController(rootViewController: tutorialViewController)
         URNavigationManager.setupNavigationDefaultAtrributes()
-        self.navigation!.navigationBar.translucent = false
+        self.navigation!.navigationBar.isTranslucent = false
         self.navigation!.setNavigationBarHidden(true, animated: false)
         
         URNavigationManager.switchRootViewController(self.navigation!, animated: true, completion: nil)
@@ -82,64 +82,64 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     }
     
     class func setupNavigationDefaultAtrributes() {
-        self.navigation!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),
-            NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as! AnyObject
+        self.navigation!.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,
+            NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as AnyObject
         ]
         
-        self.navigation.navigationBar.tintColor = UIColor.whiteColor()
+        self.navigation.navigationBar.tintColor = UIColor.white
         self.navigation.navigationBar.shadowImage = UIImage()
-        self.navigation.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigation.navigationBar.translucent = true
+        self.navigation.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        self.navigation.navigationBar.isTranslucent = true
     }
     
-    class func setupNavigationBarWithType(type:URNavigationBarType) {        
+    class func setupNavigationBarWithType(_ type:URNavigationBarType) {        
         switch type {
-        case .Clear:
-            UIView.animateWithDuration(0, animations: { () -> Void in
+        case .clear:
+            UIView.animate(withDuration: 0, animations: { () -> Void in
                 self.navigation.navigationBar.shadowImage = UIImage()
-                self.navigation.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+                self.navigation.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
             })
         break
-        case .Blue:
-            UIView.animateWithDuration(0, animations: { () -> Void in
+        case .blue:
+            UIView.animate(withDuration: 0, animations: { () -> Void in
                 let defaultNavigationController = UINavigationController()
                 self.navigation.navigationBar.barTintColor = URConstant.Color.PRIMARY
                 self.navigation.navigationBar.shadowImage = defaultNavigationController.navigationBar.shadowImage
-                self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImageForBarMetrics(.Default), forBarMetrics: .Default)
+                self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImage(for: .default), for: .default)
             })
         break
-        case .Yellow:
-            UIView.animateWithDuration(0, animations: { () -> Void in
+        case .yellow:
+            UIView.animate(withDuration: 0, animations: { () -> Void in
                 let defaultNavigationController = UINavigationController()
                 self.navigation.navigationBar.barTintColor = URConstant.Color.YELLOW
                 self.navigation.navigationBar.shadowImage = defaultNavigationController.navigationBar.shadowImage
-                self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImageForBarMetrics(.Default), forBarMetrics: .Default)
+                self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImage(for: .default), for: .default)
             })
         break
             
         }
     }
     
-    class func setupNavigationBarWithCustomColor(color:UIColor) {
+    class func setupNavigationBarWithCustomColor(_ color:UIColor) {
         let defaultNavigationController = UINavigationController()
         self.navigation.navigationBar.barTintColor = color
         self.navigation.navigationBar.shadowImage = defaultNavigationController.navigationBar.shadowImage
-        self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImageForBarMetrics(.Default), forBarMetrics: .Default)
+        self.navigation.navigationBar.setBackgroundImage(defaultNavigationController.navigationBar.backgroundImage(for: .default), for: .default)
     }
     
-    class func addLeftButtonMenuInViewController(viewController:UIViewController){
+    class func addLeftButtonMenuInViewController(_ viewController:UIViewController){
         let image:UIImage = ISImageUtil.resizeImage(UIImage(named: "icon_burgermenu")!,scaledToSize: CGSize(width: 20, height: 16))
-        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.Plain, target: self, action: #selector(toggleMenu))
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(image: image, style: UIBarButtonItemStyle.plain, target: self, action: #selector(toggleMenu))
     }
     
     class func toggleMenu() {
-        self.revealController?.revealToggleAnimated(true)
+        self.revealController?.revealToggle(animated: true)
     }
     
-    class func switchRootViewController(rootViewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+    class func switchRootViewController(_ rootViewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
         if animated {
-            UIView.transitionWithView(appDelegate.window!, duration: 0.5, options: .TransitionCrossDissolve, animations: {
-                let oldState: Bool = UIView.areAnimationsEnabled()
+            UIView.transition(with: appDelegate.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
+                let oldState: Bool = UIView.areAnimationsEnabled
                 UIView.setAnimationsEnabled(false)
                 self.appDelegate.window!.rootViewController = rootViewController
                 UIView.setAnimationsEnabled(oldState)
@@ -155,20 +155,20 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     
     //MARK SWRevealViewControllerDelegate
     
-    func revealController(revealController: SWRevealViewController!,  willMoveToPosition position: FrontViewPosition){
-        if(position == FrontViewPosition.Left) {
-            revealController.frontViewController.view.userInteractionEnabled = true
+    func revealController(_ revealController: SWRevealViewController!,  willMoveTo position: FrontViewPosition){
+        if(position == FrontViewPosition.left) {
+            revealController.frontViewController.view.isUserInteractionEnabled = true
             sidebarMenuOpen = false
         } else {
-            revealController.frontViewController.view.userInteractionEnabled = false
-            revealController.frontViewController.revealViewController().tapGestureRecognizer().enabled = true
-            revealController.frontViewController.revealViewController().panGestureRecognizer().enabled = true
+            revealController.frontViewController.view.isUserInteractionEnabled = false
+            revealController.frontViewController.revealViewController().tapGestureRecognizer().isEnabled = true
+            revealController.frontViewController.revealViewController().panGestureRecognizer().isEnabled = true
             sidebarMenuOpen = true
         }
     }
     
-    func revealController(revealController: SWRevealViewController!,  didMoveToPosition position: FrontViewPosition){
-        if(position == FrontViewPosition.Left) {
+    func revealController(_ revealController: SWRevealViewController!,  didMoveTo position: FrontViewPosition){
+        if(position == FrontViewPosition.left) {
             // self.view.userInteractionEnabled = true
             sidebarMenuOpen = false
         } else {

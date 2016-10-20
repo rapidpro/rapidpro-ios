@@ -32,17 +32,17 @@ class URAboutViewController: UIViewController {
         self.title = "label_about_ureport".localized
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         self.navigationController!.setNavigationBarHidden(false, animated: false)        
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "About")
+        tracker?.set(kGAIScreenName, value: "About")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
@@ -56,21 +56,21 @@ class URAboutViewController: UIViewController {
         self.lbAboutContent.text = "about_content".localized
         self.lbVoiceMatters.text = "about_subtitle".localized
         
-        self.youtubeView?.loadWithVideoId("pDa9OjtJhSo")
+        self.youtubeView?.load(withVideoId: "pDa9OjtJhSo")
         
     }
     
     //MARK: Button Events
     
-    @IBAction func btTwitterTapped(sender: AnyObject) {
+    @IBAction func btTwitterTapped(_ sender: AnyObject) {
         if let twitter =  URCountryProgramManager.activeCountryProgram()?.twitter {
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.twitter.com/\(twitter)")!)
+            UIApplication.shared.openURL(URL(string: "http://www.twitter.com/\(twitter)")!)
         }
     }
     
-    @IBAction func btFacebookTapped(sender: AnyObject) {
+    @IBAction func btFacebookTapped(_ sender: AnyObject) {
         if let facebook =  URCountryProgramManager.activeCountryProgram()?.facebook {
-            UIApplication.sharedApplication().openURL(NSURL(string: "http://www.facebook.com/\(facebook)")!)
+            UIApplication.shared.openURL(URL(string: "http://www.facebook.com/\(facebook)")!)
         }
     }
 }

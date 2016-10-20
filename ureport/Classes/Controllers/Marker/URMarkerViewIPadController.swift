@@ -41,16 +41,16 @@ class URMarkerViewIPadController: ISModalViewController {
     
     //MARK: Class Methods
     
-    func displayContentController(content: UIViewController) {
+    func displayContentController(_ content: UIViewController) {
         self.addChildViewController(content)
         content.view.frame = CGRect(x: 0, y: 0, width: viewContent.bounds.size.width, height: viewContent.bounds.size.height)
         viewContent.addSubview(content.view)
-        content.didMoveToParentViewController(self)
+        content.didMove(toParentViewController: self)
     }
 
     //MARK: Button Events
     
-    @IBAction func btSaveTapped(button:UIButton) {
+    @IBAction func btSaveTapped(_ button:UIButton) {
         self.closeWithCompletion { (closed) in            
         }
     }

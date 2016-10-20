@@ -19,7 +19,7 @@ class URFlowRule: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.ruleCategory       <- map["category"]
         self.test               <- map["test"]
         self.destination        <- map["destination"]

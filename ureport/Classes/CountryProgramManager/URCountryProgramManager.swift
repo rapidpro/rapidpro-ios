@@ -12,7 +12,7 @@ class URCountryProgramManager: NSObject {
     
     static var countryPrograms:[URCountryProgram]!
     
-    class func getCountryProgramByCountry(country:URCountry) -> URCountryProgram {
+    class func getCountryProgramByCountry(_ country:URCountry) -> URCountryProgram {
         
         if countryPrograms == nil {
             URCountryProgramManager.getAvailableCountryPrograms()
@@ -70,12 +70,12 @@ class URCountryProgramManager: NSObject {
         
     }
     
-    class func getChannelOfCountryProgram(countryProgram:URCountryProgram) -> String?{
+    class func getChannelOfCountryProgram(_ countryProgram:URCountryProgram) -> String?{
         
         var myDict: NSDictionary?
         var channel:String?
         
-        if let path = NSBundle.mainBundle().pathForResource(URFireBaseManager.Properties, ofType: "plist") {
+        if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
             myDict = NSDictionary(contentsOfFile: path)
         }
         
@@ -93,12 +93,12 @@ class URCountryProgramManager: NSObject {
         
     }
     
-    class func getTokenOfCountryProgram(countryProgram:URCountryProgram) -> String? {
+    class func getTokenOfCountryProgram(_ countryProgram:URCountryProgram) -> String? {
         
         var rootDictionary: NSDictionary?
         var token:String?
         
-        if let path = NSBundle.mainBundle().pathForResource(URFireBaseManager.Properties, ofType: "plist") {
+        if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
             rootDictionary = NSDictionary(contentsOfFile: path)
         }
         
@@ -126,13 +126,13 @@ class URCountryProgramManager: NSObject {
             return countryProgram
         }
         
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var encodedData: NSData?
+        let defaults: UserDefaults = UserDefaults.standard
+        var encodedData: Data?
         
-        encodedData = defaults.objectForKey("countryProgram") as? NSData
+        encodedData = defaults.object(forKey: "countryProgram") as? Data
         
         if encodedData != nil {
-            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObjectWithData(encodedData!) as? NSDictionary)
+            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
             return countryProgram
         }else{
             return URCountryProgramManager.getAvailableCountryPrograms()[0]
@@ -140,43 +140,43 @@ class URCountryProgramManager: NSObject {
         
     }
     
-    class func setActiveCountryProgram(countryProgram: URCountryProgram!) {
+    class func setActiveCountryProgram(_ countryProgram: URCountryProgram!) {
         self.deactivateCountryProgram()
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let encodedObject: NSData = NSKeyedArchiver.archivedDataWithRootObject(countryProgram.toDictionary())
-        defaults.setObject(encodedObject, forKey: "countryProgram")
+        let defaults: UserDefaults = UserDefaults.standard
+        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgram.toDictionary())
+        defaults.set(encodedObject, forKey: "countryProgram")
         defaults.synchronize()
     }
     
     class func deactivateCountryProgram() {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("countryProgram")
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: "countryProgram")
         defaults.synchronize()
     }
     
-    class func setSwitchActiveCountryProgram(countryProgram: URCountryProgram!) {
+    class func setSwitchActiveCountryProgram(_ countryProgram: URCountryProgram!) {
         self.deactivateSwitchCountryProgram()
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let encodedObject: NSData = NSKeyedArchiver.archivedDataWithRootObject(countryProgram.toDictionary())
-        defaults.setObject(encodedObject, forKey: "countryProgram_switch")
+        let defaults: UserDefaults = UserDefaults.standard
+        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgram.toDictionary())
+        defaults.set(encodedObject, forKey: "countryProgram_switch")
         defaults.synchronize()
     }
     
     class func deactivateSwitchCountryProgram() {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("countryProgram_switch")
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: "countryProgram_switch")
         defaults.synchronize()
     }
     
     class func activeSwitchCountryProgram() -> URCountryProgram? {
         
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var encodedData: NSData?
+        let defaults: UserDefaults = UserDefaults.standard
+        var encodedData: Data?
         
-        encodedData = defaults.objectForKey("countryProgram_switch") as? NSData
+        encodedData = defaults.object(forKey: "countryProgram_switch") as? Data
         
         if encodedData != nil {
-            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObjectWithData(encodedData!) as? NSDictionary)
+            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
             return countryProgram
         }else{
             return nil

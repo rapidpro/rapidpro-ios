@@ -11,24 +11,24 @@ import AVFoundation
 
 class URVideoUtil: NSObject {
 
-    static let outputURLFile = NSURL(fileURLWithPath: URFileUtil.outPutURLDirectory.stringByAppendingPathComponent("video.mp4"))
+    static let outputURLFile = URL(fileURLWithPath: URFileUtil.outPutURLDirectory.appendingPathComponent("video.mp4"))
     
-    class func compressVideo(inputURL: NSURL, handler:(session: AVAssetExportSession) -> Void) {
+    class func compressVideo(_ inputURL: URL, handler:@escaping (_ session: AVAssetExportSession) -> Void) {
         
-        let urlAsset = AVURLAsset(URL: inputURL, options: nil)
+        let urlAsset = AVURLAsset(url: inputURL, options: nil)
         let exportSession = AVAssetExportSession(asset: urlAsset, presetName: AVAssetExportPresetMediumQuality)!
         
         URFileUtil.removeFile(outputURLFile)
         
         do {
-            try NSFileManager.defaultManager().createDirectoryAtPath(URFileUtil.outPutURLDirectory as String, withIntermediateDirectories: true, attributes: nil)
+            try FileManager.default.createDirectory(atPath: URFileUtil.outPutURLDirectory as String, withIntermediateDirectories: true, attributes: nil)
             
             exportSession.outputURL = outputURLFile
             exportSession.shouldOptimizeForNetworkUse = true
             exportSession.outputFileType = AVFileTypeMPEG4
             
-            exportSession.exportAsynchronouslyWithCompletionHandler { () -> Void in
-                handler(session: exportSession)
+            exportSession.exportAsynchronously { () -> Void in
+                handler(exportSession)
             }
             
         } catch let error as NSError {
@@ -37,8 +37,8 @@ class URVideoUtil: NSObject {
         
     }
     
-    class func generateThumbnail(url : NSURL) -> UIImage?{
-        let asset = AVAsset(URL: url)
+    class func generateThumbnail(_ url : URL) -> UIImage?{
+        let asset = AVAsset(url: url)
         let assetImgGenerate : AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
         assetImgGenerate.appliesPreferredTrackTransform = true
 //        assetImgGenerate.maximumSize = CGSizeMake(1024, 768);
@@ -47,8 +47,8 @@ class URVideoUtil: NSObject {
         time.value = min(time.value, 2)
         
         do {
-            let image = try assetImgGenerate.copyCGImageAtTime(time, actualTime: nil)
-            let frameImg = UIImage(CGImage: image)
+            let image = try assetImgGenerate.copyCGImage(at: time, actualTime: nil)
+            let frameImg = UIImage(cgImage: image)
             
             return frameImg
         }catch let error as NSError {

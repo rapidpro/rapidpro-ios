@@ -24,18 +24,18 @@ class URNewsTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.viewOpacityImage.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.38)
+        self.viewOpacityImage.backgroundColor = UIColor.black.withAlphaComponent(0.38)
         self.bgView.layer.cornerRadius = 5
         self.viewSeparator.layer.cornerRadius = 5
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
         // Configure the view for the selected state
     }
     
-    func setupCellWith(news:URNews){
+    func setupCellWith(_ news:URNews){
         self.news = news
         
         self.lbTitle.text = news.title
@@ -45,7 +45,7 @@ class URNewsTableViewCell: UITableViewCell {
         
         if let images = news.images {
             if images.count > 0 {
-                self.imgNew.sd_setImageWithURL(NSURL(string: images[0]))
+                self.imgNew.sd_setImage(with: URL(string: images[0]))
             }
         }        
     }

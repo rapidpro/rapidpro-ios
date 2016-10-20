@@ -11,7 +11,7 @@ import UIKit
 class URNotification: NSObject {
    
     var message:String?
-    var date:NSDate?
+    var date:Date?
     var user:URUser?
     
 }

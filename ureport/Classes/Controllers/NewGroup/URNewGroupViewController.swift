@@ -52,18 +52,18 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         setupActionSheet()
         setupUI()
         setupUIWithDatasIfPossible()
-        self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Clear)
+        URNavigationManager.setupNavigationBarWithType(.clear)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Group Creation")
+        tracker?.set(kGAIScreenName, value: "Group Creation")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
@@ -72,29 +72,29 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         setupTableView()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listUser.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
         
         cell.delegate = self
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, indexPath: indexPath, checkGroupOption: true)
+        cell.setupCellWithUser(self.listUser[(indexPath as NSIndexPath).row],createGroupOption: false, indexPath: indexPath, checkGroupOption: true)
         
         let filtered = self.listUserSelectedToGroup.filter {
-            return $0.key == self.listUser[indexPath.row].key
+            return $0.key == self.listUser[(indexPath as NSIndexPath).row].key
         }
         if !filtered.isEmpty {
             cell.setBtCheckSelected(true)
@@ -105,9 +105,9 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.view.endEditing(true)        
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
+        let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
         self.userSelected(cell.user!)
     }
     
@@ -134,10 +134,10 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             
             self.txtTitleGroup.text = groupChatRoom.title
             self.txtDescriptionGroup.text = groupChatRoom.subject
-            self.privateGroupSwitch.on = groupChatRoom.privateAccess.boolValue
+            self.privateGroupSwitch.isOn = groupChatRoom.privateAccess.boolValue
             
             if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
-                imgPicture.sd_setImageWithURL(NSURL(string: groupChatRoom.picture.url))
+                imgPicture.sd_setImage(with: URL(string: groupChatRoom.picture.url))
             }
             
             self.listUser = []
@@ -165,9 +165,9 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         self.txtDescriptionGroup.placeholder = "chat_group_description_hint".localized
         self.lbPrivateGroup.text = "chat_private_group_title".localized
             
-        txtTitleGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
-        txtDescriptionGroup.setValue(UIColor.whiteColor(), forKeyPath: "_placeholderLabel.textColor")
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_save".localized, style: UIBarButtonItemStyle.Done, target: self, action: #selector(newGroup))
+        txtTitleGroup.setValue(UIColor.white, forKeyPath: "_placeholderLabel.textColor")
+        txtDescriptionGroup.setValue(UIColor.white, forKeyPath: "_placeholderLabel.textColor")
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "label_save".localized, style: UIBarButtonItemStyle.done, target: self, action: #selector(newGroup))
     }
     
     func newGroup() {
@@ -201,15 +201,15 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         }
     }
     
-    func save(picture:URMedia?) {
+    func save(_ picture:URMedia?) {
         
         let groupChatRoom = URGroupChatRoom()
         groupChatRoom.title = self.txtTitleGroup.text
         groupChatRoom.subject = self.txtDescriptionGroup.text
-        groupChatRoom.privateAccess = self.privateGroupSwitch.on
+        groupChatRoom.privateAccess = self.privateGroupSwitch.isOn as NSNumber!
         groupChatRoom.administrator = URUser.activeUser()
         
-        groupChatRoom.createdDate = self.groupChatRoom != nil && self.groupChatRoom.createdDate != nil && self.groupChatRoom.createdDate.integerValue > 0 ? self.groupChatRoom.createdDate : NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+        groupChatRoom.createdDate = self.groupChatRoom != nil && self.groupChatRoom.createdDate != nil && self.groupChatRoom.createdDate.intValue > 0 ? self.groupChatRoom.createdDate : NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
         groupChatRoom.type = "Group"
         
         if let pic = picture {
@@ -222,7 +222,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             
             URChatRoomManager.save(groupChatRoom, members: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
                 
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                MBProgressHUD.hide(for: self.view, animated: true)
                 
                 let main = URMainViewController()
                 URNavigationManager.addLeftButtonMenuInViewController(main)
@@ -232,7 +232,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         }else {
             groupChatRoom.key = self.groupChatRoom.key
             URChatRoomManager.update(groupChatRoom, newMembers: self.listUserSelectedToGroup) { (chatRoom:URChatRoom) -> Void in
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                MBProgressHUD.hide(for: self.view, animated: true)
                 
                 let main = URMainViewController()
                 URNavigationManager.addLeftButtonMenuInViewController(main)
@@ -243,15 +243,15 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
 
     }
 
-    private func setupTableView() {
-        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.separatorColor = UIColor.clearColor()
+    fileprivate func setupTableView() {
+        self.scrollView.contentInset = UIEdgeInsetsMake(0, 0.0, self.tabBarController != nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.separatorColor = UIColor.clear
     }
     
     //MARK: UIActionSheetDelegate
     
-    func actionSheet(actionSheet: UIActionSheet, clickedButtonAtIndex buttonIndex: Int) {
+    func actionSheet(_ actionSheet: UIActionSheet, clickedButtonAt buttonIndex: Int) {
 
         let imagePicker = UIImagePickerController()
         imagePicker.delegate = self
@@ -264,20 +264,20 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             case 1:
                 
                 imagePicker.allowsEditing = false;
-                imagePicker.sourceType = .PhotoLibrary
+                imagePicker.sourceType = .photoLibrary
                 
-                self.presentViewController(imagePicker, animated: true) { () -> Void in
+                self.present(imagePicker, animated: true) { () -> Void in
                     
                 }
                 break;
             case 2:
 
-                imagePicker.sourceType = .Camera
-                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.Photo
+                imagePicker.sourceType = .camera
+                imagePicker.cameraCaptureMode = UIImagePickerControllerCameraCaptureMode.photo
                 imagePicker.showsCameraControls = true
                 imagePicker.allowsEditing = true
                 
-                self.presentViewController(imagePicker, animated: true) { () -> Void in
+                self.present(imagePicker, animated: true) { () -> Void in
                     
                 }
                 
@@ -290,20 +290,20 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             imgPicture.image = pickedImage
         }
         
-        dismissViewControllerAnimated(true, completion: nil)
+        dismiss(animated: true, completion: nil)
     }
 
     //MARK: SearchBarDelegate
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             listUser = listUser.filter({user in
-                if user.nickname.rangeOfString(searchText) != nil {
+                if user.nickname.range(of: searchText) != nil {
                     return true
                 }else {
                     return false
@@ -319,7 +319,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: URChatTableViewCellDelegate
     
-    func userSelected(user: URUser) {
+    func userSelected(_ user: URUser) {
         
         self.view.endEditing(true)
         
@@ -328,7 +328,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
         }
         
         if !filtered.isEmpty {
-            listUserSelectedToGroup.removeAtIndex(listUserSelectedToGroup.indexOf(filtered[0])!)
+            listUserSelectedToGroup.remove(at: listUserSelectedToGroup.index(of: filtered[0])!)
         }else{
             listUserSelectedToGroup.append(user)
         }
@@ -339,8 +339,8 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     
     //MARK: Button Events
     
-    @IBAction func btAddPictureTapped(sender: AnyObject) {
-        actionSheetPicture.showInView(self.view)
+    @IBAction func btAddPictureTapped(_ sender: AnyObject) {
+        actionSheetPicture.show(in: self.view)
     }
     
 }

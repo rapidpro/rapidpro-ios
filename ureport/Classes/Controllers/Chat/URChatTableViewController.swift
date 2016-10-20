@@ -8,10 +8,21 @@
 
 import UIKit
 import MBProgressHUD
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 protocol URChatTableViewControllerDelegate {
-    func openChatRoom(chatRoom: URChatRoom,chatMembers:[URUser], title:String)
-    func openNewGroupViewController(newGroupViewController:URNewGroupViewController)
+    func openChatRoom(_ chatRoom: URChatRoom,chatMembers:[URUser], title:String)
+    func openNewGroupViewController(_ newGroupViewController:URNewGroupViewController)
 }
 
 class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate, URNewGroupTableViewCellDelegate {
@@ -29,17 +40,17 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
-        self.tableView.registerNib(UINib(nibName: "URNewGroupTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewGroupTableViewCell.self))
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.register(UINib(nibName: "URNewGroupTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewGroupTableViewCell.self))
         
         chatRoomManager.delegate = self
         self.definesPresentationContext = true
         self.tableView.tableHeaderView = addSearchController()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         self.loadData()                
@@ -50,10 +61,10 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         setupTableView()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     init() {
@@ -71,11 +82,11 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     //MARK: SearchBarDelegate
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
         if !searchController!.searchBar.text!.isEmpty {
             
-            let listFiltered = listUser.filter({return $0.nickname.rangeOfString(searchController!.searchBar.text!, options: NSStringCompareOptions.CaseInsensitiveSearch) != nil})
+            let listFiltered = listUser.filter({return $0.nickname.range(of: searchController!.searchBar.text!, options: NSString.CompareOptions.caseInsensitive) != nil})
             
             if !listFiltered.isEmpty {
                 listUser = listFiltered
@@ -91,15 +102,15 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         listUser = listAuxUser
         self.tableView.reloadData()
     }
     
     //MARK: URChatRoomManagerDelegate
     
-    func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+    func openChatRoom(_ chatRoom: URChatRoom, members: [URUser], title: String) {
+        MBProgressHUD.hide(for: self.view, animated: true)
         if let delegate = delegate {
             delegate.openChatRoom(chatRoom, chatMembers: members, title: title)
         }else{
@@ -109,7 +120,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (self.createGroupOption == true && URUserManager.userHasPermissionToAccessTheFeature(true)){
             return 65
         }else{
@@ -117,8 +128,8 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewHeader =  NSBundle.mainBundle().loadNibNamed("URNewGroupTableViewCell", owner: 0, options: nil)[0] as! URNewGroupTableViewCell
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader =  Bundle.main.loadNibNamed("URNewGroupTableViewCell", owner: 0, options: nil)?[0] as! URNewGroupTableViewCell
         viewHeader.delegate = self
 
         let view = UIView(frame: CGRect(x: 0, y: 0, width: self.tableView.frame.size.width, height: 0))
@@ -135,38 +146,38 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         return view
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {                
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {                
         return self.listUser.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
 
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: self.createGroupOption, indexPath: indexPath, checkGroupOption: false)
+        cell.setupCellWithUser(self.listUser[(indexPath as NSIndexPath).row],createGroupOption: self.createGroupOption, indexPath: indexPath, checkGroupOption: false)
         
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
         
-        if (cell.type != .Group || cell.type != .Individual) && cell.chatRoom == nil{
+        if (cell.type != .group || cell.type != .individual) && cell.chatRoom == nil{
 
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             
             chatRoomManager.createIndividualChatRoomIfPossible(cell.user!, isIndividualChatRoom: true)
             
         }else {
             if let chatRoom = cell.chatRoom {
-                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                MBProgressHUD.showAdded(to: self.view, animated: true)
                 URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
                 URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
-                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                MBProgressHUD.hide(for: self.view, animated: true)
                     
                     var chatName = ""
                     
@@ -190,7 +201,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     //MARK: URNewGroupTableViewCellDelegate
     
-    func createNewGroupCellDidTap(cell: URNewGroupTableViewCell) {
+    func createNewGroupCellDidTap(_ cell: URNewGroupTableViewCell) {
         let groupViewController = URNewGroupViewController()
         groupViewController.listUser = self.listUser
         
@@ -208,7 +219,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
         
-        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         
         var frame = headerView.frame
         frame.size.height = height
@@ -219,15 +230,15 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     
     func loadData() {
         if listUser.count == 0 {
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             if users != nil && !users!.isEmpty {
                 self.listUser = users!
                 
-                let userSortedList = self.listUser.sort({ (user1, user2) -> Bool in
+                let userSortedList = self.listUser.sorted(by: { (user1, user2) -> Bool in
                     return user1.nickname < user2.nickname
                 })
                 
@@ -250,9 +261,9 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         return searchController!.searchBar
     }
     
-    private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 64, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = UIColor.whiteColor()
-        self.tableView.separatorColor = UIColor.clearColor()
+    fileprivate func setupTableView() {
+        self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 64, 0.0, self.tabBarController != nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        self.tableView.backgroundColor = UIColor.white
+        self.tableView.separatorColor = UIColor.clear
     }
 }

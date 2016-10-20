@@ -47,35 +47,35 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Stories")
+        tracker?.set(kGAIScreenName, value: "Stories")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
     //MARK: URWriteStoryTableViewCellDelegate
     
-    func writeStoryDidTap(cell: URWriteStoryView) {
+    func writeStoryDidTap(_ cell: URWriteStoryView) {
         if URUser.activeUser() != nil {
             
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
             }else {
-                let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .Alert)
-                alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                self.presentViewController(alertController, animated: true, completion: {})
+                let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .alert)
+                alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                self.present(alertController, animated: true, completion: {})
             }
             
         }else{
@@ -85,22 +85,22 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     //MARK: URStoriesTableViewCellDelegate
     
-    func openProfile(user: URUser) {
+    func openProfile(_ user: URUser) {
         self.modalProfileViewController = URModalProfileViewController(user: user)
-        self.modalProfileViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
-        self.navigationController!.presentViewController(modalProfileViewController, animated: true) { () -> Void in
-            UIView.animateWithDuration(0.3) { () -> Void in
-                self.modalProfileViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
-            }
+        self.modalProfileViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
+        self.navigationController!.present(modalProfileViewController, animated: true) { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                self.modalProfileViewController.view.backgroundColor  = UIColor.black.withAlphaComponent(0.5)
+            }) 
         }
     }
     
     //MARK: MenuDelegateMethods
     
-    func countryProgramDidChanged(countryProgram: URCountryProgram) {
+    func countryProgramDidChanged(_ countryProgram: URCountryProgram) {
         storyList.removeAll()
         storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
-            self.storyList = storyList.reverse()
+            self.storyList = storyList.reversed()
             self.tableView.reloadData()
             self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: storyList.count)
         }
@@ -108,7 +108,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (filterStoriesToModerate == false){
             return 58
         }else{
@@ -116,8 +116,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
-    override func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewHeader =  NSBundle.mainBundle().loadNibNamed("URWriteStoryView", owner: 0, options: nil)[0] as! URWriteStoryView
+    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let viewHeader =  Bundle.main.loadNibNamed("URWriteStoryView", owner: 0, options: nil)?[0] as! URWriteStoryView
         viewHeader.delegate = self
         
         if (filterStoriesToModerate == false){
@@ -130,22 +130,22 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         return viewHeader
     }
     
-    override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.storyList.count + self.newsList.count
     }
     
-    override func tableView(tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 0.0
     }
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         
-        if indexPath.row < self.storyList.count {
-            let story = storyList[indexPath.row]
+        if (indexPath as NSIndexPath).row < self.storyList.count {
+            let story = storyList[(indexPath as NSIndexPath).row]
             
             if story.cover != nil && story.cover.url != nil {
                 return fullHeightTableViewCell
@@ -158,37 +158,37 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         
     }
     
-    override func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.row == storyList.count - 1 && storyList.count >= storyManager.itensByQuery && isLastPost == false {
+    override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if (indexPath as NSIndexPath).row == storyList.count - 1 && storyList.count >= storyManager.itensByQuery && isLastPost == false {
             storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
                 self.isLastPost = self.storyList.last?.key == storyList.first?.key
-                self.storyList = storyList.reverse()
+                self.storyList = storyList.reversed()
                 self.tableView.reloadData()
             }
         }
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if indexPath.row < self.storyList.count {
+        if (indexPath as NSIndexPath).row < self.storyList.count {
         
-            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URStoriesTableViewCell.self), for: indexPath) as! URStoriesTableViewCell
             
-            let story = storyList[indexPath.row]
+            let story = storyList[(indexPath as NSIndexPath).row]
             cell.delegate = self
             cell.viewController = self
             cell.setupCellWith(story,moderateUserMode: self.filterStoriesToModerate)
             return cell
         }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URNewsTableViewCell.self), forIndexPath: indexPath) as! URNewsTableViewCell
-            let news = newsList[indexPath.row - self.storyList.count]
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URNewsTableViewCell.self), for: indexPath) as! URNewsTableViewCell
+            let news = newsList[(indexPath as NSIndexPath).row - self.storyList.count]
             cell.setupCellWith(news)
             return cell
         }
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         
         if cell is URStoriesTableViewCell {
             if let _ = URUser.activeUser() {
@@ -208,7 +208,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         headerView.setNeedsLayout()
         headerView.layoutIfNeeded()
         
-        let height = headerView.systemLayoutSizeFittingSize(UILayoutFittingCompressedSize).height
+        let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
         
         var frame = headerView.frame
         frame.size.height = height
@@ -237,39 +237,39 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         storyList.removeAll()
         self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)
         
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
-            self.storyList = storyList.reverse()
+            MBProgressHUD.hide(for: self.view, animated: true)
+            self.storyList = storyList.reversed()
             self.tableView.reloadData()
         }
     }
     
-    private func setupTableView() {
-        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.None
+    fileprivate func setupTableView() {
+        self.tableView.separatorStyle = UITableViewCellSeparatorStyle.none
         self.tableView.delegate = self
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 49, right: 0)
         
-        self.tableView.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
-        self.tableView.registerNib(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.register(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
+        self.tableView.register(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
+        self.tableView.separatorColor = UIColor.clear
     }
     
     //MARK: StoryManagerDelegate
     
-    func removeCell(cell: URStoriesTableViewCell) {
-        let indexPath = self.tableView.indexPathForCell(cell)!
-        self.storyList.removeAtIndex(indexPath.row)
-        self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+    func removeCell(_ cell: URStoriesTableViewCell) {
+        let indexPath = self.tableView.indexPath(for: cell)!
+        self.storyList.remove(at: (indexPath as NSIndexPath).row)
+        self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
     }
     
-    func newStoryReceived(story: URStory) {
-        let hasStory = self.storyList.indexOf{($0.key == story.key)}
+    func newStoryReceived(_ story: URStory) {
+        let hasStory = self.storyList.index{($0.key == story.key)}
         
         if hasStory == nil {
-            storyList.insert(story, atIndex: 0)
-            self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: storyList.count - index, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Automatic)
+            storyList.insert(story, at: 0)
+            self.tableView.insertRows(at: [IndexPath(row: storyList.count - index, section: 0)], with: UITableViewRowAnimation.automatic)
             index += 1
         }
     }

@@ -9,9 +9,9 @@
 import UIKit
 
 enum PointsScoredType {
-    case Story
-    case Poll
-    case Contribution
+    case story
+    case poll
+    case contribution
 }
 
 class URPointsScoredViewController: UIViewController {
@@ -48,12 +48,12 @@ class URPointsScoredViewController: UIViewController {
     
     func close() {
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-            }) { (finished) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("pointsScoredDidClosed", object: nil)                
-                self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0)
+            }, completion: { (finished) -> Void in
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "pointsScoredDidClosed"), object: nil)                
+                self.dismiss(animated: true, completion: nil)
+        }) 
         
     }
     
@@ -62,10 +62,10 @@ class URPointsScoredViewController: UIViewController {
         self.lbPoints.text = "\("points_earning_count_title".localized) +5"
         self.lbYouCreated.text = "points_earning_title".localized
         self.lbYouWent.text = "points_earning_subtitle".localized
-        self.btGoToRanking.setTitle("points_earning_ranking".localized, forState: UIControlState.Normal)
-        self.btClose.setTitle("points_earning_close".localized, forState: UIControlState.Normal)
+        self.btGoToRanking.setTitle("points_earning_ranking".localized, for: UIControlState())
+        self.btClose.setTitle("points_earning_close".localized, for: UIControlState())
         
-        if scoreType == .Story {
+        if scoreType == .story {
             self.imgBadge.image = UIImage(named: "points_orange")
         }else {
             self.imgBadge.image = UIImage(named: "img_points_green")
@@ -75,11 +75,11 @@ class URPointsScoredViewController: UIViewController {
     
     //MARK: Button Events
     
-    @IBAction func btGoToRankingTapped(sender: AnyObject) {
-        URNavigationManager.setupNavigationControllerWithMainViewController(URProfileViewController(enterInTabType:.Ranking))
+    @IBAction func btGoToRankingTapped(_ sender: AnyObject) {
+        URNavigationManager.setupNavigationControllerWithMainViewController(URProfileViewController(enterInTabType:.ranking))
     }
     
-    @IBAction func btCloseTapped(sender: AnyObject) {
+    @IBAction func btCloseTapped(_ sender: AnyObject) {
         self.close()
     }
     

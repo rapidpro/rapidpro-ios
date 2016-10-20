@@ -14,7 +14,7 @@ class URMediaAudioView: UIView, URAudioViewDelegate {
     @IBOutlet weak var bgAudioView:UIView!
     var media:URMedia!
     
-    let audioView = NSBundle.mainBundle().loadNibNamed("URAudioView", owner: nil, options: nil)[0] as! URAudioView
+    let audioView = Bundle.main.loadNibNamed("URAudioView", owner: nil, options: nil)?[0] as! URAudioView
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -28,7 +28,7 @@ class URMediaAudioView: UIView, URAudioViewDelegate {
         bgAudioView.layoutSubviews()
     }
     
-    func setupWithMedia(media:URMedia) {
+    func setupWithMedia(_ media:URMedia) {
         self.media = media
                 
         audioView.playAudioImmediately(media.url,showPreloading: false)
@@ -40,7 +40,7 @@ class URMediaAudioView: UIView, URAudioViewDelegate {
         
     }
     
-    func didStartPlaying(view: URAudioView) {
+    func didStartPlaying(_ view: URAudioView) {
         if view != audioView {
             view.play()
         }

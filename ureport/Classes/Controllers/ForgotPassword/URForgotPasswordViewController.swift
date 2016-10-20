@@ -16,7 +16,7 @@ class URForgotPasswordViewController: UIViewController {
     @IBOutlet weak var btSendPassword: UIButton!
     @IBOutlet weak var viewEmail: UIView!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: "URForgotPasswordViewController", bundle: nil)
     }
 
@@ -27,24 +27,24 @@ class URForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.btSendPassword.setTitle("answer_polls_respond".localized, forState: UIControlState.Normal)
+        self.btSendPassword.setTitle("answer_polls_respond".localized, for: UIControlState())
         self.lbMessage.text = "info_forgot_password".localized
         self.txtEmail.placeholder = "login_email".localized
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Forgot Password")
+        tracker?.set(kGAIScreenName, value: "Forgot Password")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
     }
     
     //MARK: Button Events
     
-    @IBAction func btSendPasswordTapped(sender: AnyObject) {
+    @IBAction func btSendPasswordTapped(_ sender: AnyObject) {
         
         if self.txtEmail.text!.isEmpty {
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: ["login_email".localized]), delegate: self, cancelButtonTitle: "OK").show()
@@ -52,9 +52,9 @@ class URForgotPasswordViewController: UIViewController {
         }
         
         self.view.endEditing(true)
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         URUserLoginManager.resetPassword(self.txtEmail.text!, completion: { (success:Bool) -> Void in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             if success == true {
                 UIAlertView(title: nil, message: "error_email_check".localized, delegate: self, cancelButtonTitle: "OK").show()
             }else {

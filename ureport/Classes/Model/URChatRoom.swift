@@ -21,7 +21,7 @@ class URChatRoom: Serializable, Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.key <- map["key"]
     }
     

@@ -22,7 +22,7 @@ class URNews: Mappable {
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.id         <- map["id"]
         self.title      <- map["title"]
         self.featured   <- map["featured"]

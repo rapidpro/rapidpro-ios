@@ -9,7 +9,7 @@
 import UIKit
 
 protocol UROpenFieldResponseDelegate {
-    func onOpenFieldResponseChanged(flowRule: URFlowRule, text:String)
+    func onOpenFieldResponseChanged(_ flowRule: URFlowRule, text:String)
 }
 
 class UROpenFieldResponseView: URResponseView {
@@ -24,7 +24,7 @@ class UROpenFieldResponseView: URResponseView {
     }
     
     //MARK: Actions
-    @IBAction func responseChanged(sender: AnyObject) {
+    @IBAction func responseChanged(_ sender: AnyObject) {
         if delegate != nil {
             delegate?.onOpenFieldResponseChanged(flowRule, text: tfResponse.text!)
         }

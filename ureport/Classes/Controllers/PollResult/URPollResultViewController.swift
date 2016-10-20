@@ -37,7 +37,7 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
         self.title = "poll_results".localized
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)        
         pollManager.delegate = self
@@ -50,10 +50,10 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
         setupTableView()
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Poll Results")
+        tracker?.set(kGAIScreenName, value: "Poll Results")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
@@ -64,26 +64,26 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pollResultList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URPollResultTableViewCell.self), forIndexPath: indexPath) as! URPollResultTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URPollResultTableViewCell.self), for: indexPath) as! URPollResultTableViewCell
         
-        cell.setupCellWithData(self.pollResultList[indexPath.row])
+        cell.setupCellWithData(self.pollResultList[(indexPath as NSIndexPath).row])
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
 //        let cell = tableView.cellForRowAtIndexPath(indexPath) as? URPollResultTableViewCell
         
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
 
-        let pollResult = pollResultList[indexPath.row]
+        let pollResult = pollResultList[(indexPath as NSIndexPath).row]
         
         if pollResult.type == "Choices" {
             return 189 + CGFloat(pollResult.results.count * 61)
@@ -95,12 +95,12 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     
     //MARK: PollManager Delegate
     
-    func newPollReceived(poll: URPoll) {
+    func newPollReceived(_ poll: URPoll) {
         
     }
     
-    func newPollResultReceived(pollResult: URPollResult) {
-        pollResultList.insert(pollResult, atIndex: pollResultList.count)        
+    func newPollResultReceived(_ pollResult: URPollResult) {
+        pollResultList.insert(pollResult, at: pollResultList.count)        
         self.tableView.reloadData()
     }
     
@@ -111,24 +111,24 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
         pollContributionModal.show(true, inViewController: self)
     }
     
-    func reloadWithPoll(poll:URPoll) {
+    func reloadWithPoll(_ poll:URPoll) {
         self.pollResultList = []
         self.poll = poll
         pollManager.getPollsResults(poll.key)
     }
     
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, URConstant.isIpad ? 49 : 0, 0);
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.registerNib(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
-        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.layoutMargins = UIEdgeInsetsZero
-        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.register(UINib(nibName: "URPollResultTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URPollResultTableViewCell.self))
+        self.tableView.separatorColor = UIColor.groupTableViewBackground
+        self.tableView.layoutMargins = UIEdgeInsets.zero
+        self.tableView.separatorInset = UIEdgeInsets.zero
     }
     
     //MARK: Button Events
     
-    @IBAction func btCommentTapped(button:UIButton) {
+    @IBAction func btCommentTapped(_ button:UIButton) {
         openPollContribution()
     }
 }

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddMarkerTableViewCellDelegate {
-    func newMarkerAdded(marker:URMarker)
+    func newMarkerAdded(_ marker:URMarker)
 }
 
 class URAddMarkerTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -24,7 +24,7 @@ class URAddMarkerTableViewCell: UITableViewCell, UITextFieldDelegate {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -32,7 +32,7 @@ class URAddMarkerTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     //MARK: Textfield Delegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !textField.text!.isEmpty{
             if let delegate = self.delegate {
                 delegate.newMarkerAdded(URMarker(name: textField.text!))

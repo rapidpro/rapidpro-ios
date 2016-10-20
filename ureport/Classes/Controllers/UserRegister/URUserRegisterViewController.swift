@@ -47,7 +47,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var country:URCountry?
     var countryISO3:URCountry?
-    var birthDay:NSDate?
+    var birthDay:Date?
     var localizedGender:String?
     var gender:String?
     let genders:[String]? = ["user_gender_male".localized,"user_gender_female".localized]
@@ -59,13 +59,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     var hasDistrict:Bool!
     
-    let termsViewController:ISTermsViewController = ISTermsViewController(fileName: "terms", fileExtension: "rtf", btAcceptColor: UIColor(rgba:"#49D080"), btCancelColor: UIColor(rgba:"#D0D0D0"), btAcceptTitle: "Accept", btCancelTitle: "Cancel", btAcceptTitleColor: UIColor.whiteColor(), btCancelTitleColor: UIColor.blackColor(), setupButtonAsRounded: true, setupBackgroundViewAsRounded: true)
+    let termsViewController:ISTermsViewController = ISTermsViewController(fileName: "terms", fileExtension: "rtf", btAcceptColor: UIColor(rgba:"#49D080"), btCancelColor: UIColor(rgba:"#D0D0D0"), btAcceptTitle: "Accept", btCancelTitle: "Cancel", btAcceptTitleColor: UIColor.white, btCancelTitleColor: UIColor.black, setupButtonAsRounded: true, setupBackgroundViewAsRounded: true)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        self.appDelegate = UIApplication.shared.delegate as! AppDelegate
         
-        countries = URCountry.getCountries(URCountryCodeType.ISO2) as [URCountry]
+        countries = URCountry.getCountries(URCountryCodeType.iso2) as [URCountry]
         
         hasDistrict = false
         setupUI()
@@ -73,22 +73,22 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         checkUserCountry()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "User Register")
+        tracker?.set(kGAIScreenName, value: "User Register")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     init(color:UIColor,user:URUser,updateMode:Bool) {
@@ -110,7 +110,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: ISTermsViewControllerDelegate
     
-    func userDidAcceptTerms(accept: Bool) {
+    func userDidAcceptTerms(_ accept: Bool) {
         
         self.termsViewController.closeWithCompletion { (closed) in
         }
@@ -124,7 +124,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Button Events
     
-    @IBAction func btNextTapped(sender: AnyObject) {
+    @IBAction func btNextTapped(_ sender: AnyObject) {
         
         if ((self.txtPassword.text!.isEmpty) && (self.userInput == nil)) {
             showEmptyTextFieldAlert(self.txtPassword)
@@ -148,11 +148,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if URSettings.getSettings().reviewMode == true {
                 gender = gender == nil ? "" : gender
-                self.birthDay = self.birthDay == nil ? NSDate() : self.birthDay
+                self.birthDay = self.birthDay == nil ? Date() : self.birthDay
                 self.txtState.text = self.txtState.text == nil ? "" : self.txtState.text
             }
             
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
             
             if (self.userInput != nil) {
                 user = self.userInput!
@@ -165,7 +165,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 
                 URFireBaseManager.sharedLoginInstance().createUser(user.email, password: self.txtPassword.text,
                                                               withValueCompletionBlock: { error, result in
-                                                                MBProgressHUD.hideHUDForView(self.view, animated: true)
+                                                                MBProgressHUD.hide(for: self.view, animated: true)
                                                                 if error != nil {
                                                                     var msg = ""
                                                                     
@@ -188,7 +188,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                     }
                                                                     
                                                                 } else {
-                                                                    let uid = result["uid"] as? String
+                                                                    let uid = result?["uid"] as? String
                                                                     user.key = uid
                                                                     
                                                                     if (error != nil) {
@@ -198,7 +198,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                         self.saveUser(user)
                                                                         
                                                                         URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-                                                                            MBProgressHUD.hideHUDForView(self.view, animated: true)
+                                                                            MBProgressHUD.hide(for: self.view, animated: true)
                                                                             if success {
                                                                                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                                                                             }
@@ -215,12 +215,12 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Class Methods
     
-    func buildUserFields(user:URUser) -> URUser {
+    func buildUserFields(_ user:URUser) -> URUser {
         user.nickname = self.txtNick.text
         user.email = self.txtEmail.text
         user.district = self.txtDistrict.text != nil ? self.txtDistrict.text : nil
         user.gender = gender
-        user.birthday = NSNumber(longLong:Int64(self.birthDay!.timeIntervalSince1970 * 1000))
+        user.birthday = NSNumber(value: Int64(self.birthDay!.timeIntervalSince1970 * 1000) as Int64)
         user.country = countryISO3?.code
         user.state = self.txtState.text
         user.publicProfile = true
@@ -229,19 +229,19 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         return user
     }
     
-    func showEmptyTextFieldAlert(textField:UITextField) {
+    func showEmptyTextFieldAlert(_ textField:UITextField) {
         UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
     }
     
-    func saveUser(user:URUser) {
+    func saveUser(_ user:URUser) {
         
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         URUserManager.save(user)
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
         
         if updateMode == true {
             UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
-            URNavigationManager.navigation.popViewControllerAnimated(true)
+            URNavigationManager.navigation.popViewController(animated: true)
         }
         
         URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary:NSDictionary) -> Void in
@@ -259,7 +259,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     func setupUIWithUserData() {
         if self.userInput != nil {
             
-            self.viewPassword.hidden = true
+            self.viewPassword.isHidden = true
             self.txtPassword.placeholder = nil
             
             if let nickName = self.userInput!.nickname {
@@ -283,7 +283,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             }
             
             if let birthDay = self.userInput!.birthday {
-                let convertedDate = NSDate(timeIntervalSince1970: NSNumber(double: birthDay.doubleValue/1000) as NSTimeInterval)
+                let convertedDate = Date(timeIntervalSince1970: NSNumber(value: birthDay.doubleValue/1000 as Double) as TimeInterval)
                 
                 self.birthDay = convertedDate
                 self.txtBirthDay.text = URDateUtil.birthDayFormatter(convertedDate)
@@ -294,9 +294,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    private func checkUserCountry() {
+    fileprivate func checkUserCountry() {
         
-        self.txtState.enabled = true
+        self.txtState.isEnabled = true
         
         if updateMode != nil && updateMode == true {
             self.country = URCountry(code: URCountry.getISO2CountryCodeByISO3Code(self.userInput!.country))
@@ -323,7 +323,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.heightDisctrictView.constant = 50
                 
                 self.txtDistrict.text! = self.userInput!.district
-                self.txtDistrict.enabled = true
+                self.txtDistrict.isEnabled = true
             }else {
                 hasDistrict = false
                 self.txtDistrict.placeholder = nil
@@ -338,18 +338,18 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func setupTextFieldLoading(textField:UITextField) {
+    func setupTextFieldLoading(_ textField:UITextField) {
         textField.placeholder = "loading_states".localized
-        textField.enabled = false
+        textField.isEnabled = false
     }
     
-    func setupFinishLoadingTextField(textField:UITextField,placeholder:String) {
+    func setupFinishLoadingTextField(_ textField:UITextField,placeholder:String) {
         textField.text = ""
         textField.placeholder = placeholder
-        textField.enabled = true
+        textField.isEnabled = true
     }
     
-    func loadState(updateUI:Bool) {
+    func loadState(_ updateUI:Bool) {
         
         self.states = []
         
@@ -395,7 +395,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         })
     }
     
-    private func setupUI() {
+    fileprivate func setupUI() {
         
         self.txtNick.placeholder = "sign_up_nickname".localized
         self.txtBirthDay.placeholder = "sign_up_birthday".localized
@@ -404,7 +404,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.txtGender.placeholder = "gender".localized
         self.txtPassword.placeholder = "login_password".localized
         self.txtState.placeholder = "state".localized
-        self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
+        self.btNext.setTitle("next".localized, for: UIControlState())
         
         URNavigationManager.setupNavigationBarWithCustomColor(self.color!)
         self.btNext.backgroundColor = self.color
@@ -415,8 +415,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.pickerStates = UIPickerView()
         self.pickerDistricts = UIPickerView()
         
-        self.pickerDate!.datePickerMode = UIDatePickerMode.Date
-        self.pickerDate!.addTarget(self, action: #selector(dateChanged), forControlEvents: UIControlEvents.ValueChanged)
+        self.pickerDate!.datePickerMode = UIDatePickerMode.date
+        self.pickerDate!.addTarget(self, action: #selector(dateChanged), for: UIControlEvents.valueChanged)
         self.txtBirthDay.inputView = self.pickerDate!
         
         self.pickerGender!.dataSource = self
@@ -440,18 +440,18 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.txtDistrict.inputView = self.pickerDistricts
         
         if updateMode != nil && updateMode == true {
-            self.txtNick.textColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
-            self.txtEmail.textColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
-            self.txtCountry.textColor = UIColor.grayColor().colorWithAlphaComponent(0.4)
+            self.txtNick.textColor = UIColor.gray.withAlphaComponent(0.4)
+            self.txtEmail.textColor = UIColor.gray.withAlphaComponent(0.4)
+            self.txtCountry.textColor = UIColor.gray.withAlphaComponent(0.4)
             
-            self.txtNick.enabled = false
-            self.txtEmail.enabled = false
-            self.txtCountry.enabled = false
+            self.txtNick.isEnabled = false
+            self.txtEmail.isEnabled = false
+            self.txtCountry.isEnabled = false
         }
         
     }
     
-    func setNeedDistrict(needDistrict:Bool) {
+    func setNeedDistrict(_ needDistrict:Bool) {
         if needDistrict == true {
             self.hasDistrict = true
             
@@ -487,7 +487,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func dateChanged(sender:AnyObject) {
+    func dateChanged(_ sender:AnyObject) {
         let datePicker:UIDatePicker? = sender as? UIDatePicker
         self.birthDay = datePicker!.date
         self.txtBirthDay.text = URDateUtil.birthDayFormatter(self.birthDay!)        
@@ -495,11 +495,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: TextFieldDelegate
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         if textField == self.txtBirthDay || textField == self.txtGender || textField == self.txtCountry{
             return false
         }else{
@@ -509,13 +509,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Picker DataSource and Delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         if pickerView == self.pickerCities {
-            return URCountry.getCountries(URCountryCodeType.ISO2).count
+            return URCountry.getCountries(URCountryCodeType.iso2).count
         }else if pickerView == self.pickerGender {
             return self.genders!.count
         }else if pickerView == self.pickerStates {
@@ -527,7 +527,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         }
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         if pickerView == self.pickerCities {
             //            self.txtCountry.text = self.countries![row].name
             return self.countries![row].name
@@ -551,11 +551,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == self.pickerCities {
             
-            country = (URCountry.getCountries(URCountryCodeType.ISO2)[row]) as URCountry
-            countryISO3 = (URCountry.getCountries(URCountryCodeType.ISO3)[row]) as URCountry
+            country = (URCountry.getCountries(URCountryCodeType.iso2)[row]) as URCountry
+            countryISO3 = (URCountry.getCountries(URCountryCodeType.iso3)[row]) as URCountry
             
             self.txtCountry.text = country!.name
             

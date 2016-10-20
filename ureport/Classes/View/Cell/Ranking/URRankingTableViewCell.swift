@@ -22,26 +22,26 @@ class URRankingTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     //MARK: Class Methods
     
-    func setupCellWith(user:URUser) {
+    func setupCellWith(_ user:URUser) {
         self.user = user
         
         self.lbUserName.text = user.nickname
         self.lbPoints.text = "\(user.points)"
 
         if user.picture != nil && !(user.picture.isEmpty) {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFill
-            self.imageProfile.sd_setImageWithURL(NSURL(string: user.picture))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.imageProfile.contentMode = UIViewContentMode.scaleAspectFill
+            self.imageProfile.sd_setImage(with: URL(string: user.picture))
         }else{
-            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-            self.imageProfile.contentMode = UIViewContentMode.Center
+            self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+            self.imageProfile.contentMode = UIViewContentMode.center
             self.imageProfile.image = UIImage(named: "ic_person")
         }
         

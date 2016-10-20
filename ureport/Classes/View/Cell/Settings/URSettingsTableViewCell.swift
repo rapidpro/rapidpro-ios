@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URSettingsTableViewCellDelegate {
-    func switchEnableDidTapped(cell:URSettingsTableViewCell)
+    func switchEnableDidTapped(_ cell:URSettingsTableViewCell)
 }
 
 class URSettingsTableViewCell: UITableViewCell {
@@ -25,15 +25,15 @@ class URSettingsTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     //MARK: Button Events
     
     
-    @IBAction func switchEnableTapped(sender: AnyObject) {
+    @IBAction func switchEnableTapped(_ sender: AnyObject) {
         if let delegate = self.delegate {
             delegate.switchEnableDidTapped(self)
         }

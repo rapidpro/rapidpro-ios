@@ -18,13 +18,13 @@ class URSettings: Serializable {
     var firstRun:NSNumber?
     var reviewMode:NSNumber?
     
-    class func saveSettingsLocaly(settings:URSettings) {
-        let defaults = NSUserDefaults.standardUserDefaults()
-        defaults.setObject(URSettings.buildSettingsValues(settings).toDictionary(), forKey: "settings")
+    class func saveSettingsLocaly(_ settings:URSettings) {
+        let defaults = UserDefaults.standard
+        defaults.set(URSettings.buildSettingsValues(settings).toDictionary(), forKey: "settings")
         defaults.synchronize()
     }
     
-    class func buildSettingsValues(settings:URSettings) -> URSettings{
+    class func buildSettingsValues(_ settings:URSettings) -> URSettings{
         
         let savedSettings = URSettings.getSettings()
         
@@ -57,15 +57,15 @@ class URSettings: Serializable {
     
     class func getSettings() -> URSettings{
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         
-        if let settingsDictionary = defaults.objectForKey("settings") as? NSDictionary {
+        if let settingsDictionary = defaults.object(forKey: "settings") as? NSDictionary {
             return URSettings(jsonDict:(settingsDictionary))
         }
         return URSettings();
     }
     
-    class func checkIfTermsIsAccepted(termsViewController:ISTermsViewController,viewController:UIViewController) -> Bool {
+    class func checkIfTermsIsAccepted(_ termsViewController:ISTermsViewController,viewController:UIViewController) -> Bool {
         
         if URSettings.getSettings().firstRun == nil {
             

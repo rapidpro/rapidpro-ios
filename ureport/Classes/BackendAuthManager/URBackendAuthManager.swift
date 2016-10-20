@@ -16,11 +16,11 @@ class URBackendAuthManager: NSObject {
         return "backend_authorization"
     }
     
-    class func saveAuthToken(token:String,completion:(success:Bool) -> Void) {
+    class func saveAuthToken(_ token:String,completion:@escaping (_ success:Bool) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URBackendAuthManager.path())
-            .childByAppendingPath(token)
-            .setValue(["checked":true,"user":URUser.activeUser()!.key], withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+            .child(byAppendingPath: URBackendAuthManager.path())
+            .child(byAppendingPath: token)
+            .setValue(["checked":true,"user":URUser.activeUser()!.key], withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
                     completion(success: false)
                 }else {

@@ -10,10 +10,10 @@ import UIKit
 
 struct URConstant {
    
-    static let keyPath = NSBundle.mainBundle().pathForResource(URFireBaseManager.Properties, ofType: "plist")
+    static let keyPath = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist")
     static let keyDictionary = NSDictionary(contentsOfFile: URConstant.keyPath!)
     
-    static let isIpad = UIDevice.currentDevice().userInterfaceIdiom == .Pad
+    static let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
     struct Color {
         static let PRIMARY = UIColor(rgba: "#42b6e7")
@@ -112,7 +112,7 @@ struct URConstant {
             return ""
         }
         
-        static func S3_BUCKET_NAME(path:URUploadPath) -> String {
+        static func S3_BUCKET_NAME(_ path:URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["S3_BUCKET_NAME_\(path.rawValue)"] != nil {
@@ -124,7 +124,7 @@ struct URConstant {
             return ""
         }
         
-        static func URL_STORAGE(path:URUploadPath) -> String {
+        static func URL_STORAGE(_ path:URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["URL_STORAGE_\(path.rawValue)"] != nil {

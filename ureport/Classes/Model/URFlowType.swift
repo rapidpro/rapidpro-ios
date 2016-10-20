@@ -10,12 +10,12 @@ import UIKit
 
 enum URFlowType {
 
-    case OpenField
-    case Choice
-    case Number
-    case Date
-    case Phone
-    case State
-    case District
+    case openField
+    case choice
+    case number
+    case date
+    case phone
+    case state
+    case district
     
 }

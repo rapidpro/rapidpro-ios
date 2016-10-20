@@ -13,28 +13,28 @@ class URMessageRead: Serializable {
     var totalMessages:NSNumber!
     var roomKey:String!
         
-    class func saveMessageReadLocaly(messageRead:URMessageRead) {
+    class func saveMessageReadLocaly(_ messageRead:URMessageRead) {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         var readArray:[NSDictionary] = URMessageRead.getMessagesRead()
         
-        if let _ = readArray.indexOf(messageRead.toDictionary()) {
+        if let _ = readArray.index(of: messageRead.toDictionary()) {
             return
         }else {
             readArray.append(messageRead.toDictionary())
         }
         
-        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(readArray), forKey: "messagesRead")
+        defaults.set(NSKeyedArchiver.archivedData(withRootObject: readArray), forKey: "messagesRead")
         defaults.synchronize()
     }
     
     class func getMessagesRead() -> [NSDictionary]{
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         let readArray:[NSDictionary] = []
         
-        if let messagesRead = defaults.objectForKey("messagesRead") as? NSData {
-            return (NSKeyedUnarchiver.unarchiveObjectWithData(messagesRead)) as! [NSDictionary]
+        if let messagesRead = defaults.object(forKey: "messagesRead") as? Data {
+            return (NSKeyedUnarchiver.unarchiveObject(with: messagesRead)) as! [NSDictionary]
         }
         
         return readArray

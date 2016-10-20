@@ -10,7 +10,7 @@ import UIKit
 import Firebase
 
 protocol URContributionManagerDelegate {
-    func newContributionReceived(contribution:URContribution)
+    func newContributionReceived(_ contribution:URContribution)
 }
 
 class URContributionManager: NSObject {
@@ -26,23 +26,23 @@ class URContributionManager: NSObject {
         return "poll_contribution"
     }
     
-    func getContributions(storyKey:String!) {
+    func getContributions(_ storyKey:String!) {
                 
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.path())
-            .childByAppendingPath(storyKey)
-            .queryOrderedByChild("createdDate")
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.path())
+            .child(byAppendingPath: storyKey)
+            .queryOrdered(byChild: "createdDate")
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                                         
-                    let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
-                    let author = URUser(jsonDict: (snapshot.value as! NSDictionary).objectForKey("author")! as? NSDictionary)
+                    let contribution = URContribution(jsonDict: snapshot?.value as? NSDictionary)
+                    let author = URUser(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "author")! as? NSDictionary)
                     
                     URUserManager.getByKey(author.key, completion: { (user:URUser?, exists:Bool) -> Void in
                         if user != nil {
-                            contribution.key = snapshot.key
+                            contribution.key = snapshot?.key
                             contribution.author = user
                             delegate.newContributionReceived(contribution)
                         }
@@ -52,23 +52,23 @@ class URContributionManager: NSObject {
         
     }
     
-    func getPollContributions(pollkey:String!) {
+    func getPollContributions(_ pollkey:String!) {
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.pathPollContribution())
-            .childByAppendingPath(pollkey)
-            .queryOrderedByChild("createdDate")
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.pathPollContribution())
+            .child(byAppendingPath: pollkey)
+            .queryOrdered(byChild: "createdDate")
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
-                    let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
-                    let author = URUser(jsonDict: (snapshot.value as! NSDictionary).objectForKey("author")! as? NSDictionary)
+                    let contribution = URContribution(jsonDict: snapshot?.value as? NSDictionary)
+                    let author = URUser(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "author")! as? NSDictionary)
                     
                     URUserManager.getByKey(author.key, completion: { (user:URUser?, exists:Bool) -> Void in
                         if user != nil {
-                            contribution.key = snapshot.key
+                            contribution.key = snapshot?.key
                             contribution.author = user
                             delegate.newContributionReceived(contribution)
                         }
@@ -78,14 +78,14 @@ class URContributionManager: NSObject {
         
     }
     
-    class func saveContribution(storyKey:String,contribution:URContribution,completion:(Bool!) -> Void) {
+    class func saveContribution(_ storyKey:String,contribution:URContribution,completion:@escaping (Bool!) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.path())
-            .childByAppendingPath(storyKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.path())
+            .child(byAppendingPath: storyKey)
             .childByAutoId()
-            .setValue(contribution.toDictionary(), withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+            .setValue(contribution.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
                     completion(false)
                 }else {
@@ -94,14 +94,14 @@ class URContributionManager: NSObject {
             })
     }
     
-    class func savePollContribution(pollKey:String,contribution:URContribution,completion:(Bool!) -> Void) {
+    class func savePollContribution(_ pollKey:String,contribution:URContribution,completion:@escaping (Bool!) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.pathPollContribution())
-            .childByAppendingPath(pollKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.pathPollContribution())
+            .child(byAppendingPath: pollKey)
             .childByAutoId()
-            .setValue(contribution.toDictionary(), withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+            .setValue(contribution.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
                     completion(false)
                 }else {
@@ -110,39 +110,39 @@ class URContributionManager: NSObject {
             })
     }
     
-    class func getTotalContributions(storyKey:String,completion:(Int) -> Void) {
+    class func getTotalContributions(_ storyKey:String,completion:@escaping (Int) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.path())
-            .childByAppendingPath(storyKey)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
-                    completion(Int(snapshot.childrenCount))
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.path())
+            .child(byAppendingPath: storyKey)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
+                    completion(Int((snapshot?.childrenCount)!))
                 }else {
                     completion(0)
                 }
             })
     }
     
-    class func removeContribution(storyKey:String,contributionKey:String) {
+    class func removeContribution(_ storyKey:String,contributionKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.path())
-            .childByAppendingPath(storyKey)
-            .childByAppendingPath(contributionKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.path())
+            .child(byAppendingPath: storyKey)
+            .child(byAppendingPath: contributionKey)
             .removeValue()
     }
     
     
-    class func removePollContribution(pollKey:String,contributionKey:String) {
+    class func removePollContribution(_ pollKey:String,contributionKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URContributionManager.pathPollContribution())
-            .childByAppendingPath(pollKey)
-            .childByAppendingPath(contributionKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URContributionManager.pathPollContribution())
+            .child(byAppendingPath: pollKey)
+            .child(byAppendingPath: contributionKey)
             .removeValue()
     }
     

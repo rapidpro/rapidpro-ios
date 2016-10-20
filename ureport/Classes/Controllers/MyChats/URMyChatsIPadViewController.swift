@@ -23,25 +23,25 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.preferredDisplayMode = .AllVisible
+        self.preferredDisplayMode = .allVisible
         self.extendedLayoutIncludesOpaqueBars = true
         
         myChatsViewController.delegate = self
         messagesViewController.delegate = self
-        messagesViewController.view.userInteractionEnabled = false
+        messagesViewController.view.isUserInteractionEnabled = false
         
-        messagesViewController.edgesForExtendedLayout = UIRectEdge.None
+        messagesViewController.edgesForExtendedLayout = UIRectEdge()
         
         setupViewControllers()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         self.navigationController!.setNavigationBarHidden(true, animated: false)
         checkIfNeedOpenChatRoomByKey()
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: false)
     }
@@ -60,10 +60,10 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     
     //MARK: URChatTableViewControllerDelegate
     
-    func openChatRoom(chatRoom: URChatRoom, chatMembers members: [URUser], title: String) {
-        messagesViewController.view.userInteractionEnabled = true
+    func openChatRoom(_ chatRoom: URChatRoom, chatMembers members: [URUser], title: String) {
+        messagesViewController.view.isUserInteractionEnabled = true
         self.myChatsViewController.markCellThatChatIsOpen(chatRoom)
-        self.popOverViewController?.dismissPopoverAnimated(true)
+        self.popOverViewController?.dismiss(animated: true)
         self.messagesViewController.chatRoom = chatRoom
         self.messagesViewController.chatMembers = members
         self.messagesViewController.navigationTitle = title
@@ -71,16 +71,16 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         self.messagesViewController.updateReadMessages()
     }
     
-    func openNewGroupViewController(newGroupViewController: URNewGroupViewController) {
-        self.popOverViewController?.dismissPopoverAnimated(true)
+    func openNewGroupViewController(_ newGroupViewController: URNewGroupViewController) {
+        self.popOverViewController?.dismiss(animated: true)
         self.navigationController!.pushViewController(newGroupViewController, animated: true)
     }
     
     //MARK: URChatTableViewControllerDelegate
     
-    func openChatRoomWith(chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
-        messagesViewController.view.userInteractionEnabled = true
-        self.popOverViewController?.dismissPopoverAnimated(true)
+    func openChatRoomWith(_ chatRoom: URChatRoom, chatMembers: [URUser], title: String) {
+        messagesViewController.view.isUserInteractionEnabled = true
+        self.popOverViewController?.dismiss(animated: true)
         self.messagesViewController.chatRoom = chatRoom
         self.messagesViewController.chatMembers = chatMembers
         self.messagesViewController.navigationTitle = title
@@ -90,29 +90,29 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
     
     //MARK: SelectorMethods
     
-    func createChatRoom(barButtonItem:UIBarButtonItem) {
+    func createChatRoom(_ barButtonItem:UIBarButtonItem) {
         let chatTableViewController = URChatTableViewController(createGroupOption: true)
         chatTableViewController.delegate = self
         
-        chatTableViewController.view.backgroundColor = UIColor.whiteColor()
+        chatTableViewController.view.backgroundColor = UIColor.white
         popOverViewController = UIPopoverController(contentViewController: chatTableViewController)
-        popOverViewController!.popoverContentSize = CGSize(width: 320, height: 500)
+        popOverViewController!.contentSize = CGSize(width: 320, height: 500)
         
         presentPopOver(barButtonItem)
     }
     
-    func invitePeople(barButtonItem:UIBarButtonItem) {
+    func invitePeople(_ barButtonItem:UIBarButtonItem) {
         let inviteTableViewController = URInviteTableViewController()
-        inviteTableViewController.view.backgroundColor = UIColor.whiteColor()
+        inviteTableViewController.view.backgroundColor = UIColor.white
         popOverViewController = UIPopoverController(contentViewController: inviteTableViewController)
-        popOverViewController!.popoverContentSize = CGSize(width: 320, height: 500)
+        popOverViewController!.contentSize = CGSize(width: 320, height: 500)
         
-        proposeToAccess(PrivateResource.Contacts, agreed: {
+        proposeToAccess(PrivateResource.contacts, agreed: {
             
             self.presentPopOver(barButtonItem)
             
             }, rejected: {
-                self.alertNoPermissionToAccess(PrivateResource.Contacts)
+                self.alertNoPermissionToAccess(PrivateResource.contacts)
         })
     }
     
@@ -122,9 +122,9 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         if let chatRoomKeyToOpen = chatRoomKeyToOpen {
             URChatRoomManager.getByKey(chatRoomKeyToOpen, completion: { (chatRoom) -> Void in
                 
-                MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+                MBProgressHUD.showAdded(to: self.view, animated: true)
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
-                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    MBProgressHUD.hide(for: self.view, animated: true)
                     
                     var chatName = ""
                     
@@ -142,7 +142,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         }
     }
     
-    func getFriend(users:[URUser]) -> URUser? {
+    func getFriend(_ users:[URUser]) -> URUser? {
         for user in users {
             if user.key != URUser.activeUser()?.key {
                 return user
@@ -152,25 +152,25 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         return nil
     }
     
-    func presentPopOver(anyObject:AnyObject) {
+    func presentPopOver(_ anyObject:AnyObject) {
         
         var objectView:UIView?
         
         if let view = anyObject as? UIBarButtonItem {
-            objectView = view.valueForKey("view") as? UIView
+            objectView = view.value(forKey: "view") as? UIView
         }else {
             return
         }
         
-        popOverViewController!.presentPopoverFromRect(objectView!.frame, inView: self.view, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+        popOverViewController!.present(from: objectView!.frame, in: self.view, permittedArrowDirections: UIPopoverArrowDirection.any, animated: true)
     }
     
     func addRightBarButtons() -> [UIBarButtonItem]{
         
         self.navigationItem.rightBarButtonItem = nil
         
-        let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .Compose, target: self, action: #selector(createChatRoom(_:)))
-        let inviteButtonItem = UIBarButtonItem(image: UIImage(named:"icon_invite_friend"), style: UIBarButtonItemStyle.Plain, target: self, action: #selector(invitePeople(_:)))
+        let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(createChatRoom(_:)))
+        let inviteButtonItem = UIBarButtonItem(image: UIImage(named:"icon_invite_friend"), style: UIBarButtonItemStyle.plain, target: self, action: #selector(invitePeople(_:)))
         
         return [chatButtonItem,inviteButtonItem]
     }
@@ -191,15 +191,15 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
         self.viewControllers = [leftNavigationController,rightNavigationController]
     }
     
-    func setupNavigationDefaultAtrributes(navigationController:UINavigationController) {
+    func setupNavigationDefaultAtrributes(_ navigationController:UINavigationController) {
         
-        navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor(),
-                                                              NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as! AnyObject
+        navigationController.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white,
+                                                              NSFontAttributeName:UIFont(name: "Avenir-Light", size: 20) as AnyObject
         ]
         
         navigationController.navigationBar.barTintColor = URCountryProgramManager.activeCountryProgram()?.themeColor
-        navigationController.navigationBar.tintColor = UIColor.whiteColor()
-        navigationController.navigationBar.translucent = true
+        navigationController.navigationBar.tintColor = UIColor.white
+        navigationController.navigationBar.isTranslucent = true
     }
     
 

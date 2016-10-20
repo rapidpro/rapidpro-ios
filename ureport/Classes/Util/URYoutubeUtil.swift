@@ -10,13 +10,13 @@ import UIKit
 
 class URYoutubeUtil: NSObject {
 
-    class func getYoutubeVideoID(strVideoUrl:String) -> String?{                
+    class func getYoutubeVideoID(_ strVideoUrl:String) -> String?{                
         
-        if !strVideoUrl.containsString("http://") && !strVideoUrl.containsString("https://") {
+        if !strVideoUrl.contains("http://") && !strVideoUrl.contains("https://") {
             var strVideoUrl = strVideoUrl
             strVideoUrl = "https://\(strVideoUrl)"
         }
-        let URLVideo = NSURL(string: strVideoUrl)
+        let URLVideo = URL(string: strVideoUrl)
         
         print(URLVideo!.host)
         
@@ -26,18 +26,18 @@ class URYoutubeUtil: NSObject {
         }
         
         do {
-            let regex = try NSRegularExpression(pattern: ".+v=([^&]+)|.+/([^?]+)", options: .CaseInsensitive)
-            let match = regex.firstMatchInString(strVideoUrl, options: NSMatchingOptions.Anchored, range: NSMakeRange(0, strVideoUrl.characters.count))
+            let regex = try NSRegularExpression(pattern: ".+v=([^&]+)|.+/([^?]+)", options: .caseInsensitive)
+            let match = regex.firstMatch(in: strVideoUrl, options: NSRegularExpression.MatchingOptions.anchored, range: NSMakeRange(0, strVideoUrl.characters.count))
             if let match = match {
                 if match.numberOfRanges < 2 {
                     print("URL do vídeo inválida. Por favor, verifique se a URL está correta e tente novamente.")
                     return nil
                 }
-                var range = match.rangeAtIndex(1)
+                var range = match.rangeAt(1)
                 if range.location == NSNotFound {
-                    range = match.rangeAtIndex(2)
+                    range = match.rangeAt(2)
                 }
-                return (strVideoUrl as NSString).substringWithRange(range)
+                return (strVideoUrl as NSString).substring(with: range)
             }
         } catch {
             print("URL do vídeo inválida. Por favor, verifique se a URL está correta e tente novamente.")

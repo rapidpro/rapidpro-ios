@@ -32,7 +32,7 @@ class URChatVideoItem: JSQMediaItem {
     
     @objc override func mediaView() -> UIView! {
         if mediaVideoView.media == nil {
-            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMaskToMediaView(mediaVideoView, isOutgoing: maskAsOutgoing)
+            JSQMessagesMediaViewBubbleImageMasker.applyBubbleImageMask(toMediaView: mediaVideoView, isOutgoing: maskAsOutgoing)
             mediaVideoView.setupWithMedia(media)
         }
         return mediaVideoView

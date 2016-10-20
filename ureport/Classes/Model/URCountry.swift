@@ -7,10 +7,21 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 enum URCountryCodeType {
-    case ISO2
-    case ISO3
+    case iso2
+    case iso3
 }
 
 class URCountry: NSObject {
@@ -27,28 +38,28 @@ class URCountry: NSObject {
         
     }
     
-    class func getLanguageDescription(languageCode:String, type:URCountryCodeType) -> String? {
+    class func getLanguageDescription(_ languageCode:String, type:URCountryCodeType) -> String? {
         var languageCode = languageCode
-        if type == .ISO3 {
-            let keys = (NSLocale.ISO639_2Dictionary() as NSDictionary).allKeysForObject(languageCode)
+        if type == .iso3 {
+            let keys = (Locale.iso639_2Dictionary() as NSDictionary).allKeys(for: languageCode)
             languageCode = keys.count > 0 ? keys.first as! String : languageCode
         }
         
-        let id = NSLocale.localeIdentifierFromComponents([NSLocaleLanguageCode: languageCode])
-        return NSLocale(localeIdentifier: NSLocale.preferredLanguages()[0]).displayNameForKey(NSLocaleIdentifier, value: id)
+        let id = Locale.identifier(fromComponents: [Locale.Key.languageCode.rawValue: languageCode])
+        return (Locale(identifier: Locale.preferredLanguages[0]) as NSLocale).displayName(forKey: Locale.Key.identifier, value: id)
     }
     
-    class func getCountries(type:URCountryCodeType) -> [URCountry] {
+    class func getCountries(_ type:URCountryCodeType) -> [URCountry] {
         
         var countries: [URCountry] = []
         
-        for code in NSLocale.ISOCountryCodes() {
+        for code in Locale.isoRegionCodes {
             let country:URCountry? = URCountry()
             
-            let id = NSLocale.localeIdentifierFromComponents([NSLocaleCountryCode: code])
-            let name = NSLocale(localeIdentifier: NSLocale.preferredLanguages()[0] ).displayNameForKey(NSLocaleIdentifier, value: id) ?? "Country not found for code: \(code)"
+            let id = Locale.identifier(fromComponents: [NSLocale.Key.countryCode.rawValue: code])
+            let name = (Locale(identifier: Locale.preferredLanguages[0] ) as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: id) ?? "Country not found for code: \(code)"
             
-            if type == .ISO3 {
+            if type == .iso3 {
                 country!.code = getISO3CountryCodeByISO2Code(code)
             }else {
                 country!.code = code
@@ -59,7 +70,7 @@ class URCountry: NSObject {
         }
         
         
-        let sortedCountries = countries.sort({ $0.name < $1.name })
+        let sortedCountries = countries.sorted(by: { $0.name < $1.name })
         
         return sortedCountries
         
@@ -68,18 +79,18 @@ class URCountry: NSObject {
     class func getCurrentURCountry() -> URCountry {
         let country:URCountry? = URCountry()
         
-        let locale:NSLocale! = NSLocale.currentLocale()
-        country!.code = locale.objectForKey(NSLocaleCountryCode) as? String
-        country!.name = locale.displayNameForKey(NSLocaleCountryCode, value: country!.code!)
+        let locale:Locale! = Locale.current
+        country!.code = locale.object(forKey: Locale.Key.countryCode) as? String
+        country!.name = locale.displayName(forKey: Locale.Key.countryCode, value: country!.code!)
         return country!
     }
     
-    class func getISO3CountryCodeByISO2Code(code:String) -> String{
-        if let path = NSBundle.mainBundle().pathForResource("iso3-country-code", ofType: "json") {
+    class func getISO3CountryCodeByISO2Code(_ code:String) -> String{
+        if let path = Bundle.main.path(forResource: "iso3-country-code", ofType: "json") {
             do {
-                let jsonData = try NSData(contentsOfFile: path, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: Data.ReadingOptions.mappedIfSafe)
                 do {
-                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers)
+                    let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers)
                     if let ISO3Code = jsonResult[code] as? String {
                         return ISO3Code
                     }
@@ -96,12 +107,12 @@ class URCountry: NSObject {
         return ""
     }
     
-    class func getISO2CountryCodeByISO3Code(code:String) -> String{
-        if let path = NSBundle.mainBundle().pathForResource("iso3-country-code", ofType: "json") {
+    class func getISO2CountryCodeByISO3Code(_ code:String) -> String{
+        if let path = Bundle.main.path(forResource: "iso3-country-code", ofType: "json") {
             do {
-                let jsonData = try NSData(contentsOfFile: path, options: NSDataReadingOptions.DataReadingMappedIfSafe)
+                let jsonData = try Data(contentsOf: URL(fileURLWithPath: path), options: Data.ReadingOptions.mappedIfSafe)
                 do {
-                    let jsonResult = try NSJSONSerialization.JSONObjectWithData(jsonData, options: NSJSONReadingOptions.MutableContainers)
+                    let jsonResult = try JSONSerialization.jsonObject(with: jsonData, options: JSONSerialization.ReadingOptions.mutableContainers)
                     
                     let filtered = (jsonResult as! NSDictionary).filter({ $0.1 as! String == code })
                     

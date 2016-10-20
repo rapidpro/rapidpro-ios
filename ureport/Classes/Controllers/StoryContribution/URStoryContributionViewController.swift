@@ -70,25 +70,25 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         contributionManager.delegate = self
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        URNavigationManager.setupNavigationBarWithType(URConstant.isIpad ? .Blue : .Clear)
+        URNavigationManager.setupNavigationBarWithType(URConstant.isIpad ? .blue : .clear)
         
         if !URConstant.isIpad {
             self.navigationController?.hidesBarsOnSwipe = true
         }
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Story Detail")
+        tracker?.set(kGAIScreenName, value: "Story Detail")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -107,7 +107,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             let scrollViewHeight = self.tableView.contentSize.height + self.tableView.frame.origin.y
             
             self.tableViewHeight.constant = self.tableView.contentSize.height
-            self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
+            self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width,height: scrollViewHeight)
             self.contentViewHeight.constant = self.scrollView.contentSize.height
             
         }
@@ -123,22 +123,22 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         self.lbContent.text = story.content
         
         if story.userObject != nil && story.userObject!.picture == nil{
-            self.imgProfile?.contentMode = UIViewContentMode.Center
+            self.imgProfile?.contentMode = UIViewContentMode.center
             self.imgProfile?.image = UIImage(named: "ic_person")
             
-            self.roundedView?.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+            self.roundedView?.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         }else if let userObject = story.userObject {
-            self.imgProfile?.sd_setImageWithURL(NSURL(string: userObject.picture))
+            self.imgProfile?.sd_setImage(with: URL(string: userObject.picture))
         }
         
         if story.like == nil {
             story.like = 0
         }
 
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0]), forState: UIControlState.Normal)
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0]), for: UIControlState())
         
         URStoryManager.checkIfStoryWasLiked(story.key) { (liked) -> Void in
-             self.btLike.enabled = true
+             self.btLike.isEnabled = true
              self.setupLikeButtonAsLiked(liked)
         }
         
@@ -146,14 +146,14 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     func incrementLikeButton() {
         let likeCount = Int(story.like) + 1
-        story.like = likeCount
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
+        story.like = likeCount as NSNumber!
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), for: UIControlState())
     }
     
     func decrementLikeButton() {
         let likeCount = Int(story.like) - 1
-        story.like = likeCount
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), forState: UIControlState.Normal)
+        story.like = likeCount as NSNumber!
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), for: UIControlState())
     }
     
     func setupTableView() {
@@ -162,15 +162,15 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.tableView.contentInset = UIEdgeInsetsMake(64, 0, 0, 0)
         }
         
-        self.tableView.backgroundColor = UIColor.whiteColor()
-        self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
+        self.tableView.backgroundColor = UIColor.white
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.register(UINib(nibName: "URContributionTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URContributionTableViewCell.self))
         
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
         
         if !URConstant.isIpad {
-            let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
+            let viewFooter =  Bundle.main.loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)?[0] as! URAddContributionTableViewCell
             viewFooter.delegate = self
             viewFooter.parentViewController = self
             self.tableView.tableFooterView = viewFooter
@@ -180,42 +180,42 @@ class URStoryContributionViewController: UIViewController, URContributionManager
 
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listContribution.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URContributionTableViewCell.self), forIndexPath: indexPath) as! URContributionTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URContributionTableViewCell.self), for: indexPath) as! URContributionTableViewCell
         
-        cell.setupCellWith(self.listContribution[indexPath.row], indexPath: indexPath)
+        cell.setupCellWith(self.listContribution[(indexPath as NSIndexPath).row], indexPath: indexPath)
         cell.delegate = self
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
         self.view.endEditing(true)
     }
     
     //MARK: URContributionTableViewCellDelegate
     
-    func newContributionAdded(cell: URAddContributionTableViewCell) {
+    func newContributionAdded(_ cell: URAddContributionTableViewCell) {
         sendContribution(cell.txtContribution)
     }
     
     //MARK: Button Events
     
     
-    @IBAction func btSendTapped(button:UIButton) {
+    @IBAction func btSendTapped(_ button:UIButton) {
         sendContribution(self.txtContribute!)
     }
     
-    @IBAction func btLikeTapped(button:UIButton) {
-        if button.selected == true {
+    @IBAction func btLikeTapped(_ button:UIButton) {
+        if button.isSelected == true {
             URStoryManager.removeStoryLike(self.story.key)
             setupLikeButtonAsLiked(false)
             decrementLikeButton()
@@ -229,14 +229,14 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     //MARK: Class Methods
     
     func setupFooterView() {
-        let viewFooter =  NSBundle.mainBundle().loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)[0] as! URAddContributionTableViewCell
+        let viewFooter =  Bundle.main.loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)?[0] as! URAddContributionTableViewCell
         viewFooter.delegate = self
         viewFooter.txtContribution.delegate = self
         viewFooter.parentViewController = self
         self.tableView.tableFooterView = viewFooter.contentView
     }
     
-    func sendContribution(textField:UITextField) {
+    func sendContribution(_ textField:UITextField) {
         if !textField.text!.isEmpty {
             
             if URUserManager.userHasPermissionToAccessTheFeature(false) {
@@ -247,39 +247,39 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 let contribution = URContribution()
                 contribution.content = textField.text!
                 contribution.author = user
-                contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+                contribution.createdDate = NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
                 
                 URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
                     URUserManager.incrementUserContributions(user.key)
                     textField.text = ""
                     textField.resignFirstResponder()
-                    let bottomOffset = CGPointMake(0, self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+                    let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
                     self.scrollView.setContentOffset(bottomOffset, animated: true)
 
                 })
                 
             }else {
                 if URUserManager.userHasPermissionToAccessTheFeature(false) == false {
-                    let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: {})
+                    let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: {})
                 }
             }
             
         }
     }
     
-    func setupLikeButtonAsLiked(liked:Bool) {
+    func setupLikeButtonAsLiked(_ liked:Bool) {
         if liked == true {
-            self.btLike.selected = true
-            self.btLike.setImage(UIImage(named: "likeBigPressed"), forState: UIControlState.Selected)
+            self.btLike.isSelected = true
+            self.btLike.setImage(UIImage(named: "likeBigPressed"), for: UIControlState.selected)
         }else{
-            self.btLike.selected = false
-            self.btLike.setImage(UIImage(named: "likeBig"), forState: UIControlState.Normal)
+            self.btLike.isSelected = false
+            self.btLike.setImage(UIImage(named: "likeBig"), for: UIControlState())
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
     
@@ -307,14 +307,14 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     //MARK: URStoryContributionTableViewCellDelegate
     
-    func contributionTableViewCellDeleteButtonTapped(cell: URContributionTableViewCell) {
+    func contributionTableViewCellDeleteButtonTapped(_ cell: URContributionTableViewCell) {
         
-        let alert = UIAlertController(title: nil, message: "message_remove_chat_message".localized, preferredStyle: UIAlertControllerStyle.ActionSheet)
+        let alert = UIAlertController(title: nil, message: "message_remove_chat_message".localized, preferredStyle: UIAlertControllerStyle.actionSheet)
 
-        alert.addAction(UIAlertAction(title: "label_remove".localized, style: UIAlertActionStyle.Default, handler: { (UIAlertAction) -> Void in
-            let indexPath = self.tableView.indexPathForCell(cell)!
-            self.listContribution.removeAtIndex(indexPath.row)
-            self.tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Fade)
+        alert.addAction(UIAlertAction(title: "label_remove".localized, style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
+            let indexPath = self.tableView.indexPath(for: cell)!
+            self.listContribution.remove(at: (indexPath as NSIndexPath).row)
+            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             
             let totalContributions = Int(self.story.contributions) - 1
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
@@ -327,22 +327,22 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         }))
         
         if URConstant.isIpad {
-            alert.modalPresentationStyle = UIModalPresentationStyle.Popover
+            alert.modalPresentationStyle = UIModalPresentationStyle.popover
             alert.popoverPresentationController!.sourceView = cell.btDelete
             alert.popoverPresentationController!.sourceRect = cell.btDelete.bounds
         }
 
-        alert.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.Cancel, handler:nil))
+        alert.addAction(UIAlertAction(title: "cancel_dialog_button".localized, style: UIAlertActionStyle.cancel, handler:nil))
         
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
         
     }
     
     //MARK: ContributionManagerDelegate
     
-    func newContributionReceived(contribution: URContribution) {
-        self.viewNoContribution?.hidden = true
-        self.lbNoContributions?.hidden = true
+    func newContributionReceived(_ contribution: URContribution) {
+        self.viewNoContribution?.isHidden = true
+        self.lbNoContributions?.isHidden = true
         listContribution.append(contribution)
         self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [listContribution.count])
         tableView.reloadData()
@@ -351,12 +351,12 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     //MARK: TextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendContribution(textField)
         return true
     }
 
-    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    override func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let _ = URUser.activeUser() {
             return true
         }else {

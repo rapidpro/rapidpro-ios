@@ -7,6 +7,26 @@
 //
 
 import UIKit
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 public protocol URCurrentPollViewDelegate {
     func onBoundsChanged()
@@ -44,9 +64,9 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.btNext.setTitle("next".localized, forState: UIControlState.Normal)
+        self.btNext.setTitle("next".localized, for: UIControlState())
         self.lbCurrentPoll.text = "polls_current".localized
-        self.btSwitchLanguage.setTitle("switch_language".localized, forState: UIControlState.Normal)
+        self.btSwitchLanguage.setTitle("switch_language".localized, for: UIControlState())
         
         btNext.layer.cornerRadius = 5
         
@@ -56,13 +76,13 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     
     //MARK: Responses delegates
     
-    func onChoiceSelected(flowRule: URFlowRule) {
+    func onChoiceSelected(_ flowRule: URFlowRule) {
         self.flowRule = flowRule
         self.response = self.getResponseFromRule(flowRule)
         unselectResponses()
     }
     
-    func onOpenFieldResponseChanged(flowRule: URFlowRule, text: String) {
+    func onOpenFieldResponseChanged(_ flowRule: URFlowRule, text: String) {
         self.flowRule = flowRule
         self.response = text
         unselectResponses()
@@ -70,8 +90,8 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
     
     //MARK: Actions
     
-    @IBAction func switchLanguage(sender: AnyObject) {
-        viewController.presentViewController(actionSheetLanguage, animated: true, completion: nil)
+    @IBAction func switchLanguage(_ sender: AnyObject) {
+        viewController.present(actionSheetLanguage, animated: true, completion: nil)
     }
     
     //MARK: Class Methods
@@ -97,7 +117,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         }
     }
     
-    private func getResponseFromRule(rule:URFlowRule) -> String {
+    fileprivate func getResponseFromRule(_ rule:URFlowRule) -> String {
         var response = rule.test?.base
         if response == nil && rule.test?.test != nil
             && rule.test?.test.values.count > 0 {
@@ -106,7 +126,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         return response!
     }
     
-    func setupData(flowDefinition: URFlowDefinition, flowActionSet: URFlowActionSet, flowRuleset:URFlowRuleset?, contact:URContact) {
+    func setupData(_ flowDefinition: URFlowDefinition, flowActionSet: URFlowActionSet, flowRuleset:URFlowRuleset?, contact:URContact) {
         self.flowRule = nil
         self.response = nil
         
@@ -116,12 +136,12 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         self.flowActionSet = flowActionSet
         self.lbFlowName.text = flowDefinition.metadata?.name
         
-        self.btNext.hidden = false
+        self.btNext.isHidden = false
         
         setupNextStep()
     }
     
-    func setupDataWithNoAnswer(flowDefinition: URFlowDefinition?, flowActionSet: URFlowActionSet?, flowRuleset:URFlowRuleset?, contact:URContact?) {
+    func setupDataWithNoAnswer(_ flowDefinition: URFlowDefinition?, flowActionSet: URFlowActionSet?, flowRuleset:URFlowRuleset?, contact:URContact?) {
         self.flowRule = nil
         self.response = nil
         
@@ -135,7 +155,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         setupLanguages()
         setupQuestionTitle()
         
-        self.btNext.hidden = true
+        self.btNext.isHidden = true
         self.constraintResponseHeight.constant = CGFloat(viewResponses.subviews.count * responseHeight)
     }
     
@@ -145,39 +165,39 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         setupQuestionAnswers()
     }
     
-    func getChoiceResponse(flowRule:URFlowRule, frame:CGRect) -> URResponseView {
-        let choiceResponseView = NSBundle.mainBundle().loadNibNamed("URChoiceResponseView", owner: 0, options: nil)[0] as! URChoiceResponseView
+    func getChoiceResponse(_ flowRule:URFlowRule, frame:CGRect) -> URResponseView {
+        let choiceResponseView = Bundle.main.loadNibNamed("URChoiceResponseView", owner: 0, options: nil)?[0] as! URChoiceResponseView
         choiceResponseView.frame = frame
         choiceResponseView.delegate = self
         return choiceResponseView
     }
     
-    func getOpenFieldResponse(flowRule:URFlowRule, frame:CGRect) -> URResponseView {
-        let openFieldResponseView = NSBundle.mainBundle().loadNibNamed("UROpenFieldResponseView", owner: 0, options: nil)[0] as! UROpenFieldResponseView
+    func getOpenFieldResponse(_ flowRule:URFlowRule, frame:CGRect) -> URResponseView {
+        let openFieldResponseView = Bundle.main.loadNibNamed("UROpenFieldResponseView", owner: 0, options: nil)?[0] as! UROpenFieldResponseView
         openFieldResponseView.frame = frame
         openFieldResponseView.delegate = self
         return openFieldResponseView
     }
     
-    private func setupLanguages() {
+    fileprivate func setupLanguages() {
         for action in flowActionSet!.actions! {
             for key in action.message.keys {
                 languages.insert(key)
             }
         }
         
-        btSwitchLanguage.hidden = languages.count <= 1
+        btSwitchLanguage.isHidden = languages.count <= 1
         
-        actionSheetLanguage = UIAlertController(title: nil, message: "switch_language".localized, preferredStyle: .ActionSheet)
+        actionSheetLanguage = UIAlertController(title: nil, message: "switch_language".localized, preferredStyle: .actionSheet)
         
-        for language in languages.sort() {
-            let languageDescription = URCountry.getLanguageDescription(language, type: URCountryCodeType.ISO3) ?? language
+        for language in languages.sorted() {
+            let languageDescription = URCountry.getLanguageDescription(language, type: URCountryCodeType.iso3) ?? language
             
-            let switchLanguageAction = UIAlertAction(title: languageDescription, style: .Default, handler: {
+            let switchLanguageAction = UIAlertAction(title: languageDescription, style: .default, handler: {
                 (alert: UIAlertAction!) -> Void in
                 
                 let settings = URSettings()
-                settings.preferredLanguage = language
+                settings.preferredLanguage = language as NSString?
                 URSettings.saveSettingsLocaly(settings)
                 
                 self.selectedLanguage = language
@@ -193,24 +213,24 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
             actionSheetLanguage.addAction(switchLanguageAction)
         }
         
-        let cancelAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel, handler: nil)
         actionSheetLanguage.addAction(cancelAction)
     }
     
-    private func setupQuestionTitle() {
+    fileprivate func setupQuestionTitle() {
         self.tvQuestion.text = URFlowManager.translateFields(contact, message: (flowActionSet?.actions?[0].message == nil || flowActionSet?.actions?[0].message.count == 0 ? "answer_poll_greeting_message".localized : flowActionSet?.actions?[0].message[getSelectedLanguage()])!)
-        let sizeThatFitsTextView = tvQuestion.sizeThatFits(CGSizeMake(tvQuestion.frame.size.width, CGFloat.max));
+        let sizeThatFitsTextView = tvQuestion.sizeThatFits(CGSize(width: tvQuestion.frame.size.width, height: CGFloat.greatestFiniteMagnitude));
         constraintQuestionHeight.constant = sizeThatFitsTextView.height;
     }
     
-    private func removeAnswersViewOfLastQuestion() {
+    fileprivate func removeAnswersViewOfLastQuestion() {
         let array = self.viewResponses.subviews as [UIView]
         for view in array {
             view.removeFromSuperview()
         }
     }
     
-    private func setupQuestionAnswers() {
+    fileprivate func setupQuestionAnswers() {
         
         removeAnswersViewOfLastQuestion()
         
@@ -222,18 +242,18 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         for flowRule in (flowRuleset.rules)! {
             if !URFlowManager.hasRecursiveDestination(flowDefinition, ruleSet: flowRuleset, rule: flowRule) {
                 
-                let frame = CGRectMake(0, CGFloat(viewResponses.subviews.count * responseHeight), viewResponses.frame.width, CGFloat(responseHeight))
+                let frame = CGRect(x: 0, y: CGFloat(viewResponses.subviews.count * responseHeight), width: viewResponses.frame.width, height: CGFloat(responseHeight))
                 var responseView:URResponseView?
                 
                 let typeValidation = flowTypeManager.getTypeValidationForRule(flowRule)
                 switch typeValidation.type! {
-                case URFlowType.OpenField:
+                case URFlowType.openField:
                     responseView = getOpenFieldResponse(flowRule, frame: frame)
                     break
-                case URFlowType.Choice:
+                case URFlowType.choice:
                     responseView = getChoiceResponse(flowRule, frame: frame)
                     break
-                case URFlowType.Number:
+                case URFlowType.number:
                     responseView = getOpenFieldResponse(flowRule, frame: frame)
                     break
                 default: break
@@ -247,7 +267,7 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         }
     }
     
-    private func getSelectedLanguage() -> String {
+    fileprivate func getSelectedLanguage() -> String {
         return (selectedLanguage != nil && (flowActionSet?.actions?[0].message.keys.contains(selectedLanguage!))! ? selectedLanguage : flowDefinition.baseLanguage)!
     }
 }

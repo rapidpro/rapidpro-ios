@@ -14,12 +14,12 @@ class URFlowRun: Mappable {
     var flow_uuid:String!
     var flow:Int!
     var completed:Bool!
-    var expires_on:NSDate!
-    var expired_on:NSDate!
+    var expires_on:Date!
+    var expired_on:Date!
     
     required init?(_ map: Map){}
     
-    func mapping(map: Map) {
+    func mapping(_ map: Map) {
         self.flow_uuid  <- map["flow_uuid"]
         self.flow       <- map["flow"]
         self.completed  <- map["completed"]

@@ -27,9 +27,9 @@ class URPollQuestionViewController: UIViewController, URRapidProManagerDelegate 
         rapidProManager.delegate = self
     }    
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Clear)
+        URNavigationManager.setupNavigationBarWithType(.clear)
     }
     
     //MARK: Class Methods
@@ -48,13 +48,13 @@ class URPollQuestionViewController: UIViewController, URRapidProManagerDelegate 
     
     //MARK: Button Events
     
-    @IBAction func btSeePollsResultsTapped(sender: AnyObject) {
+    @IBAction func btSeePollsResultsTapped(_ sender: AnyObject) {
         self.navigationController?.pushViewController(URClosedPollTableViewController(), animated: true)
     }
         
     //MARK: TextFieldDelegate
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {   //delegate method
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {   //delegate method
         textField.resignFirstResponder()
         
         if !textField.text!.isEmpty {
@@ -67,9 +67,9 @@ class URPollQuestionViewController: UIViewController, URRapidProManagerDelegate 
     
     //MARK: RapidProManagerDelegate
     
-    func newMessageReceived(message: String) {
+    func newMessageReceived(_ message: String) {
         
-        UIView.animateWithDuration(0.5, delay: 0.5, options: UIViewAnimationOptions.CurveEaseOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.5, options: UIViewAnimationOptions.curveEaseOut, animations: {
             self.lbQuestion.alpha = 1.0
         }, completion:nil)
         

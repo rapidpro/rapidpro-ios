@@ -14,12 +14,12 @@ class PhotoShow: NSObject, NYTPhoto{
     var index:Int!
     var image: UIImage?
     var placeholderImage: UIImage?
-    var imageData:NSData?
+    var imageData:Data?
     let attributedCaptionTitle: NSAttributedString?
-    let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.grayColor()])
-    let attributedCaptionCredit:  NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGrayColor()])
+    let attributedCaptionSummary: NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.gray])
+    let attributedCaptionCredit:  NSAttributedString? = NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.darkGray])
     
-    init(image: UIImage? = nil, imageData: NSData? = nil, attributedCaptionTitle: NSAttributedString) {
+    init(image: UIImage? = nil, imageData: Data? = nil, attributedCaptionTitle: NSAttributedString) {
         self.image = image
         self.attributedCaptionTitle = attributedCaptionTitle
         super.init()

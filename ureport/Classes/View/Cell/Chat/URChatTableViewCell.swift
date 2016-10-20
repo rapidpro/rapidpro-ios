@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol URChatTableViewCellDelegate {
-    optional func userSelected(user:URUser)
+    @objc optional func userSelected(_ user:URUser)
 }
 
 class URChatTableViewCell: UITableViewCell {
@@ -36,10 +36,10 @@ class URChatTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         if !URConstant.isIpad {
-            super.selectionStyle = UITableViewCellSelectionStyle.None
+            super.selectionStyle = UITableViewCellSelectionStyle.none
         }else{            
             self.setSelectedBackgroundView()
         }
@@ -53,67 +53,67 @@ class URChatTableViewCell: UITableViewCell {
         self.selectedBackgroundView = view
     }
     
-    func setBtCheckSelected(selected:Bool) {
+    func setBtCheckSelected(_ selected:Bool) {
         if selected == true {
-            btCheck.selected = true
-            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), forState: UIControlState.Selected)
+            btCheck.isSelected = true
+            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), for: UIControlState.selected)
         }else {
-            btCheck.selected = false
-            btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), forState: UIControlState.Normal)
+            btCheck.isSelected = false
+            btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), for: UIControlState())
         }
     }
     
-    func setupCellWithUser(user:URUser?,createGroupOption:Bool,indexPath:NSIndexPath, checkGroupOption:Bool) {
+    func setupCellWithUser(_ user:URUser?,createGroupOption:Bool,indexPath:IndexPath, checkGroupOption:Bool) {
         
         self.user = user
         self.lbName.text = user!.nickname
-        self.type = URChatCellType.CreateIndividualChat
+        self.type = URChatCellType.createIndividualChat
         
         if user!.picture != nil && !(user!.picture.isEmpty) {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.img.contentMode = UIViewContentMode.ScaleAspectFill
-            self.img.sd_setImageWithURL(NSURL(string: user!.picture))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.img.contentMode = UIViewContentMode.scaleAspectFill
+            self.img.sd_setImage(with: URL(string: user!.picture))
         }else{
-            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-            self.img.contentMode = UIViewContentMode.Center
+            self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+            self.img.contentMode = UIViewContentMode.center
             self.img.image = UIImage(named: "ic_person")
         }
         
         if !checkGroupOption{
-            self.viewLastMessage.hidden = true
+            self.viewLastMessage.isHidden = true
         }else {
-            self.viewLastMessage.hidden = true
-            self.viewCheckGroup.hidden = false
+            self.viewLastMessage.isHidden = true
+            self.viewCheckGroup.isHidden = false
         }
         
     }
     
-    func setupCellWithChatRoom(chatRoom:URChatRoom) {                
+    func setupCellWithChatRoom(_ chatRoom:URChatRoom) {                
         self.chatRoom = chatRoom
         
         if chatRoom is URGroupChatRoom {
             let groupChatRoom = (chatRoom as! URGroupChatRoom)
             
             self.lbName.text = groupChatRoom.title
-            self.type = URChatCellType.Group
+            self.type = URChatCellType.group
             self.lbLastMessage.text = groupChatRoom.lastMessage?.message
             self.lbDateHour.text = getTimeAgoFromDate(groupChatRoom)
             
             if groupChatRoom.totalUnreadMessages != nil && groupChatRoom.totalUnreadMessages > 0 {
                 self.lbUnreadMessages.text = "\(groupChatRoom.totalUnreadMessages)"
-                self.viewUnreadMessages.hidden = false
+                self.viewUnreadMessages.isHidden = false
             }else {
-                self.viewUnreadMessages.hidden = true
+                self.viewUnreadMessages.isHidden = true
             }
             
             if let picture = groupChatRoom.picture {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.img.contentMode = UIViewContentMode.ScaleAspectFill
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+                self.img.contentMode = UIViewContentMode.scaleAspectFill
                 if picture.url != nil && !picture.url.isEmpty{
-                    self.img.sd_setImageWithURL(NSURL(string: picture.url))
+                    self.img.sd_setImage(with: URL(string: picture.url))
                 }else{
-                    self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-                    self.img.contentMode = UIViewContentMode.Center
+                    self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+                    self.img.contentMode = UIViewContentMode.center
                     self.img.image = UIImage(named: "default_group")
                 }
             }
@@ -124,42 +124,42 @@ class URChatTableViewCell: UITableViewCell {
             self.chatRoom = individualChatRoom
             
             self.lbName.text = individualChatRoom.friend.nickname
-            self.type = URChatCellType.Individual
+            self.type = URChatCellType.individual
             self.lbLastMessage.text = individualChatRoom.lastMessage?.message
             self.lbDateHour.text = getTimeAgoFromDate(individualChatRoom)
             self.lbUnreadMessages.text = "\(individualChatRoom.totalUnreadMessages)"
             
             if individualChatRoom.totalUnreadMessages != nil && individualChatRoom.totalUnreadMessages > 0 {
                 self.lbUnreadMessages.text = "\(individualChatRoom.totalUnreadMessages)"
-                self.viewUnreadMessages.hidden = false
+                self.viewUnreadMessages.isHidden = false
             }else {
-                self.viewUnreadMessages.hidden = true
+                self.viewUnreadMessages.isHidden = true
             }
             
             if individualChatRoom.friend.picture != nil && !(individualChatRoom.friend.picture.isEmpty) {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.img.contentMode = UIViewContentMode.ScaleAspectFit
-                self.img.sd_setImageWithURL(NSURL(string: individualChatRoom.friend.picture))
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+                self.img.contentMode = UIViewContentMode.scaleAspectFit
+                self.img.sd_setImage(with: URL(string: individualChatRoom.friend.picture))
             }else{
-                self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-                self.img.contentMode = UIViewContentMode.Center
+                self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+                self.img.contentMode = UIViewContentMode.center
                 self.img.image = UIImage(named: "ic_person")
             }
             
         }
         
-        self.viewLastMessage.hidden = false
+        self.viewLastMessage.isHidden = false
         
     }
     
-    func setupUIWithChatRoom(chatRoom:URChatRoom){
+    func setupUIWithChatRoom(_ chatRoom:URChatRoom){
         
     }
     
-    func getTimeAgoFromDate(chatRoom:URChatRoom) -> String{
+    func getTimeAgoFromDate(_ chatRoom:URChatRoom) -> String{
         if let lastMessage = chatRoom.lastMessage {
-            let date:NSDate = NSDate(timeIntervalSince1970: NSNumber(double: lastMessage.date!.doubleValue/1000) as NSTimeInterval)
-            return "\(NSDate().offsetFrom(date)) ago"
+            let date:Date = Date(timeIntervalSince1970: NSNumber(value: lastMessage.date!.doubleValue/1000 as Double) as TimeInterval)
+            return "\(Date().offsetFrom(date)) ago"
         }else {
             return ""
         }
@@ -167,9 +167,9 @@ class URChatTableViewCell: UITableViewCell {
     
     //MARK: Button Events
     
-    @IBAction func btCheckTapped(sender: AnyObject) {
+    @IBAction func btCheckTapped(_ sender: AnyObject) {
         
-        if btCheck.selected {
+        if btCheck.isSelected {
             setBtCheckSelected(false)
         }else{
             setBtCheckSelected(true)
