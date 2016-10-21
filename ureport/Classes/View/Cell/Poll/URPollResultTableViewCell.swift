@@ -78,15 +78,19 @@ class URPollResultTableViewCell: UITableViewCell {
             var tagList = [UIButton]()
             var results = pollResult.results
             
+            var resultsFiltered:[NSDictionary] = []
+            
             if results?.count > 10 {
-                results.removeSubrange((10 ..< pollResult.results.count))
+                for i in 0...10 {
+                    resultsFiltered.append(results![i])
+                }
             }
             
             for view in sphereView.subviews {
                 view.removeFromSuperview()
             }
             
-            for dictionary in results! {
+            for dictionary in resultsFiltered {
                 let tagSize = CGFloat(150 - (indexKeywords * 5))
                 let tag = dictionary.object(forKey: "keyword") as! String
                 let btnTag = UIButton(frame: CGRect(x: 0, y: 0, width: tagSize, height: tagSize))

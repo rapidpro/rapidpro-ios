@@ -20,7 +20,7 @@ class URFlowDefinition: Mappable {
     var ruleSets:[URFlowRuleset]?
     var metadata:URFlowMetadata?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.baseLanguage    <- map["base_language"]

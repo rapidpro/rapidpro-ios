@@ -20,6 +20,10 @@ class URNews: Mappable {
     var tags:String!
     var category:URNewsCategory!
     
+    init() {
+        
+    }
+    
     required init?(map: Map){}
     
     func mapping(map: Map) {

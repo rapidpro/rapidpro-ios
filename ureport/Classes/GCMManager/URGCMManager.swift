@@ -83,7 +83,7 @@ class URGCMManager: NSObject {
         ]
         return [
             "chatMessage": chatMessageDict as AnyObject,
-            "chatRoom": ["key": chatRoom.key]
+            "chatRoom": ["key": chatRoom.key] as AnyObject
         ];
     }
     

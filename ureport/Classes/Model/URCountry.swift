@@ -7,6 +7,7 @@
 //
 
 import UIKit
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -41,12 +42,12 @@ class URCountry: NSObject {
     class func getLanguageDescription(_ languageCode:String, type:URCountryCodeType) -> String? {
         var languageCode = languageCode
         if type == .iso3 {
-            let keys = (Locale.iso639_2Dictionary() as NSDictionary).allKeys(for: languageCode)
+            let keys = (NSLocale.iso639_2Dictionary() as NSDictionary).allKeys(for: languageCode)
             languageCode = keys.count > 0 ? keys.first as! String : languageCode
         }
         
-        let id = Locale.identifier(fromComponents: [Locale.Key.languageCode.rawValue: languageCode])
-        return (Locale(identifier: Locale.preferredLanguages[0]) as NSLocale).displayName(forKey: Locale.Key.identifier, value: id)
+        let id = Locale.identifier(fromComponents: [Locale.current.currencyCode!: languageCode])
+        return (Locale(identifier: Locale.preferredLanguages[0]) as NSLocale).displayName(forKey: NSLocale.Key(rawValue: Locale.current.currencyCode!), value: id)
     }
     
     class func getCountries(_ type:URCountryCodeType) -> [URCountry] {

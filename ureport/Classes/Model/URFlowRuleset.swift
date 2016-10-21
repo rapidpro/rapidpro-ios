@@ -23,7 +23,7 @@ class URFlowRuleset: Mappable {
     var positionX:Int?
     var positionY:Int?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.uuid          <- map["uuid"]

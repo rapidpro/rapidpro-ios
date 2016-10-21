@@ -188,6 +188,8 @@
 		65D562FF1BA9E8A1001AEF54 /* URStoryContributionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D562FD1BA9E8A1001AEF54 /* URStoryContributionViewController.swift */; };
 		65D563001BA9E8A1001AEF54 /* URStoryContributionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65D562FE1BA9E8A1001AEF54 /* URStoryContributionViewController.xib */; };
 		65D563081BA9EF3B001AEF54 /* URContributionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65D563071BA9EF3B001AEF54 /* URContributionManager.swift */; };
+		65D839261DBA600D00F1E86D /* NSLocale+ISO639_2.h in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */; };
+		65D839271DBA600D00F1E86D /* NSLocale+ISO639_2.m in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		65DBAEBA1CEA45EC00A8B514 /* URContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBAEB81CEA45EC00A8B514 /* URContributionTableViewCell.swift */; };
 		65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBAEB91CEA45EC00A8B514 /* URContributionTableViewCell.xib */; };
 		65DBAEBE1CEA5DD300A8B514 /* URPollContributionTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DBAEBD1CEA5DD300A8B514 /* URPollContributionTableViewController.swift */; };
@@ -1764,6 +1766,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				65D839261DBA600D00F1E86D /* NSLocale+ISO639_2.h in Resources */,
+				65D839271DBA600D00F1E86D /* NSLocale+ISO639_2.m in Resources */,
 				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,

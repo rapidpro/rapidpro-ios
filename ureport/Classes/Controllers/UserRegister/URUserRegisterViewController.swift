@@ -169,7 +169,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                 if error != nil {
                                                                     var msg = ""
                                                                     
-                                                                    switch (error.code) {
+                                                                    switch (error!._code) {
                                                                     case -9:
                                                                         msg = "error_email_already_exists".localized
                                                                         break;
@@ -357,13 +357,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             setupTextFieldLoading(self.txtState)
         }
         
-        Alamofire.request(.GET, "http://api.geonames.org/countryInfoJSON?country=\(self.country!.code!)&username=ureport").responseJSON(completionHandler: { (response: Response<AnyObject, NSError>) in
+        Alamofire.request("http://api.geonames.org/countryInfoJSON?country=\(self.country!.code!)&username=ureport", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response: DataResponse<Any>) in
             
-            if let dictionary = (response.result.value as? NSDictionary)?.objectForKey("geonames") {
+            if let dictionary = (response.result.value as? NSDictionary)?.object(forKey: "geonames") {
                 
-                let geonameId:Int = dictionary.objectAtIndex(0)["geonameId"]! as! Int
+                let geonameId:Int = (dictionary as AnyObject).objectAt(0).object(forKey:"geonameId") as! Int
                 
-                Alamofire.request(.GET, "http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON(completionHandler: { (data: Response<AnyObject, NSError>) in
+                Alamofire.request("http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON(completionHandler: { (data: DataResponse<Any>) in
                     
                     if data.result.value != nil && data.result.value is NSDictionary {
                         
@@ -373,14 +373,14 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         
                         let data = data.result.value as! NSDictionary
                         
-                        if data.objectForKey("geonames") != nil && data.objectForKey("totalResultsCount") as! Int > 0 {
+                        if data.object(forKey:"geonames") != nil && data.object(forKey:"totalResultsCount") as! Int > 0 {
                             
-                            for index in 0...data.objectForKey("geonames")!.count-1 {
+                            for index in 0...(data.object(forKey:"geonames")! as AnyObject).count-1 {
                                 let geoName:NSDictionary = data.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
                                 self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))
                             }
                             
-                            self.states = self.states.sort(){$0.name < $1.name}
+                            self.states = self.states.sort{($0.name < $1.name)}
                             
                             self.pickerStates?.reloadAllComponents()
                         }else {

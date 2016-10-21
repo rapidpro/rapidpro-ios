@@ -172,12 +172,12 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     
     func invitePeople() {
         
-        proposeToAccess(PrivateResource.Contacts, agreed: {
+        proposeToAccess(PrivateResource.contacts, agreed: {
           
             URNavigationManager.navigation.pushViewController(URInviteTableViewController(), animated: true)            
             
             }, rejected: {
-                self.alertNoPermissionToAccess(PrivateResource.Contacts)
+                self.alertNoPermissionToAccess(PrivateResource.contacts)
         })
     }
     

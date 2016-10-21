@@ -62,7 +62,7 @@ class URDateUtil: NSObject {
     
     class func getYear(_ date:Date) -> Int {
         let calendar = Calendar(identifier: Calendar.Identifier.gregorian)
-        let components = (calendar as NSCalendar).components(Calendar.Unit.year, from: date)
+        let components = calendar.dateComponents([.year], from: date)
         return components.year!        
     }
     

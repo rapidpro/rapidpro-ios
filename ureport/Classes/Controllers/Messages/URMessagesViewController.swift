@@ -585,7 +585,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             else {
                 cell.textView!.textColor = UIColor.white
             }
-            cell.textView!.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView!.textColor!, NSUnderlineStyleAttributeName: [NSUnderlineStyle.styleSingle.rawValue | NSUnderlineStyle().rawValue]]
+            cell.textView!.linkTextAttributes = [NSForegroundColorAttributeName: cell.textView!.textColor!, NSUnderlineStyleAttributeName: [NSUnderlineStyle.styleSingle.rawValue | NSUnderlineStyle.styleNone.rawValue]]
         }
         return cell
     }

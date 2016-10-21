@@ -17,7 +17,7 @@ class URFlowRule: Mappable {
     var uuid:NSString?
     var destinationType:NSString?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.ruleCategory       <- map["category"]

@@ -30,8 +30,7 @@ class URAWSManager: NSObject {
         uploadRequest?.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
         transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
-          
-            if task!.error != nil{
+            if task?.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
                 
@@ -63,7 +62,7 @@ class URAWSManager: NSObject {
         
         transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
             
-            if task!.error != nil{
+            if task?.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
                 
@@ -97,21 +96,23 @@ class URAWSManager: NSObject {
         uploadRequest?.key = fileName
         uploadRequest?.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
         
-        transferManager.upload(uploadRequest).continue { (task:AWSTask?) -> AnyObject! in
-            if task!.error != nil{
+        transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
+            
+            if task?.error != nil{
                 print("Error on send file to AWS \(task!.error)")
             }else {
                 
                 let picture = URMedia()
-                
+        
                 picture.type = URConstant.Media.PICTURE
                 picture.id = fileName
                 picture.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
-
+                
                 completion(picture)
             }
             return nil
-        }
+            
+        })
         
     }
     
@@ -130,27 +131,28 @@ class URAWSManager: NSObject {
                 uploadRequest?.key = fileName
                 uploadRequest?.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
                 
-                transferManager.upload(uploadRequest).continue { (task:AWSTask?) -> AnyObject! in
-                    if task!.error != nil{
+                transferManager?.upload(uploadRequest).continue({ (task:AWSTask?) -> Any? in
+                    
+                    if task?.error != nil{
                         print("Error on send file to AWS \(task!.error)")
                     }else {
                         
                         let video = URMedia()
-                        
+                
                         video.type = URConstant.Media.VIDEOPHONE
                         video.id = fileName
                         video.url = "\(URConstant.AWS.URL_STORAGE(uploadPath))/\(fileName)"
-                        
+                
                         URAWSManager.uploadImage(videoPhone.thumbnailImage, uploadPath: .Stories, completion: { (media) -> Void in
                             
                             video.thumbnail = media!.url
                             completionVideoUpload(video)
                             
                         })
-                        
                     }
                     return nil
-                }
+                    
+                })
                 
             }else{
                 print(session.error)

@@ -43,7 +43,7 @@ extension UIViewController: UITextFieldDelegate, UITextViewDelegate {
         var textView:UITextView?
         var textField:UITextField?
         
-        if component.isKind(of: UITextField){
+        if component is UITextField {
             textField = component as? UITextField
             textField?.inputAccessoryView = keyboardToolBar
         }else {
