@@ -376,11 +376,11 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         if data.object(forKey:"geonames") != nil && data.object(forKey:"totalResultsCount") as! Int > 0 {
                             
                             for index in 0...(data.object(forKey:"geonames")! as AnyObject).count-1 {
-                                let geoName:NSDictionary = data.objectForKey("geonames")!.objectAtIndex(index) as! NSDictionary
+                                let geoName:NSDictionary = (data.object(forKey: "geonames")! as AnyObject).objectAt(index) as! NSDictionary
                                 self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))
                             }
                             
-                            self.states = self.states.sort{($0.name < $1.name)}
+                            self.states = self.states.sorted{($0.name < $1.name)}
                             
                             self.pickerStates?.reloadAllComponents()
                         }else {

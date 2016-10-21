@@ -16,6 +16,7 @@ protocol URUserLoginManagerDelegate {
 }
 
 class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
+
     //MARK: Login Methods
     
     var loginViewController:UIViewController?
@@ -68,14 +69,19 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {
         let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedLoginInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
         
-        twitterAuthHelper.selectTwitterAccount { (error, accounts:[AnyObject]!) -> Void in
+        twitterAuthHelper.selectTwitterAccount { (error, accounts:[Any]?) -> Void in
             
             if error != nil {
                 completion(nil)
             }else {
-                twitterAuthHelper.authenticateAccount(accounts[0] as! ACAccount, withCallback: { (error, authData) -> Void in
-                    let user: URUser = URUserLoginManager.getTwitterUserData(authData)
-                    completion(user)
+                twitterAuthHelper.authenticateAccount(accounts?[0] as! ACAccount, withCallback: { (error, authData) -> Void in
+                    if let authData = authData {
+                        let user: URUser = URUserLoginManager.getTwitterUserData(authData)
+                        completion(user)
+                    }else {
+                        completion(nil)
+                    }
+                    
                 })
             }
             
@@ -93,8 +99,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         self.loginViewController!.present(viewController, animated: true, completion: nil)
     }
     
-    func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: NSError!) {
-        
+    public func sign(_ signIn: GIDSignIn!, didSignInFor user: GIDGoogleUser!, withError error: Error!) {
         if error != nil {
             print(error)
         }else{
@@ -111,6 +116,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
     
+    
     //MARK: auth Methods
     
     class func login(_ email:String,password:String,completion:@escaping (FAuthenticationError?,Bool) -> Void) {
@@ -118,7 +124,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                                                     withCompletionBlock: { error, authData in
                                                         if error != nil {
                                                             
-                                                            if let errorCode = FAuthenticationError(rawValue: error.code) {
+                                                            if let errorCode = FAuthenticationError(rawValue: (error?._code)!) {
                                                                 switch (errorCode) {
                                                                 case .userDoesNotExist:
                                                                     completion(FAuthenticationError.userDoesNotExist,false)

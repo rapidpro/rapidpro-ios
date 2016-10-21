@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         URReviewModeManager.checkIfIsInReviewMode { (reviewMode) -> Void in
             
             let settings = URSettings.getSettings()
-            settings.reviewMode = reviewMode as NSNumber?
+            settings.reviewMode = reviewMode as NSNumber
             
             URSettings.saveSettingsLocaly(settings)
         }
