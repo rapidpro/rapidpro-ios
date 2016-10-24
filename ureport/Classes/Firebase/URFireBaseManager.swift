@@ -35,7 +35,7 @@ class URFireBaseManager: NSObject {
         
         if let countryCode = URIPCheckManager.countryCode , countryCode == URIPCheckManager.syriaCountryCode {
             return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
-            
+             
         }else {
             return Reference!
         }

@@ -17,7 +17,7 @@ class URUser: Serializable {
     var state: String!
     var birthday: NSNumber!
     var country: String!
-    var picture: String!
+    var picture: String?
     var gender: String!
     var type: String!
     var countryProgram: String!
@@ -29,7 +29,7 @@ class URUser: Serializable {
     var pushIdentity:String!
     var publicProfile:NSNumber!
     var born:String!
-    var district:String!
+    var district:String?
     var moderator:NSNumber!
     var masterModerator:NSNumber!
     

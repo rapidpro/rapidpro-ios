@@ -50,7 +50,12 @@ open class Serializable: NSObject {
     
     fileprivate func build(_ mirror:Mirror,propertiesDictionary:NSMutableDictionary) {
         for (propName, propValue) in mirror.children {
-            if var propValue = self.unwrap(propValue), let propName = propName {
+            if let propValue = self.unwrap(propValue), let propName = propName {
+                
+                guard let propValue = propValue as Any?, propValue == nil else {
+                    continue
+                }
+                
                 if let serializablePropValue = propValue as? Serializable {
                     propertiesDictionary.setValue(serializablePropValue.toDictionary(), forKey: propName)
                 } else if let arrayPropValue = propValue as? [Serializable] {
@@ -67,7 +72,10 @@ open class Serializable: NSObject {
                     propertiesDictionary.setValue(dataPropValue.base64EncodedString(options: .lineLength64Characters), forKey: propName)
                 } else if let boolPropValue = propValue as? Bool {
                     propertiesDictionary.setValue(boolPropValue, forKey: propName)
-                } else {
+                } else if let stringPropValue = propValue as? String  {
+                    propertiesDictionary.setValue(stringPropValue, forKey: propName)
+                }else {
+                    print(propValue)
                     propertiesDictionary.setValue(propValue, forKey: propName)
                 }
             }

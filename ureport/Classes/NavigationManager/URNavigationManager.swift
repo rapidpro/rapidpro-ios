@@ -18,7 +18,8 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
 
     static var navigation:UINavigationController!
     static var revealController:SWRevealViewController!
-    static let appDelegate = UIApplication.shared.delegate as! AppDelegate
+    static var appDelegate:AppDelegate!
+    
     var sidebarMenuOpen:Bool!
     
     static let instance = URNavigationManager()
@@ -28,6 +29,8 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     }
     
     class func setupNavigationControllerWithMainViewController(_ viewController:UIViewController) {
+        
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let menuViewController:ISMenuViewController = ISMenuViewController()
         
@@ -58,6 +61,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     }
     
     class func setupNavigationControllerWithLoginViewController() {
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         self.navigation = UINavigationController(rootViewController: URLoginViewController())
         URNavigationManager.setupNavigationDefaultAtrributes()
@@ -69,6 +73,8 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     }
     
     class func setupNavigationControllerWithTutorialViewController() {
+        
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let tutorialViewController = URTutorialViewController()
         
@@ -137,6 +143,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
     }
     
     class func switchRootViewController(_ rootViewController: UIViewController, animated: Bool, completion: (() -> Void)?) {
+        
         if animated {
             UIView.transition(with: appDelegate.window!, duration: 0.5, options: .transitionCrossDissolve, animations: {
                 let oldState: Bool = UIView.areAnimationsEnabled

@@ -33,6 +33,11 @@ class URCountryProgram: Serializable {
           stateField:String? = nil) {
         self.code = code
         self.themeColor = themeColor
+        if themeColor == nil {
+            print("themeColor == nil")
+        }else {
+            dump(themeColor)
+        }
         self.org = org
         self.name = name
         self.twitter = twitter
