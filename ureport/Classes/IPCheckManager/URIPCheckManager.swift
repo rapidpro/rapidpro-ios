@@ -12,7 +12,7 @@ import Alamofire
 class URIPCheckManager: NSObject {
 
     static var countryCode:String?
-    static let syriaCountryCode = "SI"
+    static let syriaCountryCode = "SY"
     
     class func getCountryCodeByIP(completion:(String?) -> Void) {
         Alamofire.request(.GET, "http://ip-api.com/json", parameters: nil, encoding: .JSON, headers: nil).responseJSON { (response:Response<AnyObject, NSError>) in

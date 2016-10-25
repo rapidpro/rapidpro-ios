@@ -47,6 +47,15 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in
+            if let countryCode = countryCode {
+                print(countryCode)
+            }
+        }
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
         MBProgressHUD.hideHUDForView(self.view, animated: true)

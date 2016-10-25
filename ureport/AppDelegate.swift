@@ -226,6 +226,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     //MARK: Application Methods
     
     func applicationDidBecomeActive(application: UIApplication) {
+        
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in
+            if let countryCode = countryCode {
+                print(countryCode)
+            }
+        }
+        
         GCMService.sharedInstance().connectWithHandler({
             (error) -> Void in
             if error != nil {

@@ -103,7 +103,7 @@ DEPENDENCIES:
   - Google/CloudMessaging
   - Google/SignIn
   - IlhasoftCore (from `https://bitbucket.org/ilhasoft/ilhasoft-core-ios`)
-  - ISScrollViewPageSwift
+  - ISScrollViewPageSwift (from `https://github.com/Ilhasoft/ISScrollViewPageSwift`)
   - JSQMessagesViewController
   - NYTPhotoViewer
   - Proposer
@@ -118,6 +118,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/danielblx/DBSphereTagCloud.git
   IlhasoftCore:
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
+  ISScrollViewPageSwift:
+    :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
 
 CHECKOUT OPTIONS:
   DBSphereTagCloud:
@@ -126,6 +128,9 @@ CHECKOUT OPTIONS:
   IlhasoftCore:
     :commit: 317c5238db0ad08c9199a31857b8a33200382b94
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
+  ISScrollViewPageSwift:
+    :commit: 29983f0479d1751e468b05c92ae3a70139231648
+    :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
 
 SPEC CHECKSUMS:
   Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
@@ -165,6 +170,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
 
-PODFILE CHECKSUM: 8245209b629a54a2a8e6f23d5ba605e355f84787
+PODFILE CHECKSUM: a93aaa9f4d6e7e43ec67c671a77bdec63c78be3f
 
 COCOAPODS: 1.1.0.rc.2

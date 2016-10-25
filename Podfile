@@ -23,7 +23,7 @@ pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'
 #pod 'IlhasoftCore', :path => '../IlhasoftCore'
 pod 'Proposer'
 #pod 'DBSphereTagCloud'
-pod 'ISScrollViewPageSwift'
+pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPageSwift'
 pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'
 pod 'QRCodeReader.swift', '6.0.0'
 
