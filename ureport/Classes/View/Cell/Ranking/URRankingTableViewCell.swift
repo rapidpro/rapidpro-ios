@@ -35,10 +35,10 @@ class URRankingTableViewCell: UITableViewCell {
         self.lbUserName.text = user.nickname
         self.lbPoints.text = "\(user.points)"
 
-        if user.picture != nil && !(user.picture.isEmpty) {
+        if user.picture != nil && !((user.picture?.isEmpty)!) {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
             self.imageProfile.contentMode = UIViewContentMode.scaleAspectFill
-            self.imageProfile.sd_setImage(with: URL(string: user.picture))
+            self.imageProfile.sd_setImage(with: URL(string: user.picture!))
         }else{
             self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
             self.imageProfile.contentMode = UIViewContentMode.center

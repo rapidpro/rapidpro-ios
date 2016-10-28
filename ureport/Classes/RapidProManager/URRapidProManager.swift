@@ -117,7 +117,7 @@ class URRapidProManager: NSObject {
         ]
         
         let userId = "ext:" + URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)contacts.json?urns=\(userId)"
+        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)contacts.json?urns=\(userId)"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {

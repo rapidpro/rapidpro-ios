@@ -205,7 +205,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             
             if media.type != nil {
                 
-                switch media.type {
+                switch media.type! {
                 case URConstant.Media.PICTURE:
 
                     let chatImageItem = URChatImageItem(media: media, viewController: self, maskAsOutgoing: maskAsOutgoing)

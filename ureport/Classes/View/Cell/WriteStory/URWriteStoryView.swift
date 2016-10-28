@@ -36,10 +36,10 @@ class URWriteStoryView: UIView {
         if let user = URUser.activeUser() {
             self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
             
-            if user.picture != nil && user.picture.characters.count > 0 {
+            if user.picture != nil && user.picture!.characters.count > 0 {
                 self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
                 self.imgProfile.contentMode = UIViewContentMode.scaleAspectFill
-                self.imgProfile.sd_setImage(with: URL(string: user.picture))
+                self.imgProfile.sd_setImage(with: URL(string: user.picture!))
             }else{
                 setupUserImageAsDefault()
             }

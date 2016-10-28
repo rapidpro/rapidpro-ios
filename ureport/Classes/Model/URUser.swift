@@ -22,16 +22,16 @@ class URUser: Serializable {
     var type: String!
     var countryProgram: String!
     var chatRooms:NSDictionary!
-    var contributions:NSNumber!
-    var points:NSNumber!
-    var stories:NSNumber!
-    var polls:NSNumber!
+    var contributions:NSNumber?
+    var points:NSNumber?
+    var stories:NSNumber?
+    var polls:NSNumber?
     var pushIdentity:String!
-    var publicProfile:NSNumber!
-    var born:String!
+    var publicProfile:NSNumber?
+    var born:String?
     var district:String?
-    var moderator:NSNumber!
-    var masterModerator:NSNumber!
+    var moderator:NSNumber?
+    var masterModerator:NSNumber?
     
     override init() {
         super.init()

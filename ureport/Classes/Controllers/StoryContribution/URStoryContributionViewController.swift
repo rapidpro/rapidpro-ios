@@ -128,16 +128,16 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             
             self.roundedView?.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         }else if let userObject = story.userObject {
-            self.imgProfile?.sd_setImage(with: URL(string: userObject.picture))
+            self.imgProfile?.sd_setImage(with: URL(string: userObject.picture!))
         }
         
         if story.like == nil {
             story.like = 0
         }
 
-        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like) : 0]), for: UIControlState())
+        self.btLike.setTitle(String(format: "likes".localized, arguments: [story.like != nil ? Int(story.like!) : 0]), for: UIControlState())
         
-        URStoryManager.checkIfStoryWasLiked(story.key) { (liked) -> Void in
+        URStoryManager.checkIfStoryWasLiked(story.key!) { (liked) -> Void in
              self.btLike.isEnabled = true
              self.setupLikeButtonAsLiked(liked)
         }
@@ -145,13 +145,13 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     }
     
     func incrementLikeButton() {
-        let likeCount = Int(story.like) + 1
+        let likeCount = Int(story.like!) + 1
         story.like = likeCount as NSNumber!
         self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), for: UIControlState())
     }
     
     func decrementLikeButton() {
-        let likeCount = Int(story.like) - 1
+        let likeCount = Int(story.like!) - 1
         story.like = likeCount as NSNumber!
         self.btLike.setTitle(String(format: "likes".localized, arguments: [likeCount]), for: UIControlState())
     }
@@ -216,11 +216,11 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     
     @IBAction func btLikeTapped(_ button:UIButton) {
         if button.isSelected == true {
-            URStoryManager.removeStoryLike(self.story.key)
+            URStoryManager.removeStoryLike(self.story.key!)
             setupLikeButtonAsLiked(false)
             decrementLikeButton()
         }else{
-            URStoryManager.saveStoryLike(self.story.key)
+            URStoryManager.saveStoryLike(self.story.key!)
             setupLikeButtonAsLiked(true)
             incrementLikeButton()
         }
@@ -249,7 +249,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 contribution.author = user
                 contribution.createdDate = NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
                 
-                URContributionManager.saveContribution(story.key, contribution: contribution, completion: { (success) -> Void in
+                URContributionManager.saveContribution(story.key!, contribution: contribution, completion: { (success) -> Void in
                     URUserManager.incrementUserContributions(user.key)
                     textField.text = ""
                     textField.resignFirstResponder()
@@ -290,9 +290,9 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         scrollViewMedias.setPaging(false)
         scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
         
-        if story.medias != nil && story.medias.count > 0 {
+        if story.medias != nil && (story.medias?.count)! > 0 {
             
-            for media in story.medias {                
+            for media in story.medias! {                
                 let playMediaView = URPlayMediaView(parentViewController: self, media: media)
                 self.scrollViewMedias.addCustomView(playMediaView)
             }
@@ -320,7 +320,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
             
             self.tableView.contentSize.height = CGFloat(totalContributions)
-            URContributionManager.removeContribution(self.story.key, contributionKey: cell.contribution.key)
+            URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key)
             
             self.view.layoutIfNeeded()
             

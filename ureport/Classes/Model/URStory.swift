@@ -10,16 +10,16 @@ import UIKit
 
 class URStory: Serializable {
     
-    var key:String!
+    var key:String?
     var title:String!
     var content:String!
     var createdDate:NSNumber!
     var user:String!
     var contributions:NSNumber!
-    var markers:String!
-    var cover:URMedia!
-    var medias:[URMedia]!
+    var markers:String?
+    var cover:URMedia?
+    var medias:[URMedia]?
     var userObject:URUser?
-    var like:NSNumber!
+    var like:NSNumber?
     
 }

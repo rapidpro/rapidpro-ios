@@ -322,7 +322,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 self.topDisctrictView.constant = 8
                 self.heightDisctrictView.constant = 50
                 
-                self.txtDistrict.text! = self.userInput!.district
+                self.txtDistrict.text! = self.userInput!.district!
                 self.txtDistrict.isEnabled = true
             }else {
                 hasDistrict = false

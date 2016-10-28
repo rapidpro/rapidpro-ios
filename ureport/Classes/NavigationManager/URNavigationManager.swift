@@ -48,7 +48,6 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         viewController.view.addGestureRecognizer(self.revealController!.panGestureRecognizer())
         
         URNavigationManager.switchRootViewController(self.revealController!, animated: true, completion: nil)
-        appDelegate.window?.makeKeyAndVisible()
         
     }
     
@@ -69,7 +68,6 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         self.navigation!.setNavigationBarHidden(true, animated: false)
         
         URNavigationManager.switchRootViewController(self.navigation!, animated: true, completion: nil)
-        appDelegate.window?.makeKeyAndVisible()
     }
     
     class func setupNavigationControllerWithTutorialViewController() {
@@ -84,7 +82,6 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         self.navigation!.setNavigationBarHidden(true, animated: false)
         
         URNavigationManager.switchRootViewController(self.navigation!, animated: true, completion: nil)
-        appDelegate.window?.makeKeyAndVisible()
     }
     
     class func setupNavigationDefaultAtrributes() {
@@ -149,6 +146,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
                 let oldState: Bool = UIView.areAnimationsEnabled
                 UIView.setAnimationsEnabled(false)
                 self.appDelegate.window!.rootViewController = rootViewController
+                appDelegate.window?.makeKeyAndVisible()
                 UIView.setAnimationsEnabled(oldState)
                 }, completion: { (finished: Bool) -> () in
                     if completion != nil {
@@ -157,6 +155,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
             })
         } else {
             appDelegate.window!.rootViewController = rootViewController
+            appDelegate.window?.makeKeyAndVisible()
         }
     }
     

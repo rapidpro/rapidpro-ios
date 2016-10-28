@@ -148,7 +148,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         if (indexPath as NSIndexPath).row < self.storyList.count {
             let story = storyList[(indexPath as NSIndexPath).row]
             
-            if story.cover != nil && story.cover.url != nil {
+            if story.cover != nil && story.cover?.url != nil {
                 return fullHeightTableViewCell
             }else {
                 return fullHeightTableViewCell - imgViewHistoryHeight
@@ -221,8 +221,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     func loadNews() {
         
         if let org = URCountryProgramManager.activeCountryProgram()!.org {
-            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI)\(org)"
-
+            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI!)\(org)"
+            
             Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URNews]>) in
                     if let response = response.result.value {
                         self.newsList = response

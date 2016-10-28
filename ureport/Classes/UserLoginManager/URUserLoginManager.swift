@@ -141,7 +141,6 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                                                             
                                                             URUserManager.getByKey((authData?.uid)!, completion: { (user,exists) -> Void in
                                                                 if (user != nil && exists) {
-                                                                    
                                                                     URLoginViewController.updateUserDataInRapidPro(user!)
                                                                     
                                                                     URUserLoginManager.setUserAndCountryProgram(user!)

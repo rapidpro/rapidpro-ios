@@ -69,10 +69,10 @@ class URChatTableViewCell: UITableViewCell {
         self.lbName.text = user!.nickname
         self.type = URChatCellType.createIndividualChat
         
-        if user!.picture != nil && !(user!.picture.isEmpty) {
+        if user!.picture != nil && !(user!.picture!.isEmpty) {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
             self.img.contentMode = UIViewContentMode.scaleAspectFill
-            self.img.sd_setImage(with: URL(string: user!.picture))
+            self.img.sd_setImage(with: URL(string: user!.picture!))
         }else{
             self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
             self.img.contentMode = UIViewContentMode.center
@@ -136,10 +136,10 @@ class URChatTableViewCell: UITableViewCell {
                 self.viewUnreadMessages.isHidden = true
             }
             
-            if individualChatRoom.friend.picture != nil && !(individualChatRoom.friend.picture.isEmpty) {
+            if individualChatRoom.friend.picture != nil && !((individualChatRoom.friend.picture?.isEmpty)!) {
                 self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
                 self.img.contentMode = UIViewContentMode.scaleAspectFit
-                self.img.sd_setImage(with: URL(string: individualChatRoom.friend.picture))
+                self.img.sd_setImage(with: URL(string: individualChatRoom.friend.picture!))
             }else{
                 self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
                 self.img.contentMode = UIViewContentMode.center

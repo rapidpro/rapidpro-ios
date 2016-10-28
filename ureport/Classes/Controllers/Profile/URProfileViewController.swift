@@ -112,7 +112,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     func newStoryReceived(_ story: URStory) {
         if story.user == URUser.activeUser()?.key {
             storyList.insert(story, at: 0)
-            userList.sorted{($0.points.int32Value > $1.points.int32Value)}
+            userList = userList.sorted{(($0.points?.int32Value)! > ($1.points?.int32Value)!)}
             self.tableviewMyStories.reloadData()
         }
     }
@@ -213,7 +213,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         if tableView == self.tableviewMyStories {
             let story = storyList[(indexPath as NSIndexPath).row]
             
-            if story.cover != nil && story.cover.url != nil {
+            if story.cover != nil && story.cover?.url != nil {
                 return fullHeightTableViewCell
             }else {
                 return fullHeightTableViewCell - imgViewHistoryHeight

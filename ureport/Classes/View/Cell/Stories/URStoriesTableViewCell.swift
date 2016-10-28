@@ -142,7 +142,7 @@ class URStoriesTableViewCell: UITableViewCell {
     func setupCellWith(_ story:URStory,moderateUserMode:Bool){
         self.story = story
         
-        if story.cover != nil && story.cover.url != nil {
+        if story.cover != nil && story.cover?.url != nil {
             self.imgStoryHeight.constant = imgViewHistoryHeight
             self.lbContentTop.constant = 5
         }else {
@@ -161,8 +161,8 @@ class URStoriesTableViewCell: UITableViewCell {
 //            self.viewMarkerHeight.constant = 0
 //        }
         
-        if story.medias != nil && !story.medias.isEmpty {
-            self.lbAttachments.text = String(format: "attachments".localized, arguments: [story.medias.count])
+        if story.medias != nil && !(story.medias?.isEmpty)! {
+            self.lbAttachments.text = String(format: "attachments".localized, arguments: [(story.medias?.count)!])
             self.attachmentView.isHidden = false
             self.viewAttachmentHeight.constant = viewAttachmentDefaultHeight
         }else {
@@ -170,12 +170,12 @@ class URStoriesTableViewCell: UITableViewCell {
             self.viewAttachmentHeight.constant = 0
         }
         
-        URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
+        URStoryManager.getStoryLikes(story.key!, completion: { (likeCount) -> Void in
             story.like = likeCount as NSNumber!
             self.lbLikes.text = String(format: "likes".localized, arguments: [likeCount])
         })
         
-        URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
+        URContributionManager.getTotalContributions(story.key!, completion: { (total:Int) -> Void in
             story.contributions = total as NSNumber!
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
         })
@@ -188,7 +188,7 @@ class URStoriesTableViewCell: UITableViewCell {
                 
                 if user!.picture != nil {
                     self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
-                    self.imgUser.sd_setImage(with: URL(string: user!.picture))
+                    self.imgUser.sd_setImage(with: URL(string: user!.picture!))
                 }else{
                     self.imgUser.contentMode = UIViewContentMode.center
                     self.imgUser.image = UIImage(named: "ic_person")
@@ -198,13 +198,13 @@ class URStoriesTableViewCell: UITableViewCell {
             }
         })
         
-        if story.cover != nil && story.cover.url != nil {
+        if story.cover != nil && story.cover?.url != nil {
             
-            if story.cover.type == URConstant.Media.VIDEOPHONE {
-                self.imgStory.sd_setImage(with: URL(string: story.cover.thumbnail))
+            if story.cover?.type == URConstant.Media.VIDEOPHONE {
+                self.imgStory.sd_setImage(with: URL(string: (story.cover?.thumbnail)!))
                 
-            } else if story.cover.type == URConstant.Media.PICTURE || story.cover.type == URConstant.Media.VIDEO {
-                self.imgStory.sd_setImage(with: URL(string: story.cover.url))
+            } else if story.cover?.type == URConstant.Media.PICTURE || story.cover?.type == URConstant.Media.VIDEO {
+                self.imgStory.sd_setImage(with: URL(string: (story.cover?.url)!))
             }
         }
         

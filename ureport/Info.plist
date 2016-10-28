@@ -6,6 +6,16 @@
 	<string>en</string>
 	<key>CFBundleDisplayName</key>
 	<string>U-Report</string>
+	<key>NSContactsUsageDescription</key>
+	<string>You need grant permission to access your contacts</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You need grant permission to access your gallery</string>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>You need grant permission to access your gallery</string>
+	<key>NSCalendarsUsageDescription</key>
+	<string>You need grant permission to access your calendar</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>You need grant permission to access your microphone</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>
