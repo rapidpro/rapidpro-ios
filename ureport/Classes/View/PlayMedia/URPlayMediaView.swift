@@ -71,7 +71,7 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
         }else if media.type == URConstant.Media.VIDEO {
             
             let youtubePlayerView = YTPlayerView(frame: URPlayMediaView.defaultFrame)
-            youtubePlayerView.load(withVideoId: media.id)
+            youtubePlayerView.load(withVideoId: media.id!)
             youtubePlayerView.layer.borderWidth = 2
             youtubePlayerView.layer.borderColor = UIColor.white.cgColor
             

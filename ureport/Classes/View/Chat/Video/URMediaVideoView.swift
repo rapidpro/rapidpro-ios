@@ -30,7 +30,7 @@ class URMediaVideoView: UIView {
         let playerView = YTPlayerView(frame: frame)
         
         self.addSubview(playerView)
-        playerView.load(withVideoId: media.id)
+        playerView.load(withVideoId: media.id!)
         
     }
 }

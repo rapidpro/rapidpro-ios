@@ -91,7 +91,7 @@ PODS:
   - SRKControls/Controls (4.0.1)
   - SwiftAddressBook (0.6.2)
   - TPKeyboardAvoiding (1.2.8)
-  - youtube-ios-player-helper (0.1.4)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - AWSS3 (~> 2.2.0)
@@ -112,7 +112,7 @@ DEPENDENCIES:
   - SRKControls (from `https://github.com/Ilhasoft/SRKControls`)
   - SwiftAddressBook (from `https://github.com/SocialbitGmbH/SwiftAddressBook`, branch `chunkyguy-swift3`)
   - TPKeyboardAvoiding
-  - youtube-ios-player-helper (= 0.1.4)
+  - youtube-ios-player-helper (= 0.1.6)
 
 EXTERNAL SOURCES:
   DBSphereTagCloud:
@@ -178,8 +178,8 @@ SPEC CHECKSUMS:
   SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
-  youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 6115f3463432529bd62fb3c8340a00b83fa0bd33
+PODFILE CHECKSUM: a1f779629a767b1c8de4c64208b334674fbe759f
 
 COCOAPODS: 1.1.0.rc.2

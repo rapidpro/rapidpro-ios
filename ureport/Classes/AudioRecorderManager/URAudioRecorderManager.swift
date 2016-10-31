@@ -23,7 +23,7 @@ class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
     
     static let recordSettings = [
         AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC as UInt32),
-        AVEncoderAudioQualityKey : AVAudioQuality.min.rawValue,
+        AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
         AVNumberOfChannelsKey: 1,
         AVSampleRateKey : 8000.0
     ] as [String : Any]
@@ -40,7 +40,7 @@ class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
             recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
             
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryMultiRoute)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
                 try AVAudioSession.sharedInstance().setActive(true)
                 recorder.record()
             }catch let error as NSError {

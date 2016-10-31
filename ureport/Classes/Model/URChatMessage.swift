@@ -12,7 +12,7 @@ import ObjectMapper
 
 class URChatMessage: Serializable {
     
-    var key:String!
+    var key:String?
     var message:String?
     var user:URUser!
     var date:NSNumber!

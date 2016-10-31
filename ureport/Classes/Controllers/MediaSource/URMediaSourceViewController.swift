@@ -277,7 +277,7 @@ class URMediaSourceViewController: UIViewController, UIImagePickerControllerDele
                 let media = URVideoMedia()
                 
                 media.id = videoID
-                media.url = URConstant.Youtube.COVERIMAGE.replacingOccurrences(of: "%@", with: media.id)
+                media.url = URConstant.Youtube.COVERIMAGE.replacingOccurrences(of: "%@", with: media.id!)
                 media.type = URConstant.Media.VIDEO
                 
                 if let delegate = self.delegate {

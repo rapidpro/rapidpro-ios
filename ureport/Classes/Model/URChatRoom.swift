@@ -11,7 +11,7 @@ import ObjectMapper
 
 class URChatRoom: Serializable, Mappable {
     
-    var key:String!
+    var key:String?
     var type:String!
     var createdDate:NSNumber!
     var lastMessage:URChatMessage!

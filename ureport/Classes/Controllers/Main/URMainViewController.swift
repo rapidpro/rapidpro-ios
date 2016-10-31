@@ -113,7 +113,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         myChatsViewController.tabBarItem.image = UIImage(named: "icon_chats")
         
         if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
-            self.viewControllers = [storiesTableViewController,closedPollViewController]
+            self.viewControllers = [storiesTableViewController,closedPollViewController,myChatsViewController]
             
             if chatRoomKey != nil {
                 

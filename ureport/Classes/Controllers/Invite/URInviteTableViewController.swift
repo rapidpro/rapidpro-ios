@@ -14,7 +14,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     let addressBook : SwiftAddressBook? = swiftAddressBook
     var addressBookList:[NSDictionary] = []
-    let inviteMessage = "invite_message".localized
+    let inviteMessage = "invite_contact_text".localized
     
     override func viewDidLoad() {
         super.viewDidLoad()
