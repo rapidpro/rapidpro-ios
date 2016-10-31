@@ -210,7 +210,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         URUser.setActiveUser(user)
         URUserLoginManager.setLoggedUser(user)
         
-        URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country)))
+        URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country!)))
         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
     }
     

@@ -41,19 +41,19 @@ class URRapidProContactUtil: NSObject {
     
     class func buildRapidProUserDictionaryWithContactFields(_ user:URUser,country:URCountry,completion:@escaping (NSDictionary) -> Void) {
         
-        URRapidProManager.getContactFields(URCountry(code: user.country)) { (contactFields:[String]) -> Void in
+        URRapidProManager.getContactFields(URCountry(code: user.country!)) { (contactFields:[String]) -> Void in
             if !contactFields.isEmpty {
                 
-                let countryProgram = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country))
+                let countryProgram = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country!))
                 
                 var age = 0
                 
                 if user.birthday != nil {
-                    age = (Calendar.current as NSCalendar).components(.year, from: Date(timeIntervalSince1970: NSNumber(value: user.birthday.doubleValue/1000 as Double) as TimeInterval), to: URDateUtil.currentDate(), options: []).year!
+                    age = (Calendar.current as NSCalendar).components(.year, from: Date(timeIntervalSince1970: NSNumber(value: user.birthday!.doubleValue/1000 as Double) as TimeInterval), to: URDateUtil.currentDate(), options: []).year!
                     
-                    URRapidProContactUtil.putValueIfExists(URDateUtil.birthDayFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: user.birthday.doubleValue/1000 as Double) as TimeInterval)), countryProgramContactFields: contactFields, possibleFields: ["birthday","birthdate","birth_day","date_of_birth"])
+                    URRapidProContactUtil.putValueIfExists(URDateUtil.birthDayFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: user.birthday!.doubleValue/1000 as Double) as TimeInterval)), countryProgramContactFields: contactFields, possibleFields: ["birthday","birthdate","birth_day","date_of_birth"])
                     URRapidProContactUtil.putValueIfExists(String(age), countryProgramContactFields: contactFields, possibleFields: ["age"])
-                    URRapidProContactUtil.putValueIfExists(String(URDateUtil.getYear(Date(timeIntervalSince1970: NSNumber(value: user.birthday.doubleValue/1000 as Double) as TimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["year_of_birth","born"])
+                    URRapidProContactUtil.putValueIfExists(String(URDateUtil.getYear(Date(timeIntervalSince1970: NSNumber(value: user.birthday!.doubleValue/1000 as Double) as TimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["year_of_birth","born"])
                 }
                 
 //                URRapidProContactUtil.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
@@ -73,7 +73,7 @@ class URRapidProContactUtil: NSObject {
         URRapidProContactUtil.addGenderGroup(user)
         URRapidProContactUtil.addAgeGroup(user)
         
-        groupList.append(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country)).groupName)
+        groupList.append(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country!)).groupName)
         groupList.append(GROUP_APP_UREPORT)
         
         let rootDictionary = NSMutableDictionary()
@@ -121,7 +121,7 @@ class URRapidProContactUtil: NSObject {
     
     class func addAgeGroup(_ user:URUser) {
         if user.birthday != nil {
-            if URDateUtil.getYear(Date(timeIntervalSince1970: NSNumber(value: user.birthday.doubleValue/1000 as Double) as TimeInterval)) >= YOUTH_MIN_BIRTHDAY_YEAR {
+            if URDateUtil.getYear(Date(timeIntervalSince1970: NSNumber(value: user.birthday!.doubleValue/1000 as Double) as TimeInterval)) >= YOUTH_MIN_BIRTHDAY_YEAR {
                 groupList.append(GROUP_UREPORT_YOUTH)
             }else {
                 groupList.append(GROUP_UREPORT_ADULTS)

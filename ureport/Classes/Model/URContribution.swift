@@ -10,7 +10,7 @@ import UIKit
 
 class URContribution: Serializable {
     
-    var key:String!
+    var key:String?
     var content:String!
     var author:URUser!
     var createdDate:NSNumber!

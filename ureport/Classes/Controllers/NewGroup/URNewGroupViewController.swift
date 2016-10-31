@@ -303,7 +303,7 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
             listUser = listUser.filter({user in
-                if user.nickname.range(of: searchText) != nil {
+                if user.nickname!.range(of: searchText) != nil {
                     return true
                 }else {
                     return false

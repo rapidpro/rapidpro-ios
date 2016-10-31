@@ -146,7 +146,7 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         
         self.lbGroupTitle.text = groupChatRoom.title
         self.lbSubject.text = groupChatRoom.subject
-        self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname])
+        self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname!])
         
         if let createdDate = groupChatRoom.createdDate {
              self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) \(URDateUtil.birthDayFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: createdDate.doubleValue/1000 as Double) as TimeInterval)))"

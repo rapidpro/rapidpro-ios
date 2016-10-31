@@ -12,21 +12,21 @@ import ObjectMapper
 class URUser: Serializable {
     
     var key: String!
-    var nickname: String!
-    var email: String!
-    var state: String!
-    var birthday: NSNumber!
-    var country: String!
+    var nickname: String?
+    var email: String?
+    var state: String?
+    var birthday: NSNumber?
+    var country: String?
     var picture: String?
-    var gender: String!
-    var type: String!
-    var countryProgram: String!
-    var chatRooms:NSDictionary!
+    var gender: String?
+    var type: String?
+    var countryProgram: String?
+    var chatRooms:NSDictionary?
     var contributions:NSNumber?
     var points:NSNumber?
     var stories:NSNumber?
     var polls:NSNumber?
-    var pushIdentity:String!
+    var pushIdentity:String?
     var publicProfile:NSNumber?
     var born:String?
     var district:String?

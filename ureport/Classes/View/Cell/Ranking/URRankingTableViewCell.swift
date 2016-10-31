@@ -33,7 +33,7 @@ class URRankingTableViewCell: UITableViewCell {
         self.user = user
         
         self.lbUserName.text = user.nickname
-        self.lbPoints.text = "\(user.points)"
+        self.lbPoints.text = "\(user.points!)"
 
         if user.picture != nil && !((user.picture?.isEmpty)!) {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)

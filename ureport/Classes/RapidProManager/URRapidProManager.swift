@@ -70,7 +70,7 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
         
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)flow_definition.json?uuid=\(flowUuid)"
+        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)flow_definition.json?uuid=\(flowUuid)"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseObject(completionHandler: { (response:DataResponse<URFlowDefinition>) -> Void in
             if let flowDefinition = response.result.value {
@@ -85,7 +85,7 @@ class URRapidProManager: NSObject {
         ]
         
         let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
             if let response = response.result.value {
@@ -136,7 +136,7 @@ class URRapidProManager: NSObject {
         let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
         
         let userId = URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)external/received/\(channel)/"
+        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)external/received/\(channel)/"
         
         let group = DispatchGroup();
         let queue = DispatchQueue(label: "in.ureport-poll-responses", attributes: []);
@@ -179,7 +179,7 @@ class URRapidProManager: NSObject {
         let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
         
         let userId = URUserManager.formatExtUserId(user.key)
-        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI)external/received/\(channel)/"
+        let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)external/received/\(channel)/"
         
         let parameters = [
             "from": userId,
@@ -195,7 +195,7 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
-        Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
+        Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
          
             if let response = response.result.value as? NSDictionary {
                 var arrayFields:[String] = []
@@ -222,7 +222,7 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]        
         
-        Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)boundaries.json?aliases=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response: DataResponse<Any>) in
+        Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)boundaries.json?aliases=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response: DataResponse<Any>) in
             
             if let response = response.result.value as? NSDictionary {
                 
@@ -280,11 +280,11 @@ class URRapidProManager: NSObject {
             
             print("===============")
             print(rootDicionary.copy())
-            print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json")
+            print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)contacts.json")
             print(headers)
             print("===============")
                         
-            Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI)contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
+            Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
                 
                 if response.result.isFailure {
                     print("error \(response.result.value)")

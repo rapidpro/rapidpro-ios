@@ -16,6 +16,8 @@
 	<string>You need grant permission to access your calendar</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>You need grant permission to access your microphone</string>
+	<key>NSCameraUsageDescription</key>
+	<string>You need grant permission to access your camera</string>
 	<key>CFBundleExecutable</key>
 	<string>$(EXECUTABLE_NAME)</string>
 	<key>CFBundleIdentifier</key>

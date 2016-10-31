@@ -320,7 +320,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
             
             self.tableView.contentSize.height = CGFloat(totalContributions)
-            URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key)
+            URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key!)
             
             self.view.layoutIfNeeded()
             

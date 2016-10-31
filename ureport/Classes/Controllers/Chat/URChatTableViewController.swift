@@ -86,7 +86,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         
         if !searchController!.searchBar.text!.isEmpty {
             
-            let listFiltered = listUser.filter({return $0.nickname.range(of: searchController!.searchBar.text!, options: NSString.CompareOptions.caseInsensitive) != nil})
+            let listFiltered = listUser.filter({return $0.nickname!.range(of: searchController!.searchBar.text!, options: NSString.CompareOptions.caseInsensitive) != nil})
             
             if !listFiltered.isEmpty {
                 listUser = listFiltered
@@ -182,7 +182,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
                     var chatName = ""
                     
                     if chatRoom is URIndividualChatRoom {
-                        chatName = (chatRoom as! URIndividualChatRoom).friend.nickname
+                        chatName = (chatRoom as! URIndividualChatRoom).friend.nickname!
                     }else if chatRoom is URGroupChatRoom {
                         chatName = (chatRoom as! URGroupChatRoom).title
                     }

@@ -34,7 +34,7 @@ class URWriteStoryView: UIView {
     func setupLayout() {
         
         if let user = URUser.activeUser() {
-            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
+            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname!])
             
             if user.picture != nil && user.picture!.characters.count > 0 {
                 self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)

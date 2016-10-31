@@ -253,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (registrationToken, error) in
             if (registrationToken != nil) {
                 if let user = URUser.activeUser() {
-                    if (user.pushIdentity == nil || user.pushIdentity.isEmpty) || (!user.pushIdentity.isEmpty && (user.pushIdentity != registrationToken)){
+                    if (user.pushIdentity == nil || user.pushIdentity!.isEmpty) || (!user.pushIdentity!.isEmpty && (user.pushIdentity! != registrationToken)){
                         user.pushIdentity = registrationToken
                         URUserManager.updatePushIdentity(user)
                     }

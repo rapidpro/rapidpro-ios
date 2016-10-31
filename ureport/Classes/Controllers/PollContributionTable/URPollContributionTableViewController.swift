@@ -54,7 +54,7 @@ class URPollContributionTableViewController: UITableViewController, URContributi
             self.listContribution.remove(at: (indexPath as NSIndexPath).row)
             self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
             
-            URContributionManager.removePollContribution(self.poll.key, contributionKey: cell.contribution.key)
+            URContributionManager.removePollContribution(self.poll.key, contributionKey: cell.contribution.key!)
         }))
         
         if URConstant.isIpad {

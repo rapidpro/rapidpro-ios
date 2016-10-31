@@ -84,7 +84,7 @@ class URChatRoomManager: NSObject {
             group.notify(queue: DispatchQueue.main, execute: {
                 
                 if equalsChatRoomList.count > 0 {
-                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname)
+                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname!)
                 }else {
                     URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
                         self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
@@ -148,7 +148,7 @@ class URChatRoomManager: NSObject {
         URChatRoomManager.save(chatRoom, members: [user,URUser.activeUser()!]) { (chatRoom:URChatRoom?) -> Void in
             if chatRoom != nil{
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
-                    completion(chatRoom!,users,user.nickname)
+                    completion(chatRoom!,users,user.nickname!)
                 })
             }
         }

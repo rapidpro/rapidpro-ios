@@ -79,7 +79,7 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
 
         }else if media.type == URConstant.Media.VIDEOPHONE {
             
-            SDWebImageManager.shared().downloadImage(with: URL(string:media.thumbnail), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
+            SDWebImageManager.shared().downloadImage(with: URL(string:media.thumbnail!), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
                 
                 }, completed: { (image, error, cacheType, finish, url) -> Void in
                     

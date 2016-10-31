@@ -168,7 +168,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             
             if chatRoom is URIndividualChatRoom {
                 let friend = self.getFriend(users)
-                chatName = friend!.nickname
+                chatName = friend!.nickname!
             }else if chatRoom is URGroupChatRoom {
                 chatName = (chatRoom as! URGroupChatRoom).title
             }

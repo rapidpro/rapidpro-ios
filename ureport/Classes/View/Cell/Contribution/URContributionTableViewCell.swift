@@ -50,7 +50,7 @@ class URContributionTableViewCell: UITableViewCell {
     func setupCellWith(_ contribution:URContribution, indexPath:IndexPath) {
         self.contribution = contribution
         
-        self.lbContributionText.text = "\(contribution.content)\n"
+        self.lbContributionText.text = "\(contribution.content!)\n"
         self.lbUserName.text = contribution.author.nickname
         self.lbDate.text = "\(Date().offsetFrom(Date(timeIntervalSince1970: NSNumber(value: contribution.createdDate.doubleValue/1000 as Double) as TimeInterval))) ago"
         

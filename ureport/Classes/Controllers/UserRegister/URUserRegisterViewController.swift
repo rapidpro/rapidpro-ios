@@ -246,7 +246,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary:NSDictionary) -> Void in
             
-            URRapidProManager.saveUser(user, country: URCountry(code:user.country),setupGroups: !self.updateMode, completion: { (response) -> Void in
+            URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: !self.updateMode, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
                 print(response)
@@ -299,8 +299,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.txtState.isEnabled = true
         
         if updateMode != nil && updateMode == true {
-            self.country = URCountry(code: URCountry.getISO2CountryCodeByISO3Code(self.userInput!.country))
-            self.txtCountry.text = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: self.userInput!.country)).name
+            self.country = URCountry(code: URCountry.getISO2CountryCodeByISO3Code(self.userInput!.country!))
+            self.txtCountry.text = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: self.userInput!.country!)).name
             self.countryISO3 = URCountry(code:URCountry.getISO3CountryCodeByISO2Code(self.country!.code!))
         }else{
             self.country = URCountry.getCurrentURCountry()
@@ -312,7 +312,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             loadState(false)
             
             if self.userInput!.state != nil && !self.userInput!.state!.isEmpty {
-                self.txtState.text! = self.userInput!.state
+                self.txtState.text! = self.userInput!.state!
                 
             }
             
