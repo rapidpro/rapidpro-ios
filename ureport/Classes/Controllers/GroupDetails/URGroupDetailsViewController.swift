@@ -102,9 +102,9 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         
         let leaveAction: UIAlertAction = UIAlertAction(title: isUserAdmin == true ? "remove_group".localized : "label_leave_group".localized , style: .default) { action -> Void in
             if self.isUserAdmin == true {
-                URChatMemberManager.removeChatRoom(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key)
+                URChatMemberManager.removeChatRoom(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key!)
             }else {
-                URChatMemberManager.removeMemberByChatRoomKey(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key)
+                URChatMemberManager.removeMemberByChatRoomKey(URUser.activeUser()!.key, chatRoomKey: self.groupChatRoom.key!)
             }
         }
         
@@ -146,16 +146,16 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
         
         self.lbGroupTitle.text = groupChatRoom.title
         self.lbSubject.text = groupChatRoom.subject
-        self.lbCreatedBy.text = String(format: "chat_group_info_created_date".localized, arguments: [groupChatRoom.administrator.nickname!])
+        self.lbCreatedBy.text = String(format: "chat_group_info_created_3date".localized, arguments: [groupChatRoom.administrator.nickname!])
         
         if let createdDate = groupChatRoom.createdDate {
              self.lbCreatedBy.text = "\( self.lbCreatedBy.text!) \(URDateUtil.birthDayFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: createdDate.doubleValue/1000 as Double) as TimeInterval)))"
         }
         
-        if self.groupChatRoom.picture != nil && self.groupChatRoom.picture.url != nil {
+        if self.groupChatRoom.picture != nil && self.groupChatRoom.picture!.url != nil {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
             self.imgGroupPic.contentMode = UIViewContentMode.scaleAspectFill
-            self.imgGroupPic.sd_setImage(with: URL(string: self.groupChatRoom.picture.url))
+            self.imgGroupPic.sd_setImage(with: URL(string: self.groupChatRoom.picture!.url))
         }else {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
             self.imgGroupPic.image = UIImage(named: "default_group")

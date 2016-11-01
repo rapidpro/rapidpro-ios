@@ -27,11 +27,8 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     var listCurrentModerators:[String] = []
     var listUserAux:[URUser] = []
     
-    var isOptionSelectedUserAsModeratorActive:Bool!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        isOptionSelectedUserAsModeratorActive = false
         self.tableView.backgroundColor = UIColor.groupTableViewBackground
         self.tableView.separatorColor = UIColor.clear
         self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
@@ -91,16 +88,14 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     func userSelected(_ user: URUser) {
         
         let filtered = listUserSelectedAsModerator.filter {
-            return $0 as String == user.key
+            return $0 as String == user.key!
         }
         
         if !filtered.isEmpty {
             URUserManager.removeModerateUser(filtered[0])
             listUserSelectedAsModerator.remove(at: listUserSelectedAsModerator.index(of: filtered[0])!)
         }else{
-            if isOptionSelectedUserAsModeratorActive == false {
-                URUserManager.setUserAsModerator(user.key)
-            }
+            URUserManager.setUserAsModerator(user.key)
             listUserSelectedAsModerator.append(user.key)
         }
         
@@ -111,7 +106,6 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     //MARK: Class Methods
     
     func putSelectedUserAsModerator(_ user:URUser) {
-        isOptionSelectedUserAsModeratorActive = true
         self.userSelected(user)
     }
     
@@ -138,6 +132,8 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     func loadData() {
         MBProgressHUD.showAdded(to: self.view, animated: true)
         
+        self.listUserSelectedAsModerator = []
+        
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
             MBProgressHUD.hide(for: self.view, animated: true)
             
@@ -151,6 +147,8 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
                     }
                 }
                 
+                self.tableView.reloadData()
+                
                 URUserManager.getAllModertorUsers { (usersKey) -> Void in
                     if let usersKey = usersKey {
                         
@@ -159,14 +157,13 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
                         for userKey in usersKey {
                             let user = URUser()
                             user.key = userKey
-                            self.putSelectedUserAsModerator(user)
+                            self.listUserSelectedAsModerator.append(user.key)
                         }
                         
-                        self.isOptionSelectedUserAsModeratorActive = false
-                        
-                    }else {
-                        self.tableView.reloadData()
                     }
+                    
+                    self.tableView.reloadData()
+                    
                 }
                 
             }

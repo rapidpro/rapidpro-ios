@@ -123,7 +123,7 @@ class URMyChatsIPadViewController: UISplitViewController, URMyChatsViewControlle
             URChatRoomManager.getByKey(chatRoomKeyToOpen, completion: { (chatRoom) -> Void in
                 
                 MBProgressHUD.showAdded(to: self.view, animated: true)
-                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key!, completionWithUsers: { (users) -> Void in
                     MBProgressHUD.hide(for: self.view, animated: true)
                     
                     var chatName = ""

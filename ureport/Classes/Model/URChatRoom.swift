@@ -14,8 +14,8 @@ class URChatRoom: Serializable, Mappable {
     var key:String?
     var type:String!
     var createdDate:NSNumber!
-    var lastMessage:URChatMessage!
-    var totalUnreadMessages:Int!
+    var lastMessage:URChatMessage?
+    var totalUnreadMessages:Int?
     
     override init() {}
     

@@ -161,7 +161,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     func openChatRoom(_ chatRoom: URChatRoom) {
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
+        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key!, completionWithUsers: { (users) -> Void in
             MBProgressHUD.hide(for: self.view, animated: true)
             
             var chatName = ""

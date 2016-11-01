@@ -169,12 +169,12 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 68.0
         
-        if !URConstant.isIpad {
-            let viewFooter =  Bundle.main.loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)?[0] as! URAddContributionTableViewCell
-            viewFooter.delegate = self
-            viewFooter.parentViewController = self
-            self.tableView.tableFooterView = viewFooter
-        }
+//        if !URConstant.isIpad {
+//            let viewFooter =  Bundle.main.loadNibNamed("URAddContributionTableViewCell", owner: 0, options: nil)?[0] as! URAddContributionTableViewCell
+//            viewFooter.delegate = self
+//            viewFooter.parentViewController = self
+//            self.tableView.tableFooterView = viewFooter
+//        }
         
     }
 
@@ -252,9 +252,10 @@ class URStoryContributionViewController: UIViewController, URContributionManager
                 URContributionManager.saveContribution(story.key!, contribution: contribution, completion: { (success) -> Void in
                     URUserManager.incrementUserContributions(user.key)
                     textField.text = ""
-                    textField.resignFirstResponder()
-                    let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
-                    self.scrollView.setContentOffset(bottomOffset, animated: true)
+                    self.view.endEditing(true)
+                    //textField.resignFirstResponder()
+                    //let bottomOffset = CGPoint(x: 0, y: self.scrollView.contentSize.height - self.scrollView.bounds.size.height)
+                    //self.scrollView.setContentOffset(bottomOffset, animated: true)
 
                 })
                 
@@ -319,10 +320,10 @@ class URStoryContributionViewController: UIViewController, URContributionManager
             let totalContributions = Int(self.story.contributions) - 1
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
             
-            self.tableView.contentSize.height = CGFloat(totalContributions)
-            URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key!)
+            //self.tableView.contentSize.height = CGFloat(totalContributions)
+            //URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key!)
             
-            self.view.layoutIfNeeded()
+            //self.view.layoutIfNeeded()
             
         }))
         

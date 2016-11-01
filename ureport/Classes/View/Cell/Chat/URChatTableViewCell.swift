@@ -99,8 +99,8 @@ class URChatTableViewCell: UITableViewCell {
             self.lbLastMessage.text = groupChatRoom.lastMessage?.message
             self.lbDateHour.text = getTimeAgoFromDate(groupChatRoom)
             
-            if groupChatRoom.totalUnreadMessages != nil && groupChatRoom.totalUnreadMessages > 0 {
-                self.lbUnreadMessages.text = "\(groupChatRoom.totalUnreadMessages)"
+            if groupChatRoom.totalUnreadMessages != nil && groupChatRoom.totalUnreadMessages! > 0 {
+                self.lbUnreadMessages.text = "\(groupChatRoom.totalUnreadMessages!)"
                 self.viewUnreadMessages.isHidden = false
             }else {
                 self.viewUnreadMessages.isHidden = true
@@ -127,10 +127,9 @@ class URChatTableViewCell: UITableViewCell {
             self.type = URChatCellType.individual
             self.lbLastMessage.text = individualChatRoom.lastMessage?.message
             self.lbDateHour.text = getTimeAgoFromDate(individualChatRoom)
-            self.lbUnreadMessages.text = "\(individualChatRoom.totalUnreadMessages)"
             
-            if individualChatRoom.totalUnreadMessages != nil && individualChatRoom.totalUnreadMessages > 0 {
-                self.lbUnreadMessages.text = "\(individualChatRoom.totalUnreadMessages)"
+            if individualChatRoom.totalUnreadMessages != nil && individualChatRoom.totalUnreadMessages! > 0 {
+                self.lbUnreadMessages.text = "\(individualChatRoom.totalUnreadMessages!)"
                 self.viewUnreadMessages.isHidden = false
             }else {
                 self.viewUnreadMessages.isHidden = true

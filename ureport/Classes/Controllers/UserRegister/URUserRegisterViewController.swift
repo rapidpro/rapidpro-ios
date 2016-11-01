@@ -272,6 +272,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if let gender = self.userInput!.gender {
                 
+                self.gender = gender
+                
                 if gender == "Male" {
                     self.localizedGender = URGender.Male
                 }else{
@@ -538,7 +540,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             return self.genders![row]
         }else if pickerView == self.pickerStates {
             self.stateBoundary = self.states[row].boundary
-            self.txtState.text = self.states[row].name
+            if self.txtState.text!.isEmpty {
+                self.txtState.text = self.states[row].name
+            }
             filterDistricts()
             return self.states[row].name
         }else if pickerView == self.pickerDistricts {

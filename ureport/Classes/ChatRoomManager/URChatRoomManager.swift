@@ -50,10 +50,13 @@ class URChatRoomManager: NSObject {
         var equalsChatRoomList = [URChatRoom]()
         var equalsGroupChatRoomList = [URChatRoom]()
         
-        if let friendChatRooms = friend.chatRooms,  let myChatRooms = URUser.activeUser()?.chatRooms {
+        let friendChatRooms = friend.chatRooms
+        let myChatRooms = URUser.activeUser()?.chatRooms
+        
+        if friendChatRooms != nil && myChatRooms != nil {
             
-            for friendChatRoomKey in friendChatRooms.allKeys {
-                for myChatRoomKey in myChatRooms.allKeys {
+            for friendChatRoomKey in friendChatRooms!.allKeys {
+                for myChatRoomKey in myChatRooms!.allKeys {
                     
                     if myChatRoomKey as! String == friendChatRoomKey as! String {
                         equalsChatRoomKeyList.append(myChatRoomKey as! String)
@@ -147,7 +150,7 @@ class URChatRoomManager: NSObject {
         
         URChatRoomManager.save(chatRoom, members: [user,URUser.activeUser()!]) { (chatRoom:URChatRoom?) -> Void in
             if chatRoom != nil{
-                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key!, completionWithUsers: { (users) -> Void in
                     completion(chatRoom!,users,user.nickname!)
                 })
             }
@@ -196,12 +199,12 @@ class URChatRoomManager: NSObject {
                     print(error?.localizedDescription)
                 }else {
 
-                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (members) -> Void in
+                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key!, completionWithUsers: { (members) -> Void in
                         for user in members {
-                            URChatMemberManager.removeMemberByChatRoomKey(user.key, chatRoomKey: chatRoom.key)
+                            URChatMemberManager.removeMemberByChatRoomKey(user.key, chatRoomKey: chatRoom.key!)
                         }
                         
-                        let chatMember = URChatMember(key:chatRoom.key)
+                        let chatMember = URChatMember(key:chatRoom.key!)
                         
                         for user in newMembers {
                             
@@ -240,7 +243,7 @@ class URChatRoomManager: NSObject {
                     group.key = snapshot?.key
                     group.type = URChatRoomType.Group
                     
-                    URChatMemberManager.getByKey(group.key, completion: { (data, exists) -> Void in
+                    URChatMemberManager.getByKey(group.key!, completion: { (data, exists) -> Void in
                         if exists == true{
                             for object in data!.children {
                                 let userKey = (object as! FDataSnapshot).key

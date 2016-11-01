@@ -176,7 +176,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
                 URUserManager.updateChatroom(URUser.activeUser()!, chatRoom: chatRoom)
-                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key!, completionWithUsers: { (users) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
                     
                     var chatName = ""

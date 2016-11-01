@@ -1,4 +1,4 @@
-//
+ //
 //  URMessagesViewController.swift
 //  ureport
 //
@@ -69,7 +69,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         keyboardDidHide()
         setupAvatarImages()
         
-        if self.chatRoom != nil && self.chatRoom!.key != nil && self.chatRoom!.key.characters.count > 0{
+        if self.chatRoom != nil && self.chatRoom!.key != nil && self.chatRoom!.key!.characters.count > 0{
             self.jsqMessages = []
             self.collectionView.reloadData()
             chatMessage.delegate = self
@@ -311,7 +311,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
                     
                     alertController.addAction(UIAlertAction(title: "Ok", style: .cancel, handler: nil))
                     alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .default, handler: { (alertAction) -> Void in
-                        URChatRoomManager.unblockUser(self.chatRoom!.key)
+                        URChatRoomManager.unblockUser(self.chatRoom!.key!)
                         self.userBlocked = false
                         self.collectionView!.isUserInteractionEnabled = true
                         self.inputToolbar!.isUserInteractionEnabled = true
@@ -369,9 +369,9 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let groupChatRoom = self.chatRoom as! URGroupChatRoom
         let container = UIView(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
         
-        if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
+        if groupChatRoom.picture != nil && groupChatRoom.picture!.url != nil {
             btnInfo.frame = CGRect(x: 0, y: 0, width: 36, height: 36)
-            btnInfo.sd_setBackgroundImage(with: URL(string: groupChatRoom.picture.url), for: UIControlState())
+            btnInfo.sd_setBackgroundImage(with: URL(string: groupChatRoom.picture!.url), for: UIControlState())
             container.layer.cornerRadius = 18
         }else {
             btnInfo.frame = CGRect(x: 0, y: 7, width: 29, height: 18)
@@ -422,7 +422,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     func blockUser() {
         let alertController = UIAlertController(title: nil, message: "message_confirm_block_user".localized, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "block_chat_room".localized, style: .default, handler: { (alertAction) -> Void in
-            URChatRoomManager.blockUser(self.chatRoom!.key)
+            URChatRoomManager.blockUser(self.chatRoom!.key!)
             self.collectionView!.isUserInteractionEnabled = false
             self.inputToolbar!.isUserInteractionEnabled = false
             self.userBlocked = true
@@ -436,7 +436,7 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     func unblockUser() {
         let alertController = UIAlertController(title: nil, message: "message_confirm_unblock_user".localized, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "label_unblock_chat_room".localized, style: .default, handler: { (alertAction) -> Void in
-            URChatRoomManager.unblockUser(self.chatRoom!.key)
+            URChatRoomManager.unblockUser(self.chatRoom!.key!)
             self.collectionView!.isUserInteractionEnabled = true
             self.inputToolbar!.isUserInteractionEnabled = true
             self.userBlocked = false

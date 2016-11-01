@@ -74,7 +74,7 @@ class URUserManager: NSObject {
             .child(byAppendingPath: URCountryProgram.path())
             .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
             .child(byAppendingPath: URUserManager.pathUserModerator())
-            .setValue([userKey:true])
+            .updateChildValues([userKey:true])
     }
 
     class func removeModerateUser(_ userKey:String) {

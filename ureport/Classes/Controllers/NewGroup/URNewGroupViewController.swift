@@ -136,8 +136,8 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             self.txtDescriptionGroup.text = groupChatRoom.subject
             self.privateGroupSwitch.isOn = groupChatRoom.privateAccess.boolValue
             
-            if groupChatRoom.picture != nil && groupChatRoom.picture.url != nil {
-                imgPicture.sd_setImage(with: URL(string: groupChatRoom.picture.url))
+            if groupChatRoom.picture != nil && groupChatRoom.picture!.url != nil {
+                imgPicture.sd_setImage(with: URL(string: groupChatRoom.picture!.url))
             }
             
             self.listUser = []

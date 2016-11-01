@@ -66,7 +66,7 @@ class URGroupsTableViewCell: UITableViewCell {
         let user = URUser.activeUser()!
         
         MBProgressHUD.showAdded(to: self.window!, animated: true)
-        URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key, completionWithUsers: { (users:[URUser]) -> Void in
+        URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key!, completionWithUsers: { (users:[URUser]) -> Void in
             MBProgressHUD.hide(for: self.window!, animated: true)
             
             URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
@@ -76,7 +76,7 @@ class URGroupsTableViewCell: UITableViewCell {
                     delegate?.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text! )
                 }
             }else {
-                let chatMember = URChatMember(key: self.groupChatRoom.key)
+                let chatMember = URChatMember(key: self.groupChatRoom.key!)
                 
                 URChatMemberManager.save(chatMember, user: user, completion: { (success:Bool) -> Void in
                     if success == true {
