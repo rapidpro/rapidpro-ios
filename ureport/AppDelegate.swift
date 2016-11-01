@@ -9,9 +9,10 @@
 import UIKit
 import Firebase
 import ObjectMapper
+import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate, UNUserNotificationCenterDelegate  {
 
     var window: UIWindow?
     var loginViewController: URLoginViewController?
@@ -95,11 +96,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
     
     func requestPermissionForPushNotification(_ application:UIApplication) {
-        let types:UIUserNotificationType = ([.alert, .badge, .sound])
-        let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
-        application.registerUserNotificationSettings(settings)
-        application.registerForRemoteNotifications()
-    }        
+        
+        if #available(iOS 10.0, *) {
+            let center  = UNUserNotificationCenter.current()
+            center.delegate = self
+            // set the type as sound or badge
+            center.requestAuthorization(options: [.sound,.alert,.badge], completionHandler: { (success, error) in
+                if let error = error {
+                    print(error.localizedDescription)
+                }else {
+                    print("success: \(success)")
+                }
+                
+            })
+        }else {
+        
+            let types:UIUserNotificationType = ([.alert, .badge, .sound])
+            let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
+            application.registerUserNotificationSettings(settings)
+            application.registerForRemoteNotifications()
+        }
+    }
     
     func setupGoogle() {
         var configureError: NSError?
@@ -132,7 +149,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         }else {
             if URUser.activeUser() != nil {
                 if let launchOptions = launchOptions {
-                    if let userInfo = launchOptions[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary{
+                    if let userInfo = launchOptions[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]{
                         openNotification(userInfo)
                     }
                 }else {
@@ -144,7 +161,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         }
     }
     
-    func getChatRoomKey(_ userInfo:NSDictionary) -> String? {
+    func getChatRoomKey(_ userInfo:[AnyHashable:Any]) -> String? {
         if userInfo["chatRoom"] != nil {
             let chatRoom = convertStringToDictionary(userInfo["chatRoom"] as! String)
             return chatRoom!["key"] as? String
@@ -170,7 +187,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     //MARK: Notification Methods
     
-    func openNotification(_ userInfo:NSDictionary) {
+    func openNotification(_ userInfo:[AnyHashable:Any]) {
         
         var notificationType:String? = nil
         
@@ -217,6 +234,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     //MARK: Application Methods
     
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let _ = URUser.activeUser() {
+            openNotification(userInfo)
+        }
+        
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+    }
+    
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        
+        let userInfo = notification.request.content.userInfo
+        
+        if let _ = URUser.activeUser() {
+            openNotification(userInfo)
+        }
+        
+        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
+        
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         GCMService.sharedInstance().connect(handler: {
             (error) -> Void in
@@ -239,7 +282,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
         
         if let _ = URUser.activeUser() {
-            openNotification(userInfo as NSDictionary)
+            openNotification(userInfo)
         }
         
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)

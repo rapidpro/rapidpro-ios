@@ -94,17 +94,4 @@ class URGCMManager: NSObject {
         ]
     }
     
-    class func registrationHandler(_ registrationToken: String, error: NSError) {
-        if (registrationToken != nil) {
-            if let user = URUser.activeUser() {
-                if (user.pushIdentity == nil || user.pushIdentity!.isEmpty) || (!user.pushIdentity!.isEmpty && (user.pushIdentity != registrationToken)){
-                    user.pushIdentity = registrationToken
-                    URUserManager.updatePushIdentity(user)
-                }
-            }
-        } else {
-            print("Registration to GCM failed with error: \(error.localizedDescription)")
-        }
-    }
-    
 }

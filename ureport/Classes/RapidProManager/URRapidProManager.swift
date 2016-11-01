@@ -87,7 +87,7 @@ class URRapidProManager: NSObject {
         let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
         
-        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
+        Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
             if let response = response.result.value {
                 if response.count > 0 {
                     completion(response)
