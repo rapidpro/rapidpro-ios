@@ -81,8 +81,8 @@ class URCountryProgramManager: NSObject {
         
         if let dict = myDict {
             
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] != nil {
-                channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] as? String
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code!)"] != nil {
+                channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code!)"] as? String
             }else {
                 channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(URConstant.RapidPro.GLOBAL)"] as? String
             }
@@ -104,8 +104,8 @@ class URCountryProgramManager: NSObject {
         
         if let dict = rootDictionary {
             
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] != nil {
-                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] as? String
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code!)"] != nil {
+                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code!)"] as? String
             }else {
                 token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(URConstant.RapidPro.GLOBAL)"] as? String
             }

@@ -32,6 +32,7 @@ class URUser: Serializable {
     var district:String?
     var moderator:NSNumber?
     var masterModerator:NSNumber?
+    var socialUid:String?
     
     override init() {
         super.init()

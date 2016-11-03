@@ -72,6 +72,18 @@ struct URConstant {
             }
             return ""
         }
+        
+        static func AUTH_REGISTER() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_REGISTER"] != nil {
+                    return dictionary["AUTH_REGISTER"] as! String
+                }else{
+                    print("AUTH_REGISTER doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
     }
     
     struct SocialNetwork {

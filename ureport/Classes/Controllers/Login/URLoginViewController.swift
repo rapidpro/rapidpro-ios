@@ -186,22 +186,11 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
             MBProgressHUD.showAdded(to: self.view, animated: true)
             URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
-                if user == nil || user!.key.isEmpty {
-                    
+                if user!.key == nil {
+                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!,updateMode:false),animated:true)
                 }else{
-                    MBProgressHUD.showAdded(to: self.view, animated: true)
-                    URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        if exists {
-                            
-                            URLoginViewController.updateUserDataInRapidPro(userById!)
-                            
-                            URUserLoginManager.setUserAndCountryProgram(userById!)
-                            
-                        }else {
-                            self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!,updateMode:false),animated:true)
-                        }
-                    })
+                    URLoginViewController.updateUserDataInRapidPro(user!)
+                    URUserLoginManager.setUserAndCountryProgram(user!)
                 }
                 
             }

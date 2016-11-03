@@ -81,17 +81,46 @@ class URFireBaseManager: NSObject {
         }
     }
     
-    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
-        print(String(format: URConstant.Auth.AUTH_FACEBOOK(), token))
-        Alamofire.request(String(format: URConstant.Auth.AUTH_FACEBOOK(), token)).responseJSON { (response:DataResponse<Any>) in
+    static func createUser(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_REGISTER(), email,password)).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {
                 if let uid = response["uid"] as? String {
                     
                     URUserManager.getByKey(uid, completion: { (user, success) in
                         if let user = user {
+                            completion(user, nil)
+                        }
+                    })
+                    
+                }else if let error = response["error"] as? NSDictionary {
+                    let errorCode = error["code"] as! String
+                    switch errorCode {
+                    case "INVALID_EMAIL":
+                        completion(nil, .invalidEmail)
+                        break
+                    case "INVALID_USER":
+                        completion(nil, .invalidUser)
+                        break
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+        print(String(format: URConstant.Auth.AUTH_FACEBOOK(), token))
+        Alamofire.request(String(format: URConstant.Auth.AUTH_FACEBOOK(), token)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
                             completion(user)
                         }else {
-                            completion(nil)
+                            let user = URUserLoginManager.getFacebookUserDataWithDictionary(response["facebook"] as! NSDictionary)
+                            user.socialUid = uid
+                            completion(user)
                         }
                     })
                     

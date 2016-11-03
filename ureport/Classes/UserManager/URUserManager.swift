@@ -38,7 +38,12 @@ class URUserManager: NSObject {
         }
     }
     
-    class func save(_ user:URUser) {        
+    class func save(_ user:URUser) {
+        
+        print(user)
+        print("=======")
+        dump(user)
+        
         URFireBaseManager.sharedInstance()
             .child(byAppendingPath: self.path())
             .child(byAppendingPath: user.key)

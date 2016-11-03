@@ -195,11 +195,14 @@ class URRapidProManager: NSObject {
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.getCountryProgramByCountry(country))!
         ]
         
+        print(headers)
+        print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)fields.json")
+        
         Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
          
             if let response = response.result.value as? NSDictionary {
                 var arrayFields:[String] = []
-                if let results = response.object(forKey:"results") as? [NSDictionary] {
+                if let results = response["results"] as? [NSDictionary] {
 
                     for dictionary in results {
                         arrayFields.append(dictionary.object(forKey:"key") as! String)

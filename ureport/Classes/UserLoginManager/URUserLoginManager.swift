@@ -38,7 +38,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?) -> Void ) {
         
-        let login: FBSDKLoginManager = FBSDKLoginManager()
+        let login = FBSDKLoginManager()
         
         login.logIn(withReadPermissions: ["email","user_birthday"], from: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
@@ -50,20 +50,8 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(nil)
                 } else {
                     if FBSDKAccessToken.current() != nil {
-                        /*URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Facebook, token: FBSDKAccessToken.current().tokenString, withCompletionBlock: { (error, authData) -> Void in
-                            if error != nil {
-                                print(error)
-                            }else{
-                                let user: URUser = URUserLoginManager.getFacebookUserData(authData!)
-                                completion(user)
-                            }
-                        })*/
                         URFireBaseManager.authUserWithFacebook(token: FBSDKAccessToken.current().tokenString, completion: { (user) in
-                            if let user = user {
-                                completion(user)
-                            }else {
-                                completion(nil)
-                            }
+                            completion(user)
                         })
                     }
                 }
@@ -251,14 +239,16 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         return user
     }
     
-    class func getFacebookUserData(_ dictionary:NSDictionary) -> URUser{
+    class func getFacebookUserDataWithDictionary(_ dictionary:NSDictionary) -> URUser{
         let user = URUser()
         
-        user.key = authData.uid
-        user.nickname = (authData.providerData["displayName"] as? String)?.replacingOccurrences(of: " ", with: "", options: [], range: nil)
-        user.email = authData.providerData["email"] as? String
-        user.picture = authData.providerData["profileImageURL"] as? String
-        user.gender = ((authData.providerData["cachedUserProfile"]! as AnyObject).object(forKey: "gender") as! String) == "male" ? URGender.Male : URGender.Female
+        if let key = dictionary["uid"] as? String {
+            user.key = key
+        }
+        user.nickname = (dictionary["displayName"] as! String).replacingOccurrences(of: " ", with: "", options: [], range: nil)
+        user.email = dictionary["email"] as? String
+        user.picture = dictionary["profileImageURL"] as? String
+        user.gender = ((dictionary["cachedUserProfile"]! as AnyObject).object(forKey: "gender") as! String) == "male" ? URGender.Male : URGender.Female
         user.type = URType.Facebook
         
         return user

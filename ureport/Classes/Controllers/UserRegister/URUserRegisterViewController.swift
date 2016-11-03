@@ -156,6 +156,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if (self.userInput != nil) {
                 user = self.userInput!
+                user.key = user.socialUid
                 self.saveUser(buildUserFields(user))
                 
             }else {
@@ -163,6 +164,22 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 user = buildUserFields(user)
                 user.type = URType.UReport
                 
+                URFireBaseManager.createUser(email: user.email!, password: self.txtPassword.text!, completion: { (user, error) in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    if let user = user {
+                        self.saveUser(user)
+                        
+                        URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
+                            MBProgressHUD.hide(for: self.view, animated: true)
+                            if success {
+                                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+                            }
+                        })
+                    }else if let error = error {
+                        //TODO
+                    }
+                })
+                /*
                 URFireBaseManager.sharedLoginInstance().createUser(user.email, password: self.txtPassword.text,
                                                               withValueCompletionBlock: { error, result in
                                                                 MBProgressHUD.hide(for: self.view, animated: true)
@@ -205,7 +222,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                                                                         })
                                                                     }
                                                                 }
-                })
+                })*/
                 
             }
             
@@ -216,15 +233,15 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     //MARK: Class Methods
     
     func buildUserFields(_ user:URUser) -> URUser {
-        user.nickname = self.txtNick.text
-        user.email = self.txtEmail.text
-        user.district = self.txtDistrict.text != nil ? self.txtDistrict.text : nil
-        user.gender = gender
+        user.nickname = self.txtNick.text!
+        user.email = self.txtEmail.text!
+        user.district = self.txtDistrict.text != nil ? self.txtDistrict.text! : nil
+        user.gender = gender!
         user.birthday = NSNumber(value: Int64(self.birthDay!.timeIntervalSince1970 * 1000) as Int64)
-        user.country = countryISO3?.code
-        user.state = self.txtState.text
+        user.country = countryISO3?.code!
+        user.state = self.txtState.text!
         user.publicProfile = true
-        user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code
+        user.countryProgram = URCountryProgramManager.getCountryProgramByCountry(countryISO3!).code!
         URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(countryISO3!))
         return user
     }
@@ -359,42 +376,23 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             setupTextFieldLoading(self.txtState)
         }
         
-        Alamofire.request("http://api.geonames.org/countryInfoJSON?country=\(self.country!.code!)&username=ureport", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response: DataResponse<Any>) in
-            
-            if let dictionary = (response.result.value as? NSDictionary)?.object(forKey: "geonames") {
-                
-                let geonameId:Int = (dictionary as AnyObject).objectAt(0).object(forKey:"geonameId") as! Int
-                
-                Alamofire.request("http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON(completionHandler: { (data: DataResponse<Any>) in
-                    
-                    if data.result.value != nil && data.result.value is NSDictionary {
-                        
+        URGeonamesAPI.getGeonameID(countryCode: self.country!.code!) { (geonameId) in
+            if let geonameId = geonameId {
+                URGeonamesAPI.getStatesByGeonameID(geonameId: geonameId, completion: { (states) in
+                    if let states = states {
                         if updateUI == true {
                             self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
                         }
-                        
-                        let data = data.result.value as! NSDictionary
-                        
-                        if data.object(forKey:"geonames") != nil && data.object(forKey:"totalResultsCount") as! Int > 0 {
-                            
-                            for index in 0...(data.object(forKey:"geonames")! as AnyObject).count-1 {
-                                let geoName:NSDictionary = (data.object(forKey: "geonames")! as AnyObject).objectAt(index) as! NSDictionary
-                                self.states.append(URState(name: geoName["adminName1"] as! String, boundary: nil))
-                            }
-                            
-                            self.states = self.states.sorted{($0.name < $1.name)}
-                            
-                            self.pickerStates?.reloadAllComponents()
-                        }else {
-                            print("geonames key not found")
-                        }
+                        self.states = states
+                        self.pickerStates?.reloadAllComponents()
                     }else {
-                        print("error on http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport")
+                        if updateUI == true {
+                            self.setupFinishLoadingTextField(self.txtState, placeholder: "state".localized)
+                        }
                     }
                 })
             }
-        
-        })
+        }
     }
     
     fileprivate func setupUI() {

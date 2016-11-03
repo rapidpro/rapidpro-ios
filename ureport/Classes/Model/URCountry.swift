@@ -81,8 +81,8 @@ class URCountry: NSObject {
         let country:URCountry? = URCountry()
         
         let locale = Locale.current
-        country!.code = locale.currencyCode
-        country!.name = locale.localizedString(forCurrencyCode: locale.currencyCode!)
+        country!.code = locale.regionCode
+        country!.name = locale.localizedString(forRegionCode: locale.regionCode!)
         return country!
     }
     
