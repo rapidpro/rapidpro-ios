@@ -10,6 +10,8 @@ import UIKit
 import Firebase
 import FBSDKLoginKit
 import FBSDKCoreKit
+import Accounts
+import Social
 
 protocol URUserLoginManagerDelegate {
     func userHasLoggedInGoogle(_ user:URUser)
@@ -33,7 +35,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     class func logoutFromSocialNetwork() {
         GIDSignIn.sharedInstance().disconnect()
         FBSDKLoginManager().logOut()
-        URFireBaseManager.sharedLoginInstance().unauth()
+        //URFireBaseManager.sharedLoginInstance().unauth()
     }
     
     class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?) -> Void ) {
@@ -62,26 +64,27 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {
-        let twitterAuthHelper:TwitterAuthHelper = TwitterAuthHelper(firebaseRef: URFireBaseManager.sharedLoginInstance(), apiKey: URConstant.SocialNetwork.TWITTER_APP_ID())
         
-        twitterAuthHelper.selectTwitterAccount { (error, accounts:[Any]?) -> Void in
-            
-            if error != nil {
-                completion(nil)
-            }else {
-                twitterAuthHelper.authenticateAccount(accounts?[0] as! ACAccount, withCallback: { (error, authData) -> Void in
-                    if let authData = authData {
-                        let user: URUser = URUserLoginManager.getTwitterUserData(authData)
-                        completion(user)
-                    }else {
-                        completion(nil)
-                    }
+        let accountStore = ACAccountStore()
+        let accountType  = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
+
+        accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: {success, error in
+            if let twitterAccount = accountStore.accounts(with: accountType).first as? ACAccount {
+                
+                accountStore.renewCredentials(for: twitterAccount) { (renewResult, error) in
+                    var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
+                    let details = (properties["properties"] as! NSDictionary)
+                    print("user_id  =  \(details["user_id"] as! String)")
                     
-                })
+                    URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, completion: { (user) in
+                        completion(user)
+                    })   
+                }
+ 
+            } else {
+                completion(nil)
             }
-            
-        }
-        
+        })
     }
     
     //MARK: GoogleSigninDelegate
@@ -98,16 +101,13 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         if error != nil {
             print(error)
         }else{
-            URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Google, token: user.authentication.accessToken, withCompletionBlock: { (error, authData) -> Void in
-                if error != nil {
-                    print(error)
-                }else{
-                    let user: URUser = URUserLoginManager.getGoogleUserData(authData!)
-                    if self.delegate != nil {
-                        self.delegate?.userHasLoggedInGoogle(user)
-                    }
+            
+            URFireBaseManager.authUserWithGoogle(token: user.authentication.accessToken, completion: { (user) in
+                if self.delegate != nil {
+                    self.delegate?.userHasLoggedInGoogle(user!)
                 }
             })
+    
         }
     }
     
@@ -123,6 +123,8 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(FAuthenticationError.userDoesNotExist,false)
                 case .invalidEmail:
                     completion(FAuthenticationError.invalidEmail,false)
+                default:
+                    break
                 }
             }else if let user = user {
                 URLoginViewController.updateUserDataInRapidPro(user)
@@ -165,7 +167,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     }
     
     class func resetPassword(_ email:String,completion:@escaping (Bool) -> Void) {
-        URFireBaseManager.sharedLoginInstance().resetPassword(forUser: email, withCompletionBlock: { error in
+        URFireBaseManager.sharedInstance().resetPassword(forUser: email, withCompletionBlock: { error in
             if error != nil {
                 completion(false)
             } else {
@@ -254,6 +256,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         return user
     }
     
+    
     class func getTwitterUserData(_ authData:FAuthData) -> URUser{
         let user = URUser()
         
@@ -266,6 +269,21 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         return user
     }
     
+    class func getTwitterUserDataWithDictionary(_ dictionary:NSDictionary) -> URUser{
+        let user = URUser()
+        
+        if let key = dictionary["uid"] as? String {
+            user.key = key
+        }
+        
+        user.nickname = dictionary["username"] as? String
+        user.email = dictionary["email"] as? String
+        user.picture = dictionary["profileImageURL"] as? String
+        user.type = URType.Twitter
+        
+        return user
+    }
+    
     class func getGoogleUserData(_ authData:FAuthData) -> URUser{
         let user = URUser()
         
@@ -273,6 +291,20 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         user.nickname = (authData.providerData["displayName"] as? String)?.replacingOccurrences(of: " ", with: "", options: [], range: nil)
         user.email = authData.providerData["email"] as? String
         user.picture = authData.providerData["profileImageURL"] as? String
+        user.type = URType.Google
+        
+        return user
+    }
+    
+    class func getGoogleUserDataWithDictionary(_ dictionary:NSDictionary) -> URUser{
+        let user = URUser()
+        
+        if let key = dictionary["uid"] as? String {
+            user.key = key
+        }
+        user.nickname = (dictionary["displayName"] as! String).replacingOccurrences(of: " ", with: "", options: [], range: nil)
+        user.email = dictionary["email"] as? String
+        user.picture = dictionary["profileImageURL"] as? String
         user.type = URType.Google
         
         return user

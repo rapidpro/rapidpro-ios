@@ -73,6 +73,30 @@ struct URConstant {
             return ""
         }
         
+        static func AUTH_GOOGLE() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_GOOGLE"] != nil {
+                    return dictionary["AUTH_GOOGLE"] as! String
+                }else{
+                    print("AUTH_GOOGLE doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_TWITTER() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_TWITTER"] != nil {
+                    return dictionary["AUTH_TWITTER"] as! String
+                }else{
+                    print("AUTH_TWITTER doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
         static func AUTH_REGISTER() -> String {
             
             if let dictionary = keyDictionary {

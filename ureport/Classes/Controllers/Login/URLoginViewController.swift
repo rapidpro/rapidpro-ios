@@ -86,30 +86,18 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     func userHasLoggedInGoogle(_ user: URUser) {
         MBProgressHUD.hide(for: self.view, animated: true)
-        if user.key.isEmpty {
+        if user.key == nil {
+            self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
         }else{
-            
-            URUserManager.getByKey(user.key, completion: { (userById,exists) -> Void in
-                if exists {
-                    
-                    URLoginViewController.updateUserDataInRapidPro(userById!)
-                    
-                    URUserLoginManager.setUserAndCountryProgram(userById!)
-                }else {
-                    self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
-                }
-            })
+            URLoginViewController.updateUserDataInRapidPro(user)
+            URUserLoginManager.setUserAndCountryProgram(user)
         }
     }
     
     //MARK: Class Methods
     
     func checkIfIsSyriaUser() {
-        URIPCheckManager.getCountryCodeByIP { (countryCode) in
-            if let countryCode = countryCode , countryCode == URIPCheckManager.syriaCountryCode {
-                ISAlertMessages.displaySimpleMessage("syria_vpn_required".localized, fromController: self)
-            }
-        }
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in }
     }
     
     class func updateUserDataInRapidPro(_ user:URUser) {
@@ -149,7 +137,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
             MBProgressHUD.showAdded(to: self.view, animated: true)
             URUserLoginManager.loginWithTwitter { (user) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
-                if user == nil || user!.key.isEmpty {
+                if user == nil {
                     
                     let alert = UIAlertController(title: nil, message: "twitter_error_message".localized, preferredStyle: .alert)
                     alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
@@ -157,19 +145,11 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                     }))
                     
                     self.present(alert, animated: true, completion: nil)
-                }else{
-                    MBProgressHUD.showAdded(to: self.view, animated: true)
-                    URUserManager.getByKey(user!.key, completion: { (userById,exists) -> Void in
-                        MBProgressHUD.hide(for: self.view, animated: true)
-                        if exists {
-                            
-                            URLoginViewController.updateUserDataInRapidPro(userById!)
-                            URUserLoginManager.setUserAndCountryProgram(userById!)
-                            
-                        }else {
-                            self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!, updateMode:false),animated:true)
-                        }
-                    })
+                }else if user!.key == nil {
+                    self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!, updateMode:false),animated:true)
+                }else {
+                    URLoginViewController.updateUserDataInRapidPro(user!)
+                    URUserLoginManager.setUserAndCountryProgram(user!)
                 }
             }
         }

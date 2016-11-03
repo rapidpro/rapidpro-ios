@@ -55,7 +55,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: true)
-        dump(URCountryProgramManager.activeCountryProgram())
+
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         let tracker = GAI.sharedInstance().defaultTracker

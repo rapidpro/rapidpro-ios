@@ -164,19 +164,29 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                 user = buildUserFields(user)
                 user.type = URType.UReport
                 
-                URFireBaseManager.createUser(email: user.email!, password: self.txtPassword.text!, completion: { (user, error) in
+                URFireBaseManager.createUser(email: user.email!, password: self.txtPassword.text!, completion: { (newUser, error) in
                     MBProgressHUD.hide(for: self.view, animated: true)
-                    if let user = user {
-                        self.saveUser(user)
+                    if let newUser = newUser {
                         
-                        URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-                            MBProgressHUD.hide(for: self.view, animated: true)
-                            if success {
+                        user.key = newUser.key
+                        
+                        self.saveUser(user)                        
+                        
+                        URFireBaseManager.authUserWithPassword(email: user.email!, password: self.txtPassword.text!, completion: { (user, error) in
+                            if let _ = user {
                                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                             }
                         })
+                        
                     }else if let error = error {
-                        //TODO
+                        switch error {
+                        case .emailTaken:
+                            ISAlertMessages.displaySimpleMessage("error_email_already_exists".localized, fromController: self)
+                            break
+                        default:
+                            ISAlertMessages.displaySimpleMessage("error_no_internet".localized, fromController: self)
+                            break
+                        }
                     }
                 })
                 /*
