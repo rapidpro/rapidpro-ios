@@ -8,6 +8,12 @@
 
 import UIKit
 import Firebase
+import Alamofire
+
+enum URFireBaseManagerAuthError {
+    case invalidEmail
+    case invalidUser
+}
 
 class URFireBaseManager: NSObject {
     
@@ -42,8 +48,58 @@ class URFireBaseManager: NSObject {
     }
     
     static func sharedLoginInstance() -> Firebase {
-        //return Firebase(url: "https://ureport-proxy.ilhasoft.mobi")
-        return Reference!
+        let reference = Firebase(url: "https://ureport-proxy.ilhasoft.mobi/v2/u-report/auth")
+        return reference!
+        //return Reference!
+    }
+    
+    static func authUserWithPassword(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_LOGIN(), email,password)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user, nil)
+                        }
+                    })
+                    
+                }else if let error = response["error"] as? NSDictionary {
+                    let errorCode = error["code"] as! String
+                    switch errorCode {
+                        case "INVALID_EMAIL":
+                            completion(nil, .invalidEmail)
+                        break
+                        case "INVALID_USER":
+                            completion(nil, .invalidUser)
+                        break
+                        default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+        print(String(format: URConstant.Auth.AUTH_FACEBOOK(), token))
+        Alamofire.request(String(format: URConstant.Auth.AUTH_FACEBOOK(), token)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user)
+                        }else {
+                            completion(nil)
+                        }
+                    })
+                    
+                }
+            }else{
+                print(response)
+            }
+        }
     }
     
 }

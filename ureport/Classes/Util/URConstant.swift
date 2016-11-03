@@ -47,6 +47,33 @@ struct URConstant {
         static let ContributionPoints = 1
     }
     
+    struct Auth {
+        
+        static func AUTH_LOGIN() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_LOGIN"] != nil {
+                    return dictionary["AUTH_LOGIN"] as! String
+                }else{
+                    print("AUTH_LOGIN doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_FACEBOOK() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_FACEBOOK"] != nil {
+                    return dictionary["AUTH_FACEBOOK"] as! String
+                }else{
+                    print("AUTH_FACEBOOK doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+    }
+    
     struct SocialNetwork {
         
         static func TWITTER_APP_ID() -> String {

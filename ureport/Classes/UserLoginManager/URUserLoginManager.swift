@@ -50,12 +50,19 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(nil)
                 } else {
                     if FBSDKAccessToken.current() != nil {
-                        URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Facebook, token: FBSDKAccessToken.current().tokenString, withCompletionBlock: { (error, authData) -> Void in
+                        /*URFireBaseManager.sharedLoginInstance().auth(withOAuthProvider: URType.Facebook, token: FBSDKAccessToken.current().tokenString, withCompletionBlock: { (error, authData) -> Void in
                             if error != nil {
                                 print(error)
                             }else{
                                 let user: URUser = URUserLoginManager.getFacebookUserData(authData!)
                                 completion(user)
+                            }
+                        })*/
+                        URFireBaseManager.authUserWithFacebook(token: FBSDKAccessToken.current().tokenString, completion: { (user) in
+                            if let user = user {
+                                completion(user)
+                            }else {
+                                completion(nil)
                             }
                         })
                     }
@@ -120,6 +127,22 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     //MARK: auth Methods
     
     class func login(_ email:String,password:String,completion:@escaping (FAuthenticationError?,Bool) -> Void) {
+        
+        URFireBaseManager.authUserWithPassword(email: email, password: password) { (user,error) in
+            if let error = error {
+                switch (error) {
+                case .invalidUser:
+                    completion(FAuthenticationError.userDoesNotExist,false)
+                case .invalidEmail:
+                    completion(FAuthenticationError.invalidEmail,false)
+                }
+            }else if let user = user {
+                URLoginViewController.updateUserDataInRapidPro(user)
+                URUserLoginManager.setUserAndCountryProgram(user)
+                completion(nil,true)
+            }
+        }
+            /*
         URFireBaseManager.sharedLoginInstance().authUser(email, password: password,
                                                     withCompletionBlock: { error, authData in
                                                         if error != nil {
@@ -150,7 +173,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                                                                 }
                                                             })
                                                         }
-        })
+        })*/
     }
     
     class func resetPassword(_ email:String,completion:@escaping (Bool) -> Void) {
@@ -216,6 +239,19 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     
     //MARK: GetUserData Methods
     class func getFacebookUserData(_ authData:FAuthData) -> URUser{
+        let user = URUser()
+        
+        user.key = authData.uid
+        user.nickname = (authData.providerData["displayName"] as? String)?.replacingOccurrences(of: " ", with: "", options: [], range: nil)
+        user.email = authData.providerData["email"] as? String
+        user.picture = authData.providerData["profileImageURL"] as? String
+        user.gender = ((authData.providerData["cachedUserProfile"]! as AnyObject).object(forKey: "gender") as! String) == "male" ? URGender.Male : URGender.Female
+        user.type = URType.Facebook
+        
+        return user
+    }
+    
+    class func getFacebookUserData(_ dictionary:NSDictionary) -> URUser{
         let user = URUser()
         
         user.key = authData.uid
