@@ -132,7 +132,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     @IBAction func btTwitterTapped(_ sender: AnyObject) {
-        
+        /*
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
             MBProgressHUD.showAdded(to: self.view, animated: true)
             URUserLoginManager.loginWithTwitter { (user) -> Void in
@@ -153,6 +153,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 }
             }
         }
+         */
     }
     
     @IBAction func btLoginTapped(_ sender: AnyObject) {
@@ -166,11 +167,17 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
             MBProgressHUD.showAdded(to: self.view, animated: true)
             URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
-                if user!.key == nil {
-                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!,updateMode:false),animated:true)
+                
+                guard let user = user else {
+                    ISAlertMessages.displaySimpleMessage("unknown_error".localized, fromController: self)
+                    return
+                }
+                
+                if user.key == nil {
+                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
                 }else{
-                    URLoginViewController.updateUserDataInRapidPro(user!)
-                    URUserLoginManager.setUserAndCountryProgram(user!)
+                    URLoginViewController.updateUserDataInRapidPro(user)
+                    URUserLoginManager.setUserAndCountryProgram(user)
                 }
                 
             }

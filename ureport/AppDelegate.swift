@@ -106,6 +106,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                     print(error.localizedDescription)
                 }else {
                     print("success: \(success)")
+                    application.registerForRemoteNotifications()
                 }
                 
             })
@@ -261,6 +262,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
+        
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in}
+        
         GCMService.sharedInstance().connect(handler: {
             (error) -> Void in
             if error != nil {
@@ -310,6 +314,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if (url.scheme?.hasPrefix("fb"))! {
+            
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         }
         else {

@@ -56,6 +56,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: true)
 
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in}
+        
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         let tracker = GAI.sharedInstance().defaultTracker

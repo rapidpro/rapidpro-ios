@@ -71,15 +71,24 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: {success, error in
             if let twitterAccount = accountStore.accounts(with: accountType).first as? ACAccount {
                 
-                accountStore.renewCredentials(for: twitterAccount) { (renewResult, error) in
-                    var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
-                    let details = (properties["properties"] as! NSDictionary)
-                    print("user_id  =  \(details["user_id"] as! String)")
-                    
-                    URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, completion: { (user) in
-                        completion(user)
-                    })   
-                }
+                var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
+                let details = (properties["properties"] as! NSDictionary)
+                print("user_id  =  \(details["user_id"] as! String)")
+                
+                let request = SLRequest(
+                    forServiceType: SLServiceTypeTwitter,
+                    requestMethod: .GET,
+                    url: NSURL(string: "https://api.twitter.com/1.1/account/verify_credentials.json") as URL!,
+                    parameters: ["include_entities": true])
+                request?.account = twitterAccount
+                
+                var headerFields = request!.preparedURLRequest().allHTTPHeaderFields!
+                
+                print(headerFields)
+
+                URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:headerFields.removeValue(forKey: "oauth_token")!, authTokenSecret: "", completion: { (user) in
+                    completion(user)
+                })
  
             } else {
                 completion(nil)

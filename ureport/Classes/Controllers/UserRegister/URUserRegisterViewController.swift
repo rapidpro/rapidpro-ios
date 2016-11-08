@@ -156,7 +156,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             
             if (self.userInput != nil) {
                 user = self.userInput!
-                user.key = user.socialUid
+                if user.key == nil {
+                    user.key = user.socialUid
+                }
                 self.saveUser(buildUserFields(user))
                 
             }else {

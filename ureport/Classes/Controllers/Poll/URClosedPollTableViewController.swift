@@ -62,6 +62,8 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in}
+        
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Poll Results List")
         
