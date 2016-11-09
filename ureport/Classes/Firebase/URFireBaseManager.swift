@@ -143,8 +143,9 @@ class URFireBaseManager: NSObject {
     }
     
     static func authUserWithTwitter(userId:String,authToken:String,authTokenSecret:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
-        print(String(format: URConstant.Auth.AUTH_TWITTER(), userId, authToken, authTokenSecret))
-        Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), userId, authToken, authTokenSecret)).responseJSON { (response:DataResponse<Any>) in
+        print(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId))
+        
+        Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId)).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in

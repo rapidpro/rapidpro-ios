@@ -44,7 +44,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         
         login.logIn(withReadPermissions: ["email","user_birthday"], from: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
-                print(error)
+                print(error!)
                 completion(nil)
             }
             else {
@@ -75,20 +75,19 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                 let details = (properties["properties"] as! NSDictionary)
                 print("user_id  =  \(details["user_id"] as! String)")
                 
-                let request = SLRequest(
-                    forServiceType: SLServiceTypeTwitter,
-                    requestMethod: .GET,
-                    url: NSURL(string: "https://api.twitter.com/1.1/account/verify_credentials.json") as URL!,
-                    parameters: ["include_entities": true])
-                request?.account = twitterAccount
+                URTwitterAuthHelper.getAccessTokenKeyAndTokenSecret(twitterAccount, completion: { (tokenKey, tokenSecret) in
                 
-                var headerFields = request!.preparedURLRequest().allHTTPHeaderFields!
-                
-                print(headerFields)
-
-                URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:headerFields.removeValue(forKey: "oauth_token")!, authTokenSecret: "", completion: { (user) in
-                    completion(user)
+                    guard let _ = tokenKey else {
+                        completion(nil)
+                        return
+                    }
+                    
+                    URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:tokenKey!, authTokenSecret: tokenSecret!, completion: { (user) in
+                        completion(user)
+                    })
+                    
                 })
+                
  
             } else {
                 completion(nil)

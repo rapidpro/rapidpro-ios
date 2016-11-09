@@ -124,6 +124,18 @@ struct URConstant {
             return ""
         }
         
+        static func TWITTER_CONSUMER_SECRET() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["TWITTER_CONSUMER_SECRET"] != nil {
+                    return dictionary["TWITTER_CONSUMER_SECRET"] as! String
+                }else{
+                    print("TWITTER_CONSUMER_SECRET doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
         static func FACEBOOK_APP_ID() -> String {
             
             if let dictionary = keyDictionary {

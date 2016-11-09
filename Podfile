@@ -23,6 +23,7 @@ pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPa
 pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'
 pod 'QRCodeReader.swift', '7.2.0'
 pod 'SRKControls', :git => 'https://github.com/Ilhasoft/SRKControls'
+pod 'STTwitter'
 
 #pod 'AlamofireObjectMapper'
 #pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'

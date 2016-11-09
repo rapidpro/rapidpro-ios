@@ -132,7 +132,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     @IBAction func btTwitterTapped(_ sender: AnyObject) {
-        /*
+        
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
             MBProgressHUD.showAdded(to: self.view, animated: true)
             URUserLoginManager.loginWithTwitter { (user) -> Void in
@@ -153,7 +153,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 }
             }
         }
-         */
+ 
     }
     
     @IBAction func btLoginTapped(_ sender: AnyObject) {

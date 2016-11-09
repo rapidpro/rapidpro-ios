@@ -17,3 +17,4 @@
 #import <NYTPhotoViewer/NYTPhoto.h>
 #import <NYTPhotoViewer/NYTPhotosViewController.h>
 #import <AWSS3/AWSS3TransferManager.h>
+#import <STTwitter/STTwitter.h>

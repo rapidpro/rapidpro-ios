@@ -89,6 +89,7 @@ PODS:
   - SRKControls (4.0.1):
     - SRKControls/Controls (= 4.0.1)
   - SRKControls/Controls (4.0.1)
+  - STTwitter (0.2.5)
   - SwiftAddressBook (0.6.2)
   - TPKeyboardAvoiding (1.2.8)
   - youtube-ios-player-helper (0.1.6)
@@ -110,6 +111,7 @@ DEPENDENCIES:
   - QRCodeReader.swift (= 7.2.0)
   - SDWebImage
   - SRKControls (from `https://github.com/Ilhasoft/SRKControls`)
+  - STTwitter
   - SwiftAddressBook (from `https://github.com/SocialbitGmbH/SwiftAddressBook`, branch `chunkyguy-swift3`)
   - TPKeyboardAvoiding
   - youtube-ios-player-helper (= 0.1.6)
@@ -176,10 +178,11 @@ SPEC CHECKSUMS:
   QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
+  STTwitter: 5c157e8dcb4f0e4cf5b4374393021b7d7b7fd497
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: a1f779629a767b1c8de4c64208b334674fbe759f
+PODFILE CHECKSUM: 2c3542984545bf5d64b7b4577ee57c003cf6bfd0
 
 COCOAPODS: 1.1.0.rc.2
