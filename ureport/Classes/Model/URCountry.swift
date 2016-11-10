@@ -46,8 +46,8 @@ class URCountry: NSObject {
             languageCode = keys.count > 0 ? keys.first as! String : languageCode
         }
         
-        let id = Locale.identifier(fromComponents: [Locale.current.currencyCode!: languageCode])
-        return (Locale(identifier: Locale.preferredLanguages[0]) as NSLocale).displayName(forKey: NSLocale.Key(rawValue: Locale.current.currencyCode!), value: id)
+        let id = Locale.identifier(fromComponents: [NSLocale.Key.languageCode.rawValue: languageCode])
+        return (Locale(identifier: Locale.preferredLanguages[0]) as NSLocale).displayName(forKey: NSLocale.Key.identifier, value: id)
     }
     
     class func getCountries(_ type:URCountryCodeType) -> [URCountry] {

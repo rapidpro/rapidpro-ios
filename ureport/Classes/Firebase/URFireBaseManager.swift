@@ -18,23 +18,23 @@ enum URFireBaseManagerAuthError {
 
 class URFireBaseManager: NSObject {
     
-//    static let Properties = "Key"
-    static let Properties = "Key-debug"
-//    static let Path = "https://u-report.firebaseio.com/"
-    static let Path = "https://u-report-dev.firebaseio.com/"
+    static let Properties = "Key"
+//    static let Properties = "Key-debug"
+    static let Path = "https://u-report.firebaseio.com/"
+//    static let Path = "https://u-report-dev.firebaseio.com/"
 //    static let Path = "https://u-report-beta.firebaseio.com"
     
     static let GCM_DEBUG_MODE = true
     
 //    Production
-//    static let region = AWSRegionType.euWest1
+    static let region = AWSRegionType.euWest1
 //    Debug
-    static let region = AWSRegionType.usEast1
+//    static let region = AWSRegionType.usEast1
 
 //    Production
-//        static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+        static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
 //    Debug
-    static let credentialsProvider:AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
+//    static let credentialsProvider:AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
     
     static let Reference = Firebase(url: Path)
     
