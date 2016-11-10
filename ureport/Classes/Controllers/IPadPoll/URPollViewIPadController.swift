@@ -96,7 +96,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
         content.didMove(toParentViewController: self)
     }
     
-    func setupUI() {        
+    func setupUI() {
         displayLeftContentController(closedPollTableViewController)
         displayRightContentController(pollResultViewController)
         pollResultViewController.tableView.alwaysBounceVertical = false

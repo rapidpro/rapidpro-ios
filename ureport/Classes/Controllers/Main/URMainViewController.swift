@@ -154,7 +154,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         let chatButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(createChatRoom))
         
         let btnInvite: UIButton = UIButton(type: UIButtonType.custom)
-        btnInvite.frame = CGRect(x: 0, y: 0, width: 30, height: 20)
+        btnInvite.frame = CGRect(x: 0, y: 5, width: 30, height: 20)
         btnInvite.setBackgroundImage(UIImage(named:"icon_invite_friend"), for: UIControlState())
         btnInvite.addTarget(self, action: #selector(invitePeople), for: UIControlEvents.touchUpInside)
         let container2: UIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -193,7 +193,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     
     func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
-        if viewController is URClosedPollTableViewController || viewController is URMyChatsViewController {
+        if viewController is URClosedPollTableViewController || viewController is URMyChatsViewController || viewController is URMyChatsIPadViewController {
             if let _ = URUser.activeUser() {
                 return true
             }else {

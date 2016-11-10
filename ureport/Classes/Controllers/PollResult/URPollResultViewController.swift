@@ -35,6 +35,9 @@ class URPollResultViewController: UIViewController, URPollManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "poll_results".localized
+        if URConstant.isIpad {
+            self.btComment.isHidden = true
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

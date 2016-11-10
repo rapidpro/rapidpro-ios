@@ -53,6 +53,8 @@ class URChatRoomManager: NSObject {
         let friendChatRooms = friend.chatRooms
         let myChatRooms = URUser.activeUser()?.chatRooms
         
+        //return
+        
         if friendChatRooms != nil && myChatRooms != nil {
             
             for friendChatRoomKey in friendChatRooms!.allKeys {

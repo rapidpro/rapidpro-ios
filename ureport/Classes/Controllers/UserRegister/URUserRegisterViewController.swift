@@ -428,6 +428,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         self.pickerDistricts = UIPickerView()
         
         self.pickerDate!.datePickerMode = UIDatePickerMode.date
+        self.pickerDate!.maximumDate = Calendar.current.date(byAdding: .year, value: -10, to: Date())
         self.pickerDate!.addTarget(self, action: #selector(dateChanged), for: UIControlEvents.valueChanged)
         self.txtBirthDay.inputView = self.pickerDate!
         

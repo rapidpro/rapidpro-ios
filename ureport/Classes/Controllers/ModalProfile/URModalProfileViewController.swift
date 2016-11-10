@@ -128,8 +128,14 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
     
     @IBAction func btInviteToChatTapped(_ sender: AnyObject) {
         self.close()
-        MBProgressHUD.showAdded(to: self.view, animated: true)
-        chatRoomManager.createIndividualChatRoomIfPossible(user,isIndividualChatRoom: true)
+        
+        URUserManager.getByKey(user!.key, completion: { (friend:URUser?, exists:Bool) -> Void in
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            if exists == true && friend != nil {
+                self.chatRoomManager.createIndividualChatRoomIfPossible(friend!,isIndividualChatRoom: true)
+            }
+        })
+        
     }
     
     @IBAction func btCloseTapped(_ sender: AnyObject) {

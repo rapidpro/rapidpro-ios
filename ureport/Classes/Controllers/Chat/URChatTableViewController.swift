@@ -114,6 +114,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         if let delegate = delegate {
             delegate.openChatRoom(chatRoom, chatMembers: members, title: title)
         }else{
+            self.navigationController?.popViewController(animated: true)
             self.navigationController?.pushViewController(URMessagesViewController(chatRoom: chatRoom, chatMembers: members, title: title), animated: true)
         }
     }

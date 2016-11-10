@@ -191,6 +191,11 @@ class URCurrentPollView: UITableViewCell, URChoiceResponseDelegate, UROpenFieldR
         actionSheetLanguage = UIAlertController(title: nil, message: "switch_language".localized, preferredStyle: .actionSheet)
         
         for language in languages.sorted() {
+            
+            if language == "base" {
+                continue
+            }
+            
             let languageDescription = URCountry.getLanguageDescription(language, type: URCountryCodeType.iso3) ?? language
             
             let switchLanguageAction = UIAlertAction(title: languageDescription, style: .default, handler: {

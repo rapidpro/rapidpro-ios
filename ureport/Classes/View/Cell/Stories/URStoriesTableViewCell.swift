@@ -99,6 +99,12 @@ class URStoriesTableViewCell: UITableViewCell {
         reportContentAlertController.addAction(inappropriateContentAction)
         reportContentAlertController.addAction(cancelAction)
         
+        if URConstant.isIpad {
+            reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.popover
+            reportContentAlertController.popoverPresentationController!.sourceView = self.btReportContent
+            reportContentAlertController.popoverPresentationController!.sourceRect = self.btReportContent.bounds
+        }
+        
         URNavigationManager.navigation.present(reportContentAlertController, animated: true, completion: nil)
         
     }
