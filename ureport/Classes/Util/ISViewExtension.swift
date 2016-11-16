@@ -11,19 +11,19 @@ import UIKit
 extension UIView {
    
     func toImage() -> UIImage {
-        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.mainScreen().scale)
+        UIGraphicsBeginImageContextWithOptions(bounds.size, false, UIScreen.main.scale)
         
-        drawViewHierarchyInRect(self.bounds, afterScreenUpdates: true)
+        drawHierarchy(in: self.bounds, afterScreenUpdates: true)
         
         // old style: layer.renderInContext(UIGraphicsGetCurrentContext())
         
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
     
-    func findTextFieldEmptyInView(input: UIView) -> UITextField? {
-        if input.isKindOfClass(UITextField) {
+    func findTextFieldEmptyInView(_ input: UIView) -> UITextField? {
+        if input.isKind(of: UITextField.self) {
             let textField:UITextField! = input as! UITextField
             if textField.text!.isEmpty {
                 

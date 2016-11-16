@@ -170,7 +170,7 @@
 "label_data_confirmation" = "Confirmação de dados";
 "load_message_save_user" = "Salvando usuário...";
 "error_no_internet" = "Por favor, conecte-se à internet antes de continuar";
-"invite_contact_text" = "Converse comigo no aplicativo U-Report! Faça o download ele aqui http://goo.gl/Xxyodt";
+"invite_contact_text" = "Converse comigo no aplicativo U-Report! Faça o download ele aqui https://itunes.apple.com/us/app/u-report/id1067406438?mt=8";
 "ureporters_selected_maximum" = "O número máximo de usuários selecionados são %d";
 "chat_private_media_permission_title" = "Mídia habilitada";
 "search_title" = "Buscar";
@@ -235,7 +235,7 @@
 "title_share_story" = "Compartilhe história usando:";
 "title_share_news" = "Compartilhe notícia usando:";
 "title_share_subject" = "História compartilhada usando U-Report";
-"story_share_info" = "Download U-Report: http://goo.gl/Xxyodt";
+"story_share_info" = "Download U-Report: https://itunes.apple.com/us/app/u-report/id1067406438?mt=8";
 "label_country_moderator" = "Moderadores de País";
 "message_success_user_update" = "Usuário foi atualizado com sucesso!";
 "ureport_message_title" = "Mensagem do U-Report";

@@ -13,38 +13,38 @@ extension PrivateResource {
 
     var proposeMessage: String {
         switch self {
-        case .Photos:
+        case .photos:
             return "no_hardware_permission_photo".localized
-        case .Camera:
+        case .camera:
             return "no_hardware_permission_camera".localized
-        case .Microphone:
+        case .microphone:
             return "no_hardware_permission_microphone".localized
-        case .Contacts:
+        case .contacts:
             return "no_hardware_permission_contact".localized
-        case .Reminders:
+        case .reminders:
             return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
-        case .Calendar:
+        case .calendar:
             return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
-        case .Location:
+        case .location:
             return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
         }
     }
     
     var noPermissionMessage: String {
         switch self {
-        case .Photos:
+        case .photos:
             return "no_hardware_permission_photo".localized
-        case .Camera:
+        case .camera:
             return "no_hardware_permission_camera".localized
-        case .Microphone:
+        case .microphone:
             return "no_hardware_permission_microphone".localized
-        case .Contacts:
+        case .contacts:
             return "no_hardware_permission_contact".localized
-        case .Reminders:
+        case .reminders:
             return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
-        case .Calendar:
+        case .calendar:
             return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
-        case .Location:
+        case .location:
             return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
         }
     }
@@ -52,26 +52,26 @@ extension PrivateResource {
 
 extension UIViewController {
 
-    private func showDialogWithTitle(title: String?, message: String, cancelTitle: String, confirmTitle: String, withCancelAction cancelAction : (() -> Void)?, confirmAction: (() -> Void)?) {
+    fileprivate func showDialogWithTitle(_ title: String?, message: String, cancelTitle: String, confirmTitle: String, withCancelAction cancelAction : (() -> Void)?, confirmAction: (() -> Void)?) {
 
-        dispatch_async(dispatch_get_main_queue()) {
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .Alert)
+        DispatchQueue.main.async {
+            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
 
-            let cancelAction: UIAlertAction = UIAlertAction(title: cancelTitle, style: .Cancel) { _ in
+            let cancelAction: UIAlertAction = UIAlertAction(title: cancelTitle, style: .cancel) { _ in
                 cancelAction?()
             }
             alertController.addAction(cancelAction)
 
-            let confirmAction: UIAlertAction = UIAlertAction(title: confirmTitle, style: .Default) { _ in
+            let confirmAction: UIAlertAction = UIAlertAction(title: confirmTitle, style: .default) { _ in
                 confirmAction?()
             }
             alertController.addAction(confirmAction)
 
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
 
-    func showProposeMessageIfNeedFor(resource: PrivateResource, andTryPropose propose: Propose) {
+    func showProposeMessageIfNeedFor(_ resource: PrivateResource, andTryPropose propose: @escaping Propose) {
 
         if resource.isNotDeterminedAuthorization {
             showDialogWithTitle(nil, message: resource.proposeMessage, cancelTitle: "cancel_dialog_button".localized, confirmTitle: "Ok", withCancelAction: nil, confirmAction: {
@@ -83,10 +83,10 @@ extension UIViewController {
         }
     }
 
-    func alertNoPermissionToAccess(resource: PrivateResource) {
+    func alertNoPermissionToAccess(_ resource: PrivateResource) {
 
         showDialogWithTitle(nil, message: resource.noPermissionMessage, cancelTitle: "cancel_dialog_button".localized, confirmTitle: "Ok", withCancelAction: nil, confirmAction: {
-            UIApplication.sharedApplication().openURL(NSURL(string: UIApplicationOpenSettingsURLString)!)
+            UIApplication.shared.openURL(URL(string: UIApplicationOpenSettingsURLString)!)
         })
     }
 }

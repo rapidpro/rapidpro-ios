@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URContributionTableViewCellDelegate {
-    func contributionTableViewCellDeleteButtonTapped(cell:URContributionTableViewCell)
+    func contributionTableViewCellDeleteButtonTapped(_ cell:URContributionTableViewCell)
 }
 
 class URContributionTableViewCell: UITableViewCell {
@@ -29,15 +29,15 @@ class URContributionTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
         // Configure the view for the selected state
     }
     
     //MARK: Button Events
     
-    @IBAction func btDeleteTapped(sender:AnyObject) {
+    @IBAction func btDeleteTapped(_ sender:AnyObject) {
         
         if let delegate = self.delegate {
             delegate.contributionTableViewCellDeleteButtonTapped(self)
@@ -47,29 +47,29 @@ class URContributionTableViewCell: UITableViewCell {
     
     //MARK: Class Methods
     
-    func setupCellWith(contribution:URContribution, indexPath:NSIndexPath) {
+    func setupCellWith(_ contribution:URContribution, indexPath:IndexPath) {
         self.contribution = contribution
         
-        self.lbContributionText.text = "\(contribution.content)\n"
+        self.lbContributionText.text = "\(contribution.content!)\n"
         self.lbUserName.text = contribution.author.nickname
-        self.lbDate.text = "\(NSDate().offsetFrom(NSDate(timeIntervalSince1970: NSNumber(double: contribution.createdDate.doubleValue/1000) as NSTimeInterval))) ago"
+        self.lbDate.text = "\(Date().offsetFrom(Date(timeIntervalSince1970: NSNumber(value: contribution.createdDate.doubleValue/1000 as Double) as TimeInterval))) ago"
         
         if let picture = contribution.author.picture {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imgUser.contentMode = UIViewContentMode.ScaleAspectFill
-            self.imgUser.sd_setImageWithURL(NSURL(string: picture))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
+            self.imgUser.sd_setImage(with: URL(string: picture))
         }else{
-            self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-            self.imgUser.contentMode = UIViewContentMode.Center
+            self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+            self.imgUser.contentMode = UIViewContentMode.center
             self.imgUser.image = UIImage(named: "ic_person")
         }                
         
         if let user = URUser.activeUser() {
             
             if user.masterModerator != nil || user.moderator != nil {
-                self.btDelete.hidden = false
+                self.btDelete.isHidden = false
             }else {
-                self.btDelete.hidden = true
+                self.btDelete.isHidden = true
             }
             
         }

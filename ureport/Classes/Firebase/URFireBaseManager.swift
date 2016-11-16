@@ -8,6 +8,13 @@
 
 import UIKit
 import Firebase
+import Alamofire
+
+enum URFireBaseManagerAuthError {
+    case invalidEmail
+    case invalidUser
+    case emailTaken
+}
 
 class URFireBaseManager: NSObject {
     
@@ -20,9 +27,9 @@ class URFireBaseManager: NSObject {
     static let GCM_DEBUG_MODE = false
     
 //    Production
-    static let region = AWSRegionType.EUWest1
+    static let region = AWSRegionType.euWest1
 //    Debug
-//    static let region = AWSRegionType.USEast1
+//    static let region = AWSRegionType.usEast1
 
 //    Production
         static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
@@ -33,16 +40,129 @@ class URFireBaseManager: NSObject {
     
     static func sharedInstance() -> Firebase {
         
-        if let countryCode = URIPCheckManager.countryCode where countryCode == URIPCheckManager.syriaCountryCode {
+        if let countryCode = URIPCheckManager.countryCode , countryCode == URIPCheckManager.syriaCountryCode {
             return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
-            
+             
         }else {
-            return Reference
+            return Reference!
         }
     }
     
-    static func sharedLoginInstance() -> Firebase {
-        return Reference
+    static func authUserWithPassword(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_LOGIN(), email,password)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user, nil)
+                        }
+                    })
+                    
+                }else if let error = response["error"] as? NSDictionary {
+                    let errorCode = error["code"] as! String
+                    switch errorCode {
+                        case "INVALID_EMAIL":
+                            completion(nil, .invalidEmail)
+                        break
+                        case "INVALID_USER":
+                            completion(nil, .invalidUser)
+                        break
+                        default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    static func createUser(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_REGISTER(), email,password)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    let user = URUser()
+                    
+                    user.key = uid
+                    
+                    completion(user, nil)
+                    
+                }else if let error = response["error"] as? NSDictionary {
+                    let errorCode = error["code"] as! String
+                    switch errorCode {
+                    case "EMAIL_TAKEN":
+                        completion(nil, .emailTaken)
+                        break
+                    default:
+                        break
+                    }
+                }
+            }
+        }
+    }
+    
+    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_FACEBOOK(), token)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user)
+                        }else {
+                            let user = URUserLoginManager.getFacebookUserDataWithDictionary(response["facebook"] as! NSDictionary)
+                            user.socialUid = uid
+                            completion(user)
+                        }
+                    })
+                    
+                }
+            }else{
+                print(response)
+            }
+        }
+    }
+    
+    static func authUserWithGoogle(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+        Alamofire.request(String(format: URConstant.Auth.AUTH_GOOGLE(), token)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user)
+                        }else {
+                            let user = URUserLoginManager.getGoogleUserDataWithDictionary(response["google"] as! NSDictionary)
+                            user.socialUid = uid
+                            completion(user)
+                        }
+                    })
+                    
+                }
+            }else{
+                print(response)
+            }
+        }
+    }
+    
+    static func authUserWithTwitter(userId:String,authToken:String,authTokenSecret:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+        print(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId))
+        
+        Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId)).responseJSON { (response:DataResponse<Any>) in
+            if let response = response.result.value as? NSDictionary {
+                if let uid = response["uid"] as? String {
+                    URUserManager.getByKey(uid, completion: { (user, success) in
+                        if let user = user {
+                            completion(user)
+                        }else {
+                            let user = URUserLoginManager.getTwitterUserDataWithDictionary(response["twitter"] as! NSDictionary)
+                            user.socialUid = uid
+                            completion(user)
+                        }
+                    })
+                    
+                }
+            }else{
+                print(response)
+            }
+        }
     }
     
 }

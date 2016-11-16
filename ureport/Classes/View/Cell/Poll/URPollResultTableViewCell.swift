@@ -8,6 +8,26 @@
 
 import UIKit
 import DBSphereTagCloud
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class URPollResultTableViewCell: UITableViewCell {
 
@@ -28,7 +48,7 @@ class URPollResultTableViewCell: UITableViewCell {
         super.awakeFromNib()
         self.viewSeparator.layer.cornerRadius = 5
         self.containerView.layer.cornerRadius = 5
-        self.containerView.layer.borderColor = UIColor.lightGrayColor().CGColor
+        self.containerView.layer.borderColor = UIColor.lightGray.cgColor
         self.containerView.layer.borderWidth = 0.5
         
         let panGesture = UIPanGestureRecognizer(target: sphereView, action: #selector(DBSphereView.handlePanGesture(_:)))
@@ -36,16 +56,16 @@ class URPollResultTableViewCell: UITableViewCell {
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
-        self.layoutMargins = UIEdgeInsetsZero
-        self.separatorInset = UIEdgeInsetsZero
+        super.selectionStyle = UITableViewCellSelectionStyle.none
+        self.layoutMargins = UIEdgeInsets.zero
+        self.separatorInset = UIEdgeInsets.zero
     }
     
     //MARK: Class Methods
     
-    func setupCellWithData(pollResult:URPollResult) {
+    func setupCellWithData(_ pollResult:URPollResult) {
         self.pollResult = pollResult
         self.lbDate.text = pollResult.date
         self.lbDetails.text = String(format: "polls_responded_info".localized, arguments: [pollResult.responded,pollResult.polled])
@@ -53,29 +73,33 @@ class URPollResultTableViewCell: UITableViewCell {
                 
         if pollResult.type == "Keywords" {
             var indexKeywords = 1
-            self.sphereView.hidden = false
-            self.choiceView.hidden = true
+            self.sphereView.isHidden = false
+            self.choiceView.isHidden = true
             var tagList = [UIButton]()
             var results = pollResult.results
             
-            if results.count > 10 {
-                results.removeRange(Range(start: 10, end: pollResult.results.count))
+            var resultsFiltered:[NSDictionary] = []
+            
+            if results?.count > 10 {
+                for i in 0...10 {
+                    resultsFiltered.append(results![i])
+                }
             }
             
             for view in sphereView.subviews {
                 view.removeFromSuperview()
             }
             
-            for dictionary in results {
+            for dictionary in resultsFiltered {
                 let tagSize = CGFloat(150 - (indexKeywords * 5))
-                let tag = dictionary.objectForKey("keyword") as! String
+                let tag = dictionary.object(forKey: "keyword") as! String
                 let btnTag = UIButton(frame: CGRect(x: 0, y: 0, width: tagSize, height: tagSize))
                 btnTag.layer.cornerRadius = tagSize/2
                 btnTag.backgroundColor = URConstant.Color.PRIMARY
                 let buttonTitle = "\(indexKeywords). \(tag)"
-                btnTag.setTitle(buttonTitle, forState: UIControlState.Normal)
+                btnTag.setTitle(buttonTitle, for: UIControlState())
                 btnTag.titleLabel!.numberOfLines = 2
-                btnTag.titleLabel!.lineBreakMode = NSLineBreakMode.ByClipping
+                btnTag.titleLabel!.lineBreakMode = NSLineBreakMode.byClipping
                 tagList.append(btnTag)
                 sphereView.addSubview(btnTag)
                 indexKeywords += 1
@@ -85,8 +109,8 @@ class URPollResultTableViewCell: UITableViewCell {
             
         } else if pollResult.type == "Choices"{
             var indexChoices = 0
-            self.sphereView.hidden = true
-            self.choiceView.hidden = false
+            self.sphereView.isHidden = true
+            self.choiceView.isHidden = false
             
             let array = self.choiceView.subviews as [UIView];
 
@@ -95,19 +119,19 @@ class URPollResultTableViewCell: UITableViewCell {
             }
             
                 for dictionary in pollResult.results {
-                    let choiceResultView = NSBundle.mainBundle().loadNibNamed("URChoiceResultView", owner: 0, options: nil)[0] as? URChoiceResultView
+                    let choiceResultView = Bundle.main.loadNibNamed("URChoiceResultView", owner: 0, options: nil)?[0] as? URChoiceResultView
 
-                    choiceResultView!.frame = CGRectMake(0, CGFloat(indexChoices * viewChoiceHeight), UIScreen.mainScreen().bounds.width, CGFloat(viewChoiceHeight))
+                    choiceResultView!.frame = CGRect(x: 0, y: CGFloat(indexChoices * viewChoiceHeight), width: UIScreen.main.bounds.width, height: CGFloat(viewChoiceHeight))
                     
-                    let percent = dictionary.objectForKey("value") as? String
-                    let title = dictionary.objectForKey("title") as? String
+                    let percent = dictionary.object(forKey: "value") as? String
+                    let title = dictionary.object(forKey: "title") as? String
                     var color:UIColor!
                     
                     choiceResultView!.lbChoice.text = title
                     choiceResultView!.lbPercent.text = "\(percent!)%"
                     
                     if indexChoices >= URPollManager.getColors().count {
-                        color = UIColor.yellowColor()
+                        color = UIColor.yellow
                     }else {
                         color = UIColor(rgba:URPollManager.getColors()[indexChoices])
                     }

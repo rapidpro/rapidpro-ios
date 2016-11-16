@@ -10,9 +10,9 @@ import ObjectMapper
 
 class URRapidPRODateTransform: DateTransform {
     
-    override func transformFromJSON(value: AnyObject?) -> NSDate? {
+    override func transformFromJSON(_ value: Any?) -> Date? {
         if let timeInt = value as? Double {
-            return NSDate(timeIntervalSince1970: NSTimeInterval(timeInt))
+            return Date(timeIntervalSince1970: TimeInterval(timeInt))
         } else if let timeString = value as? String {
             return URDateUtil.dateParserRapidPro(timeString)
         }

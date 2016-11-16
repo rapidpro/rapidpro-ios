@@ -30,8 +30,8 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     var startTimeRecording:CFAbsoluteTime!
     var startTimePlayBack:CFAbsoluteTime!
-    var timerRecording:NSTimer!
-    var timerPlayback:NSTimer!
+    var timerRecording:Timer!
+    var timerPlayback:Timer!
     
     var recordedSeconds = 0
     let maximumTime = 50
@@ -46,7 +46,7 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     //MARK: AudioRecorderManagerDelegate
     
-    func audioRecorderDidFinish(path: String) {
+    func audioRecorderDidFinish(_ path: String) {
         
         audioMedia = URAudioMedia()
         audioMedia!.path = path
@@ -56,15 +56,15 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     //MARK: Class Methods
     
-    func playAudioImmediately(audioURL:String,showPreloading:Bool) {
+    func playAudioImmediately(_ audioURL:String,showPreloading:Bool) {
         if showPreloading == true {
-            MBProgressHUD.showHUDAddedTo(self, animated: true)
+            MBProgressHUD.showAdded(to: self, animated: true)
         }
-        URDownloader.download(NSURL(string: audioURL)!) { (data) -> Void in
+        URDownloader.download(URL(string: audioURL)!) { (data) -> Void in
             if let data = data {
-                dispatch_async(dispatch_get_main_queue(), {
-                    MBProgressHUD.hideHUDForView(self, animated: true)
-                    self.setupAudioPlayerWithURL(NSURL(string: URFileUtil.writeFile(data))!)
+                DispatchQueue.main.async(execute: {
+                    MBProgressHUD.hide(for: self, animated: true)
+                    self.setupAudioPlayerWithURL(URL(string: URFileUtil.writeFile(data))!)
                 })
             }else{
                 print("playAudioImmediately error")
@@ -76,8 +76,8 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
         
         recordedSeconds = recordedSeconds == 0 ? Int(player.duration) : recordedSeconds
         
-        self.btPlay.enabled = true
-        self.btPlay.setImage(UIImage(named: "play_audio"), forState: UIControlState.Normal)
+        self.btPlay.isEnabled = true
+        self.btPlay.setImage(UIImage(named: "play_audio"), for: UIControlState())
         
         slider.value = 0
         slider.minimumValue = 0
@@ -91,16 +91,16 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
         let imageSize = CGSize(width: 23, height: 23)
         
         UIGraphicsBeginImageContextWithOptions(imageSize, false, 0.0)
-        thumbImage!.drawInRect(CGRectMake(0, 0, imageSize.width, imageSize.height))
+        thumbImage!.draw(in: CGRect(x: 0, y: 0, width: imageSize.width, height: imageSize.height))
         thumbImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        slider.setThumbImage(thumbImage, forState: UIControlState.Normal)
+        slider.setThumbImage(thumbImage, for: UIControlState())
     }
     
-    func setupAudioPlayerWithURL(url:NSURL) {
+    func setupAudioPlayerWithURL(_ url:URL) {
         do {
-            player = try AVAudioPlayer(contentsOfURL: url)
+            player = try AVAudioPlayer(contentsOf: url)
             
             player.delegate = self
             player.prepareToPlay()
@@ -113,22 +113,22 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
             }
             
         }catch let error as NSError {
-            self.btPlay.enabled = false
+            self.btPlay.isEnabled = false
             print("Error on load Audio, try again.")
             print(error.localizedDescription)
         }
     }
     
     func play() {
-        if !player.playing {
-            NSNotificationCenter.defaultCenter().postNotificationName("didStartPlaying", object: self)
-            self.btPlay.setImage(UIImage(named: "ic_pause_blue"), forState: UIControlState.Normal)
+        if !player.isPlaying {
+            NotificationCenter.default.post(name: Notification.Name(rawValue: "didStartPlaying"), object: self)
+            self.btPlay.setImage(UIImage(named: "ic_pause_blue"), for: UIControlState())
             startTimePlayBack = CFAbsoluteTimeGetCurrent()
             player.play()
-            timerPlayback = NSTimer.scheduledTimerWithTimeInterval(1.0, target: self, selector: #selector(timerCheckOnPlayBlack), userInfo: nil, repeats: true)
+            timerPlayback = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(timerCheckOnPlayBlack), userInfo: nil, repeats: true)
             timerPlayback.fire()
         }else{
-            self.btPlay.setImage(UIImage(named: "play_audio"), forState: UIControlState.Normal)
+            self.btPlay.setImage(UIImage(named: "play_audio"), for: UIControlState())
             timerPlayback.invalidate()
             player.pause()
         }
@@ -136,9 +136,9 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     func setupSlider() {
         if isRecording == false {
-            slider.setThumbImage(UIImage(), forState: UIControlState.Normal)
+            slider.setThumbImage(UIImage(), for: UIControlState())
             slider.value = 0
-            slider.continuous = true
+            slider.isContinuous = true
             slider.minimumValue = 0
             slider.maximumValue = Float(maximumTime)
         }
@@ -147,7 +147,7 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     func timerCheckOnRecording() {
         recordedSeconds = Int(CFAbsoluteTimeGetCurrent() - startTimeRecording)
         
-        UIView.animateWithDuration(1.5, animations: {
+        UIView.animate(withDuration: 1.5, animations: {
             self.slider.setValue(Float(self.recordedSeconds), animated:true)
         })
         
@@ -172,11 +172,11 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     func timerCheckOnPlayBlack() {
         
-        dispatch_async(dispatch_get_main_queue(),{
+        DispatchQueue.main.async(execute: {
             if self.player.currentTime == 0 {
                 self.slider.value = 0
             }else{
-                UIView.animateWithDuration(1.5, animations: {
+                UIView.animate(withDuration: 1.5, animations: {
                     self.slider.setValue(Float(self.player.currentTime), animated:true)
                 })
             }
@@ -192,14 +192,14 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
         
     }
     
-    func getDurationString(seconds:Int) -> String{
+    func getDurationString(_ seconds:Int) -> String{
         var seconds = seconds
         let minutes = (seconds % 3600) / 60
         seconds = seconds % 60
         return "\(URAudioView.getTwoDigitString(minutes)):\(URAudioView.getTwoDigitString(seconds))"
     }
     
-    class func getTwoDigitString(number:Int) -> String{
+    class func getTwoDigitString(_ number:Int) -> String{
         if number == 0 {
             return "00"
         }
@@ -214,15 +214,15 @@ class URAudioView: UIView, AVAudioPlayerDelegate, URAudioRecorderManagerDelegate
     
     //MARK: UI Events
     
-    @IBAction func sliderMoved(sender: UISlider) {
+    @IBAction func sliderMoved(_ sender: UISlider) {
         
         self.lbCurrentTime.text = getDurationString(Int(self.player.currentTime))
         
-        if player.playing == true {
+        if player.isPlaying == true {
             player.pause()
         }
         
-        player.currentTime = NSTimeInterval(round(slider.value))
+        player.currentTime = TimeInterval(round(slider.value))
         play()
     }
     

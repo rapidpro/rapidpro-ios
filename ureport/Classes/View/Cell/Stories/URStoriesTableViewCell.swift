@@ -9,8 +9,8 @@
 import UIKit
 
 @objc protocol URStoriesTableViewCellDelegate {
-    func openProfile(user:URUser)
-    optional func removeCell(cell:URStoriesTableViewCell)
+    func openProfile(_ user:URUser)
+    @objc optional func removeCell(_ cell:URStoriesTableViewCell)
 }
 
 class URStoriesTableViewCell: UITableViewCell {
@@ -54,14 +54,14 @@ class URStoriesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
-        self.btReportContent.hidden = !(URSettings.getSettings().reviewMode!).boolValue
+        self.btReportContent.isHidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         btDisapprove.layer.cornerRadius = 5
         btPublish.layer.cornerRadius = 5
-        btContribute.setTitle("story_item_contribute_to_story".localized, forState: UIControlState.Normal)
-        btDisapprove.setTitle("button_title_disapprove".localized, forState: UIControlState.Normal)
-        btPublish.setTitle("button_title_publish".localized, forState: UIControlState.Normal)
+        btContribute.setTitle("story_item_contribute_to_story".localized, for: UIControlState())
+        btDisapprove.setTitle("button_title_disapprove".localized, for: UIControlState())
+        btPublish.setTitle("button_title_publish".localized, for: UIControlState())
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(openModalProfile))
         tapGesture.numberOfTouchesRequired = 1
@@ -73,26 +73,26 @@ class URStoriesTableViewCell: UITableViewCell {
         self.imgUser.image = nil
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
         // Configure the view for the selected state
     }
     
     //MARK: Button Events
     
-    @IBAction func btReportContentTapped(sender: AnyObject) {
+    @IBAction func btReportContentTapped(_ sender: AnyObject) {
         
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .ActionSheet)
+        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) { action -> Void in
             
         }
         
-        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .Default) { action -> Void in
+        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .default) { action -> Void in
         }
 
-        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .Default) { action -> Void in
+        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .default) { action -> Void in
         }
         
         reportContentAlertController.addAction(spamAction)
@@ -100,16 +100,16 @@ class URStoriesTableViewCell: UITableViewCell {
         reportContentAlertController.addAction(cancelAction)
         
         if URConstant.isIpad {
-            reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.Popover
+            reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.popover
             reportContentAlertController.popoverPresentationController!.sourceView = self.btReportContent
             reportContentAlertController.popoverPresentationController!.sourceRect = self.btReportContent.bounds
         }
         
-        URNavigationManager.navigation.presentViewController(reportContentAlertController, animated: true, completion: nil)
+        URNavigationManager.navigation.present(reportContentAlertController, animated: true, completion: nil)
         
     }
     
-    @IBAction func btContributeTapped(sender: AnyObject) {
+    @IBAction func btContributeTapped(_ sender: AnyObject) {
         if let _ = URUser.activeUser() {
             self.viewController!.navigationController?.pushViewController(URStoryContributionViewController(story: self.story), animated: true)
         }else {
@@ -117,7 +117,7 @@ class URStoriesTableViewCell: UITableViewCell {
         }
     }
     
-    @IBAction func btDisapprovedTapped(sender: AnyObject) {
+    @IBAction func btDisapprovedTapped(_ sender: AnyObject) {
         URStoryManager.setStoryAsDisapproved(self.story) { (finished) -> Void in
             if let delegate = self.delegate {
                 delegate.removeCell!(self)
@@ -125,7 +125,7 @@ class URStoriesTableViewCell: UITableViewCell {
         }
     }
     
-    @IBAction func btPublishTapped(sender: AnyObject) {
+    @IBAction func btPublishTapped(_ sender: AnyObject) {
         URStoryManager.setStoryAsPublished(self.story) { (finished) -> Void in
             if let delegate = self.delegate {
                 delegate.removeCell!(self)
@@ -145,10 +145,10 @@ class URStoriesTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCellWith(story:URStory,moderateUserMode:Bool){
+    func setupCellWith(_ story:URStory,moderateUserMode:Bool){
         self.story = story
         
-        if story.cover != nil && story.cover.url != nil {
+        if story.cover != nil && story.cover?.url != nil {
             self.imgStoryHeight.constant = imgViewHistoryHeight
             self.lbContentTop.constant = 5
         }else {
@@ -167,22 +167,22 @@ class URStoriesTableViewCell: UITableViewCell {
 //            self.viewMarkerHeight.constant = 0
 //        }
         
-        if story.medias != nil && !story.medias.isEmpty {
-            self.lbAttachments.text = String(format: "attachments".localized, arguments: [story.medias.count])
-            self.attachmentView.hidden = false
+        if story.medias != nil && !(story.medias?.isEmpty)! {
+            self.lbAttachments.text = String(format: "attachments".localized, arguments: [(story.medias?.count)!])
+            self.attachmentView.isHidden = false
             self.viewAttachmentHeight.constant = viewAttachmentDefaultHeight
         }else {
-            self.attachmentView.hidden = true
+            self.attachmentView.isHidden = true
             self.viewAttachmentHeight.constant = 0
         }
         
-        URStoryManager.getStoryLikes(story.key, completion: { (likeCount) -> Void in
-            story.like = likeCount
+        URStoryManager.getStoryLikes(story.key!, completion: { (likeCount) -> Void in
+            story.like = likeCount as NSNumber!
             self.lbLikes.text = String(format: "likes".localized, arguments: [likeCount])
         })
         
-        URContributionManager.getTotalContributions(story.key, completion: { (total:Int) -> Void in
-            story.contributions = total
+        URContributionManager.getTotalContributions(story.key!, completion: { (total:Int) -> Void in
+            story.contributions = total as NSNumber!
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
         })
         
@@ -193,24 +193,24 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.lbAuthorName.text = "\(user!.nickname!)"
                 
                 if user!.picture != nil {
-                    self.imgUser.contentMode = UIViewContentMode.ScaleAspectFill
-                    self.imgUser.sd_setImageWithURL(NSURL(string: user!.picture))
+                    self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
+                    self.imgUser.sd_setImage(with: URL(string: user!.picture!))
                 }else{
-                    self.imgUser.contentMode = UIViewContentMode.Center
+                    self.imgUser.contentMode = UIViewContentMode.center
                     self.imgUser.image = UIImage(named: "ic_person")
                     
-                    self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+                    self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
                 }
             }
         })
         
-        if story.cover != nil && story.cover.url != nil {
+        if story.cover != nil && story.cover?.url != nil {
             
-            if story.cover.type == URConstant.Media.VIDEOPHONE {
-                self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.thumbnail))
+            if story.cover?.type == URConstant.Media.VIDEOPHONE {
+                self.imgStory.sd_setImage(with: URL(string: (story.cover?.thumbnail)!))
                 
-            } else if story.cover.type == URConstant.Media.PICTURE || story.cover.type == URConstant.Media.VIDEO {
-                self.imgStory.sd_setImageWithURL(NSURL(string: story.cover.url))
+            } else if story.cover?.type == URConstant.Media.PICTURE || story.cover?.type == URConstant.Media.VIDEO {
+                self.imgStory.sd_setImage(with: URL(string: (story.cover?.url)!))
             }
         }
         
@@ -219,7 +219,7 @@ class URStoriesTableViewCell: UITableViewCell {
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content
         
-        self.moderationView.hidden = !moderateUserMode
+        self.moderationView.isHidden = !moderateUserMode
         
     }
 }

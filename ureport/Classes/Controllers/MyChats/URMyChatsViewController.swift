@@ -8,9 +8,29 @@
 
 import UIKit
 import MBProgressHUD
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 protocol URMyChatsViewControllerDelegate {
-    func openChatRoomWith(chatRoom:URChatRoom,chatMembers:[URUser],title:String)
+    func openChatRoomWith(_ chatRoom:URChatRoom,chatMembers:[URUser],title:String)
 }
 
 class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, URGroupsTableViewCellDelegate {
@@ -39,38 +59,38 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:"newChatReceived", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:NSNotification.Name(rawValue: "newChatReceived"), object: nil)
         
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "My Chats")
+        tracker?.set(kGAIScreenName, value: "My Chats")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
 
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         openChatRoomWithKey(chatRoomKeyToOpen)
         chatRoomKeyToOpen = nil
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)    
     }
     
     //MARK: URGroupsTableViewCellDelegate
     
-    func btJoinDidTap(cell: URGroupsTableViewCell, groupChatRoom: URGroupChatRoom, members: [URUser],title:String) {
+    func btJoinDidTap(_ cell: URGroupsTableViewCell, groupChatRoom: URGroupChatRoom, members: [URUser],title:String) {
         if let delegate = self.delegate {
             delegate.openChatRoomWith(groupChatRoom, chatMembers: members, title: title)
         }
@@ -78,36 +98,36 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listChatRoom.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
         
-        cell.setupCellWithChatRoom(self.listChatRoom[indexPath.row])        
+        cell.setupCellWithChatRoom(self.listChatRoom[(indexPath as NSIndexPath).row])        
         
-        self.tableView.deselectRowAtIndexPath(indexPath, animated: true)
+        self.tableView.deselectRow(at: indexPath, animated: true)
         
         if currentChatRoom != nil {
             if cell.chatRoom?.key == currentChatRoom?.key {
-                self.tableView.selectRowAtIndexPath(indexPath, animated: true, scrollPosition: UITableViewScrollPosition.Middle)
+                self.tableView.selectRow(at: indexPath, animated: true, scrollPosition: UITableViewScrollPosition.middle)
             }
         }
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
         
         self.currentChatRoom = cell.chatRoom
         
-        cell.viewUnreadMessages.hidden = true
+        cell.viewUnreadMessages.isHidden = true
         
         if let chatRoom = cell.chatRoom {
             URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)
@@ -118,7 +138,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
 
     //MARK: Button Events
     
-    @IBAction func btSeeTapped(sender: AnyObject) {
+    @IBAction func btSeeTapped(_ sender: AnyObject) {
         let groupsTableViewController = URGroupsTableViewController()
         groupsTableViewController.myChatsViewController = self
         self.navigationController?.pushViewController(groupsTableViewController, animated: true)
@@ -131,7 +151,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         loadData()
     }
     
-    func openChatRoomWithKey(chatRoomKey: String?) {
+    func openChatRoomWithKey(_ chatRoomKey: String?) {
         if chatRoomKey != nil {
             URChatRoomManager.getByKey(chatRoomKey!, completion: { (chatRoom) -> Void in
                 self.openChatRoom(chatRoom!)
@@ -139,16 +159,16 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         }
     }
     
-    func openChatRoom(chatRoom: URChatRoom) {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (users) -> Void in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+    func openChatRoom(_ chatRoom: URChatRoom) {
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key!, completionWithUsers: { (users) -> Void in
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             var chatName = ""
             
             if chatRoom is URIndividualChatRoom {
                 let friend = self.getFriend(users)
-                chatName = friend!.nickname
+                chatName = friend!.nickname!
             }else if chatRoom is URGroupChatRoom {
                 chatName = (chatRoom as! URGroupChatRoom).title
             }
@@ -160,7 +180,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         })
     }
     
-    func getFriend(users:[URUser]) -> URUser? {
+    func getFriend(_ users:[URUser]) -> URUser? {
         for user in users {
             if user.key != URUser.activeUser()?.key {
                 return user
@@ -174,52 +194,52 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         
         self.lbTitle.text = "label_chat_groups".localized
         self.lbDescriptionOpenGroups.text = "description_open_groups".localized
-        self.btSee.setTitle("title_see".localized, forState: UIControlState.Normal)
+        self.btSee.setTitle("title_see".localized, for: UIControlState())
         
         btSee.layer.cornerRadius = 4
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.separatorColor = UIColor.clear
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
-        self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
     
-    func markCellThatChatIsOpen(chatRoom:URChatRoom) {        
+    func markCellThatChatIsOpen(_ chatRoom:URChatRoom) {        
         self.currentChatRoom = chatRoom
         loadData()
     }
     
     func loadData() {
         if listChatRoom.count == 0 && URUser.activeUser()?.chatRooms?.count > 0{
-            MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            MBProgressHUD.showAdded(to: self.view, animated: true)
         }
         
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             if chatRooms != nil {
                 
-                self.lbMessage.hidden = true
+                self.lbMessage.isHidden = true
                 
-                let index = self.listChatRoom.indexOf{($0.key == chatRooms!.last!.key)}
+                let index = self.listChatRoom.index{($0.key == chatRooms!.last!.key)}
                 
                 if index == nil {
-                    self.listChatRoom.insert(chatRooms!.last!, atIndex: self.listChatRoom.count)
+                    self.listChatRoom.insert(chatRooms!.last!, at: self.listChatRoom.count)
                     
-                    self.tableView.insertRowsAtIndexPaths([NSIndexPath(forRow: self.listChatRoom.count - 1, inSection: 0)], withRowAnimation: UITableViewRowAnimation.Fade)
+                    self.tableView.insertRows(at: [IndexPath(row: self.listChatRoom.count - 1, section: 0)], with: UITableViewRowAnimation.fade)
                     
                 }else {
-                    self.listChatRoom.removeAtIndex(index!)
-                    self.listChatRoom.insert(chatRooms!.last!, atIndex: index!)
-                    self.tableView.reloadRowsAtIndexPaths([NSIndexPath(forRow: index!, inSection: 0)], withRowAnimation: UITableViewRowAnimation.None)
+                    self.listChatRoom.remove(at: index!)
+                    self.listChatRoom.insert(chatRooms!.last!, at: index!)
+                    self.tableView.reloadRows(at: [IndexPath(row: index!, section: 0)], with: UITableViewRowAnimation.none)
                 }
                 
                 if self.listChatRoom.count == chatRooms?.count {
-                    self.listChatRoom = self.listChatRoom.sort{($0.0.lastMessage?.date.integerValue > $0.1.lastMessage?.date.integerValue)}
+                    self.listChatRoom = self.listChatRoom.sorted{($0.0.lastMessage?.date.intValue > $0.1.lastMessage?.date.intValue)}
                     self.tableView.reloadData()
                 }
                 
             }else{
-                self.lbMessage.hidden = false
+                self.lbMessage.isHidden = false
             }
         })
     }

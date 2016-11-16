@@ -55,7 +55,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
         closedPollTableViewController.onBoundsChanged()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
@@ -63,40 +63,40 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     
     //MARK: URClosedPollTableViewControllerDelegate
     
-    func tableViewCellDidTap(cell: URClosedPollTableViewCell, isIPad:Bool) {
-        pollResultViewController.btComment.hidden = false
+    func tableViewCellDidTap(_ cell: URClosedPollTableViewCell, isIPad:Bool) {
+        pollResultViewController.btComment.isHidden = false
         self.poll = cell.poll
         pollContributionModal.poll = poll
-        self.lbMessage.hidden = true
-        self.imgMessage.hidden = true
+        self.lbMessage.isHidden = true
+        self.imgMessage.isHidden = true
         pollResultViewController.reloadWithPoll(self.poll!)
     }
     
     //MARK: Button Events
     
-    @IBAction func btCommentTapped(sender: AnyObject) {
+    @IBAction func btCommentTapped(_ sender: AnyObject) {
         pollContributionModal.show(true, inViewController: self)
     }
     
     
     //MARK: Class Methods
     
-    func displayLeftContentController(content: UIViewController) {
+    func displayLeftContentController(_ content: UIViewController) {
         self.addChildViewController(content)
         content.view.frame = CGRect(x: 0, y: 0, width: contentLeftView.bounds.size.width, height: contentLeftView.bounds.size.height)
-        content.view.backgroundColor = UIColor.clearColor()
+        content.view.backgroundColor = UIColor.clear
         self.contentLeftView.addSubview(content.view)
-        content.didMoveToParentViewController(self)
+        content.didMove(toParentViewController: self)
     }
     
-    func displayRightContentController(content: UIViewController) {
+    func displayRightContentController(_ content: UIViewController) {
         self.addChildViewController(content)
         content.view.frame = CGRect(x: 0, y: 0, width: rightView.bounds.size.width, height: rightView.bounds.size.height - 50)
-        self.rightView.insertSubview(content.view, atIndex: 0)
-        content.didMoveToParentViewController(self)
+        self.rightView.insertSubview(content.view, at: 0)
+        content.didMove(toParentViewController: self)
     }
     
-    func setupUI() {        
+    func setupUI() {
         displayLeftContentController(closedPollTableViewController)
         displayRightContentController(pollResultViewController)
         pollResultViewController.tableView.alwaysBounceVertical = false

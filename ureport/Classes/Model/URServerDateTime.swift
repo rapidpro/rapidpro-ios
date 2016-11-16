@@ -14,7 +14,7 @@ class URServerDateTime: Mappable {
     var status:String!
     var timestamp:Int!
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.status    <- map["status"]

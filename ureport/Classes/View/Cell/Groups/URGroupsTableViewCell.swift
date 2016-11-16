@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 protocol URGroupsTableViewCellDelegate {
-    func btJoinDidTap(cell:URGroupsTableViewCell, groupChatRoom:URGroupChatRoom, members:[URUser], title:String)
+    func btJoinDidTap(_ cell:URGroupsTableViewCell, groupChatRoom:URGroupChatRoom, members:[URUser], title:String)
 }
 
 class URGroupsTableViewCell: UITableViewCell {
@@ -23,38 +23,38 @@ class URGroupsTableViewCell: UITableViewCell {
     
     var groupChatRoom:URGroupChatRoom!
     
-    var delegate:URGroupsTableViewCellDelegate!?
+    var delegate:URGroupsTableViewCellDelegate??
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.btJoin.layer.cornerRadius = 3
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     //MARK: Class Methods
     
-    func setupCellWithData(groupChatRoom:URGroupChatRoom) {
+    func setupCellWithData(_ groupChatRoom:URGroupChatRoom) {
         
         self.groupChatRoom = groupChatRoom
         self.lbTitle.text = groupChatRoom.title
         self.lbDescription.text = groupChatRoom.subject
         
         if groupChatRoom.userIsMember != nil && groupChatRoom.userIsMember == true{
-            self.btJoin.setTitle("open".localized, forState: UIControlState.Normal)
+            self.btJoin.setTitle("open".localized, for: UIControlState())
         }else {
-            self.btJoin.setTitle("chat_groups_join".localized, forState: UIControlState.Normal)
+            self.btJoin.setTitle("chat_groups_join".localized, for: UIControlState())
         }
         
         if let picture = groupChatRoom.picture {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imageViewGroup.contentMode = UIViewContentMode.ScaleAspectFill
-            self.imageViewGroup.sd_setImageWithURL(NSURL(string: picture.url))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.imageViewGroup.contentMode = UIViewContentMode.scaleAspectFill
+            self.imageViewGroup.sd_setImage(with: URL(string: picture.url))
         }else{
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
             self.imageViewGroup.image = UIImage(named: "default_group")
         }
         
@@ -62,28 +62,28 @@ class URGroupsTableViewCell: UITableViewCell {
     
     //MARK: Button Events
     
-    @IBAction func btJoinTapped(sender: AnyObject) {
+    @IBAction func btJoinTapped(_ sender: AnyObject) {
         let user = URUser.activeUser()!
         
-        MBProgressHUD.showHUDAddedTo(self.window!, animated: true)
-        URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key, completionWithUsers: { (users:[URUser]) -> Void in
-            MBProgressHUD.hideHUDForView(self.window!, animated: true)
+        MBProgressHUD.showAdded(to: self.window!, animated: true)
+        URChatMemberManager.getChatMembersByChatRoomWithCompletion(self.groupChatRoom.key!, completionWithUsers: { (users:[URUser]) -> Void in
+            MBProgressHUD.hide(for: self.window!, animated: true)
             
             URUserManager.updateChatroom(user, chatRoom: self.groupChatRoom)
             
             if self.groupChatRoom.userIsMember != nil && self.groupChatRoom.userIsMember == true {
                 if let delegate = self.delegate {
-                    delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text! )
+                    delegate?.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text! )
                 }
             }else {
-                let chatMember = URChatMember(key: self.groupChatRoom.key)
+                let chatMember = URChatMember(key: self.groupChatRoom.key!)
                 
                 URChatMemberManager.save(chatMember, user: user, completion: { (success:Bool) -> Void in
                     if success == true {
                         URGCMManager.registerUserInTopic(user, chatRoom: self.groupChatRoom)                        
                         
                         if let delegate = self.delegate {
-                            delegate.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text!)
+                            delegate?.btJoinDidTap(self, groupChatRoom: self.groupChatRoom, members: users, title: self.lbTitle.text!)
                         }
                         
                     }

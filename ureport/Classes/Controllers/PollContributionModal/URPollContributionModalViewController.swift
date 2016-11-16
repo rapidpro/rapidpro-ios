@@ -45,7 +45,7 @@ class URPollContributionModalViewController: ISModalViewController {
 
     //MARK: Class Methods
     
-    func sendContribution(textField:UITextField) {
+    func sendContribution(_ textField:UITextField) {
         if !textField.text!.isEmpty {
             
             if URUserManager.userHasPermissionToAccessTheFeature(false) {
@@ -56,7 +56,7 @@ class URPollContributionModalViewController: ISModalViewController {
                 let contribution = URContribution()
                 contribution.content = textField.text!
                 contribution.author = user
-                contribution.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+                contribution.createdDate = NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
                 
                 URContributionManager.savePollContribution(poll.key, contribution: contribution, completion: { (success) -> Void in
                     URUserManager.incrementUserContributions(user.key)
@@ -67,28 +67,28 @@ class URPollContributionModalViewController: ISModalViewController {
                 
             }else {
                 if URUserManager.userHasPermissionToAccessTheFeature(false) == false {
-                    let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .Alert)
-                    alertController.addAction(UIAlertAction(title: "Ok", style: .Default, handler: nil))
-                    self.presentViewController(alertController, animated: true, completion: {})
+                    let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .alert)
+                    alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self.present(alertController, animated: true, completion: {})
                 }
             }
             
         }
     }
     
-    func displayContentController(content: UIViewController) {
+    func displayContentController(_ content: UIViewController) {
         self.addChildViewController(content)
         content.view.frame = CGRect(x: 0, y: 0, width: contentView.bounds.size.width, height: contentView.bounds.size.height)
-        self.contentView.insertSubview(content.view, atIndex: 0)
-        content.didMoveToParentViewController(self)
+        self.contentView.insertSubview(content.view, at: 0)
+        content.didMove(toParentViewController: self)
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         sendContribution(textField)
         return true
     }
     
-    override func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    override func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let _ = URUser.activeUser() {
             return true
         }else {
@@ -99,11 +99,11 @@ class URPollContributionModalViewController: ISModalViewController {
     
     //MARK: Button Events
     
-    @IBAction func btSendTapped(sender: AnyObject) {
+    @IBAction func btSendTapped(_ sender: AnyObject) {
         sendContribution(self.txtContribute)
     }
     
-    @IBAction func btDismissTapped(sender: AnyObject) {
+    @IBAction func btDismissTapped(_ sender: AnyObject) {
         self.closeWithCompletion { (closed) in
             
         }

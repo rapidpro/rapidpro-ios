@@ -41,7 +41,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         return instance
     }
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: "ISMenuViewController", bundle: nil)
     }
 
@@ -55,45 +55,45 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         setupMenu()
         setupTableViewCell()
         setupGestureRecognizer()
-        self.txtSwitchCountryProgram.tintColor = UIColor.clearColor()
+        self.txtSwitchCountryProgram.tintColor = UIColor.clear
         self.txtSwitchCountryProgram.textColor = URConstant.Color.PRIMARY
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardHideNotification(_:)), name:   UIKeyboardWillHideNotification, object: nil);
-        self.appDelegate = (UIApplication.sharedApplication().delegate as! AppDelegate)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardHideNotification(_:)), name:   NSNotification.Name.UIKeyboardWillHide, object: nil);
+        self.appDelegate = (UIApplication.shared.delegate as! AppDelegate)
     }    
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.topView.backgroundColor = URCountryProgramManager.activeCountryProgram()?.themeColor!
         loadUserInfo()
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Menu")
+        tracker?.set(kGAIScreenName, value: "Menu")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
     }
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.menuList.count
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 55
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(ISMenuTableViewCell.self), forIndexPath: indexPath) as! ISMenuTableViewCell
-        let menu:ISMenu! = self.menuList[indexPath.row]
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(ISMenuTableViewCell.self), for: indexPath) as! ISMenuTableViewCell
+        let menu:ISMenu! = self.menuList[(indexPath as NSIndexPath).row]
 
         cell.setupCellWith(menu)
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! ISMenuTableViewCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! ISMenuTableViewCell
         let menu = cell.menu
         
         switch menu!.menuItem as URMenuItem {
@@ -113,16 +113,16 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
                 URNavigationManager.toggleMenu()
                 URNavigationManager.setFrontViewController(settingsTableViewController)
             }else{
-                settingsTableViewController.view.backgroundColor = UIColor.whiteColor()
+                settingsTableViewController.view.backgroundColor = UIColor.white
                 var popOverViewController = UIPopoverController(contentViewController: settingsTableViewController)
                 
                 popOverViewController = UIPopoverController(contentViewController: settingsTableViewController)
-                popOverViewController.popoverContentSize = CGSize(width: 320, height: 300)
+                popOverViewController.contentSize = CGSize(width: 320, height: 300)
                 
                 var frame = cell.frame
                 frame.origin.x = frame.origin.x - 50
                 
-                popOverViewController.presentPopoverFromRect(frame, inView: self.tableView, permittedArrowDirections: UIPopoverArrowDirection.Any, animated: true)
+                popOverViewController.present(from: frame, in: self.tableView, permittedArrowDirections: UIPopoverArrowDirection.any, animated: true)
             }
             break
         case .Moderation:
@@ -153,11 +153,11 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     //MARK: TextFieldDelegate
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         return false
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         if textField == self.txtSwitchCountryProgram {
             self.pickerCountryProgram!.selectRow(lastCountryProgramIndexSelected, inComponent: 0, animated: true)
         }
@@ -165,19 +165,19 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     //MARK: Picker DataSource and Delegate
     
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1
     }
     
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return countryPrograms.count
     }
     
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return countryPrograms[row].name
     }
     
-    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         self.lastCountryProgramIndexSelected = row
         countryProgramChanged = self.countryPrograms[row] 
         txtSwitchCountryProgram.text = countryProgramChanged.name!
@@ -186,7 +186,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     //MARK: Button Events
     
-    @IBAction func btLoginTapped(sender: AnyObject) {
+    @IBAction func btLoginTapped(_ sender: AnyObject) {
         URNavigationManager.setupNavigationControllerWithLoginViewController()
     }
     
@@ -200,19 +200,19 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     func openProfile() {
         if let _ = URUser.activeUser() {
-            URNavigationManager.setupNavigationControllerWithMainViewController(URProfileViewController(enterInTabType:.MyStories))
+            URNavigationManager.setupNavigationControllerWithMainViewController(URProfileViewController(enterInTabType:.myStories))
         }else {
             URLoginAlertController.show(self)
         }
     }
     
-    func keyboardHideNotification(notification: NSNotification) {
+    func keyboardHideNotification(_ notification: Notification) {
         if let countryProgram = countryProgramChanged {
             checkIfIsADifferentCountryProgram(countryProgram)
         }
     }
     
-    func checkIfIsADifferentCountryProgram(countryProgram:URCountryProgram) {
+    func checkIfIsADifferentCountryProgram(_ countryProgram:URCountryProgram) {
         if URCountryProgramManager.activeCountryProgram()?.code != countryProgram.code {
             URCountryProgramManager.setSwitchActiveCountryProgram(countryProgram)
             
@@ -224,10 +224,10 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     
     func setupUI() {
         
-        self.btLogin.setTitle("login_now".localized, forState: UIControlState.Normal)
+        self.btLogin.setTitle("login_now".localized, for: UIControlState())
         
         self.pickerCountryProgram = UIPickerView()
-        self.pickerCountryProgram!.backgroundColor = UIColor.whiteColor()
+        self.pickerCountryProgram!.backgroundColor = UIColor.white
         self.pickerCountryProgram!.dataSource = self
         self.pickerCountryProgram!.delegate = self
         self.pickerCountryProgram!.showsSelectionIndicator = true
@@ -236,7 +236,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         
         self.btLogin.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
-        self.roundedView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.roundedView.layer.borderColor = UIColor.white.cgColor
     }
     
     func loadUserInfo() {
@@ -262,41 +262,41 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             }
             
             if let picture = user.picture {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
-                self.imgProfile.sd_setImageWithURL(NSURL(string: picture))
-                self.bgImageProfile.contentMode = UIViewContentMode.ScaleAspectFill
-                self.bgImageProfile.sd_setImageWithURL(NSURL(string: picture))
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+                self.imgProfile.contentMode = UIViewContentMode.scaleAspectFill
+                self.imgProfile.sd_setImage(with: URL(string: picture))
+                self.bgImageProfile.contentMode = UIViewContentMode.scaleAspectFill
+                self.bgImageProfile.sd_setImage(with: URL(string: picture))
             }else{
                 setupUserImageAsDefault()
             }
             
-            self.lbStoriesAndPolls.hidden = false
-            self.lbPoints.hidden = false
-            self.lbNickName.hidden = false
-            self.btLogin.hidden = true
+            self.lbStoriesAndPolls.isHidden = false
+            self.lbPoints.isHidden = false
+            self.lbNickName.isHidden = false
+            self.btLogin.isHidden = true
         }else {
-            self.lbStoriesAndPolls.hidden = true
-            self.lbPoints.hidden = true
-            self.lbNickName.hidden = true
-            self.btLogin.hidden = false
+            self.lbStoriesAndPolls.isHidden = true
+            self.lbPoints.isHidden = true
+            self.lbNickName.isHidden = true
+            self.btLogin.isHidden = false
             
             setupUserImageAsDefault()
         }
         
         self.txtSwitchCountryProgram.text = (URCountryProgramManager.activeCountryProgram()!.name!)
         if !countryPrograms.isEmpty {
-            lastCountryProgramIndexSelected = self.countryPrograms.indexOf({$0.code == URCountryProgramManager.activeCountryProgram()?.code})!
+            lastCountryProgramIndexSelected = self.countryPrograms.index(where: {$0.code == URCountryProgramManager.activeCountryProgram()?.code})!
         }
     }
     
     func setupUserImageAsDefault() {
-        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        self.imgProfile.contentMode = UIViewContentMode.Center
+        self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        self.imgProfile.contentMode = UIViewContentMode.center
         self.imgProfile.image = UIImage(named: "ic_person")
     }
     
-    private func setupMenu() {
+    fileprivate func setupMenu() {
         
         var menuItem1,menuItem2,menuItem3,menuItem4,menuItem5:ISMenu?
         
@@ -333,8 +333,8 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         
     }
     
-    private func setupTableViewCell() {
-        self.tableView.registerNib(UINib(nibName: "ISMenuTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(ISMenuTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+    fileprivate func setupTableViewCell() {
+        self.tableView.register(UINib(nibName: "ISMenuTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(ISMenuTableViewCell.self))
+        self.tableView.separatorColor = UIColor.clear
     }
 }

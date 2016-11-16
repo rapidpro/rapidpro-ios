@@ -8,6 +8,17 @@
 
 import UIKit
 import MBProgressHUD
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
 
 class URModeratorTableViewController: UITableViewController, URChatTableViewCellDelegate {
 
@@ -16,17 +27,14 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     var listCurrentModerators:[String] = []
     var listUserAux:[URUser] = []
     
-    var isOptionSelectedUserAsModeratorActive:Bool!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        isOptionSelectedUserAsModeratorActive = false
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.separatorColor = UIColor.clearColor()
-        self.tableView.registerNib(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.separatorColor = UIColor.clear
+        self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)                
         loadData()
@@ -37,28 +45,28 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
         setupTableView()
     }
     
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
     }
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 65
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.listUser.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URChatTableViewCell.self), forIndexPath: indexPath) as! URChatTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
         
         cell.delegate = self
-        cell.setupCellWithUser(self.listUser[indexPath.row],createGroupOption: false, indexPath: indexPath, checkGroupOption: true)
+        cell.setupCellWithUser(self.listUser[(indexPath as NSIndexPath).row],createGroupOption: false, indexPath: indexPath, checkGroupOption: true)
         
         let filtered = self.listUserSelectedAsModerator.filter {
-            return $0 == self.listUser[indexPath.row].key
+            return $0 == self.listUser[(indexPath as NSIndexPath).row].key
         }
                 
         if !filtered.isEmpty {
@@ -70,26 +78,24 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
         return cell
     }
     
-    override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as! URChatTableViewCell
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
         self.userSelected(cell.user!)
     }
     
     //MARK: URChatTableViewCellDelegate
     
-    func userSelected(user: URUser) {
+    func userSelected(_ user: URUser) {
         
         let filtered = listUserSelectedAsModerator.filter {
-            return $0 as String == user.key
+            return $0 as String == user.key!
         }
         
         if !filtered.isEmpty {
             URUserManager.removeModerateUser(filtered[0])
-            listUserSelectedAsModerator.removeAtIndex(listUserSelectedAsModerator.indexOf(filtered[0])!)
+            listUserSelectedAsModerator.remove(at: listUserSelectedAsModerator.index(of: filtered[0])!)
         }else{
-            if isOptionSelectedUserAsModeratorActive == false {
-                URUserManager.setUserAsModerator(user.key)
-            }
+            URUserManager.setUserAsModerator(user.key)
             listUserSelectedAsModerator.append(user.key)
         }
         
@@ -99,12 +105,11 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     
     //MARK: Class Methods
     
-    func putSelectedUserAsModerator(user:URUser) {
-        isOptionSelectedUserAsModeratorActive = true
+    func putSelectedUserAsModerator(_ user:URUser) {
         self.userSelected(user)
     }
     
-    func setUserAsModerator(userKey:String) {
+    func setUserAsModerator(_ userKey:String) {
         URUserManager.setUserAsModerator(userKey)
     }
     
@@ -125,20 +130,24 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
     }
     
     func loadData() {
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
+        self.listUserSelectedAsModerator = []
         
         URUserManager.getAllUserByCountryProgram({ (users:[URUser]?) -> Void in
-            MBProgressHUD.hideHUDForView(self.view, animated: true)
+            MBProgressHUD.hide(for: self.view, animated: true)
             
             if users != nil && !users!.isEmpty {
-                self.listUser = users!.sort({$0.nickname < $1.nickname})
+                self.listUser = users!.sorted(by: {$0.nickname < $1.nickname})
                 
                 for i in 0...self.listUser.count-1 {
                     if self.listUser[i].key == URUser.activeUser()!.key {
-                        self.listUser.removeAtIndex(i)
+                        self.listUser.remove(at: i)
                         break
                     }
                 }
+                
+                self.tableView.reloadData()
                 
                 URUserManager.getAllModertorUsers { (usersKey) -> Void in
                     if let usersKey = usersKey {
@@ -148,23 +157,22 @@ class URModeratorTableViewController: UITableViewController, URChatTableViewCell
                         for userKey in usersKey {
                             let user = URUser()
                             user.key = userKey
-                            self.putSelectedUserAsModerator(user)
+                            self.listUserSelectedAsModerator.append(user.key)
                         }
                         
-                        self.isOptionSelectedUserAsModeratorActive = false
-                        
-                    }else {
-                        self.tableView.reloadData()
                     }
+                    
+                    self.tableView.reloadData()
+                    
                 }
                 
             }
         })
     }
 
-    private func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(64, 0.0, self.tabBarController != nil ? CGRectGetHeight(self.tabBarController!.tabBar.frame) : 0.0, 0.0);
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.separatorColor = UIColor.clearColor()
+    fileprivate func setupTableView() {
+        self.tableView.contentInset = UIEdgeInsetsMake(64, 0.0, self.tabBarController != nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.separatorColor = UIColor.clear
     }
 }

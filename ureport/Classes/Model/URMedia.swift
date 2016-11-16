@@ -10,11 +10,11 @@ import UIKit
 
 class URMedia: Serializable {
 
-    var id:String!
+    var id:String?
     var url:String!
     var type:String!
-    var thumbnail:String!
-    var isCover:Bool!
+    var thumbnail:String?
+    var isCover:Bool?
     var metadata:[String:AnyObject]?
     
 }

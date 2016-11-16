@@ -17,9 +17,9 @@ class URFlowMetadata: Mappable {
     var name:String?
     var revision:Int?
     var id:Int?
-    var savedOn:NSDate?
+    var savedOn:Date?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.uuid           <- map["uuid"]

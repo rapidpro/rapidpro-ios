@@ -18,13 +18,13 @@ class URResponseView: UIView {
         }
     }
     
-    func setFlowRule(flowDefinition:URFlowDefinition, flowRule:URFlowRule) {
+    func setFlowRule(_ flowDefinition:URFlowDefinition, flowRule:URFlowRule) {
         self.flowDefinition = flowDefinition
         self.flowRule = flowRule
     }
     
     func unselectResponse() {}
     
-    func selectLanguage(language:String?){}
+    func selectLanguage(_ language:String?){}
 
 }

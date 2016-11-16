@@ -10,7 +10,7 @@ import UIKit
 
 class URMediaUpload: NSObject {
 
-    class func uploadMedias(medias:[URMedia],completion:(medias:[URMedia]) -> Void) {
+    class func uploadMedias(_ medias:[URMedia],completion:@escaping (_ medias:[URMedia]) -> Void) {
         
         var mediaList:[URMedia] = []
         
@@ -27,7 +27,7 @@ class URMediaUpload: NSObject {
                 mediaList.append(media)
                 
                 if mediaList.count == medias.count {
-                    completion(medias: mediaList)
+                    completion(mediaList)
                 }
                 
             }else if let videoPhoneMedia = media as? URVideoPhoneMedia {
@@ -39,7 +39,7 @@ class URMediaUpload: NSObject {
                     mediaList.append(video!)
                     
                     if mediaList.count == medias.count {
-                        completion(medias: mediaList)
+                        completion(mediaList)
                     }
                     
                 })
@@ -53,7 +53,7 @@ class URMediaUpload: NSObject {
                     imageMedia.image = nil
                     
                     if mediaList.count == medias.count {
-                        completion(medias: mediaList)
+                        completion(mediaList)
                     }
                     
                 })
@@ -65,7 +65,7 @@ class URMediaUpload: NSObject {
                     mediaList.append(media!)
                     
                     if mediaList.count == medias.count {
-                        completion(medias: mediaList)
+                        completion(mediaList)
                     }
                     
                 })
@@ -78,7 +78,7 @@ class URMediaUpload: NSObject {
                     mediaList.append(media!)
                     
                     if mediaList.count == medias.count {
-                        completion(medias: mediaList)
+                        completion(mediaList)
                     }
                     
                 })

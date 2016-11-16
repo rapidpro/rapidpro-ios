@@ -10,7 +10,7 @@ import UIKit
 import MBProgressHUD
 
 protocol URClosedPollTableViewControllerDelegate {
-    func tableViewCellDidTap(cell:URClosedPollTableViewCell,isIPad:Bool)
+    func tableViewCellDidTap(_ cell:URClosedPollTableViewCell,isIPad:Bool)
 }
 
 class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, UITableViewDelegate, UITableViewDataSource, URCurrentPollViewDelegate {
@@ -58,41 +58,43 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         super.viewDidLayoutSubviews()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
-        let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Poll Results List")
+        URIPCheckManager.getCountryCodeByIP { (countryCode) in}
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let tracker = GAI.sharedInstance().defaultTracker
+        tracker?.set(kGAIScreenName, value: "Poll Results List")
+        
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         self.automaticallyAdjustsScrollViewInsets = true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         if !URRapidProManager.sendingAnswers {
             loadCurrentFlow()
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.pollList.count
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URClosedPollTableViewCell.self), forIndexPath: indexPath) as! URClosedPollTableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URClosedPollTableViewCell.self), for: indexPath) as! URClosedPollTableViewCell
         
-        cell.setupCellWithData(self.pollList[indexPath.row])
+        cell.setupCellWithData(self.pollList[(indexPath as NSIndexPath).row])
         
         return cell
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath) as? URClosedPollTableViewCell
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as? URClosedPollTableViewCell
         
         if let delegate = self.delegate {
             delegate.tableViewCellDidTap(cell!,isIPad: URConstant.isIpad)
@@ -101,13 +103,13 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     
     //MARK: PollManager Delegate
     
-    func newPollReceived(poll: URPoll) {
-        self.pollList.insert(poll, atIndex: 0)
+    func newPollReceived(_ poll: URPoll) {
+        self.pollList.insert(poll, at: 0)
         self.tableView.reloadData()
         self.fitScrollSize()
     }
     
-    func newPollResultReceived(pollResult: URPollResult) {
+    func newPollResultReceived(_ pollResult: URPollResult) {
         
     }
     
@@ -137,27 +139,27 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
 
     }
     
-    private func setupHeaderCell() {
-        headerCell = NSBundle.mainBundle().loadNibNamed("URCurrentPollView", owner: 0, options: nil)[0] as! URCurrentPollView
+    fileprivate func setupHeaderCell() {
+        headerCell = Bundle.main.loadNibNamed("URCurrentPollView", owner: 0, options: nil)?[0] as! URCurrentPollView
         headerCell.viewController = self
-        headerCell.btNext.addTarget(self, action: #selector(moveToNextStep), forControlEvents: UIControlEvents.TouchUpInside)
+        headerCell.btNext.addTarget(self, action: #selector(moveToNextStep), for: UIControlEvents.touchUpInside)
     }
     
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         self.tableView.delegate = self
         self.tableView.dataSource = self
-        self.tableView.backgroundColor = UIColor.groupTableViewBackgroundColor()
-        self.tableView.registerNib(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
-        self.tableView.separatorColor = UIColor.groupTableViewBackgroundColor()
+        self.tableView.backgroundColor = UIColor.groupTableViewBackground
+        self.tableView.register(UINib(nibName: "URClosedPollTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URClosedPollTableViewCell.self))
+        self.tableView.separatorColor = UIColor.groupTableViewBackground
         self.tableView.rowHeight = UITableViewAutomaticDimension;
         self.tableView.estimatedRowHeight = 220;
-        self.tableView.layoutMargins = UIEdgeInsetsZero
-        self.tableView.separatorInset = UIEdgeInsetsZero
+        self.tableView.layoutMargins = UIEdgeInsets.zero
+        self.tableView.separatorInset = UIEdgeInsets.zero
         
-        URNavigationManager.setupNavigationBarWithType(.Blue)
+        URNavigationManager.setupNavigationBarWithType(.blue)
     }
     
-    private func loadCurrentFlow() {
+    fileprivate func loadCurrentFlow() {
         URRapidProManager.getContact(URUser.activeUser()!, completion: { (contact) -> Void in
             self.contact = contact
             URRapidProManager.getFlowRuns(contact, completion: { (flowRuns: [URFlowRun]?) -> Void in
@@ -175,12 +177,12 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         })
     }
     
-    private func setupNextStep(destination:String?) {
+    fileprivate func setupNextStep(_ destination:String?) {
         self.currentActionSet = URFlowManager.getFlowActionSetByUuid(currentFlow!, destination: destination, currentActionSet: currentActionSet)
         self.currentRuleset = URFlowManager.getRulesetForAction(currentFlow!, actionSet: currentActionSet)
     }
     
-    private func reloadCurrentFlowSection() {
+    fileprivate func reloadCurrentFlowSection() {
         
         headerCell.delegate = self
         
@@ -192,14 +194,14 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             
         }else if currentActionSet == nil {
             
-            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.label.text = "message_send_poll".localized
             
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.responses = []
-                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
             })
             
@@ -212,33 +214,33 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             
             currentPollHeight = headerCell.getCurrentPollHeight() - 30
             
-            let hud = MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+            let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.label.text = "message_send_poll".localized
             
             URRapidProManager.sendRulesetResponses(URUser.activeUser()!, responses: responses, completion: { () -> Void in
                 
-                dispatch_async(dispatch_get_main_queue()) {
+                DispatchQueue.main.async {
                     self.responses = []
-                    MBProgressHUD.hideHUDForView(self.view, animated: true)
+                    MBProgressHUD.hide(for: self.view, animated: true)
                 }
             })
         }
         
-        headerCell.frame = CGRectMake(0, 0, self.view.bounds.size.width, currentPollHeight)
+        headerCell.frame = CGRect(x: 0, y: 0, width: self.view.bounds.size.width, height: currentPollHeight)
         updateTopViewHeight(currentPollHeight)
         fitScrollSize()
     }
     
-    private func updateTopViewHeight(newHeight:CGFloat) {
-        self.scrollView.contentOffset = CGPointMake(self.scrollView.contentOffset.x, -64)
+    fileprivate func updateTopViewHeight(_ newHeight:CGFloat) {
+        self.scrollView.contentOffset = CGPoint(x: self.scrollView.contentOffset.x, y: -64)
         topViewHeight.constant = newHeight
         
-        UIView.animateWithDuration(0.5) { () -> Void in
+        UIView.animate(withDuration: 0.5, animations: { () -> Void in
             self.view.layoutIfNeeded()
-        }
+        }) 
     }
     
-    private func fitScrollSize() {
+    fileprivate func fitScrollSize() {
         if topView.subviews.count == 0 {
             topView.addSubview(headerCell)
         }
@@ -248,7 +250,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         
         self.contentViewHeight.constant = scrollViewHeight
         
-        self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
+        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width,height: scrollViewHeight)
         self.scrollView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
         
         self.view.layoutIfNeeded()

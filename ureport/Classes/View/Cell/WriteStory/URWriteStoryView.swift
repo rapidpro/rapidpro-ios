@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URWriteStoryViewDelegate {
-    func writeStoryDidTap(cell:URWriteStoryView)
+    func writeStoryDidTap(_ cell:URWriteStoryView)
 }
 
 class URWriteStoryView: UIView {
@@ -34,12 +34,12 @@ class URWriteStoryView: UIView {
     func setupLayout() {
         
         if let user = URUser.activeUser() {
-            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname])
+            self.lbMsg.text = String(format: "list_stories_header_title".localized, arguments: [user.nickname!])
             
-            if user.picture != nil && user.picture.characters.count > 0 {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imgProfile.contentMode = UIViewContentMode.ScaleAspectFill
-                self.imgProfile.sd_setImageWithURL(NSURL(string: user.picture))
+            if user.picture != nil && user.picture!.characters.count > 0 {
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+                self.imgProfile.contentMode = UIViewContentMode.scaleAspectFill
+                self.imgProfile.sd_setImage(with: URL(string: user.picture!))
             }else{
                 setupUserImageAsDefault()
             }
@@ -51,8 +51,8 @@ class URWriteStoryView: UIView {
     }
     
     func setupUserImageAsDefault() {
-        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
-        self.imgProfile.contentMode = UIViewContentMode.Center
+        self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+        self.imgProfile.contentMode = UIViewContentMode.center
         self.imgProfile.image = UIImage(named: "ic_person")
     }
     

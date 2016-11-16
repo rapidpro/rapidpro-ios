@@ -23,22 +23,22 @@ class URMediaFileView: UIView {
         self.layoutIfNeeded()
     }
     
-    func setupWithMedia(media:URMedia) {
+    func setupWithMedia(_ media:URMedia) {
         
         self.media = media
         
         if let metadaData = media.metadata {
             let filename = metadaData["filename"] as! String
             self.lbFileName.text = filename
-            self.lbSubtitle.text = NSURL(fileURLWithPath: media.url).pathExtension
+            self.lbSubtitle.text = URL(fileURLWithPath: media.url).pathExtension
         }
     }
     
     //MARK: Button Events
     
-    @IBAction func btOpenTapped(button:UIButton) {
-        if let checkURL = NSURL(string: media.url) {
-            if UIApplication.sharedApplication().openURL(checkURL) {
+    @IBAction func btOpenTapped(_ button:UIButton) {
+        if let checkURL = URL(string: media.url) {
+            if UIApplication.shared.openURL(checkURL) {
                 print("url successfully opened")
             }
         } else {

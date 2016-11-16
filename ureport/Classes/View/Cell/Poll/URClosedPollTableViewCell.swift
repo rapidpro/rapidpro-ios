@@ -26,17 +26,17 @@ class URClosedPollTableViewCell: UITableViewCell {
         self.lbSeeResults.text = "polls_see_results".localized
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
-        self.layoutMargins = UIEdgeInsetsZero
-        self.separatorInset = UIEdgeInsetsZero
+        super.selectionStyle = UITableViewCellSelectionStyle.none
+        self.layoutMargins = UIEdgeInsets.zero
+        self.separatorInset = UIEdgeInsets.zero
         // Configure the view for the selected state
     }        
     
     //MARK: Class Methods
     
-    func setupCellWithData(poll:URPoll) {
+    func setupCellWithData(_ poll:URPoll) {
         self.poll = poll
         self.lbCategoryName.text = poll.category.name
         self.lbDescr.text = poll.title

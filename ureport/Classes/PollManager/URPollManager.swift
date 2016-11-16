@@ -10,8 +10,8 @@ import UIKit
 import Firebase
 
 protocol URPollManagerDelegate {
-    func newPollReceived(poll:URPoll)
-    func newPollResultReceived(pollResult:URPollResult)
+    func newPollReceived(_ poll:URPoll)
+    func newPollResultReceived(_ pollResult:URPollResult)
 }
 
 class URPollManager: NSObject {
@@ -36,18 +36,18 @@ class URPollManager: NSObject {
         pollIndex = 0
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URPollManager.path())
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URPollManager.path())
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
-                    let poll = URPoll(jsonDict: snapshot.value as? NSDictionary)
-                    let category = URPollCategory(jsonDict: (snapshot.value as! NSDictionary).objectForKey("category")! as? NSDictionary)
+                    let poll = URPoll(jsonDict: snapshot?.value as? NSDictionary)
+                    let category = URPollCategory(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "category")! as? NSDictionary)
                     
                     category.color = URPollManager.getAvailableColorToCategory(category, index: self.pollIndex)
                     
-                    poll.key = snapshot.key
+                    poll.key = snapshot?.key
                     poll.category = category
                     delegate.newPollReceived(poll)
                     
@@ -56,19 +56,19 @@ class URPollManager: NSObject {
             })
     }
     
-    func getPollsResults(pollKey:String!) {
+    func getPollsResults(_ pollKey:String!) {
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URPollManager.pathForPollResult())
-            .childByAppendingPath(pollKey)
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URPollManager.pathForPollResult())
+            .child(byAppendingPath: pollKey)
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
-                    let pollResult = URPollResult(jsonDict: snapshot.value as? NSDictionary)
+                    let pollResult = URPollResult(jsonDict: snapshot?.value as? NSDictionary)
                     
-                    if let results = (snapshot.value as? NSDictionary)!.objectForKey("results") {
+                    if let results = (snapshot?.value as? NSDictionary)!.object(forKey: "results") {
                         pollResult.results = results as! [NSDictionary]
                     }
                     
@@ -78,10 +78,10 @@ class URPollManager: NSObject {
             })
     }
  
-    class func getAvailableColorToCategory(pollCategory:URPollCategory,index:Int) -> UIColor {
+    class func getAvailableColorToCategory(_ pollCategory:URPollCategory,index:Int) -> UIColor {
         
         let filtered = categoryAndColorList.filter {
-            if $0.objectForKey(pollCategory.name) != nil {
+            if $0.object(forKey: pollCategory.name) != nil {
                 return true
             }else {
                 return false
@@ -89,7 +89,7 @@ class URPollManager: NSObject {
         }
         
         if !filtered.isEmpty {
-            return UIColor(rgba: filtered[0].objectForKey(pollCategory.name) as! String)
+            return UIColor(rgba: filtered[0].object(forKey: pollCategory.name) as! String)
         }else {
             var index = index
             if index >= URPollManager.getColors().count {

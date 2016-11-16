@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URInviteTableViewCellDelegate {
-    func inviteButtonDidTapped(cell:URInviteTableViewCell)
+    func inviteButtonDidTapped(_ cell:URInviteTableViewCell)
 }
 
 class URInviteTableViewCell: UITableViewCell {
@@ -25,16 +25,16 @@ class URInviteTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.btInvite.layer.cornerRadius = 3
-        self.btInvite.setTitle("chat_contact_invite_button".localized, forState: UIControlState.Normal)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        self.btInvite.setTitle("chat_contact_invite_button".localized, for: UIControlState())
+        super.selectionStyle = UITableViewCellSelectionStyle.none
         
-        self.imgContact.contentMode = UIViewContentMode.Center
+        self.imgContact.contentMode = UIViewContentMode.center
         self.imgContact.image = UIImage(named: "ic_person")        
-        self.roundedView.backgroundColor = UIColor.grayColor().colorWithAlphaComponent(0.2)
+        self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
         
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -42,7 +42,7 @@ class URInviteTableViewCell: UITableViewCell {
     
     //MARK: Button Events
     
-    @IBAction func btInviteTapped(sender: AnyObject) {
+    @IBAction func btInviteTapped(_ sender: AnyObject) {
         if let delegate = self.delegate {
             delegate.inviteButtonDidTapped(self)
         }

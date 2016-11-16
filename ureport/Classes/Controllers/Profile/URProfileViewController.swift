@@ -11,9 +11,9 @@ import IlhasoftCore
 import MBProgressHUD
 
 enum TabType {
-    case MyStories
-    case AnsweredPolls
-    case Ranking
+    case myStories
+    case answeredPolls
+    case ranking
 }
 
 class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate, ISImageViewPickerDelegate {
@@ -69,22 +69,22 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
-        URNavigationManager.setupNavigationBarWithType(.Clear)
+        URNavigationManager.setupNavigationBarWithType(.clear)
         setupDelegates()
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Profile")
+        tracker?.set(kGAIScreenName, value: "Profile")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
@@ -97,7 +97,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     //MARK: ISImageViewPickerDelegate
     
-    func mediaDidLoad(imageView: ISImageViewPicker, image: UIImage) {
+    func mediaDidLoad(_ imageView: ISImageViewPicker, image: UIImage) {
         URAWSManager.uploadImage(image, uploadPath:.User, completion: { (picture:URMedia?) -> Void in
             if let media = picture {
                 let user = URUser.activeUser()
@@ -109,31 +109,31 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     //MARK: StoryManagerDelegate
     
-    func newStoryReceived(story: URStory) {
+    func newStoryReceived(_ story: URStory) {
         if story.user == URUser.activeUser()?.key {
-            storyList.insert(story, atIndex: 0)
-            userList.sortInPlace{($0.points.integerValue > $1.points.integerValue)}
+            storyList.insert(story, at: 0)
+            userList = userList.sorted{(($0.points?.int32Value)! > ($1.points?.int32Value)!)}
             self.tableviewMyStories.reloadData()
         }
     }
     
     //MARK: UserManagerDelegate
     
-    func newUserReceived(user: URUser) {
+    func newUserReceived(_ user: URUser) {
         if (user.points != nil) {
-            userList.insert(user, atIndex: 0)
+            userList.insert(user, at: 0)
             self.tableviewRanking.reloadData()
         }
     }
     
     //MARK: Class Methods
     
-    func selectTabType(type:TabType) {
+    func selectTabType(_ type:TabType) {
         switch type {
-        case .MyStories:
+        case .myStories:
             btMyStoriesTapped(self.btMyStories)
             break
-        case .Ranking:
+        case .ranking:
             btRankingTapped(self.btRanking)
             break
         default:
@@ -153,12 +153,12 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     func setupTableView() {
         self.tableviewMyStories.backgroundColor = URConstant.Color.WINDOW_BACKGROUND
-        self.tableviewMyStories.registerNib(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
-        self.tableviewMyStories.separatorColor = UIColor.clearColor()
+        self.tableviewMyStories.register(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
+        self.tableviewMyStories.separatorColor = UIColor.clear
         
-        self.tableviewRanking.backgroundColor = UIColor.clearColor()
-        self.tableviewRanking.registerNib(UINib(nibName: "URRankingTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URRankingTableViewCell.self))
-        self.tableviewRanking.separatorColor = UIColor.clearColor()
+        self.tableviewRanking.backgroundColor = UIColor.clear
+        self.tableviewRanking.register(UINib(nibName: "URRankingTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URRankingTableViewCell.self))
+        self.tableviewRanking.separatorColor = UIColor.clear
         
     }
     
@@ -168,12 +168,12 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         
         if let user = URUser.activeUser() {
             if let picture = user.picture {
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-                self.imageProfile.contentMode = UIViewContentMode.ScaleAspectFill
-                self.imageProfile.sd_setImageWithURL(NSURL(string: picture))
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+                self.imageProfile.contentMode = UIViewContentMode.scaleAspectFill
+                self.imageProfile.sd_setImage(with: URL(string: picture))
             }else{
-                self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-                self.imageProfile.contentMode = UIViewContentMode.Center
+                self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+                self.imageProfile.contentMode = UIViewContentMode.center
                 self.imageProfile.image = UIImage(named: "ic_person")
             }
             
@@ -199,21 +199,21 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         self.btEdit.layer.cornerRadius = 4
         self.btLogout.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
-        self.roundedView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.roundedView.layer.borderColor = UIColor.white.cgColor
         self.tableviewRanking.layer.cornerRadius = 5
         
-        self.btEdit.setTitle("label_edit".localized, forState: UIControlState.Normal)
-        self.btMyStories.setTitle("label_view_stories".localized, forState: UIControlState.Normal)
-        self.btRanking.setTitle("profile_ranking".localized, forState: UIControlState.Normal)
+        self.btEdit.setTitle("label_edit".localized, for: UIControlState())
+        self.btMyStories.setTitle("label_view_stories".localized, for: UIControlState())
+        self.btRanking.setTitle("profile_ranking".localized, for: UIControlState())
     }
     
     // MARK: - Table view data source
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForRowAtIndexPath indexPath: IndexPath) -> CGFloat {
         if tableView == self.tableviewMyStories {
-            let story = storyList[indexPath.row]
+            let story = storyList[(indexPath as NSIndexPath).row]
             
-            if story.cover != nil && story.cover.url != nil {
+            if story.cover != nil && story.cover?.url != nil {
                 return fullHeightTableViewCell
             }else {
                 return fullHeightTableViewCell - imgViewHistoryHeight
@@ -223,7 +223,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         }
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if tableView == self.tableviewMyStories {
             return storyList.count
         }else {
@@ -231,23 +231,23 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         }
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAtIndexPath indexPath: IndexPath) -> UITableViewCell {
         
         if tableView == self.tableviewMyStories {
-            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URStoriesTableViewCell.self), forIndexPath: indexPath) as! URStoriesTableViewCell
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URStoriesTableViewCell.self), for: indexPath) as! URStoriesTableViewCell
             cell.viewController = self
-            cell.setupCellWith(storyList[indexPath.row],moderateUserMode: false)
+            cell.setupCellWith(storyList[(indexPath as NSIndexPath).row],moderateUserMode: false)
             return cell
         }else {
-            let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URRankingTableViewCell.self), forIndexPath: indexPath) as! URRankingTableViewCell
-            cell.setupCellWith(userList[indexPath.row])
+            let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URRankingTableViewCell.self), for: indexPath) as! URRankingTableViewCell
+            cell.setupCellWith(userList[(indexPath as NSIndexPath).row])
             return cell
         }
         
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let cell = tableView.cellForRowAtIndexPath(indexPath)
+    func tableView(_ tableView: UITableView, didSelectRowAtIndexPath indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath)
         
         if cell is URStoriesTableViewCell {
             self.navigationController?.pushViewController(URStoryContributionViewController(story: (cell as! URStoriesTableViewCell).story), animated: true)
@@ -256,13 +256,13 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         }else {
             
             let modalProfileViewController = URModalProfileViewController(user: (cell as! URRankingTableViewCell).user)
-            modalProfileViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+            modalProfileViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
             
-            dispatch_async(dispatch_get_main_queue(), {
-                URNavigationManager.navigation.presentViewController(modalProfileViewController, animated: true) { () -> Void in
-                    UIView.animateWithDuration(0.3) { () -> Void in
-                        modalProfileViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
-                    }
+            DispatchQueue.main.async(execute: {
+                URNavigationManager.navigation.present(modalProfileViewController, animated: true) { () -> Void in
+                    UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                        modalProfileViewController.view.backgroundColor  = UIColor.black.withAlphaComponent(0.5)
+                    }) 
                 }
             });
         }
@@ -271,45 +271,45 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     //MARK: Button Events
     
-    @IBAction func btMyStoriesTapped(sender: AnyObject) {
+    @IBAction func btMyStoriesTapped(_ sender: AnyObject) {
         if isBtMyStoriesTapped == false {
             isBtMyStoriesTapped = true
-            self.tableviewMyStories.hidden = false
-            self.tableviewRanking.hidden = true
+            self.tableviewMyStories.isHidden = false
+            self.tableviewRanking.isHidden = true
             btMyStories.backgroundColor = URConstant.Color.DARK_BLUE
             btRanking.backgroundColor = URConstant.Color.PRIMARY
             isBtRankingTapped = false
         }
     }
     
-    @IBAction func btRankingTapped(sender: AnyObject) {
+    @IBAction func btRankingTapped(_ sender: AnyObject) {
         if isBtRankingTapped == false {
             isBtRankingTapped = true
-            self.tableviewMyStories.hidden = true
-            self.tableviewRanking.hidden = false
+            self.tableviewMyStories.isHidden = true
+            self.tableviewRanking.isHidden = false
             btMyStories.backgroundColor = URConstant.Color.PRIMARY
             btRanking.backgroundColor = URConstant.Color.DARK_BLUE
             isBtMyStoriesTapped = false
         }
     }
     
-    @IBAction func btEditTapped(sender: AnyObject) {
+    @IBAction func btEditTapped(_ sender: AnyObject) {
         
         if URUser.activeUser()!.type != URType.UReport {
             URNavigationManager.navigation.pushViewController(URUserRegisterViewController(color: URConstant.Color.PRIMARY, user: URUser.activeUser()!,updateMode:true), animated: true)
         }else {
             
-            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .ActionSheet)
+            let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
             
-            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .Cancel) { action -> Void in
+            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) { action -> Void in
                 
             }
             
-            let passwordUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_change_password".localized, style: .Default) { action -> Void in
+            let passwordUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_change_password".localized, style: .default) { action -> Void in
                 self.navigationController?.pushViewController(URPasswordEditViewController(), animated: true)
             }
             
-            let profileUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_edit_profile".localized, style: .Default) { action -> Void in
+            let profileUpdateAction: UIAlertAction = UIAlertAction(title: "title_pref_edit_profile".localized, style: .default) { action -> Void in
                 URNavigationManager.navigation.pushViewController(URUserRegisterViewController(color: URConstant.Color.PRIMARY, user: URUser.activeUser()!,updateMode:true), animated: true)
             }
             
@@ -318,16 +318,16 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             alertController.addAction(cancelAction)
             
             if URConstant.isIpad {
-                alertController.modalPresentationStyle = UIModalPresentationStyle.Popover
+                alertController.modalPresentationStyle = UIModalPresentationStyle.popover
                 alertController.popoverPresentationController!.sourceView = self.btEdit
                 alertController.popoverPresentationController!.sourceRect = self.btEdit.bounds
             }
             
-            self.presentViewController(alertController, animated: true, completion: nil)
+            self.present(alertController, animated: true, completion: nil)
         }
     }
     
-    @IBAction func btLogoutTapped(sender: AnyObject) {
+    @IBAction func btLogoutTapped(_ sender: AnyObject) {
         URNavigationManager.toggleMenu()
         URUser.deactivateUser()
         URNavigationManager.setupNavigationControllerWithLoginViewController()

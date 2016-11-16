@@ -14,13 +14,13 @@ class URFlowDefinition: Mappable {
     var baseLanguage:String?
     var actionSets:[URFlowActionSet]?
     var version:Int?
-    var lastSaved:NSDate?
+    var lastSaved:Date?
     var type:String?
     var entry:String?
     var ruleSets:[URFlowRuleset]?
     var metadata:URFlowMetadata?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.baseLanguage    <- map["base_language"]

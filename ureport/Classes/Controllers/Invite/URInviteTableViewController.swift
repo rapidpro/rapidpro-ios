@@ -14,7 +14,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     let addressBook : SwiftAddressBook? = swiftAddressBook
     var addressBookList:[NSDictionary] = []
-    let inviteMessage = "invite_message".localized
+    let inviteMessage = "invite_contact_text".localized
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,31 +23,31 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
         requestAuthorizationToAddressBook()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Invite")
+        tracker?.set(kGAIScreenName, value: "Invite")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])        
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)        
     }
     
     // MARK: - Table view data source
     
-    override func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 67
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.addressBookList.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier(NSStringFromClass(URInviteTableViewCell.self), forIndexPath: indexPath) as! URInviteTableViewCell
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URInviteTableViewCell.self), for: indexPath) as! URInviteTableViewCell
         
-        let dictionary = self.addressBookList[indexPath.row]
+        let dictionary = self.addressBookList[(indexPath as NSIndexPath).row]
 
         cell.delegate = self
         cell.lbContactName.text = dictionary["name"] as? String
@@ -58,19 +58,19 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
     
     //MARK: MFMessageComposeViewControllerDelegate
     
-    func messageComposeViewController(controller: MFMessageComposeViewController, didFinishWithResult result: MessageComposeResult) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+    func messageComposeViewController(_ controller: MFMessageComposeViewController, didFinishWith result: MessageComposeResult) {
+        self.dismiss(animated: true, completion: nil)
     }
     
     //MARK: URInviteTableViewCellDelegate
     
-    func inviteButtonDidTapped(cell: URInviteTableViewCell) {
+    func inviteButtonDidTapped(_ cell: URInviteTableViewCell) {
         if (MFMessageComposeViewController.canSendText()) {
             let controller = MFMessageComposeViewController()
             controller.body = inviteMessage
             controller.recipients = [cell.lbPhoneNumber.text!]
             controller.messageComposeDelegate = self
-            self.presentViewController(controller, animated: true, completion: nil)
+            self.present(controller, animated: true, completion: nil)
         }
     }
     
@@ -98,7 +98,7 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
                 }
             }
             
-            addressBookList = addressBookList.sort({ (dictionary1, dictionary2) -> Bool in
+            addressBookList = addressBookList.sorted(by: { (dictionary1, dictionary2) -> Bool in
                 return (dictionary1["name"] as! String) < (dictionary2["name"] as! String)
             })
             
@@ -106,11 +106,11 @@ class URInviteTableViewController: UITableViewController, MFMessageComposeViewCo
         }
     }
     
-    private func setupTableView() {
+    fileprivate func setupTableView() {
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0);
-        self.tableView.backgroundColor = UIColor.whiteColor()
-        self.tableView.registerNib(UINib(nibName: "URInviteTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URInviteTableViewCell.self))
-        self.tableView.separatorColor = UIColor.clearColor()
+        self.tableView.backgroundColor = UIColor.white
+        self.tableView.register(UINib(nibName: "URInviteTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URInviteTableViewCell.self))
+        self.tableView.separatorColor = UIColor.clear
     }
 
 }

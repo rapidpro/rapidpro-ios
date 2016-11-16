@@ -10,23 +10,23 @@ import UIKit
 import AVFoundation
 
 protocol URAudioRecorderManagerDelegate {
-    func audioRecorderDidFinish(path:String)
+    func audioRecorderDidFinish(_ path:String)
 }
 
 class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
 
-    static let outputURLFile = NSURL(fileURLWithPath: URFileUtil.outPutURLDirectory.stringByAppendingPathComponent("audio.m4a"))
-    static let audiosPlaying = []
+    static let outputURLFile = URL(fileURLWithPath: URFileUtil.outPutURLDirectory.appendingPathComponent("audio.m4a"))
+//    static let audiosPlaying = []
     
     var recorder:AVAudioRecorder!
     var delegate:URAudioRecorderManagerDelegate?
     
     static let recordSettings = [
-        AVFormatIDKey: NSNumber(unsignedInt:kAudioFormatMPEG4AAC),
-        AVEncoderAudioQualityKey : AVAudioQuality.Min.rawValue,
+        AVFormatIDKey: NSNumber(value: kAudioFormatMPEG4AAC as UInt32),
+        AVEncoderAudioQualityKey : AVAudioQuality.max.rawValue,
         AVNumberOfChannelsKey: 1,
         AVSampleRateKey : 8000.0
-    ]
+    ] as [String : Any]
     
     func startAudioRecord() {
         
@@ -34,13 +34,13 @@ class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
             
             URFileUtil.removeFile(URAudioRecorderManager.outputURLFile)
             
-            recorder = try AVAudioRecorder(URL: URAudioRecorderManager.outputURLFile, settings: URAudioRecorderManager.recordSettings)
+            recorder = try AVAudioRecorder(url: URAudioRecorderManager.outputURLFile, settings: URAudioRecorderManager.recordSettings)
             recorder.delegate = self
-            recorder.meteringEnabled = true
+            recorder.isMeteringEnabled = true
             recorder.prepareToRecord() // creates/overwrites the file at soundFileURL
             
             do {
-                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryMultiRoute)
+                try AVAudioSession.sharedInstance().setCategory(AVAudioSessionCategoryPlayAndRecord, with: AVAudioSessionCategoryOptions.defaultToSpeaker)
                 try AVAudioSession.sharedInstance().setActive(true)
                 recorder.record()
             }catch let error as NSError {
@@ -68,13 +68,13 @@ class URAudioRecorderManager: NSObject,  AVAudioRecorderDelegate {
     
     //MARK: AVAudioRecorderDelegate
     
-    func audioRecorderDidFinishRecording(recorder: AVAudioRecorder, successfully flag: Bool) {
+    func audioRecorderDidFinishRecording(_ recorder: AVAudioRecorder, successfully flag: Bool) {
         if let delegate = self.delegate {
-            delegate.audioRecorderDidFinish(URAudioRecorderManager.outputURLFile.path!)
+            delegate.audioRecorderDidFinish(URAudioRecorderManager.outputURLFile.path)
         }
     }
     
-    func audioRecorderEncodeErrorDidOccur(recorder: AVAudioRecorder, error: NSError?) {
+    func audioRecorderEncodeErrorDidOccur(_ recorder: AVAudioRecorder, error: Error?) {
         if let error = error {
             print(error.localizedDescription)
         }

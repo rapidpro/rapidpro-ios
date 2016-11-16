@@ -42,28 +42,28 @@ class URMarkerManager: Serializable {
         
     }
     
-    class func saveMarker(marker:URMarker) {
+    class func saveMarker(_ marker:URMarker) {
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         var markerDic:[NSDictionary] = URMarkerManager.getLocalyMarkers()
         
-        if let _ = markerDic.indexOf(marker.toDictionary()) {
+        if let _ = markerDic.index(of: marker.toDictionary()) {
             return
         }else {
             markerDic.append(marker.toDictionary())
         }
         
-        defaults.setObject(NSKeyedArchiver.archivedDataWithRootObject(markerDic), forKey: "markers")
+        defaults.set(NSKeyedArchiver.archivedData(withRootObject: markerDic), forKey: "markers")
         defaults.synchronize()
     }
     
     class func getLocalyMarkers() -> [NSDictionary]{
         
-        let defaults = NSUserDefaults.standardUserDefaults()
+        let defaults = UserDefaults.standard
         let markerDic:[NSDictionary] = []
         
-        if let markers = defaults.objectForKey("markers") as? NSData {
-            return (NSKeyedUnarchiver.unarchiveObjectWithData(markers)) as! [NSDictionary]
+        if let markers = defaults.object(forKey: "markers") as? Data {
+            return (NSKeyedUnarchiver.unarchiveObject(with: markers)) as! [NSDictionary]
         }
         
         return markerDic

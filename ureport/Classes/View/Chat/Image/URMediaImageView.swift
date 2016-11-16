@@ -22,33 +22,35 @@ class URMediaImageView: UIView, NYTPhotosViewControllerDelegate {
     
     //MARK: Button Events
     
-    @IBAction func btImageViewTapped(button:UIButton) {
+    @IBAction func btImageViewTapped(_ button:UIButton) {
         
-        let photoShow = PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()]))
+        let photoShow = PhotoShow(image: image, attributedCaptionTitle: NSAttributedString(string: "", attributes: [NSForegroundColorAttributeName: UIColor.white]))
         
         photosViewController = NYTPhotosViewController(photos: [photoShow])
         photosViewController.delegate = self
         
-        self.viewController.presentViewController(photosViewController, animated: true) { () -> Void in
-            UIApplication.sharedApplication().setStatusBarHidden(true, withAnimation: .Fade)
+        self.viewController.present(photosViewController, animated: true) { () -> Void in
+            UIApplication.shared.setStatusBarHidden(true, with: .fade)
         }
     }
     
     //MARK: Class Methods
     
-    func setupWithMedia(media:URMedia,viewController:UIViewController) {
+    func setupWithMedia(_ media:URMedia,viewController:UIViewController) {
         self.imageURL = media.url
-        self.imageView.sd_setImageWithURL(NSURL(string: self.imageURL), placeholderImage: nil) { (image:UIImage!, error:NSError!, SDImageCacheType, url:NSURL!) in
+        
+        self.imageView.sd_setImage(with: URL(string: self.imageURL)) { (image, error, SDImageCacheType, url) in
             self.image = image
         }
+        
         self.media = media
         self.viewController = viewController
     }
     
     //MARK: NYTPhotosViewControllerDelegate
     
-    func photosViewControllerDidDismiss(photosViewController: NYTPhotosViewController) {
-        UIApplication.sharedApplication().setStatusBarHidden(false, withAnimation: .None)
+    func photosViewControllerDidDismiss(_ photosViewController: NYTPhotosViewController) {
+        UIApplication.shared.setStatusBarHidden(false, with: .none)
     }
 
 }

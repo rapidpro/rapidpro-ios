@@ -1,8 +1,8 @@
 PODS:
-  - Alamofire (3.4.2)
-  - AlamofireObjectMapper (3.0.2):
-    - Alamofire (~> 3.2)
-    - ObjectMapper (~> 1.0)
+  - Alamofire (4.0.1)
+  - AlamofireObjectMapper (4.0.0):
+    - Alamofire (~> 4.0)
+    - ObjectMapper (~> 2.0)
   - AWSCore (2.2.4)
   - AWSS3 (2.2.4):
     - AWSCore (= 2.2.4)
@@ -80,61 +80,73 @@ PODS:
     - FLAnimatedImage (~> 1.0.8)
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.1.0)
-  - ObjectMapper (1.4.0)
-  - Proposer (0.9.0)
-  - QRCodeReader.swift (6.0.0)
+  - ObjectMapper (2.1.0)
+  - Proposer (1.0.0)
+  - QRCodeReader.swift (7.2.0)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
   - SDWebImage/Core (3.7.3)
-  - SRKControls (3.0.6):
-    - SRKControls/Controls (= 3.0.6)
-  - SRKControls/Controls (3.0.6)
+  - SRKControls (4.0.1):
+    - SRKControls/Controls (= 4.0.1)
+  - SRKControls/Controls (4.0.1)
+  - STTwitter (0.2.5)
   - SwiftAddressBook (0.6.2)
   - TPKeyboardAvoiding (1.2.8)
-  - youtube-ios-player-helper (0.1.4)
+  - youtube-ios-player-helper (0.1.6)
 
 DEPENDENCIES:
   - AWSS3 (~> 2.2.0)
   - DBSphereTagCloud (from `https://github.com/danielblx/DBSphereTagCloud.git`)
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - Firebase (>= 2.5.1)
+  - Firebase (= 2.5.1)
   - Google/Analytics
   - Google/CloudMessaging
   - Google/SignIn
-  - IlhasoftCore (from `https://bitbucket.org/ilhasoft/ilhasoft-core-ios`)
-  - ISScrollViewPageSwift (from `https://github.com/Ilhasoft/ISScrollViewPageSwift`)
+  - IlhasoftCore (from `../IlhasoftCore`)
+  - ISScrollViewPageSwift (from `https://github.com/Ilhasoft/ISScrollViewPageSwift`, branch `swift3`)
   - JSQMessagesViewController
   - NYTPhotoViewer
-  - Proposer
-  - QRCodeReader.swift (= 6.0.0)
+  - Proposer (= 1.0.0)
+  - QRCodeReader.swift (= 7.2.0)
   - SDWebImage
-  - SwiftAddressBook
+  - SRKControls (from `https://github.com/Ilhasoft/SRKControls`)
+  - STTwitter
+  - SwiftAddressBook (from `https://github.com/SocialbitGmbH/SwiftAddressBook`, branch `chunkyguy-swift3`)
   - TPKeyboardAvoiding
-  - youtube-ios-player-helper (= 0.1.4)
+  - youtube-ios-player-helper (= 0.1.6)
 
 EXTERNAL SOURCES:
   DBSphereTagCloud:
     :git: https://github.com/danielblx/DBSphereTagCloud.git
   IlhasoftCore:
-    :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
+    :path: ../IlhasoftCore
   ISScrollViewPageSwift:
+    :branch: swift3
     :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
+  SRKControls:
+    :git: https://github.com/Ilhasoft/SRKControls
+  SwiftAddressBook:
+    :branch: chunkyguy-swift3
+    :git: https://github.com/SocialbitGmbH/SwiftAddressBook
 
 CHECKOUT OPTIONS:
   DBSphereTagCloud:
     :commit: 2523dfdaf0bb9b2830d95400b8e8a9c259f62333
     :git: https://github.com/danielblx/DBSphereTagCloud.git
-  IlhasoftCore:
-    :commit: 317c5238db0ad08c9199a31857b8a33200382b94
-    :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
   ISScrollViewPageSwift:
-    :commit: 29983f0479d1751e468b05c92ae3a70139231648
+    :commit: a2414f587a081f294726503288422cf91159960a
     :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
+  SRKControls:
+    :commit: a15930e85625b28481fbfacdfb47782884ff5b34
+    :git: https://github.com/Ilhasoft/SRKControls
+  SwiftAddressBook:
+    :commit: 23a4a93a665fbf1615b95b95b5baa70e15bdbf0e
+    :git: https://github.com/SocialbitGmbH/SwiftAddressBook
 
 SPEC CHECKSUMS:
-  Alamofire: 6aa33201d20d069e1598891cf928883ff1888c7a
-  AlamofireObjectMapper: 70f97cbf45c01c48d26aa07a1a7059a60ed7411d
+  Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  AlamofireObjectMapper: 9faa3ce5a240efda1b209009a2d6e1e949227abc
   AWSCore: 483fa0f25c8508e3364f818e9b941c6204619afa
   AWSS3: da758d5a95e65bb9e6e718245c1a86b6f63de9ae
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
@@ -155,21 +167,22 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
-  IlhasoftCore: e7d17d075bc6e96c0c30c42968214969d5821e92
+  IlhasoftCore: 68e6fa14c9392b98ffab7c134f93ba1553fbf355
   ISScrollViewPageSwift: 2840b2c26fa43c50a5a0d0be6936f8ba3e983f45
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
-  ObjectMapper: a07ad0462c5adf014adc0f89ef04c29b626e855e
-  Proposer: 231565a8b6bbb1816f3670d6471e6a84e582c80c
-  QRCodeReader.swift: 4aa8b0f88847a51312d6ffd2cafc387962da9dd8
+  ObjectMapper: e5e0f8aef8590fc2ddcde7f27eddb255863ee6e9
+  Proposer: 73303728e11cb6dbe27102deac0da82956a51f16
+  QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
-  SRKControls: 1b3c78d73436cf53bf087d5147ee6fc90700e7c5
+  SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
+  STTwitter: 5c157e8dcb4f0e4cf5b4374393021b7d7b7fd497
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
-  youtube-ios-player-helper: 84b1485ebb4b7c6b619c6e05edcb55186723a7c6
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: a93aaa9f4d6e7e43ec67c671a77bdec63c78be3f
+PODFILE CHECKSUM: 2c3542984545bf5d64b7b4577ee57c003cf6bfd0
 
 COCOAPODS: 1.1.0.rc.2

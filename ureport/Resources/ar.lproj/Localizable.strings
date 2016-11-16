@@ -169,7 +169,7 @@
 "label_data_confirmation" = "تأكيد البيانات";
 "load_message_save_user" = "حفظ المستخدم...";
 "error_no_internet" = "يرجى الاتصال بالإنترنت قبل المتابعة";
-"invite_contact_text" = "تحدث معي عن طريق تطبيق اليو-ريبورت! تحميل التطبيق من هنا http://goo.gl/Xxyodt ";
+"invite_contact_text" = "تحدث معي عن طريق تطبيق اليو-ريبورت! تحميل التطبيق من هنا https://itunes.apple.com/us/app/u-report/id1067406438?mt=8 ";
 "ureporters_selected_maximum" = "الرقم الأعظمي للمستخدمين المختارين هو %d ";
 "chat_private_media_permission_title" = "الوسائط المتعددة مسموحة";
 "search_title" = "بحث";
@@ -232,7 +232,7 @@
 "title_share_story" = "مشاركة القصة عبر:";
 "title_share_news" = "مشاركة الأخبار عبر:";
 "title_share_subject" = "تم مشاركة القصة عن طريق اليو-ريبورت";
-"story_share_info" = "تحميل تطبيق اليو-ريبورت: http://goo.gl/Xxyodt ";
+"story_share_info" = "تحميل تطبيق اليو-ريبورت: https://itunes.apple.com/us/app/u-report/id1067406438?mt=8 ";
 "label_country_moderator" = "مشرفو البلد";
 "message_success_user_update" = "تم تحديث المستخدم بنجاح!";
 "ureport_message_title" = "رسالة يو-ريبورت";

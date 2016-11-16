@@ -9,7 +9,7 @@
 import UIKit
 
 protocol MarkerTableViewCellDelegate {
-    func markerHasTapped(cell:URMarkerTableViewCell)
+    func markerHasTapped(_ cell:URMarkerTableViewCell)
 }
 
 class URMarkerTableViewCell: UITableViewCell {
@@ -25,37 +25,37 @@ class URMarkerTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
     }
     
     //MARK: Class Methods
     
-    func setupCellWith(marker:URMarker) {
+    func setupCellWith(_ marker:URMarker) {
         self.marker = marker
         lbName.text = marker.name
     }
     
-    func setBtCheckSelected(selected:Bool) {
+    func setBtCheckSelected(_ selected:Bool) {
         if selected == true {
-            btCheck.selected = true
-            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), forState: UIControlState.Selected)
+            btCheck.isSelected = true
+            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), for: UIControlState.selected)
         }else {
-            btCheck.selected = false
-            btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), forState: UIControlState.Normal)
+            btCheck.isSelected = false
+            btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), for: UIControlState())
         }
     }
     
     //MARK: Button Events
     
-    @IBAction func btCheckTapped(sender: AnyObject) {
+    @IBAction func btCheckTapped(_ sender: AnyObject) {
         
         if let delegate = self.delegate {
             delegate.markerHasTapped(self)
         }
         
-        if btCheck.selected {
+        if btCheck.isSelected {
             setBtCheckSelected(false)
         }else{
             setBtCheckSelected(true)            

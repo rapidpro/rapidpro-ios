@@ -22,7 +22,7 @@ class URLoginCredentialsViewController: UIViewController {
     
     var appDelegate:AppDelegate!
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: "URLoginCredentialsViewController", bundle: nil)
     }
 
@@ -32,33 +32,33 @@ class URLoginCredentialsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()        
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         setupUI()
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Login Credentials")
+        tracker?.set(kGAIScreenName, value: "Login Credentials")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])        
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)        
     }
 
-    override func viewDidDisappear(animated: Bool) {
+    override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        MBProgressHUD.hide(for: self.view, animated: true)
     }
     
     //MARK: Button Events
-    @IBAction func btForgotPasswordTapped(sender: AnyObject) {
+    @IBAction func btForgotPasswordTapped(_ sender: AnyObject) {
         self.view.endEditing(true)
         self.navigationController?.pushViewController(URForgotPasswordViewController(), animated: true)
     }
 
-    @IBAction func btLoginTapped(sender: AnyObject) {
+    @IBAction func btLoginTapped(_ sender: AnyObject) {
         
         if let textfield = self.view.findTextFieldEmptyInView(self.view) {
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textfield.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
@@ -66,9 +66,9 @@ class URLoginCredentialsViewController: UIViewController {
         }
         
         self.view.endEditing(true)
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
+        //MBProgressHUD.showAdded(to: self.view, animated: true)
         URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+        //MBProgressHUD.hide(for: self.view, animated: true)
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             }else {
@@ -80,8 +80,8 @@ class URLoginCredentialsViewController: UIViewController {
     //MARK: Class Methods
     
     func setupUI() {
-        self.btLogin.setTitle("login".localized, forState: UIControlState.Normal)
-        self.btForgotPassword.setTitle("login_forgot_password".localized, forState: UIControlState.Normal)
+        self.btLogin.setTitle("login".localized, for: UIControlState())
+        self.btForgotPassword.setTitle("login_forgot_password".localized, for: UIControlState())
         
         self.txtLogin.placeholder = "login_email".localized
         self.txtPassword.placeholder = "login_password".localized

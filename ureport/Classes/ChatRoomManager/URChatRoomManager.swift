@@ -7,10 +7,30 @@
 //
 
 import Firebase
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 @objc protocol URChatRoomManagerDelegate {
-    optional func newOpenGroupReceived(groupChatRoom:URGroupChatRoom)
-    optional func openChatRoom(chatRoom:URChatRoom, members:[URUser], title:String)
+    @objc optional func newOpenGroupReceived(_ groupChatRoom:URGroupChatRoom)
+    @objc optional func openChatRoom(_ chatRoom:URChatRoom, members:[URUser], title:String)
 }
 
 class URChatRoomManager: NSObject {
@@ -22,18 +42,23 @@ class URChatRoomManager: NSObject {
         return "chat_room"
     }
     
-    func createIndividualChatRoomIfPossible(friend:URUser,isIndividualChatRoom:Bool) {
+    func createIndividualChatRoomIfPossible(_ friend:URUser,isIndividualChatRoom:Bool) {
         
-        let group = dispatch_group_create()
+        let group = DispatchGroup()
         
         var equalsChatRoomKeyList = [String]()
         var equalsChatRoomList = [URChatRoom]()
         var equalsGroupChatRoomList = [URChatRoom]()
         
-        if let friendChatRooms = friend.chatRooms,  myChatRooms = URUser.activeUser()?.chatRooms {
+        let friendChatRooms = friend.chatRooms
+        let myChatRooms = URUser.activeUser()?.chatRooms
+        
+        //return
+        
+        if friendChatRooms != nil && myChatRooms != nil {
             
-            for friendChatRoomKey in friendChatRooms.allKeys {
-                for myChatRoomKey in myChatRooms.allKeys {
+            for friendChatRoomKey in friendChatRooms!.allKeys {
+                for myChatRoomKey in myChatRooms!.allKeys {
                     
                     if myChatRoomKey as! String == friendChatRoomKey as! String {
                         equalsChatRoomKeyList.append(myChatRoomKey as! String)
@@ -43,7 +68,7 @@ class URChatRoomManager: NSObject {
             }
             
             for chatRoomKey in equalsChatRoomKeyList {
-                dispatch_group_enter(group)
+                group.enter()
                 URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoomKey, completionWithUsers: { (users:[URUser]) -> Void in
                     URChatRoomManager.getByKey(chatRoomKey, completion: { (chatRoom:URChatRoom?) -> Void in
                         
@@ -54,17 +79,17 @@ class URChatRoomManager: NSObject {
                         }else {
                             equalsChatRoomList.append(chatRoom!)
                         }
-                        dispatch_group_leave(group)
+                        group.leave()
                     })
                     
                 })
                 
             }
             
-            dispatch_group_notify(group, dispatch_get_main_queue(), {
+            group.notify(queue: DispatchQueue.main, execute: {
                 
                 if equalsChatRoomList.count > 0 {
-                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname)
+                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname!)
                 }else {
                     URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
                         self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
@@ -83,33 +108,33 @@ class URChatRoomManager: NSObject {
         
     }
     
-    class func getByKey(key:String,completion:(URChatRoom?) -> Void) {
+    class func getByKey(_ key:String,completion:@escaping (URChatRoom?) -> Void) {
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()?.code)
-            .childByAppendingPath(path())
-            .childByAppendingPath(key)
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
+            .child(byAppendingPath: path())
+            .child(byAppendingPath: key)
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     
-                    if (snapshot.value as! NSDictionary).objectForKey("administrator") != nil {
+                    if (snapshot?.value as! NSDictionary).object(forKey: "administrator") != nil {
                         
-                        let administrator = URUser(jsonDict: (snapshot.value as! NSDictionary).objectForKey("administrator") as? NSDictionary)
-                        let picture = URMedia(jsonDict: (snapshot.value as! NSDictionary).objectForKey("picture") as? NSDictionary)
-                        let groupChatRoom = URGroupChatRoom(jsonDict: snapshot.value as? NSDictionary)
+                        let administrator = URUser(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "administrator") as? NSDictionary)
+                        let picture = URMedia(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "picture") as? NSDictionary)
+                        let groupChatRoom = URGroupChatRoom(jsonDict: snapshot?.value as? NSDictionary)
                         
-                        groupChatRoom.createdDate = (snapshot.value as! NSDictionary).objectForKey("createdDate") as! NSNumber
+                        groupChatRoom.createdDate = (snapshot?.value as! NSDictionary).object(forKey: "createdDate") as! NSNumber
                         groupChatRoom.administrator = administrator
                         groupChatRoom.picture = picture
                         groupChatRoom.type = URChatRoomType.Group
-                        groupChatRoom.key = snapshot.key
+                        groupChatRoom.key = snapshot?.key
                         
                         completion(groupChatRoom)
                         
                     }else {
-                        let individualChatRoom = URIndividualChatRoom(jsonDict: (snapshot.value as! NSDictionary))
-                        individualChatRoom.key = snapshot.key
+                        let individualChatRoom = URIndividualChatRoom(jsonDict: (snapshot?.value as! NSDictionary))
+                        individualChatRoom.key = snapshot?.key
                         individualChatRoom.type = URChatRoomType.Individual
                         
                         completion(individualChatRoom)
@@ -120,32 +145,32 @@ class URChatRoomManager: NSObject {
             })
     }
     
-    class func createIndividualChatRoom(user:URUser,completion:(chatRoom:URChatRoom,chatMembers:[URUser],title:String) -> Void) {
+    class func createIndividualChatRoom(_ user:URUser,completion:@escaping (_ chatRoom:URChatRoom,_ chatMembers:[URUser],_ title:String) -> Void) {
         let chatRoom:URChatRoom = URChatRoom()
         chatRoom.type = "Individual"
-        chatRoom.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+        chatRoom.createdDate = NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
         
         URChatRoomManager.save(chatRoom, members: [user,URUser.activeUser()!]) { (chatRoom:URChatRoom?) -> Void in
             if chatRoom != nil{
-                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key, completionWithUsers: { (users) -> Void in
-                    completion(chatRoom: chatRoom!,chatMembers:users,title:user.nickname)
+                URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom!.key!, completionWithUsers: { (users) -> Void in
+                    completion(chatRoom!,users,user.nickname!)
                 })
             }
         }
     }
     
-    class func save(chatRoom:URChatRoom, members:[URUser], completion:(URChatRoom) -> Void) {
+    class func save(_ chatRoom:URChatRoom, members:[URUser], completion:@escaping (URChatRoom) -> Void) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(self.path())
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: self.path())
             .childByAutoId()
-            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
                     print(error?.localizedDescription)
                 }else if !(firebase!.key.isEmpty) {
                     
-                    let chatMembers:URChatMember = URChatMember(key:firebase.key)
+                    let chatMembers:URChatMember = URChatMember(key:firebase!.key)
                     chatRoom.key = chatMembers.key                                        
                     
                     for user in members {
@@ -164,24 +189,24 @@ class URChatRoomManager: NSObject {
             })
     }
     
-    class func update(chatRoom:URChatRoom, newMembers:[URUser], completion:(URChatRoom) -> Void) {    
+    class func update(_ chatRoom:URChatRoom, newMembers:[URUser], completion:@escaping (URChatRoom) -> Void) {    
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(self.path())
-            .childByAppendingPath(chatRoom.key)
-            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error:NSError!, firebase: Firebase!) -> Void in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: self.path())
+            .child(byAppendingPath: chatRoom.key)
+            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
                 if error != nil {
                     print(error?.localizedDescription)
                 }else {
 
-                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key, completionWithUsers: { (members) -> Void in
+                    URChatMemberManager.getChatMembersByChatRoomWithCompletion(chatRoom.key!, completionWithUsers: { (members) -> Void in
                         for user in members {
-                            URChatMemberManager.removeMemberByChatRoomKey(user.key, chatRoomKey: chatRoom.key)
+                            URChatMemberManager.removeMemberByChatRoomKey(user.key, chatRoomKey: chatRoom.key!)
                         }
                         
-                        let chatMember = URChatMember(key:chatRoom.key)
+                        let chatMember = URChatMember(key:chatRoom.key!)
                         
                         for user in newMembers {
                             
@@ -201,26 +226,26 @@ class URChatRoomManager: NSObject {
     func getOpenGroups() {
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URChatRoomManager.path())
-            .queryOrderedByChild("privateAccess")
-            .queryEqualToValue(false)
-            .observeEventType(FEventType.ChildAdded, withBlock: { (snapshot) in
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URChatRoomManager.path())
+            .queryOrdered(byChild: "privateAccess")
+            .queryEqual(toValue: false)
+            .observe(FEventType.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
-                    let group = URGroupChatRoom(jsonDict: (snapshot.value as! NSDictionary))
-                    let administrator = URUser(jsonDict: (snapshot.value as! NSDictionary).objectForKey("administrator") as? NSDictionary)
+                    let group = URGroupChatRoom(jsonDict: (snapshot?.value as! NSDictionary))
+                    let administrator = URUser(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "administrator") as? NSDictionary)
                     
-                    if let picture = (snapshot.value as! NSDictionary).objectForKey("picture") as? NSDictionary{
+                    if let picture = (snapshot?.value as! NSDictionary).object(forKey: "picture") as? NSDictionary{
                         group.picture = URMedia(jsonDict: picture)
                     }
                     
                     group.administrator = administrator
-                    group.key = snapshot.key
+                    group.key = snapshot?.key
                     group.type = URChatRoomType.Group
                     
-                    URChatMemberManager.getByKey(group.key, completion: { (data, exists) -> Void in
+                    URChatMemberManager.getByKey(group.key!, completion: { (data, exists) -> Void in
                         if exists == true{
                             for object in data!.children {
                                 let userKey = (object as! FDataSnapshot).key
@@ -237,37 +262,37 @@ class URChatRoomManager: NSObject {
         
     }
     
-    class func blockUser(chatRoomKey:String) {
+    class func blockUser(_ chatRoomKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URChatRoomManager.path())
-            .childByAppendingPath(chatRoomKey)
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URChatRoomManager.path())
+            .child(byAppendingPath: chatRoomKey)
             .updateChildValues(["blocked" : URUser.activeUser()!.key])
     }
     
-    class func unblockUser(chatRoomKey:String) {
+    class func unblockUser(_ chatRoomKey:String) {
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URCountryProgram.path())
-            .childByAppendingPath(URCountryProgramManager.activeCountryProgram()!.code)
-            .childByAppendingPath(URChatRoomManager.path())
-            .childByAppendingPath(chatRoomKey)
-            .childByAppendingPath("blocked")
+            .child(byAppendingPath: URCountryProgram.path())
+            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
+            .child(byAppendingPath: URChatRoomManager.path())
+            .child(byAppendingPath: chatRoomKey)
+            .child(byAppendingPath: "blocked")
             .removeValue()
     }
     
-    class func getChatRooms(user:URUser,completion:([URChatRoom]?) -> Void){
+    class func getChatRooms(_ user:URUser,completion:@escaping ([URChatRoom]?) -> Void){
         
         var chatRoomList:[URChatRoom] = []
         
         URFireBaseManager.sharedInstance()
-            .childByAppendingPath(URUserManager.path())
-            .childByAppendingPath(user.key)
-            .childByAppendingPath("chatRooms")
-            .observeSingleEventOfType(FEventType.Value, withBlock: { snapshot in
-                if ((snapshot != nil) && !(snapshot.value is NSNull)) {
+            .child(byAppendingPath: URUserManager.path())
+            .child(byAppendingPath: user.key)
+            .child(byAppendingPath: "chatRooms")
+            .observeSingleEvent(of: FEventType.value, with: { snapshot in
+                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
                     
-                    for rest in snapshot.children.allObjects as! [FDataSnapshot] {
+                    for rest in snapshot?.children.allObjects as! [FDataSnapshot] {
                         
                         URChatMemberManager.getByKey(rest.key, completion: { (snapshot:FDataSnapshot?, exists:Bool) -> Void in
                             if exists == true && snapshot?.childrenCount > 0 {

@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URAddContributionTableViewCellDelegate {
-    func newContributionAdded(cell:URAddContributionTableViewCell)
+    func newContributionAdded(_ cell:URAddContributionTableViewCell)
 }
 
 class URAddContributionTableViewCell: UITableViewCell, UITextFieldDelegate {
@@ -24,7 +24,7 @@ class URAddContributionTableViewCell: UITableViewCell, UITextFieldDelegate {
         self.txtContribution.placeholder = "story_item_contribute_to_story".localized
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
@@ -32,7 +32,7 @@ class URAddContributionTableViewCell: UITableViewCell, UITextFieldDelegate {
     
     //MARK: Textfield Delegate
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+    func textFieldShouldBeginEditing(_ textField: UITextField) -> Bool {
         if let _ = URUser.activeUser() {
             return true
         }else {
@@ -41,7 +41,7 @@ class URAddContributionTableViewCell: UITableViewCell, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if !textField.text!.isEmpty{
             if let delegate = self.delegate {
                 delegate.newContributionAdded(self)

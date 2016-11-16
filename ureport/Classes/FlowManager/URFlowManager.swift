@@ -8,23 +8,23 @@
 
 class URFlowManager {
     
-    class func translateFields(contact:URContact, message:String) -> String {
-        return message.stringByReplacingOccurrencesOfString("@contact", withString: contact.name!)
+    class func translateFields(_ contact:URContact, message:String) -> String {
+        return message.replacingOccurrences(of: "@contact", with: contact.name!)
     }
     
-    class func isFlowActive(flowRun:URFlowRun) -> Bool {
+    class func isFlowActive(_ flowRun:URFlowRun) -> Bool {
         return (flowRun.completed == false && !URFlowManager.isFlowExpired(flowRun))
     }
     
-    class func isFlowExpired(flowRun:URFlowRun) -> Bool {
-        return flowRun.expired_on != nil && (flowRun.expires_on.compare(URDateUtil.currentDate()) == NSComparisonResult.OrderedDescending)
+    class func isFlowExpired(_ flowRun:URFlowRun) -> Bool {
+        return flowRun.expired_on != nil && (flowRun.expires_on.compare(URDateUtil.currentDate() as Date) == ComparisonResult.orderedDescending)
     }
     
-    class func isLastActionSet(actionSet:URFlowActionSet?) -> Bool {
+    class func isLastActionSet(_ actionSet:URFlowActionSet?) -> Bool {
         return actionSet == nil || actionSet?.destination == nil || actionSet!.destination!.isEmpty
     }
     
-    class func hasRecursiveDestination(flowDefinition:URFlowDefinition, ruleSet:URFlowRuleset, rule:URFlowRule) -> Bool {
+    class func hasRecursiveDestination(_ flowDefinition:URFlowDefinition, ruleSet:URFlowRuleset, rule:URFlowRule) -> Bool {
             if rule.destination != nil {
                 let actionSet = getFlowActionSetByUuid(flowDefinition,  destination: rule.destination!, currentActionSet: nil);
                 return actionSet != nil && actionSet?.destination != nil && actionSet?.destination == ruleSet.uuid!
@@ -32,7 +32,7 @@ class URFlowManager {
         return false;
     }
     
-    class func getFlowActionSetByUuid(flowDefinition: URFlowDefinition, destination: String?, currentActionSet:URFlowActionSet?) -> URFlowActionSet? {
+    class func getFlowActionSetByUuid(_ flowDefinition: URFlowDefinition, destination: String?, currentActionSet:URFlowActionSet?) -> URFlowActionSet? {
         for actionSet in flowDefinition.actionSets! {
             if destination != nil && destination == actionSet.uuid! {
                 return actionSet
@@ -54,7 +54,7 @@ class URFlowManager {
 
     }
     
-    class func getRulesetForAction(flowDefinition: URFlowDefinition, actionSet: URFlowActionSet?) -> URFlowRuleset? {
+    class func getRulesetForAction(_ flowDefinition: URFlowDefinition, actionSet: URFlowActionSet?) -> URFlowRuleset? {
         for ruleSet in flowDefinition.ruleSets! {
             if actionSet != nil && actionSet?.destination != nil
                 && actionSet?.destination == ruleSet.uuid {

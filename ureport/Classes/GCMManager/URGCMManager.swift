@@ -17,7 +17,7 @@ class URGCMManager: NSObject {
     static let registrationKey = "onRegistrationCompleted"
     static let messageKey = "onMessageReceived"
     
-    class func handleNotification(userData:[NSObject : AnyObject]) {
+    class func handleNotification(_ userData:[AnyHashable: Any]) {
         let from = userData["from"] as! String
         if from.hasPrefix(chatTopic) {
             let chatMessageDict = convertJsonToDictionary(userData["chatMessage"] as! String)
@@ -30,10 +30,10 @@ class URGCMManager: NSObject {
         }
     }
     
-    private class func convertJsonToDictionary(value:String) -> NSDictionary? {
-        if let data = value.dataUsingEncoding(NSUTF8StringEncoding) {
+    fileprivate class func convertJsonToDictionary(_ value:String) -> NSDictionary? {
+        if let data = value.data(using: String.Encoding.utf8) {
             do {
-                return try NSJSONSerialization.JSONObjectWithData(data, options: .MutableContainers) as? NSDictionary
+                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
             } catch {
                 print("Error on converting json to dictionary!")
             }
@@ -41,22 +41,17 @@ class URGCMManager: NSObject {
         return nil
     }
     
-    private class func isUserAllowedForMessageNotification(user:URUser?) -> Bool {
+    fileprivate class func isUserAllowedForMessageNotification(_ user:URUser?) -> Bool {
         return URUser.activeUser() != nil && user != nil
             && user!.key != URUser.activeUser()?.key
     }
     
-    class func registerUserInTopic(user:URUser,chatRoom:URChatRoom) {
+    class func registerUserInTopic(_ user:URUser,chatRoom:URChatRoom) {
         if user.pushIdentity != nil {
-            GCMPubSub.sharedInstance().subscribeWithToken(user.pushIdentity, topic: "\(self.chatTopic)\(chatRoom.key)",
+            GCMPubSub.sharedInstance().subscribe(withToken: user.pushIdentity!, topic: "\(self.chatTopic)\(chatRoom.key!)",
                                                           options: nil, handler: {(error) -> Void in
                                                             if (error != nil) {
-                                                                // Treat the "already subscribed" error more gently
-                                                                if error.code == 3001 {
-                                                                    print("Already subscribed to topic")
-                                                                } else {
-                                                                    print("Subscription failed: \(error.localizedDescription)");
-                                                                }
+                                                                print("Subscription failed: \(error?.localizedDescription)")
                                                             } else {
                                                                 NSLog("Subscribed to topic");
                                                             }
@@ -64,7 +59,7 @@ class URGCMManager: NSObject {
         }
     }
     
-    class func notifyChatMessage(chatRoom:URChatRoom, chatMessage:URChatMessage) {
+    class func notifyChatMessage(_ chatRoom:URChatRoom, chatMessage:URChatMessage) {
         let headers = [
             "Authorization": URConstant.Gcm.GCM_AUTHORIZATION
         ]
@@ -72,44 +67,31 @@ class URGCMManager: NSObject {
         let message = chatMessage.message != nil ? chatMessage.message! : "label_chat_picture_notification".localized
         chatMessage.message = message
         
-        let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
-        input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname): \(chatMessage.message!)",type: URConstant.NotificationType.CHAT)
+        let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key!)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
+        input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname!): \(chatMessage.message!)",type: URConstant.NotificationType.CHAT)
         
         let param = Mapper<URGcmInput>().toJSON(input)
         
-        Alamofire.request(.POST, URConstant.Gcm.GCM_URL, parameters: param, encoding: .JSON, headers: headers).debugLog()
+        Alamofire.request(URConstant.Gcm.GCM_URL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).debugLog()
     }
     
-    class func buildChatMessageData(chatRoom:URChatRoom, chatMessage:URChatMessage) -> [String : AnyObject] {
+    class func buildChatMessageData(_ chatRoom:URChatRoom, chatMessage:URChatMessage) -> [String : AnyObject] {
         let chatMessageDict:[String : AnyObject] = [
-            "message": chatMessage.message!,
-            "date": URDateUtil.dateFormatterRapidPro(NSDate(timeIntervalSince1970: NSNumber(double: chatMessage.date.doubleValue/1000) as NSTimeInterval)),
-            "user": buildUserData(chatMessage.user)
+            "message": chatMessage.message! as AnyObject,
+            "date": URDateUtil.dateFormatterRapidPro(Date(timeIntervalSince1970: NSNumber(value: chatMessage.date.doubleValue/1000 as Double) as TimeInterval)) as AnyObject,
+            "user": buildUserData(chatMessage.user) as AnyObject
         ]
         return [
-            "chatMessage": chatMessageDict,
-            "chatRoom": ["key": chatRoom.key]
+            "chatMessage": chatMessageDict as AnyObject,
+            "chatRoom": ["key": chatRoom.key] as AnyObject
         ];
     }
     
-    class func buildUserData(user:URUser) -> [String : AnyObject] {
+    class func buildUserData(_ user:URUser) -> [String : AnyObject] {
         return [
-            "key": user.key!,
-            "nickname": user.nickname!
+            "key": user.key! as AnyObject,
+            "nickname": user.nickname! as AnyObject
         ]
-    }
-    
-    class func registrationHandler(registrationToken: String!, error: NSError!) {
-        if (registrationToken != nil) {
-            if let user = URUser.activeUser() {
-                if (user.pushIdentity == nil || user.pushIdentity.isEmpty) || (!user.pushIdentity.isEmpty && (user.pushIdentity != registrationToken)){
-                    user.pushIdentity = registrationToken
-                    URUserManager.updatePushIdentity(user)
-                }
-            }
-        } else {
-            print("Registration to GCM failed with error: \(error.localizedDescription)")
-        }
     }
     
 }

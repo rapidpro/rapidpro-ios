@@ -16,10 +16,10 @@ class URCountryProgram: Serializable {
     var org:NSNumber?
     var rapidProHostAPI:String!
     var ureportHostAPI:String!
-    var twitter:String!
-    var facebook:String!
+    var twitter:String?
+    var facebook:String?
     var groupName:String!
-    var stateField:String!
+    var stateField:String?
     
     init (code:String!,
           themeColor:UIColor?,

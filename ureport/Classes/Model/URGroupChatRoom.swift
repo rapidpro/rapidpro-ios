@@ -10,11 +10,11 @@ import UIKit
 
 class URGroupChatRoom: URChatRoom {
    
-    var mediaAllowed:NSNumber!
+    var mediaAllowed:NSNumber?
     var administrator:URUser!
-    var picture:URMedia!
+    var picture:URMedia?
     var privateAccess:NSNumber!
     var title:String!
     var subject:String!
-    var userIsMember:Bool!
+    var userIsMember:Bool?
 }

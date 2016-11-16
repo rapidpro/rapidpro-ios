@@ -12,26 +12,27 @@ import ObjectMapper
 class URUser: Serializable {
     
     var key: String!
-    var nickname: String!
-    var email: String!
-    var state: String!
-    var birthday: NSNumber!
-    var country: String!
-    var picture: String!
-    var gender: String!
-    var type: String!
-    var countryProgram: String!
-    var chatRooms:NSDictionary!
-    var contributions:NSNumber!
-    var points:NSNumber!
-    var stories:NSNumber!
-    var polls:NSNumber!
-    var pushIdentity:String!
-    var publicProfile:NSNumber!
-    var born:String!
-    var district:String!
-    var moderator:NSNumber!
-    var masterModerator:NSNumber!
+    var nickname: String?
+    var email: String?
+    var state: String?
+    var birthday: NSNumber?
+    var country: String?
+    var picture: String?
+    var gender: String?
+    var type: String?
+    var countryProgram: String?
+    var chatRooms:NSDictionary?
+    var contributions:NSNumber?
+    var points:NSNumber?
+    var stories:NSNumber?
+    var polls:NSNumber?
+    var pushIdentity:String?
+    var publicProfile:NSNumber?
+    var born:String?
+    var district:String?
+    var moderator:NSNumber?
+    var masterModerator:NSNumber?
+    var socialUid:String?
     
     override init() {
         super.init()
@@ -40,13 +41,13 @@ class URUser: Serializable {
     //MARK: User Account Manager
     
     static func activeUser() -> URUser? {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        var encodedData: NSData?
+        let defaults: UserDefaults = UserDefaults.standard
+        var encodedData: Data?
         
-        encodedData = defaults.objectForKey("user") as? NSData
+        encodedData = defaults.object(forKey: "user") as? Data
         
         if encodedData != nil {
-            let user: URUser = URUser(jsonDict: NSKeyedUnarchiver.unarchiveObjectWithData(encodedData!) as? NSDictionary)
+            let user: URUser = URUser(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
             return user
         }else{
             return nil
@@ -54,17 +55,17 @@ class URUser: Serializable {
         
     }
     
-    static func setActiveUser(user: URUser!) {
+    static func setActiveUser(_ user: URUser!) {
         self.deactivateUser()
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        let encodedObject: NSData = NSKeyedArchiver.archivedDataWithRootObject(user.toDictionary())
-        defaults.setObject(encodedObject, forKey: "user")
+        let defaults: UserDefaults = UserDefaults.standard
+        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: user.toDictionary())
+        defaults.set(encodedObject, forKey: "user")
         defaults.synchronize()
     }
     
     static func deactivateUser() {
-        let defaults: NSUserDefaults = NSUserDefaults.standardUserDefaults()
-        defaults.removeObjectForKey("user")
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: "user")
         defaults.synchronize()
     }
 

@@ -17,7 +17,7 @@ class URFlowActionSet: Mappable {
     var uuid:String?
     var actions:[URFlowAction]?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.positionX    <- map["x"]

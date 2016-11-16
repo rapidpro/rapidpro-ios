@@ -46,23 +46,23 @@ class URNewsDetailViewController: UIViewController {
         let scrollViewHeight = self.lbContent.frame.size.height + 181 + self.scrollViewMedias.frame.height + 35
         
         self.contentViewHeight.constant = scrollViewHeight
-        self.scrollView.contentSize = CGSizeMake(UIScreen.mainScreen().bounds.width,scrollViewHeight)
+        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width,height: scrollViewHeight)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        URNavigationManager.setupNavigationBarWithType(.Clear)
+        URNavigationManager.setupNavigationBarWithType(.clear)
         self.navigationController?.hidesBarsOnSwipe = true
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "News")
+        tracker?.set(kGAIScreenName, value: "News")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.navigationController?.hidesBarsOnSwipe = false
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -73,7 +73,7 @@ class URNewsDetailViewController: UIViewController {
     func setupUI() {
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)        
         self.lbContent.setSizeFont(14)        
-        self.viewOpacityImage.backgroundColor = UIColor.blackColor().colorWithAlphaComponent(0.38)
+        self.viewOpacityImage.backgroundColor = UIColor.black.withAlphaComponent(0.38)
         
         self.lbTitle.text = news.title
         self.lbMarkers.text = news.tags
@@ -81,7 +81,7 @@ class URNewsDetailViewController: UIViewController {
         
         if let images = news.images {
             if images.count > 0 {
-                self.imgView.sd_setImageWithURL(NSURL(string: images[0]))
+                self.imgView.sd_setImage(with: URL(string: images[0]))
             }
         }
         
@@ -92,7 +92,7 @@ class URNewsDetailViewController: UIViewController {
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.ISScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
         
         if self.news.images != nil && self.news.images.count > 0{
             var photoIndex = 0
@@ -101,20 +101,20 @@ class URNewsDetailViewController: UIViewController {
                 
                 let imgView = UIImageView(frame: CGRect(x: 0, y: 0, width: 100, height: 115))
                 imgView.layer.borderWidth = 2
-                imgView.layer.borderColor = UIColor.whiteColor().CGColor
-                imgView.contentMode = UIViewContentMode.ScaleAspectFill
-                imgView.userInteractionEnabled = true
+                imgView.layer.borderColor = UIColor.white.cgColor
+                imgView.contentMode = UIViewContentMode.scaleAspectFill
+                imgView.isUserInteractionEnabled = true
                 
                 let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imgViewTapped))
                 tapGesture.numberOfTouchesRequired = 1
                 
                 imgView.addGestureRecognizer(tapGesture)
                 
-                imgView.sd_setImageWithURL(NSURL(string:imageURL), completed: { (image, _, _, _) -> Void in
+                imgView.sd_setImage(with: URL(string:imageURL), completed: { (image, _, _, _) -> Void in
                     self.scrollViewMedias.addCustomView(imgView)
                     imgView.tag = photoIndex
                     
-                    let title = NSAttributedString(string: "\(photoIndex + 1)", attributes: [NSForegroundColorAttributeName: UIColor.whiteColor()])
+                    let title = NSAttributedString(string: "\(photoIndex + 1)", attributes: [NSForegroundColorAttributeName: UIColor.white])
                     let photo = PhotoShow(image: imgView.image, attributedCaptionTitle: title)
                     photo.index = photoIndex
                     
@@ -128,9 +128,9 @@ class URNewsDetailViewController: UIViewController {
         }
     }
     
-    func imgViewTapped(sender:UITapGestureRecognizer) {        
+    func imgViewTapped(_ sender:UITapGestureRecognizer) {        
         let photosViewController = NYTPhotosViewController(photos: self.photos, initialPhoto:self.photos[sender.view!.tag])
-        presentViewController(photosViewController, animated: true, completion: nil)
+        present(photosViewController, animated: true, completion: nil)
         
     }
     

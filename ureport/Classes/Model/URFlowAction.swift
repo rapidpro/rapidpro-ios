@@ -14,7 +14,7 @@ class URFlowAction: Mappable {
     var message: [String : String] = [:]
     var type:String?
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.message    <- map["msg"]

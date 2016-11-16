@@ -10,9 +10,9 @@ import UIKit
 
 enum URChatCellType {
     
-    case CreateGroup
-    case CreateIndividualChat
-    case Individual
-    case Group
+    case createGroup
+    case createIndividualChat
+    case individual
+    case group
         
 }

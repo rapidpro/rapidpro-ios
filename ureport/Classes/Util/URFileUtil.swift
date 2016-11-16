@@ -10,15 +10,15 @@ import UIKit
 
 class URFileUtil: NSObject {
 
-    static let outPutURLDirectory = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0] as NSString
+    static let outPutURLDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as NSString
     
-    class func removeFile(fileURL: NSURL) {
+    class func removeFile(_ fileURL: URL) {
         let filePath = fileURL.path
-        let fileManager = NSFileManager.defaultManager()
+        let fileManager = FileManager.default
         
-        if fileManager.fileExistsAtPath(filePath!) {
+        if fileManager.fileExists(atPath: filePath) {
             do {
-                try fileManager.removeItemAtPath(filePath!)
+                try fileManager.removeItem(atPath: filePath)
             }catch let error as NSError {
                 print("Can't remove file \(error.localizedDescription)")
             }
@@ -28,13 +28,13 @@ class URFileUtil: NSObject {
         }
     }
     
-    class func writeFile(data:NSData) -> String{
+    class func writeFile(_ data:Data) -> String{
         
-        let path = URFileUtil.outPutURLDirectory.stringByAppendingPathComponent("audio.3gp")
+        let path = URFileUtil.outPutURLDirectory.appendingPathComponent("audio.3gp")
         
-        URFileUtil.removeFile(NSURL(string: path)!)
+        URFileUtil.removeFile(URL(string: path)!)
         
-        if data.writeToFile(path, atomically: true) == true {
+        if ((try? data.write(to: URL(fileURLWithPath: path), options: [.atomic])) != nil) == true {
             print("file available")
         }
         

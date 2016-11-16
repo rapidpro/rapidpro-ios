@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URNewGroupTableViewCellDelegate {
-    func createNewGroupCellDidTap(cell:URNewGroupTableViewCell)
+    func createNewGroupCellDidTap(_ cell:URNewGroupTableViewCell)
 }
 
 class URNewGroupTableViewCell: UITableViewCell {
@@ -25,14 +25,14 @@ class URNewGroupTableViewCell: UITableViewCell {
         
         self.lbName.text = "new_group".localized
         self.imgViewGroup.image = UIImage(named: "icon_group_add_grey")
-        self.roundedView.backgroundColor = UIColor.whiteColor()
+        self.roundedView.backgroundColor = UIColor.white
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(createNewGroup))
         tapGesture.numberOfTapsRequired = 1
         self.contentView.addGestureRecognizer(tapGesture)
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state

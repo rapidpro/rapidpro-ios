@@ -39,14 +39,14 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
         setupLayout()
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Modal Profile")
+        tracker?.set(kGAIScreenName, value: "Modal Profile")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
         
         
     }
@@ -63,7 +63,7 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
     //MARK: Class Methods
     
     func setupLayout() {
-        self.btInviteToChat.setTitle("label_chat".localized, forState: UIControlState.Normal)
+        self.btInviteToChat.setTitle("label_chat".localized, for: UIControlState())
         self.lbPoints.text = "label_view_points".localized
         self.lbStories.text = "main_stories".localized
     }
@@ -86,53 +86,59 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
         }
         
         self.roundedView.layer.borderWidth = 2
-        self.roundedView.layer.borderColor = UIColor.whiteColor().CGColor
+        self.roundedView.layer.borderColor = UIColor.white.cgColor
         
         if let picture = user.picture {
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(1)
-            self.imageProfile.sd_setImageWithURL(NSURL(string: picture))
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
+            self.imageProfile.sd_setImage(with: URL(string: picture))
         }else{
-            self.roundedView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.2)
-            self.imageProfile.contentMode = UIViewContentMode.Center
+            self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(0.2)
+            self.imageProfile.contentMode = UIViewContentMode.center
             self.imageProfile.image = UIImage(named: "ic_person")
         }
         
         if self.user.key! == URUser.activeUser()!.key {
-            self.btInviteToChat.hidden = true
+            self.btInviteToChat.isHidden = true
         }else{
-            self.btInviteToChat.hidden = false
+            self.btInviteToChat.isHidden = false
         }
         
     }
     
     func close() {
         
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
-            self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-            }) { (finished) -> Void in
-                NSNotificationCenter.defaultCenter().postNotificationName("modalProfileDidClosed", object: nil)
-            self.dismissViewControllerAnimated(true, completion: nil)
-        }
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            self.view.backgroundColor = self.view.backgroundColor?.withAlphaComponent(0)
+            }, completion: { (finished) -> Void in
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "modalProfileDidClosed"), object: nil)
+            self.dismiss(animated: true, completion: nil)
+        }) 
         
     }
     
     //MARK: URChatRoomManagerDelegate
     
-    func openChatRoom(chatRoom: URChatRoom, members: [URUser], title: String) {
-        MBProgressHUD.hideHUDForView(self.view, animated: true)
+    func openChatRoom(_ chatRoom: URChatRoom, members: [URUser], title: String) {
+        MBProgressHUD.hide(for: self.view, animated: true)
         URNavigationManager.navigation.pushViewController(URMessagesViewController(chatRoom: chatRoom, chatMembers: members, title: title), animated: true)
     }
     
     
     //MARK: Button Events
     
-    @IBAction func btInviteToChatTapped(sender: AnyObject) {
+    @IBAction func btInviteToChatTapped(_ sender: AnyObject) {
         self.close()
-        MBProgressHUD.showHUDAddedTo(self.view, animated: true)
-        chatRoomManager.createIndividualChatRoomIfPossible(user,isIndividualChatRoom: true)
+        
+        URUserManager.getByKey(user!.key, completion: { (friend:URUser?, exists:Bool) -> Void in
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            if exists == true && friend != nil {
+                self.chatRoomManager.createIndividualChatRoomIfPossible(friend!,isIndividualChatRoom: true)
+            }
+        })
+        
     }
     
-    @IBAction func btCloseTapped(sender: AnyObject) {
+    @IBAction func btCloseTapped(_ sender: AnyObject) {
         self.close()
     }
     

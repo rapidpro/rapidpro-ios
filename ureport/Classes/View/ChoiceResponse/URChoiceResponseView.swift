@@ -9,7 +9,7 @@
 import UIKit
 
 protocol URChoiceResponseDelegate {
-    func onChoiceSelected(flowRule:URFlowRule)
+    func onChoiceSelected(_ flowRule:URFlowRule)
 }
 
 class URChoiceResponseView: URResponseView {
@@ -21,26 +21,26 @@ class URChoiceResponseView: URResponseView {
     
     //MARK: Superclass methods
     
-    override func setFlowRule(flowDefinition:URFlowDefinition, flowRule:URFlowRule) {
+    override func setFlowRule(_ flowDefinition:URFlowDefinition, flowRule:URFlowRule) {
         super.setFlowRule(flowDefinition, flowRule: flowRule)
         lbResponse.text = flowRule.ruleCategory[getLanguage()]
     }
     
     override func unselectResponse() {
-        btCheck.selected = false
-        btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), forState: UIControlState.Normal)
+        btCheck.isSelected = false
+        btCheck.setBackgroundImage(UIImage(named: "radio_button_Inactive"), for: UIControlState())
     }
     
-    override func selectLanguage(language: String?) {
+    override func selectLanguage(_ language: String?) {
         lbResponse.text = flowRule.ruleCategory[getLanguage()]
     }
     
     //MARK: Actions
     
-    @IBAction func toggleCheckButton(sender:AnyObject?) {
-        if !btCheck.selected {
-            btCheck.selected = true
-            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), forState: UIControlState.Selected)
+    @IBAction func toggleCheckButton(_ sender:AnyObject?) {
+        if !btCheck.isSelected {
+            btCheck.isSelected = true
+            btCheck.setBackgroundImage(UIImage(named: "radio_button_active"), for: UIControlState.selected)
             
             if delegate != nil {
                 delegate?.onChoiceSelected(flowRule)

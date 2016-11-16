@@ -35,7 +35,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     let markerViewIPadController = URMarkerViewIPadController()
     let mediaSourceViewController = URMediaSourceViewController()
     
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: NSBundle?) {
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: "URAddStoryViewController", bundle: nil)
     }
 
@@ -46,37 +46,37 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     override func viewDidLoad() {
         super.viewDidLoad()
         youtubeMediaList = []
-        appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        appDelegate = UIApplication.shared.delegate as! AppDelegate
         setupUI()
         setupScrollViewPage()
         setupActionSheet()
         addRightButtonItem()
         markerTableViewController.delegate = self
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(pointsScoredDidClosed), name:"pointsScoredDidClosed", object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(pointsScoredDidClosed), name:NSNotification.Name(rawValue: "pointsScoredDidClosed"), object: nil)
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.view.endEditing(true)        
     }
 
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
         let tracker = GAI.sharedInstance().defaultTracker
-        tracker.set(kGAIScreenName, value: "Story Creation")
+        tracker?.set(kGAIScreenName, value: "Story Creation")
         
-        let builder = GAIDictionaryBuilder.createScreenView()
-        tracker.send(builder.build() as [NSObject : AnyObject])
+        let builder = GAIDictionaryBuilder.createScreenView().build()
+        tracker?.send(builder as [NSObject : AnyObject]!)
     }
     
     //MARK: Button Events
     
-    @IBAction func btSendHistoryTapped(sender: AnyObject) {
-        self.navigationController!.popViewControllerAnimated(true)
+    @IBAction func btSendHistoryTapped(_ sender: AnyObject) {
+        self.navigationController!.popViewController(animated: true)
     }
     
-    @IBAction func btAddMarkersTapped(sender: AnyObject) {
+    @IBAction func btAddMarkersTapped(_ sender: AnyObject) {
         if URConstant.isIpad {
             markerViewIPadController.viewController = self
             markerViewIPadController.show(true, inViewController: self)
@@ -85,7 +85,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         }
     }
 
-    @IBAction func btAddMediaTapped(sender: AnyObject) {
+    @IBAction func btAddMediaTapped(_ sender: AnyObject) {
         self.view.endEditing(true)
         
         self.view.addSubview(mediaSourceViewController.view)
@@ -95,23 +95,23 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     //MARK: MediaSourceViewControllerDelegate
 
-    func newMediaAdded(mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
+    func newMediaAdded(_ mediaSourceViewController: URMediaSourceViewController, media: URMedia) {
         setupMediaViewMediaObject(media)
     }
 
     //MARK: Class Methods
 
-    func pointsScoredDidClosed(notification:NSNotification) {
+    func pointsScoredDidClosed(_ notification:Notification) {
         URNavigationManager.setFrontViewController(URMainViewController())
     }
     
     func addRightButtonItem() {
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "action_title_publish".localized, style: UIBarButtonItemStyle.Done, target: self, action: #selector(buildStory))
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "action_title_publish".localized, style: UIBarButtonItemStyle.done, target: self, action: #selector(buildStory))
     }
     
     func buildStory() {
         
-        if let textField = self.view.findTextFieldEmptyInView(self.view) where textField != self.txtMarkers {
+        if let textField = self.view.findTextFieldEmptyInView(self.view) , textField != self.txtMarkers {
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textField.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
@@ -121,7 +121,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             return
         }
         
-        MBProgressHUD.showHUDAddedTo(self.view.window!, animated: true)
+        MBProgressHUD.showAdded(to: self.view.window!, animated: true)
         
         if !self.mediaList.isEmpty {
             
@@ -142,7 +142,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         
     }
     
-    func saveStory(medias:[URMedia]?) {
+    func saveStory(_ medias:[URMedia]?) {
         self.view.endEditing(true)                
         
         let story = URStory()
@@ -159,7 +159,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             
         }
         
-        story.createdDate = NSNumber(longLong:Int64(NSDate().timeIntervalSince1970 * 1000))
+        story.createdDate = NSNumber(value: Int64(Date().timeIntervalSince1970 * 1000) as Int64)
         story.title = self.txtTitle.text
         story.content = self.txtHistory.text
         story.markers = self.txtMarkers.text
@@ -170,20 +170,20 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             (URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true)
         
         URStoryManager.saveStory(story, isModerator:isModerator, completion: { (success:Bool) -> Void in
-            MBProgressHUD.hideHUDForView(self.view.window!, animated: true)
+            MBProgressHUD.hide(for: self.view.window!, animated: true)
             
-            dispatch_async(dispatch_get_main_queue(), {
+            DispatchQueue.main.async(execute: {
                 
-                let alertController = UIAlertController(title: nil, message: "message_story_publish_warning".localized, preferredStyle: .Alert)
+                let alertController = UIAlertController(title: nil, message: "message_story_publish_warning".localized, preferredStyle: .alert)
                 
-                let cancelAction = UIAlertAction(title: "Ok", style: .Cancel) { action -> Void in
+                let cancelAction = UIAlertAction(title: "Ok", style: .cancel) { action -> Void in
                     self.showPointsScoredViewController()
                 }
                 
                 alertController.addAction(cancelAction)
                 
                 if isModerator == false {
-                    URNavigationManager.navigation.presentViewController(alertController, animated: true, completion: nil)
+                    URNavigationManager.navigation.present(alertController, animated: true, completion: nil)
                 }else{
                     self.showPointsScoredViewController()
                 }
@@ -194,13 +194,13 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     }
     
     func showPointsScoredViewController() {
-        let pointsScoredViewController = URPointsScoredViewController(scoreType:.Story)
-        pointsScoredViewController.modalPresentationStyle = UIModalPresentationStyle.OverCurrentContext
+        let pointsScoredViewController = URPointsScoredViewController(scoreType:.story)
+        pointsScoredViewController.modalPresentationStyle = UIModalPresentationStyle.overCurrentContext
         
-        URNavigationManager.navigation.presentViewController(pointsScoredViewController, animated: true) { () -> Void in
-            UIView.animateWithDuration(0.3) { () -> Void in
-                pointsScoredViewController.view.backgroundColor  = UIColor.blackColor().colorWithAlphaComponent(0.5)
-            }
+        URNavigationManager.navigation.present(pointsScoredViewController, animated: true) { () -> Void in
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
+                pointsScoredViewController.view.backgroundColor  = UIColor.black.withAlphaComponent(0.5)
+            }) 
         }
     }
     
@@ -213,7 +213,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.ISScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
     }
     
     func setupUI() {
@@ -223,11 +223,11 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         self.lbInsertImage.text = "create_story_title_media".localized
         
         self.txtHistory.text = defaultText
-        self.txtHistory.textColor = UIColor.lightGrayColor()
+        self.txtHistory.textColor = UIColor.lightGray
     }
     
-    func setupMediaViewMediaObject(media:URMedia) {
-        let viewMedia = NSBundle.mainBundle().loadNibNamed("URMediaView", owner: 0, options: nil)[0] as! URMediaView
+    func setupMediaViewMediaObject(_ media:URMedia) {
+        let viewMedia = Bundle.main.loadNibNamed("URMediaView", owner: 0, options: nil)?[0] as! URMediaView
         
         viewMedia.setupWithMediaObject(media)
         viewMedia.delegate = self
@@ -249,21 +249,21 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     //MARK: TextView Delegate
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.text == defaultText {
             textView.text = nil
-            textView.textColor = UIColor.blackColor()
+            textView.textColor = UIColor.black
         }
     }
     
-    func textViewDidEndEditing(textView: UITextView) {
+    func textViewDidEndEditing(_ textView: UITextView) {
         if textView.text.isEmpty {
             textView.text = defaultText
-            textView.textColor = UIColor.lightGrayColor()
+            textView.textColor = UIColor.lightGray
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
         if textView == txtTitle{
             return textView.text.characters.count + (text.characters.count - range.length) <= maxTitleLength
         }else {
@@ -273,16 +273,16 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     //MARK: URMarkerTableViewControllerDelegate
     
-    func markersList(markers: [URMarker]) {
+    func markersList(_ markers: [URMarker]) {
                 
-        var markersString = "\(markers)".stringByReplacingOccurrencesOfString("[", withString: "", options: [], range: nil)
-        markersString = "\(markersString)".stringByReplacingOccurrencesOfString("]", withString: "", options: [], range: nil)
+        var markersString = "\(markers)".replacingOccurrences(of: "[", with: "", options: [], range: nil)
+        markersString = "\(markersString)".replacingOccurrences(of: "]", with: "", options: [], range: nil)
         txtMarkers.text = markersString
     }
     
     //MARK: URMediaViewDelegate
     
-    func mediaViewTapped(mediaView: URMediaView) {
+    func mediaViewTapped(_ mediaView: URMediaView) {
         
         for i in 0...self.scrollViewMedias.views!.count-1 {
             let mView = self.scrollViewMedias.views![i] as! URMediaView
@@ -298,7 +298,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
 
     }
     
-    func removeMediaView(mediaView: URMediaView) {
+    func removeMediaView(_ mediaView: URMediaView) {
         
         for i in 0...self.scrollViewMedias.views!.count-1 {
             let mView = self.scrollViewMedias.views![i] as! URMediaView
@@ -308,7 +308,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                     
                     if let media = mView.media {
                         if media == self.youtubeMediaList[j] {
-                            self.youtubeMediaList.removeAtIndex(j)
+                            self.youtubeMediaList.remove(at: j)
                             break
                         }
                     }
@@ -328,7 +328,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     //MARK: ImagePickerControllerDelegate
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
             let imageMedia = URImageMedia()
@@ -336,17 +336,17 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
             setupMediaViewMediaObject(imageMedia)
         }
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
 
     }
     
     //MARK: ISScrollViewPageDelegate
     
-    func scrollViewPageDidScroll(scrollView: UIScrollView) {
+    func scrollViewPageDidScroll(_ scrollView: UIScrollView) {
         
     }
     
-    func scrollViewPageDidChanged(scrollViewPage: ISScrollViewPage, index: Int) {
+    func scrollViewPageDidChanged(_ scrollViewPage: ISScrollViewPage, index: Int) {
         
     }
     

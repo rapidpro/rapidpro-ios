@@ -23,7 +23,7 @@ class URGcmNotification : Mappable {
         self.sound = "default"
     }
     
-    required init?(_ map: Map){}
+    required init?(map: Map){}
     
     func mapping(map: Map) {
         self.title       <- map["title"]

@@ -10,10 +10,10 @@ import UIKit
 
 struct URConstant {
    
-    static let keyPath = NSBundle.mainBundle().pathForResource(URFireBaseManager.Properties, ofType: "plist")
+    static let keyPath = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist")
     static let keyDictionary = NSDictionary(contentsOfFile: URConstant.keyPath!)
     
-    static let isIpad = UIDevice.currentDevice().userInterfaceIdiom == .Pad
+    static let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
     struct Color {
         static let PRIMARY = UIColor(rgba: "#42b6e7")
@@ -47,6 +47,69 @@ struct URConstant {
         static let ContributionPoints = 1
     }
     
+    struct Auth {
+        
+        static func AUTH_LOGIN() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_LOGIN"] != nil {
+                    return dictionary["AUTH_LOGIN"] as! String
+                }else{
+                    print("AUTH_LOGIN doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_FACEBOOK() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_FACEBOOK"] != nil {
+                    return dictionary["AUTH_FACEBOOK"] as! String
+                }else{
+                    print("AUTH_FACEBOOK doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_GOOGLE() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_GOOGLE"] != nil {
+                    return dictionary["AUTH_GOOGLE"] as! String
+                }else{
+                    print("AUTH_GOOGLE doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_TWITTER() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_TWITTER"] != nil {
+                    return dictionary["AUTH_TWITTER"] as! String
+                }else{
+                    print("AUTH_TWITTER doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func AUTH_REGISTER() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["AUTH_REGISTER"] != nil {
+                    return dictionary["AUTH_REGISTER"] as! String
+                }else{
+                    print("AUTH_REGISTER doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+    }
+    
     struct SocialNetwork {
         
         static func TWITTER_APP_ID() -> String {
@@ -56,6 +119,18 @@ struct URConstant {
                     return dictionary["TWITTER_APP_ID"] as! String
                 }else{
                     print("TWITTER_APP_ID doesn't exists in key.plist")
+                }
+            }
+            return ""
+        }
+        
+        static func TWITTER_CONSUMER_SECRET() -> String {
+            
+            if let dictionary = keyDictionary {
+                if dictionary["TWITTER_CONSUMER_SECRET"] != nil {
+                    return dictionary["TWITTER_CONSUMER_SECRET"] as! String
+                }else{
+                    print("TWITTER_CONSUMER_SECRET doesn't exists in key.plist")
                 }
             }
             return ""
@@ -112,7 +187,7 @@ struct URConstant {
             return ""
         }
         
-        static func S3_BUCKET_NAME(path:URUploadPath) -> String {
+        static func S3_BUCKET_NAME(_ path:URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["S3_BUCKET_NAME_\(path.rawValue)"] != nil {
@@ -124,7 +199,7 @@ struct URConstant {
             return ""
         }
         
-        static func URL_STORAGE(path:URUploadPath) -> String {
+        static func URL_STORAGE(_ path:URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["URL_STORAGE_\(path.rawValue)"] != nil {

@@ -18,14 +18,14 @@ class ISMenuTableViewCell: UITableViewCell {
         // Initialization code
     }
 
-    override func setSelected(selected: Bool, animated: Bool) {
+    override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)        
-        super.selectionStyle = UITableViewCellSelectionStyle.None
+        super.selectionStyle = UITableViewCellSelectionStyle.none
     }        
     
     //MARK: Class Methods
     
-    func setupCellWith(menu:ISMenu){
+    func setupCellWith(_ menu:ISMenu){
         self.menu = menu
         self.lbTitle.text = menu.title
     }
