@@ -66,7 +66,6 @@ PODS:
     - MBProgressHUD
     - Proposer
     - SDWebImage
-    - SRKControls
     - TPKeyboardAvoiding
   - ISScrollViewPageSwift (0.0.7)
   - JSQMessagesViewController (7.2.0):
@@ -81,7 +80,7 @@ PODS:
     - NYTPhotoViewer/Core
   - NYTPhotoViewer/Core (1.1.0)
   - ObjectMapper (2.1.0)
-  - Proposer (1.0.0)
+  - Proposer (1.1.0)
   - QRCodeReader.swift (7.2.0)
   - SDWebImage (3.7.3):
     - SDWebImage/Core (= 3.7.3)
@@ -107,7 +106,7 @@ DEPENDENCIES:
   - ISScrollViewPageSwift (from `https://github.com/Ilhasoft/ISScrollViewPageSwift`, branch `swift3`)
   - JSQMessagesViewController
   - NYTPhotoViewer
-  - Proposer (= 1.0.0)
+  - Proposer (= 1.1.0)
   - QRCodeReader.swift (= 7.2.0)
   - SDWebImage
   - SRKControls (from `https://github.com/Ilhasoft/SRKControls`)
@@ -167,14 +166,14 @@ SPEC CHECKSUMS:
   GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
   GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
-  IlhasoftCore: 68e6fa14c9392b98ffab7c134f93ba1553fbf355
+  IlhasoftCore: e0e4a476d3d513e3e69b765abed1d3d68ac217c1
   ISScrollViewPageSwift: 2840b2c26fa43c50a5a0d0be6936f8ba3e983f45
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
   ObjectMapper: e5e0f8aef8590fc2ddcde7f27eddb255863ee6e9
-  Proposer: 73303728e11cb6dbe27102deac0da82956a51f16
+  Proposer: 422c693b1917a461af30e7139b0d05eefe999e16
   QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
   SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
   SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
@@ -183,6 +182,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: f1ef0028fe9ba98ef2871cf55b4bbc39cae0267b
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 2c3542984545bf5d64b7b4577ee57c003cf6bfd0
+PODFILE CHECKSUM: 134ff43190942a4949a7df7e419d2f3c8f9f7e00
 
-COCOAPODS: 1.1.0.rc.2
+COCOAPODS: 1.2.0.beta.1

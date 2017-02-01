@@ -265,6 +265,8 @@
 		97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
+		E463CE691E3F7A6700600D90 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE671E3F7A6700600D90 /* Key-debug.plist */; };
+		E463CE6A1E3F7A6700600D90 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE681E3F7A6700600D90 /* Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -567,6 +569,8 @@
 		97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLocale+ISO639_2.h"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
 		97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLocale+ISO639_2.m"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
+		E463CE671E3F7A6700600D90 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
+		E463CE681E3F7A6700600D90 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,6 +706,8 @@
 		65409FBD1B4C842700344D75 /* ureport */ = {
 			isa = PBXGroup;
 			children = (
+				E463CE671E3F7A6700600D90 /* Key-debug.plist */,
+				E463CE681E3F7A6700600D90 /* Key.plist */,
 				65609F2B1C72C1EA0039A8AB /* ureport.entitlements */,
 				65409FE01B4C845200344D75 /* Classes */,
 				65409FEA1B4C845200344D75 /* Resources */,
@@ -1818,6 +1824,7 @@
 				655691701B7D3DA800525E00 /* URClosedPollTableViewCell.xib in Resources */,
 				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
+				E463CE691E3F7A6700600D90 /* Key-debug.plist in Resources */,
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
@@ -1829,6 +1836,7 @@
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
+				E463CE6A1E3F7A6700600D90 /* Key.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,

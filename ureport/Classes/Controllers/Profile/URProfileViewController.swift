@@ -97,14 +97,20 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     //MARK: ISImageViewPickerDelegate
     
-    func mediaDidLoad(_ imageView: ISImageViewPicker, image: UIImage) {
-        URAWSManager.uploadImage(image, uploadPath:.User, completion: { (picture:URMedia?) -> Void in
-            if let media = picture {
-                let user = URUser.activeUser()
-                user!.picture = media.url
-                URUserManager.save(user!)
-            }
-        })
+    public func mediaDidLoad(imageView: ISImageViewPicker, media: ISMedia) {
+        if let imageMedia = media as? ISImageMedia {
+            URAWSManager.uploadImage(imageMedia.image, uploadPath:.User, completion: { (picture:URMedia?) -> Void in
+                if let media = picture {
+                    let user = URUser.activeUser()
+                    user!.picture = media.url
+                    URUserManager.save(user!)
+                }
+            })
+        }
+    }
+    
+    public func mediaDidRemove(imageView: ISImageViewPicker, media: ISMedia) {
+        
     }
     
     //MARK: StoryManagerDelegate
