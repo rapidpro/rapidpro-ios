@@ -26,6 +26,7 @@ class URNewGroupTableViewCell: UITableViewCell {
         self.lbName.text = "new_group".localized
         self.imgViewGroup.image = UIImage(named: "icon_group_add_grey")
         self.roundedView.backgroundColor = UIColor.white
+        self.contentView.backgroundColor = UIColor.white
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(createNewGroup))
         tapGesture.numberOfTapsRequired = 1

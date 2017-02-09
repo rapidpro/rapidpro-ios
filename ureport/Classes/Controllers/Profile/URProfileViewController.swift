@@ -65,7 +65,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         
         self.imageProfile.delegate = self
         self.imageProfile.parentViewController = self
-        
+        self.imageProfile.mediaSources = [.Gallery,.Camera]
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
     }
     

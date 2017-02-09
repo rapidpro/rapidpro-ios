@@ -40,7 +40,7 @@ class URCountryProgramManager: NSObject {
             countryPrograms.append(URCountryProgram(code: "CMR", themeColor: UIColor(rgba: "#00a400"), org:10,    name: "Cameroun",       twitter:"UReportCameroon",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "CHL", themeColor: UIColor(rgba: "#c6002a"), org:12,    name: "Chile",          twitter:"UReportChile",facebook:"ureportchile",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
             
-            countryPrograms.append(URCountryProgram(code: "CIV", themeColor: UIColor(rgba: "#00a200"), org:26,    name: "Côte d'Ivoire",          twitter:"UReportChile",facebook:"ureportchile",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
+            countryPrograms.append(URCountryProgram(code: "CIV", themeColor: UIColor(rgba: "#00a200"), org:26,    name: "Côte d'Ivoire",          twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
             
             countryPrograms.append(URCountryProgram(code: "COD", themeColor: UIColor(rgba: "#05b5e8"), org:nil,   name: "DRC",            twitter:"UReportDRC",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "FJI", themeColor: UIColor(rgba: "#05b5e8"), org:9,     name: "Fiji",        twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
@@ -62,7 +62,11 @@ class URCountryProgramManager: NSObject {
             countryPrograms.append(URCountryProgram(code: "SLE", themeColor: UIColor(rgba: "#41b646"), org:7,     name: "Sierra Leone",   twitter:"UreportSL",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "SWZ", themeColor: UIColor(rgba: "#d7001c"), org:4,     name: "Swaziland",      twitter:"Ureportszd",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "SYR", themeColor: UIColor(rgba: "#C1001D"), org:6,     name: "Syria",      twitter:nil,facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/v1/",ureportHostAPI: "http://syria.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
+            
             countryPrograms.append(URCountryProgram(code: "THA", themeColor: UIColor(rgba: "#1B143E"), org:5,     name: "Thailand",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/v1/",ureportHostAPI: "http://thailand.ureport.in/api/v1/stories/org/", groupName: "U-Reporters",stateField:"province"))
+            
+            countryPrograms.append(URCountryProgram(code: "TUN", themeColor: UIColor.red, org:31,     name: "Tunisie",      twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL ,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
+            
             countryPrograms.append(URCountryProgram(code: "UGA", themeColor: UIColor(rgba: "#d6001f"), org:18,   name: "Uganda",         twitter:"UReportUganda",facebook:"UReportUganda",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             
             countryPrograms.append(URCountryProgram(code: "GBR", themeColor: UIColor(rgba: "#00166B"), org:3,     name: "United Kingdom",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/v1/",ureportHostAPI: "http://uk.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))

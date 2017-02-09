@@ -150,7 +150,7 @@ class URRapidProManager: NSObject {
                 request.setValue(token, forHTTPHeaderField: "Authorization")
                 request.timeoutInterval = 15
                 
-                let postString = "from=\(userId)&text=\(response.response)"
+                let postString = "from=\(userId)&text=\(response.response!)"
                 request.httpBody = postString.data(using: String.Encoding.utf8)
                 var httpResponse: URLResponse?
                 
