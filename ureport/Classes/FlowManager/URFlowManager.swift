@@ -13,12 +13,15 @@ class URFlowManager {
     }
     
     class func isFlowActive(_ flowRun:URFlowRun) -> Bool {
-        return (flowRun.completed == false && !URFlowManager.isFlowExpired(flowRun))
+        guard let exit_type = flowRun.exit_type else {
+            return true
+        }
+        return !(exit_type == "completed" || exit_type == "expired")
     }
     
-    class func isFlowExpired(_ flowRun:URFlowRun) -> Bool {
-        return flowRun.expired_on != nil && (flowRun.expires_on.compare(URDateUtil.currentDate() as Date) == ComparisonResult.orderedDescending)
-    }
+//    class func isFlowExpired(_ flowRun:URFlowRun) -> Bool {
+//        return flowRun.expired_on != nil && (flowRun.expires_on.compare(URDateUtil.currentDate() as Date) == ComparisonResult.orderedDescending)
+//    }
     
     class func isLastActionSet(_ actionSet:URFlowActionSet?) -> Bool {
         return actionSet == nil || actionSet?.destination == nil || actionSet!.destination!.isEmpty

@@ -11,19 +11,17 @@ import ObjectMapper
 
 class URFlowRun: Mappable {
     
-    var flow_uuid:String!
-    var flow:Int!
-    var completed:Bool!
-    var expires_on:Date!
-    var expired_on:Date!
+    var flow:URFlow!
+    var exit_type:String?
+    //var expires_on:Date!
+    //var expired_on:Date!
     
     required init?(map: Map){}
     
     func mapping(map: Map) {
-        self.flow_uuid  <- map["flow_uuid"]
-        self.flow       <- map["flow"]
-        self.completed  <- map["completed"]
-        self.expires_on <- (map["expires_on"], URRapidPRODateTransform())
-        self.expired_on <- (map["expired_on"], URRapidPRODateTransform())
+        self.flow  <- map["flow"]
+        self.exit_type  <- map["exit_type"]
+        //self.expires_on <- (map["expires_on"], URRapidPRODateTransform())
+        //self.expired_on <- (map["expired_on"], URRapidPRODateTransform())
     }
 }
