@@ -29,17 +29,17 @@ class URChatMessageManager: NSObject {
             .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
             .child(byAppendingPath: URChatMessageManager.path())
             .child(byAppendingPath: chatRoom.key)
-            .observe(FEventType.childAdded, with: { (snapshot) in
+            .observe(FEventType.childAdded, with: { (snapshot: FDataSnapshot?) in
                 if let delegate = self.delegate {
-                    
                     let chatMessage = URChatMessage()
-                    
                     chatMessage.user = URUser(jsonDict: (snapshot?.value as AnyObject).object(forKey: "user") as? NSDictionary)
                     chatMessage.message = (snapshot?.value as AnyObject).object(forKey: "message") as? String
                     chatMessage.media = URMedia(jsonDict:(snapshot?.value as AnyObject).object(forKey: "media") as? NSDictionary)
                     chatMessage.date = (snapshot?.value as AnyObject).object(forKey: "date") as! NSNumber
-                    
-                    print(snapshot?.childrenCount)
+
+                    if let snapshot = snapshot {
+                        print(snapshot.childrenCount)
+                    }
                     
                     if chatMessage.user.nickname != nil {
                         delegate.newMessageReceived(chatMessage)

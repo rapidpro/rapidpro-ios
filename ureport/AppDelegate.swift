@@ -83,7 +83,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     func setupGCM(_ application: UIApplication) {
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
+        assert(configureError == nil, "Error configuring Google services: \(configureError!)")
         gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID        
         
         let instanceIDConfig = GGLInstanceIDConfig.default()
@@ -267,8 +267,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         
         GCMService.sharedInstance().connect(handler: {
             (error) -> Void in
-            if error != nil {
-                print("Could not connect to GCM: \(error?.localizedDescription)")
+            if let error = error {
+                print("Could not connect to GCM: \(error.localizedDescription)")
             } else {
                 print("Connected with GCM")
             }
