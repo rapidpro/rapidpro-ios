@@ -19,7 +19,6 @@
 		6515FBA01B8B9FCD00CEEC3B /* URChatCellType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FB9F1B8B9FCD00CEEC3B /* URChatCellType.swift */; };
 		6515FBA21B8CA4D000CEEC3B /* URChatRoomType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBA11B8CA4D000CEEC3B /* URChatRoomType.swift */; };
 		6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBA31B8CADB900CEEC3B /* URChatMember.swift */; };
-		6515FBAF1B8D6E2600CEEC3B /* ISDateExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */; };
 		6515FBB91B8E0B4000CEEC3B /* URMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */; };
 		65180BD81DB6EEBA008306D0 /* CloudKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 65180BD71DB6EEBA008306D0 /* CloudKit.framework */; };
 		651EC7161D5B9D20008695E3 /* URAddContributionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 651EC7141D5B9D20008695E3 /* URAddContributionTableViewCell.swift */; };
@@ -36,6 +35,7 @@
 		6530BE6A1B974ADB00C9707C /* SWRevealViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE691B974ADB00C9707C /* SWRevealViewController.m */; };
 		6530BE6C1B974E0F00C9707C /* URMessageRead.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6530BE6B1B974E0F00C9707C /* URMessageRead.swift */; };
 		6533CF441C496627009DF49C /* URRapidProContactUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6533CF431C496627009DF49C /* URRapidProContactUtil.swift */; };
+		653413461EC23D4A006DC85D /* URFlow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 653413451EC23D4A006DC85D /* URFlow.swift */; };
 		65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FC01B4C842700344D75 /* AppDelegate.swift */; };
 		65409FEE1B4C84DE00344D75 /* URLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65409FEC1B4C84DE00344D75 /* URLoginViewController.swift */; };
 		65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65409FED1B4C84DE00344D75 /* URLoginViewController.xib */; };
@@ -265,6 +265,8 @@
 		97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
+		E463CE691E3F7A6700600D90 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE671E3F7A6700600D90 /* Key-debug.plist */; };
+		E463CE6A1E3F7A6700600D90 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE681E3F7A6700600D90 /* Key.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -306,7 +308,6 @@
 		6515FB9F1B8B9FCD00CEEC3B /* URChatCellType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatCellType.swift; sourceTree = "<group>"; };
 		6515FBA11B8CA4D000CEEC3B /* URChatRoomType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatRoomType.swift; sourceTree = "<group>"; };
 		6515FBA31B8CADB900CEEC3B /* URChatMember.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatMember.swift; sourceTree = "<group>"; };
-		6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ISDateExtension.swift; sourceTree = "<group>"; };
 		6515FBB81B8E0B4000CEEC3B /* URMessagesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessagesViewController.swift; sourceTree = "<group>"; };
 		65180BD71DB6EEBA008306D0 /* CloudKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CloudKit.framework; path = System/Library/Frameworks/CloudKit.framework; sourceTree = SDKROOT; };
 		651EC7141D5B9D20008695E3 /* URAddContributionTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddContributionTableViewCell.swift; sourceTree = "<group>"; };
@@ -324,6 +325,7 @@
 		6530BE691B974ADB00C9707C /* SWRevealViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SWRevealViewController.m; sourceTree = "<group>"; };
 		6530BE6B1B974E0F00C9707C /* URMessageRead.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMessageRead.swift; sourceTree = "<group>"; };
 		6533CF431C496627009DF49C /* URRapidProContactUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRapidProContactUtil.swift; sourceTree = "<group>"; };
+		653413451EC23D4A006DC85D /* URFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlow.swift; sourceTree = "<group>"; };
 		65409FBB1B4C842700344D75 /* ureport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ureport.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		65409FBF1B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65409FC01B4C842700344D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -567,6 +569,8 @@
 		97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLocale+ISO639_2.h"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
 		97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLocale+ISO639_2.m"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
+		E463CE671E3F7A6700600D90 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
+		E463CE681E3F7A6700600D90 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -702,6 +706,8 @@
 		65409FBD1B4C842700344D75 /* ureport */ = {
 			isa = PBXGroup;
 			children = (
+				E463CE671E3F7A6700600D90 /* Key-debug.plist */,
+				E463CE681E3F7A6700600D90 /* Key.plist */,
 				65609F2B1C72C1EA0039A8AB /* ureport.entitlements */,
 				65409FE01B4C845200344D75 /* Classes */,
 				65409FEA1B4C845200344D75 /* Resources */,
@@ -873,6 +879,7 @@
 				6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */,
 				65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */,
 				65F077261CB5AA4700A1D608 /* URChatFileItem.swift */,
+				653413451EC23D4A006DC85D /* URFlow.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -892,7 +899,6 @@
 				655690701B7CFA0B00525E00 /* URConstant.swift */,
 				655690AA1B7D170100525E00 /* ISRoundedButton.swift */,
 				6556917E1B7E2A8F00525E00 /* ISRoundedView.swift */,
-				6515FBAE1B8D6E2600CEEC3B /* ISDateExtension.swift */,
 				654CB3C41BAB632100D8803B /* Serializable.swift */,
 				65C234051BAE0843002DB994 /* ISLabelExtension.swift */,
 				65EA8C171BAF4F7200F2E29E /* URLoginAlertController.swift */,
@@ -1818,6 +1824,7 @@
 				655691701B7D3DA800525E00 /* URClosedPollTableViewCell.xib in Resources */,
 				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
+				E463CE691E3F7A6700600D90 /* Key-debug.plist in Resources */,
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
@@ -1829,6 +1836,7 @@
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
+				E463CE6A1E3F7A6700600D90 /* Key.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
@@ -2015,7 +2023,6 @@
 				6556909D1B7D14BA00525E00 /* URGroupChatRoom.swift in Sources */,
 				655690A31B7D157600525E00 /* URContribution.swift in Sources */,
 				65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */,
-				6515FBAF1B8D6E2600CEEC3B /* ISDateExtension.swift in Sources */,
 				972817AB1BFFCA0800FBD20E /* URResponseView.swift in Sources */,
 				65FAF0C91BC2C2E200F8B380 /* URPasswordEditViewController.swift in Sources */,
 				97A5A6F21C0E2970006CBA25 /* URGcmInput.swift in Sources */,
@@ -2063,6 +2070,7 @@
 				6515FBA21B8CA4D000CEEC3B /* URChatRoomType.swift in Sources */,
 				651EC7161D5B9D20008695E3 /* URAddContributionTableViewCell.swift in Sources */,
 				65409FF51B4C9E7C00344D75 /* URUserRegisterViewController.swift in Sources */,
+				653413461EC23D4A006DC85D /* URFlow.swift in Sources */,
 				9742492F1BFBD4FE0024384E /* URFlowDefinition.swift in Sources */,
 				65685ADA1BA224BB00099CFB /* URRapidProManager.swift in Sources */,
 				65D0F39D1BA7627800E5D367 /* URMediaView.swift in Sources */,
@@ -2169,6 +2177,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_WHOLE_MODULE_OPTIMIZATION = YES;

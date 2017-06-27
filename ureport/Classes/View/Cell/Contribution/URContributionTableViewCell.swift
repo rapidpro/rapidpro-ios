@@ -52,7 +52,7 @@ class URContributionTableViewCell: UITableViewCell {
         
         self.lbContributionText.text = "\(contribution.content!)\n"
         self.lbUserName.text = contribution.author.nickname
-        self.lbDate.text = "\(Date().offsetFrom(Date(timeIntervalSince1970: NSNumber(value: contribution.createdDate.doubleValue/1000 as Double) as TimeInterval))) ago"
+        self.lbDate.text = Date.localizedOffsetFrom(Date(timeIntervalSince1970: NSNumber(value: contribution.createdDate.doubleValue/1000 as Double) as TimeInterval))
         
         if let picture = contribution.author.picture {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)

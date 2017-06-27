@@ -228,7 +228,7 @@ struct URConstant {
     
     struct RapidPro {
         static let GLOBAL = "GLOBAL"
-        static let API_URL = "https://api.rapidpro.io/api/v1/"
+        static let API_URL = "https://api.rapidpro.io/api/"
         static let API_NEWS = "http://ureport.in/api/v1/stories/org/"
     }
     

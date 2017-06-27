@@ -22,11 +22,13 @@ extension PrivateResource {
         case .contacts:
             return "no_hardware_permission_contact".localized
         case .reminders:
-            return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
+            return NSLocalizedString("Proposer needs to access your Reminders to create reminder.", comment: "")
         case .calendar:
-            return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
+            return NSLocalizedString("Proposer needs to access your Calendar to create event.", comment: "")
         case .location:
-            return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
+            return NSLocalizedString("Proposer needs to get your Location to share to your friends.", comment: "")
+        case .notifications:
+            return NSLocalizedString("App needs to get your Location to share to your friends.", comment: "")
         }
     }
     
@@ -41,11 +43,13 @@ extension PrivateResource {
         case .contacts:
             return "no_hardware_permission_contact".localized
         case .reminders:
-            return NSLocalizedString("Proposer need to access your Reminders to create reminder.", comment: "")
+            return NSLocalizedString("Proposer needs to access your Reminders to create reminder.", comment: "")
         case .calendar:
-            return NSLocalizedString("Proposer need to access your Calendar to create event.", comment: "")
+            return NSLocalizedString("Proposer needs to access your Calendar to create event.", comment: "")
         case .location:
-            return NSLocalizedString("Proposer need to get your Location to share to your friends.", comment: "")
+            return NSLocalizedString("Proposer needs to get your Location to share to your friends.", comment: "")
+        case .notifications:
+            return NSLocalizedString("App needs to get your Location to share to your friends.", comment: "")
         }
     }
 }

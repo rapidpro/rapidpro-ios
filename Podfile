@@ -18,7 +18,7 @@ pod 'SwiftAddressBook', :git => 'https://github.com/SocialbitGmbH/SwiftAddressBo
 pod 'JSQMessagesViewController'
 pod 'youtube-ios-player-helper', '0.1.6'
 pod 'IlhasoftCore', :path => '../IlhasoftCore'
-pod 'Proposer', '1.0.0'
+pod 'Proposer', ‘1.1.0’
 pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPageSwift', :branch => 'swift3'
 pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'
 pod 'QRCodeReader.swift', '7.2.0'
