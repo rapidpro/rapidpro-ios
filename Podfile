@@ -5,7 +5,6 @@ use_frameworks!
 target "ureport" do
 
 pod 'TPKeyboardAvoiding'
-pod 'Firebase', '2.5.1'
 pod 'FBSDKLoginKit'
 pod 'FBSDKCoreKit'
 pod 'Google/SignIn', '1.3.2'
@@ -13,7 +12,6 @@ pod 'Google/Analytics', '1.3.2'
 pod 'GoogleUtilities', '1.1.0'
 pod 'SDWebImage'
 pod 'AWSS3', '~> 2.2.0'
-pod 'Google/CloudMessaging'
 pod 'NYTPhotoViewer', '1.1.0'
 pod 'SwiftAddressBook', :git => 'https://github.com/SocialbitGmbH/SwiftAddressBook', :branch => 'chunkyguy-swift3'
 pod 'JSQMessagesViewController', '7.2.0'
@@ -25,10 +23,9 @@ pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.g
 pod 'QRCodeReader.swift', '7.2.0'
 pod 'SRKControls', :git => 'https://github.com/Ilhasoft/SRKControls'
 pod 'STTwitter'
-
-#pod 'AlamofireObjectMapper'
-#pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios'
-#pod 'DBSphereTagCloud'
-#pod 'Alamofire'
+pod 'Firebase/Core'
+pod 'Firebase/Messaging'
+pod 'Firebase/Auth'
+pod 'Firebase/Database'
 
 end
