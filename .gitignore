@@ -66,6 +66,8 @@ Pods/
 
 ureport/Key-debug.plist
 ureport/Key.plist
+ureport/FirebaseDatabase-Info.plist
+ureport/GoogleService-Info.plist
 
 # Carthage
 #
