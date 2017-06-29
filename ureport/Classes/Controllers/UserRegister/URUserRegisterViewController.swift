@@ -182,7 +182,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         
                     }else if let error = error {
                         switch error {
-                        case .emailTaken:
+                        case URFireBaseManagerAuthError.emailTaken:
                             ISAlertMessages.displaySimpleMessage("error_email_already_exists".localized, fromController: self)
                             break
                         default:
@@ -278,7 +278,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: !self.updateMode, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
-                print(response)
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             })
         }

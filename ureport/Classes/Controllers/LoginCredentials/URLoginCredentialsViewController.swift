@@ -35,7 +35,7 @@ class URLoginCredentialsViewController: UIViewController {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         setupUI()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
@@ -51,7 +51,7 @@ class URLoginCredentialsViewController: UIViewController {
         super.viewDidDisappear(animated)
         MBProgressHUD.hide(for: self.view, animated: true)
     }
-    
+
     //MARK: Button Events
     @IBAction func btForgotPasswordTapped(_ sender: AnyObject) {
         self.view.endEditing(true)
@@ -59,19 +59,17 @@ class URLoginCredentialsViewController: UIViewController {
     }
 
     @IBAction func btLoginTapped(_ sender: AnyObject) {
-        
+
         if let textfield = self.view.findTextFieldEmptyInView(self.view) {
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textfield.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
-        
+
         self.view.endEditing(true)
-        //MBProgressHUD.showAdded(to: self.view, animated: true)
-        URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-        //MBProgressHUD.hide(for: self.view, animated: true)
+        URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (_, success) -> Void in
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
-            }else {
+            } else {
                 UIAlertView(title: nil, message: "login_password_error".localized, delegate: self, cancelButtonTitle: "OK").show()
             }
         })

@@ -12,20 +12,19 @@ import ObjectMapper
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate, UNUserNotificationCenterDelegate  {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
 
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
     var revealController:SWRevealViewController?
-    
-    var gcmSenderID: String!
+
     var registrationOptions = [String: AnyObject]()
-    
+
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        
+
         loginViewController = URLoginViewController()
-        
+
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent,animated:true)
         
         self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -41,10 +40,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         }
         
         URCountryProgramManager.deactivateSwitchCountryProgram()
-        Firebase.defaultConfig().persistenceEnabled = false
-        setupGoogle()
+
+
+        if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabase-Info", ofType: "plist")!) {
+            FirebaseApp.configure(name: "database", options: databaseOptions)
+        }
+
+        FirebaseApp.configure()
+        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
+
+//        setupGoogle()
         requestPermissionForPushNotification(application)
-        setupGCM(application)
+//        setupGCM(application)
         setupAWS()
         createDirectoryToImageUploads()
         
