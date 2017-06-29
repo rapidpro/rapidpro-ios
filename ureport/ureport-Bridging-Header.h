@@ -13,7 +13,6 @@
 #import "TwitterAuthHelper.h"
 #import <AWSS3/AWSS3.h>
 #import <AWSCore/AWSCore.h>
-#import <Google/CloudMessaging.h>
 #import <NYTPhotoViewer/NYTPhoto.h>
 #import <NYTPhotoViewer/NYTPhotosViewController.h>
 #import <AWSS3/AWSS3TransferManager.h>
