@@ -24,58 +24,53 @@ class URChatMemberManager: NSObject {
     
     class func save(_ chatMember:URChatMember, user:URUser?, completion:@escaping (Bool) -> Void) {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.path())
-            .child(byAppendingPath: chatMember.key)
-            .child(byAppendingPath: user!.key)
-            .setValue(true, withCompletionBlock: { (error:Error?, firebase:Firebase?) -> Void in
-                if error != nil {
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.path())
+            .child(chatMember.key!)
+            .child(user!.key)
+            .setValue(true) { (error, _) -> Void in
+                guard error == nil else {
                     completion(false)
-                }else {
-                    completion(true)
+                    return
                 }
-            })
-        
+                completion(true)
+            }
+
     }
     
-    class func getByKey(_ key:String,completion:@escaping (FDataSnapshot?,Bool) -> Void){
-        
+    class func getByKey(_ key: String, completion: @escaping (DataSnapshot?, Bool) -> Void) {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-            .child(byAppendingPath: self.path())
-            .child(byAppendingPath: key)
-            .observeSingleEvent(of: FEventType.value, with: { snapshot in
-                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
-                    completion(snapshot,true)
-                }else {
-                    completion(nil,false)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.path())
+            .child(key)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard snapshot.value != nil else {
+                    completion(nil, false)
+                    return
                 }
+                completion(snapshot, true)
             })
     }
     
     func getByChatRoom(_ key:String){
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-            .child(byAppendingPath: URChatMemberManager.path())
-            .child(byAppendingPath: key)
-            .observe(FEventType.childAdded, with: { snapshot in
-                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
-                    
-                    if let delegate = self.delegate {
-                        
-                        URUserManager.getByKey((snapshot?.key)!, completion: { (user:URUser?, exists:Bool) -> Void in
-                            if exists == true && user != nil {
-                                delegate.newMemberInChatRoom(user!)
-                            }
-                        })
-                        
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(URChatMemberManager.path())
+            .child(key)
+            .observe(.childAdded, with: { snapshot in
+                guard snapshot.value != nil else {
+                    return
+                }
+                if let delegate = self.delegate {
+                    URUserManager.getByKey(snapshot.key) { (user, exists) -> Void in
+                        if user != nil && exists {
+                            delegate.newMemberInChatRoom(user!)
+                        }
                     }
-                }else {
-                    
                 }
             })
     }
@@ -83,109 +78,98 @@ class URChatMemberManager: NSObject {
     class func removeMemberByChatRoomKey(_ memberKey:String,chatRoomKey:String) {
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-            .child(byAppendingPath: URChatMemberManager.path())
-            .child(byAppendingPath: chatRoomKey)
-            .child(byAppendingPath: memberKey)
-            .removeValue { (error:Error?, firebase:Firebase?) -> Void in                
-                if error != nil {
-                    print(error?.localizedDescription)
-                }else {
-                    print("the user was removed from group")
-                    
-                    URUserManager.getByKey(memberKey, completion: { (user, exists) -> Void in
-                        if user != nil {
-                            URUserManager.removeChatroom(user!, chatRoomKey: chatRoomKey)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(URChatMemberManager.path())
+            .child(chatRoomKey)
+            .child(memberKey)
+            .removeValue { (error, _) -> Void in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                print("the user was removed from group")
+                URUserManager.getByKey(memberKey, completion: { (user, exists) -> Void in
+                    if let user = user {
+                        URUserManager.removeChatroom(user, chatRoomKey: chatRoomKey)
+                    }
+                })
+        }
+        
+    }
+    
+    class func removeChatRoom(_ memberKey:String, chatRoomKey:String) {
+        
+        URFireBaseManager.sharedInstance()
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(URChatMemberManager.path())
+            .child(chatRoomKey)
+            .removeValue { (error, _) -> Void in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                print("removed chatroom from chatMember")
+
+                URUserManager.getByKey(memberKey) { (user, exists) -> Void in
+                    if user != nil {
+                        URUserManager.removeChatroom(user!, chatRoomKey: chatRoomKey)
+                    }
+                }
+
+                URFireBaseManager.sharedInstance()
+                    .child(URCountryProgram.path())
+                    .child(URCountryProgramManager.activeCountryProgram()!.code)
+                    .child(URChatMessageManager.path())
+                    .child(chatRoomKey)
+                    .removeValue { (error, _) -> Void in
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
                         }
-                    })
-                    
+                        print("removed chatroom from chatMessage")
+                    }
+
+                URFireBaseManager.sharedInstance()
+                    .child(URCountryProgram.path())
+                    .child(URCountryProgramManager.activeCountryProgram()!.code)
+                    .child(URChatRoomManager.path())
+                    .child(chatRoomKey)
+                    .removeValue { (error, _) -> Void in
+                        guard error == nil else {
+                            print(error!.localizedDescription)
+                            return
+                        }
+                        print("removed chatroom")
                 }
         }
         
     }
     
-    class func removeChatRoom(_ memberKey:String,chatRoomKey:String) {
+    class func getChatMembersByChatRoomWithCompletion(_ key:String, completionWithUsers: @escaping ([URUser]) -> Void) {
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-            .child(byAppendingPath: URChatMemberManager.path())
-            .child(byAppendingPath: chatRoomKey)
-            .removeValue { (error:Error?, firebase:Firebase?) -> Void in
-                if error != nil {
-                    print(error?.localizedDescription)
-                }else {
-                    
-                    print("removed chatroom from chatMember")
-                    
-                    URUserManager.getByKey(memberKey, completion: { (user, exists) -> Void in
-                        if user != nil {
-                            URUserManager.removeChatroom(user!, chatRoomKey: chatRoomKey)
-                        }
-                    })
-                    
-                    URFireBaseManager.sharedInstance()
-                        .child(byAppendingPath: URCountryProgram.path())
-                        .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-                        .child(byAppendingPath: URChatMessageManager.path())
-                        .child(byAppendingPath: chatRoomKey)
-                        .removeValue { (error:Error?, firebase:Firebase?) -> Void in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            }else {
-                                print("removed chatroom from chatMessage")
-                            }
-                            
-                    }
-                    
-                    URFireBaseManager.sharedInstance()
-                        .child(byAppendingPath: URCountryProgram.path())
-                        .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()?.code)
-                        .child(byAppendingPath: URChatRoomManager.path())
-                        .child(byAppendingPath: chatRoomKey)
-                        .removeValue { (error:Error?, firebase:Firebase?) -> Void in
-                            if let error = error {
-                                print(error.localizedDescription)
-                            } else {
-                                print("removed chatroom")
-                            }
-                    }
-                    
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.path())
+            .child(key)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard snapshot.value != nil else {
+                    return
                 }
-        }
-        
-    }
-    
-    class func getChatMembersByChatRoomWithCompletion(_ key:String,completionWithUsers:@escaping ([URUser]) -> Void){
-        
-        URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.path())
-            .child(byAppendingPath: key)
-            .observeSingleEvent(of: FEventType.value, with: { snapshot in
-                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
-                    var listMembers:[URUser] = []
-                    let total = Int((snapshot?.childrenCount)!)
-                    
-                    for data in snapshot?.children.allObjects as! [FDataSnapshot]{
-                        
-                        URUserManager.getByKey(data.key, completion: { (user:URUser?, exists:Bool) -> Void in
-                            if exists == true && user != nil {
+                var listMembers:[URUser] = []
+                let total = Int(snapshot.childrenCount)
 
-                                listMembers.append(user!)
-
-                                if total == listMembers.count {
-                                    
-                                    completionWithUsers(listMembers)
-                                }
+                for data in snapshot.children.allObjects as! [DataSnapshot] {
+                    URUserManager.getByKey(data.key) { (user, exists) -> Void in
+                        if user != nil && exists {
+                            listMembers.append(user!)
+                            if total == listMembers.count {
+                                completionWithUsers(listMembers)
                             }
-                        })
+                        }
                     }
-                    
-                }else {
-                    
                 }
             })
     }
