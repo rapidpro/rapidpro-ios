@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		01374BEA1F044CBD00827C71 /* FirebaseDatabase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */; };
+		01B582461F0AAB18002DC1F8 /* URFCMRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B582451F0AAB18002DC1F8 /* URFCMRegistrationManager.swift */; };
+		01B582481F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B582471F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift */; };
 		6502CB851DB16CB100E548B4 /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502CB841DB16CB100E548B4 /* URIPCheckManager.swift */; };
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
 		650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
@@ -293,6 +295,8 @@
 
 /* Begin PBXFileReference section */
 		01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabase-Info.plist"; sourceTree = "<group>"; };
+		01B582451F0AAB18002DC1F8 /* URFCMRegistrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URFCMRegistrationManager.swift; path = fcm/URFCMRegistrationManager.swift; sourceTree = "<group>"; };
+		01B582471F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFCMRegistratoinAPI.swift; sourceTree = "<group>"; };
 		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -598,6 +602,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		01B582441F0AAAEE002DC1F8 /* fcm */ = {
+			isa = PBXGroup;
+			children = (
+				01B582451F0AAB18002DC1F8 /* URFCMRegistrationManager.swift */,
+			);
+			name = fcm;
+			sourceTree = "<group>";
+		};
 		6502CB831DB16C7D00E548B4 /* IPCheckManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -733,30 +745,31 @@
 		65409FE01B4C845200344D75 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
-				65BB89D51DCB86E3002B4856 /* Network */,
-				6502CB831DB16C7D00E548B4 /* IPCheckManager */,
-				656AACFE1CEFAA2600426ADB /* BackendAuthManager */,
-				65DFCCED1CE23F9400E4DFD9 /* ReviewMode */,
 				65816BAE1C750739004F9DEB /* AudioRecorderManager */,
-				65F7DA281C073544001AFA22 /* Firebase */,
-				9742492B1BFBD04E0024384E /* FlowManager */,
-				65D4215D1BBB0A610057EE39 /* NavigationManager */,
-				654850611BB1D7270002A3D5 /* PollManager */,
-				65D563061BA9EF21001AEF54 /* ContributionManager */,
 				65D0F3A51BA8791700E5D367 /* AWSManager */,
-				65D0F3571BA72E7B00E5D367 /* MarkerManager */,
-				65685B481BA6685200099CFB /* StoryManager */,
-				65685AD81BA224AE00099CFB /* RapidProManager */,
+				656AACFE1CEFAA2600426ADB /* BackendAuthManager */,
+				65409FE11B4C845200344D75 /* Categories */,
 				652F8B0B1BA207B10096C8DC /* ChatMemberManager */,
 				652F8B081BA207080096C8DC /* ChatMessageManager */,
 				652F8B051BA205FA0096C8DC /* ChatRoomManager */,
-				652F8B021BA2054A0096C8DC /* UserManager */,
-				652F8AA61BA0D8AD0096C8DC /* CountryProgramManager */,
-				656A2BDB1B98C7490079BD6A /* GCMManager */,
-				658949DC1B862A170087F361 /* UserLoginManager */,
-				65409FE11B4C845200344D75 /* Categories */,
+				65D563061BA9EF21001AEF54 /* ContributionManager */,
 				65409FE21B4C845200344D75 /* Controllers */,
+				652F8AA61BA0D8AD0096C8DC /* CountryProgramManager */,
+				01B582441F0AAAEE002DC1F8 /* fcm */,
+				65F7DA281C073544001AFA22 /* Firebase */,
+				9742492B1BFBD04E0024384E /* FlowManager */,
+				656A2BDB1B98C7490079BD6A /* GCMManager */,
+				6502CB831DB16C7D00E548B4 /* IPCheckManager */,
+				65D0F3571BA72E7B00E5D367 /* MarkerManager */,
 				65409FE41B4C845200344D75 /* Model */,
+				65D4215D1BBB0A610057EE39 /* NavigationManager */,
+				65BB89D51DCB86E3002B4856 /* Network */,
+				654850611BB1D7270002A3D5 /* PollManager */,
+				65685AD81BA224AE00099CFB /* RapidProManager */,
+				65DFCCED1CE23F9400E4DFD9 /* ReviewMode */,
+				65685B481BA6685200099CFB /* StoryManager */,
+				658949DC1B862A170087F361 /* UserLoginManager */,
+				652F8B021BA2054A0096C8DC /* UserManager */,
 				65409FE61B4C845200344D75 /* Util */,
 				65409FE71B4C845200344D75 /* Vendors */,
 				65409FE81B4C845200344D75 /* View */,
@@ -818,69 +831,69 @@
 		65409FE41B4C845200344D75 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				65DFCCF41CE248D900E4DFD9 /* URServerDateTime.swift */,
-				65DFCCEB1CE23DAC00E4DFD9 /* URState.swift */,
-				65DFCCE91CE23D9C00E4DFD9 /* URDistrict.swift */,
+				65C234031BACB89D002DB994 /* PhotoShow.swift */,
+				65F8B3021BE2CA7E009F9CAB /* URAPIResponse.swift */,
+				6547D3D91C76324E00938236 /* URAudioMedia.swift */,
+				65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */,
+				6515FB9F1B8B9FCD00CEEC3B /* URChatCellType.swift */,
+				65F077261CB5AA4700A1D608 /* URChatFileItem.swift */,
+				658D14CD1C9C8DA8009A63A5 /* URChatImageItem.swift */,
+				6515FBA31B8CADB900CEEC3B /* URChatMember.swift */,
+				655690A61B7D15BA00525E00 /* URChatMessage.swift */,
+				655690A01B7D150D00525E00 /* URChatRoom.swift */,
+				6515FBA11B8CA4D000CEEC3B /* URChatRoomType.swift */,
+				6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */,
+				6567C1CF1CB5A4D10041F004 /* URChatVideoPhoneItem.swift */,
+				655690A41B7D159C00525E00 /* URContact.swift */,
+				655690A21B7D157600525E00 /* URContribution.swift */,
 				65EA8C191BAFAEA900F2E29E /* URCountry.swift */,
-				658D85921B554FD600DFB949 /* URStory.swift */,
 				6556907C1B7D083500525E00 /* URCountryProgram.swift */,
-				6556907E1B7D0A5200525E00 /* URUser.swift */,
+				65DFCCE91CE23D9C00E4DFD9 /* URDistrict.swift */,
+				653413451EC23D4A006DC85D /* URFlow.swift */,
+				974249321BFBD93D0024384E /* URFlowAction.swift */,
+				974249301BFBD81B0024384E /* URFlowActionSet.swift */,
+				9742492E1BFBD4FE0024384E /* URFlowDefinition.swift */,
+				9742493A1BFBE2C00024384E /* URFlowMetadata.swift */,
+				974249361BFBDDA20024384E /* URFlowRule.swift */,
+				974249341BFBDADE0024384E /* URFlowRuleset.swift */,
+				974249381BFBE0AF0024384E /* URFlowRuleTest.swift */,
+				974249271BFBB6D40024384E /* URFlowRun.swift */,
+				974249501BFE5EFA0024384E /* URFlowType.swift */,
+				974249521BFE5F6A0024384E /* URFlowTypeValidation.swift */,
+				97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */,
+				97A5A6F11C0E2970006CBA25 /* URGcmInput.swift */,
+				97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */,
+				97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */,
 				655690801B7D0AF200525E00 /* URGender.swift */,
-				655690821B7D0EA200525E00 /* URType.swift */,
+				6556909C1B7D14BA00525E00 /* URGroupChatRoom.swift */,
+				65F47F531C654B79009A2066 /* URImageMedia.swift */,
+				6556909A1B7D14A100525E00 /* URIndividualChatRoom.swift */,
+				65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */,
+				655690981B7D147900525E00 /* URMarker.swift */,
+				6554D09A1B94AE4A009C5E89 /* URMedia.swift */,
+				65F47F551C658C71009A2066 /* URMediaUpload.swift */,
+				6530BE6B1B974E0F00C9707C /* URMessageRead.swift */,
+				655690961B7D144C00525E00 /* URMultipleChoiceQuestion.swift */,
+				655690921B7D13F000525E00 /* URMultipleResult.swift */,
+				655690901B7D138400525E00 /* URNews.swift */,
+				65F8B3001BE2A76A009F9CAB /* URNewsCategory.swift */,
+				6556908E1B7D135C00525E00 /* URNotification.swift */,
+				655690941B7D142900525E00 /* UROpenQuestion.swift */,
 				655690841B7D0F6700525E00 /* URPoll.swift */,
 				655690861B7D101500525E00 /* URPollCategory.swift */,
 				655690881B7D11E700525E00 /* URPollQuestion.swift */,
-				6556908A1B7D123E00525E00 /* URPollResult.swift */,
-				6556908C1B7D12BB00525E00 /* URWordsResult.swift */,
-				6556908E1B7D135C00525E00 /* URNotification.swift */,
-				655690901B7D138400525E00 /* URNews.swift */,
-				655690921B7D13F000525E00 /* URMultipleResult.swift */,
-				655690941B7D142900525E00 /* UROpenQuestion.swift */,
-				655690961B7D144C00525E00 /* URMultipleChoiceQuestion.swift */,
-				655690981B7D147900525E00 /* URMarker.swift */,
-				6556909A1B7D14A100525E00 /* URIndividualChatRoom.swift */,
-				6556909C1B7D14BA00525E00 /* URGroupChatRoom.swift */,
-				655690A01B7D150D00525E00 /* URChatRoom.swift */,
-				655690A21B7D157600525E00 /* URContribution.swift */,
-				655690A41B7D159C00525E00 /* URContact.swift */,
-				655690A61B7D15BA00525E00 /* URChatMessage.swift */,
-				6515FB9F1B8B9FCD00CEEC3B /* URChatCellType.swift */,
-				6515FBA11B8CA4D000CEEC3B /* URChatRoomType.swift */,
-				6515FBA31B8CADB900CEEC3B /* URChatMember.swift */,
-				6554D09A1B94AE4A009C5E89 /* URMedia.swift */,
-				6530BE6B1B974E0F00C9707C /* URMessageRead.swift */,
 				65685ADD1BA23C4C00099CFB /* URPollResponse.swift */,
-				65C234031BACB89D002DB994 /* PhotoShow.swift */,
-				656562041BD5962400EBA9BD /* URSettings.swift */,
-				65F8B3001BE2A76A009F9CAB /* URNewsCategory.swift */,
-				65F8B3021BE2CA7E009F9CAB /* URAPIResponse.swift */,
-				974249271BFBB6D40024384E /* URFlowRun.swift */,
-				9742492E1BFBD4FE0024384E /* URFlowDefinition.swift */,
-				974249301BFBD81B0024384E /* URFlowActionSet.swift */,
-				974249321BFBD93D0024384E /* URFlowAction.swift */,
-				974249341BFBDADE0024384E /* URFlowRuleset.swift */,
-				974249361BFBDDA20024384E /* URFlowRule.swift */,
-				974249381BFBE0AF0024384E /* URFlowRuleTest.swift */,
-				9742493A1BFBE2C00024384E /* URFlowMetadata.swift */,
-				974249501BFE5EFA0024384E /* URFlowType.swift */,
-				974249521BFE5F6A0024384E /* URFlowTypeValidation.swift */,
+				6556908A1B7D123E00525E00 /* URPollResult.swift */,
 				97B2FAB61C03938B000820BD /* URRulesetResponse.swift */,
-				97A5A6F11C0E2970006CBA25 /* URGcmInput.swift */,
-				97A5A6F31C0E2B07006CBA25 /* URGcmPriority.swift */,
-				97A5A6F51C0E2B3A006CBA25 /* URGcmNotification.swift */,
-				97A5A6F71C0E2C20006CBA25 /* URGcmChatMessage.swift */,
-				65F47F4D1C653FB2009A2066 /* URLocalMedia.swift */,
+				65DFCCF41CE248D900E4DFD9 /* URServerDateTime.swift */,
+				656562041BD5962400EBA9BD /* URSettings.swift */,
+				65DFCCEB1CE23DAC00E4DFD9 /* URState.swift */,
+				658D85921B554FD600DFB949 /* URStory.swift */,
+				655690821B7D0EA200525E00 /* URType.swift */,
+				6556907E1B7D0A5200525E00 /* URUser.swift */,
 				65F47F4F1C654517009A2066 /* URVideoMedia.swift */,
 				65F47F511C654A6C009A2066 /* URVideoPhoneMedia.swift */,
-				65F47F531C654B79009A2066 /* URImageMedia.swift */,
-				65F47F551C658C71009A2066 /* URMediaUpload.swift */,
-				6547D3D91C76324E00938236 /* URAudioMedia.swift */,
-				658D14CD1C9C8DA8009A63A5 /* URChatImageItem.swift */,
-				6567C1CF1CB5A4D10041F004 /* URChatVideoPhoneItem.swift */,
-				6567C1D21CB5A8990041F004 /* URChatVideoItem.swift */,
-				65F077241CB5A9BF00A1D608 /* URChatAudioItem.swift */,
-				65F077261CB5AA4700A1D608 /* URChatFileItem.swift */,
-				653413451EC23D4A006DC85D /* URFlow.swift */,
+				6556908C1B7D12BB00525E00 /* URWordsResult.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1419,6 +1432,7 @@
 			isa = PBXGroup;
 			children = (
 				65BB89D61DCB86F1002B4856 /* URGeonamesAPI.swift */,
+				01B582471F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift */,
 			);
 			path = Network;
 			sourceTree = "<group>";
@@ -2009,6 +2023,7 @@
 				65F47F501C654517009A2066 /* URVideoMedia.swift in Sources */,
 				655690AB1B7D170100525E00 /* ISRoundedButton.swift in Sources */,
 				655690811B7D0AF200525E00 /* URGender.swift in Sources */,
+				01B582481F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift in Sources */,
 				658D85931B554FD600DFB949 /* URStory.swift in Sources */,
 				6515FBA41B8CADB900CEEC3B /* URChatMember.swift in Sources */,
 				65F8B3071BE2D712009F9CAB /* URNewsDetailViewController.swift in Sources */,
@@ -2069,6 +2084,7 @@
 				658D14C61C9B54EE009A63A5 /* URMediaVideoPhoneView.swift in Sources */,
 				6515FBA21B8CA4D000CEEC3B /* URChatRoomType.swift in Sources */,
 				651EC7161D5B9D20008695E3 /* URAddContributionTableViewCell.swift in Sources */,
+				01B582461F0AAB18002DC1F8 /* URFCMRegistrationManager.swift in Sources */,
 				65409FF51B4C9E7C00344D75 /* URUserRegisterViewController.swift in Sources */,
 				653413461EC23D4A006DC85D /* URFlow.swift in Sources */,
 				9742492F1BFBD4FE0024384E /* URFlowDefinition.swift in Sources */,
