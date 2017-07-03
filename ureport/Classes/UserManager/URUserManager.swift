@@ -44,16 +44,17 @@ class URUserManager: NSObject {
         URUser.setActiveUser(user)
     }
 
-    class func updatePushIdentity(_ user:URUser) {
+    class func updatePushIdentity(_ user:URUser, completion: @escaping (_ success: Bool) -> Void) {
         URFireBaseManager.sharedInstance()
             .child(URUserManager.path)
             .child(user.key)
             .child("pushIdentity")
             .setValue(user.pushIdentity, withCompletionBlock: { (error, dbRerference) in
                 guard error == nil else {
-                    print("Error updating pushIdentity")
+                    completion(false)
                     return
                 }
+                completion(true)
             })
         URUserLoginManager.setLoggedUser(user)
     }

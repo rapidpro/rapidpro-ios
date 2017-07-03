@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		01374BEA1F044CBD00827C71 /* FirebaseDatabase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */; };
+		0157B6E31F0AD17F004049E7 /* URSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157B6E21F0AD17F004049E7 /* URSettingsManager.swift */; };
 		01B582461F0AAB18002DC1F8 /* URFCMRegistrationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B582451F0AAB18002DC1F8 /* URFCMRegistrationManager.swift */; };
 		01B582481F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B582471F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift */; };
 		6502CB851DB16CB100E548B4 /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502CB841DB16CB100E548B4 /* URIPCheckManager.swift */; };
@@ -295,6 +296,7 @@
 
 /* Begin PBXFileReference section */
 		01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabase-Info.plist"; sourceTree = "<group>"; };
+		0157B6E21F0AD17F004049E7 /* URSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URSettingsManager.swift; sourceTree = "<group>"; };
 		01B582451F0AAB18002DC1F8 /* URFCMRegistrationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URFCMRegistrationManager.swift; path = fcm/URFCMRegistrationManager.swift; sourceTree = "<group>"; };
 		01B582471F0AB729002DC1F8 /* URFCMRegistratoinAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFCMRegistratoinAPI.swift; sourceTree = "<group>"; };
 		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
@@ -602,6 +604,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0157B6E11F0AD149004049E7 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				0157B6E21F0AD17F004049E7 /* URSettingsManager.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
 		01B582441F0AAAEE002DC1F8 /* fcm */ = {
 			isa = PBXGroup;
 			children = (
@@ -745,6 +755,7 @@
 		65409FE01B4C845200344D75 /* Classes */ = {
 			isa = PBXGroup;
 			children = (
+				0157B6E11F0AD149004049E7 /* Settings */,
 				65816BAE1C750739004F9DEB /* AudioRecorderManager */,
 				65D0F3A51BA8791700E5D367 /* AWSManager */,
 				656AACFE1CEFAA2600426ADB /* BackendAuthManager */,
@@ -2054,6 +2065,7 @@
 				6515FB9D1B8B996800CEEC3B /* URChatTableViewCell.swift in Sources */,
 				97B2FAC51C061EC0000820BD /* URTutoView.swift in Sources */,
 				655690A71B7D15BA00525E00 /* URChatMessage.swift in Sources */,
+				0157B6E31F0AD17F004049E7 /* URSettingsManager.swift in Sources */,
 				65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */,
 				6556916B1B7D398900525E00 /* URMainViewController.swift in Sources */,
 				974249371BFBDDA20024384E /* URFlowRule.swift in Sources */,

@@ -12,19 +12,25 @@ import Alamofire
 class URFCMRegistratoinAPI {
 
     private static let URL = "https://iid.googleapis.com/iid/"
+    private static let fcmApiKey = "AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs" // TODO: read from file
 
-    static func registerOnTopic(key: String, pushIdentity: String, topic: String) {
+    static func registerOnTopic(pushIdentity: String, topic: String) {
         let headers = [
-            "Authorization": "key=\(key)"
+            "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .post, headers: headers)
+        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .post, headers: headers).response(completionHandler: { defaultDataResponse in
+            print("Request done")
+        })
     }
 
-    static func unregisterFromTopic(key: String, pushIdentity: String, topic: String) {
+    static func unregisterFromTopic(pushIdentity: String, topic: String) {
         let headers = [
-            "Authorizaiton": "key=\(key)"
+            "Authorizaiton": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .delete, headers: headers)
+        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .delete, headers: headers).response(completionHandler: {
+             defaultDataResponse in
+            print("Request done")
+        })
     }
 
 }

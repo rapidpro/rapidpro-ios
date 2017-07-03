@@ -253,9 +253,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         Messaging.messaging().apnsToken = deviceToken
 
-        if let fcmToken = self.fcmToken, let user = URUser.activeUser() {
+        if let fcmToken = URSettingsManager.getFCMToken(), let user = URUser.activeUser() {
             user.pushIdentity = fcmToken
-            URUserManager.updatePushIdentity(user)
+            URUserManager.updatePushIdentity(user, completion: { success in
+                guard success else { return }
+                URFCMRegistrationManager.onFCMRegistered(user: user)
+            })
         }
 
 //        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject, kGGLInstanceIDAPNSServerTypeSandboxOption:debugMode as AnyObject]
@@ -288,6 +291,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token was refreshed: \(fcmToken)")
-        self.fcmToken = fcmToken
+        URSettingsManager.saveFCMToken(fcmToken: fcmToken)
     }
 }
