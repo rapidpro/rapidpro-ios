@@ -13,12 +13,10 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
     var revealController:SWRevealViewController?
-
     var registrationOptions = [String: AnyObject]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -26,21 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         loginViewController = URLoginViewController()
 
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent,animated:true)
-        
+
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = URConstant.Color.YELLOW
-        
+
         UserDefaults.saveIncomingAvatarSetting(true)
         UserDefaults.saveOutgoingAvatarSetting(true)
-        
+
         URIPCheckManager.getCountryCodeByIP { (countryCode) in
             if let countryCode = countryCode {
                 print(countryCode)
             }
         }
-        
-        URCountryProgramManager.deactivateSwitchCountryProgram()
 
+        URCountryProgramManager.deactivateSwitchCountryProgram()
 
         if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabase-Info", ofType: "plist")!) {
             FirebaseApp.configure(name: "database", options: databaseOptions)
@@ -123,22 +120,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
 
     func checkMainViewControllerToShow(_ launchOptions: [AnyHashable: Any]?) {
-        
+
         if UserDefaults.standard.object(forKey: "FirstRun") == nil {
             UserDefaults.standard.set("firstrun", forKey: "FirstRun")
             UserDefaults.standard.synchronize()
             
             URNavigationManager.setupNavigationControllerWithTutorialViewController()
-        }else {
+        } else {
             if URUser.activeUser() != nil {
                 if let launchOptions = launchOptions {
                     if let userInfo = launchOptions[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]{
                         openNotification(userInfo)
                     }
-                }else {
+                } else {
                     URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                 }
-            }else {
+            } else {
                 URNavigationManager.setupNavigationControllerWithLoginViewController()
             }
         }
@@ -256,7 +253,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             user.pushIdentity = fcmToken
             URUserManager.updatePushIdentity(user, completion: { success in
                 guard success else { return }
-                URFCMRegistrationManager.onFCMRegistered(user: user)
+                URGCMManager.onFCMRegistered(user: user)
             })
         }
 

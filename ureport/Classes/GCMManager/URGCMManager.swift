@@ -11,12 +11,20 @@ import Alamofire
 import ObjectMapper
 
 class URGCMManager: NSObject {
-    
+
     static let chatTopic = "/topics/chats-"
-    
+
+    private static let chatTopicsPath = "chats-"
+    private static let storyTopicsPath = "story-"
+
     static let registrationKey = "onRegistrationCompleted"
     static let messageKey = "onMessageReceived"
-    
+
+    static func onFCMRegistered(user: URUser) {
+        registerUserToChatTopics(user)
+//        registerToStoryTopics(user: user)
+    }
+
     class func handleNotification(_ userData:[AnyHashable: Any]) {
         let from = userData["from"] as! String
         if from.hasPrefix(chatTopic) {
@@ -29,7 +37,7 @@ class URGCMManager: NSObject {
             }
         }
     }
-    
+
     fileprivate class func convertJsonToDictionary(_ value:String) -> NSDictionary? {
         if let data = value.data(using: String.Encoding.utf8) {
             do {
@@ -40,41 +48,53 @@ class URGCMManager: NSObject {
         }
         return nil
     }
-    
+
     fileprivate class func isUserAllowedForMessageNotification(_ user:URUser?) -> Bool {
         return URUser.activeUser() != nil && user != nil
             && user!.key != URUser.activeUser()?.key
     }
-    
-    class func registerUserInTopic(_ user:URUser,chatRoom:URChatRoom) {
-        if user.pushIdentity != nil {
-            GCMPubSub.sharedInstance().subscribe(withToken: user.pushIdentity!, topic: "\(self.chatTopic)\(chatRoom.key!)",
-                                                          options: nil, handler: {(error) -> Void in
-                                                            if (error != nil) {
-                                                                print("Subscription failed: \(error?.localizedDescription)")
-                                                            } else {
-                                                                NSLog("Subscribed to topic");
-                                                            }
-            })
-        }
+
+    class func registerUserToChatTopics(_ user: URUser) {
+        guard let fcmToken = user.pushIdentity else { return }
+        URUserManager.getChatRooms(user, completion: { chatRooms in
+            guard let chatRooms = chatRooms else { return }
+            for chatRoom in chatRooms {
+                URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoom))
+            }
+        })
     }
-    
+
+    static public func registerUserToChatTopic(user: URUser, chatRoomKey: String) {
+        guard let fcmToken = user.pushIdentity else { return }
+        URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
+    }
+
+    static public func unregisterUserFromChatTopic(user: URUser, chatRoomKey: String) {
+        guard let fcmToken = user.pushIdentity else { return }
+        URFcmAPI.unregisterFromTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
+    }
+
+    class func registerUserInTopic(_ user:URUser,chatRoom:URChatRoom) {
+        guard let fcmToken = user.pushIdentity else { return }
+        URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoom.key!))
+    }
+
     class func notifyChatMessage(_ chatRoom:URChatRoom, chatMessage:URChatMessage) {
         let headers = [
             "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        
+
         let message = chatMessage.message != nil ? chatMessage.message! : "label_chat_picture_notification".localized
         chatMessage.message = message
-        
+
         let input:URGcmInput = URGcmInput(to: "\(self.chatTopic)\(chatRoom.key!)", data: buildChatMessageData(chatRoom, chatMessage: chatMessage))
         input.notification = URGcmNotification(title: "New chat message", body: "\(chatMessage.user.nickname!): \(chatMessage.message!)",type: URConstant.NotificationType.CHAT)
-        
+
         let param = Mapper<URGcmInput>().toJSON(input)
-        
+
         Alamofire.request(URConstant.Fcm.GCM_URL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).debugLog()
     }
-    
+
     class func buildChatMessageData(_ chatRoom:URChatRoom, chatMessage:URChatMessage) -> [String : AnyObject] {
         let chatMessageDict:[String : AnyObject] = [
             "message": chatMessage.message! as AnyObject,
@@ -86,12 +106,15 @@ class URGCMManager: NSObject {
             "chatRoom": ["key": chatRoom.key] as AnyObject
         ];
     }
-    
+
     class func buildUserData(_ user:URUser) -> [String : AnyObject] {
         return [
             "key": user.key! as AnyObject,
             "nickname": user.nickname! as AnyObject
         ]
     }
-    
+
+    private static func topicByName(topic: String, key: String) -> String {
+        return "\(topic)\(key)"
+    }
 }
