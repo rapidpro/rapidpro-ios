@@ -12,12 +12,13 @@ import ObjectMapper
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
 
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
     var revealController:SWRevealViewController?
+    var fcmToken: String?
 
     var registrationOptions = [String: AnyObject]()
 
@@ -49,11 +50,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         FirebaseApp.configure()
         Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
 
-//        setupGoogle()
         requestPermissionForPushNotification(application)
-//        setupGCM(application)
         setupAWS()
         createDirectoryToImageUploads()
+        Messaging.messaging().delegate = self
         
         URReviewModeManager.checkIfIsInReviewMode { (reviewMode) -> Void in
             
@@ -86,22 +86,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         AWSServiceManager.default().defaultServiceConfiguration = configuration
         
     }
-    
-    func setupGCM(_ application: UIApplication) {
-        var configureError:NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError!)")
-        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID        
-        
-        let instanceIDConfig = GGLInstanceIDConfig.default()
-        instanceIDConfig?.delegate = self
-        GGLInstanceID.sharedInstance().start(with: instanceIDConfig)
-        
-        let gcmConfig = GCMConfig.default()
-        gcmConfig?.receiverDelegate = self
-        GCMService.sharedInstance().start(with: gcmConfig)
-    }
-    
+
     func requestPermissionForPushNotification(_ application:UIApplication) {
         
         if #available(iOS 10.0, *) {
@@ -111,40 +96,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             center.requestAuthorization(options: [.sound,.alert,.badge], completionHandler: { (success, error) in
                 if let error = error {
                     print(error.localizedDescription)
-                }else {
+                } else {
                     print("success: \(success)")
                     application.registerForRemoteNotifications()
                 }
-                
             })
-        }else {
-        
+        } else {
             let types:UIUserNotificationType = ([.alert, .badge, .sound])
             let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
             application.registerUserNotificationSettings(settings)
             application.registerForRemoteNotifications()
         }
     }
-    
-    func setupGoogle() {
-        var configureError: NSError?
-        GGLContext.sharedInstance().configureWithError(&configureError)
-        assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        
-        let gai: GAI = GAI.sharedInstance()
-        gai.trackUncaughtExceptions = true
-    }
-    
+
+
     func convertStringToDictionary(_ text: String) -> [String:AnyObject]? {
-        if let data = text.data(using: String.Encoding.utf8) {
-            do {
-                let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
-                return json
-            } catch {
-                print("Something went wrong")
-            }
+        guard let data = text.data(using: String.Encoding.utf8) else {
+            return nil
         }
-        return nil
+        do {
+            let json = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:AnyObject]
+            return json
+        } catch {
+            print("Something went wrong")
+            return nil
+        }
     }
 
     func checkMainViewControllerToShow(_ launchOptions: [AnyHashable: Any]?) {
@@ -176,23 +152,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         return nil
     }
-    
-    //MARK: GCMReceiverDelegate
-    
-    func didSendDataMessage(withID messageID: String!) {
 
-    }
-    
-    func didDeleteMessagesOnServer() {
-
-    }
-    
-    //MARK: GGLInstanceIDDelegate
-    
-    func onTokenRefresh() {
-        print("The GCM registration token needs to be changed.")
-    }
-    
     //MARK: Notification Methods
     
     func openNotification(_ userInfo:[AnyHashable:Any]) {
@@ -239,6 +199,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
         
     }
+
+    func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        print("Did receive remote notification")
+    }
     
     //MARK: Application Methods
     
@@ -250,53 +214,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
-        
-        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
     }
     
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        //Enter on app foreground
         let userInfo = notification.request.content.userInfo
-        
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
-        
-        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         
         URIPCheckManager.getCountryCodeByIP { (countryCode) in}
-        
-        GCMService.sharedInstance().connect(handler: {
-            (error) -> Void in
-            if let error = error {
-                print("Could not connect to GCM: \(error.localizedDescription)")
-            } else {
-                print("Connected with GCM")
-            }
-        })
     }
-    
-    func applicationDidEnterBackground(_ application: UIApplication) {
-        GCMService.sharedInstance().disconnect()
-    }
-    
+
     func application( _ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error ) {
         print("Registration for remote notification failed with error: \(error.localizedDescription)")
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
-        
-        GCMService.sharedInstance().appDidReceiveMessage(userInfo)
         completionHandler(.newData)
     }
     
@@ -309,33 +250,44 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         #else
             debugMode = false
         #endif
-        
-        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject, kGGLInstanceIDAPNSServerTypeSandboxOption:debugMode as AnyObject]
-        
-        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (registrationToken, error) in
-            if (registrationToken != nil) {
-                if let user = URUser.activeUser() {
-                    if (user.pushIdentity == nil || user.pushIdentity!.isEmpty) || (!user.pushIdentity!.isEmpty && (user.pushIdentity! != registrationToken)){
-                        user.pushIdentity = registrationToken
-                        URUserManager.updatePushIdentity(user)
-                    }
-                }
-            } else {
-                print("Registration to GCM failed with error: \(error?.localizedDescription)")
-            }
+
+        Messaging.messaging().apnsToken = deviceToken
+
+        if let fcmToken = self.fcmToken, let user = URUser.activeUser() {
+            user.pushIdentity = fcmToken
+            URUserManager.updatePushIdentity(user)
         }
-        
+
+//        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject, kGGLInstanceIDAPNSServerTypeSandboxOption:debugMode as AnyObject]
+
+//        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (registrationToken, error) in
+//            if (registrationToken != nil) {
+//                if let user = URUser.activeUser() {
+//                    if (user.pushIdentity == nil || user.pushIdentity!.isEmpty) || (!user.pushIdentity!.isEmpty && (user.pushIdentity! != registrationToken)){
+//                        user.pushIdentity = registrationToken
+//                        URUserManager.updatePushIdentity(user)
+//                    }
+//                }
+//            } else {
+//                print("Registration to GCM failed with error: \(error?.localizedDescription)")
+//            }
+//        }
+
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if (url.scheme?.hasPrefix("fb"))! {
-            
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         }
         else {
             return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
         }
     }
-
 }
 
+extension AppDelegate: MessagingDelegate {
+    func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        print("Firebase registration token was refreshed: \(fcmToken)")
+        self.fcmToken = fcmToken
+    }
+}
