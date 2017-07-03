@@ -33,14 +33,12 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
 }
 
 class URChatRoomManager: NSObject {
-    
+
     var delegate:URChatRoomManagerDelegate?
-    
+    static var path = "chat_room"
+
     //MARK: FireBase Methods
-    class func path() -> String {
-        return "chat_room"
-    }
-    
+
     func createIndividualChatRoomIfPossible(_ friend:URUser,isIndividualChatRoom:Bool) {
         
         let group = DispatchGroup()
@@ -112,7 +110,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()?.code ?? "")
-            .child(path())
+            .child(URChatRoomManager.path)
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
                 guard snapshot.value != nil else {
@@ -161,7 +159,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(self.path())
+            .child(URChatRoomManager.path)
             .childByAutoId()
             .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error, dbReference) -> Void in
                 guard error == nil else {
@@ -189,7 +187,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(self.path())
+            .child(URChatRoomManager.path)
             .child(chatRoom.key!)
             .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error, firebase) -> Void in
                 guard error == nil else {
@@ -206,7 +204,7 @@ class URChatRoomManager: NSObject {
                     for user in newMembers {
 
                         URChatMemberManager.save(chatMember, user: user, completion: { (success) -> Void in
-                            if success == true {
+                            if success {
                                 URGCMManager.registerUserInTopic(user, chatRoom: chatRoom)
                                 URUserManager.updateChatroom(user, chatRoom: chatRoom)
                             }
@@ -221,7 +219,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(URChatRoomManager.path())
+            .child(URChatRoomManager.path)
             .queryOrdered(byChild: "privateAccess")
             .queryEqual(toValue: false)
             .observe(.childAdded, with: { snapshot in
@@ -253,7 +251,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(URChatRoomManager.path())
+            .child(URChatRoomManager.path)
             .child(chatRoomKey)
             .updateChildValues(["blocked" : URUser.activeUser()!.key])
     }
@@ -262,7 +260,7 @@ class URChatRoomManager: NSObject {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(URChatRoomManager.path())
+            .child(URChatRoomManager.path)
             .child(chatRoomKey)
             .child("blocked")
             .removeValue()

@@ -134,7 +134,7 @@ class URChatMemberManager: NSObject {
                 URFireBaseManager.sharedInstance()
                     .child(URCountryProgram.path())
                     .child(URCountryProgramManager.activeCountryProgram()!.code)
-                    .child(URChatRoomManager.path())
+                    .child(URChatRoomManager.path)
                     .child(chatRoomKey)
                     .removeValue { (error, _) -> Void in
                         guard error == nil else {
