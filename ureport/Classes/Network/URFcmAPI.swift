@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class URFCMRegistratoinAPI {
+class URFcmAPI {
 
     private static let URL = "https://iid.googleapis.com/iid/"
 
@@ -31,5 +31,4 @@ class URFCMRegistratoinAPI {
             print("Request done")
         })
     }
-
 }

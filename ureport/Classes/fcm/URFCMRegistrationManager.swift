@@ -25,19 +25,19 @@ class URFCMRegistrationManager {
         URUserManager.getChatRooms(user, completion: { chatRooms in
             guard let chatRooms = chatRooms else { return }
             for chatRoom in chatRooms {
-                URFCMRegistratoinAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoom))
+                URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoom))
             }
         })
     }
 
     static private func registerToChatTopic(user: URUser, chatRoomKey: String) {
         guard let fcmToken = user.pushIdentity else { return }
-        URFCMRegistratoinAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
+        URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
     }
 
     static private func unregisterFromChatTopic(user: URUser, chatRoomKey: String) {
         guard let fcmToken = user.pushIdentity else { return }
-        URFCMRegistratoinAPI.unregisterFromTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
+        URFcmAPI.unregisterFromTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoomKey))
     }
 
     static private func registerToStoryTopics(user: URUser) {
