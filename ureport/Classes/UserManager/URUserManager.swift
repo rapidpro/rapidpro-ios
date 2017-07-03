@@ -17,10 +17,9 @@ class URUserManager: NSObject {
 
     var delegate: URUserManagerDelegate!
 
+    static var path: String = "user"
+
     //MARK: FireBase Methods
-    class func path() -> String {
-        return "user"
-    }
 
     class func pathUserModerator() -> String {
         return "user_moderator"
@@ -39,7 +38,7 @@ class URUserManager: NSObject {
 
     class func save(_ user:URUser) {
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(user.key)
             .setValue(user.toDictionary())
         URUser.setActiveUser(user)
@@ -47,16 +46,21 @@ class URUserManager: NSObject {
 
     class func updatePushIdentity(_ user:URUser) {
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(user.key)
             .child("pushIdentity")
-            .setValue(user.pushIdentity)
+            .setValue(user.pushIdentity, withCompletionBlock: { (error, dbRerference) in
+                guard error == nil else {
+                    print("Error updating pushIdentity")
+                    return
+                }
+            })
         URUserLoginManager.setLoggedUser(user)
     }
 
     class func updateAvailableInChat(_ user:URUser,publicProfile:Bool) {
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(user.key)
             .child("publicProfile")
             .setValue(publicProfile)
@@ -80,9 +84,26 @@ class URUserManager: NSObject {
             .removeValue()
     }
 
+    class func getChatRooms(_ user:URUser, completion: @escaping (_ chatRoomKeys: [String]?) -> Void) {
+        URFireBaseManager.sharedInstance()
+            .child(URUserManager.path)
+            .child(user.key)
+            .child("chatRooms").observeSingleEvent(of: .value, with: { snapshot in
+                guard snapshot.hasChildren() else {
+                    completion(nil)
+                    return
+                }
+                var chatRoomKeys: [String] = []
+                for chatRoomNode in snapshot.children.allObjects as! [DataSnapshot] {
+                    chatRoomKeys.append(chatRoomNode.key)
+                }
+                completion(chatRoomKeys)
+            })
+    }
+
     class func updateChatroom(_ user:URUser,chatRoom:URChatRoom) {
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(user.key)
             .child("chatRooms")
             .updateChildValues([chatRoom.key! : true])
@@ -90,7 +111,7 @@ class URUserManager: NSObject {
 
     class func removeChatroom(_ user:URUser,chatRoomKey:String) {
         URFireBaseManager.sharedInstance()
-            .child(URUserManager.path())
+            .child(URUserManager.path)
             .child("chatRooms")
             .child(chatRoomKey)
             .removeValue { (error: Error?, firebase: DatabaseReference?) -> Void in
@@ -104,7 +125,7 @@ class URUserManager: NSObject {
 
     func getUsersByPoints() {
         URFireBaseManager.sharedInstance()
-            .child(URUserManager.path())
+            .child(URUserManager.path)
             .queryOrdered(byChild: "points")
             .observe(.childAdded, with: { snapshot in
                 guard snapshot.value != nil else { return }
@@ -115,7 +136,7 @@ class URUserManager: NSObject {
 
     class func getByKey(_ key:String,completion:@escaping (URUser?,Bool) -> Void){
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
                 guard snapshot.value != nil else {
@@ -161,7 +182,7 @@ class URUserManager: NSObject {
     class func getAllUserByCountryProgram(_ completion:@escaping ([URUser]?) -> Void){
         let countryProgram = URCountryProgramManager.activeCountryProgram()!.code!
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .queryOrdered(byChild: "countryProgram")
             .queryEqual(toValue: countryProgram)
             .observeSingleEvent(of: .value, with: { snapshot in
@@ -200,7 +221,7 @@ class URUserManager: NSObject {
 
     class func incrementUserStories(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(userKey)
             .child("stories")
             .runTransactionBlock { currentData -> TransactionResult in
@@ -218,7 +239,7 @@ class URUserManager: NSObject {
 
     class func incrementUserContributions(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(userKey)
             .child("contributions")
             .runTransactionBlock { currentData -> TransactionResult in
@@ -236,7 +257,7 @@ class URUserManager: NSObject {
 
     class func incrementUserPointsUsingStoryCriteria(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(userKey)
             .child("points")
             .runTransactionBlock { currentData -> TransactionResult in
@@ -257,7 +278,7 @@ class URUserManager: NSObject {
 
     class func incrementUserPointsUsingContributionCriteria(_ userKey:String){
         URFireBaseManager.sharedInstance()
-            .child(self.path())
+            .child(URUserManager.path)
             .child(userKey)
             .child("points")
             .runTransactionBlock { currentData ->  TransactionResult in

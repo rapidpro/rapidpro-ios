@@ -271,7 +271,7 @@ class URChatRoomManager: NSObject {
         var chatRoomList:[URChatRoom] = []
         
         URFireBaseManager.sharedInstance()
-            .child(URUserManager.path())
+            .child(URUserManager.path)
             .child(user.key)
             .child("chatRooms")
             .observeSingleEvent(of: .value, with: { snapshot in
