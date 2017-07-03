@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
     var revealController:SWRevealViewController?
-    var fcmToken: String?
 
     var registrationOptions = [String: AnyObject]()
 

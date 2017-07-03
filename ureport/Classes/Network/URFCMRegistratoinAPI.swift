@@ -12,7 +12,6 @@ import Alamofire
 class URFCMRegistratoinAPI {
 
     private static let URL = "https://iid.googleapis.com/iid/"
-    private static let fcmApiKey = "AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs" // TODO: read from file
 
     static func registerOnTopic(pushIdentity: String, topic: String) {
         let headers = [
