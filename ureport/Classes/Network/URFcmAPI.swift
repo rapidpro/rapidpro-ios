@@ -11,13 +11,14 @@ import Alamofire
 
 class URFcmAPI {
 
-    private static let URL = "https://iid.googleapis.com/iid/"
+    private static let gcmCompatURL = "https://iid.googleapis.com/iid"
+    private static let fcmURL = "https://fcm.googleapis.com"
 
     static func registerOnTopic(pushIdentity: String, topic: String) {
         let headers = [
             "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .post, headers: headers).response(completionHandler: { defaultDataResponse in
+        _ = Alamofire.request("\(gcmCompatURL)/\(pushIdentity)/rel/topics/\(topic)", method: .post, headers: headers).response(completionHandler: { defaultDataResponse in
             print("Request done")
         })
     }
@@ -26,9 +27,18 @@ class URFcmAPI {
         let headers = [
             "Authorizaiton": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        _ = Alamofire.request("\(URL)\(pushIdentity)/rel/topics/\(topic)", method: .delete, headers: headers).response(completionHandler: {
+        _ = Alamofire.request("\(gcmCompatURL)/\(pushIdentity)/rel/topics/\(topic)", method: .delete, headers: headers).response(completionHandler: {
              defaultDataResponse in
             print("Request done")
+        })
+    }
+
+    static func sendChatNotification(data: [String: Any]) {
+        let headers = [
+            "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
+        ]
+        _ = Alamofire.request("\(fcmURL)/fcm/send", method: .post, parameters: data, encoding: JSONEncoding.default, headers: headers).response(completionHandler: { defaultDataResponse in
+            print("Message sent")
         })
     }
 }

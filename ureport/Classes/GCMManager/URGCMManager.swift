@@ -80,10 +80,6 @@ class URGCMManager: NSObject {
     }
 
     class func notifyChatMessage(_ chatRoom:URChatRoom, chatMessage:URChatMessage) {
-        let headers = [
-            "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
-        ]
-
         let message = chatMessage.message != nil ? chatMessage.message! : "label_chat_picture_notification".localized
         chatMessage.message = message
 
@@ -92,7 +88,7 @@ class URGCMManager: NSObject {
 
         let param = Mapper<URGcmInput>().toJSON(input)
 
-        Alamofire.request(URConstant.Fcm.GCM_URL, method: .post, parameters: param, encoding: JSONEncoding.default, headers: headers).debugLog()
+        URFcmAPI.sendChatNotification(data: param)
     }
 
     class func buildChatMessageData(_ chatRoom:URChatRoom, chatMessage:URChatMessage) -> [String : AnyObject] {
