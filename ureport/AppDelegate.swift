@@ -256,22 +256,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                 URGCMManager.onFCMRegistered(user: user)
             })
         }
-
-//        registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject, kGGLInstanceIDAPNSServerTypeSandboxOption:debugMode as AnyObject]
-
-//        GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (registrationToken, error) in
-//            if (registrationToken != nil) {
-//                if let user = URUser.activeUser() {
-//                    if (user.pushIdentity == nil || user.pushIdentity!.isEmpty) || (!user.pushIdentity!.isEmpty && (user.pushIdentity! != registrationToken)){
-//                        user.pushIdentity = registrationToken
-//                        URUserManager.updatePushIdentity(user)
-//                    }
-//                }
-//            } else {
-//                print("Registration to GCM failed with error: \(error?.localizedDescription)")
-//            }
-//        }
-
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
