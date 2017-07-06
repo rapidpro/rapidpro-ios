@@ -66,7 +66,7 @@ class URLoginCredentialsViewController: UIViewController {
         }
 
         self.view.endEditing(true)
-        URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (_, success) -> Void in
+        URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (error, success) -> Void in
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             } else {

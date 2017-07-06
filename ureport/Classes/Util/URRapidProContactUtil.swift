@@ -21,14 +21,14 @@ class URRapidProContactUtil: NSObject {
     static let GROUP_UREPORT_MALES = "UReport Males"
     static let GROUP_UREPORT_FEMALES = "UReport Females"
     static let GROUP_APP_UREPORT = "App U-Reporters"
-    
+
     static var groupList:[String] = []
-    
+
     class func putValueIfExists(_ value:String?,countryProgramContactFields:[String],possibleFields:[String]) {
         if value == nil || value!.characters.count == 0{
             return
         }
-        
+
         for possibleField in possibleFields {
             let index = countryProgramContactFields.index(of: possibleField)
             if index != nil && index != -1{

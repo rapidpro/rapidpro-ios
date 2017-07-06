@@ -153,7 +153,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 }
             }
         }
- 
     }
     
     @IBAction func btLoginTapped(_ sender: AnyObject) {
