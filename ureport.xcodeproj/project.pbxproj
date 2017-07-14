@@ -7,8 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01374BEA1F044CBD00827C71 /* FirebaseDatabase-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */; };
+		01374BEA1F044CBD00827C71 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01374BE91F044CBD00827C71 /* FirebaseDatabaseDev-Info.plist */; };
 		0157B6E31F0AD17F004049E7 /* URSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0157B6E21F0AD17F004049E7 /* URSettingsManager.swift */; };
+		01655A111F19383500EAEF69 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 01655A101F19320500EAEF69 /* FirebaseDatabaseProd-Info.plist */; };
 		01B582481F0AB729002DC1F8 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01B582471F0AB729002DC1F8 /* URFcmAPI.swift */; };
 		6502CB851DB16CB100E548B4 /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6502CB841DB16CB100E548B4 /* URIPCheckManager.swift */; };
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
@@ -293,8 +294,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabase-Info.plist"; sourceTree = "<group>"; };
+		01374BE91F044CBD00827C71 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		0157B6E21F0AD17F004049E7 /* URSettingsManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URSettingsManager.swift; sourceTree = "<group>"; };
+		01655A101F19320500EAEF69 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
 		01B582471F0AB729002DC1F8 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
 		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -729,7 +731,8 @@
 		65409FBE1B4C842700344D75 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				01374BE91F044CBD00827C71 /* FirebaseDatabase-Info.plist */,
+				01655A101F19320500EAEF69 /* FirebaseDatabaseProd-Info.plist */,
+				01374BE91F044CBD00827C71 /* FirebaseDatabaseDev-Info.plist */,
 				65A45CCD1B8694AE001C6808 /* GoogleService-Info.plist */,
 				659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */,
 				65409FBF1B4C842700344D75 /* Info.plist */,
@@ -1782,6 +1785,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				01655A111F19383500EAEF69 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,
@@ -1795,7 +1799,7 @@
 				651EC7171D5B9D20008695E3 /* URAddContributionTableViewCell.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
 				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
-				01374BEA1F044CBD00827C71 /* FirebaseDatabase-Info.plist in Resources */,
+				01374BEA1F044CBD00827C71 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,

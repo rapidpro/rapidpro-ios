@@ -39,9 +39,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         URCountryProgramManager.deactivateSwitchCountryProgram()
 
-        if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabase-Info", ofType: "plist")!) {
-            FirebaseApp.configure(name: "database", options: databaseOptions)
-        }
+        #if DEBUG
+            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
+                FirebaseApp.configure(name: "database", options: databaseOptions)
+            }
+        #else
+            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
+                FirebaseApp.configure(name: "database", options: databaseOptions)
+            }
+        #endif
 
         FirebaseApp.configure()
         Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
