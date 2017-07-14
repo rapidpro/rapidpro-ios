@@ -345,16 +345,14 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
             
             if let picture = user.picture {
                 
-                SDWebImageManager.shared().downloadImage(with: URL(string: picture), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                    
-                    }, completed: { (image, error, cache, finish, url) -> Void in
-                        if image != nil {
-                            let userImage = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
-                            self.avatars[user.key] = userImage
-                            self.users[user.key] = user.nickname
-                        }
+                SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: picture), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in                    
+                }, completed: { (image, data, error, success) in
+                    if image != nil {
+                        let userImage = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
+                        self.avatars[user.key] = userImage
+                        self.users[user.key] = user.nickname
+                    }
                 })
-                
             }
             
         }

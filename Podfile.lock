@@ -82,9 +82,9 @@ PODS:
   - ObjectMapper (2.1.0)
   - Proposer (1.1.0)
   - QRCodeReader.swift (7.2.0)
-  - SDWebImage (3.7.3):
-    - SDWebImage/Core (= 3.7.3)
-  - SDWebImage/Core (3.7.3)
+  - SDWebImage (4.0.0):
+    - SDWebImage/Core (= 4.0.0)
+  - SDWebImage/Core (4.0.0)
   - SRKControls (4.0.1):
     - SRKControls/Controls (= 4.0.1)
   - SRKControls/Controls (4.0.1)
@@ -155,7 +155,7 @@ SPEC CHECKSUMS:
   Firebase: 3565ea88b830f28f2c77ecc524622bc71a20d085
   FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
   GGLInstanceID: f92465924a9b8a48f712829d22e223653ab8dc72
-  Google: 97618e118111b998cce1d8dd1bd98b82301d72db
+  Google: 55ccf2acbe6f6ade86f872c1cd29a0c44039c349
   GoogleAnalytics: 9be1afdb8deeac4bb5f13ca7f7d3b9db2a1f43dc
   GoogleAppUtilities: c01c6a5671e9da8b9d690fdaec5959d6c2aac699
   GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
@@ -175,7 +175,7 @@ SPEC CHECKSUMS:
   ObjectMapper: e5e0f8aef8590fc2ddcde7f27eddb255863ee6e9
   Proposer: 422c693b1917a461af30e7139b0d05eefe999e16
   QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
-  SDWebImage: 1d2b1a1efda1ade1b00b6f8498865f8ddedc8a84
+  SDWebImage: 76a6348bdc74eb5a55dd08a091ef298e56b55e41
   SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
   STTwitter: 5c157e8dcb4f0e4cf5b4374393021b7d7b7fd497
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
@@ -184,4 +184,4 @@ SPEC CHECKSUMS:
 
 PODFILE CHECKSUM: 134ff43190942a4949a7df7e419d2f3c8f9f7e00
 
-COCOAPODS: 1.1.1
+COCOAPODS: 1.2.1

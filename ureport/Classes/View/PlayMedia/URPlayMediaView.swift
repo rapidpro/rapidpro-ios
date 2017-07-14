@@ -58,15 +58,13 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
         
         if media.type == URConstant.Media.PICTURE {
             
-            SDWebImageManager.shared().downloadImage(with: URL(string:media.url), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                
-                }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    if let image = image {
-                        self.addSubview(URPlayMediaView.buildImageView(image))
-                    }else{
-                        print("error on image download")
-                    }
-            })
+        SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.url), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in }, completed: { (image, data, error, finished) in
+            if let image = image {
+                self.addSubview(URPlayMediaView.buildImageView(image))
+            } else {
+                print("error on image download")
+            }
+        })
             
         }else if media.type == URConstant.Media.VIDEO {
             
@@ -79,20 +77,18 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
 
         }else if media.type == URConstant.Media.VIDEOPHONE {
             
-            SDWebImageManager.shared().downloadImage(with: URL(string:media.thumbnail!), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                
-                }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    
-                    if let image = image {
-                        self.addSubview(URPlayMediaView.buildImageView(image))
-                        let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
-                        playImage.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
-                        self.addSubview(playImage)
-                    }else{
-                        print("error on image download")
-                    }
-                    
+            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.thumbnail!), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in
+            }, completed: { (image, data, error, success) in
+                if let image = image {
+                    self.addSubview(URPlayMediaView.buildImageView(image))
+                    let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
+                    playImage.frame = CGRect(x: (URPlayMediaView.defaultFrame.width - 30) / 2, y: (URPlayMediaView.defaultFrame.height - 30) / 2, width: 30, height: 30)
+                    self.addSubview(playImage)
+                }else{
+                    print("error on image download")
+                }
             })
+            
         }else if media.type == URConstant.Media.FILE {
             let backgroundView = UIView(frame: URPlayMediaView.defaultFrame)
             backgroundView.backgroundColor = URConstant.Color.MEDIA_FILE

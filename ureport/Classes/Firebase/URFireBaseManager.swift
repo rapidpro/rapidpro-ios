@@ -39,7 +39,7 @@ class URFireBaseManager: NSObject {
     
     static func sharedInstance() -> Firebase {
         
-        if let countryCode = URIPCheckManager.countryCode , countryCode == URIPCheckManager.syriaCountryCode {
+        if let countryCode = URIPCheckManager.countryCode, URIPCheckManager.proxyCountryCodes.contains(countryCode) {
             return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
              
         }else {

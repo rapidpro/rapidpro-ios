@@ -55,14 +55,13 @@ class URMediaView: UIView {
         
         if let media = media as? URVideoMedia {
 
-            MBProgressHUD.showAdded(to: self, animated: true)
-            SDWebImageManager.shared().downloadImage(with: URL(string:media.url), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-
-                }, completed: { (image, error, cacheType, finish, url) -> Void in
-                    MBProgressHUD.hide(for: self, animated: true)
-                    self.imgMedia.image = image
-            })
+        MBProgressHUD.showAdded(to: self, animated: true)
             
+        SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.url), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in
+        }, completed: { (image, data, error, success) in
+            MBProgressHUD.hide(for: self, animated: true)
+            self.imgMedia.image = image
+        })
             
         }else if let media = media as? URVideoPhoneMedia {
             
