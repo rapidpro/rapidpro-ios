@@ -10,7 +10,6 @@
 #import <FBSDKLoginKit/FBSDKLoginKit.h>
 #import <Google/SignIn.h>
 #import <SDWebImage/UIImageView+WebCache.h>
-#import "TwitterAuthHelper.h"
 #import <AWSS3/AWSS3.h>
 #import <AWSCore/AWSCore.h>
 #import <NYTPhotoViewer/NYTPhoto.h>
