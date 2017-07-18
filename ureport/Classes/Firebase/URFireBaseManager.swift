@@ -137,10 +137,10 @@ class URFireBaseManager: NSObject {
         print(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId))
         
         Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId)).responseJSON { (response:DataResponse<Any>) in
-            if let response = response.result.value as? [AnyHashable: Any] {
+            if let response = response.result.value as? [String: Any] {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in
-                        if let user = user {
+                        if let user = user, user.key != nil {
                             completion(user)
                         }else {
                             let user = URUserLoginManager.getTwitterUserDataWithDictionary(response["twitter"] as! NSDictionary)
