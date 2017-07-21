@@ -45,12 +45,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         #else
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
+                dump(databaseOptions)
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
         #endif
 
         FirebaseApp.configure()
-        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
+//        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
 
         requestPermissionForPushNotification(application)
         setupAWS()
@@ -280,3 +281,4 @@ extension AppDelegate: MessagingDelegate {
         URSettingsManager.saveFCMToken(fcmToken: fcmToken)
     }
 }
+
