@@ -66,7 +66,9 @@ class URLoginCredentialsViewController: UIViewController {
         }
 
         self.view.endEditing(true)
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (error, success) -> Void in
+            MBProgressHUD.hide(for: self.view, animated: true)
             if success {                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             } else {
