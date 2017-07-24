@@ -13,12 +13,8 @@ import AVFoundation
 class URModerationViewController: UITabBarController, UITabBarControllerDelegate {
 
     var appDelegate:AppDelegate!
-    
-    lazy var reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
-        $0.reader          = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
-        $0.showTorchButton = true
-    })
-    
+    var reader: QRCodeReaderViewController!
+
     let storyViewController:URStoriesTableViewController = URStoriesTableViewController(filterStoriesToModerate: true)
     let moderatorViewController:URModeratorTableViewController = URModeratorTableViewController()
     
@@ -28,9 +24,14 @@ class URModerationViewController: UITabBarController, UITabBarControllerDelegate
         self.delegate = self
         self.appDelegate = UIApplication.shared.delegate as! AppDelegate
         self.appDelegate.requestPermissionForPushNotification(UIApplication.shared)
-        
+
         setupViewControllers()
         tabBarController(self, didSelect: storyViewController)
+
+        reader = QRCodeReaderViewController(builder: QRCodeReaderViewControllerBuilder {
+            $0.reader          = QRCodeReader(metadataObjectTypes: [AVMetadataObjectTypeQRCode])
+            $0.showTorchButton = true
+        })
         
     }
 

@@ -160,7 +160,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                     user.key = user.socialUid
                 }
                 self.saveUser(buildUserFields(user))
-                
             }else {
                 
                 user = buildUserFields(user)
@@ -182,7 +181,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         
                     }else if let error = error {
                         switch error {
-                        case .emailTaken:
+                        case URFireBaseManagerAuthError.emailTaken:
                             ISAlertMessages.displaySimpleMessage("error_email_already_exists".localized, fromController: self)
                             break
                         default:
@@ -191,51 +190,6 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         }
                     }
                 })
-                /*
-                URFireBaseManager.sharedLoginInstance().createUser(user.email, password: self.txtPassword.text,
-                                                              withValueCompletionBlock: { error, result in
-                                                                MBProgressHUD.hide(for: self.view, animated: true)
-                                                                if error != nil {
-                                                                    var msg = ""
-                                                                    
-                                                                    switch (error!._code) {
-                                                                    case -9:
-                                                                        msg = "error_email_already_exists".localized
-                                                                        break;
-                                                                    case -5:
-                                                                        msg = "2".localized
-                                                                        break;
-                                                                    default:
-                                                                        break
-                                                                    }
-                                                                    
-                                                                    if msg.isEmpty {
-                                                                        print(error)
-                                                                        UIAlertView(title: "Error", message: "error_no_internet".localized, delegate: self, cancelButtonTitle: "OK").show()
-                                                                    }else {
-                                                                        UIAlertView(title: nil, message: msg, delegate: self, cancelButtonTitle: "OK").show()
-                                                                    }
-                                                                    
-                                                                } else {
-                                                                    let uid = result?["uid"] as? String
-                                                                    user.key = uid
-                                                                    
-                                                                    if (error != nil) {
-                                                                        print(error)
-                                                                    }else{
-                                                                        
-                                                                        self.saveUser(user)
-                                                                        
-                                                                        URUserLoginManager.login(user.email!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-                                                                            MBProgressHUD.hide(for: self.view, animated: true)
-                                                                            if success {
-                                                                                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
-                                                                            }
-                                                                        })
-                                                                    }
-                                                                }
-                })*/
-                
             }
             
         }
@@ -273,12 +227,16 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             URNavigationManager.navigation.popViewController(animated: true)
         }
         
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary:NSDictionary) -> Void in
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary) -> Void in
+
+            guard let _ = rapidProUserDictionary else {
+                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
+                return
+            }
             
             URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: !self.updateMode, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
-                print(response)
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             })
         }

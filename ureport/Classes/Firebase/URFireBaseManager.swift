@@ -10,62 +10,57 @@ import UIKit
 import Firebase
 import Alamofire
 
-enum URFireBaseManagerAuthError {
+enum URFireBaseManagerAuthError: Error {
     case invalidEmail
     case invalidUser
     case emailTaken
 }
 
 class URFireBaseManager: NSObject {
-    
-    static let Properties = "Key"
-//    static let Properties = "Key-debug"
-    static let Path = "https://u-report.firebaseio.com/"
-//    static let Path = "https://u-report-dev.firebaseio.com/"
-//    static let Path = "https://u-report-beta.firebaseio.com"
-    
-    
-//    Production
-    static let region = AWSRegionType.euWest1
-//    Debug
-//    static let region = AWSRegionType.usEast1
 
-//    Production
-        static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
-//    Debug
-//    static let credentialsProvider:AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
-    
-    static let Reference = Firebase(url: Path)
-    
-    static func sharedInstance() -> Firebase {
+#if DEBUG
+    static let Properties = "Key-debug"
+    static let region = AWSRegionType.usEast1
+    static let credentialsProvider:AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
+#else
+    static let Properties = "Key"
+    static let region = AWSRegionType.euWest1
+    static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+#endif
+
+    static var databaseApp: FirebaseApp {
+        return FirebaseApp.app(name: "database")!
+    }
+
+    static let Reference: DatabaseReference = Database.database(app: FirebaseApp.app(name: "database")!).reference()
+
+    static func sharedInstance() -> DatabaseReference {
         
-        if let countryCode = URIPCheckManager.countryCode , countryCode == URIPCheckManager.syriaCountryCode {
-            return Firebase(url: "http://ureport-socket.ilhasoft.mobi:5000")
-             
+        if let countryCode = URIPCheckManager.countryCode , URIPCheckManager.proxyCountryCodes.contains(countryCode) {
+            return Database.database().reference(fromURL: "http://ureport-socket.ilhasoft.mobi:5000")
         }else {
-            return Reference!
+            return Reference
         }
     }
-    
-    static func authUserWithPassword(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+
+    static func authUserWithPassword(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError: Error?) -> Void) -> Void {
         Alamofire.request(String(format: URConstant.Auth.AUTH_LOGIN(), email,password)).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {
                 if let uid = response["uid"] as? String {
-                    
                     URUserManager.getByKey(uid, completion: { (user, success) in
                         if let user = user {
                             completion(user, nil)
                         }
                     })
                     
-                }else if let error = response["error"] as? NSDictionary {
+                } else if let error = response["error"] as? NSDictionary {
                     let errorCode = error["code"] as! String
                     switch errorCode {
                         case "INVALID_EMAIL":
-                            completion(nil, .invalidEmail)
+                            completion(nil, URFireBaseManagerAuthError.invalidEmail)
                         break
                         case "INVALID_USER":
-                            completion(nil, .invalidUser)
+                            completion(nil, URFireBaseManagerAuthError.invalidUser)
                         break
                         default:
                         break
@@ -74,23 +69,21 @@ class URFireBaseManager: NSObject {
             }
         }
     }
-    
-    static func createUser(email:String,password:String, completion:@escaping (_ user:URUser?,_ authError:URFireBaseManagerAuthError?) -> Void) -> Void {
+
+    static func createUser(email:String,password:String, completion:@escaping (_ user:URUser?, _ authError: Error?) -> Void) -> Void {
         Alamofire.request(String(format: URConstant.Auth.AUTH_REGISTER(), email,password)).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {
                 if let uid = response["uid"] as? String {
                     let user = URUser()
-                    
                     user.key = uid
-                    
                     completion(user, nil)
-                    
                 }else if let error = response["error"] as? NSDictionary {
                     let errorCode = error["code"] as! String
                     switch errorCode {
                     case "EMAIL_TAKEN":
-                        completion(nil, .emailTaken)
+                        completion(nil, URFireBaseManagerAuthError.emailTaken)
                         break
+                    // TODO: add wrong password error
                     default:
                         break
                     }
@@ -112,7 +105,6 @@ class URFireBaseManager: NSObject {
                             completion(user)
                         }
                     })
-                    
                 }
             }else{
                 print(response)
@@ -120,7 +112,7 @@ class URFireBaseManager: NSObject {
         }
     }
     
-    static func authUserWithGoogle(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+    static func authUserWithGoogle(token:String, completion:@escaping (_ user: URUser?) -> Void) -> Void {
         Alamofire.request(String(format: URConstant.Auth.AUTH_GOOGLE(), token)).responseJSON { (response:DataResponse<Any>) in
             if let response = response.result.value as? NSDictionary {
                 if let uid = response["uid"] as? String {
@@ -145,10 +137,10 @@ class URFireBaseManager: NSObject {
         print(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId))
         
         Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId)).responseJSON { (response:DataResponse<Any>) in
-            if let response = response.result.value as? NSDictionary {
+            if let response = response.result.value as? [String: Any] {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in
-                        if let user = user {
+                        if let user = user, user.key != nil {
                             completion(user)
                         }else {
                             let user = URUserLoginManager.getTwitterUserDataWithDictionary(response["twitter"] as! NSDictionary)
@@ -162,6 +154,12 @@ class URFireBaseManager: NSObject {
                 print(response)
             }
         }
+    }
+
+    static func resetPassword(forUser email: String, withCompletionBlock completion: @escaping (_ error: Error?) -> Void) {
+        Auth.auth(app: URFireBaseManager.databaseApp).sendPasswordReset(withEmail: email, completion: { error in
+            completion(error)
+        })
     }
     
 }
