@@ -5,8 +5,8 @@ use_frameworks!
 target "ureport" do
 
 pod 'TPKeyboardAvoiding'
-pod 'FBSDKLoginKit'
-pod 'FBSDKCoreKit'
+pod 'FBSDKLoginKit', '4.23.0'
+pod 'FBSDKCoreKit', '4.23.0'
 pod 'Google/SignIn', '1.3.2'
 pod 'Google/Analytics', '1.3.2'
 pod 'GoogleUtilities', '1.1.0'
