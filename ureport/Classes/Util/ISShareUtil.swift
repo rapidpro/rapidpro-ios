@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ISShareUtil: NSObject {
+class ISShareUtil {
    
     class func share(_ viewController:UIViewController,objects:[AnyObject]) {
         

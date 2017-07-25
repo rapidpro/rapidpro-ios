@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class URIPCheckManager: NSObject {
+class URIPCheckManager {
 
     static var countryCode:String?
     static let proxyCountryCodes = ["SY","LB", "IR", "IQ", "JO", "AZ", "AF"]

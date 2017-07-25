@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URCountryProgramManager: NSObject {
+class URCountryProgramManager {
     
     static var countryPrograms:[URCountryProgram]!
     

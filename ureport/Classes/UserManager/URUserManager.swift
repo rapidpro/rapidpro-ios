@@ -13,7 +13,7 @@ import Firebase
     @objc optional func newUserReceived(_ user:URUser)
 }
 
-class URUserManager: NSObject {
+class URUserManager {
 
     var delegate: URUserManagerDelegate!
 

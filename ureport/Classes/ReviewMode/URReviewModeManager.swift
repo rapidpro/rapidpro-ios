@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URReviewModeManager: NSObject {
+class URReviewModeManager {
 
     //MARK: FireBase Methods
     class func path() -> String {

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URFileUtil: NSObject {
+class URFileUtil {
 
     static let outPutURLDirectory = NSSearchPathForDirectoriesInDomains(FileManager.SearchPathDirectory.documentDirectory, FileManager.SearchPathDomainMask.userDomainMask, true)[0] as NSString
     

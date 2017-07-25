@@ -13,7 +13,7 @@ protocol URStoryManagerDelegate {
     func newStoryReceived(_ story:URStory)
 }
 
-class URStoryManager: NSObject {
+class URStoryManager {
  
     let itensByQuery = 5
 

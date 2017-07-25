@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class URGeonamesAPI: NSObject {
+class URGeonamesAPI {
 
     static func getGeonameID(countryCode:String, completion:@escaping (_ geonameID:Int?) -> Void ) -> Void {
         Alamofire.request("http://api.geonames.org/countryInfoJSON?country=\(countryCode)&username=ureport", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response: DataResponse<Any>) in

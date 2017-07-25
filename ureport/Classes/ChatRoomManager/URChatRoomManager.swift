@@ -32,7 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc optional func openChatRoom(_ chatRoom:URChatRoom, members:[URUser], title:String)
 }
 
-class URChatRoomManager: NSObject {
+class URChatRoomManager {
 
     var delegate:URChatRoomManagerDelegate?
     static var path = "chat_room"

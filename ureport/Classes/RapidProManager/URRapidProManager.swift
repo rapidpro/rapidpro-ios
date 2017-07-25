@@ -14,7 +14,7 @@ protocol URRapidProManagerDelegate {
     func newMessageReceived(_ message:String)
 }
 
-class URRapidProManager: NSObject {
+class URRapidProManager {
     
     var delegate:URRapidProManagerDelegate?
     static var sendingAnswers:Bool = false

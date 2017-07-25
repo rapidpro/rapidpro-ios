@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URMediaUpload: NSObject {
+class URMediaUpload {
 
     class func uploadMedias(_ medias:[URMedia],completion:@escaping (_ medias:[URMedia]) -> Void) {
         
