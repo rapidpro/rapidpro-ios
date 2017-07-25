@@ -67,9 +67,10 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Poll Results List")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
+
         self.navigationController!.setNavigationBarHidden(false, animated: true)
         self.automaticallyAdjustsScrollViewInsets = true
     }
