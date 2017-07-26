@@ -10,37 +10,6 @@ import UIKit
 
 class URCountryProgramManager {
 
-    private struct CountryProgramStruct: CustomStringConvertible {
-        var description: String {
-            return ""
-        }
-
-        let code: String
-        let themeColor: UIColor
-        let org: NSNumber?
-        let name: String
-        let twitter: String?
-        let facebook: String?
-        let rapidProHostAPI: String
-        let ureportHostAPI: String
-        let groupName: String
-        let stateField: String?
-        let channel: String?
-        init(dictionary: [String: Any?]) {
-            self.code = dictionary["code"] as! String
-            self.themeColor = UIColor(rgba: dictionary["themeColor"] as! String)
-            self.org = dictionary["org"] as? NSNumber
-            self.name = dictionary["name"] as! String
-            self.twitter = dictionary["twitter"] as? String
-            self.facebook = dictionary["facebook"] as? String
-            self.rapidProHostAPI = dictionary["rapidProHostAPI"] as! String
-            self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
-            self.groupName = dictionary["groupName"] as! String
-            self.stateField = dictionary["stateField"] as? String
-            self.channel = dictionary["channel"] as? String
-        }
-    }
-    
     static var countryPrograms:[URCountryProgram]!
     
     class func getCountryProgramByCountry(_ country:URCountry) -> URCountryProgram {
@@ -70,8 +39,7 @@ class URCountryProgramManager {
             let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
 
             for countryJSON in countriesJSON {
-                let countryProgram = CountryProgramStruct(dictionary: countryJSON)
-                countryPrograms.append(URCountryProgram(code: countryProgram.code, themeColor: countryProgram.themeColor, org: countryProgram.org, channel: countryProgram.channel, name: countryProgram.name, twitter: countryProgram.twitter, facebook: countryProgram.facebook, rapidProHostAPI: countryProgram.rapidProHostAPI, ureportHostAPI: countryProgram.ureportHostAPI, groupName: countryProgram.groupName, stateField: countryProgram.stateField))
+                countryPrograms.append(URCountryProgram(dictionary: countryJSON))
             }
         }
         return countryPrograms
@@ -84,8 +52,8 @@ class URCountryProgramManager {
             myDict = NSDictionary(contentsOfFile: path)
         }
         if let dict = myDict {
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code!)"] != nil {
-                channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code!)"] as? String
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] != nil {
+                channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] as? String
             }else {
                 channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(URConstant.RapidPro.GLOBAL)"] as? String
             }
@@ -100,8 +68,8 @@ class URCountryProgramManager {
             rootDictionary = NSDictionary(contentsOfFile: path)
         }
         if let dict = rootDictionary {
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code!)"] != nil {
-                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code!)"] as? String
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] != nil {
+                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] as? String
             } else {
                 token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(URConstant.RapidPro.GLOBAL)"] as? String
             }

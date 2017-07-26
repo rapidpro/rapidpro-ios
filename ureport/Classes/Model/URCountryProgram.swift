@@ -11,7 +11,7 @@ import UIKit
 class URCountryProgram: Serializable {
 
     var code: String!
-    var themeColor: UIColor?
+    var themeColor: UIColor!
     var name: String!
     var org: NSNumber?
     var rapidProHostAPI: String!
@@ -21,34 +21,26 @@ class URCountryProgram: Serializable {
     var groupName: String!
     var stateField: String?
     var channel: String?
-    
-    init (code:String!,
-          themeColor:UIColor?,
-          org:NSNumber?,
-          channel: String!,
-          name:String!,
-          twitter:String?,
-          facebook:String?,
-          rapidProHostAPI:String!,
-          ureportHostAPI:String!,
-          groupName:String!,
-          stateField:String? = nil) {
-        self.code = code
-        self.themeColor = themeColor
-        self.org = org
-        self.name = name
-        self.twitter = twitter
-        self.facebook = facebook
-        self.rapidProHostAPI = rapidProHostAPI
-        self.ureportHostAPI = ureportHostAPI
-        self.groupName = groupName
-        self.stateField = stateField
+
+    init(dictionary: [String: Any?]) {
+        self.code = dictionary["code"] as! String
+        self.themeColor = UIColor(rgba: dictionary["themeColor"] as! String)
+        self.org = dictionary["org"] as? NSNumber
+        self.name = dictionary["name"] as! String
+        self.twitter = dictionary["twitter"] as? String
+        self.facebook = dictionary["facebook"] as? String
+        self.rapidProHostAPI = dictionary["rapidProHostAPI"] as! String
+        self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
+        self.groupName = dictionary["groupName"] as! String
+        self.stateField = dictionary["stateField"] as? String
+        self.channel = dictionary["channel"] as? String
+        super.init()
     }
-    
+
     override init () {
         super.init()
     }
-    
+
     //MARK: FireBase Methods
     class func path() -> String {
         return "country_program"

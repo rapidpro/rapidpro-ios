@@ -181,7 +181,7 @@ class URUserManager {
     }
 
     class func getAllUserByCountryProgram(_ completion:@escaping ([URUser]?) -> Void){
-        let countryProgram = URCountryProgramManager.activeCountryProgram()!.code!
+        let countryProgram = URCountryProgramManager.activeCountryProgram()!.code
         URFireBaseManager.sharedInstance()
             .child(URUserManager.path)
             .queryOrdered(byChild: "countryProgram")
@@ -329,7 +329,7 @@ class URUserManager {
     }
 
     class func isUserInYourOwnCountryProgram() -> Bool {
-        if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code! {
+        if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code {
             return true
         } else {
             return false
