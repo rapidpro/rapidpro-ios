@@ -9,21 +9,23 @@
 import UIKit
 
 class URCountryProgram: Serializable {
-    
-    var code:String!
-    var themeColor:UIColor?
-    var name:String!
-    var org:NSNumber?
-    var rapidProHostAPI:String!
-    var ureportHostAPI:String!
-    var twitter:String?
-    var facebook:String?
-    var groupName:String!
-    var stateField:String?
+
+    var code: String!
+    var themeColor: UIColor?
+    var name: String!
+    var org: NSNumber?
+    var rapidProHostAPI: String!
+    var ureportHostAPI: String!
+    var twitter: String?
+    var facebook: String?
+    var groupName: String!
+    var stateField: String?
+    var channel: String?
     
     init (code:String!,
           themeColor:UIColor?,
           org:NSNumber?,
+          channel: String!,
           name:String!,
           twitter:String?,
           facebook:String?,
