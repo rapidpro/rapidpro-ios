@@ -63,7 +63,7 @@ class URRapidProManager {
     }
     
     class func getFlowDefinition(_ flowUuid: String, completion:@escaping (URFlowDefinition) -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             if let countryResponse = countryResponse {
                 let headers = [
                     "Authorization": countryResponse.token
@@ -81,7 +81,7 @@ class URRapidProManager {
     }
     
     class func getFlowRuns(_ contact: URContact, completion:@escaping ([URFlowRun]?) -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             if let countryResponse = countryResponse {
                 let headers = [
                     "Authorization": countryResponse.token
@@ -116,7 +116,7 @@ class URRapidProManager {
     }
     
     class func getContact(_ user:URUser, completion:@escaping (URContact) -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             if let countryResponse = countryResponse {
                 let headers = [
                     "Authorization": countryResponse.token
@@ -139,7 +139,7 @@ class URRapidProManager {
     }
     
     class func sendRulesetResponses(_ user:URUser, responses:[URRulesetResponse], completion:@escaping () -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
 
             let token = countryResponse.token
@@ -183,7 +183,7 @@ class URRapidProManager {
     }
     
     class func sendReceivedMessage(_ user:URUser, text:String) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
 
             let headers = [
@@ -206,7 +206,7 @@ class URRapidProManager {
     }
 
     class func getContactFields(_ country:URCountry, completion:@escaping ([String]) -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
             let headers = [
                 "Authorization": countryResponse.token
@@ -228,7 +228,7 @@ class URRapidProManager {
     }
 
     class func getStatesByCountry(_ country:URCountry, completion:@escaping (_ states:[URState]?,_ districts:[URDistrict]?) -> Void) {
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
             let headers = [
                 "Authorization": countryResponse.token
@@ -272,7 +272,7 @@ class URRapidProManager {
 
     class func saveUser(_ user:URUser,country:URCountry,setupGroups:Bool,completion:@escaping (_ response:NSDictionary?) -> Void) {
 
-        URCountryProgramAPI.getCountryProgram(code: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
             let headers = [
                 "Authorization": countryResponse.token
