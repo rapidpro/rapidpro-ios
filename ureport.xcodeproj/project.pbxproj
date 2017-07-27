@@ -23,6 +23,7 @@
 		01F030931F27CB18004B4C83 /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030871F27C163004B4C83 /* URIPCheckManager.swift */; };
 		01F030941F27CB18004B4C83 /* URBackendAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030881F27C1D0004B4C83 /* URBackendAuthManager.swift */; };
 		01F030961F28CAAB004B4C83 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = 01F030951F27DA55004B4C83 /* countryprogram.json */; };
+		01F030981F2933CE004B4C83 /* URCountryProgramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030971F2933CE004B4C83 /* URCountryProgramAPI.swift */; };
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
 		650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
 		6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6515FB781B881AE100CEEC3B /* LaunchImages.xcassets */; };
@@ -311,6 +312,7 @@
 		01F030881F27C1D0004B4C83 /* URBackendAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URBackendAuthManager.swift; sourceTree = "<group>"; };
 		01F030891F27C23C004B4C83 /* URReviewModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
 		01F030951F27DA55004B4C83 /* countryprogram.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
+		01F030971F2933CE004B4C83 /* URCountryProgramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URCountryProgramAPI.swift; sourceTree = "<group>"; };
 		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -624,6 +626,7 @@
 			isa = PBXGroup;
 			children = (
 				01F030871F27C163004B4C83 /* URIPCheckManager.swift */,
+				01F030971F2933CE004B4C83 /* URCountryProgramAPI.swift */,
 			);
 			path = Proxy;
 			sourceTree = "<group>";
@@ -1978,6 +1981,7 @@
 				65A45CF31B8812D1001C6808 /* URInviteTableViewController.swift in Sources */,
 				6515FB9D1B8B996800CEEC3B /* URChatTableViewCell.swift in Sources */,
 				97B2FAC51C061EC0000820BD /* URTutoView.swift in Sources */,
+				01F030981F2933CE004B4C83 /* URCountryProgramAPI.swift in Sources */,
 				655690A71B7D15BA00525E00 /* URChatMessage.swift in Sources */,
 				0157B6E31F0AD17F004049E7 /* URSettingsManager.swift in Sources */,
 				65D0F3A71BA8792D00E5D367 /* URAWSManager.swift in Sources */,

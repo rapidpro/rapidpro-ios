@@ -20,7 +20,6 @@ class URCountryProgram: Serializable {
     var facebook: String?
     var groupName: String!
     var stateField: String?
-    var channel: String?
 
     init(dictionary: [String: Any?]) {
         self.code = dictionary["code"] as! String
@@ -33,7 +32,6 @@ class URCountryProgram: Serializable {
         self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
         self.groupName = dictionary["groupName"] as! String
         self.stateField = dictionary["stateField"] as? String
-        self.channel = dictionary["channel"] as? String
         super.init()
     }
 

@@ -245,6 +245,7 @@ struct URConstant {
     struct Key {
         static let COUNTRY_PROGRAM_CHANNEL = "COUNTRY_PROGRAM_CHANNEL_"
         static let COUNTRY_PROGRAM_TOKEN = "COUNTRY_PROGRAM_TOKEN_"
+        static let UREPORT_API_TOKEN = "UREPORT_API_TOKEN"
     }
     
 }

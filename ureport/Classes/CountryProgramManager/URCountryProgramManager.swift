@@ -11,25 +11,21 @@ import UIKit
 class URCountryProgramManager {
 
     static var countryPrograms:[URCountryProgram]!
-    
+
     class func getCountryProgramByCountry(_ country:URCountry) -> URCountryProgram {
-        
         if countryPrograms == nil {
             URCountryProgramManager.getAvailableCountryPrograms()
         }
-        
         let filtered = countryPrograms.filter {
             return $0.code == country.code!
         }
-        
         if filtered.isEmpty {
             return countryPrograms[0] as URCountryProgram
-        }else {
+        } else {
             return filtered[0] as URCountryProgram
         }
-        
     }
-    
+
     class func getAvailableCountryPrograms() -> [URCountryProgram]{
         if countryPrograms == nil {
             countryPrograms = []
@@ -44,7 +40,7 @@ class URCountryProgramManager {
         }
         return countryPrograms
     }
-    
+
     class func getChannelOfCountryProgram(_ countryProgram:URCountryProgram) -> String?{
         var myDict: NSDictionary?
         var channel:String?
@@ -60,21 +56,19 @@ class URCountryProgramManager {
         }
         return channel
     }
-    
-    class func getTokenOfCountryProgram(_ countryProgram:URCountryProgram) -> String? {
+
+    class func getUReportApiToken() -> String {
         var rootDictionary: NSDictionary?
-        var token:String?
+        var apiToken = ""
         if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
             rootDictionary = NSDictionary(contentsOfFile: path)
         }
         if let dict = rootDictionary {
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] != nil {
-                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(countryProgram.code)"] as? String
-            } else {
-                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(URConstant.RapidPro.GLOBAL)"] as? String
+            if dict["\(URConstant.Key.UREPORT_API_TOKEN)"] != nil {
+                apiToken = dict["\(URConstant.Key.UREPORT_API_TOKEN)"] as! String
             }
         }
-        return token
+        return apiToken
     }
 
     class func getChannelOfCurrentCountryProgram() -> String {
