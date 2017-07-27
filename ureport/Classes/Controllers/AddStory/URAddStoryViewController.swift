@@ -213,7 +213,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.horizontally
     }
     
     func setupUI() {
@@ -234,7 +234,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         
         scrollViewMedias.addCustomView(viewMedia)
         
-        if scrollViewMedias.views!.count == 1 && !(media.type == URConstant.Media.AUDIO || media.type == URConstant.Media.FILE){
+        if scrollViewMedias.views.count == 1 && !(media.type == URConstant.Media.AUDIO || media.type == URConstant.Media.FILE){
             indexImgCover = 0
             viewMedia.isCover = true
             self.mediaViewCover = viewMedia
@@ -284,8 +284,8 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func mediaViewTapped(_ mediaView: URMediaView) {
         
-        for i in 0...self.scrollViewMedias.views!.count-1 {
-            let mView = self.scrollViewMedias.views![i] as! URMediaView
+        for i in 0...self.scrollViewMedias.views.count-1 {
+            let mView = self.scrollViewMedias.views[i] as! URMediaView
             if mView == mediaView {
                 indexImgCover = 0
                 mView.setMediaAsCover(true)
@@ -300,8 +300,8 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func removeMediaView(_ mediaView: URMediaView) {
         
-        for i in 0...self.scrollViewMedias.views!.count-1 {
-            let mView = self.scrollViewMedias.views![i] as! URMediaView
+        for i in 0...self.scrollViewMedias.views.count-1 {
+            let mView = self.scrollViewMedias.views[i] as! URMediaView
    
             if !self.youtubeMediaList.isEmpty {
                 for j in 0...self.youtubeMediaList.count-1 {

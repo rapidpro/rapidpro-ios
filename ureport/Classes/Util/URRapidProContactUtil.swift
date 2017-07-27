@@ -21,14 +21,14 @@ class URRapidProContactUtil: NSObject {
     static let GROUP_UREPORT_MALES = "UReport Males"
     static let GROUP_UREPORT_FEMALES = "UReport Females"
     static let GROUP_APP_UREPORT = "App U-Reporters"
-    
+
     static var groupList:[String] = []
-    
+
     class func putValueIfExists(_ value:String?,countryProgramContactFields:[String],possibleFields:[String]) {
         if value == nil || value!.characters.count == 0{
             return
         }
-        
+
         for possibleField in possibleFields {
             let index = countryProgramContactFields.index(of: possibleField)
             if index != nil && index != -1{
@@ -39,7 +39,7 @@ class URRapidProContactUtil: NSObject {
         }
     }
     
-    class func buildRapidProUserDictionaryWithContactFields(_ user:URUser,country:URCountry,completion:@escaping (NSDictionary) -> Void) {
+    class func buildRapidProUserDictionaryWithContactFields(_ user:URUser,country:URCountry, completion: @escaping (NSDictionary?) -> Void) {
         
         URRapidProManager.getContactFields(URCountry(code: user.country!)) { (contactFields:[String]) -> Void in
             if !contactFields.isEmpty {
@@ -55,14 +55,14 @@ class URRapidProContactUtil: NSObject {
                     URRapidProContactUtil.putValueIfExists(String(age), countryProgramContactFields: contactFields, possibleFields: ["age"])
                     URRapidProContactUtil.putValueIfExists(String(URDateUtil.getYear(Date(timeIntervalSince1970: NSNumber(value: user.birthday!.doubleValue/1000 as Double) as TimeInterval))), countryProgramContactFields: contactFields, possibleFields: ["year_of_birth","born"])
                 }
-                
-//                URRapidProContactUtil.putValueIfExists(user.email, countryProgramContactFields: contactFields, possibleFields: ["email","e_mail"])
                 URRapidProContactUtil.putValueIfExists(user.nickname, countryProgramContactFields: contactFields, possibleFields: ["nickname","nick_name"])
                 URRapidProContactUtil.putValueIfExists(user.gender, countryProgramContactFields: contactFields, possibleFields: ["gender"])
                 URRapidProContactUtil.putValueIfExists(user.state, countryProgramContactFields: contactFields, possibleFields: countryProgram.stateField != nil ? [countryProgram.stateField!] : ["state","region","province","county"])
                 URRapidProContactUtil.putValueIfExists(user.district, countryProgramContactFields: contactFields, possibleFields: ["location","district","lga"])
                 URRapidProContactUtil.putValueIfExists(country.code, countryProgramContactFields: contactFields, possibleFields: ["country"])
                 completion(URRapidProContactUtil.rapidProUser)
+            } else {
+                completion(nil)
             }
         }
         

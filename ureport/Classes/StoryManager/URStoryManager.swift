@@ -39,25 +39,25 @@ class URStoryManager: NSObject {
     func getStories(_ storiesToModerate:Bool, initQueryFromItem:Int) {
                 
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
             .queryLimited(toLast: UInt(initQueryFromItem + itensByQuery))
-            .observe(FEventType.childAdded, with: { (snapshot) in
+            .observe(.childAdded, with: { (snapshot) in
                 if let delegate = self.delegate {
                     
-                    let story = URStory(jsonDict: snapshot?.value as? NSDictionary)
+                    let story = URStory(jsonDict: snapshot.value as? NSDictionary)
                     
-                    story.key = snapshot?.key
+                    story.key = snapshot.key
                     
-                    if (snapshot?.value as! NSDictionary).object(forKey: "cover") != nil {
-                        let cover = URMedia(jsonDict:((snapshot?.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
+                    if (snapshot.value as! NSDictionary).object(forKey: "cover") != nil {
+                        let cover = URMedia(jsonDict:((snapshot.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
                         story.cover = cover
                     }
                     
                     var medias:[URMedia] = []
                     
-                    if let mediaArray = (snapshot?.value as! NSDictionary).object(forKey: "medias") as? NSArray {
+                    if let mediaArray = (snapshot.value as! NSDictionary).object(forKey: "medias") as? NSArray {
                         
                         for value in mediaArray {
                             let media = URMedia(jsonDict:value as? NSDictionary)
@@ -76,151 +76,138 @@ class URStoryManager: NSObject {
     func getStoriesWithCompletion(_ storiesToModerate:Bool, initQueryFromItem:Int,completion:@escaping (_ storyList:[URStory]) -> Void) {
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
             .queryLimited(toLast: UInt(initQueryFromItem + itensByQuery))
-            .observeSingleEvent(of: FEventType.value, with: { (snapshot) in
-                
-                if ((snapshot != nil) && !(snapshot?.value is NSNull)) {
-                    
-                    var storyList = [URStory]()
-                    
-                    for data in snapshot?.children.allObjects as! [FDataSnapshot]{
-                        let story = URStory(jsonDict: data.value as? NSDictionary)
-                        
-                        story.key = data.key
-                        
-                        if (data.value as! NSDictionary).object(forKey: "cover") != nil {
-                            let cover = URMedia(jsonDict:((data.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
-                            story.cover = cover
-                        }
-                        
-                        var medias:[URMedia] = []
-                        
-                        if let mediaArray = (data.value as! NSDictionary).object(forKey: "medias") as? NSArray {
-                            
-                            for value in mediaArray {
-                                let media = URMedia(jsonDict:value as? NSDictionary)
-                                medias.append(media)
-                            }
-                            
-                            story.medias = medias
-                        }
-                        storyList.append(story)
-                    }
-                    
-                    completion(storyList)
-                    
-                }else {
+            .observeSingleEvent(of: .value, with: { snapshot in
+                guard snapshot.value != nil else {
                     completion([])
+                    return
                 }
-                
+                var storyList = [URStory]()
+                for data in snapshot.children.allObjects as! [DataSnapshot]{
+                    let story = URStory(jsonDict: data.value as? NSDictionary)
+                    story.key = data.key
+                    if (data.value as! NSDictionary).object(forKey: "cover") != nil {
+                        let cover = URMedia(jsonDict:((data.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
+                        story.cover = cover
+                    }
+                    var medias:[URMedia] = []
+                    if let mediaArray = (data.value as! NSDictionary).object(forKey: "medias") as? NSArray {
+                        for value in mediaArray {
+                            let media = URMedia(jsonDict:value as? NSDictionary)
+                            medias.append(media)
+                        }
+                        story.medias = medias
+                    }
+                    storyList.append(story)
+                }
+                completion(storyList)
             })
     }
     
     class func getStoryLikes(_ storyKey:String,completion:@escaping (_ likeCount:Int) -> Void) {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryLike())
-            .child(byAppendingPath: storyKey)
-            .observeSingleEvent(of: FEventType.value, with: { snapshot in
-                completion(Int((snapshot?.childrenCount)!))
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryLike())
+            .child(storyKey)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                completion(Int(snapshot.childrenCount))
             })
     }
     
-    class func checkIfStoryWasLiked(_ storyKey:String,completion:@escaping (_ liked:Bool) -> Void) {
+    class func checkIfStoryWasLiked(_ storyKey:String, completion:@escaping (_ liked:Bool) -> Void) {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryLike())
-            .child(byAppendingPath: storyKey)
-            .child(byAppendingPath: URUser.activeUser()?.key)
-            .observeSingleEvent(of: FEventType.value, with: { snapshot in
-                completion((snapshot?.exists())!)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryLike())
+            .child(storyKey)
+            .child(URUser.activeUser()!.key)
+            .observeSingleEvent(of: .value, with: { snapshot in
+                completion(snapshot.exists())
             })
     }
     
     class func saveStoryLike(_ key:String) -> Void {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryLike())
-            .child(byAppendingPath: key)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryLike())
+            .child(key)
             .setValue([URUser.activeUser()!.key:true])
     }
     
     class func removeStoryLike(_ key:String) -> Void {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryLike())
-            .child(byAppendingPath: key)
-            .child(byAppendingPath: URUser.activeUser()!.key)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryLike())
+            .child(key)
+            .child(URUser.activeUser()!.key)
             .removeValue()
     }
     
     class func saveStory(_ story:URStory,isModerator:Bool, completion:@escaping (Bool) -> Void) {
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: isModerator == true ? self.path() : self.pathStoryModerate())
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(isModerator == true ? self.path() : self.pathStoryModerate())
             .childByAutoId()
-            .setValue(story.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
-                if error != nil {
-                    print(error?.localizedDescription)
+            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+                guard error == nil else {
+                    print(error!.localizedDescription)
                     completion(false)
-                }else {
-                    URUserManager.incrementUserStories(story.user)
-                    completion(true)
+                    return
                 }
+                URUserManager.incrementUserStories(story.user)
+                completion(true)
             })
     }
  
     class func setStoryAsPublished(_ story:URStory, completion:@escaping (_ finished:Bool) -> Void) {
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.path())
-            .child(byAppendingPath: story.key)
-            .setValue(story.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
-                completion(true)
-                if error != nil {
-                    print(error?.localizedDescription)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.path())
+            .child(story.key!)
+            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+                if let error = error {
+                    print(error.localizedDescription)
                 }
+                completion(true)
             })
         
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryModerate())
-            .child(byAppendingPath: story.key)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryModerate())
+            .child(story.key!)
             .removeValue()
     }
     
     class func setStoryAsDisapproved(_ story:URStory, completion:@escaping (_ finished:Bool) -> Void) {
-        
+
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryDisapproved())
-            .child(byAppendingPath: story.key)
-            .setValue(story.toDictionary(), withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
-                completion(true)                
-                if error != nil {
-                    print(error?.localizedDescription)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryDisapproved())
+            .child(story.key!)
+            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+                if let error = error {
+                    print(error.localizedDescription)
                 }
+                completion(true)
             })
-        
+
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: self.pathStoryModerate())
-            .child(byAppendingPath: story.key)
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryModerate())
+            .child(story.key!)
             .removeValue()
     }
-    
 }

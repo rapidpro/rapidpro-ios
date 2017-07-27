@@ -237,7 +237,7 @@ struct URConstant {
         static let CHAT = "Chat"
     }
     
-    struct Gcm {
+    struct Fcm {
         static let GCM_URL = "https://gcm-http.googleapis.com/gcm/send"
         static let GCM_AUTHORIZATION = "key=AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs"
     }

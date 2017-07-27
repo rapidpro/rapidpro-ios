@@ -25,43 +25,40 @@ class URRapidProManager: NSObject {
     }
     
     func getPollMessage() {
-        
         var userKey = URUser.activeUser()!.key
         userKey = userKey?.replacingOccurrences(of: "-", with: "", options: [], range: nil)
         userKey = userKey?.replacingOccurrences(of: ":", with: "", options: [], range: nil)
-        
+
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URRapidProManager.path())
-            .child(byAppendingPath: "message")
-            .child(byAppendingPath: userKey)
+            .child(URRapidProManager.path())
+            .child("message")
+            .child(userKey!)
             .queryLimited(toLast: 1)
-            .observe(FEventType.childAdded, with: { (snapshot) in
-                
-                print(snapshot?.value)
-                
+            .observe(.childAdded, with: { snapshot in
+                if let value = snapshot.value {
+                    print(value)
+                }
                 if let delegate = self.delegate {
-                    delegate.newMessageReceived((snapshot?.value as! NSDictionary).object(forKey: "text") as! String)
+                    delegate.newMessageReceived((snapshot.value as! NSDictionary).object(forKey: "text") as! String)
                 }
             })
     }
-    
-    
-    
+
     class func sendPollResponse(_ text:String!) {
-        
         let pollResponse = URPollResponse(channel: URCountryProgramManager.getChannelOfCurrentCountryProgram(), from:URUser.activeUser()!.key, text: text)
-        
+
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URRapidProManager.path())
-            .child(byAppendingPath: "response")
+            .child(URRapidProManager.path())
+            .child("response")
             .childByAutoId()
-            .setValue(pollResponse.toDictionary(), withCompletionBlock: { (error:Error?, firebase:Firebase?) -> Void in
-                if error != nil {
-                    print(error?.localizedDescription)
-                }else if !(firebase!.key.isEmpty) {
+            .setValue(pollResponse.toDictionary(), withCompletionBlock: { (error, dbReference) -> Void in
+                guard error == nil else {
+                    print(error!.localizedDescription)
+                    return
+                }
+                if !dbReference.key.isEmpty {
                     print("poll message sent")
                 }
-                
             })
     }
     
@@ -69,9 +66,8 @@ class URRapidProManager: NSObject {
         let headers = [
             "Authorization": URCountryProgramManager.getTokenOfCountryProgram(URCountryProgramManager.activeCountryProgram()!)!
         ]
-        
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/flow_definition.json?uuid=\(flowUuid)"
-        
+
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseObject(completionHandler: { (response:DataResponse<URFlowDefinition>) -> Void in
             if let flowDefinition = response.result.value {
                 completion(flowDefinition)
@@ -120,12 +116,11 @@ class URRapidProManager: NSObject {
         let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/contacts.json?urns=\(userId)"
         
         Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-            if let response = response.result.value as? NSDictionary {
-                if let results = response.object(forKey: "results") as? [NSDictionary] {
-                    for object in results {
-                        let contact = URContact(jsonDict: object)
-                        completion(contact)
-                    }
+            guard let response = response.result.value as? NSDictionary else { return }
+            if let results = response.object(forKey: "results") as? [NSDictionary] {
+                for object in results {
+                    let contact = URContact(jsonDict: object)
+                    completion(contact)
                 }
             }
         }
@@ -287,11 +282,9 @@ class URRapidProManager: NSObject {
             Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
                 
                 if response.result.isFailure {
-                    print("error \(response.result.value)")
+                    print("error \(String(describing: response.result.value))")
                     completion(nil)
-                }
-                
-                if let response = response.result.value as? NSDictionary {
+                } else if let response = response.result.value as? NSDictionary {
                     completion(response)
                 }
                 
