@@ -198,7 +198,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Class Methods
     
-    func buildUserFields(_ user:URUser) -> URUser {
+    func buildUserFields(_ user: URUser) -> URUser {
         user.nickname = self.txtNick.text!
         user.email = self.txtEmail.text!
         user.district = self.txtDistrict.text != nil ? self.txtDistrict.text! : nil
