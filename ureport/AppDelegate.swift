@@ -229,7 +229,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
         URIPCheckManager.getCountryCodeByIP { (countryCode) in}
     }
 

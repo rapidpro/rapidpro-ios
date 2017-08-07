@@ -81,9 +81,9 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "User Register")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     override func viewDidDisappear(_ animated: Bool) {
@@ -198,7 +198,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     //MARK: Class Methods
     
-    func buildUserFields(_ user:URUser) -> URUser {
+    func buildUserFields(_ user: URUser) -> URUser {
         user.nickname = self.txtNick.text!
         user.email = self.txtEmail.text!
         user.district = self.txtDistrict.text != nil ? self.txtDistrict.text! : nil

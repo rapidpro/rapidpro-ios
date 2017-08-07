@@ -16,7 +16,7 @@ enum URFireBaseManagerAuthError: Error {
     case emailTaken
 }
 
-class URFireBaseManager: NSObject {
+class URFireBaseManager {
 
 #if DEBUG
     static let Properties = "Key-debug"

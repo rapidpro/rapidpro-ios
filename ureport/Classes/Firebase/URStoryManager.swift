@@ -13,7 +13,7 @@ protocol URStoryManagerDelegate {
     func newStoryReceived(_ story:URStory)
 }
 
-class URStoryManager: NSObject {
+class URStoryManager {
  
     let itensByQuery = 5
 
@@ -44,32 +44,23 @@ class URStoryManager: NSObject {
             .child(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
             .queryLimited(toLast: UInt(initQueryFromItem + itensByQuery))
             .observe(.childAdded, with: { (snapshot) in
-                if let delegate = self.delegate {
-                    
-                    let story = URStory(jsonDict: snapshot.value as? NSDictionary)
-                    
-                    story.key = snapshot.key
-                    
-                    if (snapshot.value as! NSDictionary).object(forKey: "cover") != nil {
-                        let cover = URMedia(jsonDict:((snapshot.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
-                        story.cover = cover
-                    }
-                    
-                    var medias:[URMedia] = []
-                    
-                    if let mediaArray = (snapshot.value as! NSDictionary).object(forKey: "medias") as? NSArray {
-                        
-                        for value in mediaArray {
-                            let media = URMedia(jsonDict:value as? NSDictionary)
-                            medias.append(media)
-                        }
-                        
-                        story.medias = medias
-                    }
-                    
-                    delegate.newStoryReceived(story)
-                    
+                guard let delegate = self.delegate else { return }
+                guard let snapshotValue = snapshot.value as? NSDictionary else { return }
+                let story = URStory(jsonDict: snapshotValue)
+                story.key = snapshot.key
+                if snapshotValue["cover"] != nil {
+                    let cover = URMedia(jsonDict: snapshotValue["cover"] as? NSDictionary)
+                    story.cover = cover
                 }
+                var medias:[URMedia] = []
+                if let mediaArray = snapshotValue["medias"] as? NSArray {
+                    for value in mediaArray {
+                        let media = URMedia(jsonDict:value as? NSDictionary)
+                        medias.append(media)
+                    }
+                    story.medias = medias
+                }
+                delegate.newStoryReceived(story)
             })
     }
     
@@ -81,27 +72,29 @@ class URStoryManager: NSObject {
             .child(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
             .queryLimited(toLast: UInt(initQueryFromItem + itensByQuery))
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                guard snapshot.exists() else {
                     completion([])
                     return
                 }
                 var storyList = [URStory]()
                 for data in snapshot.children.allObjects as! [DataSnapshot]{
-                    let story = URStory(jsonDict: data.value as? NSDictionary)
-                    story.key = data.key
-                    if (data.value as! NSDictionary).object(forKey: "cover") != nil {
-                        let cover = URMedia(jsonDict:((data.value as! NSDictionary).object(forKey: "cover") as? NSDictionary)!)
-                        story.cover = cover
-                    }
-                    var medias:[URMedia] = []
-                    if let mediaArray = (data.value as! NSDictionary).object(forKey: "medias") as? NSArray {
-                        for value in mediaArray {
-                            let media = URMedia(jsonDict:value as? NSDictionary)
-                            medias.append(media)
+                    if let dataValue = data.value as? NSDictionary {
+                        let story = URStory(jsonDict: dataValue)
+                        story.key = data.key
+                        if dataValue["cover"] != nil {
+                            let cover = URMedia(jsonDict: dataValue["cover"] as? NSDictionary)
+                            story.cover = cover
                         }
-                        story.medias = medias
+                        var medias:[URMedia] = []
+                        if let mediaArray = dataValue["medias"] as? NSArray {
+                            for value in mediaArray {
+                                let media = URMedia(jsonDict:value as? NSDictionary)
+                                medias.append(media)
+                            }
+                            story.medias = medias
+                        }
+                        storyList.append(story)
                     }
-                    storyList.append(story)
                 }
                 completion(storyList)
             })

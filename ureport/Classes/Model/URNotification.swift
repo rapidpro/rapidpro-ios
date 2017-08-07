@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URNotification: NSObject {
+class URNotification {
    
     var message:String?
     var date:Date?

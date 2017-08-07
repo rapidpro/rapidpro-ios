@@ -38,9 +38,9 @@ class URPasswordEditViewController: UIViewController {
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Password Edit")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     //MARK: Class Methods

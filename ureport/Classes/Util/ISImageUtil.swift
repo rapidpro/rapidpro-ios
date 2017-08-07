@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ISImageUtil: NSObject {
+class ISImageUtil {
    
     static func resizeImage(_ image:UIImage, scaledToSize: CGSize) -> UIImage{
      UIGraphicsBeginImageContextWithOptions(scaledToSize, false, 0.0)

@@ -16,7 +16,7 @@ enum URMenuItem:String {
     case Logout = "Logout"
 }
 
-class ISMenu: NSObject {
+class ISMenu {
     
     var title:String?
     var subtitle:String?

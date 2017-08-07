@@ -32,7 +32,7 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
     @objc optional func openChatRoom(_ chatRoom:URChatRoom, members:[URUser], title:String)
 }
 
-class URChatRoomManager: NSObject {
+class URChatRoomManager {
 
     var delegate:URChatRoomManagerDelegate?
     static var path = "chat_room"
@@ -113,17 +113,15 @@ class URChatRoomManager: NSObject {
             .child(URChatRoomManager.path)
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                guard snapshot.exists(), let snapshotValue = snapshot.value as? NSDictionary else {
                     completion(nil)
                     return
                 }
-                if (snapshot.value as! NSDictionary).object(forKey: "administrator") != nil {
-
-                    let administrator = URUser(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "administrator") as? NSDictionary)
-                    let picture = URMedia(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "picture") as? NSDictionary)
-                    let groupChatRoom = URGroupChatRoom(jsonDict: snapshot.value as? NSDictionary)
-
-                    groupChatRoom.createdDate = (snapshot.value as! NSDictionary).object(forKey: "createdDate") as! NSNumber
+                if snapshotValue["administrator"] != nil {
+                    let administrator = URUser(jsonDict: snapshotValue["administrator"] as? NSDictionary)
+                    let picture = URMedia(jsonDict: snapshotValue["picture"] as? NSDictionary)
+                    let groupChatRoom = URGroupChatRoom(jsonDict: snapshotValue)
+                    groupChatRoom.createdDate = snapshotValue["createdDate"] as! NSNumber
                     groupChatRoom.administrator = administrator
                     groupChatRoom.picture = picture
                     groupChatRoom.type = URChatRoomType.Group
@@ -132,10 +130,9 @@ class URChatRoomManager: NSObject {
                     completion(groupChatRoom)
 
                 } else {
-                    let individualChatRoom = URIndividualChatRoom(jsonDict: (snapshot.value as! NSDictionary))
+                    let individualChatRoom = URIndividualChatRoom(jsonDict: snapshotValue)
                     individualChatRoom.key = snapshot.key
                     individualChatRoom.type = URChatRoomType.Individual
-
                     completion(individualChatRoom)
                 }
             })
@@ -223,20 +220,22 @@ class URChatRoomManager: NSObject {
             .queryOrdered(byChild: "privateAccess")
             .queryEqual(toValue: false)
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate else { return }
+                guard let delegate = self.delegate, let snapshotValue = snapshot.value as? NSDictionary else {
+                    return
+                }
 
-                let group = URGroupChatRoom(jsonDict: (snapshot.value as! NSDictionary))
-                let administrator = URUser(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "administrator") as? NSDictionary)
+                let group = URGroupChatRoom(jsonDict: snapshotValue)
+                let administrator = URUser(jsonDict: snapshotValue["administrator"] as? NSDictionary)
 
-                if let picture = (snapshot.value as! NSDictionary).object(forKey: "picture") as? NSDictionary{
+                if let picture = snapshotValue["picture"] as? NSDictionary{
                     group.picture = URMedia(jsonDict: picture)
                 }
                 group.administrator = administrator
                 group.key = snapshot.key
                 group.type = URChatRoomType.Group
                 URChatMemberManager.getByKey(group.key!, completion: { (data, exists) -> Void in
-                    guard exists == true else { return }
-                    for object in data!.children {
+                    guard exists, let data = data else { return }
+                    for object in data.children {
                         let userKey = (object as! DataSnapshot).key
                         if userKey == URUser.activeUser()!.key {
                             group.userIsMember = true
@@ -275,7 +274,7 @@ class URChatRoomManager: NSObject {
             .child(user.key)
             .child("chatRooms")
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                guard snapshot.exists() else {
                     completion(nil)
                     return
                 }

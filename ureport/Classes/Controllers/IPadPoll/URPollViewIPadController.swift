@@ -58,7 +58,7 @@ class URPollViewIPadController: UIViewController, URClosedPollTableViewControlle
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController!.setNavigationBarHidden(false, animated: false)
-        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
+        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor)
     }
     
     //MARK: URClosedPollTableViewControllerDelegate

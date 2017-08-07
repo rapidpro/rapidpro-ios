@@ -39,9 +39,10 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Marker")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
+
         markerList = URMarkerManager.getMarkers()
         setupTableView()
         

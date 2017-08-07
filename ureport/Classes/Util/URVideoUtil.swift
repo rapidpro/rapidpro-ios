@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class URVideoUtil: NSObject {
+class URVideoUtil {
 
     static let outputURLFile = URL(fileURLWithPath: URFileUtil.outPutURLDirectory.appendingPathComponent("video.mp4"))
     

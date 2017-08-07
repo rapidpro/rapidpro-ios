@@ -13,7 +13,7 @@ protocol URContributionManagerDelegate {
     func newContributionReceived(_ contribution:URContribution)
 }
 
-class URContributionManager: NSObject {
+class URContributionManager {
    
     var delegate:URContributionManagerDelegate?
     

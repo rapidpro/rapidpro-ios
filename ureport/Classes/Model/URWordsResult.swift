@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URWordsResult: NSObject {
+class URWordsResult {
    
     var results:[String]?
     
