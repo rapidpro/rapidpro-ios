@@ -7,11 +7,13 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 ## [Unreleased]
 
 ## [2.2.0] - 2017-07-31
+### Added
+- Add separete code configurations for Debug and Release where possible.
 
 ### Changed
 - Upgraded Firebase dependency to current version;
 - Extract all the country-programs info into a separate (non versioned) JSON file;
-- Country tokens are retrieved at runtime using the RapidPro API;
+- Country tokens are retrieved at runtime using the RapidPro API.
 
 ### Removed
-- Removed GCM libraries;
+- Removed GCM libraries.
