@@ -13,7 +13,7 @@ import Firebase
     @objc optional func newUserReceived(_ user:URUser)
 }
 
-class URUserManager: NSObject {
+class URUserManager {
 
     var delegate: URUserManagerDelegate!
 
@@ -181,7 +181,7 @@ class URUserManager: NSObject {
     }
 
     class func getAllUserByCountryProgram(_ completion:@escaping ([URUser]?) -> Void){
-        let countryProgram = URCountryProgramManager.activeCountryProgram()!.code!
+        let countryProgram = URCountryProgramManager.activeCountryProgram()!.code
         URFireBaseManager.sharedInstance()
             .child(URUserManager.path)
             .queryOrdered(byChild: "countryProgram")
@@ -227,10 +227,10 @@ class URUserManager: NSObject {
             .child("stories")
             .runTransactionBlock { currentData -> TransactionResult in
                 var storiesCount = 1
-                if currentData.value == nil {
+                if let value = currentData.value as? Int {
+                    storiesCount = value + 1
                     currentData.value = storiesCount
-                }else{
-                    storiesCount = currentData.value as! Int + 1
+                } else {
                     currentData.value = storiesCount
                 }
                 URUserManager.incrementUserPointsUsingStoryCriteria(userKey)
@@ -245,10 +245,10 @@ class URUserManager: NSObject {
             .child("contributions")
             .runTransactionBlock { currentData -> TransactionResult in
                 var contributionsCount = 1
-                if currentData.value == nil {
+                if let value = currentData.value as? Int {
+                    contributionsCount = value + 1
                     currentData.value = contributionsCount
-                }else{
-                    contributionsCount = currentData.value as! Int + 1
+                } else {
                     currentData.value = contributionsCount
                 }
                 URUserManager.incrementUserPointsUsingContributionCriteria(userKey)
@@ -263,10 +263,10 @@ class URUserManager: NSObject {
             .child("points")
             .runTransactionBlock { currentData -> TransactionResult in
                 var pointsCount = URConstant.Gamefication.StoryPoints
-                if currentData.value == nil {
+                if let value = currentData.value as? Int {
+                    pointsCount = value + URConstant.Gamefication.StoryPoints
                     currentData.value = pointsCount
-                }else{
-                    pointsCount = currentData.value as! Int + URConstant.Gamefication.StoryPoints
+                } else {
                     currentData.value = pointsCount
                 }
                 let totalPoints = currentData.value as! NSNumber
@@ -284,10 +284,10 @@ class URUserManager: NSObject {
             .child("points")
             .runTransactionBlock { currentData ->  TransactionResult in
                 var pointsCount = URConstant.Gamefication.ContributionPoints
-                if currentData.value == nil {
+                if let value = currentData.value as? Int {
+                    pointsCount = value + URConstant.Gamefication.ContributionPoints
                     currentData.value = pointsCount
                 } else {
-                    pointsCount = currentData.value as! Int + URConstant.Gamefication.ContributionPoints
                     currentData.value = pointsCount
                 }
                 let totalPoints = currentData.value as! NSNumber
@@ -329,7 +329,7 @@ class URUserManager: NSObject {
     }
 
     class func isUserInYourOwnCountryProgram() -> Bool {
-        if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code! {
+        if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code {
             return true
         } else {
             return false

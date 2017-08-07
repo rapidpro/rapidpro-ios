@@ -13,7 +13,7 @@ protocol URChatMessageManagerDelegate {
     func newMessageReceived(_ chatMessage:URChatMessage)
 }
 
-class URChatMessageManager: NSObject {
+class URChatMessageManager {
 
     var delegate:URChatMessageManagerDelegate?
 

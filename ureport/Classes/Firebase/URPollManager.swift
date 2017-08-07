@@ -14,7 +14,7 @@ protocol URPollManagerDelegate {
     func newPollResultReceived(_ pollResult:URPollResult)
 }
 
-class URPollManager: NSObject {
+class URPollManager {
 
     var delegate:URPollManagerDelegate?
     var pollIndex = 0

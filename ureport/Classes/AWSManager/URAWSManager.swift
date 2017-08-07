@@ -16,7 +16,7 @@ enum URUploadPath:String {
 }
 
 
-class URAWSManager: NSObject {
+class URAWSManager {
    
     class func uploadAudio(_ audioMedia:URAudioMedia,uploadPath:URUploadPath,completion:@escaping (URMedia?) -> Void) {
         

@@ -63,12 +63,14 @@ xcuserdata
 # http://guides.cocoapods.org/using/using-cocoapods.html#should-i-check-the-pods-directory-into-source-control
 #
 Pods/
+Podfile.lock
 
 ureport/Key-debug.plist
 ureport/Key.plist
 ureport/FirebaseDatabaseDev-Info.plist
 ureport/FirebaseDatabaseProd-Info.plist
 ureport/GoogleService-Info.plist
+ureport/Resources/countryprogram.json
 
 # Carthage
 #

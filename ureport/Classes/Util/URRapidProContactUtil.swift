@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class URRapidProContactUtil: NSObject {
+class URRapidProContactUtil {
     
     static var rapidProUser = NSMutableDictionary()
     

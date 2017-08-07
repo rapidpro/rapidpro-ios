@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class URBackendAuthManager: NSObject {
+class URBackendAuthManager {
 
     //MARK: FireBase Methods
     class func path() -> String {

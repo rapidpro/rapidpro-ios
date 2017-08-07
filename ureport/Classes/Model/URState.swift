@@ -8,13 +8,12 @@
 
 import UIKit
 
-class URState: NSObject {
+class URState {
 
     var name:String!
     var boundary:String!
     
     init(name:String,boundary:String?) {
-        super.init()
         self.name = name
         self.boundary = boundary
     }

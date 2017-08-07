@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import ObjectMapper
 
-class URGCMManager: NSObject {
+class URGCMManager {
 
     static let chatTopic = "/topics/chats-"
 

@@ -25,18 +25,15 @@ enum URCountryCodeType {
     case iso3
 }
 
-class URCountry: NSObject {
+class URCountry {
     
     var code:String?
     var name:String?
+
+    init() {}
     
     init(code:String) {
         self.code = code
-        super.init()
-    }
-    
-    override init() {
-        
     }
     
     class func getLanguageDescription(_ languageCode:String, type:URCountryCodeType) -> String? {

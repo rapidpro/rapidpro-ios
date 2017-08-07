@@ -136,7 +136,7 @@ open class Serializable: NSObject {
     */
     open func toJsonString(_ prettyPrinted : Bool = false) -> String? {
         if let jsonData = self.toJson(prettyPrinted) {
-            return NSString(data: jsonData, encoding: String.Encoding.utf8.rawValue) as String?
+            return String(data: jsonData, encoding: String.Encoding.utf8)
         }
         
         return nil

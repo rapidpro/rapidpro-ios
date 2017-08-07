@@ -13,7 +13,7 @@ protocol URChatMemberManagerDelegate {
     func newMemberInChatRoom(_ user:URUser)
 }
 
-class URChatMemberManager: NSObject {
+class URChatMemberManager {
    
     var delegate:URChatMemberManagerDelegate?
     
