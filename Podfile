@@ -16,7 +16,7 @@ pod 'NYTPhotoViewer', '1.1.0'
 pod 'SwiftAddressBook', :git => 'https://github.com/SocialbitGmbH/SwiftAddressBook', :branch => 'chunkyguy-swift3'
 pod 'JSQMessagesViewController', '7.2.0'
 pod 'youtube-ios-player-helper', '0.1.6'
-pod 'IlhasoftCore', :git => 'git@bitbucket.org:ilhasoft/ilhasoft-core-ios.git', :branch => 'develop'
+pod 'IlhasoftCore', :path => '../IlhasoftCore'
 pod 'Proposer', ‘1.1.0’
 pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPageSwift', :branch => 'master'
 pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'

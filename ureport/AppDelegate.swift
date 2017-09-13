@@ -245,7 +245,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        var debugMode = false
+        var debugMode = true
         
         #if DEBUG
             debugMode = true

@@ -22,7 +22,6 @@
 		01F030921F27CAC3004B4C83 /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030891F27C23C004B4C83 /* URReviewModeManager.swift */; };
 		01F030931F27CB18004B4C83 /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030871F27C163004B4C83 /* URIPCheckManager.swift */; };
 		01F030941F27CB18004B4C83 /* URBackendAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030881F27C1D0004B4C83 /* URBackendAuthManager.swift */; };
-		01F030961F28CAAB004B4C83 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = 01F030951F27DA55004B4C83 /* countryprogram.json */; };
 		01F030981F2933CE004B4C83 /* URCountryProgramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 01F030971F2933CE004B4C83 /* URCountryProgramAPI.swift */; };
 		65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */; };
 		650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
@@ -270,6 +269,7 @@
 		97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
+		EA88DD941F6715DD003963C0 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = EA88DD931F6715DD003963C0 /* countryprogram.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -311,7 +311,6 @@
 		01F030871F27C163004B4C83 /* URIPCheckManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URIPCheckManager.swift; sourceTree = "<group>"; };
 		01F030881F27C1D0004B4C83 /* URBackendAuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URBackendAuthManager.swift; sourceTree = "<group>"; };
 		01F030891F27C23C004B4C83 /* URReviewModeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
-		01F030951F27DA55004B4C83 /* countryprogram.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
 		01F030971F2933CE004B4C83 /* URCountryProgramAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URCountryProgramAPI.swift; sourceTree = "<group>"; };
 		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -578,6 +577,7 @@
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
 		E463CE671E3F7A6700600D90 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
 		E463CE681E3F7A6700600D90 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
+		EA88DD931F6715DD003963C0 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -950,7 +950,7 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				01F030951F27DA55004B4C83 /* countryprogram.json */,
+				EA88DD931F6715DD003963C0 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
 				97FBAA581C06447B0012D752 /* iso639_2.bundle */,
 				65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */,
@@ -1718,7 +1718,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01F030961F28CAAB004B4C83 /* countryprogram.json in Resources */,
 				01655A111F19383500EAEF69 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
@@ -1741,6 +1740,7 @@
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
 				65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
+				EA88DD941F6715DD003963C0 /* countryprogram.json in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
 				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
 				974249261BFB76570024384E /* Key-debug.plist in Resources */,
@@ -1808,9 +1808,12 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1823,9 +1826,66 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DBSphereTagCloud/DBSphereTagCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
+				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBSphereTagCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -1838,13 +1898,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ureport-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

@@ -98,8 +98,9 @@ class URFireBaseManager {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in
                         if let user = user {
+                            user.socialUid = uid
                             completion(user)
-                        }else {
+                        } else {
                             let user = URUserLoginManager.getFacebookUserDataWithDictionary(response["facebook"] as! NSDictionary)
                             user.socialUid = uid
                             completion(user)
@@ -118,6 +119,7 @@ class URFireBaseManager {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in
                         if let user = user {
+                            user.socialUid = uid
                             completion(user)
                         }else {
                             let user = URUserLoginManager.getGoogleUserDataWithDictionary(response["google"] as! NSDictionary)
@@ -141,6 +143,7 @@ class URFireBaseManager {
                 if let uid = response["uid"] as? String {
                     URUserManager.getByKey(uid, completion: { (user, success) in
                         if let user = user, user.key != nil {
+                            user.key = uid
                             completion(user)
                         }else {
                             let user = URUserLoginManager.getTwitterUserDataWithDictionary(response["twitter"] as! NSDictionary)
