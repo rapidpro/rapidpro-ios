@@ -63,46 +63,81 @@ class URRapidProManager {
     }
     
     class func getFlowDefinition(_ flowUuid: String, completion:@escaping (URFlowDefinition) -> Void) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            if let countryResponse = countryResponse {
-                let headers = [
-                    "Authorization": countryResponse.token
-                ]
-                let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/flow_definition.json?uuid=\(flowUuid)"
-
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseObject(completionHandler: { (response:DataResponse<URFlowDefinition>) -> Void in
-                    if let flowDefinition = response.result.value {
-                        completion(flowDefinition)
-                    }
-                })
+        #if DEBUG
+            // OK
+            let headers = [
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
+            ]
+            let url = "https://rapidpro.ilhasoft.mobi/api/v1/flow_definition.json?uuid=\(flowUuid)"
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseObject(completionHandler: { (response:DataResponse<URFlowDefinition>) -> Void in
+                if let flowDefinition = response.result.value {
+                    completion(flowDefinition)
+                }
+            })
+        #else
+            URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+                if let countryResponse = countryResponse {
+                    let headers = [
+                        "Authorization": countryResponse.token
+                    ]
+                    let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/flow_definition.json?uuid=\(flowUuid)"
+                    
+                    Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseObject(completionHandler: { (response:DataResponse<URFlowDefinition>) -> Void in
+                        if let flowDefinition = response.result.value {
+                            completion(flowDefinition)
+                        }
+                    })
+                }
             }
-        }
-
+        #endif
     }
     
     class func getFlowRuns(_ contact: URContact, completion:@escaping ([URFlowRun]?) -> Void) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            if let countryResponse = countryResponse {
-                let headers = [
-                    "Authorization": countryResponse.token
-                ]
-                let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
-                let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v2/runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
-
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
-                    if let response = response.result.value {
-                        if response.count > 0 {
-                            completion(response)
-                        }else{
-                            completion(nil)
-                        }
+        #if DEBUG
+            // OK
+            let headers = [
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
+            ]
+            let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
+            let url = "https://rapidpro.ilhasoft.mobi/api/v2/runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
+                if let response = response.result.value {
+                    if response.count > 0 {
+                        completion(response)
                     }else{
                         completion(nil)
                     }
-                })
+                }else{
+                    completion(nil)
+                }
+            })
+        #else
+            URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+                if let countryResponse = countryResponse {
+                    let headers = [
+                        "Authorization": countryResponse.token
+                    ]
+                    let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
+                    let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v2/runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+                    
+                    Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
+                        if let response = response.result.value {
+                            if response.count > 0 {
+                                completion(response)
+                            }else{
+                                completion(nil)
+                            }
+                        }else{
+                            completion(nil)
+                        }
+                    })
+                }
             }
+
+        #endif
         }
-    }
     
     class func getMinimumDate() -> Date {
         let date = URDateUtil.currentDate()
@@ -116,29 +151,89 @@ class URRapidProManager {
     }
     
     class func getContact(_ user:URUser, completion:@escaping (URContact) -> Void) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            if let countryResponse = countryResponse {
-                let headers = [
-                    "Authorization": countryResponse.token
-                ]
-                let userId = "ext:" + URUserManager.formatExtUserId(user.key)
-                let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/contacts.json?urns=\(userId)"
-
-                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-                    guard let response = response.result.value as? NSDictionary else { return }
-                    if let results = response.object(forKey: "results") as? [NSDictionary] {
-                        for object in results {
-                            let contact = URContact(jsonDict: object)
-                            completion(contact)
+        
+        #if DEBUG
+            // OK
+            let headers = [
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
+            ]
+            let userId = "ext:" + URUserManager.formatExtUserId(user.key)
+            let url = "https://rapidpro.ilhasoft.mobi/api/v1/contacts.json?urns=\(userId)"
+            
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
+                guard let response = response.result.value as? NSDictionary else { return }
+                if let results = response.object(forKey: "results") as? [NSDictionary] {
+                    for object in results {
+                        let contact = URContact(jsonDict: object)
+                        completion(contact)
+                    }
+                }
+            }
+        #else
+            URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+                if let countryResponse = countryResponse {
+                    let headers = [
+                        "Authorization": countryResponse.token
+                    ]
+                    let userId = "ext:" + URUserManager.formatExtUserId(user.key)
+                    let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/contacts.json?urns=\(userId)"
+                    
+                    Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
+                        guard let response = response.result.value as? NSDictionary else { return }
+                        if let results = response.object(forKey: "results") as? [NSDictionary] {
+                            for object in results {
+                                let contact = URContact(jsonDict: object)
+                                completion(contact)
+                            }
                         }
                     }
                 }
             }
-        }
-
+        #endif
     }
     
     class func sendRulesetResponses(_ user:URUser, responses:[URRulesetResponse], completion:@escaping () -> Void) {
+        // Atualizar para v2
+        #if DEBUG
+        
+        let token = "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
+            
+        let userId = URUserManager.formatExtUserId(user.key)
+        let url = "https://rapidpro.ilhasoft.mobi/api/v1/external/received/3818d161-a642-4e86-b5af-86e41fc0be2b/"
+            
+        let group = DispatchGroup();
+        let queue = DispatchQueue(label: "in.ureport-poll-responses", attributes: []);
+            
+        self.sendingAnswers = true
+            
+        for response in responses {
+                queue.async(group: group, execute: { () -> Void in
+                    let request = NSMutableURLRequest(url: URL(string: url)!)
+                    request.httpMethod = "POST"
+                    request.setValue(token, forHTTPHeaderField: "Authorization")
+                    request.timeoutInterval = 15
+                    
+                    let postString = "from=\(userId)&text=\(response.response!)"
+                    request.httpBody = postString.data(using: String.Encoding.utf8)
+                    var httpResponse: URLResponse?
+                    
+                    do {
+                        try NSURLConnection.sendSynchronousRequest(request as URLRequest, returning: &httpResponse)
+                        print("Sent: \(response.response!)")
+                    } catch {
+                        print("Error on sending poll response")
+                    }
+                    
+                    Thread.sleep(forTimeInterval: 2)
+                })
+            }
+            
+            group.notify(queue: queue) { () -> Void in
+                self.sendingAnswers = false
+                completion()
+            }
+
+        #else
         URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
             guard let countryResponse = countryResponse else { return }
 
@@ -180,38 +275,56 @@ class URRapidProManager {
                 completion()
             }
         }
+        #endif
     }
     
     class func sendReceivedMessage(_ user:URUser, text:String) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            guard let countryResponse = countryResponse else { return }
-
+        // Atualizar para v2
+        #if DEBUG
             let headers = [
-                "Authorization": countryResponse.token
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
             ]
-
+            
             let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
-
+            
             let userId = URUserManager.formatExtUserId(user.key)
             let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/external/received/\(channel)/"
-
+            
             let parameters = [
                 "from": userId,
                 "text": text
             ]
-
+            
             Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
-        }
-
+        #else
+            URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+                guard let countryResponse = countryResponse else { return }
+                
+                let headers = [
+                    "Authorization": countryResponse.token
+                ]
+                
+                let channel = URCountryProgramManager.getChannelOfCurrentCountryProgram()
+                
+                let userId = URUserManager.formatExtUserId(user.key)
+                let url = "\(URCountryProgramManager.activeCountryProgram()!.rapidProHostAPI!)v1/external/received/\(channel)/"
+                
+                let parameters = [
+                    "from": userId,
+                    "text": text
+                ]
+                
+                Alamofire.request(url, method: .post, parameters: parameters, encoding: JSONEncoding.default, headers: headers)
+            }
+        #endif
     }
 
     class func getContactFields(_ country:URCountry, completion:@escaping ([String]) -> Void) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            guard let countryResponse = countryResponse else { return }
+        #if DEBUG
             let headers = [
-                "Authorization": countryResponse.token
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
             ]
-            Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
+            Alamofire.request("https://rapidpro.ilhasoft.mobi/api/v1/fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
                 if let response = response.result.value as? NSDictionary {
                     var arrayFields:[String] = []
                     if let results = response["results"] as? [NSDictionary] {
@@ -224,16 +337,37 @@ class URRapidProManager {
                     }
                 }
             }
-        }
+        #else
+            if let countryCode = country.code {
+                URCountryProgramAPI.getCountryProgram(countryCode: countryCode) { countryResponse in
+                    guard let countryResponse = countryResponse else { return }
+                    let headers = [
+                        "Authorization": countryResponse.token
+                    ]
+                    Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/fields.json", method:.get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
+                        if let response = response.result.value as? NSDictionary {
+                            var arrayFields:[String] = []
+                            if let results = response["results"] as? [NSDictionary] {
+                                for dictionary in results {
+                                    arrayFields.append(dictionary.object(forKey:"key") as! String)
+                                }
+                                completion(arrayFields)
+                            } else {
+                                completion(arrayFields)
+                            }
+                        }
+                    }
+                }
+            }
+        #endif
     }
 
     class func getStatesByCountry(_ country:URCountry, completion:@escaping (_ states:[URState]?,_ districts:[URDistrict]?) -> Void) {
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            guard let countryResponse = countryResponse else { return }
+        #if DEBUG
             let headers = [
-                "Authorization": countryResponse.token
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
             ]
-            Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/boundaries.json?aliases=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response: DataResponse<Any>) in
+            Alamofire.request("https://rapidpro.ilhasoft.mobi/api/v1/boundaries.json?aliases=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response: DataResponse<Any>) in
                 if let response = response.result.value as? NSDictionary {
                     var states:[URState] = []
                     var districts:[URDistrict] = []
@@ -245,7 +379,7 @@ class URRapidProManager {
                         for dictionary in results {
                             let level = dictionary.object(forKey: "level") as! Int
                             let name = dictionary.object(forKey: "name") as! String
-
+                            
                             switch level {
                             case 0:
                                 break
@@ -267,23 +401,59 @@ class URRapidProManager {
                     }
                 }
             }
-        }
+        #else
+            URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
+                guard let countryResponse = countryResponse else { return }
+                let headers = [
+                    "Authorization": countryResponse.token
+                ]
+                Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/boundaries.json?aliases=true", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response: DataResponse<Any>) in
+                    if let response = response.result.value as? NSDictionary {
+                        var states:[URState] = []
+                        var districts:[URDistrict] = []
+                        if let results = response.object(forKey:"results") as? [NSDictionary] {
+                            if results.isEmpty {
+                                completion(nil,nil)
+                                return
+                            }
+                            for dictionary in results {
+                                let level = dictionary.object(forKey: "level") as! Int
+                                let name = dictionary.object(forKey: "name") as! String
+                                
+                                switch level {
+                                case 0:
+                                    break
+                                case 1:
+                                    let state = URState(name: name, boundary: dictionary.object(forKey: "boundary") as? String)
+                                    states.append(state)
+                                    break
+                                case 2:
+                                    let district = URDistrict(name: name, parent: dictionary.object(forKey: "parent") as! String)
+                                    districts.append(district)
+                                    break
+                                default:
+                                    break
+                                }
+                            }
+                            completion(states, districts)
+                        } else {
+                            completion(nil, nil)
+                        }
+                    }
+                }
+            }
+        #endif
     }
 
     class func saveUser(_ user:URUser,country:URCountry,setupGroups:Bool,completion:@escaping (_ response:NSDictionary?) -> Void) {
-
-        URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
-            guard let countryResponse = countryResponse else { return }
+        #if DEBUG
+            // OK
             let headers = [
-                "Authorization": countryResponse.token
+                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
             ]
+            
             URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
-                print("===============")
-                print(rootDicionary.copy())
-                print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/contacts.json")
-                print(headers)
-                print("===============")
-                Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
+                Alamofire.request("https://rapidpro.ilhasoft.mobi/api/v1/contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
                     if response.result.isFailure {
                         print("error \(String(describing: response.result.value))")
                         completion(nil)
@@ -292,6 +462,30 @@ class URRapidProManager {
                     }
                 })
             }
-        }
+        #else
+            if let countryCode = country.code {
+                URCountryProgramAPI.getCountryProgram(countryCode: countryCode) { countryResponse in
+                    guard let countryResponse = countryResponse else { return }
+                    let headers = [
+                        "Authorization": countryResponse.token
+                    ]
+                    URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
+                        print("===============")
+                        print(rootDicionary.copy())
+                        print("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/contacts.json")
+                        print(headers)
+                        print("===============")
+                        Alamofire.request("\(URCountryProgramManager.getCountryProgramByCountry(country).rapidProHostAPI!)v1/contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
+                            if response.result.isFailure {
+                                print("error \(String(describing: response.result.value))")
+                                completion(nil)
+                            } else if let response = response.result.value as? NSDictionary {
+                                completion(response)
+                            }
+                        })
+                    }
+                }
+            }
+        #endif
     }
 }

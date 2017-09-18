@@ -112,8 +112,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
     
     func userDidAcceptTerms(_ accept: Bool) {
         
-        self.termsViewController.closeWithCompletion { (closed) in
-        }
+        self.termsViewController.closeWithCompletion { (closed) in }
         
         if accept == true {
             let settings = URSettings.getSettings()
@@ -129,10 +128,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         if ((self.txtPassword.text!.isEmpty) && (self.userInput == nil)) {
             showEmptyTextFieldAlert(self.txtPassword)
             return
-        }else if ((self.txtDistrict.text!.isEmpty) && (hasDistrict == true)) {
+        } else if ((self.txtDistrict.text!.isEmpty) && (hasDistrict == true)) {
             showEmptyTextFieldAlert(self.txtDistrict)
             return
-        }else if let textField = self.view.findTextFieldEmptyInView(self.view) {
+        } else if let textField = self.view.findTextFieldEmptyInView(self.view) {
             
             if !(URSettings.getSettings().reviewMode == true && (textField == self.txtBirthDay || textField == self.txtState || textField == self.txtGender)) {
                 showEmptyTextFieldAlert(textField)
@@ -160,7 +159,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                     user.key = user.socialUid
                 }
                 self.saveUser(buildUserFields(user))
-            }else {
+            } else {
                 
                 user = buildUserFields(user)
                 user.type = URType.UReport

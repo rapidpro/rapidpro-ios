@@ -19,6 +19,6 @@ class URSettingsManager {
     }
 
     static func getFCMToken() -> String? {
-        return UserDefaults.standard.value(forKey: Constants.keyFCMToken) as? String
+        return  UserDefaults.standard.value(forKey: Constants.keyFCMToken) as? String
     }
 }
