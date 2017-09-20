@@ -166,7 +166,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             URRapidProManager.getFlowRuns(contact, completion: { (flowRuns: [URFlowRun]?) -> Void in
                 if let flowRuns = flowRuns {
                     if ((!flowRuns.isEmpty) && URFlowManager.isFlowActive(flowRuns[0])) {
-                        URRapidProManager.getFlowDefinition(flowRuns[0].flow.uuid, completion: {
+                        URRapidProManager.getFlowDefinition(flowRuns[0].flow.uuid, block: {
                             (flowDefinition: URFlowDefinition) -> Void in
                             self.currentFlow = flowDefinition
                             self.setupNextStep(self.currentFlow!.entry)

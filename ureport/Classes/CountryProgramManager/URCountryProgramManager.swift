@@ -25,6 +25,27 @@ class URCountryProgramManager {
             return filtered[0] as URCountryProgram
         }
     }
+    
+    class func getSandboxToken() -> String? {
+        #if DEBUG
+        var myDict: NSDictionary?
+        var token: String?
+            
+        if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
+            myDict = NSDictionary(contentsOfFile: path)
+        }
+        
+        if let dict = myDict {
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\("SANDBOX")"] != nil {
+                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\("SANDBOX")"] as? String
+            } else {
+                token = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(URConstant.RapidPro.GLOBAL)"] as? String
+            }
+        }
+            
+        return token
+        #endif
+    }
 
     class func getAvailableCountryPrograms() -> [URCountryProgram]{
         if countryPrograms == nil {
@@ -54,8 +75,8 @@ class URCountryProgramManager {
             myDict = NSDictionary(contentsOfFile: path)
         }
         
-        if let dict = myDict {
-            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] != nil {
+        if let dict = myDict, let countryCode = countryProgram.code {
+            if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryCode)"] != nil {
                 channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] as? String
             }else {
                 channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(URConstant.RapidPro.GLOBAL)"] as? String
