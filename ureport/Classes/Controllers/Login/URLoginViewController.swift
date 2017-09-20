@@ -101,15 +101,21 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     class func updateUserDataInRapidPro(_ user:URUser) {
-        
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary?) -> Void in
+        #if DEBUG
             URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: false, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
                 print(response)
             })
-        }
-        
+        #else
+            URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary?) -> Void in
+                URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: false, completion: { (response) -> Void in
+                    URRapidProContactUtil.rapidProUser = NSMutableDictionary()
+                    URRapidProContactUtil.groupList = []
+                    print(response)
+                })
+            }
+        #endif
     }
     
     func setupUI() {

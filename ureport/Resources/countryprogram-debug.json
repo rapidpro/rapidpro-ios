@@ -8,7 +8,7 @@
             "twitter": null,
             "facebook": null,
             "rapidProHostAPI": "https://rapidpro.ilhasoft.mobi/api/",
-            "ureportHostAPI": null,
+            "ureportHostAPI": "http://ureport.in/api/v1/stories/org/",
             "groupName": "U-Reporters",
             "stateField": null
         }

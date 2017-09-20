@@ -96,23 +96,32 @@ class URRapidProManager {
     class func getFlowRuns(_ contact: URContact, completion:@escaping ([URFlowRun]?) -> Void) {
         #if DEBUG
             // OK
-            let headers = [
-                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
-            ]
-            let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
-            let url = "https://rapidpro.ilhasoft.mobi/api/v2/runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+            var myDict: NSDictionary?
             
-            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URFlowRun]>) in
-                if let response = response.result.value {
-                    if response.count > 0 {
-                        completion(response)
-                    }else{
-                        completion(nil)
-                    }
-                }else{
-                    completion(nil)
-                }
-            })
+            if let path = Bundle.main.path(forResource: "Config", ofType: "plist") {
+                myDict = NSDictionary(contentsOfFile: path)
+            }
+            if let dict = myDict {
+                let headers = [
+                    "Authorization": dict["COUNTRY_PROGRAM_TOKEN_SANDBOX"] as? String
+                ]
+                
+                let afterDate = URDateUtil.dateFormatterRapidPro(getMinimumDate())
+                let url = "https://rapidpro.ilhasoft.mobi/api/v2/runs.json?contact=\(contact.uuid!)&after=\(afterDate)"
+                
+//                Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseArray(completionHandler: { (response: DataResponse<[URFlowRun]>) in
+//                    if let response = response.result.value {
+//                        if response.count > 0 {
+//                            completion(response)
+//                        }else{
+//                            completion(nil)
+//                        }
+//                    }else{
+//                        completion(nil)
+//                    }
+//                })
+            }
+            
         #else
             URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
                 if let countryResponse = countryResponse {
@@ -157,17 +166,29 @@ class URRapidProManager {
             let headers = [
                 "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
             ]
-            let userId = "ext:" + URUserManager.formatExtUserId(user.key)
+            let userId = "fcm:" + URUserManager.formatExtUserId(user.key)
             let url = "https://rapidpro.ilhasoft.mobi/api/v1/contacts.json?urns=\(userId)"
             
-            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
-                guard let response = response.result.value as? NSDictionary else { return }
-                if let results = response.object(forKey: "results") as? [NSDictionary] {
-                    for object in results {
-                        let contact = URContact(jsonDict: object)
-                        completion(contact)
+            Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON {
+                (response:DataResponse<Any>) in
+                
+                switch response.result {
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    return
+                    
+                case .success(let response):
+                    if let response = response as? [String: Any] {
+                        if let results = response["results"] as? [NSDictionary]{
+                            for object in results {
+                                let contact = URContact(jsonDict: object)
+                                completion(contact)
+                            }
+                        }
                     }
                 }
+                
             }
         #else
             URCountryProgramAPI.getCountryProgram(countryCode: URCountryProgramManager.activeCountryProgram()!.code) { countryResponse in
@@ -445,23 +466,53 @@ class URRapidProManager {
         #endif
     }
 
-    class func saveUser(_ user:URUser,country:URCountry,setupGroups:Bool,completion:@escaping (_ response:NSDictionary?) -> Void) {
+    class func saveUser(_ user:URUser,country:URCountry,setupGroups:Bool,completion:@escaping (_ response:String?) -> Void) {
         #if DEBUG
-            // OK
-            let headers = [
-                "Authorization": "Token 3fe5f57b6b085c83c0d539b752adeb55fbed1a39"
-            ]
-            
-            URRapidProContactUtil.buildRapidProUserRootDictionary(user, setupGroups: setupGroups) { (rootDicionary) in
-                Alamofire.request("https://rapidpro.ilhasoft.mobi/api/v1/contacts.json", method: .post, parameters: rootDicionary.copy() as? [String : AnyObject] , encoding: JSONEncoding.default, headers: headers).responseJSON(completionHandler: { (response: DataResponse<Any>) in
-                    if response.result.isFailure {
-                        print("error \(String(describing: response.result.value))")
-                        completion(nil)
-                    } else if let response = response.result.value as? NSDictionary {
-                        completion(response)
+            if let fcmToken = URSettingsManager.getFCMToken() {
+                var myDict: NSDictionary?
+                var channel: String?
+                
+                if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
+                    myDict = NSDictionary(contentsOfFile: path)
+                }
+                
+                if let dict = myDict {
+                    if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\("SANDBOX")"] != nil {
+                        channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\("SANDBOX")"] as? String
+                    } else {
+                        channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(URConstant.RapidPro.GLOBAL)"] as? String
                     }
-                })
+                }
+                
+                var params = ["urn": URUserManager.formatExtUserId(user.key),
+                              "fcm_token": fcmToken]
+                
+                if let nickname = user.nickname {
+                    params["name"] = nickname
+                }
+                
+                if let channel = channel {
+                    Alamofire.request("https://rapidpro.ilhasoft.mobi/handlers/fcm/register/\(channel)", method: .post, parameters: params).responseJSON(completionHandler: {
+                        (response) in
+                        
+                        switch response.result {
+                            
+                        case .failure(let error):
+                            print("error \(String(describing: error.localizedDescription))")
+                            completion(nil)
+                            
+                        case .success(let response):
+                            if let response = response as? [String: String] {
+                                if let uuid = response["contact_uuid"] {
+                                    completion(uuid)
+                                }
+                            }
+                            
+                        }
+                    })
+                }
             }
+            
         #else
             if let countryCode = country.code {
                 URCountryProgramAPI.getCountryProgram(countryCode: countryCode) { countryResponse in

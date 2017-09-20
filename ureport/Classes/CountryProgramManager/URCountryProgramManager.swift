@@ -29,7 +29,12 @@ class URCountryProgramManager {
     class func getAvailableCountryPrograms() -> [URCountryProgram]{
         if countryPrograms == nil {
             countryPrograms = []
-            let path = Bundle.main.path(forResource: "countryprogram", ofType: "json")!
+            #if DEBUG
+                let path = Bundle.main.path(forResource: "countryprogram-debug", ofType: "json")!
+            #else
+                let path = Bundle.main.path(forResource: "countryprogram", ofType: "json")!
+            #endif
+            
             let data = NSData(contentsOfFile: path)
             let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
             let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
@@ -44,9 +49,11 @@ class URCountryProgramManager {
     class func getChannelOfCountryProgram(_ countryProgram:URCountryProgram) -> String?{
         var myDict: NSDictionary?
         var channel:String?
+        
         if let path = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist") {
             myDict = NSDictionary(contentsOfFile: path)
         }
+        
         if let dict = myDict {
             if dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] != nil {
                 channel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(countryProgram.code)"] as? String

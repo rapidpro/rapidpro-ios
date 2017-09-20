@@ -270,6 +270,7 @@
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
 		EA88DD941F6715DD003963C0 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = EA88DD931F6715DD003963C0 /* countryprogram.json */; };
+		EA9D1E7D1F72DC74009E8583 /* countryprogram-debug.json in Resources */ = {isa = PBXBuildFile; fileRef = EA9D1E7C1F72DC74009E8583 /* countryprogram-debug.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -578,6 +579,7 @@
 		E463CE671E3F7A6700600D90 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
 		E463CE681E3F7A6700600D90 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 		EA88DD931F6715DD003963C0 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
+		EA9D1E7C1F72DC74009E8583 /* countryprogram-debug.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogram-debug.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -950,6 +952,7 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				EA9D1E7C1F72DC74009E8583 /* countryprogram-debug.json */,
 				EA88DD931F6715DD003963C0 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
 				97FBAA581C06447B0012D752 /* iso639_2.bundle */,
@@ -1783,6 +1786,7 @@
 				65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */,
 				65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */,
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
+				EA9D1E7D1F72DC74009E8583 /* countryprogram-debug.json in Resources */,
 				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,

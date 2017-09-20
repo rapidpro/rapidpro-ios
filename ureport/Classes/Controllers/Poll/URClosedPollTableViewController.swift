@@ -193,7 +193,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             headerCell.setupData(currentFlow!, flowActionSet: currentActionSet!, flowRuleset: currentRuleset, contact: contact!)
             currentPollHeight = headerCell.getCurrentPollHeight()
             
-        }else if currentActionSet == nil {
+        } else if currentActionSet == nil {
             
             let hud = MBProgressHUD.showAdded(to: self.view, animated: true)
             hud.label.text = "message_send_poll".localized
@@ -210,7 +210,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             headerCell.removeFromSuperview()
             self.view.endEditing(true)
             
-        }else{
+        } else {
             headerCell.setupDataWithNoAnswer(currentFlow, flowActionSet: currentActionSet, flowRuleset: currentRuleset, contact: contact)
             
             currentPollHeight = headerCell.getCurrentPollHeight() - 30
