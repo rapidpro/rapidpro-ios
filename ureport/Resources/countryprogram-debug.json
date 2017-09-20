@@ -1,0 +1,16 @@
+{
+    "countries": [
+        {
+            "code": "SANDBOX",
+            "themeColor": "#42b6e7",
+            "org": 13,
+            "name": "Ilhasoft SANDBOX",
+            "twitter": null,
+            "facebook": null,
+            "rapidProHostAPI": "https://rapidpro.ilhasoft.mobi/api/",
+            "ureportHostAPI": null,
+            "groupName": "U-Reporters",
+            "stateField": null
+        }
+    ]
+}
