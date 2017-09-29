@@ -9,6 +9,7 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import FirebaseMessaging
 
 class URGCMManager {
 
@@ -59,7 +60,9 @@ class URGCMManager {
         URUserManager.getChatRooms(user, completion: { chatRooms in
             guard let chatRooms = chatRooms else { return }
             for chatRoom in chatRooms {
-                URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: chatRoom))
+                DispatchQueue.main.async {
+                    Messaging.messaging().subscribe(toTopic: topicByName(topic: chatTopicsPath, key: chatRoom))
+                }
             }
         })
     }

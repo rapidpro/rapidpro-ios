@@ -172,7 +172,7 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
             
             chatRoomManager.createIndividualChatRoomIfPossible(cell.user!, isIndividualChatRoom: true)
             
-        }else {
+        } else {
             if let chatRoom = cell.chatRoom {
                 MBProgressHUD.showAdded(to: self.view, animated: true)
                 URGCMManager.registerUserInTopic(URUser.activeUser()!, chatRoom: chatRoom)

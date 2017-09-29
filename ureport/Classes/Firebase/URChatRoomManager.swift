@@ -265,7 +265,7 @@ class URChatRoomManager {
             .removeValue()
     }
     
-    class func getChatRooms(_ user:URUser,completion:@escaping ([URChatRoom]?) -> Void){
+    class func getChatRooms(_ user: URUser, completion: @escaping ([URChatRoom]?) -> Void){
         
         var chatRoomList:[URChatRoom] = []
         

@@ -9,7 +9,7 @@
 import UIKit
 import NYTPhotoViewer
 
-class PhotoShow: NSObject, NYTPhoto{
+class PhotoShow: NSObject, NYTPhoto {
 
     var index:Int!
     var image: UIImage?

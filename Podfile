@@ -23,6 +23,7 @@ pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.g
 pod 'QRCodeReader.swift', '7.2.0'
 pod 'SRKControls', :git => 'https://github.com/Ilhasoft/SRKControls'
 pod 'STTwitter'
+pod 'fcm-channel-ios', :git => 'https://github.com/push-flow/fcm-channel-ios'
 
 pod 'Firebase/Core', '4.0.4'
 pod 'Firebase/Messaging', '4.0.4'

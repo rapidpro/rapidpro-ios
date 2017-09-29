@@ -1,3 +1,4 @@
+
 //
 //  AppDelegate.swift
 //  ureport
@@ -12,7 +13,7 @@ import ObjectMapper
 import UserNotifications
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = URConstant.Color.YELLOW
+
 
         UserDefaults.saveIncomingAvatarSetting(true)
         UserDefaults.saveOutgoingAvatarSetting(true)
@@ -70,9 +72,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
+    
+    
     func createDirectoryToImageUploads() {
         do {
-                        
             try FileManager.default.createDirectory(atPath: URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload").path, withIntermediateDirectories:true, attributes: nil)
         } catch let error1 as NSError {
                 print("Creating 'upload' directory failed. Error: \(error1)")
@@ -164,7 +167,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
         if let type = userInfo["type"] as? String {
             notificationType = type
-        }else if let type = userInfo["gcm.notification.type"] as? String {
+        } else if let type = userInfo["gcm.notification.type"] as? String {
             notificationType = type
         }
         
@@ -209,25 +212,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     //MARK: Application Methods
     
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-        //Enter on touch notification
-        let userInfo = response.notification.request.content.userInfo
-        
-        if let _ = URUser.activeUser() {
-            openNotification(userInfo)
-        }
-    }
-    
-    
-    @available(iOS 10.0, *)
-    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-        let userInfo = notification.request.content.userInfo
-        if let _ = URUser.activeUser() {
-            openNotification(userInfo)
-        }
-    }
-    
     func applicationDidBecomeActive(_ application: UIApplication) {
         URIPCheckManager.getCountryCodeByIP { (countryCode) in}
     }
@@ -259,6 +243,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             user.pushIdentity = fcmToken
             URUserManager.updatePushIdentity(user, completion: { success in
                 guard success else { return }
+//                Messaging.messaging().
                 URGCMManager.onFCMRegistered(user: user)
             })
         }
@@ -267,8 +252,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if (url.scheme?.hasPrefix("fb"))! {
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-        }
-        else {
+        } else {
             return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
         }
     }
@@ -278,6 +262,28 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token was refreshed: \(fcmToken)")
         URSettingsManager.saveFCMToken(fcmToken: fcmToken)
+        
+    }
+}
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        //Enter on touch notification
+        let userInfo = response.notification.request.content.userInfo
+        
+        if let _ = URUser.activeUser() {
+            openNotification(userInfo)
+        }
+    }
+    
+    
+    @available(iOS 10.0, *)
+    func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+        let userInfo = notification.request.content.userInfo
+        if let _ = URUser.activeUser() {
+            openNotification(userInfo)
+        }
     }
 }
 

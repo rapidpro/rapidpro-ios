@@ -18,7 +18,9 @@ class URFcmAPI {
         let headers = [
             "Authorization": URConstant.Fcm.GCM_AUTHORIZATION
         ]
-        _ = Alamofire.request("\(gcmCompatURL)/\(pushIdentity)/rel/topics/\(topic)", method: .post, headers: headers).response(completionHandler: { defaultDataResponse in
+        
+        let url = "\(gcmCompatURL)/\(pushIdentity)/rel/topics/\(topic)"
+        Alamofire.request(url, method: .post, headers: headers).response(completionHandler: { defaultDataResponse in
             print("Request done")
         })
     }
