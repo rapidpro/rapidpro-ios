@@ -165,8 +165,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         var notificationType:String? = nil
         
-        if let type = userInfo["type"] as? String {
-            notificationType = type
+        if let type = userInfo["aps"] as? [String: String] {
+            if let alert = type["alert"] as? [String: String] {
+                let keys = Array(alert.keys)
+                print(keys.debugDescription)
+            }
         } else if let type = userInfo["gcm.notification.type"] as? String {
             notificationType = type
         }

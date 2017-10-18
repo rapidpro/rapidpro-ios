@@ -133,11 +133,12 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let _ = self.listChatRoom[indexPath.row] as? URCountryProgram {
             print("Open country program")
-            URFCMManager.setupPush()
-            URFCMManager.createPushContact(completion: { (success, contact) in
+            URFCMManager.setupFCMChannel()
+            print(URUser.activeUser()?.socialUid)
+            URFCMManager.createContact(completion: { (success, contact) in
                 if success {
                     if let contact = contact {
-                        let chatVC = ISPushChatViewController(contact: contact, botName: "SANDBOX")
+                        let chatVC = FCMChannelChatViewController(contact: contact, botName: "SANDBOX")
                         self.navigationController?.pushViewController(chatVC, animated: true)
                     }
                 }

@@ -20,7 +20,7 @@ class URFCMManager {
     static var channel = ""
     static var handlerUrl = ""
     
-    static func setupPush() {
+    static func setupFCMChannel() {
         var rootDictionary: NSDictionary?
         
         if let path = Bundle.main.path(forResource: "Key-debug", ofType: "plist") {
@@ -45,14 +45,14 @@ class URFCMManager {
             }
         }
         
-        ISPushSettings.setConfiguration(token, channel: channel, url: apiPrefix, handlerURL: handlerUrl)
+        FCMChannelSettings.setConfiguration(token, channel: channel, url: apiPrefix, handlerURL: handlerUrl)
     }
     
-    static func createPushContact(completion: @escaping (_ success: Bool, _ contact: ISPushContact?) -> ()) {
+    static func createContact(completion: @escaping (_ success: Bool, _ contact: FCMChannelContact?) -> ()) {
         if let urn = URUser.activeUser()?.socialUid, let name = URUser.activeUser()?.nickname, let pushIdentity = URUser.activeUser()?.pushIdentity {
-            var contact = ISPushContact(urn: urn, name: name, pushIdentity: pushIdentity)
+            var contact = FCMChannelContact(urn: urn, name: name, fcmToken: pushIdentity)
             
-            ISPushManager.registerContact(contact) {
+            RapidProAPI.registerContact(contact) {
                 uuid in
                 
                 if uuid != nil {
@@ -66,8 +66,8 @@ class URFCMManager {
         }
     }
     
-    static func loadPushContact(urn: String, completion: @escaping (ISPushContact?) -> ()) {
-        ISPushManager.loadContact(fromUrn: urn) {
+    static func loadPushContact(urn: String, completion: @escaping (FCMChannelContact?) -> ()) {
+        RapidProAPI.loadContact(fromUrn: urn) {
             (pushContact) in
             
             completion(pushContact)
