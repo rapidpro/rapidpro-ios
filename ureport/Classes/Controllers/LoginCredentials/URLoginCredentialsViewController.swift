@@ -19,6 +19,8 @@ class URLoginCredentialsViewController: UIViewController {
     @IBOutlet weak var txtPassword: UITextField!
     @IBOutlet weak var viewLogin: UIView!
     @IBOutlet weak var viewPassword: UIView!
+    @IBOutlet weak var rememberMeSwitch: UISwitch!
+    @IBOutlet weak var rememberMeLbl: UILabel!
     
     var appDelegate:AppDelegate!
     
@@ -59,6 +61,7 @@ class URLoginCredentialsViewController: UIViewController {
     }
 
     @IBAction func btLoginTapped(_ sender: AnyObject) {
+        
         MBProgressHUD.showAdded(to: self.view, animated: true)
         if let textfield = self.view.findTextFieldEmptyInView(self.view) {
             MBProgressHUD.hide(for: self.view, animated: true)
@@ -67,6 +70,7 @@ class URLoginCredentialsViewController: UIViewController {
         }
         
         self.view.endEditing(true)
+        
         URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
             
             DispatchQueue.main.async {
@@ -74,12 +78,23 @@ class URLoginCredentialsViewController: UIViewController {
             }
             
             if success {
+                self.saveEmailAddress()
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             }else {
                 UIAlertView(title: nil, message: "login_password_error".localized, delegate: self, cancelButtonTitle: "OK").show()
             }
         })
     }
+    
+    @IBAction func rememberMeSwitchChanged(_ sender: Any) {
+        
+        if rememberMeSwitch.isOn {
+            rememberMeLbl.text = "Remember me"
+        } else {
+            rememberMeLbl.text = "Don't remember me"
+        }
+    }
+    
     
     //MARK: Class Methods
     
@@ -90,7 +105,18 @@ class URLoginCredentialsViewController: UIViewController {
         self.txtLogin.placeholder = "login_email".localized
         self.txtPassword.placeholder = "login_password".localized
         
+        if let cachedEmail = UserDefaults.standard.string(forKey: "CachedEmailAddress") {
+            self.txtLogin.text = cachedEmail
+        }
+        
         self.navigationController?.navigationBar.barTintColor = URConstant.Color.LOGIN_PRIMARY
     }
     
+    private func saveEmailAddress() {
+        if rememberMeSwitch.isOn {
+            if let email = txtLogin.text {
+                UserDefaults.standard.set(email, forKey: "CachedEmailAddress")
+            }
+        }
+    }
 }
