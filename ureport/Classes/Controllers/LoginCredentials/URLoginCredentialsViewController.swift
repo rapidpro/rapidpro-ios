@@ -59,17 +59,21 @@ class URLoginCredentialsViewController: UIViewController {
     }
 
     @IBAction func btLoginTapped(_ sender: AnyObject) {
-        
+        MBProgressHUD.showAdded(to: self.view, animated: true)
         if let textfield = self.view.findTextFieldEmptyInView(self.view) {
+            MBProgressHUD.hide(for: self.view, animated: true)
             UIAlertView(title: nil, message: String(format: "is_empty".localized, arguments: [textfield.placeholder!]), delegate: self, cancelButtonTitle: "OK").show()
             return
         }
         
         self.view.endEditing(true)
-        //MBProgressHUD.showAdded(to: self.view, animated: true)
         URUserLoginManager.login(self.txtLogin.text!,password: self.txtPassword.text!, completion: { (FAuthenticationError,success) -> Void in
-        //MBProgressHUD.hide(for: self.view, animated: true)
-            if success {                
+            
+            DispatchQueue.main.async {
+                MBProgressHUD.hide(for: self.view, animated: true)
+            }
+            
+            if success {
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             }else {
                 UIAlertView(title: nil, message: "login_password_error".localized, delegate: self, cancelButtonTitle: "OK").show()

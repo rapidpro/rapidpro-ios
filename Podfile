@@ -19,7 +19,7 @@ pod 'JSQMessagesViewController'
 pod 'youtube-ios-player-helper', '0.1.6'
 pod 'IlhasoftCore', :path => '../IlhasoftCore'
 pod 'Proposer', ‘1.1.0’
-pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPageSwift', :branch => 'swift3'
+pod 'ISScrollViewPageSwift', :git => 'https://github.com/Ilhasoft/ISScrollViewPageSwift'
 pod 'DBSphereTagCloud', :git => 'https://github.com/danielblx/DBSphereTagCloud.git'
 pod 'QRCodeReader.swift', '7.2.0'
 pod 'SRKControls', :git => 'https://github.com/Ilhasoft/SRKControls'

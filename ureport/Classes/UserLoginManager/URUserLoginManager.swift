@@ -68,27 +68,32 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         let accountStore = ACAccountStore()
         let accountType  = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
 
-        accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: {success, error in
-            if let twitterAccount = accountStore.accounts(with: accountType).first as? ACAccount {
-                
-                var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
-                let details = (properties["properties"] as! NSDictionary)
-                print("user_id  =  \(details["user_id"] as! String)")
-                
-                URTwitterAuthHelper.getAccessTokenKeyAndTokenSecret(twitterAccount, completion: { (tokenKey, tokenSecret) in
-                
-                    guard let _ = tokenKey else {
-                        completion(nil)
-                        return
-                    }
+        accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: {
+            success, error in
+            
+            if let accounts = accountStore.accounts(with: accountType) {
+                if let twitterAccount = accounts.first as? ACAccount {
                     
-                    URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:tokenKey!, authTokenSecret: tokenSecret!, completion: { (user) in
-                        completion(user)
+                    var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
+                    let details = (properties["properties"] as! NSDictionary)
+                    print("user_id  =  \(details["user_id"] as! String)")
+                    
+                    URTwitterAuthHelper.getAccessTokenKeyAndTokenSecret(twitterAccount, completion: { (tokenKey, tokenSecret) in
+                        
+                        guard let _ = tokenKey else {
+                            completion(nil)
+                            return
+                        }
+                        
+                        URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:tokenKey!, authTokenSecret: tokenSecret!, completion: { (user) in
+                            completion(user)
+                        })
+                        
                     })
                     
-                })
-                
- 
+                } else {
+                    completion(nil)
+                }
             } else {
                 completion(nil)
             }
@@ -123,7 +128,6 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     //MARK: auth Methods
     
     class func login(_ email:String,password:String,completion:@escaping (FAuthenticationError?,Bool) -> Void) {
-        
         URFireBaseManager.authUserWithPassword(email: email, password: password) { (user,error) in
             if let error = error {
                 switch (error) {
@@ -131,10 +135,12 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(FAuthenticationError.userDoesNotExist,false)
                 case .invalidEmail:
                     completion(FAuthenticationError.invalidEmail,false)
+                case .invalidPassword:
+                    completion(FAuthenticationError.invalidPassword, false)
                 default:
                     break
                 }
-            }else if let user = user {
+            } else if let user = user {
                 URLoginViewController.updateUserDataInRapidPro(user)
                 URUserLoginManager.setUserAndCountryProgram(user)
                 completion(nil,true)

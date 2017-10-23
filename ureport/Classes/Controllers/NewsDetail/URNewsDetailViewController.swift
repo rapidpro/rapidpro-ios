@@ -92,7 +92,7 @@ class URNewsDetailViewController: UIViewController {
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = .horizontally
         
         if self.news.images != nil && self.news.images.count > 0{
             var photoIndex = 0

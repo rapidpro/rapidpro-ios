@@ -67,7 +67,7 @@ class URTutorialViewController: UIViewController, ISScrollViewPageDelegate {
         scrollViewTutorial.setFillContent(true)
         scrollViewTutorial.setEnableBounces(false)
         scrollViewTutorial.setPaging(true)
-        scrollViewTutorial.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
+        scrollViewTutorial.scrollViewPageType = .horizontally
         
         scrollViewTutorial.setCustomViews([tutoView1!,tutoView2!,tutoView3!])        
         

@@ -13,6 +13,7 @@ import Alamofire
 enum URFireBaseManagerAuthError {
     case invalidEmail
     case invalidUser
+    case invalidPassword
     case emailTaken
 }
 
@@ -58,7 +59,7 @@ class URFireBaseManager: NSObject {
                         }
                     })
                     
-                }else if let error = response["error"] as? NSDictionary {
+                } else if let error = response["error"] as? NSDictionary {
                     let errorCode = error["code"] as! String
                     switch errorCode {
                         case "INVALID_EMAIL":
@@ -66,6 +67,9 @@ class URFireBaseManager: NSObject {
                         break
                         case "INVALID_USER":
                             completion(nil, .invalidUser)
+                        break
+                        case "INVALID_PASSWORD":
+                            completion(nil, .invalidPassword)
                         break
                         default:
                         break

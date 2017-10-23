@@ -264,7 +264,7 @@
 		97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2FAC41C061EC0000820BD /* URTutoView.xib */; };
 		97FBAA571C0644120012D752 /* NSLocale+ISO639_2.m in Sources */ = {isa = PBXBuildFile; fileRef = 97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */; };
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
-		9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 48CB42E22540D34F256E8133 /* Pods_ureport.framework */; };
+		9BDE960200E2F706453D1171 /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
 		E463CE691E3F7A6700600D90 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE671E3F7A6700600D90 /* Key-debug.plist */; };
 		E463CE6A1E3F7A6700600D90 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E463CE681E3F7A6700600D90 /* Key.plist */; };
 /* End PBXBuildFile section */
@@ -293,9 +293,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
+		2938F725A3A400358D81C846 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		30D4A2F49216E9109C180A69 /* Pods.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		48CB42E22540D34F256E8133 /* Pods_ureport.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6502CB841DB16CB100E548B4 /* URIPCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPCheckManager.swift; sourceTree = "<group>"; };
 		65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDownloader.swift; sourceTree = "<group>"; };
 		650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAboutViewIPadController.xib; sourceTree = "<group>"; };
@@ -532,7 +531,7 @@
 		65FAF0D21BC41AF300F8B380 /* URGroupDetailsViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URGroupDetailsViewController.xib; sourceTree = "<group>"; };
 		65FF45CA1D88426300A06460 /* th-TH */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "th-TH"; path = "th-TH.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		65FF45CB1D8843F500A06460 /* th */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = th; path = th.lproj/Localizable.strings; sourceTree = "<group>"; };
-		7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.debug.xcconfig"; sourceTree = "<group>"; };
+		8F4B7CDABFD39D8B74002C11 /* Pods-ureport.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.debug.xcconfig"; sourceTree = "<group>"; };
 		9725C5951C0EAE1A00EE1237 /* URAlamofireLogExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAlamofireLogExtension.swift; sourceTree = "<group>"; };
 		972817A81BFF9C3000FBD20E /* URChoiceResponseView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = URChoiceResponseView.xib; path = ChoiceResponse/URChoiceResponseView.xib; sourceTree = "<group>"; };
 		972817AA1BFFCA0800FBD20E /* URResponseView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = URResponseView.swift; path = PollResponse/URResponseView.swift; sourceTree = "<group>"; };
@@ -569,6 +568,7 @@
 		97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLocale+ISO639_2.h"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
 		97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLocale+ISO639_2.m"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
+		E18C80312825F0AD5B871CF8 /* Pods-ureport.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ureport.release.xcconfig"; path = "Pods/Target Support Files/Pods-ureport/Pods-ureport.release.xcconfig"; sourceTree = "<group>"; };
 		E463CE671E3F7A6700600D90 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
 		E463CE681E3F7A6700600D90 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -584,7 +584,7 @@
 				658949D41B85775A0087F361 /* Accounts.framework in Frameworks */,
 				658949D21B8577530087F361 /* Social.framework in Frameworks */,
 				65409FF11B4C977600344D75 /* Foundation.framework in Frameworks */,
-				9B551E37C9944B5014019E9B /* Pods_ureport.framework in Frameworks */,
+				9BDE960200E2F706453D1171 /* Pods_ureport.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,6 +598,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4306F579F0DBD3251E38FF3D /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				8F4B7CDABFD39D8B74002C11 /* Pods-ureport.debug.xcconfig */,
+				E18C80312825F0AD5B871CF8 /* Pods-ureport.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		6502CB831DB16C7D00E548B4 /* IPCheckManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -690,7 +699,7 @@
 				65409FBD1B4C842700344D75 /* ureport */,
 				65409FBC1B4C842700344D75 /* Products */,
 				765863F8BACD5E4ED452B82C /* Frameworks */,
-				CFA94116CFAD1BE71524C9A7 /* Pods */,
+				4306F579F0DBD3251E38FF3D /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -1608,7 +1617,7 @@
 				658949D31B85775A0087F361 /* Accounts.framework */,
 				658949D11B8577530087F361 /* Social.framework */,
 				30D4A2F49216E9109C180A69 /* Pods.framework */,
-				48CB42E22540D34F256E8133 /* Pods_ureport.framework */,
+				2938F725A3A400358D81C846 /* Pods_ureport.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1661,15 +1670,6 @@
 			name = NSLocaleISO639_2;
 			sourceTree = "<group>";
 		};
-		CFA94116CFAD1BE71524C9A7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */,
-				1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1677,13 +1677,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 65409FDA1B4C842700344D75 /* Build configuration list for PBXNativeTarget "ureport" */;
 			buildPhases = (
-				50C28071DEE32473E2626A8F /* [CP] Check Pods Manifest.lock */,
+				226359F6D43D57738F62DD7A /* [CP] Check Pods Manifest.lock */,
 				65409FB71B4C842700344D75 /* Sources */,
 				65409FB81B4C842700344D75 /* Frameworks */,
 				65409FB91B4C842700344D75 /* Resources */,
 				65894A061B8652E10087F361 /* Embed Frameworks */,
-				450D4BBB81DED4C784503883 /* [CP] Embed Pods Frameworks */,
-				24E1E8C688478972448154BC /* [CP] Copy Pods Resources */,
+				ECBA084B5B20B83D9A419AB2 /* [CP] Embed Pods Frameworks */,
+				47BC1884708E957A8A4EA188 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1863,49 +1863,107 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		24E1E8C688478972448154BC /* [CP] Copy Pods Resources */ = {
+		226359F6D43D57738F62DD7A /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ureport-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		47BC1884708E957A8A4EA188 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh",
+				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		450D4BBB81DED4C784503883 /* [CP] Embed Pods Frameworks */ = {
+		ECBA084B5B20B83D9A419AB2 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DBSphereTagCloud/DBSphereTagCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/Firebase/Firebase.framework",
+				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
+				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBSphereTagCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Firebase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		50C28071DEE32473E2626A8F /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -2228,7 +2286,7 @@
 		};
 		65409FDB1B4C842700344D75 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7F64B916CA16088C64A94B74 /* Pods-ureport.debug.xcconfig */;
+			baseConfigurationReference = 8F4B7CDABFD39D8B74002C11 /* Pods-ureport.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
@@ -2256,7 +2314,7 @@
 		};
 		65409FDC1B4C842700344D75 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 1FEF00B55A801B024B760889 /* Pods-ureport.release.xcconfig */;
+			baseConfigurationReference = E18C80312825F0AD5B871CF8 /* Pods-ureport.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;

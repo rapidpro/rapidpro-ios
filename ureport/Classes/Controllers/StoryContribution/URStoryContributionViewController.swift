@@ -289,7 +289,7 @@ class URStoryContributionViewController: UIViewController, URContributionManager
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.isScrollViewPageHorizontally
+        scrollViewMedias.scrollViewPageType = .horizontally
         
         if story.medias != nil && (story.medias?.count)! > 0 {
             
