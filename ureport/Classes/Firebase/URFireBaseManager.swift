@@ -13,6 +13,7 @@ import Alamofire
 enum URFireBaseManagerAuthError: Error {
     case invalidEmail
     case invalidUser
+    case invalidPassword
     case emailTaken
 }
 
@@ -61,6 +62,9 @@ class URFireBaseManager {
                         break
                         case "INVALID_USER":
                             completion(nil, URFireBaseManagerAuthError.invalidUser)
+                        break
+                        case "INVALID_PASSWORD":
+                            completion(nil, URFireBaseManagerAuthError.invalidPassword)
                         break
                         default:
                         break

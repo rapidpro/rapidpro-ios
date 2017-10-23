@@ -1,0 +1,235 @@
+PODS:
+  - Alamofire (4.5.1)
+  - AlamofireObjectMapper (4.1.0):
+    - Alamofire (~> 4.1)
+    - ObjectMapper (~> 2.0)
+  - AWSCore (2.2.7)
+  - AWSS3 (2.2.7):
+    - AWSCore (= 2.2.7)
+  - Bolts (1.8.4):
+    - Bolts/AppLinks (= 1.8.4)
+    - Bolts/Tasks (= 1.8.4)
+  - Bolts/AppLinks (1.8.4):
+    - Bolts/Tasks
+  - Bolts/Tasks (1.8.4)
+  - DBSphereTagCloud (1.0.0)
+  - FBSDKCoreKit (4.23.0):
+    - Bolts (~> 1.7)
+  - FBSDKLoginKit (4.23.0):
+    - FBSDKCoreKit
+  - Firebase/Auth (4.0.4):
+    - Firebase/Core
+    - FirebaseAuth (= 4.0.0)
+  - Firebase/Core (4.0.4):
+    - FirebaseAnalytics (= 4.0.2)
+    - FirebaseCore (= 4.0.4)
+  - Firebase/Database (4.0.4):
+    - Firebase/Core
+    - FirebaseDatabase (= 4.0.0)
+  - Firebase/Messaging (4.0.4):
+    - Firebase/Core
+    - FirebaseMessaging (= 2.0.0)
+  - FirebaseAnalytics (4.0.2):
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+  - FirebaseAuth (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
+    - GTMSessionFetcher/Core (~> 1.1)
+  - FirebaseCore (4.0.4):
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
+  - FirebaseDatabase (4.0.0):
+    - FirebaseAnalytics (~> 4.0)
+  - FirebaseInstanceID (2.0.3)
+  - FirebaseMessaging (2.0.0):
+    - FirebaseAnalytics (~> 4.0)
+    - FirebaseCore (~> 4.0)
+    - FirebaseInstanceID (~> 2.0)
+    - GoogleToolboxForMac/Logger (~> 2.1)
+    - Protobuf (~> 3.1)
+  - FLAnimatedImage (1.0.12)
+  - Google/Analytics (1.3.2):
+    - Google/Core
+    - GoogleAnalytics (~> 3.12)
+  - Google/Core (1.3.2):
+    - GoogleInterchangeUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.1)
+  - Google/SignIn (1.3.2):
+    - Google/Core
+    - GoogleSignIn (~> 2.0)
+  - GoogleAnalytics (3.17.0)
+  - GoogleAppUtilities (1.1.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleAuthUtilities (1.0.1):
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleInterchangeUtilities (1.2.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleNetworkingUtilities (1.2.1):
+    - GoogleSymbolUtilities (~> 1.0)
+  - GoogleSignIn (2.4.0):
+    - GoogleAppUtilities (~> 1.0)
+    - GoogleAuthUtilities (~> 1.0)
+    - GoogleNetworkingUtilities (~> 1.0)
+    - GoogleUtilities (~> 1.0)
+  - GoogleSymbolUtilities (1.0.3)
+  - GoogleToolboxForMac/DebugUtils (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/Defines (2.1.1)
+  - GoogleToolboxForMac/Logger (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSData+zlib (2.1.1):
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+  - GoogleToolboxForMac/NSDictionary+URLArguments (2.1.1):
+    - GoogleToolboxForMac/DebugUtils (= 2.1.1)
+    - GoogleToolboxForMac/Defines (= 2.1.1)
+    - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
+  - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
+  - GoogleUtilities (1.1.0):
+    - GoogleSymbolUtilities (~> 1.0.0)
+  - GTMSessionFetcher/Core (1.1.12)
+  - IlhasoftCore (0.0.9):
+    - Alamofire
+    - AlamofireObjectMapper
+    - MBProgressHUD
+    - Proposer
+    - SDWebImage (= 3.8.2)
+    - TPKeyboardAvoiding
+  - ISScrollViewPageSwift (1.0.0)
+  - JSQMessagesViewController (7.2.0):
+    - JSQSystemSoundPlayer (~> 2.0.1)
+  - JSQSystemSoundPlayer (2.0.1)
+  - MBProgressHUD (1.0.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
+  - NYTPhotoViewer (1.1.0):
+    - NYTPhotoViewer/AnimatedGifSupport (= 1.1.0)
+    - NYTPhotoViewer/Core (= 1.1.0)
+  - NYTPhotoViewer/AnimatedGifSupport (1.1.0):
+    - FLAnimatedImage (~> 1.0.8)
+    - NYTPhotoViewer/Core
+  - NYTPhotoViewer/Core (1.1.0)
+  - ObjectMapper (2.2.9)
+  - Proposer (1.1.0)
+  - Protobuf (3.4.0)
+  - QRCodeReader.swift (7.2.0)
+  - SDWebImage (3.8.2):
+    - SDWebImage/Core (= 3.8.2)
+  - SDWebImage/Core (3.8.2)
+  - SRKControls (4.0.1):
+    - SRKControls/Controls (= 4.0.1)
+  - SRKControls/Controls (4.0.1)
+  - STTwitter (0.2.6)
+  - SwiftAddressBook (0.6.2)
+  - TPKeyboardAvoiding (1.3.1)
+  - youtube-ios-player-helper (0.1.6)
+
+DEPENDENCIES:
+  - AWSS3 (~> 2.2.0)
+  - DBSphereTagCloud (from `https://github.com/danielblx/DBSphereTagCloud.git`)
+  - FBSDKCoreKit (= 4.23.0)
+  - FBSDKLoginKit (= 4.23.0)
+  - Firebase/Auth (= 4.0.4)
+  - Firebase/Core (= 4.0.4)
+  - Firebase/Database (= 4.0.4)
+  - Firebase/Messaging (= 4.0.4)
+  - Google/Analytics (= 1.3.2)
+  - Google/SignIn (= 1.3.2)
+  - GoogleUtilities (= 1.1.0)
+  - IlhasoftCore (from `../IlhasoftCore`)
+  - ISScrollViewPageSwift (from `https://github.com/Ilhasoft/ISScrollViewPageSwift`, branch `master`)
+  - JSQMessagesViewController (= 7.2.0)
+  - NYTPhotoViewer (= 1.1.0)
+  - Proposer (= 1.1.0)
+  - QRCodeReader.swift (= 7.2.0)
+  - SDWebImage
+  - SRKControls (from `https://github.com/Ilhasoft/SRKControls`)
+  - STTwitter
+  - SwiftAddressBook (from `https://github.com/SocialbitGmbH/SwiftAddressBook`, branch `chunkyguy-swift3`)
+  - TPKeyboardAvoiding
+  - youtube-ios-player-helper (= 0.1.6)
+
+EXTERNAL SOURCES:
+  DBSphereTagCloud:
+    :git: https://github.com/danielblx/DBSphereTagCloud.git
+  IlhasoftCore:
+    :path: ../IlhasoftCore
+  ISScrollViewPageSwift:
+    :branch: master
+    :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
+  SRKControls:
+    :git: https://github.com/Ilhasoft/SRKControls
+  SwiftAddressBook:
+    :branch: chunkyguy-swift3
+    :git: https://github.com/SocialbitGmbH/SwiftAddressBook
+
+CHECKOUT OPTIONS:
+  DBSphereTagCloud:
+    :commit: 2523dfdaf0bb9b2830d95400b8e8a9c259f62333
+    :git: https://github.com/danielblx/DBSphereTagCloud.git
+  ISScrollViewPageSwift:
+    :commit: 09dd63102d0d12ab376654204c8beba012b3114b
+    :git: https://github.com/Ilhasoft/ISScrollViewPageSwift
+  SRKControls:
+    :commit: a15930e85625b28481fbfacdfb47782884ff5b34
+    :git: https://github.com/Ilhasoft/SRKControls
+  SwiftAddressBook:
+    :commit: ba5ed3048575330c6a6515c2b2c43976a52c0650
+    :git: https://github.com/SocialbitGmbH/SwiftAddressBook
+
+SPEC CHECKSUMS:
+  Alamofire: 2d95912bf4c34f164fdfc335872e8c312acaea4a
+  AlamofireObjectMapper: 435adc82f5b367679bd9e71c4974a54efd0b2521
+  AWSCore: d81e1e534040780deb0f3877aaa207d297e54b4c
+  AWSS3: d39bae2ebbcdc450aef30635c85e556317b92a33
+  Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  DBSphereTagCloud: b7f8b02fa136adc011abb839c66081b0c4beb002
+  FBSDKCoreKit: d7829f5a69901cd7296105328e4c3c3fc7da6518
+  FBSDKLoginKit: 6b92bd65f319d669d2b0730e49db495ef1660566
+  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
+  FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
+  FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
+  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
+  FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
+  FirebaseInstanceID: a4fc702b5a026f7322964376047f1a3f1f7cc6ff
+  FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
+  FLAnimatedImage: 4a0b56255d9b05f18b6dd7ee06871be5d3b89e31
+  Google: 55ccf2acbe6f6ade86f872c1cd29a0c44039c349
+  GoogleAnalytics: f42cc53a87a51fe94334821868d9c8481ff47a7b
+  GoogleAppUtilities: f1730f91f67767b453c289577040dd3f425ffdc7
+  GoogleAuthUtilities: 049ffd3a297cdffd271451b82fd4e75304f15ef3
+  GoogleInterchangeUtilities: def8415a862effc67d549d5b5b0b9c7a2f97d4de
+  GoogleNetworkingUtilities: 3e83269048cfb498dc7ec83ab36813360965c74f
+  GoogleSignIn: 79929b51e6299c69f1197bbd9c7a1367d523ecd8
+  GoogleSymbolUtilities: 82ad9f93d3615244b3f4ce440f5ab2515e8b4f56
+  GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
+  GoogleUtilities: 8ed9134debe11719097881711464752900668f10
+  GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
+  IlhasoftCore: 3919606d5e820986fb90e9354de3e52238e61530
+  ISScrollViewPageSwift: a54a0f1f2d1dbdf27ce31d08124473a7b050ee17
+  JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
+  JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
+  MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
+  NYTPhotoViewer: e80e8767f3780d2df37c6f72cbab15d6c7232911
+  ObjectMapper: 63cfe41bc6f8e7c8f44344c49901b8ae7de14c52
+  Proposer: 422c693b1917a461af30e7139b0d05eefe999e16
+  Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
+  QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
+  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
+  STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
+  SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec
+  TPKeyboardAvoiding: 0d6af20e95e2850f4c621841225b59ec7d8dd852
+  youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
+
+PODFILE CHECKSUM: 33640cec6d3fb488c4d9207cd92296be9452135c
+
+COCOAPODS: 1.3.1
