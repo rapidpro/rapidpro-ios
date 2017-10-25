@@ -11,9 +11,9 @@
 "email" = "Email";
 "error_required_field" = "Required field";
 "login" = "Login";
-"login_facebook" = "Facebook";
+"login_facebook" = "Login with Facebook";
 "login_google" = "Google+";
-"login_twitter" = "Sign up with Twitter";
+"login_twitter" = "Twitter";
 "login_skip" = "Skip Login";
 "login_or" = "Or";
 "login_sign_up" = "Click here to sign up with email!";

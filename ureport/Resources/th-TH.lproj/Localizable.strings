@@ -13,9 +13,9 @@
 "email" = "อีเมล";
 "error_required_field" = "ข้อมูลที่ต้องระบุ";
 "login" = "ลงชื่อเข้าใช้";
-"login_facebook" = "Facebook";
+"login_facebook" = "ลงชื่อเข้าใช้ด้วยเฟซบุ๊ก";
 "login_google" = "Google+";
-"login_twitter" = "ลงชื่อเข้าใช้ด้วยทวิตเตอร์";
+"login_twitter" = "ทวิตเตอร์";
 "login_skip" = "ข้ามการลงชื่อเข้าใช้";
 "login_or" = "หรือ";
 "login_sign_up" = "คลิกที่นี่เพื่อลงทะเบียนด้วยอีเมล!";

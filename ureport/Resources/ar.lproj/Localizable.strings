@@ -12,9 +12,9 @@
 "email" = "البريد الالكتروني";
 "error_required_field" = "حقول مطلوبة";
 "login" = "الدخول";
-"login_facebook" = "فيسبوك";
+"login_facebook" = "التسجيل باستخدام الفيس بوك";
 "login_google" = "غوغل+";
-"login_twitter" = "التسجيل عن طريق تويتر";
+"login_twitter" = "تويتر";
 "login_skip" = "تجاوز الدخول";
 "login_or" = "أو";
 "login_sign_up" = "انقر هنا للتسجيل عن طريق البريد الالكتروني";

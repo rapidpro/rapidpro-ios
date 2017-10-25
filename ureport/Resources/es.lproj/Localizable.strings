@@ -12,9 +12,9 @@
 "email" = "Correo Electrónico";
 "error_required_field" = "Campo requerido";
 "login" = "Registro";
-"login_facebook" = "Facebook";
+"login_facebook" = "Registrarse con Facebook";
 "login_google" = "Google+";
-"login_twitter" = "Registrarse con Twitter";
+"login_twitter" = "Twitter";
 "login_skip" = "Saltar Registro";
 "login_or" = "o";
 "login_sign_up" = "Hay click aquí para registrarte con tu mail";

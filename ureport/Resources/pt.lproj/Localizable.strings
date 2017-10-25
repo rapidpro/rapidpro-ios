@@ -12,9 +12,9 @@
 "email" = "E-mail";
 "error_required_field" = "Campo obrigatório";
 "login" = "Login";
-"login_facebook" = "Facebook";
+"login_facebook" = "Entrar com o Facebook";
 "login_google" = "Google+";
-"login_twitter" = "Entrar com o Twitter";
+"login_twitter" = "Twitter";
 "login_skip" = "Pular Login";
 "login_or" = "Ou";
 "login_sign_up" = "Clique aqui para entrar com seu e-mail!";
