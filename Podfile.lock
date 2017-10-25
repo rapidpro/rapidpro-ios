@@ -97,7 +97,7 @@ PODS:
     - AlamofireObjectMapper
     - MBProgressHUD
     - Proposer
-    - SDWebImage (= 3.8.2)
+    - SDWebImage
     - TPKeyboardAvoiding
   - ISScrollViewPageSwift (1.0.0)
   - JSQMessagesViewController (7.2.0):
@@ -120,9 +120,9 @@ PODS:
   - Proposer (1.1.0)
   - Protobuf (3.4.0)
   - QRCodeReader.swift (7.2.0)
-  - SDWebImage (3.8.2):
-    - SDWebImage/Core (= 3.8.2)
-  - SDWebImage/Core (3.8.2)
+  - SDWebImage (4.1.0):
+    - SDWebImage/Core (= 4.1.0)
+  - SDWebImage/Core (4.1.0)
   - SRKControls (4.0.1):
     - SRKControls/Controls (= 4.0.1)
   - SRKControls/Controls (4.0.1)
@@ -212,7 +212,7 @@ SPEC CHECKSUMS:
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
   GoogleUtilities: 8ed9134debe11719097881711464752900668f10
   GTMSessionFetcher: ebaa1f79a5366922c1735f1566901f50beba23b7
-  IlhasoftCore: 3919606d5e820986fb90e9354de3e52238e61530
+  IlhasoftCore: ad1be983a3c679b7ee1db176052e6fb6cc4fc3d0
   ISScrollViewPageSwift: a54a0f1f2d1dbdf27ce31d08124473a7b050ee17
   JSQMessagesViewController: 73cab48aa92fc2d512f3b6724f3425cc47a19eb5
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
@@ -223,7 +223,7 @@ SPEC CHECKSUMS:
   Proposer: 422c693b1917a461af30e7139b0d05eefe999e16
   Protobuf: 03eef2ee0b674770735cf79d9c4d3659cf6908e8
   QRCodeReader.swift: 2ddf74993243106dd2be5cf9f6e13c7a3e9a2d00
-  SDWebImage: 098e97e6176540799c27e804c96653ee0833d13c
+  SDWebImage: 0e435c14e402a6730315a0fb79f95e68654d55a4
   SRKControls: 0c223f332b8f9855cee46673da6fa5b64a69057a
   STTwitter: 30ee2f79eff78c3d633a1edc869e97db9c9ead59
   SwiftAddressBook: 88c68c6bd0c6a9cb10e5cdc80f91fd87b5e0f4ec

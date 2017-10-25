@@ -58,7 +58,7 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
         
         if media.type == URConstant.Media.PICTURE {
         
-            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.url), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _) in }, completed: { (image, data, error, finished) in
+            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.url), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in }, completed: { (image, data, error, finished) in
                 if let image = image {
                     self.addSubview(URPlayMediaView.buildImageView(image))
                 } else {
@@ -75,7 +75,7 @@ class URPlayMediaView: UIView, NYTPhotosViewControllerDelegate {
             self.addSubview(youtubePlayerView)
 
         }else if media.type == URConstant.Media.VIDEOPHONE {
-            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.thumbnail!), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _) in }, completed: { (image, data, error, finished) in
+            SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string:media.thumbnail!), options: SDWebImageDownloaderOptions.highPriority, progress: { (_, _, _) in }, completed: { (image, data, error, finished) in
                 if let image = image {
                     self.addSubview(URPlayMediaView.buildImageView(image))
                     let playImage = UIImageView(image: UIImage(named: "ic_play_48"))
