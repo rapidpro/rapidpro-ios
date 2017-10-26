@@ -68,6 +68,13 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
+//    @available(iOS 11.0, *)
+//    override func viewSafeAreaInsetsDidChange() {
+//        super.viewSafeAreaInsetsDidChange()
+//
+//        self.tableView.contentInset.top = -self.view.safeAreaInsets.top
+//    }
+    
     //MARK: URWriteStoryTableViewCellDelegate
     
     func writeStoryDidTap(_ cell: URWriteStoryView) {
@@ -118,20 +125,20 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             return 0
         }
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewHeader =  Bundle.main.loadNibNamed("URWriteStoryView", owner: 0, options: nil)?[0] as! URWriteStoryView
-        viewHeader.delegate = self
-        
-        if (filterStoriesToModerate == false){
-            self.tableView.tableHeaderView = viewHeader
-            sizeHeaderToFit()
-        }else{
-            viewHeader.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        }
-        
-        return viewHeader
-    }
+   
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let viewHeader =  Bundle.main.loadNibNamed("URWriteStoryView", owner: 0, options: nil)?[0] as! URWriteStoryView
+//        viewHeader.delegate = self
+//
+//        if (filterStoriesToModerate == false){
+//            self.tableView.tableHeaderView = viewHeader
+//            sizeHeaderToFit()
+//        }else{
+//            viewHeader.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+//        }
+//
+//        return viewHeader
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

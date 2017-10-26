@@ -1,9 +1,18 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_0" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="URStoryContributionViewController" customModule="ureport" customModuleProvider="target">
             <connections>
@@ -27,26 +36,26 @@
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
-            <rect key="frame" x="0.0" y="0.0" width="1024" height="445"/>
+            <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" bounces="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1JX-lw-Ner" customClass="TPKeyboardAvoidingScrollView">
-                    <rect key="frame" x="0.0" y="0.0" width="1024" height="445"/>
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EdV-zF-7Om">
-                            <rect key="frame" x="0.0" y="0.0" width="1024" height="445"/>
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="445"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tMl-65-lLz" userLabel="ViewTop">
-                                    <rect key="frame" x="0.0" y="0.0" width="1024" height="181"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="181"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title asd asd ads asd asd asd ads asd ads " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="ejk-zR-XSN">
-                                            <rect key="frame" x="71" y="82" width="945" height="57"/>
+                                            <rect key="frame" x="71" y="82" width="241" height="57"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="57" id="LBU-SR-F1h"/>
                                                 <constraint firstAttribute="height" constant="53" id="z6s-HM-aso"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                             <variation key="default">
                                                 <mask key="constraints">
@@ -55,12 +64,12 @@
                                             </variation>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="tags" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PUX-ec-XJV">
-                                            <rect key="frame" x="24" y="145" width="992" height="28"/>
+                                            <rect key="frame" x="24" y="145" width="288" height="28"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="28" id="o4e-1X-LL4"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_tag_white" translatesAutoresizingMaskIntoConstraints="NO" id="Dtc-LK-oFT">
@@ -77,7 +86,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="57" height="57"/>
                                                 </imageView>
                                             </subviews>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstItem="IXr-3d-O5q" firstAttribute="leading" secondItem="HLb-s2-6gF" secondAttribute="leading" id="HJJ-Aa-9RX"/>
                                                 <constraint firstAttribute="trailing" secondItem="IXr-3d-O5q" secondAttribute="trailing" id="JC2-iW-sK7"/>
@@ -88,7 +97,7 @@
                                             </constraints>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="ejk-zR-XSN" firstAttribute="top" secondItem="tMl-65-lLz" secondAttribute="top" constant="84" id="55L-ht-D2v"/>
                                         <constraint firstItem="Dtc-LK-oFT" firstAttribute="leading" secondItem="tMl-65-lLz" secondAttribute="leading" constant="6" id="Cnb-Jo-3eA"/>
@@ -114,21 +123,21 @@
                                     </variation>
                                 </view>
                                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aG1-Fb-sEP" customClass="ISScrollViewPage" customModule="ISScrollViewPageSwift">
-                                    <rect key="frame" x="8" y="215" width="1008" height="100"/>
+                                    <rect key="frame" x="8" y="215" width="304" height="100"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="100" id="E5L-Nk-Ao0"/>
                                     </constraints>
                                 </scrollView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cOh-j1-NA7">
-                                    <rect key="frame" x="8" y="190" width="1008" height="17"/>
+                                    <rect key="frame" x="8" y="190" width="304" height="17"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6Jq-BI-Dex">
-                                            <rect key="frame" x="0.0" y="0.0" width="1008" height="17"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="304" height="17"/>
                                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="6Jq-BI-Dex" firstAttribute="top" secondItem="cOh-j1-NA7" secondAttribute="top" id="1aP-8R-JlR"/>
                                         <constraint firstAttribute="bottom" secondItem="6Jq-BI-Dex" secondAttribute="bottom" id="Bx5-B3-hZ1"/>
@@ -151,8 +160,8 @@
                                     </variation>
                                 </view>
                                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XtD-yc-Uzw" customClass="TPKeyboardAvoidingTableView">
-                                    <rect key="frame" x="8" y="364" width="1008" height="14"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <rect key="frame" x="8" y="364" width="304" height="14"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="14" id="IoN-7v-6BC"/>
                                     </constraints>
@@ -170,7 +179,7 @@
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                     <inset key="imageEdgeInsets" minX="-17" minY="0.0" maxX="0.0" maxY="0.0"/>
                                     <state key="normal" title="24 Likes" image="likeBig">
-                                        <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="titleColor" red="0.43529411759999997" green="0.4431372549" blue="0.47450980390000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
                                         <action selector="btLikeTapped:" destination="-1" eventType="touchUpInside" id="moc-Fp-SZP"/>
@@ -183,7 +192,7 @@
                                         <constraint firstAttribute="width" constant="123" id="stn-YI-5QD"/>
                                     </constraints>
                                     <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_person_black" translatesAutoresizingMaskIntoConstraints="NO" id="8Hi-m6-8ft">
@@ -194,7 +203,7 @@
                                     </constraints>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="8Hi-m6-8ft" firstAttribute="leading" secondItem="poC-s0-TMD" secondAttribute="trailing" constant="13" id="2Gs-Yz-hP4"/>
                                 <constraint firstItem="XtD-yc-Uzw" firstAttribute="leading" secondItem="EdV-zF-7Om" secondAttribute="leading" constant="8" id="3zn-tV-TqL"/>
@@ -234,7 +243,7 @@
                     </constraints>
                 </scrollView>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="1JX-lw-Ner" secondAttribute="bottom" id="P31-Q4-dtK"/>
                 <constraint firstAttribute="trailing" secondItem="1JX-lw-Ner" secondAttribute="trailing" id="k1H-AI-Cxi"/>
@@ -242,7 +251,6 @@
                 <constraint firstItem="1JX-lw-Ner" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="wvd-3a-OrW"/>
             </constraints>
             <simulatedNavigationBarMetrics key="simulatedTopBarMetrics" prompted="NO"/>
-            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="533" y="67.5"/>
         </view>
     </objects>
