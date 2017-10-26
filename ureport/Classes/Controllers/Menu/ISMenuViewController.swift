@@ -19,6 +19,8 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var txtSwitchCountryProgram: UITextField!
+    @IBOutlet weak var imgLocationCountryProgram: UIImageView!
+    @IBOutlet weak var viewSeparCountryProgram: UIView!
     @IBOutlet weak var imgProfile: UIImageView!
     @IBOutlet weak var bgImageProfile: UIImageView!
     @IBOutlet weak var btLogin: UIButton!
@@ -233,6 +235,11 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         self.pickerCountryProgram!.showsSelectionIndicator = true
         self.txtSwitchCountryProgram.inputView = self.pickerCountryProgram
         self.txtSwitchCountryProgram.attributedPlaceholder = NSAttributedString(string: "switch_country_program".localized, attributes: [NSForegroundColorAttributeName: URConstant.Color.PRIMARY])
+        #if ONTHEMOVE
+            self.txtSwitchCountryProgram.isHidden = true
+            self.imgLocationCountryProgram.isHidden = true
+            self.viewSeparCountryProgram.isHidden = true
+        #endif
         
         self.btLogin.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
@@ -283,11 +290,13 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             setupUserImageAsDefault()
         }
-        
-        self.txtSwitchCountryProgram.text = (URCountryProgramManager.activeCountryProgram()!.name!)
-        if !countryPrograms.isEmpty {
-            lastCountryProgramIndexSelected = self.countryPrograms.index(where: {$0.code == URCountryProgramManager.activeCountryProgram()?.code})!
-        }
+        #if !ONTHEMOVE
+            self.txtSwitchCountryProgram.text = (URCountryProgramManager.activeCountryProgram()!.name!)
+            if !countryPrograms.isEmpty {
+                lastCountryProgramIndexSelected = self.countryPrograms.index(where: {$0.code == URCountryProgramManager.activeCountryProgram()?.code})!
+            }
+        #endif
+
     }
     
     func setupUserImageAsDefault() {

@@ -1,14 +1,24 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ISMenuViewController" customModule="ureport" customModuleProvider="target">
             <connections>
                 <outlet property="bgImageProfile" destination="yvP-AP-Xxj" id="SOf-Yw-r29"/>
                 <outlet property="btLogin" destination="xTl-xs-ITI" id="4yC-4d-P1o"/>
+                <outlet property="imgLocationCountryProgram" destination="xea-Jp-6ZK" id="5h2-gO-kOI"/>
                 <outlet property="imgProfile" destination="zcx-bM-adt" id="MkW-fb-rpx"/>
                 <outlet property="lbNickName" destination="GOO-66-tEG" id="FcN-Wt-FZn"/>
                 <outlet property="lbPoints" destination="xAb-Ps-a9U" id="VPt-6F-BBy"/>
@@ -18,6 +28,7 @@
                 <outlet property="topView" destination="foF-kR-CZQ" id="EYH-qw-VnJ"/>
                 <outlet property="txtSwitchCountryProgram" destination="ZuV-lb-hm5" id="TKY-Kz-nXc"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="viewSeparCountryProgram" destination="E87-J9-uw0" id="aN3-2r-zd6"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
@@ -31,7 +42,7 @@
                         <constraint firstAttribute="height" constant="30" id="tPa-RG-Mru"/>
                         <constraint firstAttribute="height" constant="30" id="vsb-hC-DNp"/>
                     </constraints>
-                    <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                     <textInputTraits key="textInputTraits"/>
                     <variation key="default">
@@ -73,7 +84,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                 </imageView>
                             </subviews>
-                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstItem="zcx-bM-adt" firstAttribute="top" secondItem="rOj-Kw-ybm" secondAttribute="top" id="Ho9-Jd-SXA"/>
                                 <constraint firstAttribute="trailing" secondItem="zcx-bM-adt" secondAttribute="trailing" id="Rd8-gV-tXy"/>
@@ -89,7 +100,7 @@
                                 <constraint firstAttribute="height" constant="21" id="eMv-5v-4V4"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="16"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="xAb-Ps-a9U">
@@ -98,7 +109,7 @@
                                 <constraint firstAttribute="height" constant="19" id="OIc-v7-Erl"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stories: 0   Polls: 0" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="6" translatesAutoresizingMaskIntoConstraints="NO" id="3tj-Xq-nbV">
@@ -107,26 +118,26 @@
                                 <constraint firstAttribute="height" constant="19" id="YAU-vP-C9a"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="12"/>
-                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="wordWrap" translatesAutoresizingMaskIntoConstraints="NO" id="xTl-xs-ITI">
                             <rect key="frame" x="115" y="67" width="92" height="31"/>
-                            <color key="backgroundColor" red="0.32549019610000002" green="0.59607843140000005" blue="0.78039215689999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <color key="backgroundColor" red="0.32549019610000002" green="0.59607843140000005" blue="0.78039215689999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="92" id="0pX-Rn-FtP"/>
                                 <constraint firstAttribute="height" constant="31" id="d3z-ZY-xhP"/>
                             </constraints>
                             <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="13"/>
                             <state key="normal" title="Login now!">
-                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </state>
                             <connections>
                                 <action selector="btLoginTapped:" destination="-1" eventType="touchUpInside" id="VAu-8D-Knf"/>
                             </connections>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="145" id="3IK-LM-ECY"/>
                         <constraint firstItem="xAb-Ps-a9U" firstAttribute="leading" secondItem="rOj-Kw-ybm" secondAttribute="trailing" constant="15" id="8NU-da-mqz"/>
@@ -152,7 +163,7 @@
                 </view>
                 <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sKs-yi-mz0">
                     <rect key="frame" x="0.0" y="145" width="237" height="365"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <connections>
                         <outlet property="dataSource" destination="-1" id="UW7-QF-4QT"/>
                         <outlet property="delegate" destination="-1" id="JY1-U1-aI8"/>
@@ -173,7 +184,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="sKs-yi-mz0" secondAttribute="trailing" id="39g-JP-Mwj"/>
                 <constraint firstItem="sKs-yi-mz0" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="4YG-lf-XCx"/>
