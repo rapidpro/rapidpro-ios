@@ -9,12 +9,39 @@
 import UIKit
 
 struct URConstant {
-   
+    
     static let keyPath = Bundle.main.path(forResource: URFireBaseManager.Properties, ofType: "plist")
     static let keyDictionary = NSDictionary(contentsOfFile: URConstant.keyPath!)
     
     static let isIpad = UIDevice.current.userInterfaceIdiom == .pad
     
+    #if ONTHEMOVE
+    struct Color {
+        static let PRIMARY = UIColor(rgba: "#8750A0")
+        static let PRIMARY_DARK = UIColor(rgba: "#6d4081")
+        static let DARK_BLUE = UIColor(rgba: "#5398C7")
+        static let TRANSLUCENT_COVER = UIColor(rgba: "#6000")
+        static let WINDOW_BACKGROUND = UIColor(rgba: "#e1e1e1")
+        static let YELLOW = UIColor(rgba: "#ebce2c")
+        static let HIGHLIGHT = UIColor(rgba: "#ec2248")
+        static let BUTTON = UIColor(rgba: "#e8e8e8")
+        static let BUTTON_PRESSED = UIColor(rgba: "#c0c0c0")
+        static let LINE = UIColor(rgba: "#44c9c9c9")
+        static let LINE_STRONG = UIColor(rgba: "#d7d7d7")
+        static let LOGIN_PRIMARY = UIColor(rgba: "#8750A0")
+        static let LOGIN_PRIMARY_DARK = UIColor(rgba: "#6d4081")
+        static let SIGNUP_PRIMARY = UIColor(rgba: "#8750A0")
+        static let SIGNUP_PRIMARY_DARK = UIColor(rgba: "#6d4081")
+        static let CONFIRM_INFO_PRIMARY = UIColor(rgba: "#8750A0")
+        static let CONFIRM_INFO_PRIMARY_DARK = UIColor(rgba: "#6d4081")
+        static let MEDIA_CAMERA = UIColor(rgba: "#16B1F0")
+        static let MEDIA_GALLERY = UIColor(rgba: "#FFBB42")
+        static let MEDIA_VIDEOPHONE = UIColor(rgba: "#B438CE")
+        static let MEDIA_FILE = UIColor(rgba: "#FA741A")
+        static let MEDIA_AUDIO = UIColor(rgba: "#1CD355")
+        static let MEDIA_YOUTUBE = UIColor(rgba: "#F13A41")
+    }
+    #else
     struct Color {
         static let PRIMARY = UIColor(rgba: "#42b6e7")
         static let PRIMARY_DARK = UIColor(rgba: "#3aadda")
@@ -40,7 +67,8 @@ struct URConstant {
         static let MEDIA_AUDIO = UIColor(rgba: "#1CD355")
         static let MEDIA_YOUTUBE = UIColor(rgba: "#F13A41")
     }
-
+    #endif
+    
     struct Gamefication {
         static let StoryPoints = 5
         static let PollPoints = 5
@@ -211,7 +239,7 @@ struct URConstant {
             }
             return ""
         }
-
+        
     }
     
     struct Media {

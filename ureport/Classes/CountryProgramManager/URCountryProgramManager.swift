@@ -11,9 +11,26 @@ import UIKit
 class URCountryProgramManager: NSObject {
     
     static var countryPrograms:[URCountryProgram]!
+    fileprivate static var countryProgram:URCountryProgram?
     
     class func getCountryProgramByCountry(_ country:URCountry) -> URCountryProgram {
-        
+        #if ONTHEMOVE
+            return getOtmProgram()
+        #else
+            return getUReportProgram(country)
+        #endif
+    }
+    
+    //MARK: On The Move
+    class func getOtmProgram() -> URCountryProgram {
+        if countryProgram == nil {
+            countryProgram = URCountryProgram(code: "OTM", themeColor: URConstant.Color.PRIMARY, org:33, name: "On The Move", twitter:nil, facebook:nil, rapidProHostAPI: URConstant.RapidPro.API_URL, ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters")
+        }
+        return countryProgram!
+    }
+
+    //MARK: U-Report
+    class func getUReporProgram(_ country: URCountry) -> URCountryProgram {
         if countryPrograms == nil {
             URCountryProgramManager.getAvailableCountryPrograms()
         }
@@ -27,11 +44,9 @@ class URCountryProgramManager: NSObject {
         }else {
             return filtered[0] as URCountryProgram
         }
-        
     }
     
     class func getAvailableCountryPrograms() -> [URCountryProgram]{
-        
         if countryPrograms == nil {
             countryPrograms = []
             countryPrograms.append(URCountryProgram(code: "GLOBAL", themeColor: URConstant.Color.PRIMARY, org:13, name: "U-Report Global",twitter:"UReportGlobal",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))

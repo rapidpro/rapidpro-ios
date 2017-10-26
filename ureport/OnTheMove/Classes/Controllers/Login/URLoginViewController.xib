@@ -52,36 +52,6 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaM-Oi-FNm">
                     <rect key="frame" x="0.0" y="517" width="375" height="295"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTR-FY-6nF" customClass="ISRoundedButton" customModule="ureport_on_the_move" customModuleProvider="target">
-                            <rect key="frame" x="194" y="160" width="161" height="40"/>
-                            <color key="backgroundColor" red="0.95145983040017423" green="0.37557847577501252" blue="0.29378919262598896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="CTG-5q-qCD"/>
-                                <constraint firstAttribute="width" constant="170" id="FGK-d4-8J9"/>
-                                <constraint firstAttribute="height" constant="40" id="HWC-al-NzQ"/>
-                                <constraint firstAttribute="width" constant="161" id="eMF-MR-l27"/>
-                            </constraints>
-                            <state key="normal" title="Google">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <variation key="default">
-                                <mask key="constraints">
-                                    <exclude reference="CTG-5q-qCD"/>
-                                    <exclude reference="FGK-d4-8J9"/>
-                                </mask>
-                            </variation>
-                            <variation key="widthClass=regular">
-                                <mask key="constraints">
-                                    <include reference="CTG-5q-qCD"/>
-                                    <include reference="FGK-d4-8J9"/>
-                                    <exclude reference="HWC-al-NzQ"/>
-                                </mask>
-                            </variation>
-                            <connections>
-                                <action selector="btGooglePlusTapped:" destination="-1" eventType="touchUpInside" id="rWs-yR-Gbi"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edX-Cm-QZZ">
                             <rect key="frame" x="0.0" y="248" width="380" height="47"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -126,20 +96,60 @@
                                 <action selector="btLoginTapped:" destination="-1" eventType="touchUpInside" id="dJu-eS-Oez"/>
                             </connections>
                         </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKV-wx-Vue" customClass="ISRoundedButton" customModule="ureport_on_the_move" customModuleProvider="target">
-                            <rect key="frame" x="25" y="160" width="162" height="40"/>
-                            <color key="backgroundColor" red="0.10117121040821075" green="0.78574633598327637" blue="0.82483148574829102" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <state key="normal" title="Twitter">
-                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="btTwitterTapped:" destination="-1" eventType="touchUpInside" id="hRA-Iw-spe"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="jKS-Rk-nOc">
+                            <rect key="frame" x="25" y="160" width="332" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TKV-wx-Vue" customClass="ISRoundedButton" customModule="ureport_on_the_move" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="0.0" width="161" height="40"/>
+                                    <color key="backgroundColor" red="0.10117121040821075" green="0.78574633598327637" blue="0.82483148574829102" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="ZbY-eK-n7E"/>
+                                    </constraints>
+                                    <state key="normal" title="Twitter">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="btTwitterTapped:" destination="-1" eventType="touchUpInside" id="hRA-Iw-spe"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jTR-FY-6nF" customClass="ISRoundedButton" customModule="ureport_on_the_move" customModuleProvider="target">
+                                    <rect key="frame" x="171" y="0.0" width="161" height="40"/>
+                                    <color key="backgroundColor" red="0.95145983040017423" green="0.37557847577501252" blue="0.29378919262598896" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="40" id="CTG-5q-qCD"/>
+                                        <constraint firstAttribute="width" constant="170" id="FGK-d4-8J9"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="UtV-ky-TuL"/>
+                                        <constraint firstAttribute="width" constant="161" id="eMF-MR-l27"/>
+                                    </constraints>
+                                    <state key="normal" title="Google">
+                                        <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </state>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="CTG-5q-qCD"/>
+                                            <exclude reference="FGK-d4-8J9"/>
+                                        </mask>
+                                    </variation>
+                                    <variation key="widthClass=regular">
+                                        <mask key="constraints">
+                                            <include reference="CTG-5q-qCD"/>
+                                            <include reference="FGK-d4-8J9"/>
+                                        </mask>
+                                    </variation>
+                                    <connections>
+                                        <action selector="btGooglePlusTapped:" destination="-1" eventType="touchUpInside" id="rWs-yR-Gbi"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                        </stackView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjh-IX-6Au" customClass="ISRoundedButton" customModule="ureport_on_the_move" customModuleProvider="target">
-                            <rect key="frame" x="25" y="77" width="330" height="39"/>
+                            <rect key="frame" x="25" y="77" width="330" height="40"/>
                             <color key="backgroundColor" red="0.31605315807318246" green="0.47882310561574443" blue="0.94144758597883593" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="p3q-rM-sW6"/>
+                            </constraints>
                             <state key="normal" title="Login with Facebook">
                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -149,10 +159,10 @@
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="center" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="upI-Li-PWM">
-                            <rect key="frame" x="25" y="124" width="330" height="26"/>
+                            <rect key="frame" x="25" y="125" width="331" height="26"/>
                             <subviews>
                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="BpG-cd-Gua" userLabel="ViewSeparator2">
-                                    <rect key="frame" x="0.0" y="12.666666666666629" width="146.66666666666666" height="1"/>
+                                    <rect key="frame" x="0.0" y="12.666666666666629" width="147" height="1"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="4" id="POz-yp-K93">
@@ -176,7 +186,7 @@
                                     </variation>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="or" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KZ6-mL-bC2">
-                                    <rect key="frame" x="151.66666666666666" y="0.0" width="27" height="26"/>
+                                    <rect key="frame" x="152" y="0.0" width="27" height="26"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="26" id="ENc-MA-cTV"/>
                                         <constraint firstAttribute="width" constant="27" id="kQU-4f-73X"/>
@@ -199,7 +209,7 @@
                                     </variation>
                                 </label>
                                 <view alpha="0.5" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IVU-bN-FG0" userLabel="ViewSeparator1">
-                                    <rect key="frame" x="183.66666666666663" y="12.666666666666629" width="146.33333333333337" height="1"/>
+                                    <rect key="frame" x="184" y="12.666666666666629" width="147" height="1"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="4" id="kiS-e3-g9i">
@@ -235,8 +245,8 @@
                             <variation key="widthClass=regular" constant="20"/>
                         </constraint>
                         <constraint firstItem="Yjh-IX-6Au" firstAttribute="leading" secondItem="NuB-Oz-6SQ" secondAttribute="leading" id="2hl-ng-01a"/>
-                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="top" secondItem="TKV-wx-Vue" secondAttribute="bottom" constant="48" id="2lv-WX-nfb"/>
-                        <constraint firstItem="jTR-FY-6nF" firstAttribute="leading" secondItem="TKV-wx-Vue" secondAttribute="trailing" constant="7" id="6kj-D6-bl8"/>
+                        <constraint firstItem="jKS-Rk-nOc" firstAttribute="leading" secondItem="upI-Li-PWM" secondAttribute="leading" id="3hh-iD-B8f"/>
+                        <constraint firstAttribute="trailing" secondItem="jKS-Rk-nOc" secondAttribute="trailing" constant="18" id="5t3-Ch-Z3B"/>
                         <constraint firstAttribute="bottom" secondItem="edX-Cm-QZZ" secondAttribute="bottom" id="6yT-dW-IHS"/>
                         <constraint firstAttribute="trailing" secondItem="NuB-Oz-6SQ" secondAttribute="trailing" constant="20" id="7go-oR-k4g">
                             <variation key="widthClass=regular" constant="224"/>
@@ -244,25 +254,16 @@
                         <constraint firstAttribute="height" constant="295" id="9M8-zO-AUL"/>
                         <constraint firstItem="NuB-Oz-6SQ" firstAttribute="centerX" secondItem="RaM-Oi-FNm" secondAttribute="centerX" id="Cw9-zw-wjB"/>
                         <constraint firstAttribute="bottom" secondItem="edX-Cm-QZZ" secondAttribute="bottom" id="DcH-tY-aZV"/>
+                        <constraint firstItem="jKS-Rk-nOc" firstAttribute="top" secondItem="upI-Li-PWM" secondAttribute="bottom" constant="9" id="DfW-fm-7E6"/>
                         <constraint firstAttribute="height" constant="200" id="F7q-in-alV"/>
-                        <constraint firstItem="TKV-wx-Vue" firstAttribute="baseline" secondItem="jTR-FY-6nF" secondAttribute="baseline" id="GcV-Bk-LVC"/>
-                        <constraint firstAttribute="trailing" secondItem="jTR-FY-6nF" secondAttribute="trailing" constant="20" id="JCC-ST-4jm">
-                            <variation key="widthClass=regular" constant="224"/>
-                        </constraint>
-                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="top" secondItem="jTR-FY-6nF" secondAttribute="bottom" constant="48" id="OOu-dB-H11"/>
-                        <constraint firstItem="TKV-wx-Vue" firstAttribute="leading" secondItem="RaM-Oi-FNm" secondAttribute="leading" constant="25" id="Ozx-Tj-J9e"/>
-                        <constraint firstAttribute="trailing" secondItem="upI-Li-PWM" secondAttribute="trailing" constant="20" id="QlE-Ec-aZg"/>
+                        <constraint firstItem="jKS-Rk-nOc" firstAttribute="leading" secondItem="Yjh-IX-6Au" secondAttribute="leading" id="PTW-sV-2p3"/>
+                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="top" secondItem="jKS-Rk-nOc" secondAttribute="bottom" constant="48" id="SBt-YY-lGI"/>
                         <constraint firstItem="NuB-Oz-6SQ" firstAttribute="top" secondItem="RaM-Oi-FNm" secondAttribute="top" constant="20" id="T7A-eB-OzT"/>
-                        <constraint firstAttribute="trailing" secondItem="edX-Cm-QZZ" secondAttribute="trailing" id="ZE1-rb-rj8"/>
-                        <constraint firstItem="TKV-wx-Vue" firstAttribute="top" secondItem="upI-Li-PWM" secondAttribute="bottom" constant="10" id="ctK-w3-WOy"/>
                         <constraint firstItem="Yjh-IX-6Au" firstAttribute="top" secondItem="NuB-Oz-6SQ" secondAttribute="bottom" constant="8" symbolic="YES" id="hzz-hg-cU4"/>
-                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="leading" secondItem="RaM-Oi-FNm" secondAttribute="leading" id="pdk-vO-DRe"/>
-                        <constraint firstItem="jTR-FY-6nF" firstAttribute="centerX" secondItem="RaM-Oi-FNm" secondAttribute="centerX" id="rC5-dd-uDb">
-                            <variation key="widthClass=regular" constant="91"/>
-                        </constraint>
-                        <constraint firstItem="upI-Li-PWM" firstAttribute="leading" secondItem="RaM-Oi-FNm" secondAttribute="leading" constant="25" id="rYC-hd-4zA"/>
+                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="centerX" secondItem="Yjh-IX-6Au" secondAttribute="centerX" id="jfe-lq-d7C"/>
+                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="centerX" secondItem="upI-Li-PWM" secondAttribute="centerX" id="muP-an-iWf"/>
+                        <constraint firstItem="edX-Cm-QZZ" firstAttribute="leading" secondItem="RaM-Oi-FNm" secondAttribute="leading" id="oaq-Ry-HNR"/>
                         <constraint firstItem="Yjh-IX-6Au" firstAttribute="trailing" secondItem="NuB-Oz-6SQ" secondAttribute="trailing" id="rmk-x9-PQW"/>
-                        <constraint firstItem="upI-Li-PWM" firstAttribute="centerX" secondItem="edX-Cm-QZZ" secondAttribute="centerX" id="tPH-PM-7V8"/>
                         <constraint firstItem="NuB-Oz-6SQ" firstAttribute="leading" secondItem="RaM-Oi-FNm" secondAttribute="leading" constant="25" id="tf8-R8-LOn">
                             <variation key="widthClass=regular" constant="224"/>
                         </constraint>
@@ -276,7 +277,6 @@
                             <exclude reference="Cw9-zw-wjB"/>
                             <exclude reference="T7A-eB-OzT"/>
                             <exclude reference="6yT-dW-IHS"/>
-                            <exclude reference="rC5-dd-uDb"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=regular">
@@ -287,9 +287,6 @@
                             <include reference="T7A-eB-OzT"/>
                             <exclude reference="tf8-R8-LOn"/>
                             <include reference="6yT-dW-IHS"/>
-                            <exclude reference="OOu-dB-H11"/>
-                            <exclude reference="JCC-ST-4jm"/>
-                            <include reference="rC5-dd-uDb"/>
                         </mask>
                     </variation>
                 </view>
@@ -356,6 +353,6 @@
         </view>
     </objects>
     <resources>
-        <image name="img_log_otm" width="560" height="238"/>
+        <image name="img_log_otm" width="170" height="72"/>
     </resources>
 </document>

@@ -13,7 +13,7 @@ import UserNotifications
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GCMReceiverDelegate, UNUserNotificationCenterDelegate  {
-
+    
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
@@ -49,42 +49,34 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         createDirectoryToImageUploads()
         
         URReviewModeManager.checkIfIsInReviewMode { (reviewMode) -> Void in
-            
             let settings = URSettings.getSettings()
             settings.reviewMode = reviewMode as NSNumber
-            
             URSettings.saveSettingsLocaly(settings)
         }
-        
         checkMainViewControllerToShow(launchOptions)
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     
     func createDirectoryToImageUploads() {
         do {
-                        
             try FileManager.default.createDirectory(atPath: URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("upload").path, withIntermediateDirectories:true, attributes: nil)
         } catch let error1 as NSError {
-                print("Creating 'upload' directory failed. Error: \(error1)")
+            print("Creating 'upload' directory failed. Error: \(error1)")
         }
     }
     
     func setupAWS() {
 //        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: AWSRegionType.USEast1, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
-        
 //        let credentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
-        
         let configuration = AWSServiceConfiguration(region: URFireBaseManager.region, credentialsProvider: URFireBaseManager.credentialsProvider)
-        
         AWSServiceManager.default().defaultServiceConfiguration = configuration
-        
     }
     
     func setupGCM(_ application: UIApplication) {
         var configureError:NSError?
         GGLContext.sharedInstance().configureWithError(&configureError)
         assert(configureError == nil, "Error configuring Google services: \(configureError)")
-        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID        
+        gcmSenderID = GGLContext.sharedInstance().configuration.gcmSenderID
         
         let instanceIDConfig = GGLInstanceIDConfig.default()
         instanceIDConfig?.delegate = self
@@ -96,7 +88,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
     
     func requestPermissionForPushNotification(_ application:UIApplication) {
-        
         if #available(iOS 10.0, *) {
             let center  = UNUserNotificationCenter.current()
             center.delegate = self
@@ -108,10 +99,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                     print("success: \(success)")
                     application.registerForRemoteNotifications()
                 }
-                
             })
-        }else {
-        
+        } else {
             let types:UIUserNotificationType = ([.alert, .badge, .sound])
             let settings:UIUserNotificationSettings = UIUserNotificationSettings(types: types, categories: nil)
             application.registerUserNotificationSettings(settings)
@@ -139,24 +128,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         }
         return nil
     }
-
+    
     func checkMainViewControllerToShow(_ launchOptions: [AnyHashable: Any]?) {
-        
         if UserDefaults.standard.object(forKey: "FirstRun") == nil {
             UserDefaults.standard.set("firstrun", forKey: "FirstRun")
             UserDefaults.standard.synchronize()
-            
             URNavigationManager.setupNavigationControllerWithTutorialViewController()
-        }else {
+        } else {
             if URUser.activeUser() != nil {
                 if let launchOptions = launchOptions {
                     if let userInfo = launchOptions[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable: Any]{
                         openNotification(userInfo)
                     }
-                }else {
+                } else {
                     URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                 }
-            }else {
+            } else {
                 URNavigationManager.setupNavigationControllerWithLoginViewController()
             }
         }
@@ -171,27 +158,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
     
     //MARK: GCMReceiverDelegate
-    
-    func didSendDataMessage(withID messageID: String!) {
-
-    }
-    
-    func didDeleteMessagesOnServer() {
-
-    }
+    func didSendDataMessage(withID messageID: String!) {}
+    func didDeleteMessagesOnServer() {}
     
     //MARK: GGLInstanceIDDelegate
-    
     func onTokenRefresh() {
         print("The GCM registration token needs to be changed.")
     }
     
     //MARK: Notification Methods
-    
     func openNotification(_ userInfo:[AnyHashable:Any]) {
-        
         var notificationType:String? = nil
-        
         if let type = userInfo["type"] as? String {
             notificationType = type
         }else if let type = userInfo["gcm.notification.type"] as? String {
@@ -201,70 +178,50 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         if let notificationType = notificationType {
             switch notificationType {
             case URConstant.NotificationType.CHAT:
-                
                 if let chatRoomKey = getChatRoomKey(userInfo) {
                     if UIApplication.shared.applicationState != UIApplicationState.active {
                         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
                     }else{
-                        
                         NotificationCenter.default.post(name: Notification.Name(rawValue: "newChatReceived"), object: userInfo)
-                        
-                        if let visibleViewController = URNavigationManager.navigation.visibleViewController {
-                            if !(visibleViewController is URMessagesViewController) {
-                                //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                            }
-                        }
                     }
                 }
-                
                 break
             case URConstant.NotificationType.RAPIDPRO:
-                
                 if URRapidProManager.sendingAnswers {
                     break
                 }
-                
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(viewControllerToShow: URClosedPollTableViewController()))
                 break
             default:
                 break
             }
         }
-        
     }
     
     //MARK: Application Methods
-    
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         //Enter on touch notification
         let userInfo = response.notification.request.content.userInfo
-        
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
-        
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
     }
-    
     
     @available(iOS 10.0, *)
     func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
         //Enter on app foreground
         let userInfo = notification.request.content.userInfo
-        
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
         
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
-        
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        
         URIPCheckManager.getCountryCodeByIP { (countryCode) in}
-        
         GCMService.sharedInstance().connect(handler: {
             (error) -> Void in
             if error != nil {
@@ -284,19 +241,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any], fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
-        
         if let _ = URUser.activeUser() {
             openNotification(userInfo)
         }
-        
         GCMService.sharedInstance().appDidReceiveMessage(userInfo)
         completionHandler(.newData)
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
         var debugMode = false
-        
         #if DEBUG
             debugMode = true
         #else
@@ -304,7 +257,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
         #endif
         
         registrationOptions = [kGGLInstanceIDRegisterAPNSOption:deviceToken as AnyObject, kGGLInstanceIDAPNSServerTypeSandboxOption:debugMode as AnyObject]
-        
         GGLInstanceID.sharedInstance().token(withAuthorizedEntity: gcmSenderID, scope: kGGLInstanceIDScopeGCM, options: registrationOptions) { (registrationToken, error) in
             if (registrationToken != nil) {
                 if let user = URUser.activeUser() {
@@ -317,18 +269,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate, GGLInstanceIDDelegate, GC
                 print("Registration to GCM failed with error: \(error?.localizedDescription)")
             }
         }
-        
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
         if (url.scheme?.hasPrefix("fb"))! {
-            
             return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
         }
         else {
             return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
         }
     }
-
 }
 
