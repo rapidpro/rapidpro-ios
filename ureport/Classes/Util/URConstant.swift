@@ -19,7 +19,7 @@ struct URConstant {
     struct Color {
         static let PRIMARY = UIColor(rgba: "#8750A0")
         static let PRIMARY_DARK = UIColor(rgba: "#6d4081")
-        static let DARK_BLUE = UIColor(rgba: "#5398C7")
+        static let DARK_BLUE = UIColor(rgba: "#5a366b")
         static let TRANSLUCENT_COVER = UIColor(rgba: "#6000")
         static let WINDOW_BACKGROUND = UIColor(rgba: "#e1e1e1")
         static let YELLOW = UIColor(rgba: "#ebce2c")

@@ -18,6 +18,7 @@ enum TabType {
 
 class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserManagerDelegate, ISImageViewPickerDelegate {
     
+    @IBOutlet weak var containerView: UIView!
     @IBOutlet weak var roundedView: ISRoundedView!
     @IBOutlet weak var imageProfile: ISImageViewPicker!
     @IBOutlet weak var lbProfileDetails: UILabel!
@@ -202,6 +203,10 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     }
     
     func setupUI() {
+        
+        #if ONTHEMOVE
+                self.containerView.backgroundColor = URConstant.Color.PRIMARY
+        #endif
         self.btEdit.layer.cornerRadius = 4
         self.btLogout.layer.cornerRadius = 4
         self.roundedView.layer.borderWidth = 2
