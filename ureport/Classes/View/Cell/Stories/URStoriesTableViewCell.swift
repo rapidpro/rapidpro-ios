@@ -145,7 +145,7 @@ class URStoriesTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCellWith(_ story:URStory,moderateUserMode:Bool){
+    func setupCellWith(_ story:URStory, moderateUserMode:Bool){
         self.story = story
         
         if story.cover != nil && story.cover?.url != nil {

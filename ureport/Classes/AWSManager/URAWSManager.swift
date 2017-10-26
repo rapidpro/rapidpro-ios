@@ -59,7 +59,7 @@ class URAWSManager {
             uploadRequest.key = fileName
             uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
             
-            transferManager.upload(uploadRequest).continueWith{ (task:AWSTask?) -> Any? in
+            transferManager.upload(uploadRequest).continueWith(executor: AWSExecutor.mainThread()){ (task:AWSTask?) -> Any? in
                 
                 if let error = task?.error {
                     print("Error on send file to AWS \(error.localizedDescription)")
@@ -93,7 +93,7 @@ class URAWSManager {
             uploadRequest.key = fileName
             uploadRequest.bucket = URConstant.AWS.S3_BUCKET_NAME(uploadPath)
             
-         transferManager.upload(uploadRequest).continueWith(block: {
+            transferManager.upload(uploadRequest).continueWith(executor: AWSExecutor.mainThread()) {
                 (task:AWSTask?) -> Any? in
                 
                 if let error = task?.error {
@@ -109,7 +109,7 @@ class URAWSManager {
                 }
                 
                 return nil
-            })
+            }
         }
     }
     

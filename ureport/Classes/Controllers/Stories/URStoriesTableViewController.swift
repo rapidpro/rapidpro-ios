@@ -75,7 +75,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
-            }else {
+            } else {
                 let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: {})
