@@ -30,7 +30,7 @@ class URCountryProgramManager: NSObject {
     }
 
     //MARK: U-Report
-    class func getUReporProgram(_ country: URCountry) -> URCountryProgram {
+    class func getUReportProgram(_ country: URCountry) -> URCountryProgram {
         if countryPrograms == nil {
             URCountryProgramManager.getAvailableCountryPrograms()
         }

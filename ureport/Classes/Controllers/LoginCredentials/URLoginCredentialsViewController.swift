@@ -101,6 +101,9 @@ class URLoginCredentialsViewController: UIViewController {
     func setupUI() {
         self.btLogin.setTitle("login".localized, for: UIControlState())
         self.btForgotPassword.setTitle("login_forgot_password".localized, for: UIControlState())
+        #if ONTHEMOVE
+            self.btLogin.backgroundColor = URConstant.Color.PRIMARY
+        #endif
         
         self.txtLogin.placeholder = "login_email".localized
         self.txtPassword.placeholder = "login_password".localized
