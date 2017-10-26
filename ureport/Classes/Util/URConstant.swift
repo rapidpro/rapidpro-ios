@@ -156,7 +156,7 @@ struct URConstant {
             if let dictionary = keyDictionary {
                 if dictionary["COGNITO_IDENTITY_POLL_ID"] != nil {
                     return dictionary["COGNITO_IDENTITY_POLL_ID"] as! String
-                }else{
+                } else {
                     print("COGNITO_IDENTITY_POLL_ID doesn't exists in key.plist")
                 }
             }
@@ -187,7 +187,7 @@ struct URConstant {
             return ""
         }
         
-        static func S3_BUCKET_NAME(_ path:URUploadPath) -> String {
+        static func S3_BUCKET_NAME(_ path: URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["S3_BUCKET_NAME_\(path.rawValue)"] != nil {

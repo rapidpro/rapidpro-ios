@@ -1,4 +1,4 @@
-//
+ //
 //  URFireBaseManager.swift
 //  ureport
 //
@@ -21,12 +21,12 @@ class URFireBaseManager {
 
 #if DEBUG
     static let Properties = "Key-debug"
-    static let region = AWSRegionType.usEast1
-    static let credentialsProvider:AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
+    static let region = AWSRegionType.USEast1
+    static let credentialsProvider: AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
 #else
     static let Properties = "Key"
     static let region = AWSRegionType.euWest1
-    static let credentialsProvider:AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+    static let credentialsProvider: AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
 #endif
 
     static var databaseApp: FirebaseApp {
@@ -139,26 +139,33 @@ class URFireBaseManager {
         }
     }
     
-    static func authUserWithTwitter(userId:String,authToken:String,authTokenSecret:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+    static func authUserWithTwitter(userId: String, authToken: String, authTokenSecret: String, completion: @escaping (_ user:URUser?) -> Void) -> Void {
         print(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId))
         
         Alamofire.request(String(format: URConstant.Auth.AUTH_TWITTER(), authToken, authTokenSecret, userId)).responseJSON { (response:DataResponse<Any>) in
-            if let response = response.result.value as? [String: Any] {
-                if let uid = response["uid"] as? String {
-                    URUserManager.getByKey(uid, completion: { (user, success) in
-                        if let user = user, user.key != nil {
-                            user.key = uid
-                            completion(user)
-                        }else {
-                            let user = URUserLoginManager.getTwitterUserDataWithDictionary(response["twitter"] as! NSDictionary)
-                            user.socialUid = uid
-                            completion(user)
-                        }
-                    })
-                    
+            
+            switch response.result {
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                
+            case .success(let value):
+                if let value = value as? [String: Any] {
+                    if let uid = value["uid"] as? String {
+                        URUserManager.getByKey(uid, completion: { (user, success) in
+                            if let user = user, user.key != nil {
+                                user.key = uid
+                                completion(user)
+                            } else {
+                                let user = URUserLoginManager.getTwitterUserDataWithDictionary(value["twitter"] as! NSDictionary)
+                                user.socialUid = uid
+                                completion(user)
+                            }
+                        })
+                    } else {
+                        completion(nil)
+                    }
                 }
-            }else{
-                print(response)
             }
         }
     }

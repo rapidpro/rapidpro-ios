@@ -12,6 +12,8 @@ import FBSDKLoginKit
 import FBSDKCoreKit
 import Accounts
 import Social
+import TwitterKit
+import TwitterCore
 
 protocol URUserLoginManagerDelegate {
     func userHasLoggedInGoogle(_ user:URUser)
@@ -59,28 +61,22 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
 
-    class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {
-        let accountStore = ACAccountStore()
-        let accountType  = accountStore.accountType(withAccountTypeIdentifier: ACAccountTypeIdentifierTwitter)
-
-        accountStore.requestAccessToAccounts(with: accountType, options: nil, completion: {success, error in
-            if let twitterAccount = accountStore.accounts(with: accountType).first as? ACAccount {
-                var properties = twitterAccount.dictionaryWithValues(forKeys: ["properties"])
-                let details = (properties["properties"] as! NSDictionary)
-                print("user_id  =  \(details["user_id"] as! String)")
-                URTwitterAuthHelper.getAccessTokenKeyAndTokenSecret(twitterAccount, completion: { (tokenKey, tokenSecret) in
-                    guard let _ = tokenKey else {
-                        completion(nil)
-                        return
-                    }
-                    URFireBaseManager.authUserWithTwitter(userId:details["user_id"] as! String, authToken:tokenKey!, authTokenSecret: tokenSecret!, completion: { (user) in
+    class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {    
+        Twitter.sharedInstance().logIn { (session, error) in
+            if let error = error {
+                print(error.localizedDescription)
+                completion(nil)
+            } else {
+                if let userID = session?.userID, let authToken = session?.authToken, let authTokenSecret = session?.authTokenSecret {
+                    
+                    URFireBaseManager.authUserWithTwitter(userId: userID, authToken: authToken, authTokenSecret: authTokenSecret, completion: {
+                        (user) in
+                        
                         completion(user)
                     })
-                })
-            } else {
-                completion(nil)
+                }
             }
-        })
+        }
     }
 
     //MARK: GoogleSigninDelegate
