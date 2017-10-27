@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import MBProgressHUD
+import IlhasoftCore
 
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
@@ -103,6 +104,10 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
                 self.modalProfileViewController.view.backgroundColor  = UIColor.black.withAlphaComponent(0.5)
             }) 
         }
+    }
+    
+    func openAlert(with message: String) {
+        ISAlertMessages.displaySimpleMessage(message, fromController: self)
     }
     
     //MARK: MenuDelegateMethods

@@ -115,7 +115,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                 default:
                     break
                 }
-            }else if let user = user {
+            } else if let user = user {
                 URLoginViewController.updateUserDataInRapidPro(user)
                 URUserLoginManager.setUserAndCountryProgram(user)
                 completion(nil,true)
@@ -138,14 +138,13 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
             if isMasterModerator == true {
                 user.masterModerator = true
                 URUser.setActiveUser(user)
-            }else {
+            } else {
                 URUserManager.checkIfUserIsCountryProgramModerator(user.key, completion: { (isModerator) -> Void in
                     if isModerator == true {
                         user.moderator = isModerator as NSNumber!
                     }
                     URUser.setActiveUser(user)
-                })
-                
+                })                
             }
         }
     }

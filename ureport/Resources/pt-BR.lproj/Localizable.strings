@@ -42,6 +42,8 @@
 "stories_list_item_author" = "por %d";
 "stories_list_item_contributions" = "%d contribuições";
 "no_contributions" = "Sem contribuições";
+"disapprove_story" = "Rejeitar História";
+"denounce_story" = "Denunciar História";
 "story_item_read_full_story" = "Leia a história completa";
 "label_new_story" = "Nova história";
 "create_story_insert_cover" = "Insira uma imagem de capa";

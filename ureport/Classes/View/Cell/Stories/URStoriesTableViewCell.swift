@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol URStoriesTableViewCellDelegate {
     func openProfile(_ user:URUser)
+    func openAlert(with message: String)
     @objc optional func removeCell(_ cell:URStoriesTableViewCell)
 }
 
@@ -82,49 +83,53 @@ class URStoriesTableViewCell: UITableViewCell {
     
     @IBAction func btReportContentTapped(_ sender: AnyObject) {
         
-        let activeUserIsModerator: Bool = (URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true) || (URUser.activeUser()!.moderator != nil && URUser.activeUser()!.moderator == true)
-        
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
-        
-        if activeUserIsModerator {
-            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
-                _ in
-            }
-            
-            let disapproveAction: UIAlertAction = UIAlertAction(title: "Disapprove Story", style: .destructive) {
-                    _ in
+        if let key = URUser.activeUser()?.key {
+            URUserManager.checkIfUserIsMasterModerator(key) { (success) in
                 
-//                URStoryManager.setStoryAsDisapproved(self.story, completion: { _ in })
+                let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
+                
+                let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
+                    _ in
+                }
+                
+                if success {
+                    let disapproveAction: UIAlertAction = UIAlertAction(title: "disapprove_story".localized, style: .destructive) {
+                        _ in
+                        URStoryManager.setStoryAsDisapproved(self.story, completion: {
+                            finished in
+                            if finished {
+                                self.delegate?.removeCell!(self)
+                                self.delegate?.openAlert(with: "message_success_remove".localized)
+                            }
+                        })
+                    }
+                    
+                    reportContentAlertController.addAction(disapproveAction)
+                } else {
+                    let denounceAction: UIAlertAction = UIAlertAction(title: "denounce_story".localized, style: .default) {
+                        _ in
+                        URStoryManager.setStoryAsDenounced(self.story, completion: {
+                            finished in
+                            if finished {
+                                self.delegate?.openAlert(with: "points_earning_title".localized)
+                            }
+                        })
+                    }
+                    
+                    reportContentAlertController.addAction(denounceAction)
+                }
+                
+                reportContentAlertController.addAction(cancelAction)
+                
+                if URConstant.isIpad {
+                    reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.popover
+                    reportContentAlertController.popoverPresentationController!.sourceView = self.btReportContent
+                    reportContentAlertController.popoverPresentationController!.sourceRect = self.btReportContent.bounds
+                }
+                
+                URNavigationManager.navigation.present(reportContentAlertController, animated: true, completion: nil)
             }
-            
-            reportContentAlertController.addAction(disapproveAction)
-            reportContentAlertController.addAction(cancelAction)
-        } else {
-            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
-                _ in
-            }
-            
-            let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .default) {
-                _ in
-            }
-            
-            let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .default) {
-                _ in
-            }
-            
-            reportContentAlertController.addAction(spamAction)
-            reportContentAlertController.addAction(inappropriateContentAction)
-            reportContentAlertController.addAction(cancelAction)
         }
-        
-        if URConstant.isIpad {
-            reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.popover
-            reportContentAlertController.popoverPresentationController!.sourceView = self.btReportContent
-            reportContentAlertController.popoverPresentationController!.sourceRect = self.btReportContent.bounds
-        }
-        
-        URNavigationManager.navigation.present(reportContentAlertController, animated: true, completion: nil)
-        
     }
     
     @IBAction func btContributeTapped(_ sender: AnyObject) {

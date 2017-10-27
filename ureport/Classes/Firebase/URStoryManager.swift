@@ -36,6 +36,10 @@ class URStoryManager {
         return "story_like"
     }
     
+    class func pathStoryDenounced() -> String {
+        return "story_denounced"
+    }
+    
     func getStories(_ storiesToModerate:Bool, initQueryFromItem:Int) {
                 
         URFireBaseManager.sharedInstance()
@@ -199,8 +203,23 @@ class URStoryManager {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())
             .child(URCountryProgramManager.activeCountryProgram()!.code)
-            .child(self.pathStoryModerate())
+            .child(self.path())
             .child(story.key!)
             .removeValue()
+    }
+    
+    class func setStoryAsDenounced(_ story: URStory, completion: @escaping (_ finished: Bool) -> Void) {
+        URFireBaseManager.sharedInstance()
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathStoryDenounced())
+            .child(story.key!)
+            .setValue(story.toDictionary()) { (error, _) -> Void in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+                
+                completion(true)
+        }
     }
 }

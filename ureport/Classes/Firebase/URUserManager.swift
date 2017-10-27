@@ -157,11 +157,11 @@ class URUserManager {
             .child(URUserManager.pathUserModerator())
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                if snapshot.value is NSNull {
                     completion(false)
-                    return
+                } else {
+                    completion(true)
                 }
-                completion(true)
             })
     }
 
@@ -172,11 +172,11 @@ class URUserManager {
             .child(URUserManager.pathUserModerator())
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                if snapshot.value is NSNull {
                     completion(false)
-                    return
+                } else {
+                    completion(true)
                 }
-                completion(true)
             })
     }
 

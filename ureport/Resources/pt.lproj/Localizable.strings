@@ -28,6 +28,8 @@
 "error_minimum_size" = "Insira um valor maior que %d caracteres";
 "error_valid_email" = "Insira um e-mail válido";
 "label_home" = "Principal";
+"disapprove_story" = "Rejeitar História";
+“denounce_story” = “Denunciar História”;
 "load_message_wait" = "Aguarde...";
 "main_stories" = "Histórias";
 "main_polls" = "Enquetes";

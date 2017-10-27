@@ -55,6 +55,8 @@
 "create_story_title_cover_image" = "เลือกแหล่งที่มาของภาพปก:";
 "action_title_publish" = "เผยแพร่";
 "action_label_search" = "ค้นหา";
+"disapprove_story" = "ปฏิเสธประวัติ";
+“denounce_story” = “ประวัติรายงาน”;
 "create_story_add_marker_title" = "เพิ่มป้ายกำกับ";
 "label_story_view" = "มุมมองเรื่องราว";
 "story_view_contribute" = "มีส่วนร่วมกับเรื่องราวนี้";
