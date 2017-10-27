@@ -267,16 +267,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         }
     }
     
-//    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
-//        if (url.scheme?.hasPrefix("fb"))! {
-//            return FBSDKApplicationDelegate.sharedInstance().application(application, open: url, sourceApplication: sourceApplication, annotation: annotation)
-//        } else {
-//            return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: annotation)
-//        }
-//    }
-    
     func application(_ app: UIApplication, open url: URL, options: [UIApplicationOpenURLOptionsKey : Any] = [:]) -> Bool {
-        return Twitter.sharedInstance().application(app, open: url, options: options)
+        
+        if (url.scheme?.hasPrefix("fb"))! {
+            let sourceApplication: String? = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+            return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: sourceApplication, annotation: nil)
+        } else if (url.scheme?.hasPrefix("twitterkit"))! {
+            return Twitter.sharedInstance().application(app, open: url, options: options)
+        } else {
+            let sourceApplication: String? = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
+            return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: nil)
+        }
     }
 }
 

@@ -34,6 +34,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
     @IBOutlet weak var btReportContent: UIButton!
+    
 
     @IBOutlet weak var lbContentTop: NSLayoutConstraint!
     @IBOutlet weak var contentViewBottom: NSLayoutConstraint!
@@ -53,8 +54,6 @@ class URStoriesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.btReportContent.isHidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         btDisapprove.layer.cornerRadius = 5
@@ -83,21 +82,40 @@ class URStoriesTableViewCell: UITableViewCell {
     
     @IBAction func btReportContentTapped(_ sender: AnyObject) {
         
+        let activeUserIsModerator: Bool = (URUser.activeUser()!.masterModerator != nil && URUser.activeUser()!.masterModerator == true) || (URUser.activeUser()!.moderator != nil && URUser.activeUser()!.moderator == true)
+        
         let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
         
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) { action -> Void in
+        if activeUserIsModerator {
+            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
+                _ in
+            }
             
+            let disapproveAction: UIAlertAction = UIAlertAction(title: "Disapprove Story", style: .destructive) {
+                    _ in
+                
+//                URStoryManager.setStoryAsDisapproved(self.story, completion: { _ in })
+            }
+            
+            reportContentAlertController.addAction(disapproveAction)
+            reportContentAlertController.addAction(cancelAction)
+        } else {
+            let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
+                _ in
+            }
+            
+            let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .default) {
+                _ in
+            }
+            
+            let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .default) {
+                _ in
+            }
+            
+            reportContentAlertController.addAction(spamAction)
+            reportContentAlertController.addAction(inappropriateContentAction)
+            reportContentAlertController.addAction(cancelAction)
         }
-        
-        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .default) { action -> Void in
-        }
-
-        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .default) { action -> Void in
-        }
-        
-        reportContentAlertController.addAction(spamAction)
-        reportContentAlertController.addAction(inappropriateContentAction)
-        reportContentAlertController.addAction(cancelAction)
         
         if URConstant.isIpad {
             reportContentAlertController.modalPresentationStyle = UIModalPresentationStyle.popover
@@ -193,10 +211,10 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.lbAuthorName.text = "\(user!.nickname!)"
                 
                 if user!.picture != nil {
-                    self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
+                    self.imgUser.contentMode = .scaleAspectFill
                     self.imgUser.sd_setImage(with: URL(string: user!.picture!))
                 }else{
-                    self.imgUser.contentMode = UIViewContentMode.center
+                    self.imgUser.contentMode = .center
                     self.imgUser.image = UIImage(named: "ic_person")
                     
                     self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)

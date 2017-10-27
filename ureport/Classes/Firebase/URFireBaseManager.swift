@@ -25,7 +25,7 @@ class URFireBaseManager {
     static let credentialsProvider: AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
 #else
     static let Properties = "Key"
-    static let region = AWSRegionType.euWest1
+    static let region = AWSRegionType.EUWest1
     static let credentialsProvider: AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
 #endif
 
