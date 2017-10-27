@@ -24,7 +24,7 @@ class URCountryProgramManager: NSObject {
     //MARK: On The Move
     class func getOtmProgram() -> URCountryProgram {
         if countryProgram == nil {
-            countryProgram = URCountryProgram(code: "OTM", themeColor: URConstant.Color.PRIMARY, org:33, name: "On The Move", twitter:nil, facebook:nil, rapidProHostAPI: URConstant.RapidPro.API_URL, ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters")
+            countryProgram = URCountryProgram(code: "OTM", themeColor: URConstant.Color.PRIMARY, org:33, name: "On The Move", twitter:nil, facebook:nil, rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA, ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters")
         }
         return countryProgram!
     }
@@ -50,7 +50,7 @@ class URCountryProgramManager: NSObject {
         if countryPrograms == nil {
             countryPrograms = []
             countryPrograms.append(URCountryProgram(code: "GLOBAL", themeColor: URConstant.Color.PRIMARY, org:13, name: "U-Report Global",twitter:"UReportGlobal",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
-            countryPrograms.append(URCountryProgram(code: "BRA", themeColor: UIColor(rgba: "#00a200"), org:1,   name: "Brasil",         twitter:"ureportbrasil",facebook:"UNICEFBrasil",rapidProHostAPI:"https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://brasil.ureport.in/api/v1/stories/org/", groupName: "UReport Brasil"))
+            countryPrograms.append(URCountryProgram(code: "BRA", themeColor: UIColor(rgba: "#00a200"), org:1,   name: "Brasil",         twitter:"ureportbrasil",facebook:"UNICEFBrasil",rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://brasil.ureport.in/api/v1/stories/org/", groupName: "UReport Brasil"))
             countryPrograms.append(URCountryProgram(code: "BDI", themeColor: UIColor(rgba: "#00a418"), org:5,     name: "Burundi",        twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "CMR", themeColor: UIColor(rgba: "#00a400"), org:10,    name: "Cameroun",       twitter:"UReportCameroon",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "CHL", themeColor: UIColor(rgba: "#c6002a"), org:12,    name: "Chile",          twitter:"UReportChile",facebook:"ureportchile",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
@@ -59,11 +59,11 @@ class URCountryProgramManager: NSObject {
             
             countryPrograms.append(URCountryProgram(code: "COD", themeColor: UIColor(rgba: "#05b5e8"), org:nil,   name: "DRC",            twitter:"UReportDRC",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             
-            countryPrograms.append(URCountryProgram(code: "SLV", themeColor: URConstant.Color.PRIMARY, org:10,   name: "El Salvador",         twitter:nil,facebook:nil,rapidProHostAPI:"https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://elsalvador.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
+            countryPrograms.append(URCountryProgram(code: "SLV", themeColor: URConstant.Color.PRIMARY, org:10,   name: "El Salvador",         twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://elsalvador.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
             
             countryPrograms.append(URCountryProgram(code: "FJI", themeColor: UIColor(rgba: "#05b5e8"), org:9,     name: "Fiji",        twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters"))
-            countryPrograms.append(URCountryProgram(code: "GTM", themeColor: UIColor(rgba: "#3B85C5"), org:7,     name: "Guatemala",        twitter:"UReportGua",facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://guatemala.ureport.in/api/v1/stories/org/", groupName: "U-Reporters",stateField:"department"))
-            countryPrograms.append(URCountryProgram(code: "IRL", themeColor: UIColor(rgba: "#00a200"), org:2,   name: "Ireland",         twitter:"UReportIRL",facebook:"Unicefitsaboutus",rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://ireland.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
+            countryPrograms.append(URCountryProgram(code: "GTM", themeColor: UIColor(rgba: "#3B85C5"), org:7,     name: "Guatemala",        twitter:"UReportGua",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://guatemala.ureport.in/api/v1/stories/org/", groupName: "U-Reporters",stateField:"department"))
+            countryPrograms.append(URCountryProgram(code: "IRL", themeColor: UIColor(rgba: "#00a200"), org:2,   name: "Ireland",         twitter:"UReportIRL",facebook:"Unicefitsaboutus",rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://ireland.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "IDN", themeColor: UIColor(rgba: "#b9001c"), org:15,    name: "Indonesia",      twitter:"UReport_id",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "UReporters_Indonesia"))
             countryPrograms.append(URCountryProgram(code: "LBR", themeColor: UIColor(rgba: "#155ad0"), org:6,     name: "Liberia",        twitter:"UReportLiberia",facebook:"ureport.liberia",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "MLI", themeColor: UIColor(rgba: "#d7001d"), org:3,     name: "Mali",           twitter:"UReportMali",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
@@ -80,15 +80,15 @@ class URCountryProgramManager: NSObject {
             countryPrograms.append(URCountryProgram(code: "SEN", themeColor: UIColor(rgba: "#00a400"), org:14,    name: "Sénégal",        twitter:"ureportsenegal",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "SLE", themeColor: UIColor(rgba: "#41b646"), org:7,     name: "Sierra Leone",   twitter:"UreportSL",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "SWZ", themeColor: UIColor(rgba: "#d7001c"), org:4,     name: "Swaziland",      twitter:"Ureportszd",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
-            countryPrograms.append(URCountryProgram(code: "SYR", themeColor: UIColor(rgba: "#C1001D"), org:6,     name: "Syria",      twitter:nil,facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://syria.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
+            countryPrograms.append(URCountryProgram(code: "SYR", themeColor: UIColor(rgba: "#C1001D"), org:6,     name: "Syria",      twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://syria.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
             
-            countryPrograms.append(URCountryProgram(code: "THA", themeColor: UIColor(rgba: "#1B143E"), org:5,     name: "Thailand",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://thailand.ureport.in/api/v1/stories/org/", groupName: "U-Reporters",stateField:"province"))
+            countryPrograms.append(URCountryProgram(code: "THA", themeColor: UIColor(rgba: "#1B143E"), org:5,     name: "Thailand",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://thailand.ureport.in/api/v1/stories/org/", groupName: "U-Reporters",stateField:"province"))
             
             countryPrograms.append(URCountryProgram(code: "TUN", themeColor: UIColor.red, org:31,     name: "Tunisie",      twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL ,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             
             countryPrograms.append(URCountryProgram(code: "UGA", themeColor: UIColor(rgba: "#d6001f"), org:18,   name: "Uganda",         twitter:"UReportUganda",facebook:"UReportUganda",rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             
-            countryPrograms.append(URCountryProgram(code: "GBR", themeColor: UIColor(rgba: "#00166B"), org:3,     name: "United Kingdom",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: "https://rapidpro.ilhasoft.mobi/api/",ureportHostAPI: "http://uk.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
+            countryPrograms.append(URCountryProgram(code: "GBR", themeColor: UIColor(rgba: "#00166B"), org:3,     name: "United Kingdom",      twitter:"UReportThai",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA,ureportHostAPI: "http://uk.ureport.in/api/v1/stories/org/", groupName: "U-Reporters"))
             countryPrograms.append(URCountryProgram(code: "UKR", themeColor: UIColor(rgba: "#00166B"), org:19,   name: "Ukraine",         twitter:nil,facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))
             
             countryPrograms.append(URCountryProgram(code: "ZMB", themeColor: UIColor(rgba: "#00a200"), org:nil,   name: "Zambia",         twitter:"ZambiaUReport",facebook:nil,rapidProHostAPI: URConstant.RapidPro.API_URL,ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters"))

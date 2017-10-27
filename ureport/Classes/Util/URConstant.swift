@@ -258,6 +258,7 @@ struct URConstant {
         static let GLOBAL = "GLOBAL"
         static let API_URL = "https://api.rapidpro.io/api/"
         static let API_NEWS = "http://ureport.in/api/v1/stories/org/"
+        static let API_URL_ILHA = "https://rapidpro.ilhasoft.mobi/api/"
     }
     
     struct NotificationType {

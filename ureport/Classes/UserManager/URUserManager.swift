@@ -354,7 +354,11 @@ class URUserManager: NSObject {
             (user!.moderator == true))) {
             return true
         }else if (featureNeedModeratorPermission == false){
-            return URUserManager.isUserInYourOwnCountryProgram()
+            #if ONTHEMOVE
+                return true
+            #else
+                return URUserManager.isUserInYourOwnCountryProgram()
+            #endif
         }else {
             return false
         }
