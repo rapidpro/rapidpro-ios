@@ -336,4 +336,16 @@ class URUserManager {
         }
     }
     
+    class func hasModeratorPrivilegies() -> Bool {
+        var userIsModerator = false
+        
+        if let isMasterModerator = URUser.activeUser()?.masterModerator {
+            userIsModerator = isMasterModerator.boolValue
+        } else if let isCountryModerator = URUser.activeUser()?.moderator {
+            userIsModerator = isCountryModerator.boolValue
+        }
+        
+        return userIsModerator
+    }
+    
 }

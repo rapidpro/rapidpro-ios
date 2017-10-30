@@ -26,6 +26,10 @@ class URContributionManager {
         return "poll_contribution"
     }
     
+    class func pathContributionDenounced() -> String {
+        return "contribution_denounced"
+    }
+    
     func getContributions(_ storyKey: String!) {
                 
         URFireBaseManager.sharedInstance()
@@ -140,4 +144,19 @@ class URContributionManager {
             .removeValue()
     }
     
+    class func setContributionAsDenounced(_ storyKey: String, contribution: URContribution, completion: @escaping (Bool) -> ()) {
+        URFireBaseManager.sharedInstance()
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(self.pathContributionDenounced())
+            .child(storyKey)
+            .setValue(contribution.toDictionary()) {
+                (error, _) in
+                guard error == nil else {
+                    completion(false)
+                    return
+                }
+                completion(true)
+        }
+    }
 }

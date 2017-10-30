@@ -30,6 +30,7 @@
 "label_home" = "Principal";
 "disapprove_story" = "Rechazo Historia";
 "denounce_story" = "Delatar Historia";
+"denounce_contribution" = "Denunciar Contribución";
 "load_message_wait" = "Espera...";
 "main_stories" = "Historias";
 "main_polls" = "Encuestas";

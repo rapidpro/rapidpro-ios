@@ -57,7 +57,8 @@
 "create_story_add_marker_title" = "علام جديد";
 "label_story_view" = "عرض القصة";
 "disapprove_story" = "رفض التاريخ";
-“denounce_story” = “تاريخ التقرير”;
+"denounce_story" = "تاريخ التقرير";
+"denounce_contribution" = "مساهمة التقرير";
 "story_view_contribute" = "ساهم بهذه القصة";
 "story_contribution_add" = "أضف مساهمة";
 "polls_participate" = "جواب";

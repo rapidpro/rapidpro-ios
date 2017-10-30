@@ -12,6 +12,7 @@ import youtube_ios_player_helper
 import SDWebImage
 import MediaPlayer
 import ISScrollViewPageSwift
+import IlhasoftCore
 
 class URStoryContributionViewController: UIViewController, URContributionManagerDelegate, URContributionTableViewCellDelegate, URAddContributionTableViewCellDelegate {
     
@@ -310,22 +311,31 @@ class URStoryContributionViewController: UIViewController, URContributionManager
     func contributionTableViewCellDeleteButtonTapped(_ cell: URContributionTableViewCell) {
         
         let alert = UIAlertController(title: nil, message: "message_remove_chat_message".localized, preferredStyle: UIAlertControllerStyle.actionSheet)
-
-        alert.addAction(UIAlertAction(title: "label_remove".localized, style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
-            let indexPath = self.tableView.indexPath(for: cell)!
-            self.listContribution.remove(at: (indexPath as NSIndexPath).row)
-            self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
-            
-            let totalContributions = Int(self.story.contributions) - 1
-            self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
-            
-            //self.tableView.contentSize.height = CGFloat(totalContributions)
-            //URContributionManager.removeContribution(self.story.key!, contributionKey: cell.contribution.key!)
-            
-            //self.view.layoutIfNeeded()
-            
-        }))
         
+        if URUserManager.hasModeratorPrivilegies() {
+            alert.addAction(UIAlertAction(title: "label_remove".localized, style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
+                let indexPath = self.tableView.indexPath(for: cell)!
+                self.listContribution.remove(at: (indexPath as NSIndexPath).row)
+                self.tableView.deleteRows(at: [indexPath], with: UITableViewRowAnimation.fade)
+                
+                let totalContributions = Int(self.story.contributions) - 1
+                self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [totalContributions])
+            }))
+        } else {
+            alert.addAction(UIAlertAction(title: "denounce_contribution".localized, style: UIAlertActionStyle.default, handler: { (UIAlertAction) -> Void in
+                
+                if let storyKey = self.story.key {
+                    URContributionManager.setContributionAsDenounced(storyKey, contribution: cell.contribution, completion: { (success) in
+                        if success {
+                            ISAlertMessages.displaySimpleMessage("points_earning_title".localized, fromController: self)
+                        } else {
+                            ISAlertMessages.displaySimpleMessage("error_update_user".localized, fromController: self)
+                        }
+                    })
+                }
+            }))
+        }
+
         if URConstant.isIpad {
             alert.modalPresentationStyle = UIModalPresentationStyle.popover
             alert.popoverPresentationController!.sourceView = cell.btDelete
