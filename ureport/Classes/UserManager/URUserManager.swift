@@ -354,12 +354,8 @@ class URUserManager: NSObject {
             (user!.moderator == true))) {
             return true
         }else if (featureNeedModeratorPermission == false){
-            #if ONTHEMOVE
-                return true
-            #else
-                return URUserManager.isUserInYourOwnCountryProgram()
-            #endif
-        }else {
+            return URUserManager.isUserInYourOwnCountryProgram()
+        } else {
             return false
         }
     }
@@ -369,12 +365,15 @@ class URUserManager: NSObject {
     }
     
     class func isUserInYourOwnCountryProgram() -> Bool {
-                
-         if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code!{
+        #if ONTHEMOVE
             return true
-        }else {
-            return false
-        }
+        #else
+             if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code!{
+                return true
+            }else {
+                return false
+            }
+        #endif
     }
     
 }
