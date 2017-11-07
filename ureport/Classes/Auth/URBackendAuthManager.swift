@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class URBackendAuthManager: NSObject {
+class URBackendAuthManager {
 
     //MARK: FireBase Methods
     class func path() -> String {
@@ -18,15 +18,15 @@ class URBackendAuthManager: NSObject {
     
     class func saveAuthToken(_ token:String,completion:@escaping (_ success:Bool) -> Void) {
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URBackendAuthManager.path())
-            .child(byAppendingPath: token)
-            .setValue(["checked":true,"user":URUser.activeUser()!.key], withCompletionBlock: { (error:Error?, firebase: Firebase?) -> Void in
-                if error != nil {
+            .child(URBackendAuthManager.path())
+            .child(token)
+            .setValue(["checked": true, "user": URUser.activeUser()!.key]) { (error, _) -> Void in
+                guard error == nil else {
                     completion(false)
-                }else {
-                    completion(true)
+                    return
                 }
-            })
+                completion(true)
+            }
     }
     
 }

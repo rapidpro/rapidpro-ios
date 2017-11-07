@@ -25,15 +25,21 @@ class URChatTableViewCell: UITableViewCell {
     @IBOutlet weak var img: UIImageView!
     @IBOutlet weak var btCheck: UIButton!
     
-    var delegate:URChatTableViewCellDelegate?
+    var delegate: URChatTableViewCellDelegate?
     
-    var chatRoom:URChatRoom?
-    var user:URUser?
+    var chatRoom: URChatRoom?
+    var user: URUser?
+    var countryProgram: URCountryProgram?
     var type: URChatCellType!
     
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+    }
+
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        self.img.backgroundColor = UIColor.white
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -86,6 +92,17 @@ class URChatTableViewCell: UITableViewCell {
             self.viewCheckGroup.isHidden = false
         }
         
+    }
+
+    func setupCell(withCountryProgram countryProgram: URCountryProgram) {
+        self.countryProgram = countryProgram
+        self.lbName.text = countryProgram.name
+        self.lbLastMessage.text = "A direct channel with us!"
+        self.lbDateHour.text = ""
+        self.viewUnreadMessages.isHidden = true
+        self.img.backgroundColor = UIColor.yellow
+        self.img.contentMode = UIViewContentMode.scaleAspectFit
+        self.img.image = UIImage(named: "logo")
     }
     
     func setupCellWithChatRoom(_ chatRoom:URChatRoom) {                

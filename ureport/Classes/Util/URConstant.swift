@@ -184,7 +184,7 @@ struct URConstant {
             if let dictionary = keyDictionary {
                 if dictionary["COGNITO_IDENTITY_POLL_ID"] != nil {
                     return dictionary["COGNITO_IDENTITY_POLL_ID"] as! String
-                }else{
+                } else {
                     print("COGNITO_IDENTITY_POLL_ID doesn't exists in key.plist")
                 }
             }
@@ -215,7 +215,7 @@ struct URConstant {
             return ""
         }
         
-        static func S3_BUCKET_NAME(_ path:URUploadPath) -> String {
+        static func S3_BUCKET_NAME(_ path: URUploadPath) -> String {
             
             if let dictionary = keyDictionary {
                 if dictionary["S3_BUCKET_NAME_\(path.rawValue)"] != nil {
@@ -266,7 +266,7 @@ struct URConstant {
         static let CHAT = "Chat"
     }
     
-    struct Gcm {
+    struct Fcm {
         static let GCM_URL = "https://gcm-http.googleapis.com/gcm/send"
         static let GCM_AUTHORIZATION = "key=AIzaSyAUwf0ZOqn9BXA6lhupxKmTcEpv_tYdoVs"
     }
@@ -274,6 +274,7 @@ struct URConstant {
     struct Key {
         static let COUNTRY_PROGRAM_CHANNEL = "COUNTRY_PROGRAM_CHANNEL_"
         static let COUNTRY_PROGRAM_TOKEN = "COUNTRY_PROGRAM_TOKEN_"
+        static let UREPORT_API_TOKEN = "UREPORT_API_TOKEN"
     }
     
 }

@@ -19,6 +19,9 @@
 "login_sign_up" = "Click here to sign up with email!";
 "sign_up_name" = "Name";
 "sign_up_nickname" = "Nickname";
+"disapprove_story" = "Disapprove Story";
+"denounce_story" = "Denounce Story";
+"denounce_contribution" = "Report Contribution";
 "sign_up_email" = "E-mail";
 "sign_up_birthday" = "Birthday";
 "sign_up_confirm" = "Confirm";

@@ -5,14 +5,13 @@
 //  Created by Daniel Amaral on 13/07/15.
 //  Copyright (c) 2015 ilhasoft. All rights reserved.
 //
-
 import UIKit
 import Firebase
 import MBProgressHUD
 import IlhasoftCore
 
 class URLoginCredentialsViewController: UIViewController {
-
+    
     @IBOutlet weak var btForgotPassword: UIButton!
     @IBOutlet weak var btLogin: UIButton!
     @IBOutlet weak var txtLogin: UITextField!
@@ -27,13 +26,13 @@ class URLoginCredentialsViewController: UIViewController {
     override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: "URLoginCredentialsViewController", bundle: nil)
     }
-
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
-        super.viewDidLoad()        
+        super.viewDidLoad()
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         setupUI()
     }
@@ -46,9 +45,9 @@ class URLoginCredentialsViewController: UIViewController {
         tracker?.set(kGAIScreenName, value: "Login Credentials")
         
         let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)        
+        tracker?.send(builder as [NSObject : AnyObject]!)
     }
-
+    
     override func viewDidDisappear(_ animated: Bool) {
         super.viewDidDisappear(animated)
         MBProgressHUD.hide(for: self.view, animated: true)
@@ -59,7 +58,7 @@ class URLoginCredentialsViewController: UIViewController {
         self.view.endEditing(true)
         self.navigationController?.pushViewController(URForgotPasswordViewController(), animated: true)
     }
-
+    
     @IBAction func btLoginTapped(_ sender: AnyObject) {
         
         MBProgressHUD.showAdded(to: self.view, animated: true)

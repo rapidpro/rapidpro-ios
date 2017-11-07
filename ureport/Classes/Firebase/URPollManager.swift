@@ -14,7 +14,7 @@ protocol URPollManagerDelegate {
     func newPollResultReceived(_ pollResult:URPollResult)
 }
 
-class URPollManager: NSObject {
+class URPollManager {
 
     var delegate:URPollManagerDelegate?
     var pollIndex = 0
@@ -32,54 +32,40 @@ class URPollManager: NSObject {
     }
     
     func getPolls() {
-        
         pollIndex = 0
-        
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: URPollManager.path())
-            .observe(FEventType.childAdded, with: { (snapshot) in
-                if let delegate = self.delegate {
-                    
-                    let poll = URPoll(jsonDict: snapshot?.value as? NSDictionary)
-                    let category = URPollCategory(jsonDict: (snapshot?.value as! NSDictionary).object(forKey: "category")! as? NSDictionary)
-                    
-                    category.color = URPollManager.getAvailableColorToCategory(category, index: self.pollIndex)
-                    
-                    poll.key = snapshot?.key
-                    poll.category = category
-                    delegate.newPollReceived(poll)
-                    
-                    self.pollIndex += 1
-                }
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(URPollManager.path())
+            .observe(.childAdded, with: { snapshot in
+                guard let delegate = self.delegate else { return }
+                let poll = URPoll(jsonDict: snapshot.value as? NSDictionary)
+                let category = URPollCategory(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "category")! as? NSDictionary)
+                category.color = URPollManager.getAvailableColorToCategory(category, index: self.pollIndex)
+                poll.key = snapshot.key
+                poll.category = category
+                delegate.newPollReceived(poll)
+                self.pollIndex += 1
             })
     }
     
     func getPollsResults(_ pollKey:String!) {
-        
         URFireBaseManager.sharedInstance()
-            .child(byAppendingPath: URCountryProgram.path())
-            .child(byAppendingPath: URCountryProgramManager.activeCountryProgram()!.code)
-            .child(byAppendingPath: URPollManager.pathForPollResult())
-            .child(byAppendingPath: pollKey)
-            .observe(FEventType.childAdded, with: { (snapshot) in
-                if let delegate = self.delegate {
-                    
-                    let pollResult = URPollResult(jsonDict: snapshot?.value as? NSDictionary)
-                    
-                    if let results = (snapshot?.value as? NSDictionary)!.object(forKey: "results") {
-                        pollResult.results = results as! [NSDictionary]
-                    }
-                    
-                    delegate.newPollResultReceived(pollResult)
-                    
+            .child(URCountryProgram.path())
+            .child(URCountryProgramManager.activeCountryProgram()!.code)
+            .child(URPollManager.pathForPollResult())
+            .child(pollKey)
+            .observe(.childAdded, with: { snapshot in
+                guard let delegate = self.delegate else { return }
+                let pollResult = URPollResult(jsonDict: snapshot.value as? NSDictionary)
+                if let results = (snapshot.value as? NSDictionary)!.object(forKey: "results") {
+                    pollResult.results = results as! [NSDictionary]
                 }
+                delegate.newPollResultReceived(pollResult)
             })
     }
- 
-    class func getAvailableColorToCategory(_ pollCategory:URPollCategory,index:Int) -> UIColor {
-        
+
+    class func getAvailableColorToCategory(_ pollCategory:URPollCategory, index:Int) -> UIColor {
         let filtered = categoryAndColorList.filter {
             if $0.object(forKey: pollCategory.name) != nil {
                 return true
@@ -87,7 +73,6 @@ class URPollManager: NSObject {
                 return false
             }
         }
-        
         if !filtered.isEmpty {
             return UIColor(rgba: filtered[0].object(forKey: pollCategory.name) as! String)
         }else {
@@ -98,11 +83,9 @@ class URPollManager: NSObject {
             categoryAndColorList.append([pollCategory.name:URPollManager.getColors()[index]])
             return UIColor(rgba: URPollManager.getColors()[index] as String)
         }
-        
     }
-    
-    class func getColors() -> [String]{
-        
+
+    class func getColors() -> [String] {
         if colors.isEmpty {
             colors.append("#78c95d")
             colors.append("#b08f6d")
@@ -115,8 +98,6 @@ class URPollManager: NSObject {
             colors.append("#f5766e")
             colors.append("#f6caca")
         }
-        
         return colors
     }
-    
 }

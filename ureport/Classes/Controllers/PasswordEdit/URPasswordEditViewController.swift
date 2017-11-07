@@ -8,6 +8,7 @@
 
 import UIKit
 import MBProgressHUD
+import Firebase
 
 class URPasswordEditViewController: UIViewController {
 
@@ -37,9 +38,9 @@ class URPasswordEditViewController: UIViewController {
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Password Edit")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     //MARK: Class Methods
@@ -54,20 +55,20 @@ class URPasswordEditViewController: UIViewController {
     }    
 
     //MARK: Button Events
-    
+
     @IBAction func btConfirmTapped(_ sender: AnyObject) {
         MBProgressHUD.showAdded(to: self.view, animated: true)
-        URFireBaseManager.sharedInstance().changePassword(forUser: URUser.activeUser()?.email, fromOld: self.txtCurrentPassword.text, toNew: self.txtNewPassword.text) { (error:Error?) -> Void in
-                MBProgressHUD.hide(for: self.view, animated: true)
-                self.view.endEditing(true)
-            if error != nil {
-                UIAlertView(title: nil, message: "unknown_error".localized, delegate: self, cancelButtonTitle: "OK").show()
-            }else {
+
+        if let currentUser = Auth.auth().currentUser {
+            currentUser.updatePassword(to: self.txtNewPassword.text!, completion: { error in
+                guard error == nil else {
+                    UIAlertView(title: nil, message: "unknown_error".localized, delegate: self, cancelButtonTitle: "OK").show()
+                    return
+                }
                 UIAlertView(title: nil, message: "password_updated".localized, delegate: self, cancelButtonTitle: "OK").show()
                 URNavigationManager.navigation.popViewController(animated: true)
-            }
+            })
         }
-        
     }
     
 }

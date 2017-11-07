@@ -9,7 +9,7 @@
 import UIKit
 import Alamofire
 
-class URGeonamesAPI: NSObject {
+class URGeonamesAPI {
 
     static func getGeonameID(countryCode:String, completion:@escaping (_ geonameID:Int?) -> Void ) -> Void {
         Alamofire.request("http://api.geonames.org/countryInfoJSON?country=\(countryCode)&username=ureport", method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (response: DataResponse<Any>) in
@@ -26,32 +26,26 @@ class URGeonamesAPI: NSObject {
             
         })
     }
-    
+
     static func getStatesByGeonameID(geonameId:Int,completion:@escaping (_ states:[URState]?) -> Void ) -> Void {
-        
         Alamofire.request("http://api.geonames.org/childrenJSON?geonameId=\(geonameId)&username=ureport").responseJSON(completionHandler: { (response: DataResponse<Any>) in
-            
             var states = [URState]()
-            
             if let response = response.result.value as? NSDictionary {
                 if response["geonames"] != nil && response["totalResultsCount"] as! Int > 0 {
                     for geoname in response["geonames"] as! [NSDictionary] {
                         let state = URState(name: geoname["adminName1"] as! String, boundary: nil)
                         states.append(state)
                     }
-                    
                     states = states.sorted{($0.name < $1.name)}
                     completion(states)
                     
                 }else {
                     completion(nil)
                 }
-                
             }else {
                 completion(nil)
             }
         })
-        
     }
     
 }

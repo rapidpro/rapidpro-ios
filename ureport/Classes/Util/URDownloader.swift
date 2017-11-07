@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URDownloader: NSObject {
+class URDownloader {
 
     class func download(_ URL: Foundation.URL, completion:@escaping (_ data:Data?) -> Void) {
         

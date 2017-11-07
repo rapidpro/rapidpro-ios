@@ -9,7 +9,7 @@
 import UIKit
 import STTwitter
 
-class URTwitterAuthHelper: NSObject {
+class URTwitterAuthHelper {
     
     static let TWITTER_CONSUMER_KEY = URConstant.SocialNetwork.TWITTER_APP_ID()
     static let TWITTER_CONSUMER_SECRET_KEY = URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET()

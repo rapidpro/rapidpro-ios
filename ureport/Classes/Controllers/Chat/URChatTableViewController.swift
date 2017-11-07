@@ -67,6 +67,12 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
         MBProgressHUD.hide(for: self.view, animated: true)
     }
     
+    @available(iOS 11.0, *)
+    override func viewSafeAreaInsetsDidChange() {
+        super.viewSafeAreaInsetsDidChange()
+//        self.tableView.contentInset.top = -self.view.safeAreaInsets.top
+    }
+    
     init() {
         super.init(nibName: nil, bundle:nil)
     }
@@ -263,7 +269,12 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     }
     
     fileprivate func setupTableView() {
-        self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 64, 0.0, self.tabBarController != nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        if #available(iOS 11.0, *) {
+            self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 0, 0.0, self.tabBarController !=     nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        } else {
+            self.tableView.contentInset = UIEdgeInsetsMake(URConstant.isIpad ? 0 : 64, 0.0, self.tabBarController !=     nil ? self.tabBarController!.tabBar.frame.height : 0.0, 0.0);
+        }
+        
         self.tableView.backgroundColor = UIColor.white
         self.tableView.separatorColor = UIColor.clear
     }

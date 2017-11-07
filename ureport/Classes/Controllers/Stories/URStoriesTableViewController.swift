@@ -10,6 +10,7 @@ import UIKit
 import Alamofire
 import AlamofireObjectMapper
 import MBProgressHUD
+import IlhasoftCore
 
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
@@ -63,10 +64,17 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Stories")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
+    
+//    @available(iOS 11.0, *)
+//    override func viewSafeAreaInsetsDidChange() {
+//        super.viewSafeAreaInsetsDidChange()
+//
+//        self.tableView.contentInset.top = -self.view.safeAreaInsets.top
+//    }
     
     //MARK: URWriteStoryTableViewCellDelegate
     
@@ -75,7 +83,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationController?.pushViewController(URAddStoryViewController(), animated: true)
-            }else {
+            } else {
                 let alertController = UIAlertController(title: nil, message: "feature_without_permission".localized, preferredStyle: .alert)
                 alertController.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
                 self.present(alertController, animated: true, completion: {})
@@ -98,6 +106,10 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         }
     }
     
+    func openAlert(with message: String) {
+        ISAlertMessages.displaySimpleMessage(message, fromController: self)
+    }
+    
     //MARK: MenuDelegateMethods
     
     func countryProgramDidChanged(_ countryProgram: URCountryProgram) {
@@ -118,20 +130,20 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             return 0
         }
     }
-    
-    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let viewHeader =  Bundle.main.loadNibNamed("URWriteStoryView", owner: 0, options: nil)?[0] as! URWriteStoryView
-        viewHeader.delegate = self
-        
-        if (filterStoriesToModerate == false){
-            self.tableView.tableHeaderView = viewHeader
-            sizeHeaderToFit()
-        }else{
-            viewHeader.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
-        }
-        
-        return viewHeader
-    }
+   
+//    override func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+//        let viewHeader =  Bundle.main.loadNibNamed("URWriteStoryView", owner: 0, options: nil)?[0] as! URWriteStoryView
+//        viewHeader.delegate = self
+//
+//        if (filterStoriesToModerate == false){
+//            self.tableView.tableHeaderView = viewHeader
+//            sizeHeaderToFit()
+//        }else{
+//            viewHeader.frame = CGRect(x: 0, y: 0, width: 0, height: 0)
+//        }
+//
+//        return viewHeader
+//    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1

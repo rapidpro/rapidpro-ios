@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URFlowTypeManager: NSObject {
+class URFlowTypeManager {
     
     let OpenField: URFlowTypeValidation = URFlowTypeValidation(type: URFlowType.openField, validation: "true", message: "Please, fill all the fields")
     let Choice: URFlowTypeValidation = URFlowTypeValidation(type: URFlowType.choice, validation: "contains_any", message: "Please, fill all the fields")
@@ -31,7 +31,7 @@ class URFlowTypeManager: NSObject {
     
     let typeValidations: [URFlowTypeValidation]
     
-    override init() {
+    init() {
         typeValidations = [OpenField, Choice, OpenFieldContains, OpenFieldNotEmpty, OpenFieldStarts, OpenFieldRegex, Number, NumberLessThan, NumberGreaterThan, NumberBetween, NumberEqual, Date, DateBefore, DateAfter, DateEqual, Phone, State, District]
     }
     

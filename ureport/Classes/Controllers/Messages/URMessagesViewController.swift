@@ -101,9 +101,9 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Chat Messages")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -344,17 +344,15 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
         for user in chatMembers {
             
             if let picture = user.picture {
-                
-                SDWebImageManager.shared().downloadImage(with: URL(string: picture), options: SDWebImageOptions.avoidAutoSetImage, progress: { (receivedSize, expectedSize) -> Void in
-                    
-                    }, completed: { (image, error, cache, finish, url) -> Void in
-                        if image != nil {
-                            let userImage = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
-                            self.avatars[user.key] = userImage
-                            self.users[user.key] = user.nickname
-                        }
+                SDWebImageManager.shared().imageDownloader?.downloadImage(with: URL(string: picture), options: SDWebImageDownloaderOptions.highPriority, progress: { result in }, completed: { (image, data, error, finished) in
+                    if let image = image {
+                        let userImage = JSQMessagesAvatarImageFactory.avatarImage(with: image, diameter: 30)
+                        self.avatars[user.key] = userImage
+                        self.users[user.key] = user.nickname
+                    } else {
+                        print("error downloading image")
+                    }
                 })
-                
             }
             
         }

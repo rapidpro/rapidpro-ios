@@ -66,8 +66,9 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Story Creation")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     //MARK: Button Events
@@ -213,7 +214,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = .horizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.horizontally
     }
     
     func setupUI() {
@@ -285,15 +286,15 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     func mediaViewTapped(_ mediaView: URMediaView) {
         
         for i in 0...self.scrollViewMedias.views.count-1 {
-            if let mView = self.scrollViewMedias.views[i] as? URMediaView {
-                if mView == mediaView {
-                    indexImgCover = 0
-                    mView.setMediaAsCover(true)
-                    mediaViewCover = mView
-                } else {
-                    mView.setMediaAsCover(false)
-                }
+            let mView = self.scrollViewMedias.views[i] as! URMediaView
+            if mView == mediaView {
+                indexImgCover = 0
+                mView.setMediaAsCover(true)
+                mediaViewCover = mView
+            }else {
+                mView.setMediaAsCover(false)
             }
+            
         }
 
     }
@@ -301,19 +302,20 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     func removeMediaView(_ mediaView: URMediaView) {
         
         for i in 0...self.scrollViewMedias.views.count-1 {
-            if let mView = self.scrollViewMedias.views[i] as? URMediaView  {
-                if !self.youtubeMediaList.isEmpty {
-                    for j in 0...self.youtubeMediaList.count-1 {
-                        
-                        if let media = mView.media {
-                            if media == self.youtubeMediaList[j] {
-                                self.youtubeMediaList.remove(at: j)
-                                break
-                            }
+            let mView = self.scrollViewMedias.views[i] as! URMediaView
+   
+            if !self.youtubeMediaList.isEmpty {
+                for j in 0...self.youtubeMediaList.count-1 {
+                    
+                    if let media = mView.media {
+                        if media == self.youtubeMediaList[j] {
+                            self.youtubeMediaList.remove(at: j)
+                            break
                         }
                     }
                 }
             }
+            
         }
 
         if mediaView.isCover == true {

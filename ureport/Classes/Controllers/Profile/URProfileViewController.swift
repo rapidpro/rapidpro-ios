@@ -66,7 +66,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         
         self.imageProfile.delegate = self
         self.imageProfile.parentViewController = self
-        self.imageProfile.mediaSources = [.Gallery,.Camera]
+        self.imageProfile.mediaSources = [.Gallery, .Camera]
         self.scrollView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0)
     }
     
@@ -79,10 +79,9 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Profile")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -100,7 +99,9 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     
     public func mediaDidLoad(imageView: ISImageViewPicker, media: ISMedia) {
         if let imageMedia = media as? ISImageMedia {
-            URAWSManager.uploadImage(imageMedia.image, uploadPath:.User, completion: { (picture:URMedia?) -> Void in
+            URAWSManager.uploadImage(imageMedia.image, uploadPath: .User, completion: {
+                (picture:URMedia?) -> Void in
+                
                 if let media = picture {
                     let user = URUser.activeUser()
                     user!.picture = media.url
@@ -249,9 +250,9 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
             cell.viewController = self
             cell.setupCellWith(storyList[(indexPath as NSIndexPath).row],moderateUserMode: false)
             return cell
-        }else {
+        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URRankingTableViewCell.self), for: indexPath) as! URRankingTableViewCell
-            cell.setupCellWith(userList[(indexPath as NSIndexPath).row])
+            cell.setupCellWith(userList[indexPath.row])
             return cell
         }
         

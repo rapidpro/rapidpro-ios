@@ -57,9 +57,9 @@ class URNewsDetailViewController: UIViewController {
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "News")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,7 +92,7 @@ class URNewsDetailViewController: UIViewController {
         scrollViewMedias.setFillContent(false)
         scrollViewMedias.setEnableBounces(false)
         scrollViewMedias.setPaging(false)
-        scrollViewMedias.scrollViewPageType = .horizontally
+        scrollViewMedias.scrollViewPageType = ISScrollViewPageType.horizontally
         
         if self.news.images != nil && self.news.images.count > 0{
             var photoIndex = 0

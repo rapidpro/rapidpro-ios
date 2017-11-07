@@ -10,6 +10,7 @@ import UIKit
 
 @objc protocol URStoriesTableViewCellDelegate {
     func openProfile(_ user:URUser)
+    func openAlert(with message: String)
     @objc optional func removeCell(_ cell:URStoriesTableViewCell)
 }
 
@@ -34,6 +35,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
     @IBOutlet weak var btReportContent: UIButton!
+    
 
     @IBOutlet weak var lbContentTop: NSLayoutConstraint!
     @IBOutlet weak var contentViewBottom: NSLayoutConstraint!
@@ -53,8 +55,6 @@ class URStoriesTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
-        self.btReportContent.isHidden = !(URSettings.getSettings().reviewMode!).boolValue
         
         self.bgView.layer.cornerRadius = 5
         btDisapprove.layer.cornerRadius = 5
@@ -82,21 +82,40 @@ class URStoriesTableViewCell: UITableViewCell {
     //MARK: Button Events
     
     @IBAction func btReportContentTapped(_ sender: AnyObject) {
-        
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
-        
-        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) { action -> Void in
-            
-        }
-        
-        let inappropriateContentAction: UIAlertAction = UIAlertAction(title: "Inappropriate content", style: .default) { action -> Void in
-        }
 
-        let spamAction: UIAlertAction = UIAlertAction(title: "Spam", style: .default) { action -> Void in
+        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
+    
+        if URUserManager.hasModeratorPrivilegies() {
+            let disapproveAction: UIAlertAction = UIAlertAction(title: "disapprove_story".localized, style: .destructive) {
+                _ in
+                URStoryManager.setStoryAsDisapproved(self.story, completion: {
+                    finished in
+                    if finished {
+                        self.delegate?.removeCell!(self)
+                        self.delegate?.openAlert(with: "message_success_remove".localized)
+                    }
+                })
+            }
+            
+            reportContentAlertController.addAction(disapproveAction)
+        } else {
+            let denounceAction: UIAlertAction = UIAlertAction(title: "denounce_story".localized, style: .default) {
+                _ in
+                URStoryManager.setStoryAsDenounced(self.story, completion: {
+                    finished in
+                    if finished {
+                        self.delegate?.openAlert(with: "points_earning_title".localized)
+                    }
+                })
+            }
+            
+            reportContentAlertController.addAction(denounceAction)
         }
         
-        reportContentAlertController.addAction(spamAction)
-        reportContentAlertController.addAction(inappropriateContentAction)
+        let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
+            _ in
+        }
+        
         reportContentAlertController.addAction(cancelAction)
         
         if URConstant.isIpad {
@@ -145,7 +164,7 @@ class URStoriesTableViewCell: UITableViewCell {
         }
     }
     
-    func setupCellWith(_ story:URStory,moderateUserMode:Bool){
+    func setupCellWith(_ story:URStory, moderateUserMode:Bool){
         self.story = story
         
         if story.cover != nil && story.cover?.url != nil {
@@ -193,10 +212,10 @@ class URStoriesTableViewCell: UITableViewCell {
                 self.lbAuthorName.text = "\(user!.nickname!)"
                 
                 if user!.picture != nil {
-                    self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
+                    self.imgUser.contentMode = .scaleAspectFill
                     self.imgUser.sd_setImage(with: URL(string: user!.picture!))
                 }else{
-                    self.imgUser.contentMode = UIViewContentMode.center
+                    self.imgUser.contentMode = .center
                     self.imgUser.image = UIImage(named: "ic_person")
                     
                     self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)

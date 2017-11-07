@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URYoutubeUtil: NSObject {
+class URYoutubeUtil {
 
     class func getYoutubeVideoID(_ strVideoUrl:String) -> String?{                
         

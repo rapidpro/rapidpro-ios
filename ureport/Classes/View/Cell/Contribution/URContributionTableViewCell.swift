@@ -58,22 +58,10 @@ class URContributionTableViewCell: UITableViewCell {
             self.roundedView.backgroundColor = UIColor.white.withAlphaComponent(1)
             self.imgUser.contentMode = UIViewContentMode.scaleAspectFill
             self.imgUser.sd_setImage(with: URL(string: picture))
-        }else{
+        } else {
             self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
             self.imgUser.contentMode = UIViewContentMode.center
             self.imgUser.image = UIImage(named: "ic_person")
-        }                
-        
-        if let user = URUser.activeUser() {
-            
-            if user.masterModerator != nil || user.moderator != nil {
-                self.btDelete.isHidden = false
-            }else {
-                self.btDelete.isHidden = true
-            }
-            
         }
-        
     }
-    
 }

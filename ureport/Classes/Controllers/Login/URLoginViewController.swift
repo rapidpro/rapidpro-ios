@@ -50,9 +50,9 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Main Login Options")
         
-        let builder = GAIDictionaryBuilder.createScreenView().build()
-        tracker?.send(builder as [NSObject : AnyObject]!)
-        
+        if let builder = GAIDictionaryBuilder.createScreenView().build() as? [AnyHashable: Any] {
+            tracker?.send(builder)
+        }
         checkIfIsSyriaUser()
     }
     
@@ -86,7 +86,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     func userHasLoggedInGoogle(_ user: URUser) {
         MBProgressHUD.hide(for: self.view, animated: true)
-
         if user.key == nil {
             self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
         } else {
@@ -103,11 +102,11 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     
     class func updateUserDataInRapidPro(_ user:URUser) {
         
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary) -> Void in
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary?) -> Void in
             URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: false, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
-//                print(response)
+                print(response)
             })
         }
         
@@ -133,42 +132,36 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     @IBAction func btTwitterTapped(_ sender: AnyObject) {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
+        
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
-            URUserLoginManager.loginWithTwitter {
-                (user) in
+            
+            MBProgressHUD.showAdded(to: self.view, animated: true)
+            
+            URUserLoginManager.loginWithTwitter { (user) -> Void in
                 
                 DispatchQueue.main.async {
                     MBProgressHUD.hide(for: self.view, animated: true)
                 }
                 
+                guard let user = user else {
+                    ISAlertMessages.displaySimpleMessage("unknown_error".localized, fromController: self)
+                    return
+                }
                 
-                if user == nil {
-                    
-                    let alert = UIAlertController(title: nil, message: "twitter_error_message".localized, preferredStyle: .alert)
-                    
-                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: { (action) in
-                        UIApplication.shared.openURL(URL(string:"App-prefs:root=TWITTER")!)
-                    }))
-                    
-                    self.present(alert, animated: true, completion: nil)
-                } else if user!.key == nil {
-                    self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user!, updateMode:false),animated:true)
+                if user.key == nil {
+                    self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
                 } else {
-                    URLoginViewController.updateUserDataInRapidPro(user!)
-                    URUserLoginManager.setUserAndCountryProgram(user!)
+                    URLoginViewController.updateUserDataInRapidPro(user)
+                    URUserLoginManager.setUserAndCountryProgram(user)
                 }
             }
-        } else {
-            DispatchQueue.main.async {
-                MBProgressHUD.hide(for: self.view, animated: true)
-            }
         }
-
     }
     
     @IBAction func btLoginTapped(_ sender: AnyObject) {
+        
         self.navigationController!.pushViewController(URLoginCredentialsViewController(), animated: true)
+        
     }
     @IBAction func btFacebookTapped(_ sender: AnyObject) {
         
@@ -184,7 +177,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 
                 if user.key == nil {
                      self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
-                } else {
+                }else{
                     URLoginViewController.updateUserDataInRapidPro(user)
                     URUserLoginManager.setUserAndCountryProgram(user)
                 }

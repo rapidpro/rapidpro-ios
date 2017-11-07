@@ -8,13 +8,12 @@
 
 import UIKit
 
-class URDistrict: NSObject {
+class URDistrict {
 
     var name:String!
     var parent:String!
     
     init(name:String,parent:String) {
-        super.init()
         self.name = name
         self.parent = parent
     }

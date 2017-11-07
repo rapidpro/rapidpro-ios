@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URDateUtil: NSObject {
+class URDateUtil {
    
     class func birthDayFormatter(_ date:Date) -> String{
         return DateFormatter.localizedString(from: date, dateStyle: DateFormatter.Style.medium, timeStyle: DateFormatter.Style.none)

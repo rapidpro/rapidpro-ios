@@ -35,6 +35,9 @@
 "main_menu_home" = "หน้าจอหลัก";
 "main_menu_chat" = "แชท";
 "main_menu_group_unicef" = "ยูนิเซฟ";
+"disapprove_story" = "ปฏิเสธประวัติ";
+“denounce_story” = “ประวัติรายงาน”;
+"denounce_contribution" = "รายงานการบริจาค";
 "main_menu_subitem_buy_goods" = "ซื้อสินค้า";
 "main_menu_subitem_embassadors" = "ทูต";
 "base_menu_open_drawer" = "เปิดเมนู";

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URPollQuestion: NSObject {
+class URPollQuestion {
  
     var question:String?
     var answer:String?    
