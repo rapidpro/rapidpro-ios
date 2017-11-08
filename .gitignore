@@ -72,6 +72,7 @@ ureport/FirebaseDatabaseProd-Info.plist
 ureport/GoogleService-Info.plist
 ureport/OnTheMove/GoogleService-Info.plist
 ureport/Resources/countryprogram.json
+ureport/Resources/countryprogramotm.json
 
 # Carthage
 #

@@ -150,12 +150,10 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         })
                     } else if let error = error {
                         switch error {
-                        case .emailTaken:
+                        case URFireBaseManagerAuthError.emailTaken:
                             ISAlertMessages.displaySimpleMessage("error_email_already_exists".localized, fromController: self)
-                            break
                         default:
                             ISAlertMessages.displaySimpleMessage("error_no_internet".localized, fromController: self)
-                            break
                         }
                     }
                 })
@@ -190,15 +188,14 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             URNavigationManager.navigation.popViewController(animated: true)
         }
         
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" : self.country!.code!)) { (rapidProUserDictionary:NSDictionary) -> Void in
+        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" : self.country!.code!)) { (rapidProUserDictionary:NSDictionary?) -> Void in
             
             URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: !self.updateMode, completion: { (response) -> Void in
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
-                print(response)
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
             })
-        }
+            }
     }
     
     func setupUIWithUserData() {

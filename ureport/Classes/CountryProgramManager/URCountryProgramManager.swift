@@ -24,7 +24,11 @@ class URCountryProgramManager {
     //MARK: On The Move
     class func getOtmProgram() -> URCountryProgram {
         if countryProgram == nil {
-            countryProgram = URCountryProgram(code: "OTM", themeColor: URConstant.Color.PRIMARY, org:33, name: "On The Move", twitter:nil, facebook:nil, rapidProHostAPI: URConstant.RapidPro.API_URL_ILHA, ureportHostAPI: URConstant.RapidPro.API_NEWS, groupName: "U-Reporters")
+            let path = Bundle.main.path(forResource: "countryprogramotm", ofType: "json")!
+            let data = NSData(contentsOfFile: path)
+            let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
+            let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
+            countryProgram = URCountryProgram(dictionary: countriesJSON[0])
         }
         return countryProgram!
     }
@@ -51,7 +55,7 @@ class URCountryProgramManager {
             let data = NSData(contentsOfFile: path)
             let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
             let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
-
+            
             for countryJSON in countriesJSON {
                 countryPrograms.append(URCountryProgram(dictionary: countryJSON))
             }
