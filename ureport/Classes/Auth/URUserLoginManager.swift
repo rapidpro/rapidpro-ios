@@ -112,6 +112,8 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     completion(error, false)
                 case URFireBaseManagerAuthError.invalidEmail:
                     completion(error, false)
+                case URFireBaseManagerAuthError.invalidPassword:
+                    completion(error, false)
                 default:
                     break
                 }

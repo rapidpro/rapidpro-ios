@@ -270,12 +270,12 @@
 		B215C6D81FB2254C00130A3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6D61FB2251200130A3D /* GoogleService-Info.plist */; };
 		B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
-		B2211A1D1FB339BD00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
-		B2211A1E1FB339BF00070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B2211A201FB33A1900070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B2211A211FB33A2F00070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B2211A231FB370A400070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
 		B2211A241FB370B000070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
+		B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
+		B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */; };
 		B251A53C1FA13DBF00CBC02B /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */; };
 		B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
@@ -2189,12 +2189,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				B266AFF51F9FE11800C4C968 /* Localizable.strings in Resources */,
-				B2211A1E1FB339BF00070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266AFF61F9FE11800C4C968 /* URAddMarkerTableViewCell.xib in Resources */,
 				B266AFF71F9FE11800C4C968 /* URAboutViewController.xib in Resources */,
 				B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */,
 				B266AFF81F9FE11800C4C968 /* URMediaView.xib in Resources */,
 				B266AFF91F9FE11800C4C968 /* URCurrentPollView.xib in Resources */,
+				B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
@@ -2216,7 +2216,6 @@
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
 				B266B00C1F9FE11800C4C968 /* URNewsTableViewCell.xib in Resources */,
-				B2211A1D1FB339BD00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266B00D1F9FE11800C4C968 /* URGroupDetailsViewController.xib in Resources */,
 				B266B00E1F9FE11800C4C968 /* URContributionTableViewCell.xib in Resources */,
 				B266B00F1F9FE11800C4C968 /* URMediaVideoPhoneView.xib in Resources */,
@@ -2246,6 +2245,7 @@
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
+				B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
 				B266B02D1F9FE11800C4C968 /* URMarkerViewIPadController.xib in Resources */,
