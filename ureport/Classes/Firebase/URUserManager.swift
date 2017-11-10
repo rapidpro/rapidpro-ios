@@ -329,11 +329,15 @@ class URUserManager {
     }
 
     class func isUserInYourOwnCountryProgram() -> Bool {
-        if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code {
+        #if ONTHEMOVE
             return true
-        } else {
-            return false
-        }
+        #else
+            if URUser.activeUser()!.countryProgram == URCountryProgramManager.activeCountryProgram()?.code {
+                return true
+            } else {
+                return false
+            }
+        #endif
     }
     
     class func hasModeratorPrivilegies() -> Bool {

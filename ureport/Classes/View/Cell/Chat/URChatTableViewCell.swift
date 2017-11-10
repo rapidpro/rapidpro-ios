@@ -102,7 +102,11 @@ class URChatTableViewCell: UITableViewCell {
         self.viewUnreadMessages.isHidden = true
         self.img.backgroundColor = UIColor.yellow
         self.img.contentMode = UIViewContentMode.scaleAspectFit
-        self.img.image = UIImage(named: "logo")
+        #if ONTHEMOVE
+            self.img.image = UIImage(named: "AppIcon-on-the-move")
+        #else
+            self.img.image = UIImage(named: "logo")
+        #endif
     }
     
     func setupCellWithChatRoom(_ chatRoom:URChatRoom) {                

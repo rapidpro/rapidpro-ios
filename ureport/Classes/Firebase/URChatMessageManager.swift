@@ -53,7 +53,7 @@ class URChatMessageManager {
             .child(key)
             .queryLimited(toLast: 1)
             .observeSingleEvent(of: .value, with: { snapshot -> Void in
-                guard snapshot.value != nil else {
+                guard snapshot.value != nil, snapshot.children.allObjects.count > 0 else {
                     completion(nil)
                     return
                 }
