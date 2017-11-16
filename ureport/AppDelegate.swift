@@ -57,6 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
         requestPermissionForPushNotification(application)
+        FCMChannelManager.setup()
         setupAWS()
         createDirectoryToImageUploads()
         Messaging.messaging().delegate = self
@@ -285,6 +286,7 @@ extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
         print("Firebase registration token was refreshed: \(fcmToken)")
         URSettingsManager.saveFCMToken(fcmToken: fcmToken)
+        FCMChannelManager.saveFCMToken(fcmToken: fcmToken)
     }
 }
 

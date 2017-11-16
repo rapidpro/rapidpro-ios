@@ -522,6 +522,8 @@
 		B266B0371F9FE11800C4C968 /* URPollContributionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBAEC11CEA5E1900A8B514 /* URPollContributionModalViewController.xib */; };
 		B266B0381F9FE11800C4C968 /* URPollViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6566A5C81CD2634400A0730F /* URPollViewIPadController.xib */; };
 		B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */; };
+		B284A2171FBB7D820023E772 /* FCMChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B284A2161FBB7D810023E772 /* FCMChannelManager.swift */; };
+		B284A2181FBB7D850023E772 /* FCMChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B284A2161FBB7D810023E772 /* FCMChannelManager.swift */; };
 		B29674571FB2597F00EFA624 /* URSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD341FB255CC0029897C /* URSettingsManager.swift */; };
 		B29674581FB2598300EFA624 /* URBackendAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD301FB254CA0029897C /* URBackendAuthManager.swift */; };
 		B29674591FB2598500EFA624 /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */; };
@@ -862,6 +864,7 @@
 		B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ureport on-the-move.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ureport on-the-move-Info.plist"; path = "/Users/lucasbarros/Documents/Development/ureport-ios/ureport on-the-move-Info.plist"; sourceTree = "<absolute>"; };
 		B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
+		B284A2161FBB7D810023E772 /* FCMChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCMChannelManager.swift; sourceTree = "<group>"; };
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -1776,6 +1779,7 @@
 		65F7DA281C073544001AFA22 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				B284A2161FBB7D810023E772 /* FCMChannelManager.swift */,
 				B20EFD391FB255F10029897C /* URChatMemberManager.swift */,
 				B20EFD381FB255F10029897C /* URChatMessageManager.swift */,
 				B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */,
@@ -2528,6 +2532,7 @@
 				B29674651FB25B4C00EFA624 /* URFcmAPI.swift in Sources */,
 				6515FBB91B8E0B4000CEEC3B /* URMessagesViewController.swift in Sources */,
 				6556909D1B7D14BA00525E00 /* URGroupChatRoom.swift in Sources */,
+				B284A2171FBB7D820023E772 /* FCMChannelManager.swift in Sources */,
 				655690A31B7D157600525E00 /* URContribution.swift in Sources */,
 				B20EFD431FB255F10029897C /* URUserManager.swift in Sources */,
 				65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */,
@@ -2727,6 +2732,7 @@
 				B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */,
 				B266AF9D1F9FE11800C4C968 /* URMessagesViewController.swift in Sources */,
 				B296745F1FB2599B00EFA624 /* URContributionManager.swift in Sources */,
+				B284A2181FBB7D850023E772 /* FCMChannelManager.swift in Sources */,
 				B266AF9E1F9FE11800C4C968 /* URGroupChatRoom.swift in Sources */,
 				B266AF9F1F9FE11800C4C968 /* URContribution.swift in Sources */,
 				B266AFA01F9FE11800C4C968 /* URCountry.swift in Sources */,

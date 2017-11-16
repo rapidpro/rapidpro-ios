@@ -30,6 +30,8 @@ def shared_pods
     pod 'Firebase/Messaging', '4.0.4'
     pod 'Firebase/Auth', '4.0.4'
     pod 'Firebase/Database', '4.0.4'
+    
+    pod 'fcm-channel-ios'
 
 end
 
