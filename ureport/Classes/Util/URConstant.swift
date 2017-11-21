@@ -256,7 +256,7 @@ struct URConstant {
     
     struct RapidPro {
         static let GLOBAL = "GLOBAL"
-        static let HANDLER_SUFIX = "handler/fcm/"
+        static let HANDLER_SUFIX = "handlers/fcm"
         static let API_SUFIX = "api/"
     }
     

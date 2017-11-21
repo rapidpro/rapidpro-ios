@@ -46,23 +46,24 @@ class FCMChannelManager {
     }
     
     static func createContact(completion: @escaping (_ success: Bool) -> ()) {
-//        if let key = User.current.key, let name = User.current.nickname, let fcmToken = User.current.fcmToken {
-//
-//            User.current.contact = FCMChannelContact(urn: key, name: name, fcmToken: fcmToken)
-//
-//            RapidProAPI.registerContact(User.current.contact!) {
-//                uuid in
-//
-//                if let uuid = uuid {
-//                    User.current.contact_uid = uuid
-//                    User.current.contact?.uuid = uuid
-//                    completion(true)
-//                } else {
-//                    print("Error: User couldn't register to channel.")
-//                    completion(false)
-//                }
-//            }
-//        }
+        if let user = URUser.activeUser(),
+            let key = user.key,
+            let name = user.nickname,
+            let fcmToken = user.pushIdentity {
+            
+           user.contact = FCMChannelContact(urn: key, name: name, fcmToken: fcmToken)
+            RapidProAPI.registerContact(user.contact!) {
+                uuid in
+                
+                if let uuid = uuid {
+                    user.contact?.uuid = uuid
+                    completion(true)
+                } else {
+                    print("Error: User couldn't register to channel.")
+                    completion(false)
+                }
+            }
+        }
     }
     
     static func loadContact(urn: String, completion: @escaping (FCMChannelContact?) -> ()) {

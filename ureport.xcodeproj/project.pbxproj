@@ -264,18 +264,12 @@
 		B20EFD431FB255F10029897C /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B20EFD441FB255F10029897C /* URChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */; };
 		B20EFD451FB255F10029897C /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */; };
-		B215C6D01FB21EEA00130A3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */; };
 		B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */; };
 		B215C6D51FB2231000130A3D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65409FBF1B4C842700344D75 /* Info.plist */; };
-		B215C6D81FB2254C00130A3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6D61FB2251200130A3D /* GoogleService-Info.plist */; };
 		B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
 		B2211A201FB33A1900070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B2211A211FB33A2F00070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
-		B2211A231FB370A400070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
-		B2211A241FB370B000070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
-		B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
-		B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */; };
 		B251A53C1FA13DBF00CBC02B /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */; };
 		B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
@@ -539,6 +533,10 @@
 		B29674631FB259A500EFA624 /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B29674651FB25B4C00EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
+		B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */; };
+		B2EBF9191FC4C92300CEAF68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6D61FB2251200130A3D /* GoogleService-Info.plist */; };
+		B2EBF91D1FC4CBBE00CEAF68 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */; };
+		B2EBF9221FC4D56A00CEAF68 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		E00D0327DBB10E421FB22C9E /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
 /* End PBXBuildFile section */
 
@@ -856,7 +854,6 @@
 		B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
 		B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		B2211A1F1FB33A1900070194 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
-		B2211A221FB370A400070194 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
 		B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
 		B266AF2E1F9FD73A00C4C968 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Key.plist; path = ../../../../Downloads/Key.plist; sourceTree = "<group>"; };
@@ -866,6 +863,8 @@
 		B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
 		B284A2161FBB7D810023E772 /* FCMChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCMChannelManager.swift; sourceTree = "<group>"; };
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
+		B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
+		B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -1240,7 +1239,7 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B2211A221FB370A400070194 /* countryprogramotm.json */,
+				B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */,
 				B2211A1F1FB33A1900070194 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
 				97FBAA581C06447B0012D752 /* iso639_2.bundle */,
@@ -1964,6 +1963,7 @@
 		B2B4F45F1FB11BBC0080F4C1 /* Suppoting Files */ = {
 			isa = PBXGroup;
 			children = (
+				B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */,
 				B215C6D61FB2251200130A3D /* GoogleService-Info.plist */,
 			);
 			name = "Suppoting Files";
@@ -2154,7 +2154,6 @@
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
-				B2211A231FB370A400070194 /* countryprogramotm.json in Resources */,
 				656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */,
 				B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */,
 				65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */,
@@ -2174,7 +2173,6 @@
 				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
-				B215C6D01FB21EEA00130A3D /* GoogleService-Info.plist in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
 				65DBAEC31CEA5E1900A8B514 /* URPollContributionModalViewController.xib in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
@@ -2198,7 +2196,6 @@
 				B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */,
 				B266AFF81F9FE11800C4C968 /* URMediaView.xib in Resources */,
 				B266AFF91F9FE11800C4C968 /* URCurrentPollView.xib in Resources */,
-				B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
@@ -2207,6 +2204,7 @@
 				B266AFFF1F9FE11800C4C968 /* URAddContributionTableViewCell.xib in Resources */,
 				B266B0001F9FE11800C4C968 /* URMyChatsViewController.xib in Resources */,
 				B266B0011F9FE11800C4C968 /* URMediaSourceViewController.xib in Resources */,
+				B2EBF91D1FC4CBBE00CEAF68 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */,
 				B266B0021F9FE11800C4C968 /* URStoryContributionViewIPadController.xib in Resources */,
 				B266B0031F9FE11800C4C968 /* URStoriesTableViewCell.xib in Resources */,
@@ -2234,22 +2232,23 @@
 				B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */,
 				B266B01A1F9FE11800C4C968 /* Key-debug.plist in Resources */,
 				B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */,
+				B2EBF9191FC4C92300CEAF68 /* GoogleService-Info.plist in Resources */,
 				B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */,
 				B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */,
 				B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */,
 				B266B01E1F9FE11800C4C968 /* URClosedPollTableViewCell.xib in Resources */,
 				B266B01F1F9FE11800C4C968 /* URMediaSourceViewIPadController.xib in Resources */,
 				B266B0201F9FE11800C4C968 /* URChatTableViewCell.xib in Resources */,
-				B2211A241FB370B000070194 /* countryprogramotm.json in Resources */,
 				B266B0211F9FE11800C4C968 /* URChoiceResultView.xib in Resources */,
+				B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */,
 				B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */,
 				B266B0241F9FE11800C4C968 /* URNotificationViewController.xib in Resources */,
 				B266B0251F9FE11800C4C968 /* Key.plist in Resources */,
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
+				B2EBF9221FC4D56A00CEAF68 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
-				B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
 				B266B02D1F9FE11800C4C968 /* URMarkerViewIPadController.xib in Resources */,
@@ -2261,7 +2260,6 @@
 				B266B0331F9FE11800C4C968 /* URNewGroupTableViewCell.xib in Resources */,
 				B266B0341F9FE11800C4C968 /* URMarkerTableViewCell.xib in Resources */,
 				B266B0351F9FE11800C4C968 /* ImagesV2.xcassets in Resources */,
-				B215C6D81FB2254C00130A3D /* GoogleService-Info.plist in Resources */,
 				B266B0361F9FE11800C4C968 /* URWriteStoryView.xib in Resources */,
 				B266B0371F9FE11800C4C968 /* URPollContributionModalViewController.xib in Resources */,
 				B266B0381F9FE11800C4C968 /* URPollViewIPadController.xib in Resources */,

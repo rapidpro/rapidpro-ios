@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import fcm_channel_ios
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -131,6 +133,12 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let _ = self.listChatRoom[indexPath.row] as? URCountryProgram {
             print("Open country program")
+            URUser.activeUser()?.save() { success in
+                if success {
+//                    let chatVC = FCMChannelChatViewController(contact: (URUser.activeUser()?.contact)!, botName: "SANDBOX", loadMessagesOnInit: true)
+//                    self.present(UINavigationController(rootViewController: chatVC), animated: true, completion: nil)
+                }
+            }
         } else if let _ = self.listChatRoom[indexPath.row] as? URChatRoom {
             let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
             self.currentChatRoom = cell.chatRoom

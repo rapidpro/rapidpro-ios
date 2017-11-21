@@ -8,8 +8,12 @@
 
 import UIKit
 import ObjectMapper
+import FirebaseDatabase
+import fcm_channel_ios
 
 class URUser: Serializable {
+    
+    static let ref = URFireBaseManager.sharedInstance().child("users")
     
     var key: String!
     var nickname: String?
@@ -33,6 +37,8 @@ class URUser: Serializable {
     var moderator:NSNumber?
     var masterModerator:NSNumber?
     var socialUid:String?
+    
+    var contact:FCMChannelContact?
     
     override init() {
         super.init()
@@ -68,5 +74,44 @@ class URUser: Serializable {
         defaults.removeObject(forKey: "user")
         defaults.synchronize()
     }
-
+    
+    func save(completion: @escaping (_ success: Bool) -> ()) {
+        if let user = URUser.activeUser() {
+        
+        let userRef = URUser.ref.child(user.key)
+        
+            FCMChannelManager.createContact() {
+                success in
+                
+                if success {
+                    
+                    let u:[String: Any?] = [ "birthday": user.birthday,
+                                             "country": user.country,
+                                             "countryProgram": user.countryProgram,
+                                             "district": user.district,
+                                             "email": user.email,
+                                             "gender": user.gender,
+                                             "key": user.key,
+                                             "nickname": user.nickname,
+                                             "publicProfile": user.publicProfile,
+                                             "pushIdentity": user.pushIdentity,
+                                             "soicialUid": user.socialUid,
+                                             "state": user.state]
+                    userRef.setValue(u) {
+                        error, dataRef in
+                        
+                        if error != nil {
+                            print("error saving: \(error!.localizedDescription)")
+                            completion(false)
+                        } else {
+                            print("set values without erro: \(dataRef)")
+                            completion(true)
+                        }
+                    }
+                }
+                
+                completion(success)
+            }
+        }
+    }
 }
