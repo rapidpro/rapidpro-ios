@@ -65,12 +65,10 @@ xcuserdata
 Pods/
 Podfile.lock
 
-ureport/Key-debug.plist
-ureport/Key.plist
-ureport/FirebaseDatabaseDev-Info.plist
-ureport/FirebaseDatabaseProd-Info.plist
-ureport/GoogleService-Info.plist
-ureport/OnTheMove/GoogleService-Info.plist
+ureport/SupportFiles/Firebase*
+ureport/SupportFiles/Google*
+ureport/SupportFiles/Key*
+ureport/OnTheMove/SupportFiles/*
 ureport/Resources/countryprogram.json
 ureport/Resources/countryprogramotm.json
 

@@ -251,6 +251,15 @@
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9BDE960200E2F706453D1171 /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
 		9D20422F64551F9164A63D41 /* Pods_ureport_on_the_move.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */; };
+		A3D254E21FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */; };
+		A3D254E31FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
+		A3D254E41FC5D1BE007B3777 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */; };
+		A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DD1FC5D1BE007B3777 /* Info.plist */; };
+		A3D254E61FC5D1BE007B3777 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
+		A3D254E71FC5D1BE007B3777 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
+		A3D254E91FC5D1CE007B3777 /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */; };
+		A3D254EF1FC5D1E0007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */; };
+		A3D254F01FC5D1E4007B3777 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */; };
 		B20EFD2C1FB253C90029897C /* URCountryProgramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */; };
 		B20EFD2D1FB253C90029897C /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */; };
 		B20EFD311FB254CA0029897C /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */; };
@@ -264,16 +273,10 @@
 		B20EFD431FB255F10029897C /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B20EFD441FB255F10029897C /* URChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */; };
 		B20EFD451FB255F10029897C /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */; };
-		B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */; };
-		B215C6D51FB2231000130A3D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65409FBF1B4C842700344D75 /* Info.plist */; };
-		B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
-		B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
 		B2211A201FB33A1900070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B2211A211FB33A2F00070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */; };
 		B251A53C1FA13DBF00CBC02B /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */; };
-		B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
-		B266AF311F9FD74A00C4C968 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF301F9FD74A00C4C968 /* Key-debug.plist */; };
 		B266AF351F9FE11800C4C968 /* URFlowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249321BFBD93D0024384E /* URFlowAction.swift */; };
 		B266AF361F9FE11800C4C968 /* URClosedPollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556916D1B7D3DA800525E00 /* URClosedPollTableViewCell.swift */; };
 		B266AF371F9FE11800C4C968 /* URGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */; };
@@ -486,7 +489,6 @@
 		B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */; };
 		B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14BC1C9B4DB7009A63A5 /* URMediaFileView.xib */; };
 		B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14C81C9C3201009A63A5 /* URMediaImageView.xib */; };
-		B266B01A1F9FE11800C4C968 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF301F9FD74A00C4C968 /* Key-debug.plist */; };
 		B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
 		B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CEE1B8810DE001C6808 /* URInviteTableViewCell.xib */; };
 		B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */; };
@@ -496,7 +498,6 @@
 		B266B0211F9FE11800C4C968 /* URChoiceResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654850721BB209C80002A3D5 /* URChoiceResultView.xib */; };
 		B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
 		B266B0241F9FE11800C4C968 /* URNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656562011BD5912500EBA9BD /* URNotificationViewController.xib */; };
-		B266B0251F9FE11800C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
 		B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */; };
 		B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */; };
 		B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2FABF1C061E5B000820BD /* URTutorialViewController.xib */; };
@@ -534,9 +535,6 @@
 		B29674651FB25B4C00EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */; };
-		B2EBF9191FC4C92300CEAF68 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6D61FB2251200130A3D /* GoogleService-Info.plist */; };
-		B2EBF91D1FC4CBBE00CEAF68 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */; };
-		B2EBF9221FC4D56A00CEAF68 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		E00D0327DBB10E421FB22C9E /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
 /* End PBXBuildFile section */
 
@@ -606,7 +604,6 @@
 		6533CF431C496627009DF49C /* URRapidProContactUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRapidProContactUtil.swift; sourceTree = "<group>"; };
 		653413451EC23D4A006DC85D /* URFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlow.swift; sourceTree = "<group>"; };
 		65409FBB1B4C842700344D75 /* ureport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ureport.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65409FBF1B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65409FC01B4C842700344D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65409FD01B4C842700344D75 /* ureportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ureportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65409FEC1B4C84DE00344D75 /* URLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginViewController.swift; sourceTree = "<group>"; };
@@ -726,7 +723,6 @@
 		658D85921B554FD600DFB949 /* URStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStory.swift; sourceTree = "<group>"; };
 		658D85951B558A6700DFB949 /* URAddStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddStoryViewController.swift; sourceTree = "<group>"; };
 		658D85961B558A6700DFB949 /* URAddStoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAddStoryViewController.xib; sourceTree = "<group>"; };
-		659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		659A20D21B7ECD6C00D02C69 /* URClosedPollTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URClosedPollTableViewController.xib; sourceTree = "<group>"; };
 		659A7A921B4F6C3100B56983 /* URDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDateUtil.swift; sourceTree = "<group>"; };
 		659A7A991B51EFE100B56983 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -836,6 +832,16 @@
 		97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLocale+ISO639_2.h"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
 		97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLocale+ISO639_2.m"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
+		A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
+		A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3D254DD1FC5D1BE007B3777 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
+		A3D254DF1FC5D1BE007B3777 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
+		A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
+		A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3D254F11FC5D2B8007B3777 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountryProgramAPI.swift; sourceTree = "<group>"; };
 		B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPCheckManager.swift; sourceTree = "<group>"; };
 		B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserLoginManager.swift; sourceTree = "<group>"; };
@@ -849,22 +855,14 @@
 		B20EFD3B1FB255F10029897C /* URUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserManager.swift; sourceTree = "<group>"; };
 		B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatRoomManager.swift; sourceTree = "<group>"; };
 		B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
-		B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B215C6D61FB2251200130A3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
-		B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		B2211A1F1FB33A1900070194 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
 		B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
-		B266AF2E1F9FD73A00C4C968 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Key.plist; path = ../../../../Downloads/Key.plist; sourceTree = "<group>"; };
-		B266AF301F9FD74A00C4C968 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Key-debug.plist"; path = "../../../../Downloads/Key-debug.plist"; sourceTree = "<group>"; };
 		B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ureport on-the-move.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ureport on-the-move-Info.plist"; path = "/Users/lucasbarros/Documents/Development/ureport-ios/ureport on-the-move-Info.plist"; sourceTree = "<absolute>"; };
 		B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
 		B284A2161FBB7D810023E772 /* FCMChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCMChannelManager.swift; sourceTree = "<group>"; };
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
 		B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
-		B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -990,27 +988,13 @@
 			children = (
 				B26F01F11FA0EAAA005C51A6 /* OnTheMove */,
 				65609F2B1C72C1EA0039A8AB /* ureport.entitlements */,
+				A3D254F11FC5D2B8007B3777 /* ureport-Bridging-Header.h */,
 				65409FE01B4C845200344D75 /* Classes */,
 				65409FEA1B4C845200344D75 /* Resources */,
 				65409FC01B4C842700344D75 /* AppDelegate.swift */,
-				65409FBE1B4C842700344D75 /* Supporting Files */,
+				A3D254D91FC5D1BE007B3777 /* SupportFiles */,
 			);
 			path = ureport;
-			sourceTree = "<group>";
-		};
-		65409FBE1B4C842700344D75 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */,
-				B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */,
-				B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */,
-				659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */,
-				65409FBF1B4C842700344D75 /* Info.plist */,
-				B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */,
-				B266AF301F9FD74A00C4C968 /* Key-debug.plist */,
-				B266AF2E1F9FD73A00C4C968 /* Key.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		65409FE01B4C845200344D75 /* Classes */ = {
@@ -1891,6 +1875,29 @@
 			name = NSLocaleISO639_2;
 			sourceTree = "<group>";
 		};
+		A3D254D91FC5D1BE007B3777 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */,
+				A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */,
+				A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */,
+				A3D254DD1FC5D1BE007B3777 /* Info.plist */,
+				A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */,
+				A3D254DF1FC5D1BE007B3777 /* Key.plist */,
+				A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
+		A3D254EA1FC5D1DB007B3777 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */,
+				A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 		B20EFD291FB253A60029897C /* Proxy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1921,7 +1928,7 @@
 			isa = PBXGroup;
 			children = (
 				B26F01F21FA0EACF005C51A6 /* Classes */,
-				B2B4F45F1FB11BBC0080F4C1 /* Suppoting Files */,
+				A3D254EA1FC5D1DB007B3777 /* SupportFiles */,
 			);
 			path = OnTheMove;
 			sourceTree = "<group>";
@@ -1958,15 +1965,6 @@
 				B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */,
 			);
 			path = UserRegister;
-			sourceTree = "<group>";
-		};
-		B2B4F45F1FB11BBC0080F4C1 /* Suppoting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B2EBF91B1FC4CB2500CEAF68 /* FirebaseDatabaseDev-Info.plist */,
-				B215C6D61FB2251200130A3D /* GoogleService-Info.plist */,
-			);
-			name = "Suppoting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2114,7 +2112,6 @@
 				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
-				B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				658BD0321CEBB0540019E885 /* URPollResultViewController.xib in Resources */,
 				651EC7171D5B9D20008695E3 /* URAddContributionTableViewCell.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
@@ -2122,15 +2119,17 @@
 				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
+				A3D254E61FC5D1BE007B3777 /* Key-debug.plist in Resources */,
+				A3D254E21FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
+				A3D254E71FC5D1BE007B3777 /* Key.plist in Resources */,
 				65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
 				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
 				B2211A201FB33A1900070194 /* countryprogram.json in Resources */,
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
-				B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
 				65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */,
 				65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */,
@@ -2139,12 +2138,12 @@
 				972817A91BFF9C3000FBD20E /* URChoiceResponseView.xib in Resources */,
 				65DFCCF71CE24EC700E4DFD9 /* terms.rtf in Resources */,
 				97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */,
+				A3D254E31FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */,
 				65FAF0CA1BC2C2E200F8B380 /* URPasswordEditViewController.xib in Resources */,
 				65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */,
 				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
 				658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */,
-				B266AF311F9FD74A00C4C968 /* Key-debug.plist in Resources */,
 				650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */,
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
 				65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */,
@@ -2154,8 +2153,8 @@
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
+				A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */,
 				656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */,
-				B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */,
 				65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */,
 				656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */,
 				6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */,
@@ -2164,7 +2163,6 @@
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
-				B215C6D51FB2231000130A3D /* Info.plist in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
 				65D563001BA9E8A1001AEF54 /* URStoryContributionViewController.xib in Resources */,
 				65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */,
@@ -2173,6 +2171,7 @@
 				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
+				A3D254E41FC5D1BE007B3777 /* GoogleService-Info.plist in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
 				65DBAEC31CEA5E1900A8B514 /* URPollContributionModalViewController.xib in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
@@ -2199,12 +2198,12 @@
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
+				A3D254EF1FC5D1E0007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFD1F9FE11800C4C968 /* URLoginCredentialsViewController.xib in Resources */,
 				B266AFFE1F9FE11800C4C968 /* URPollResultViewController.xib in Resources */,
 				B266AFFF1F9FE11800C4C968 /* URAddContributionTableViewCell.xib in Resources */,
 				B266B0001F9FE11800C4C968 /* URMyChatsViewController.xib in Resources */,
 				B266B0011F9FE11800C4C968 /* URMediaSourceViewController.xib in Resources */,
-				B2EBF91D1FC4CBBE00CEAF68 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */,
 				B266B0021F9FE11800C4C968 /* URStoryContributionViewIPadController.xib in Resources */,
 				B266B0031F9FE11800C4C968 /* URStoriesTableViewCell.xib in Resources */,
@@ -2217,6 +2216,7 @@
 				B266B0091F9FE11800C4C968 /* URPollResultTableViewCell.xib in Resources */,
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
+				A3D254F01FC5D1E4007B3777 /* GoogleService-Info.plist in Resources */,
 				B266B00C1F9FE11800C4C968 /* URNewsTableViewCell.xib in Resources */,
 				B266B00D1F9FE11800C4C968 /* URGroupDetailsViewController.xib in Resources */,
 				B266B00E1F9FE11800C4C968 /* URContributionTableViewCell.xib in Resources */,
@@ -2225,16 +2225,14 @@
 				B266B0111F9FE11800C4C968 /* URChoiceResponseView.xib in Resources */,
 				B266B0121F9FE11800C4C968 /* terms.rtf in Resources */,
 				B266B0131F9FE11800C4C968 /* URTutoView.xib in Resources */,
+				A3D254E91FC5D1CE007B3777 /* ureport on-the-move-Info.plist in Resources */,
 				B266B0151F9FE11800C4C968 /* iso3-country-code.json in Resources */,
 				B266B0161F9FE11800C4C968 /* URPasswordEditViewController.xib in Resources */,
 				B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */,
 				B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */,
 				B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */,
-				B266B01A1F9FE11800C4C968 /* Key-debug.plist in Resources */,
 				B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */,
-				B2EBF9191FC4C92300CEAF68 /* GoogleService-Info.plist in Resources */,
 				B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */,
-				B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */,
 				B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */,
 				B266B01E1F9FE11800C4C968 /* URClosedPollTableViewCell.xib in Resources */,
 				B266B01F1F9FE11800C4C968 /* URMediaSourceViewIPadController.xib in Resources */,
@@ -2243,11 +2241,9 @@
 				B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */,
 				B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */,
 				B266B0241F9FE11800C4C968 /* URNotificationViewController.xib in Resources */,
-				B266B0251F9FE11800C4C968 /* Key.plist in Resources */,
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
-				B2EBF9221FC4D56A00CEAF68 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
