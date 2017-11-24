@@ -1,4 +1,4 @@
-//
+ //
 //  URMyChatsViewController.swift
 //  ureport
 //
@@ -132,12 +132,12 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let _ = self.listChatRoom[indexPath.row] as? URCountryProgram {
-            print("Open country program")
-            URUser.activeUser()?.save() { success in
-                if success {
-//                    let chatVC = FCMChannelChatViewController(contact: (URUser.activeUser()?.contact)!, botName: "SANDBOX", loadMessagesOnInit: true)
-//                    self.present(UINavigationController(rootViewController: chatVC), animated: true, completion: nil)
-                }
+            if let contact = FCMChannelManager.activeContact() {
+                let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
+                self.navigationController?.pushViewController(chatVC, animated: true)
+            } else {
+                print("no active FCM channel contact!")
+                //TODO:
             }
         } else if let _ = self.listChatRoom[indexPath.row] as? URChatRoom {
             let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell

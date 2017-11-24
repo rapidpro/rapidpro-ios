@@ -41,16 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         URCountryProgramManager.deactivateSwitchCountryProgram()
 
-        #if DEBUG
+//        #if DEBUG
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
-        #else
-            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
-                dump(databaseOptions)
-                FirebaseApp.configure(name: "database", options: databaseOptions)
-            }
-        #endif
+//        #else
+//            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
+//                dump(databaseOptions)
+//                FirebaseApp.configure(name: "database", options: databaseOptions)
+//            }
+//        #endif
 
         FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
@@ -105,7 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print(error.localizedDescription)
                 } else {
                     print("success: \(success)")
-                    application.registerForRemoteNotifications()
+                    DispatchQueue.main.async {
+                        application.registerForRemoteNotifications()
+                    }
                 }
             })
         } else {

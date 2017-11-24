@@ -90,6 +90,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
             self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
         } else {
             URLoginViewController.updateUserDataInRapidPro(user)
+            FCMChannelManager.createContactAndSave(for: user) {_ in }
             URUserLoginManager.setUserAndCountryProgram(user)
         }
     }
@@ -107,6 +108,8 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 URRapidProContactUtil.rapidProUser = NSMutableDictionary()
                 URRapidProContactUtil.groupList = []
                 print(response)
+                
+                FCMChannelManager.setup()
             })
         }
         
@@ -152,6 +155,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
                 } else {
                     URLoginViewController.updateUserDataInRapidPro(user)
+                    FCMChannelManager.createContactAndSave(for: user) {_ in }
                     URUserLoginManager.setUserAndCountryProgram(user)
                 }
             }
@@ -179,6 +183,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                      self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
                 }else{
                     URLoginViewController.updateUserDataInRapidPro(user)
+                    FCMChannelManager.createContactAndSave(for: user) {_ in }
                     URUserLoginManager.setUserAndCountryProgram(user)
                 }
                 

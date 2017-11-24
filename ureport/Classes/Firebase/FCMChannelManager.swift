@@ -19,10 +19,16 @@ class FCMChannelManager {
     static var handlerUrl = ""
     
     static func setup() {
+        //TODO: activate key setting for debug/prod
+        //#if DEBUG
+//    }
+        //else {
+        
+        //        }
         if let user = URUser.activeUser(),
             let userProgram = user.countryProgram,
             let userCountry = user.country,
-            let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Key", ofType: "plist")!) {
+            let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Key-debug", ofType: "plist")!) {
             
             setUpFCMChannel(dict: dict, userProgram: userProgram, userCountry: userCountry)
         }
@@ -30,14 +36,30 @@ class FCMChannelManager {
         FCMChannelSettings.setConfiguration(token, channel: channel, url: apiPrefix, handlerURL: handlerUrl)
     }
     
+    static func activeContact() -> FCMChannelContact? {
+        let defaults: UserDefaults = UserDefaults.standard
+
+        var contact: FCMChannelContact?
+        if let encodedData = defaults.object(forKey: "fcmchannelcontact") as? Data,
+            let jsonString =  NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? String {
+            contact = FCMChannelContact(JSONString: jsonString)
+        }
+        return contact
+    }
+    
+    static func deactivateChannelContact() {
+        let defaults: UserDefaults = UserDefaults.standard
+        defaults.removeObject(forKey: "fcmchannelcontact")
+        defaults.synchronize()
+    }
+    
     private static func setUpFCMChannel(dict: NSDictionary, userProgram: String, userCountry: String) {
-        
-        if let keyToken = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(userProgram)"] {
-            token = keyToken as! String
+        if let keyToken = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(userProgram)"] as? String {
+            token = keyToken
         }
         
-        if let keyChannel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(userProgram)"] {
-            channel = keyChannel as! String
+        if let keyChannel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(userProgram)"] as? String {
+            channel = keyChannel
         }
         
         let countryProgram = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: userCountry))
@@ -45,24 +67,28 @@ class FCMChannelManager {
         handlerUrl = countryProgram.rapidProHostHandler
     }
     
-    static func createContact(completion: @escaping (_ success: Bool) -> ()) {
-        if let user = URUser.activeUser(),
-            let key = user.key,
-            let name = user.nickname,
-            let fcmToken = user.pushIdentity {
-            
-           user.contact = FCMChannelContact(urn: key, name: name, fcmToken: fcmToken)
-            RapidProAPI.registerContact(user.contact!) {
+    static func createContactAndSave(for user: URUser, completion: @escaping (_ success: Bool) -> ()) {
+        if let key = user.key, let name = user.nickname, let fcmToken = user.pushIdentity {
+            self.deactivateChannelContact()
+
+            let contact = FCMChannelContact(urn: key, name: name, fcmToken: fcmToken)
+            RapidProAPI.registerContact(contact) {
                 uuid in
-                
                 if let uuid = uuid {
-                    user.contact?.uuid = uuid
+                    contact.uuid = uuid
+                    let defaults: UserDefaults = UserDefaults.standard
+                    let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: contact.toJSONString())
+                    defaults.set(encodedObject, forKey: "fcmchannelcontact")
+                    defaults.synchronize()
+                    
                     completion(true)
                 } else {
                     print("Error: User couldn't register to channel.")
                     completion(false)
                 }
             }
+        } else {
+            completion(false)
         }
     }
     

@@ -257,9 +257,6 @@
 		A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DD1FC5D1BE007B3777 /* Info.plist */; };
 		A3D254E61FC5D1BE007B3777 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
 		A3D254E71FC5D1BE007B3777 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
-		A3D254E91FC5D1CE007B3777 /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */; };
-		A3D254EF1FC5D1E0007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */; };
-		A3D254F01FC5D1E4007B3777 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */; };
 		B20EFD2C1FB253C90029897C /* URCountryProgramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */; };
 		B20EFD2D1FB253C90029897C /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */; };
 		B20EFD311FB254CA0029897C /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */; };
@@ -536,6 +533,13 @@
 		B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */; };
 		E00D0327DBB10E421FB22C9E /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
+		E3110BE61FC85BAB006C9D25 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
+		E3110BE71FC85BAF006C9D25 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
+		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
+		E32F1CAE1FC85A20002C04AA /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */; };
+		E32F1CAF1FC85A2A002C04AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */; };
+		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
+		E3B47F9A1FC76E4B00A1D350 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -545,6 +549,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65409FBA1B4C842700344D75;
 			remoteInfo = ureport;
+		};
+		E3286C8A1FC8BEF300A7F78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65409FB31B4C842700344D75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B266AF321F9FE11800C4C968;
+			remoteInfo = "ureport on-the-move";
+		};
+		E3286C9A1FC8C20B00A7F78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65409FB31B4C842700344D75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B266AF321F9FE11800C4C968;
+			remoteInfo = "ureport on-the-move";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -838,9 +856,6 @@
 		A3D254DD1FC5D1BE007B3777 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
 		A3D254DF1FC5D1BE007B3777 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
-		A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
-		A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
-		A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		A3D254F11FC5D2B8007B3777 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountryProgramAPI.swift; sourceTree = "<group>"; };
 		B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPCheckManager.swift; sourceTree = "<group>"; };
@@ -864,6 +879,12 @@
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
 		B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ureport on-the-moveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ureport_on_the_moveTests.m; sourceTree = "<group>"; };
+		E3286C941FC8BF3D00A7F78C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -900,6 +921,13 @@
 				B266AFF11F9FE11800C4C968 /* Social.framework in Frameworks */,
 				B266AFF21F9FE11800C4C968 /* Foundation.framework in Frameworks */,
 				9D20422F64551F9164A63D41 /* Pods_ureport_on_the_move.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3286C8D1FC8BF3D00A7F78C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +995,8 @@
 			children = (
 				65409FF01B4C977600344D75 /* Foundation.framework */,
 				65409FBD1B4C842700344D75 /* ureport */,
+				E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */,
+				E3286C911FC8BF3D00A7F78C /* ureport on-the-moveTests */,
 				65409FBC1B4C842700344D75 /* Products */,
 				765863F8BACD5E4ED452B82C /* Frameworks */,
 				4306F579F0DBD3251E38FF3D /* Pods */,
@@ -979,6 +1009,7 @@
 				65409FBB1B4C842700344D75 /* ureport.app */,
 				65409FD01B4C842700344D75 /* ureportTests.xctest */,
 				B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */,
+				E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1884,16 +1915,6 @@
 				A3D254DD1FC5D1BE007B3777 /* Info.plist */,
 				A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */,
 				A3D254DF1FC5D1BE007B3777 /* Key.plist */,
-				A3D254E01FC5D1BE007B3777 /* ureport on-the-move-Info.plist */,
-			);
-			path = SupportFiles;
-			sourceTree = "<group>";
-		};
-		A3D254EA1FC5D1DB007B3777 /* SupportFiles */ = {
-			isa = PBXGroup;
-			children = (
-				A3D254EB1FC5D1DB007B3777 /* FirebaseDatabaseDev-Info.plist */,
-				A3D254EC1FC5D1DB007B3777 /* GoogleService-Info.plist */,
 			);
 			path = SupportFiles;
 			sourceTree = "<group>";
@@ -1928,7 +1949,7 @@
 			isa = PBXGroup;
 			children = (
 				B26F01F21FA0EACF005C51A6 /* Classes */,
-				A3D254EA1FC5D1DB007B3777 /* SupportFiles */,
+				E35C91491FC76053009A3C9B /* SupportFiles */,
 			);
 			path = OnTheMove;
 			sourceTree = "<group>";
@@ -1967,6 +1988,24 @@
 			path = UserRegister;
 			sourceTree = "<group>";
 		};
+		E3286C911FC8BF3D00A7F78C /* ureport on-the-moveTests */ = {
+			isa = PBXGroup;
+			children = (
+				E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */,
+				E3286C941FC8BF3D00A7F78C /* Info.plist */,
+			);
+			path = "ureport on-the-moveTests";
+			sourceTree = "<group>";
+		};
+		E35C91491FC76053009A3C9B /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */,
+				E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2003,6 +2042,7 @@
 			);
 			dependencies = (
 				65409FD21B4C842700344D75 /* PBXTargetDependency */,
+				E3286C8B1FC8BEF300A7F78C /* PBXTargetDependency */,
 			);
 			name = ureportTests;
 			productName = ureportTests;
@@ -2029,6 +2069,24 @@
 			productName = ureport;
 			productReference = B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E3286C8F1FC8BF3D00A7F78C /* ureport on-the-moveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3286C971FC8BF3D00A7F78C /* Build configuration list for PBXNativeTarget "ureport on-the-moveTests" */;
+			buildPhases = (
+				E3286C8C1FC8BF3D00A7F78C /* Sources */,
+				E3286C8D1FC8BF3D00A7F78C /* Frameworks */,
+				E3286C8E1FC8BF3D00A7F78C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E3286C9B1FC8C20B00A7F78C /* PBXTargetDependency */,
+			);
+			name = "ureport on-the-moveTests";
+			productName = "ureport on-the-moveTests";
+			productReference = E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -2071,6 +2129,12 @@
 						DevelopmentTeam = 5DSXDX2N9P;
 						ProvisioningStyle = Automatic;
 					};
+					E3286C8F1FC8BF3D00A7F78C = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = 5DSXDX2N9P;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B266AF321F9FE11800C4C968;
+					};
 				};
 			};
 			buildConfigurationList = 65409FB61B4C842700344D75 /* Build configuration list for PBXProject "ureport" */;
@@ -2094,6 +2158,7 @@
 				65409FBA1B4C842700344D75 /* ureport */,
 				B266AF321F9FE11800C4C968 /* ureport on-the-move */,
 				65409FCF1B4C842700344D75 /* ureportTests */,
+				E3286C8F1FC8BF3D00A7F78C /* ureport on-the-moveTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2161,6 +2226,7 @@
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
+				E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
@@ -2198,16 +2264,18 @@
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
-				A3D254EF1FC5D1E0007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */,
+				E32F1CAE1FC85A20002C04AA /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFD1F9FE11800C4C968 /* URLoginCredentialsViewController.xib in Resources */,
 				B266AFFE1F9FE11800C4C968 /* URPollResultViewController.xib in Resources */,
 				B266AFFF1F9FE11800C4C968 /* URAddContributionTableViewCell.xib in Resources */,
 				B266B0001F9FE11800C4C968 /* URMyChatsViewController.xib in Resources */,
 				B266B0011F9FE11800C4C968 /* URMediaSourceViewController.xib in Resources */,
 				B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */,
+				E3110BE61FC85BAB006C9D25 /* Key-debug.plist in Resources */,
 				B266B0021F9FE11800C4C968 /* URStoryContributionViewIPadController.xib in Resources */,
 				B266B0031F9FE11800C4C968 /* URStoriesTableViewCell.xib in Resources */,
 				B266B0041F9FE11800C4C968 /* ISMenuTableViewCell.xib in Resources */,
+				E3110BE71FC85BAF006C9D25 /* Key.plist in Resources */,
 				B266B0051F9FE11800C4C968 /* URPollQuestionViewController.xib in Resources */,
 				B266B0061F9FE11800C4C968 /* URMarkerTableViewController.xib in Resources */,
 				B266B0071F9FE11800C4C968 /* URProfileViewController.xib in Resources */,
@@ -2216,7 +2284,7 @@
 				B266B0091F9FE11800C4C968 /* URPollResultTableViewCell.xib in Resources */,
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
-				A3D254F01FC5D1E4007B3777 /* GoogleService-Info.plist in Resources */,
+				E32F1CAF1FC85A2A002C04AA /* GoogleService-Info.plist in Resources */,
 				B266B00C1F9FE11800C4C968 /* URNewsTableViewCell.xib in Resources */,
 				B266B00D1F9FE11800C4C968 /* URGroupDetailsViewController.xib in Resources */,
 				B266B00E1F9FE11800C4C968 /* URContributionTableViewCell.xib in Resources */,
@@ -2224,8 +2292,8 @@
 				B266B0101F9FE11800C4C968 /* URForgotPasswordViewController.xib in Resources */,
 				B266B0111F9FE11800C4C968 /* URChoiceResponseView.xib in Resources */,
 				B266B0121F9FE11800C4C968 /* terms.rtf in Resources */,
+				E3B47F9A1FC76E4B00A1D350 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B0131F9FE11800C4C968 /* URTutoView.xib in Resources */,
-				A3D254E91FC5D1CE007B3777 /* ureport on-the-move-Info.plist in Resources */,
 				B266B0151F9FE11800C4C968 /* iso3-country-code.json in Resources */,
 				B266B0161F9FE11800C4C968 /* URPasswordEditViewController.xib in Resources */,
 				B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */,
@@ -2262,6 +2330,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3286C8E1FC8BF3D00A7F78C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
@@ -2271,9 +2346,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport on-the-move/Pods-ureport on-the-move-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2295,7 +2375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		47BC1884708E957A8A4EA188 /* [CP] Copy Pods Resources */ = {
@@ -2305,8 +2385,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh",
-				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2323,13 +2404,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ureport on-the-move-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECBA084B5B20B83D9A419AB2 /* [CP] Embed Pods Frameworks */ = {
@@ -2348,21 +2432,26 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Firebase/Firebase.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MDHTMLLabel/MDHTMLLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
 				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2376,21 +2465,26 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Firebase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDHTMLLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2404,9 +2498,70 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport on-the-move/Pods-ureport on-the-move-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DBSphereTagCloud/DBSphereTagCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MDHTMLLabel/MDHTMLLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
+				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBSphereTagCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDHTMLLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2809,6 +2964,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3286C8C1FC8BF3D00A7F78C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2816,6 +2979,16 @@
 			isa = PBXTargetDependency;
 			target = 65409FBA1B4C842700344D75 /* ureport */;
 			targetProxy = 65409FD11B4C842700344D75 /* PBXContainerItemProxy */;
+		};
+		E3286C8B1FC8BEF300A7F78C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B266AF321F9FE11800C4C968 /* ureport on-the-move */;
+			targetProxy = E3286C8A1FC8BEF300A7F78C /* PBXContainerItemProxy */;
+		};
+		E3286C9B1FC8C20B00A7F78C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B266AF321F9FE11800C4C968 /* ureport on-the-move */;
+			targetProxy = E3286C9A1FC8C20B00A7F78C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2988,6 +3161,7 @@
 		65409FDE1B4C842700344D75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3010,6 +3184,7 @@
 		65409FDF1B4C842700344D75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3045,7 +3220,7 @@
 				INFOPLIST_FILE = "ureport on-the-move-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DONTHEMOVE";
+				OTHER_SWIFT_FLAGS = "-DONTHEMOVE -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport.onthemove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3077,7 +3252,7 @@
 				INFOPLIST_FILE = "ureport on-the-move-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DONTHEMOVE";
+				OTHER_SWIFT_FLAGS = "-DONTHEMOVE -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport.onthemove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3085,6 +3260,72 @@
 				SWIFT_REFLECTION_METADATA_LEVEL = all;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E3286C981FC8BF3D00A7F78C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "ureport on-the-moveTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "in.ureport.onthemove.ureport-on-the-moveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ureport on-the-move";
+			};
+			name = Debug;
+		};
+		E3286C991FC8BF3D00A7F78C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "ureport on-the-moveTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "in.ureport.onthemove.ureport-on-the-moveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ureport on-the-move";
 			};
 			name = Release;
 		};
@@ -3123,6 +3364,15 @@
 			buildConfigurations = (
 				B266B03D1F9FE11800C4C968 /* Debug */,
 				B266B03E1F9FE11800C4C968 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3286C971FC8BF3D00A7F78C /* Build configuration list for PBXNativeTarget "ureport on-the-moveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3286C981FC8BF3D00A7F78C /* Debug */,
+				E3286C991FC8BF3D00A7F78C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

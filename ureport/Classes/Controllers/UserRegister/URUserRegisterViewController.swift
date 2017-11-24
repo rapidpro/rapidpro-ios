@@ -229,6 +229,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         
         URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" :self.country!.code!)) { (rapidProUserDictionary) -> Void in
 
+            FCMChannelManager.createContactAndSave(for: user) {_ in }
             guard let _ = rapidProUserDictionary else {
                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                 return
