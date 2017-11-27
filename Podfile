@@ -3,7 +3,7 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
-    
+
     pod 'TPKeyboardAvoiding'
     pod 'FBSDKLoginKit'
     pod 'FBSDKCoreKit'
@@ -23,14 +23,14 @@ def shared_pods
     pod 'QRCodeReader.swift', '7.2.0'
     pod 'SRKControls', :git => 'https://github.com/Ilhasoft/SRKControls'
     pod 'STTwitter'
-    
+
     pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios’, :branch => 'develop'
 
     pod 'Firebase/Core', '4.0.4'
     pod 'Firebase/Messaging', '4.0.4'
     pod 'Firebase/Auth', '4.0.4'
     pod 'Firebase/Database', '4.0.4'
-    
+
     pod 'fcm-channel-ios'
 
 end
@@ -42,4 +42,3 @@ end
 target "ureport on-the-move" do
     shared_pods
 end
-

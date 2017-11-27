@@ -135,9 +135,22 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             if let contact = FCMChannelManager.activeContact() {
                 let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
                 self.navigationController?.pushViewController(chatVC, animated: true)
+            } else if let user = URUser.activeUser() {
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                FCMChannelManager.createContactAndSave(for: user) {
+                    contact in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    if let contact = contact {
+                        let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
+                        self.navigationController?.pushViewController(chatVC, animated: true)
+                    } else {
+                        //TODO:
+                        print("Couldn't create contact at this moment.")
+                    }
+                }
             } else {
-                print("no active FCM channel contact!")
                 //TODO:
+                print("no active FCM channel contact!")
             }
         } else if let _ = self.listChatRoom[indexPath.row] as? URChatRoom {
             let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell

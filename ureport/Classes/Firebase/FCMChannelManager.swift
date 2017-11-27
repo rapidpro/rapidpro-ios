@@ -19,18 +19,11 @@ class FCMChannelManager {
     static var handlerUrl = ""
     
     static func setup() {
-        //TODO: activate key setting for debug/prod
-        //#if DEBUG
-//    }
-        //else {
-        
-        //        }
         if let user = URUser.activeUser(),
             let userProgram = user.countryProgram,
-            let userCountry = user.country,
-            let dict = NSDictionary(contentsOfFile: Bundle.main.path(forResource: "Key-debug", ofType: "plist")!) {
+            let userCountry = user.country {
             
-            setUpFCMChannel(dict: dict, userProgram: userProgram, userCountry: userCountry)
+            setUpFCMChannel(userProgram: userProgram, userCountry: userCountry)
         }
         
         FCMChannelSettings.setConfiguration(token, channel: channel, url: apiPrefix, handlerURL: handlerUrl)
@@ -53,12 +46,12 @@ class FCMChannelManager {
         defaults.synchronize()
     }
     
-    private static func setUpFCMChannel(dict: NSDictionary, userProgram: String, userCountry: String) {
-        if let keyToken = dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(userProgram)"] as? String {
+    private static func setUpFCMChannel(userProgram: String, userCountry: String) {
+        if let keyToken = URCountryProgramManager.getToken(for: userProgram)  {
             token = keyToken
         }
         
-        if let keyChannel = dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(userProgram)"] as? String {
+        if let keyChannel = URCountryProgramManager.getChannelToken(for: userProgram) {
             channel = keyChannel
         }
         
@@ -67,7 +60,7 @@ class FCMChannelManager {
         handlerUrl = countryProgram.rapidProHostHandler
     }
     
-    static func createContactAndSave(for user: URUser, completion: @escaping (_ success: Bool) -> ()) {
+    static func createContactAndSave(for user: URUser, completion: @escaping (_ contact: FCMChannelContact?) -> ()) {
         if let key = user.key, let name = user.nickname, let fcmToken = user.pushIdentity {
             self.deactivateChannelContact()
 
@@ -81,14 +74,14 @@ class FCMChannelManager {
                     defaults.set(encodedObject, forKey: "fcmchannelcontact")
                     defaults.synchronize()
                     
-                    completion(true)
+                    completion(contact)
                 } else {
                     print("Error: User couldn't register to channel.")
-                    completion(false)
+                    completion(nil)
                 }
             }
         } else {
-            completion(false)
+            completion(nil)
         }
     }
     
