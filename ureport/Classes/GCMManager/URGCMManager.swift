@@ -56,6 +56,11 @@ class URGCMManager {
 
     class func registerUserToChatTopics(_ user: URUser) {
         guard let fcmToken = user.pushIdentity else { return }
+        
+        if let userCountryString = user.country, let programCode = URCountryProgramManager.getCountryProgramByCountry(URCountry(code: userCountryString)).code, let token = URCountryProgramManager.getChannelToken(for: programCode) {
+            URFcmAPI.registerOnTopic(pushIdentity: fcmToken, topic: topicByName(topic: chatTopicsPath, key: token))
+        }
+
         URUserManager.getChatRooms(user, completion: { chatRooms in
             guard let chatRooms = chatRooms else { return }
             for chatRoom in chatRooms {
