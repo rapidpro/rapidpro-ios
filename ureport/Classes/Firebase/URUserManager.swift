@@ -272,7 +272,7 @@ class URUserManager {
                 let totalPoints = currentData.value as! NSNumber
                 let user = URUser.activeUser()
                 user!.points = totalPoints
-                URUser.setActiveUser(user)
+                URUser.setActiveUser(user!)
                 return TransactionResult.success(withValue: currentData)
         }
     }
@@ -293,7 +293,7 @@ class URUserManager {
                 let totalPoints = currentData.value as! NSNumber
                 let user = URUser.activeUser()
                 user!.points = totalPoints
-                URUser.setActiveUser(user)
+                URUser.setActiveUser(user!)
                 return TransactionResult.success(withValue: currentData)
         }
     }

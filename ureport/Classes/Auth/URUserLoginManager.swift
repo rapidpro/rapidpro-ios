@@ -118,7 +118,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     break
                 }
             } else if let user = user {
-                URLoginViewController.updateUserDataInRapidPro(user)
+                URLoginViewController.updateUserDataInRapidPro(user) { _ in }
                 URUserLoginManager.setUserAndCountryProgram(user)
                 completion(nil,true)
             }

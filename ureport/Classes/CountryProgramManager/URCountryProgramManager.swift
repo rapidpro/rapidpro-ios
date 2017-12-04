@@ -21,6 +21,42 @@ class URCountryProgramManager {
         #endif
     }
     
+    class func getToken(for userProgram: String) -> String? {
+        //TODO: activate key setting for debug/prod
+        //#if DEBUG
+        //    }
+        //else {
+        
+        //        }
+        
+        guard let dictPath = Bundle.main.path(forResource: "Key-debug", ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
+        
+        var userProgram = userProgram
+        #if ONTHEMOVE
+            userProgram = "OTM"
+        #endif
+        
+        return dict["\(URConstant.Key.COUNTRY_PROGRAM_TOKEN)\(userProgram)"] as? String
+    }
+    
+    class func getChannelToken(for userProgram: String) -> String? {
+        //TODO: activate key setting for debug/prod
+        //#if DEBUG
+        //    }
+        //else {
+        
+        //        }
+        
+        guard let dictPath = Bundle.main.path(forResource: "Key-debug", ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
+
+        var userProgram = userProgram
+        #if ONTHEMOVE
+            userProgram = "OTM"
+        #endif
+        
+        return dict["\(URConstant.Key.COUNTRY_PROGRAM_CHANNEL)\(userProgram)"] as? String
+    }
+    
     //MARK: On The Move
     class func getOtmProgram() -> URCountryProgram {
         if countryProgram == nil {

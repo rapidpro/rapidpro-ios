@@ -251,6 +251,12 @@
 		97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 97FBAA581C06447B0012D752 /* iso639_2.bundle */; };
 		9BDE960200E2F706453D1171 /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
 		9D20422F64551F9164A63D41 /* Pods_ureport_on_the_move.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */; };
+		A3D254E21FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */; };
+		A3D254E31FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
+		A3D254E41FC5D1BE007B3777 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */; };
+		A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DD1FC5D1BE007B3777 /* Info.plist */; };
+		A3D254E61FC5D1BE007B3777 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
+		A3D254E71FC5D1BE007B3777 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
 		B20EFD2C1FB253C90029897C /* URCountryProgramAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */; };
 		B20EFD2D1FB253C90029897C /* URIPCheckManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */; };
 		B20EFD311FB254CA0029897C /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */; };
@@ -264,22 +270,10 @@
 		B20EFD431FB255F10029897C /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B20EFD441FB255F10029897C /* URChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */; };
 		B20EFD451FB255F10029897C /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */; };
-		B215C6D01FB21EEA00130A3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */; };
-		B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */; };
-		B215C6D51FB2231000130A3D /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65409FBF1B4C842700344D75 /* Info.plist */; };
-		B215C6D81FB2254C00130A3D /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B215C6D61FB2251200130A3D /* GoogleService-Info.plist */; };
-		B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
-		B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
 		B2211A201FB33A1900070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B2211A211FB33A2F00070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
-		B2211A231FB370A400070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
-		B2211A241FB370B000070194 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A221FB370A400070194 /* countryprogramotm.json */; };
-		B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */; };
-		B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */; };
 		B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */; };
 		B251A53C1FA13DBF00CBC02B /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */; };
-		B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
-		B266AF311F9FD74A00C4C968 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF301F9FD74A00C4C968 /* Key-debug.plist */; };
 		B266AF351F9FE11800C4C968 /* URFlowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249321BFBD93D0024384E /* URFlowAction.swift */; };
 		B266AF361F9FE11800C4C968 /* URClosedPollTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6556916D1B7D3DA800525E00 /* URClosedPollTableViewCell.swift */; };
 		B266AF371F9FE11800C4C968 /* URGroupsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65A45CE51B880C3B001C6808 /* URGroupsTableViewCell.swift */; };
@@ -492,7 +486,6 @@
 		B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65816BAB1C74C26D004F9DEB /* URAudioRecorderViewController.xib */; };
 		B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14BC1C9B4DB7009A63A5 /* URMediaFileView.xib */; };
 		B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658D14C81C9C3201009A63A5 /* URMediaImageView.xib */; };
-		B266B01A1F9FE11800C4C968 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF301F9FD74A00C4C968 /* Key-debug.plist */; };
 		B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 650A476C1CDF69ED00197241 /* URAboutViewIPadController.xib */; };
 		B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65A45CEE1B8810DE001C6808 /* URInviteTableViewCell.xib */; };
 		B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65B16FE01BB9F53300BDBDEE /* URRankingTableViewCell.xib */; };
@@ -502,7 +495,6 @@
 		B266B0211F9FE11800C4C968 /* URChoiceResultView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 654850721BB209C80002A3D5 /* URChoiceResultView.xib */; };
 		B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 658949BD1B83E1740087F361 /* ISMenuViewController.xib */; };
 		B266B0241F9FE11800C4C968 /* URNotificationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656562011BD5912500EBA9BD /* URNotificationViewController.xib */; };
-		B266B0251F9FE11800C4C968 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = B266AF2E1F9FD73A00C4C968 /* Key.plist */; };
 		B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 656561F91BD58DD200EBA9BD /* URSettingsTableViewCell.xib */; };
 		B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6554D0971B934CCB009C5E89 /* URNewGroupViewController.xib */; };
 		B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 97B2FABF1C061E5B000820BD /* URTutorialViewController.xib */; };
@@ -522,6 +514,8 @@
 		B266B0371F9FE11800C4C968 /* URPollContributionModalViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 65DBAEC11CEA5E1900A8B514 /* URPollContributionModalViewController.xib */; };
 		B266B0381F9FE11800C4C968 /* URPollViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6566A5C81CD2634400A0730F /* URPollViewIPadController.xib */; };
 		B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */; };
+		B284A2171FBB7D820023E772 /* FCMChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B284A2161FBB7D810023E772 /* FCMChannelManager.swift */; };
+		B284A2181FBB7D850023E772 /* FCMChannelManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B284A2161FBB7D810023E772 /* FCMChannelManager.swift */; };
 		B29674571FB2597F00EFA624 /* URSettingsManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD341FB255CC0029897C /* URSettingsManager.swift */; };
 		B29674581FB2598300EFA624 /* URBackendAuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD301FB254CA0029897C /* URBackendAuthManager.swift */; };
 		B29674591FB2598500EFA624 /* URUserLoginManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */; };
@@ -537,7 +531,15 @@
 		B29674631FB259A500EFA624 /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B29674651FB25B4C00EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
+		B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */; };
 		E00D0327DBB10E421FB22C9E /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
+		E3110BE61FC85BAB006C9D25 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
+		E3110BE71FC85BAF006C9D25 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
+		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
+		E32F1CAE1FC85A20002C04AA /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */; };
+		E32F1CAF1FC85A2A002C04AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */; };
+		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
+		E3B47F9A1FC76E4B00A1D350 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -547,6 +549,20 @@
 			proxyType = 1;
 			remoteGlobalIDString = 65409FBA1B4C842700344D75;
 			remoteInfo = ureport;
+		};
+		E3286C8A1FC8BEF300A7F78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65409FB31B4C842700344D75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B266AF321F9FE11800C4C968;
+			remoteInfo = "ureport on-the-move";
+		};
+		E3286C9A1FC8C20B00A7F78C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 65409FB31B4C842700344D75 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B266AF321F9FE11800C4C968;
+			remoteInfo = "ureport on-the-move";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -606,7 +622,6 @@
 		6533CF431C496627009DF49C /* URRapidProContactUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URRapidProContactUtil.swift; sourceTree = "<group>"; };
 		653413451EC23D4A006DC85D /* URFlow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFlow.swift; sourceTree = "<group>"; };
 		65409FBB1B4C842700344D75 /* ureport.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ureport.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		65409FBF1B4C842700344D75 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		65409FC01B4C842700344D75 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		65409FD01B4C842700344D75 /* ureportTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ureportTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		65409FEC1B4C84DE00344D75 /* URLoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLoginViewController.swift; sourceTree = "<group>"; };
@@ -726,7 +741,6 @@
 		658D85921B554FD600DFB949 /* URStory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStory.swift; sourceTree = "<group>"; };
 		658D85951B558A6700DFB949 /* URAddStoryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAddStoryViewController.swift; sourceTree = "<group>"; };
 		658D85961B558A6700DFB949 /* URAddStoryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URAddStoryViewController.xib; sourceTree = "<group>"; };
-		659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		659A20D21B7ECD6C00D02C69 /* URClosedPollTableViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URClosedPollTableViewController.xib; sourceTree = "<group>"; };
 		659A7A921B4F6C3100B56983 /* URDateUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URDateUtil.swift; sourceTree = "<group>"; };
 		659A7A991B51EFE100B56983 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
@@ -836,6 +850,13 @@
 		97FBAA551C0644120012D752 /* NSLocale+ISO639_2.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSLocale+ISO639_2.h"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.h"; sourceTree = "<group>"; };
 		97FBAA561C0644120012D752 /* NSLocale+ISO639_2.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSLocale+ISO639_2.m"; path = "NSLocaleISO639_2/NSLocale+ISO639_2.m"; sourceTree = "<group>"; };
 		97FBAA581C06447B0012D752 /* iso639_2.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = iso639_2.bundle; sourceTree = "<group>"; };
+		A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
+		A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		A3D254DD1FC5D1BE007B3777 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
+		A3D254DF1FC5D1BE007B3777 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
+		A3D254F11FC5D2B8007B3777 /* ureport-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "ureport-Bridging-Header.h"; sourceTree = "<group>"; };
 		B20EFD2A1FB253C90029897C /* URCountryProgramAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URCountryProgramAPI.swift; sourceTree = "<group>"; };
 		B20EFD2B1FB253C90029897C /* URIPCheckManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URIPCheckManager.swift; sourceTree = "<group>"; };
 		B20EFD2F1FB254CA0029897C /* URUserLoginManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserLoginManager.swift; sourceTree = "<group>"; };
@@ -849,21 +870,21 @@
 		B20EFD3B1FB255F10029897C /* URUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserManager.swift; sourceTree = "<group>"; };
 		B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatRoomManager.swift; sourceTree = "<group>"; };
 		B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
-		B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B215C6D61FB2251200130A3D /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
-		B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		B2211A1F1FB33A1900070194 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
-		B2211A221FB370A400070194 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
 		B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
-		B266AF2E1F9FD73A00C4C968 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Key.plist; path = ../../../../Downloads/Key.plist; sourceTree = "<group>"; };
-		B266AF301F9FD74A00C4C968 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Key-debug.plist"; path = "../../../../Downloads/Key-debug.plist"; sourceTree = "<group>"; };
 		B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ureport on-the-move.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "ureport on-the-move-Info.plist"; path = "/Users/lucasbarros/Documents/Development/ureport-ios/ureport on-the-move-Info.plist"; sourceTree = "<absolute>"; };
 		B26F01F51FA0EB19005C51A6 /* URLoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = URLoginViewController.xib; sourceTree = "<group>"; };
+		B284A2161FBB7D810023E772 /* FCMChannelManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FCMChannelManager.swift; sourceTree = "<group>"; };
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
+		B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ureport on-the-moveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ureport_on_the_moveTests.m; sourceTree = "<group>"; };
+		E3286C941FC8BF3D00A7F78C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -900,6 +921,13 @@
 				B266AFF11F9FE11800C4C968 /* Social.framework in Frameworks */,
 				B266AFF21F9FE11800C4C968 /* Foundation.framework in Frameworks */,
 				9D20422F64551F9164A63D41 /* Pods_ureport_on_the_move.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3286C8D1FC8BF3D00A7F78C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -967,6 +995,8 @@
 			children = (
 				65409FF01B4C977600344D75 /* Foundation.framework */,
 				65409FBD1B4C842700344D75 /* ureport */,
+				E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */,
+				E3286C911FC8BF3D00A7F78C /* ureport on-the-moveTests */,
 				65409FBC1B4C842700344D75 /* Products */,
 				765863F8BACD5E4ED452B82C /* Frameworks */,
 				4306F579F0DBD3251E38FF3D /* Pods */,
@@ -979,6 +1009,7 @@
 				65409FBB1B4C842700344D75 /* ureport.app */,
 				65409FD01B4C842700344D75 /* ureportTests.xctest */,
 				B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */,
+				E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -988,27 +1019,13 @@
 			children = (
 				B26F01F11FA0EAAA005C51A6 /* OnTheMove */,
 				65609F2B1C72C1EA0039A8AB /* ureport.entitlements */,
+				A3D254F11FC5D2B8007B3777 /* ureport-Bridging-Header.h */,
 				65409FE01B4C845200344D75 /* Classes */,
 				65409FEA1B4C845200344D75 /* Resources */,
 				65409FC01B4C842700344D75 /* AppDelegate.swift */,
-				65409FBE1B4C842700344D75 /* Supporting Files */,
+				A3D254D91FC5D1BE007B3777 /* SupportFiles */,
 			);
 			path = ureport;
-			sourceTree = "<group>";
-		};
-		65409FBE1B4C842700344D75 /* Supporting Files */ = {
-			isa = PBXGroup;
-			children = (
-				B2211A1A1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist */,
-				B2211A191FB3391E00070194 /* FirebaseDatabaseProd-Info.plist */,
-				B215C6CF1FB21EEA00130A3D /* GoogleService-Info.plist */,
-				659A20D01B7EC9EF00D02C69 /* ureport-Bridging-Header.h */,
-				65409FBF1B4C842700344D75 /* Info.plist */,
-				B266B0401F9FE11800C4C968 /* ureport on-the-move-Info.plist */,
-				B266AF301F9FD74A00C4C968 /* Key-debug.plist */,
-				B266AF2E1F9FD73A00C4C968 /* Key.plist */,
-			);
-			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		65409FE01B4C845200344D75 /* Classes */ = {
@@ -1237,7 +1254,7 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				B2211A221FB370A400070194 /* countryprogramotm.json */,
+				B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */,
 				B2211A1F1FB33A1900070194 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
 				97FBAA581C06447B0012D752 /* iso639_2.bundle */,
@@ -1776,6 +1793,7 @@
 		65F7DA281C073544001AFA22 /* Firebase */ = {
 			isa = PBXGroup;
 			children = (
+				B284A2161FBB7D810023E772 /* FCMChannelManager.swift */,
 				B20EFD391FB255F10029897C /* URChatMemberManager.swift */,
 				B20EFD381FB255F10029897C /* URChatMessageManager.swift */,
 				B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */,
@@ -1888,6 +1906,19 @@
 			name = NSLocaleISO639_2;
 			sourceTree = "<group>";
 		};
+		A3D254D91FC5D1BE007B3777 /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				A3D254DA1FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist */,
+				A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */,
+				A3D254DC1FC5D1BE007B3777 /* GoogleService-Info.plist */,
+				A3D254DD1FC5D1BE007B3777 /* Info.plist */,
+				A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */,
+				A3D254DF1FC5D1BE007B3777 /* Key.plist */,
+			);
+			path = SupportFiles;
+			sourceTree = "<group>";
+		};
 		B20EFD291FB253A60029897C /* Proxy */ = {
 			isa = PBXGroup;
 			children = (
@@ -1918,7 +1949,7 @@
 			isa = PBXGroup;
 			children = (
 				B26F01F21FA0EACF005C51A6 /* Classes */,
-				B2B4F45F1FB11BBC0080F4C1 /* Suppoting Files */,
+				E35C91491FC76053009A3C9B /* SupportFiles */,
 			);
 			path = OnTheMove;
 			sourceTree = "<group>";
@@ -1957,12 +1988,22 @@
 			path = UserRegister;
 			sourceTree = "<group>";
 		};
-		B2B4F45F1FB11BBC0080F4C1 /* Suppoting Files */ = {
+		E3286C911FC8BF3D00A7F78C /* ureport on-the-moveTests */ = {
 			isa = PBXGroup;
 			children = (
-				B215C6D61FB2251200130A3D /* GoogleService-Info.plist */,
+				E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */,
+				E3286C941FC8BF3D00A7F78C /* Info.plist */,
 			);
-			name = "Suppoting Files";
+			path = "ureport on-the-moveTests";
+			sourceTree = "<group>";
+		};
+		E35C91491FC76053009A3C9B /* SupportFiles */ = {
+			isa = PBXGroup;
+			children = (
+				E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */,
+				E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */,
+			);
+			path = SupportFiles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -2001,6 +2042,7 @@
 			);
 			dependencies = (
 				65409FD21B4C842700344D75 /* PBXTargetDependency */,
+				E3286C8B1FC8BEF300A7F78C /* PBXTargetDependency */,
 			);
 			name = ureportTests;
 			productName = ureportTests;
@@ -2027,6 +2069,24 @@
 			productName = ureport;
 			productReference = B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */;
 			productType = "com.apple.product-type.application";
+		};
+		E3286C8F1FC8BF3D00A7F78C /* ureport on-the-moveTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E3286C971FC8BF3D00A7F78C /* Build configuration list for PBXNativeTarget "ureport on-the-moveTests" */;
+			buildPhases = (
+				E3286C8C1FC8BF3D00A7F78C /* Sources */,
+				E3286C8D1FC8BF3D00A7F78C /* Frameworks */,
+				E3286C8E1FC8BF3D00A7F78C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E3286C9B1FC8C20B00A7F78C /* PBXTargetDependency */,
+			);
+			name = "ureport on-the-moveTests";
+			productName = "ureport on-the-moveTests";
+			productReference = E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
@@ -2069,6 +2129,12 @@
 						DevelopmentTeam = 5DSXDX2N9P;
 						ProvisioningStyle = Automatic;
 					};
+					E3286C8F1FC8BF3D00A7F78C = {
+						CreatedOnToolsVersion = 9.1;
+						DevelopmentTeam = 5DSXDX2N9P;
+						ProvisioningStyle = Automatic;
+						TestTargetID = B266AF321F9FE11800C4C968;
+					};
 				};
 			};
 			buildConfigurationList = 65409FB61B4C842700344D75 /* Build configuration list for PBXProject "ureport" */;
@@ -2092,6 +2158,7 @@
 				65409FBA1B4C842700344D75 /* ureport */,
 				B266AF321F9FE11800C4C968 /* ureport on-the-move */,
 				65409FCF1B4C842700344D75 /* ureportTests */,
+				E3286C8F1FC8BF3D00A7F78C /* ureport on-the-moveTests */,
 			);
 		};
 /* End PBXProject section */
@@ -2110,7 +2177,6 @@
 				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
-				B2211A1B1FB3391E00070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				658BD0321CEBB0540019E885 /* URPollResultViewController.xib in Resources */,
 				651EC7171D5B9D20008695E3 /* URAddContributionTableViewCell.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
@@ -2118,15 +2184,17 @@
 				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
+				A3D254E61FC5D1BE007B3777 /* Key-debug.plist in Resources */,
+				A3D254E21FC5D1BE007B3777 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				652F8B121BA214810096C8DC /* URPollQuestionViewController.xib in Resources */,
 				65D0F3601BA73A4D00E5D367 /* URMarkerTableViewController.xib in Resources */,
+				A3D254E71FC5D1BE007B3777 /* Key.plist in Resources */,
 				65DFCCFB1CE273B600E4DFD9 /* URProfileViewController.xib in Resources */,
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
 				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
 				B2211A201FB33A1900070194 /* countryprogram.json in Resources */,
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
-				B2211A1C1FB3391E00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
 				65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */,
 				65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */,
@@ -2135,12 +2203,12 @@
 				972817A91BFF9C3000FBD20E /* URChoiceResponseView.xib in Resources */,
 				65DFCCF71CE24EC700E4DFD9 /* terms.rtf in Resources */,
 				97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */,
+				A3D254E31FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */,
 				65FAF0CA1BC2C2E200F8B380 /* URPasswordEditViewController.xib in Resources */,
 				65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */,
 				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
 				658D14CA1C9C3201009A63A5 /* URMediaImageView.xib in Resources */,
-				B266AF311F9FD74A00C4C968 /* Key-debug.plist in Resources */,
 				650A476D1CDF69ED00197241 /* URAboutViewIPadController.xib in Resources */,
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
 				65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */,
@@ -2150,18 +2218,17 @@
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
-				B2211A231FB370A400070194 /* countryprogramotm.json in Resources */,
+				A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */,
 				656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */,
-				B266AF2F1F9FD73A00C4C968 /* Key.plist in Resources */,
 				65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */,
 				656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */,
 				6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */,
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
+				E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
-				B215C6D51FB2231000130A3D /* Info.plist in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
 				65D563001BA9E8A1001AEF54 /* URStoryContributionViewController.xib in Resources */,
 				65C55FE01BBCD174007F66FA /* URModalProfileViewController.xib in Resources */,
@@ -2170,7 +2237,7 @@
 				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
-				B215C6D01FB21EEA00130A3D /* GoogleService-Info.plist in Resources */,
+				A3D254E41FC5D1BE007B3777 /* GoogleService-Info.plist in Resources */,
 				65DFCCF31CE242BE00E4DFD9 /* URWriteStoryView.xib in Resources */,
 				65DBAEC31CEA5E1900A8B514 /* URPollContributionModalViewController.xib in Resources */,
 				6566A5C91CD2634400A0730F /* URPollViewIPadController.xib in Resources */,
@@ -2194,19 +2261,21 @@
 				B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */,
 				B266AFF81F9FE11800C4C968 /* URMediaView.xib in Resources */,
 				B266AFF91F9FE11800C4C968 /* URCurrentPollView.xib in Resources */,
-				B2211A2B1FB3B03F00070194 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
+				E32F1CAE1FC85A20002C04AA /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFD1F9FE11800C4C968 /* URLoginCredentialsViewController.xib in Resources */,
 				B266AFFE1F9FE11800C4C968 /* URPollResultViewController.xib in Resources */,
 				B266AFFF1F9FE11800C4C968 /* URAddContributionTableViewCell.xib in Resources */,
 				B266B0001F9FE11800C4C968 /* URMyChatsViewController.xib in Resources */,
 				B266B0011F9FE11800C4C968 /* URMediaSourceViewController.xib in Resources */,
 				B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */,
+				E3110BE61FC85BAB006C9D25 /* Key-debug.plist in Resources */,
 				B266B0021F9FE11800C4C968 /* URStoryContributionViewIPadController.xib in Resources */,
 				B266B0031F9FE11800C4C968 /* URStoriesTableViewCell.xib in Resources */,
 				B266B0041F9FE11800C4C968 /* ISMenuTableViewCell.xib in Resources */,
+				E3110BE71FC85BAF006C9D25 /* Key.plist in Resources */,
 				B266B0051F9FE11800C4C968 /* URPollQuestionViewController.xib in Resources */,
 				B266B0061F9FE11800C4C968 /* URMarkerTableViewController.xib in Resources */,
 				B266B0071F9FE11800C4C968 /* URProfileViewController.xib in Resources */,
@@ -2215,6 +2284,7 @@
 				B266B0091F9FE11800C4C968 /* URPollResultTableViewCell.xib in Resources */,
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
+				E32F1CAF1FC85A2A002C04AA /* GoogleService-Info.plist in Resources */,
 				B266B00C1F9FE11800C4C968 /* URNewsTableViewCell.xib in Resources */,
 				B266B00D1F9FE11800C4C968 /* URGroupDetailsViewController.xib in Resources */,
 				B266B00E1F9FE11800C4C968 /* URContributionTableViewCell.xib in Resources */,
@@ -2222,30 +2292,27 @@
 				B266B0101F9FE11800C4C968 /* URForgotPasswordViewController.xib in Resources */,
 				B266B0111F9FE11800C4C968 /* URChoiceResponseView.xib in Resources */,
 				B266B0121F9FE11800C4C968 /* terms.rtf in Resources */,
+				E3B47F9A1FC76E4B00A1D350 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B0131F9FE11800C4C968 /* URTutoView.xib in Resources */,
 				B266B0151F9FE11800C4C968 /* iso3-country-code.json in Resources */,
 				B266B0161F9FE11800C4C968 /* URPasswordEditViewController.xib in Resources */,
 				B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */,
 				B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */,
 				B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */,
-				B266B01A1F9FE11800C4C968 /* Key-debug.plist in Resources */,
 				B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */,
 				B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */,
-				B215C6D41FB2230C00130A3D /* ureport on-the-move-Info.plist in Resources */,
 				B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */,
 				B266B01E1F9FE11800C4C968 /* URClosedPollTableViewCell.xib in Resources */,
 				B266B01F1F9FE11800C4C968 /* URMediaSourceViewIPadController.xib in Resources */,
 				B266B0201F9FE11800C4C968 /* URChatTableViewCell.xib in Resources */,
-				B2211A241FB370B000070194 /* countryprogramotm.json in Resources */,
 				B266B0211F9FE11800C4C968 /* URChoiceResultView.xib in Resources */,
+				B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */,
 				B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */,
 				B266B0241F9FE11800C4C968 /* URNotificationViewController.xib in Resources */,
-				B266B0251F9FE11800C4C968 /* Key.plist in Resources */,
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
-				B2211A2C1FB3B04200070194 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
 				B266B02D1F9FE11800C4C968 /* URMarkerViewIPadController.xib in Resources */,
@@ -2257,10 +2324,16 @@
 				B266B0331F9FE11800C4C968 /* URNewGroupTableViewCell.xib in Resources */,
 				B266B0341F9FE11800C4C968 /* URMarkerTableViewCell.xib in Resources */,
 				B266B0351F9FE11800C4C968 /* ImagesV2.xcassets in Resources */,
-				B215C6D81FB2254C00130A3D /* GoogleService-Info.plist in Resources */,
 				B266B0361F9FE11800C4C968 /* URWriteStoryView.xib in Resources */,
 				B266B0371F9FE11800C4C968 /* URPollContributionModalViewController.xib in Resources */,
 				B266B0381F9FE11800C4C968 /* URPollViewIPadController.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E3286C8E1FC8BF3D00A7F78C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2273,9 +2346,14 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport on-the-move/Pods-ureport on-the-move-resources.sh",
+				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2297,7 +2375,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		47BC1884708E957A8A4EA188 /* [CP] Copy Pods Resources */ = {
@@ -2307,8 +2385,9 @@
 			);
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-ureport/Pods-ureport-resources.sh",
-				"${PODS_ROOT}/GoogleAuthUtilities/Frameworks/frameworks/GoogleAuthUtilities.framework/Resources/GTMOAuth2ViewTouch.xib",
 				"${PODS_ROOT}/GoogleSignIn/Resources/GoogleSignIn.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterKitResources.bundle",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework/TwitterShareExtensionUIResources.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
@@ -2325,13 +2404,16 @@
 			files = (
 			);
 			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ureport on-the-move-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
 		ECBA084B5B20B83D9A419AB2 /* [CP] Embed Pods Frameworks */ = {
@@ -2350,21 +2432,26 @@
 				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
 				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
-				"${BUILT_PRODUCTS_DIR}/Firebase/Firebase.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
 				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
 				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MDHTMLLabel/MDHTMLLabel.framework",
 				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
 				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -2378,21 +2465,26 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Firebase.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDHTMLLabel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2406,9 +2498,70 @@
 			files = (
 			);
 			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ureport on-the-move/Pods-ureport on-the-move-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSS3/AWSS3.framework",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/AlamofireObjectMapper/AlamofireObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Bolts/Bolts.framework",
+				"${BUILT_PRODUCTS_DIR}/DBSphereTagCloud/DBSphereTagCloud.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKCoreKit/FBSDKCoreKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FBSDKLoginKit/FBSDKLoginKit.framework",
+				"${BUILT_PRODUCTS_DIR}/FLAnimatedImage/FLAnimatedImage.framework",
+				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/ISScrollViewPageSwift/ISScrollViewPageSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/IlhasoftCore/IlhasoftCore.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQMessagesViewController/JSQMessagesViewController.framework",
+				"${BUILT_PRODUCTS_DIR}/JSQSystemSoundPlayer/JSQSystemSoundPlayer.framework",
+				"${BUILT_PRODUCTS_DIR}/MBProgressHUD/MBProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/MDHTMLLabel/MDHTMLLabel.framework",
+				"${BUILT_PRODUCTS_DIR}/NYTPhotoViewer/NYTPhotoViewer.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Proposer/Proposer.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/QRCodeReader.swift/QRCodeReader.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SRKControls/SRKControls.framework",
+				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
+				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
+				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSS3.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AlamofireObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Bolts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DBSphereTagCloud.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKCoreKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FBSDKLoginKit.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FLAnimatedImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ISScrollViewPageSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IlhasoftCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQMessagesViewController.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JSQSystemSoundPlayer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MBProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDHTMLLabel.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/NYTPhotoViewer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Proposer.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/QRCodeReader.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SRKControls.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -2528,6 +2681,7 @@
 				B29674651FB25B4C00EFA624 /* URFcmAPI.swift in Sources */,
 				6515FBB91B8E0B4000CEEC3B /* URMessagesViewController.swift in Sources */,
 				6556909D1B7D14BA00525E00 /* URGroupChatRoom.swift in Sources */,
+				B284A2171FBB7D820023E772 /* FCMChannelManager.swift in Sources */,
 				655690A31B7D157600525E00 /* URContribution.swift in Sources */,
 				B20EFD431FB255F10029897C /* URUserManager.swift in Sources */,
 				65EA8C1A1BAFAEA900F2E29E /* URCountry.swift in Sources */,
@@ -2727,6 +2881,7 @@
 				B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */,
 				B266AF9D1F9FE11800C4C968 /* URMessagesViewController.swift in Sources */,
 				B296745F1FB2599B00EFA624 /* URContributionManager.swift in Sources */,
+				B284A2181FBB7D850023E772 /* FCMChannelManager.swift in Sources */,
 				B266AF9E1F9FE11800C4C968 /* URGroupChatRoom.swift in Sources */,
 				B266AF9F1F9FE11800C4C968 /* URContribution.swift in Sources */,
 				B266AFA01F9FE11800C4C968 /* URCountry.swift in Sources */,
@@ -2809,6 +2964,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		E3286C8C1FC8BF3D00A7F78C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -2816,6 +2979,16 @@
 			isa = PBXTargetDependency;
 			target = 65409FBA1B4C842700344D75 /* ureport */;
 			targetProxy = 65409FD11B4C842700344D75 /* PBXContainerItemProxy */;
+		};
+		E3286C8B1FC8BEF300A7F78C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B266AF321F9FE11800C4C968 /* ureport on-the-move */;
+			targetProxy = E3286C8A1FC8BEF300A7F78C /* PBXContainerItemProxy */;
+		};
+		E3286C9B1FC8C20B00A7F78C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B266AF321F9FE11800C4C968 /* ureport on-the-move */;
+			targetProxy = E3286C9A1FC8C20B00A7F78C /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -2943,7 +3116,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = ureport/Info.plist;
+				INFOPLIST_FILE = ureport/SupportFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport;
@@ -2973,7 +3146,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)",
 				);
-				INFOPLIST_FILE = ureport/Info.plist;
+				INFOPLIST_FILE = ureport/SupportFiles/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport;
@@ -2988,6 +3161,7 @@
 		65409FDE1B4C842700344D75 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3010,6 +3184,7 @@
 		65409FDF1B4C842700344D75 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -3045,7 +3220,7 @@
 				INFOPLIST_FILE = "ureport on-the-move-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DONTHEMOVE";
+				OTHER_SWIFT_FLAGS = "-DONTHEMOVE -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport.onthemove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
@@ -3077,7 +3252,7 @@
 				INFOPLIST_FILE = "ureport on-the-move-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "-DONTHEMOVE";
+				OTHER_SWIFT_FLAGS = "-DONTHEMOVE -DDEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = in.ureport.onthemove;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -3085,6 +3260,72 @@
 				SWIFT_REFLECTION_METADATA_LEVEL = all;
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		E3286C981FC8BF3D00A7F78C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "ureport on-the-moveTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "in.ureport.onthemove.ureport-on-the-moveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ureport on-the-move";
+			};
+			name = Debug;
+		};
+		E3286C991FC8BF3D00A7F78C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_CODE_COVERAGE = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = "ureport on-the-moveTests/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "in.ureport.onthemove.ureport-on-the-moveTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ureport on-the-move";
 			};
 			name = Release;
 		};
@@ -3123,6 +3364,15 @@
 			buildConfigurations = (
 				B266B03D1F9FE11800C4C968 /* Debug */,
 				B266B03E1F9FE11800C4C968 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E3286C971FC8BF3D00A7F78C /* Build configuration list for PBXNativeTarget "ureport on-the-moveTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E3286C981FC8BF3D00A7F78C /* Debug */,
+				E3286C991FC8BF3D00A7F78C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

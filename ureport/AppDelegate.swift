@@ -41,22 +41,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         URCountryProgramManager.deactivateSwitchCountryProgram()
 
-        #if DEBUG
+//        #if DEBUG
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
-        #else
-            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
-                dump(databaseOptions)
-                FirebaseApp.configure(name: "database", options: databaseOptions)
-            }
-        #endif
+//        #else
+//            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
+//                dump(databaseOptions)
+//                FirebaseApp.configure(name: "database", options: databaseOptions)
+//            }
+//        #endif
 
         FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
         requestPermissionForPushNotification(application)
+        FCMChannelManager.setup()
         setupAWS()
         createDirectoryToImageUploads()
         Messaging.messaging().delegate = self
@@ -104,7 +105,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     print(error.localizedDescription)
                 } else {
                     print("success: \(success)")
-                    application.registerForRemoteNotifications()
+                    DispatchQueue.main.async {
+                        application.registerForRemoteNotifications()
+                    }
                 }
             })
         } else {
@@ -260,6 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         if let fcmToken = URSettingsManager.getFCMToken(), let user = URUser.activeUser() {
             user.pushIdentity = fcmToken
+            URUser.setActiveUser(user)
             URUserManager.updatePushIdentity(user, completion: { success in
                 guard success else { return }
                 URGCMManager.onFCMRegistered(user: user)
@@ -283,8 +287,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        if let user = URUser.activeUser() {
+            user.pushIdentity = fcmToken
+            URUser.setActiveUser(user)
+        }
+        
         print("Firebase registration token was refreshed: \(fcmToken)")
         URSettingsManager.saveFCMToken(fcmToken: fcmToken)
+        FCMChannelManager.saveFCMToken(fcmToken: fcmToken)
     }
 }
 

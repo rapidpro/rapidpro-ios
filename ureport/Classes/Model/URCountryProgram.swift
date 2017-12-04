@@ -14,6 +14,7 @@ class URCountryProgram: Serializable {
     var themeColor: UIColor!
     var name: String!
     var org: NSNumber?
+    var rapidProHostHandler: String!
     var rapidProHostAPI: String!
     var ureportHostAPI: String!
     var twitter: String?
@@ -28,7 +29,8 @@ class URCountryProgram: Serializable {
         self.name = dictionary["name"] as! String
         self.twitter = dictionary["twitter"] as? String
         self.facebook = dictionary["facebook"] as? String
-        self.rapidProHostAPI = dictionary["rapidProHostAPI"] as! String
+        self.rapidProHostHandler = "\(dictionary["rapidProHost"] as! String)\(URConstant.RapidPro.HANDLER_SUFIX)"
+        self.rapidProHostAPI = "\(dictionary["rapidProHost"] as! String)\(URConstant.RapidPro.API_SUFIX)"
         self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
         self.groupName = dictionary["groupName"] as! String
         self.stateField = dictionary["stateField"] as? String

@@ -8,8 +8,12 @@
 
 import UIKit
 import ObjectMapper
+import FirebaseDatabase
+import fcm_channel_ios
 
 class URUser: Serializable {
+    
+    static let ref = URFireBaseManager.sharedInstance().child("users")
     
     var key: String!
     var nickname: String?
@@ -33,7 +37,7 @@ class URUser: Serializable {
     var moderator:NSNumber?
     var masterModerator:NSNumber?
     var socialUid:String?
-    
+
     override init() {
         super.init()
     }
@@ -49,16 +53,17 @@ class URUser: Serializable {
         if encodedData != nil {
             let user: URUser = URUser(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
             return user
-        }else{
+        } else{
             return nil
         }
         
     }
     
-    static func setActiveUser(_ user: URUser!) {
+    static func setActiveUser(_ user: URUser) {
         self.deactivateUser()
         let defaults: UserDefaults = UserDefaults.standard
-        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: user.toDictionary())
+        let userDict = user.toDictionary()
+        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: userDict)
         defaults.set(encodedObject, forKey: "user")
         defaults.synchronize()
     }
@@ -68,5 +73,4 @@ class URUser: Serializable {
         defaults.removeObject(forKey: "user")
         defaults.synchronize()
     }
-
 }

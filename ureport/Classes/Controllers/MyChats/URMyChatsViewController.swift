@@ -1,4 +1,4 @@
-//
+ //
 //  URMyChatsViewController.swift
 //  ureport
 //
@@ -8,6 +8,8 @@
 
 import UIKit
 import MBProgressHUD
+import fcm_channel_ios
+
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -130,7 +132,26 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let _ = self.listChatRoom[indexPath.row] as? URCountryProgram {
-            print("Open country program")
+            if let contact = FCMChannelManager.activeContact() {
+                let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
+                self.navigationController?.pushViewController(chatVC, animated: true)
+            } else if let user = URUser.activeUser() {
+                MBProgressHUD.showAdded(to: self.view, animated: true)
+                FCMChannelManager.createContactAndSave(for: user) {
+                    contact in
+                    MBProgressHUD.hide(for: self.view, animated: true)
+                    if let contact = contact {
+                        let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
+                        self.navigationController?.pushViewController(chatVC, animated: true)
+                    } else {
+                        //TODO:
+                        print("Couldn't create contact at this moment.")
+                    }
+                }
+            } else {
+                //TODO:
+                print("no active FCM channel contact!")
+            }
         } else if let _ = self.listChatRoom[indexPath.row] as? URChatRoom {
             let cell = tableView.cellForRow(at: indexPath) as! URChatTableViewCell
             self.currentChatRoom = cell.chatRoom

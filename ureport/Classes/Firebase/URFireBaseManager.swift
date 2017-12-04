@@ -19,15 +19,15 @@ enum URFireBaseManagerAuthError: Error {
 
 class URFireBaseManager {
 
-#if DEBUG
+//#if DEBUG
     static let Properties = "Key-debug"
     static let region = AWSRegionType.USEast1
     static let credentialsProvider: AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
-#else
-    static let Properties = "Key"
-    static let region = AWSRegionType.EUWest1
-    static let credentialsProvider: AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
-#endif
+//#else
+//    static let Properties = "Key"
+//    static let region = AWSRegionType.EUWest1
+//    static let credentialsProvider: AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+//#endif
 
     static var databaseApp: FirebaseApp {
         return FirebaseApp.app(name: "database")!
