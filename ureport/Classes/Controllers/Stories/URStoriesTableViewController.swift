@@ -14,8 +14,8 @@ import IlhasoftCore
 
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     
-    let imgViewHistoryHeight:CGFloat = 188.0
-    let fullHeightTableViewCell:CGFloat = 497
+//    let imgViewHistoryHeight:CGFloat = 188.0
+//    let fullHeightTableViewCell:CGFloat = 497
     let contentViewBottom = 2
     let storyManager = URStoryManager()
     var storyList:[URStory] = []
@@ -158,19 +158,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        
-        if (indexPath as NSIndexPath).row < self.storyList.count {
-            let story = storyList[(indexPath as NSIndexPath).row]
-            
-            if story.cover != nil && story.cover?.url != nil {
-                return fullHeightTableViewCell
-            }else {
-                return fullHeightTableViewCell - imgViewHistoryHeight
-            }
-        }else {
-            return 245
-        }
-        
+        return UITableViewAutomaticDimension
     }
     
     override func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
@@ -271,6 +259,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         self.tableView.register(UINib(nibName: "URStoriesTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URStoriesTableViewCell.self))
         self.tableView.register(UINib(nibName: "URNewsTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URNewsTableViewCell.self))
         self.tableView.separatorColor = UIColor.clear
+        self.tableView.estimatedRowHeight = 300
+        self.tableView.rowHeight = UITableViewAutomaticDimension
     }
     
     //MARK: StoryManagerDelegate

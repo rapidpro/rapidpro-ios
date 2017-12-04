@@ -1,22 +1,32 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10116" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="HelveticaNeue.ttc">
+            <string>HelveticaNeue</string>
+            <string>HelveticaNeue-Bold</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" rowHeight="248" id="DaG-py-5jO" customClass="URNewsTableViewCell" customModule="ureport" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="1025" height="254"/>
+            <rect key="frame" x="0.0" y="0.0" width="576" height="248"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="DaG-py-5jO" id="PoS-It-cL1">
-                <rect key="frame" x="0.0" y="0.0" width="1025" height="253.5"/>
+                <rect key="frame" x="0.0" y="0.0" width="576" height="247.5"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JZh-Td-nWv" userLabel="ViewSeparator">
                         <rect key="frame" x="5" y="239" width="1015" height="7"/>
-                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.66666668653488159" green="0.66666668653488159" blue="0.66666668653488159" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="7" id="GVQ-ZZ-O27">
                                 <variation key="widthClass=regular" constant="6"/>
@@ -24,44 +34,44 @@
                         </constraints>
                     </view>
                     <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="laz-09-2M8">
-                        <rect key="frame" x="0.0" y="0.0" width="1025" height="253.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="576" height="247.5"/>
                         <subviews>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="npl-Yt-7Yp">
-                                <rect key="frame" x="5" y="5" width="1015" height="240"/>
+                                <rect key="frame" x="5" y="5" width="566" height="234"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="xhB-Ms-LTB">
-                                        <rect key="frame" x="0.0" y="0.0" width="1015" height="155"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="566" height="155"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="155" id="JRq-cf-yhx"/>
                                         </constraints>
                                     </imageView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hSm-Hp-u4x" userLabel="OpacityView">
-                                        <rect key="frame" x="0.0" y="0.0" width="1015" height="155"/>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="566" height="155"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="155" id="XIx-z4-dZU"/>
                                         </constraints>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increasing Immunization Coverage in Uganda" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="DX7-nm-dIA">
-                                        <rect key="frame" x="13" y="71" width="994" height="45"/>
+                                        <rect key="frame" x="13" y="71" width="545" height="45"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="45" id="d5E-xg-jdy"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hashtags" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="OMZ-5J-ArV">
-                                        <rect key="frame" x="13" y="124" width="994" height="19"/>
+                                        <rect key="frame" x="13" y="124" width="545" height="19"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="19" id="dNd-9q-IAQ"/>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
-                                        <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
-                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="shadowColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <size key="shadowOffset" width="1" height="1"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nvS-Ds-oeJ">
@@ -70,11 +80,11 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="nUL-83-jmc">
                                                 <rect key="frame" x="0.0" y="3" width="92" height="13"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-Bold" family="Helvetica Neue" pointSize="10"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.25882352939999997" green="0.71372549019999998" blue="0.90588235289999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstItem="nUL-83-jmc" firstAttribute="top" secondItem="nvS-Ds-oeJ" secondAttribute="top" constant="3" id="9cv-aU-Uji"/>
                                             <constraint firstAttribute="width" constant="92" id="Gat-nm-ree"/>
@@ -93,18 +103,18 @@
                                         </variation>
                                     </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Increasing Immunization Coverage in Uganda: The Community Problem-solving and Strategy Development Approach" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xjR-UX-FRj">
-                                        <rect key="frame" x="13" y="163" width="994" height="63"/>
+                                        <rect key="frame" x="13" y="163" width="545" height="63"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="63" id="g7D-5u-DZs">
                                                 <variation key="widthClass=regular" constant="63"/>
                                             </constraint>
                                         </constraints>
                                         <fontDescription key="fontDescription" name="HelveticaNeue" family="Helvetica Neue" pointSize="14"/>
-                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                 </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="OMZ-5J-ArV" secondAttribute="trailing" constant="8" id="25b-Qb-KLz">
                                         <variation key="widthClass=regular" constant="7"/>
@@ -133,6 +143,7 @@
                                     <constraint firstItem="xhB-Ms-LTB" firstAttribute="top" secondItem="npl-Yt-7Yp" secondAttribute="top" id="t3T-zQ-66D"/>
                                     <constraint firstItem="nvS-Ds-oeJ" firstAttribute="leading" secondItem="npl-Yt-7Yp" secondAttribute="leading" id="up5-pO-EHn"/>
                                     <constraint firstItem="xjR-UX-FRj" firstAttribute="top" secondItem="xhB-Ms-LTB" secondAttribute="bottom" constant="8" id="uzM-FG-T35"/>
+                                    <constraint firstAttribute="bottom" secondItem="xjR-UX-FRj" secondAttribute="bottom" constant="8" id="vpP-hr-eHK"/>
                                     <constraint firstItem="OMZ-5J-ArV" firstAttribute="leading" secondItem="npl-Yt-7Yp" secondAttribute="leading" constant="13" id="wZD-cZ-1y6"/>
                                     <constraint firstAttribute="trailing" secondItem="DX7-nm-dIA" secondAttribute="trailing" constant="8" id="zd2-rn-Lc2">
                                         <variation key="widthClass=regular" constant="12"/>
@@ -148,7 +159,7 @@
                                 </variation>
                             </view>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="npl-Yt-7Yp" secondAttribute="trailing" constant="5" id="4x6-Bz-iK0">
                                 <variation key="widthClass=regular" constant="6"/>
@@ -182,7 +193,7 @@
                         </variation>
                     </view>
                 </subviews>
-                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+                <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                 <constraints>
                     <constraint firstAttribute="trailing" secondItem="laz-09-2M8" secondAttribute="trailing" id="0hF-kt-tst">
                         <variation key="widthClass=regular" constant="254"/>
@@ -234,7 +245,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
-            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.93725490199999995" green="0.93725490199999995" blue="0.95686274510000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <connections>
                 <outlet property="bgView" destination="npl-Yt-7Yp" id="2Ux-Sb-jHR"/>
                 <outlet property="imgNew" destination="xhB-Ms-LTB" id="opE-XY-4dL"/>
@@ -246,7 +257,7 @@
                 <outlet property="viewOpacityImage" destination="hSm-Hp-u4x" id="hHY-QV-LXc"/>
                 <outlet property="viewSeparator" destination="JZh-Td-nWv" id="mVn-26-dLQ"/>
             </connections>
-            <point key="canvasLocation" x="363.5" y="258"/>
+            <point key="canvasLocation" x="139" y="270.5"/>
         </tableViewCell>
     </objects>
 </document>

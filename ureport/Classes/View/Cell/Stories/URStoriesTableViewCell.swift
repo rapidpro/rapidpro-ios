@@ -21,6 +21,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var lbContributions: UILabel!
     @IBOutlet weak var lbMarkers: UILabel!
     @IBOutlet weak var lbLikes: UILabel!
+    @IBOutlet weak var lbDate: UILabel!
     @IBOutlet weak var lbAttachments: UILabel!
     @IBOutlet weak var imgStory: UIImageView!
     @IBOutlet weak var imgLike: UIImageView!
@@ -233,7 +234,15 @@ class URStoriesTableViewCell: UITableViewCell {
             }
         }
         
-        self.lbTitle.text = story.title!        
+        self.lbTitle.text = story.title!
+        
+        if let createdDate = story.createdDate {
+            let interval = Int(createdDate)
+            let date =  Date(timeIntervalSince1970: TimeInterval(interval/1000))
+            self.lbDate.text = URDateUtil.birthDayFormatter(date)
+        } else {
+            self.lbDate.text = ""
+        }
         
         self.lbMarkers.text = story.markers
         self.lbDescription.text = story.content
