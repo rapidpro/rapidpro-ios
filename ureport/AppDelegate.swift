@@ -44,7 +44,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        #if DEBUG
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
-            }
+            } /*erase after #if DEBUG is reenabled */else {
+                FirebaseApp.configure()
+        }
 //        #else
 //            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
 //                dump(databaseOptions)
@@ -52,7 +54,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            }
 //        #endif
 
-        FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
