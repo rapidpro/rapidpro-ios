@@ -44,9 +44,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //        #if DEBUG
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
-            } /*erase after #if DEBUG is reenabled */else {
-                FirebaseApp.configure()
-        }
+            }
 //        #else
 //            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
 //                dump(databaseOptions)
@@ -54,6 +52,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 //            }
 //        #endif
 
+        FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
@@ -264,6 +263,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         if let fcmToken = URSettingsManager.getFCMToken(), let user = URUser.activeUser() {
             user.pushIdentity = fcmToken
+            URUser.setActiveUser(user)
             URUserManager.updatePushIdentity(user, completion: { success in
                 guard success else { return }
                 URGCMManager.onFCMRegistered(user: user)
@@ -287,6 +287,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
 extension AppDelegate: MessagingDelegate {
     func messaging(_ messaging: Messaging, didRefreshRegistrationToken fcmToken: String) {
+        if let user = URUser.activeUser() {
+            user.pushIdentity = fcmToken
+            URUser.setActiveUser(user)
+        }
+        
         print("Firebase registration token was refreshed: \(fcmToken)")
         URSettingsManager.saveFCMToken(fcmToken: fcmToken)
         FCMChannelManager.saveFCMToken(fcmToken: fcmToken)
