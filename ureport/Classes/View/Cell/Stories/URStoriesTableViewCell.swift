@@ -81,10 +81,9 @@ class URStoriesTableViewCell: UITableViewCell {
     }
     
     //MARK: Button Events
-    
     @IBAction func btReportContentTapped(_ sender: AnyObject) {
 
-        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: "Report this content", preferredStyle: .actionSheet)
+        let reportContentAlertController: UIAlertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
     
         if URUserManager.hasModeratorPrivilegies() {
             let disapproveAction: UIAlertAction = UIAlertAction(title: "disapprove_story".localized, style: .destructive) {
@@ -113,10 +112,28 @@ class URStoriesTableViewCell: UITableViewCell {
             reportContentAlertController.addAction(denounceAction)
         }
         
+        let shareAction: UIAlertAction = UIAlertAction(title: "title_share_story".localized, style: .default) {
+            _ in
+            let shareView = URStoryView()
+
+            shareView.setup(with: self.story, userName: self.lbAuthorName.text)
+            
+            let size = shareView.getNecessarySize()
+            if let image = shareView.snapshot(size: size) {
+                let activity = UIActivityViewController(activityItems: [image], applicationActivities: nil)
+                activity.popoverPresentationController?.sourceView = self.viewController?.view
+                self.viewController?.present(activity, animated: true, completion: { })
+            } else {
+                UIAlertView(title: nil, message: "unknown_error".localized, delegate: self, cancelButtonTitle: "OK").show()
+            }
+            
+        }
+        
         let cancelAction: UIAlertAction = UIAlertAction(title: "cancel_dialog_button".localized, style: .cancel) {
             _ in
         }
         
+        reportContentAlertController.addAction(shareAction)
         reportContentAlertController.addAction(cancelAction)
         
         if URConstant.isIpad {
@@ -167,7 +184,6 @@ class URStoriesTableViewCell: UITableViewCell {
     
     func setupCellWith(_ story:URStory, moderateUserMode:Bool){
         self.story = story
-        
         if story.cover != nil && story.cover?.url != nil {
             self.imgStoryHeight.constant = imgViewHistoryHeight
             self.lbContentTop.constant = 5
@@ -211,7 +227,7 @@ class URStoriesTableViewCell: UITableViewCell {
                 story.userObject = user
                 
                 self.lbAuthorName.text = "\(user!.nickname!)"
-                
+
                 if user!.picture != nil {
                     self.imgUser.contentMode = .scaleAspectFill
                     self.imgUser.sd_setImage(with: URL(string: user!.picture!))

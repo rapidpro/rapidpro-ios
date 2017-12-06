@@ -539,6 +539,12 @@
 		E32F1CAE1FC85A20002C04AA /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */; };
 		E32F1CAF1FC85A2A002C04AA /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */; };
 		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
+		E35F1C371FD822FC00C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
+		E35F1C381FD822FC00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
+		E35F1C391FD8337800C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
+		E35F1C3A1FD8337C00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
+		E3627B851FD8638E00C49EE6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */; };
+		E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */; };
 		E3B47F9A1FC76E4B00A1D350 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
 /* End PBXBuildFile section */
 
@@ -885,6 +891,9 @@
 		E35C914A1FC76053009A3C9B /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
 		E35C914B1FC76053009A3C9B /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
+		E35F1C351FD822FC00C079F5 /* URStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryView.swift; sourceTree = "<group>"; };
+		E35F1C361FD822FC00C079F5 /* URStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryView.xib; sourceTree = "<group>"; };
+		E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1203,6 +1212,7 @@
 				6547D3D71C762FDB00938236 /* URFileUtil.swift */,
 				65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */,
 				65A8DD2D1DD3752D00C0B2D5 /* URTwitterAuthHelper.swift */,
+				E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -1223,6 +1233,7 @@
 				658D14AC1C99F467009A63A5 /* Audio */,
 				658D14A41C99EECB009A63A5 /* Chat */,
 				65609F281C7266100039A8AB /* PlayMedia */,
+				E35F1C341FD822B600C079F5 /* Story */,
 				97B2FAC21C061EB2000820BD /* Tutorial */,
 				974249471BFE0C790024384E /* PollResponse */,
 				654850701BB209B00002A3D5 /* ChoiceResult */,
@@ -2006,6 +2017,15 @@
 			path = SupportFiles;
 			sourceTree = "<group>";
 		};
+		E35F1C341FD822B600C079F5 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				E35F1C351FD822FC00C079F5 /* URStoryView.swift */,
+				E35F1C361FD822FC00C079F5 /* URStoryView.xib */,
+			);
+			path = Story;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -2235,6 +2255,7 @@
 				65FAF0CF1BC2DA0000F8B380 /* URPointsScoredViewController.xib in Resources */,
 				97FBAA591C06447B0012D752 /* iso639_2.bundle in Resources */,
 				6530577B1D64DE3C00B53524 /* URNewGroupTableViewCell.xib in Resources */,
+				E35F1C381FD822FC00C079F5 /* URStoryView.xib in Resources */,
 				655691841B7E668B00525E00 /* URMarkerTableViewCell.xib in Resources */,
 				65C5A8651CDAC7C500158B0C /* ImagesV2.xcassets in Resources */,
 				A3D254E41FC5D1BE007B3777 /* GoogleService-Info.plist in Resources */,
@@ -2297,6 +2318,7 @@
 				B266B0151F9FE11800C4C968 /* iso3-country-code.json in Resources */,
 				B266B0161F9FE11800C4C968 /* URPasswordEditViewController.xib in Resources */,
 				B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */,
+				E35F1C3A1FD8337C00C079F5 /* URStoryView.xib in Resources */,
 				B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */,
 				B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */,
 				B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */,
@@ -2581,6 +2603,7 @@
 				65FAF0CE1BC2DA0000F8B380 /* URPointsScoredViewController.swift in Sources */,
 				656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */,
 				658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */,
+				E3627B851FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */,
 				65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */,
 				65A8DD2E1DD3752D00C0B2D5 /* URTwitterAuthHelper.swift in Sources */,
@@ -2648,6 +2671,7 @@
 				655690891B7D11E700525E00 /* URPollQuestion.swift in Sources */,
 				655690971B7D144C00525E00 /* URMultipleChoiceQuestion.swift in Sources */,
 				655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */,
+				E35F1C371FD822FC00C079F5 /* URStoryView.swift in Sources */,
 				6567C1D31CB5A8990041F004 /* URChatVideoItem.swift in Sources */,
 				6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */,
 				65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */,
@@ -2781,6 +2805,7 @@
 				B266AF381F9FE11800C4C968 /* URPointsScoredViewController.swift in Sources */,
 				B266AF391F9FE11800C4C968 /* URSettingsTableViewCell.swift in Sources */,
 				B266AF3A1F9FE11800C4C968 /* ISImageExtension.swift in Sources */,
+				E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				B266AF3B1F9FE11800C4C968 /* URMyChatsIPadViewController.swift in Sources */,
 				B266AF3C1F9FE11800C4C968 /* AppDelegate.swift in Sources */,
 				B266AF3D1F9FE11800C4C968 /* URTwitterAuthHelper.swift in Sources */,
@@ -2848,6 +2873,7 @@
 				B296745B1FB2598C00EFA624 /* URIPCheckManager.swift in Sources */,
 				B266AF801F9FE11800C4C968 /* URMultipleChoiceQuestion.swift in Sources */,
 				B266AF811F9FE11800C4C968 /* URMarkerTableViewController.swift in Sources */,
+				E35F1C391FD8337800C079F5 /* URStoryView.swift in Sources */,
 				B266AF821F9FE11800C4C968 /* URChatVideoItem.swift in Sources */,
 				B266AF831F9FE11800C4C968 /* URFileUtil.swift in Sources */,
 				B266AF841F9FE11800C4C968 /* URImageMedia.swift in Sources */,

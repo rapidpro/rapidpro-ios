@@ -621,7 +621,7 @@
                 <outlet property="viewAttachmentHeight" destination="IbI-rJ-FTF" id="YFE-1X-5ho"/>
                 <outlet property="viewMarkerHeight" destination="VFM-Rz-Zwy" id="gnK-1b-bqW"/>
             </connections>
-            <point key="canvasLocation" x="128.5" y="354.5"/>
+            <point key="canvasLocation" x="128.5" y="354"/>
         </tableViewCell>
     </objects>
     <resources>
