@@ -62,6 +62,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         createDirectoryToImageUploads()
         Messaging.messaging().delegate = self
         
+        
         URReviewModeManager.checkIfIsInReviewMode { (reviewMode) -> Void in
             
             let settings = URSettings.getSettings()

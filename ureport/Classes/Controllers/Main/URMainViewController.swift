@@ -65,8 +65,6 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        URUserManager.reloadUserInfoWithCompletion { (finish) in }
-        
         URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
         self.navigationController?.setNavigationBarHidden(false, animated: true)
         

@@ -135,17 +135,19 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         })
     }
     
-    class func setLoggedUser(_ user:URUser) {
+    class func setLoggedUser(_ user:URUser, completion: @escaping () -> Void) {
         URUserManager.checkIfUserIsMasterModerator(user.key) { (isMasterModerator) -> Void in
             if isMasterModerator == true {
                 user.masterModerator = true
                 URUser.setActiveUser(user)
+                completion()
             } else {
                 URUserManager.checkIfUserIsCountryProgramModerator(user.key, completion: { (isModerator) -> Void in
                     if isModerator == true {
                         user.moderator = isModerator as NSNumber!
                     }
                     URUser.setActiveUser(user)
+                    completion()
                 })                
             }
         }
@@ -173,7 +175,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
 
     class func setUserAndCountryProgram(_ user:URUser) {
         URUser.setActiveUser(user)
-        URUserLoginManager.setLoggedUser(user)
+        URUserLoginManager.setLoggedUser(user) {}
 
         URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country!)))
         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())

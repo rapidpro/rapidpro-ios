@@ -37,9 +37,9 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
     let countryPrograms:[URCountryProgram] = URCountryProgramManager.getAvailableCountryPrograms()
     var country = URCountry()
     
-    static let instance = ISMenuViewController(nibName:"ISMenuViewController",bundle:nil)
+    static var instance: ISMenuViewController!
     
-    class func sharedInstance() -> ISMenuViewController{
+    class func sharedInstance() -> ISMenuViewController {
         return instance
     }
     
@@ -67,6 +67,11 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewWillAppear(animated)
         self.topView.backgroundColor = URCountryProgramManager.activeCountryProgram()?.themeColor!
         loadUserInfo()
+        
+        URUserManager.reloadUserInfoWithCompletion { (finish) in
+            self.setupMenu()
+            self.tableView.reloadData()
+        }
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Menu")
@@ -306,7 +311,8 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
         self.imgProfile.image = UIImage(named: "ic_person")
     }
     
-    fileprivate func setupMenu() {
+    func setupMenu() {
+        menuList = []
         
         var menuItem1,menuItem2,menuItem3,menuItem4,menuItem5:ISMenu?
         

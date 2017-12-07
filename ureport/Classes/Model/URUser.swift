@@ -56,7 +56,6 @@ class URUser: Serializable {
         } else{
             return nil
         }
-        
     }
     
     static func setActiveUser(_ user: URUser) {

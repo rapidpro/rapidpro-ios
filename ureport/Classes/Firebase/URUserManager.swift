@@ -30,9 +30,12 @@ class URUserManager {
             URUserManager.getByKey(user.key, completion: { (userFromDB, exists) -> Void in
                 guard let userFromDB = userFromDB else { return }
                 URUser.setActiveUser(userFromDB)
-                URUserLoginManager.setLoggedUser(userFromDB)
-                completion(true)
+                URUserLoginManager.setLoggedUser(userFromDB) {
+                    completion(true)
+                }
             })
+        } else {
+            completion(false)
         }
     }
 
@@ -56,7 +59,7 @@ class URUserManager {
                 }
                 completion(true)
             })
-        URUserLoginManager.setLoggedUser(user)
+        URUserLoginManager.setLoggedUser(user) {}
     }
 
     class func updateAvailableInChat(_ user:URUser,publicProfile:Bool) {
@@ -65,7 +68,7 @@ class URUserManager {
             .child(user.key)
             .child("publicProfile")
             .setValue(publicProfile)
-        URUserLoginManager.setLoggedUser(user)
+        URUserLoginManager.setLoggedUser(user) {}
     }
 
     class func setUserAsModerator(_ userKey:String) {
@@ -301,14 +304,14 @@ class URUserManager {
     class func fetchUser(_ user:URUser) {
         URUserManager.getByKey(user.key) { (user, exists) -> Void in
             guard let user = user else { return }
-            URUserLoginManager.setLoggedUser(user)
+            URUserLoginManager.setLoggedUser(user) {}
         }
     }
 
     class func fetchUserWithCompletion(_ user:URUser, completion:@escaping (URUser) -> Void) {
         URUserManager.getByKey(user.key) { (user, exists) -> Void in
             guard let user = user else { return }
-            URUserLoginManager.setLoggedUser(user)
+            URUserLoginManager.setLoggedUser(user) {}
             completion(user)
         }
     }

@@ -33,7 +33,7 @@ class URNavigationManager: NSObject, SWRevealViewControllerDelegate {
         appDelegate = UIApplication.shared.delegate as! AppDelegate
         
         let menuViewController:ISMenuViewController = ISMenuViewController()
-        
+        ISMenuViewController.instance = menuViewController
         URNavigationManager.addLeftButtonMenuInViewController(viewController)
         
         self.navigation = UINavigationController(rootViewController: viewController)
