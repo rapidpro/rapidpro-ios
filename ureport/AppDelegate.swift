@@ -175,24 +175,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             notificationType = type
         }
         
-        if let notificationType = notificationType {
+        if let notificationType = notificationType?.lowercased() {
             switch notificationType {
-            case URConstant.NotificationType.CHAT:
-                
-                if let chatRoomKey = getChatRoomKey(userInfo) {
-                    if UIApplication.shared.applicationState != UIApplicationState.active {
+            case URConstant.NotificationType.RAPIDPRO://CHAT:
+//                if let chatRoomKey = //getChatRoomKey(userInfo) {
+                    if UIApplication.shared.applicationState != UIApplicationState.active, let chatRoomKey = getChatRoomKey(userInfo) {
                         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
                     }else{
                         
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "newChatReceived"), object: userInfo)
-                        
+//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "newChatReceived"), object: userInfo)
+                        NotificationCenter.default.post(name: Notification.Name(rawValue: "newMessageReceived"), object: userInfo)
+
                         if let visibleViewController = URNavigationManager.navigation.visibleViewController {
                             if !(visibleViewController is URMessagesViewController) {
                                 //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                             }
                         }
                     }
-                }
+//                }
                 
                 break
             case URConstant.NotificationType.RAPIDPRO:

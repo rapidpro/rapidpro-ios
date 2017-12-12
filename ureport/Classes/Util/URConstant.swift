@@ -261,8 +261,8 @@ struct URConstant {
     }
     
     struct NotificationType {
-        static let RAPIDPRO = "Rapidpro"
-        static let CHAT = "Chat"
+        static let RAPIDPRO = "rapidpro"
+        static let CHAT = "chat"
     }
     
     struct Fcm {
