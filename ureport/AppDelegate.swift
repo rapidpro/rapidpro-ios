@@ -41,16 +41,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         URCountryProgramManager.deactivateSwitchCountryProgram()
 
-//        #if DEBUG
+        #if DEBUG
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
-//        #else
-//            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
-//                dump(databaseOptions)
-//                FirebaseApp.configure(name: "database", options: databaseOptions)
-//            }
-//        #endif
+        #else
+            if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
+                dump(databaseOptions)
+                FirebaseApp.configure(name: "database", options: databaseOptions)
+            }
+        #endif
 
         FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
@@ -178,23 +178,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         if let notificationType = notificationType?.lowercased() {
             switch notificationType {
             case URConstant.NotificationType.RAPIDPRO://CHAT:
-//                if let chatRoomKey = //getChatRoomKey(userInfo) {
-                    if UIApplication.shared.applicationState != UIApplicationState.active, let chatRoomKey = getChatRoomKey(userInfo) {
-                        URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
-                    }else{
-                        
-//                        NotificationCenter.default.post(name: Notification.Name(rawValue: "newChatReceived"), object: userInfo)
-                        NotificationCenter.default.post(name: Notification.Name(rawValue: "newMessageReceived"), object: userInfo)
-
-                        if let visibleViewController = URNavigationManager.navigation.visibleViewController {
-                            if !(visibleViewController is URMessagesViewController) {
-                                //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
-                            }
+                if UIApplication.shared.applicationState != UIApplicationState.active, let chatRoomKey = getChatRoomKey(userInfo) {
+                    URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController(chatRoomKey: chatRoomKey))
+                }else{
+                    NotificationCenter.default.post(name: Notification.Name(rawValue: "newMessageReceived"), object: userInfo)
+                    if let visibleViewController = URNavigationManager.navigation.visibleViewController {
+                        if !(visibleViewController is URMessagesViewController) {
+                            //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                         }
                     }
-//                }
-                
-                break
+                }
             case URConstant.NotificationType.RAPIDPRO:
                 
                 if URRapidProManager.sendingAnswers {

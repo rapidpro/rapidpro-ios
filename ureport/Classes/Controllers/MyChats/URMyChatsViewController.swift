@@ -71,6 +71,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             self.listChatRoom.append(countryProgram)
         }
         setupUI()
+        MBProgressHUD.showAdded(to: self.view, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -229,7 +230,6 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     func loadData() {
-        MBProgressHUD.showAdded(to: self.view, animated: true)
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
             MBProgressHUD.hide(for: self.view, animated: true)
             if chatRooms != nil {

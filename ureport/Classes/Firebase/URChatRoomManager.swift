@@ -286,6 +286,7 @@ class URChatRoomManager {
                                 //GroupChat
                                 URChatRoomManager.getByKey(rest.key, completion: { chatRoom -> Void in
                                     guard let chatRoom = chatRoom else {
+                                        completion(nil)
                                         return
                                     }
                                     chatRoom.key = rest.key
@@ -348,9 +349,8 @@ class URChatRoomManager {
                                                 })
 
                                             }
-
                                         })
-                                    }
+                                    } 
                                 })
                             }
                         }

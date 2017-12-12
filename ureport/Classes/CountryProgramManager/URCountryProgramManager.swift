@@ -22,14 +22,12 @@ class URCountryProgramManager {
     }
     
     class func getToken(for userProgram: String) -> String? {
-        //TODO: activate key setting for debug/prod
-        //#if DEBUG
-        //    }
-        //else {
+        var fileName = "Key"
+        #if DEBUG
+            fileName += "-debug"
+        #endif
         
-        //        }
-        
-        guard let dictPath = Bundle.main.path(forResource: "Key-debug", ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
+        guard let dictPath = Bundle.main.path(forResource: fileName, ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
         
         var userProgram = userProgram
         #if ONTHEMOVE
@@ -40,14 +38,12 @@ class URCountryProgramManager {
     }
     
     class func getChannelToken(for userProgram: String) -> String? {
-        //TODO: activate key setting for debug/prod
-        //#if DEBUG
-        //    }
-        //else {
+        var fileName = "Key"
+        #if DEBUG
+            fileName += "-debug"
+        #endif
         
-        //        }
-        
-        guard let dictPath = Bundle.main.path(forResource: "Key-debug", ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
+        guard let dictPath = Bundle.main.path(forResource: fileName, ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
 
         var userProgram = userProgram
         #if ONTHEMOVE

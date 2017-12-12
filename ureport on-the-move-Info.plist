@@ -98,6 +98,8 @@
 	<string>You need grant permission to access your microphone</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>You need grant permission to access your gallery</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>You need to grant permission for gallery saving operations</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>

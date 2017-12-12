@@ -20,6 +20,7 @@ class URUser: Serializable {
     var email: String?
     var state: String?
     var birthday: NSNumber?
+    var language: String?
     var country: String?
     var picture: String?
     var gender: String?

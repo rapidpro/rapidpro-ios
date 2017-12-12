@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13196" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -50,10 +50,10 @@
                     </variation>
                 </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="RaM-Oi-FNm">
-                    <rect key="frame" x="0.0" y="444.5" width="375" height="222.5"/>
+                    <rect key="frame" x="0.0" y="269.5" width="375" height="397.5"/>
                     <subviews>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="edX-Cm-QZZ">
-                            <rect key="frame" x="0.0" y="182.5" width="375" height="40"/>
+                            <rect key="frame" x="0.0" y="357.5" width="375" height="40"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="40" id="D2U-uA-xe9"/>
@@ -68,7 +68,7 @@
                             </connections>
                         </button>
                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Y4E-J4-1oK">
-                            <rect key="frame" x="20" y="-51.5" width="335" height="190"/>
+                            <rect key="frame" x="20" y="123.5" width="335" height="190"/>
                             <subviews>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NuB-Oz-6SQ" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="335" height="40"/>
@@ -78,7 +78,7 @@
                                         <color key="titleShadowColor" red="0.5" green="0.5" blue="0.5" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <connections>
-                                        <action selector="btLoginTapped:" destination="-1" eventType="touchUpInside" id="dJu-eS-Oez"/>
+                                        <action selector="btLoginTapped:" destination="-1" eventType="touchUpInside" id="tsG-w5-MIe"/>
                                     </connections>
                                 </button>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yjh-IX-6Au" customClass="ISRoundedButton" customModule="ureport" customModuleProvider="target">
@@ -194,7 +194,7 @@
             <constraints>
                 <constraint firstItem="RaM-Oi-FNm" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="JE0-5R-5Gd"/>
                 <constraint firstAttribute="trailing" secondItem="QVp-pa-NZe" secondAttribute="trailing" constant="8" id="MYT-eO-GQc"/>
-                <constraint firstItem="RaM-Oi-FNm" firstAttribute="top" secondItem="PNX-Uu-LQL" secondAttribute="bottom" constant="185" id="Nob-sb-XpV"/>
+                <constraint firstItem="RaM-Oi-FNm" firstAttribute="top" secondItem="PNX-Uu-LQL" secondAttribute="bottom" constant="10" id="Nob-sb-XpV"/>
                 <constraint firstAttribute="centerX" secondItem="PNX-Uu-LQL" secondAttribute="centerX" id="TBb-V3-V5Q"/>
                 <constraint firstAttribute="centerY" secondItem="PNX-Uu-LQL" secondAttribute="centerY" constant="104.5" id="V79-zK-ZcS"/>
                 <constraint firstItem="QVp-pa-NZe" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="8" id="WEb-go-9B3"/>

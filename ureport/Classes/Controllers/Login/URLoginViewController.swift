@@ -160,10 +160,9 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     }
     
     @IBAction func btLoginTapped(_ sender: AnyObject) {
-        
         self.navigationController!.pushViewController(URLoginCredentialsViewController(), animated: true)
-        
     }
+    
     @IBAction func btFacebookTapped(_ sender: AnyObject) {
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {

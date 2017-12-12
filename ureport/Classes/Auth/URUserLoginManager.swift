@@ -118,12 +118,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     break
                 }
             } else if let user = user {
-                URUserLoginManager.setUserAndCountryProgram(user)
-                FCMChannelManager.setup()
-
-//                URLoginViewController.updateUserDataInRapidPro(user) { _ in
-                    FCMChannelManager.createContactAndSave(for: user) {_ in }
-//                }
+                URUserLoginManager.successfulLogin(user)
                 completion(nil,true)
             }
         }
@@ -232,6 +227,10 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     class func successfulLogin(_ user: URUser) {
         if let fcmToken = URSettingsManager.getFCMToken() {
             user.pushIdentity = fcmToken
+
+            let currentLocale = NSLocale.current as? NSLocale
+            let code = currentLocale?.iso639_2LanguageCode()
+            user.language = code
         }
         
         URUserLoginManager.setUserAndCountryProgram(user)

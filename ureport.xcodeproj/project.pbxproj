@@ -536,6 +536,7 @@
 		E3110BE61FC85BAB006C9D25 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DE1FC5D1BE007B3777 /* Key-debug.plist */; };
 		E3110BE71FC85BAF006C9D25 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DF1FC5D1BE007B3777 /* Key.plist */; };
 		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
+		E35C71B01FE0918100236AB2 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = A3D254DB1FC5D1BE007B3777 /* FirebaseDatabaseProd-Info.plist */; };
 		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
 		E35F1C371FD822FC00C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
 		E35F1C381FD822FC00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
@@ -2332,6 +2333,7 @@
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
+				E35C71B01FE0918100236AB2 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,

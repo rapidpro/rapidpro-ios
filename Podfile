@@ -30,7 +30,9 @@ def shared_pods
     pod 'Firebase/Auth', '4.0.4'
     pod 'Firebase/Database', '4.0.4'
 
-    pod 'fcm-channel-ios', :git => 'https://github.com/push-flow/fcm-channel-ios.git'
+
+    pod 'fcm-channel-ios', :path => '../fcm-channel-ios'
+    #https://github.com/push-flow/fcm-channel-ios.git'
 
 end
 
