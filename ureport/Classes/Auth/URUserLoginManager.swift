@@ -118,8 +118,12 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     break
                 }
             } else if let user = user {
-                URLoginViewController.updateUserDataInRapidPro(user) { _ in }
                 URUserLoginManager.setUserAndCountryProgram(user)
+                FCMChannelManager.setup()
+
+//                URLoginViewController.updateUserDataInRapidPro(user) { _ in
+                    FCMChannelManager.createContactAndSave(for: user) {_ in }
+//                }
                 completion(nil,true)
             }
         }
@@ -223,5 +227,15 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         user.type = URType.Google
 
         return user
+    }
+    
+    class func successfulLogin(_ user: URUser) {
+        if let fcmToken = URSettingsManager.getFCMToken() {
+            user.pushIdentity = fcmToken
+        }
+        
+        URUserLoginManager.setUserAndCountryProgram(user)
+        FCMChannelManager.setup()
+        FCMChannelManager.createContactAndSave(for: user) {_ in }
     }
 }

@@ -147,7 +147,7 @@ DEPENDENCIES:
   - DBSphereTagCloud (from `https://github.com/danielblx/DBSphereTagCloud.git`)
   - FBSDKCoreKit
   - FBSDKLoginKit
-  - fcm-channel-ios
+  - fcm-channel-ios (from `https://github.com/push-flow/fcm-channel-ios.git`)
   - Firebase/Auth (= 4.0.4)
   - Firebase/Core (= 4.0.4)
   - Firebase/Database (= 4.0.4)
@@ -172,6 +172,8 @@ DEPENDENCIES:
 EXTERNAL SOURCES:
   DBSphereTagCloud:
     :git: https://github.com/danielblx/DBSphereTagCloud.git
+  fcm-channel-ios:
+    :git: https://github.com/push-flow/fcm-channel-ios.git
   IlhasoftCore:
     :branch: develop
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
@@ -188,6 +190,9 @@ CHECKOUT OPTIONS:
   DBSphereTagCloud:
     :commit: 2523dfdaf0bb9b2830d95400b8e8a9c259f62333
     :git: https://github.com/danielblx/DBSphereTagCloud.git
+  fcm-channel-ios:
+    :commit: c5ac2f43988139fb3a6720a3a9b0b46a9494fdb4
+    :git: https://github.com/push-flow/fcm-channel-ios.git
   IlhasoftCore:
     :commit: 2d6fbcad4944a1003b3cbac0939408ba79d9268c
     :git: https://bitbucket.org/ilhasoft/ilhasoft-core-ios
@@ -210,7 +215,7 @@ SPEC CHECKSUMS:
   DBSphereTagCloud: b7f8b02fa136adc011abb839c66081b0c4beb002
   FBSDKCoreKit: 03365dad5d790249196ffad8be4f6d8a2d98f932
   FBSDKLoginKit: 66ff53b73cffd967ab773e32fac39e90a60e6d46
-  fcm-channel-ios: 6ece073562a8072d4c4713cf8190bd41cf0cbf00
+  fcm-channel-ios: a1d94e524736a6722c4279e0ae03082e7af5b45b
   Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
@@ -251,6 +256,6 @@ SPEC CHECKSUMS:
   TwitterKit: 205ac89824bbfe9e85a16c420d30bb7bcbedac45
   youtube-ios-player-helper: 21ab92db027c7ff86cb17a3843a3f6eafc8158d2
 
-PODFILE CHECKSUM: 9e58f2893a05c59d0b9863919d7919cd948cd313
+PODFILE CHECKSUM: ef98a0ad881f4336fdbd39f94049c486077e446e
 
 COCOAPODS: 1.3.1

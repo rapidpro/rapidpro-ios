@@ -89,11 +89,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         if user.key == nil {
             self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
         } else {
-            URUserLoginManager.setUserAndCountryProgram(user)
-            URLoginViewController.updateUserDataInRapidPro(user) {
-                _ in
-                FCMChannelManager.createContactAndSave(for: user) {_ in }
-            }
+            URUserLoginManager.successfulLogin(user)
         }
     }
     
@@ -103,20 +99,20 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         URIPCheckManager.getCountryCodeByIP { (countryCode) in }
     }
     
-    class func updateUserDataInRapidPro(_ user:URUser, completion: @escaping(_ success: Bool)->()) {
-        
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary?) -> Void in
-            URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: false, completion: { (response) -> Void in
-                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                URRapidProContactUtil.groupList = []
-                print(response)
-                
-                FCMChannelManager.setup()
-                completion(response != nil)
-            })
-        }
-        
-    }
+//    class func updateUserDataInRapidPro(_ user:URUser, completion: @escaping(_ success: Bool)->()) {
+//
+//        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:"")) { (rapidProUserDictionary:NSDictionary?) -> Void in
+//            URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: false, completion: { (response) -> Void in
+//                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
+//                URRapidProContactUtil.groupList = []
+//                print(response)
+//
+//                FCMChannelManager.setup()
+//                completion(response != nil)
+//            })
+//        }
+//
+//    }
     
     func setupUI() {
         
@@ -157,11 +153,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 if user.key == nil {
                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
                 } else {
-                    URUserLoginManager.setUserAndCountryProgram(user)
-                    URLoginViewController.updateUserDataInRapidPro(user) {
-                        _ in
-                        FCMChannelManager.createContactAndSave(for: user) {_ in }
-                    }
+                    URUserLoginManager.successfulLogin(user)
                 }
             }
         }
@@ -187,11 +179,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 if user.key == nil {
                      self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
                 }else{
-                    URUserLoginManager.setUserAndCountryProgram(user)
-                    URLoginViewController.updateUserDataInRapidPro(user) {
-                        _ in
-                        FCMChannelManager.createContactAndSave(for: user) {_ in }
-                    }
+                    URUserLoginManager.successfulLogin(user)
                 }
                 
             }

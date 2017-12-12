@@ -155,6 +155,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         default:
                             ISAlertMessages.displaySimpleMessage("error_no_internet".localized, fromController: self)
                         }
+                    } else {
+                        ISAlertMessages.displaySimpleMessage("error_no_internet".localized, fromController: self)
                     }
                 })
             }
@@ -188,14 +190,7 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
             URNavigationManager.navigation.popViewController(animated: true)
         }
         
-        URRapidProContactUtil.buildRapidProUserDictionaryWithContactFields(user, country: URCountry(code:updateMode == true ? "" : self.country!.code!)) { (rapidProUserDictionary:NSDictionary?) -> Void in
-            
-            URRapidProManager.saveUser(user, country: URCountry(code:user.country!),setupGroups: !self.updateMode, completion: { (response) -> Void in
-                URRapidProContactUtil.rapidProUser = NSMutableDictionary()
-                URRapidProContactUtil.groupList = []
-                URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
-            })
-            }
+        URUserLoginManager.successfulLogin(user)
     }
     
     func setupUIWithUserData() {

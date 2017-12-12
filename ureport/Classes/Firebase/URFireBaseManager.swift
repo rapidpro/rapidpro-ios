@@ -81,7 +81,7 @@ class URFireBaseManager {
                     let user = URUser()
                     user.key = uid
                     completion(user, nil)
-                }else if let error = response["error"] as? NSDictionary {
+                } else if let error = response["error"] as? NSDictionary {
                     let errorCode = error["code"] as! String
                     switch errorCode {
                     case "EMAIL_TAKEN":
@@ -91,7 +91,11 @@ class URFireBaseManager {
                     default:
                         break
                     }
+                } else {
+                    completion(nil, nil)
                 }
+            } else {
+                completion(nil, nil)
             }
         }
     }

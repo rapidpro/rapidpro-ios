@@ -3,7 +3,6 @@ platform :ios, '9.0'
 use_frameworks!
 
 def shared_pods
-
     pod 'TPKeyboardAvoiding'
     pod 'FBSDKLoginKit'
     pod 'FBSDKCoreKit'
@@ -31,7 +30,7 @@ def shared_pods
     pod 'Firebase/Auth', '4.0.4'
     pod 'Firebase/Database', '4.0.4'
 
-    pod 'fcm-channel-ios'
+    pod 'fcm-channel-ios', :git => 'https://github.com/push-flow/fcm-channel-ios.git'
 
 end
 
