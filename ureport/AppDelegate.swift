@@ -13,8 +13,15 @@ import UserNotifications
 import TwitterKit
 import TwitterCore
 
+enum UREnvironment {
+    case sandbox
+    case production
+}
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
+    static let environment: UREnvironment = .production
+    
     var window: UIWindow?
     var loginViewController: URLoginViewController?
     var navigation:UINavigationController?
@@ -41,18 +48,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
 
         URCountryProgramManager.deactivateSwitchCountryProgram()
 
-        #if DEBUG
+        switch AppDelegate.environment {
+        case .sandbox:
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseDev-Info", ofType: "plist")!) {
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
-        #else
+        case .production:
             if let databaseOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseDatabaseProd-Info", ofType: "plist")!) {
                 dump(databaseOptions)
                 FirebaseApp.configure(name: "database", options: databaseOptions)
             }
-        #endif
+        }
+        
 
-        FirebaseApp.configure()
+//        FirebaseApp.configure()
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
@@ -184,6 +193,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
                     NotificationCenter.default.post(name: Notification.Name(rawValue: "newMessageReceived"), object: userInfo)
                     if let visibleViewController = URNavigationManager.navigation.visibleViewController {
                         if !(visibleViewController is URMessagesViewController) {
+                            (URNavigationManager.navigation.viewControllers.first as? URMainViewController)?.addBadgeMyChatsViewController()
                             //                                AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate))
                         }
                     }
@@ -245,13 +255,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
         
-        var debugMode = true
-        
-        #if DEBUG
+        var debugMode: Bool!
+            
+        switch AppDelegate.environment {
+        case .sandbox:
             debugMode = true
-        #else
+        case .production:
             debugMode = false
-        #endif
+        }
 
         Messaging.messaging().apnsToken = deviceToken
 

@@ -18,17 +18,45 @@ enum URFireBaseManagerAuthError: Error {
 }
 
 class URFireBaseManager {
-
-    #if DEBUG
-    static let Properties = "Key-debug"
-    static let region = AWSRegionType.USEast1
-    static let credentialsProvider: AWSCredentialsProvider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
-    #else
-    static let Properties = "Key"
-    static let region = AWSRegionType.EUWest1
-    static let credentialsProvider: AWSCredentialsProvider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+    static var region: AWSRegionType {
+        get {
+            var reg: AWSRegionType!
+            switch AppDelegate.environment {
+            case .sandbox:
+                reg = .USEast1
+            case .production:
+                reg = .EUWest1
+            }
+            return reg
+        }
+    }
     
-    #endif
+    static var Properties: String {
+        get {
+            var filename: String!
+            switch AppDelegate.environment {
+            case .sandbox:
+                filename = "Key-debug"
+            case .production:
+                filename = "Key"
+            }
+            return filename
+        }
+    }
+    
+    static var credentialsProvider: AWSCredentialsProvider {
+        get {
+            var provider: AWSCredentialsProvider!
+            switch AppDelegate.environment {
+            case .sandbox:
+                provider = AWSCognitoCredentialsProvider(regionType: region, identityPoolId: URConstant.AWS.COGNITO_IDENTITY_POLL_ID())
+            case .production:
+                provider = AWSStaticCredentialsProvider(accessKey: URConstant.AWS.ACCESS_KEY(), secretKey: URConstant.AWS.ACCESS_SECRET())
+            }
+            return provider
+        }
+    }
+    
 
     static var databaseApp: FirebaseApp {
         return FirebaseApp.app(name: "database")!

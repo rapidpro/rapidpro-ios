@@ -22,10 +22,13 @@ class URCountryProgramManager {
     }
     
     class func getToken(for userProgram: String) -> String? {
-        var fileName = "Key"
-        #if DEBUG
-            fileName += "-debug"
-        #endif
+        var fileName: String!
+        switch AppDelegate.environment {
+        case .sandbox:
+            fileName = "Key-debug"
+        case .production:
+            fileName = "Key"
+        }
         
         guard let dictPath = Bundle.main.path(forResource: fileName, ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
         
@@ -38,10 +41,13 @@ class URCountryProgramManager {
     }
     
     class func getChannelToken(for userProgram: String) -> String? {
-        var fileName = "Key"
-        #if DEBUG
-            fileName += "-debug"
-        #endif
+        var fileName: String!
+        switch AppDelegate.environment {
+        case .sandbox:
+            fileName = "Key-debug"
+        case .production:
+            fileName = "Key"
+        }
         
         guard let dictPath = Bundle.main.path(forResource: fileName, ofType: "plist"), let dict = NSDictionary(contentsOfFile: dictPath) else {return nil}
 
