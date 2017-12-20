@@ -60,8 +60,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             }
         }
         
-
-//        FirebaseApp.configure()
+        if let fcmOptions = FirebaseOptions(contentsOfFile: Bundle.main.path(forResource: "FirebaseNotificationsProd-Info", ofType: "plist")!) {
+            FirebaseApp.configure(options: fcmOptions)
+        }
+        
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
         Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
