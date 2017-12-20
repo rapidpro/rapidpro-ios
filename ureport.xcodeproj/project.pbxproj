@@ -545,6 +545,8 @@
 		E3E08B101FEA98AF002E7229 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */; };
 		E3E08B121FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
 		E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
+		E3E08B141FEAD2AB002E7229 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */; };
+		E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -891,6 +893,7 @@
 		E35F1C361FD822FC00C079F5 /* URStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryView.xib; sourceTree = "<group>"; };
 		E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
+		E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogramotm-dev.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1262,6 +1265,7 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */,
 				B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */,
 				B2211A1F1FB33A1900070194 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
@@ -2311,6 +2315,7 @@
 				B266B01E1F9FE11800C4C968 /* URClosedPollTableViewCell.xib in Resources */,
 				B266B01F1F9FE11800C4C968 /* URMediaSourceViewIPadController.xib in Resources */,
 				B266B0201F9FE11800C4C968 /* URChatTableViewCell.xib in Resources */,
+				E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */,
 				B266B0211F9FE11800C4C968 /* URChoiceResultView.xib in Resources */,
 				B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */,
 				B266B0231F9FE11800C4C968 /* ISMenuViewController.xib in Resources */,
@@ -2320,6 +2325,7 @@
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
 				E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
+				E3E08B141FEAD2AB002E7229 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				E3366D1B1FE177B600143AF7 /* Key.plist in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,

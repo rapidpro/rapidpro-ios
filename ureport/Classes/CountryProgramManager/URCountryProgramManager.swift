@@ -62,7 +62,14 @@ class URCountryProgramManager {
     //MARK: On The Move
     class func getOtmProgram() -> URCountryProgram {
         if countryProgram == nil {
-            let path = Bundle.main.path(forResource: "countryprogramotm", ofType: "json")!
+            var resource: String!
+            switch AppDelegate.environment {
+            case .sandbox:
+                resource = "countryprogramotm-dev"
+            case .production:
+                resource = "countryprogramotm"
+            }
+            let path = Bundle.main.path(forResource: resource, ofType: "json")!
             let data = NSData(contentsOfFile: path)
             let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
             let countriesJSON = rootJSON["countries"] as! [[String: Any?]]

@@ -1,0 +1,16 @@
+{
+    "countries": [
+        {
+            "code": "OTM",
+            "themeColor": "#8750A0",
+            "org": 33,
+            "name": "On The Move",
+            "twitter": null,
+            "facebook": null,
+            "rapidProHost": "https://rapidpro.ilhasoft.mobi/",
+            "ureportHostAPI": "http://ureport.in/api/v1/stories/org/",
+            "groupName": "U-Reporters",
+            "stateField": null
+        }
+    ]
+}
