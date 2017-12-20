@@ -222,6 +222,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         if viewController is URMyChatsViewController || viewController is URMyChatsIPadViewController {
             self.title = "U-Report"
             viewController.tabBarItem.badgeValue = nil
+            UIApplication.shared.applicationIconBadgeNumber = 0
             self.navigationItem.rightBarButtonItems = addRightBarButtons()
         }
         
