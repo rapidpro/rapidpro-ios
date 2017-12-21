@@ -31,7 +31,13 @@ extension UITableView {
                 tvRefreshControl = self.viewWithTag(88101) as? UIRefreshControl
             }
             
-            animate ? tvRefreshControl?.beginRefreshing() : tvRefreshControl?.endRefreshing()
+            if animate {
+                let controlHeight = tvRefreshControl?.frame.height ?? 0
+                self.setContentOffset(CGPoint(x: 0, y: -controlHeight), animated: true)
+                tvRefreshControl?.beginRefreshing()
+            } else {
+                tvRefreshControl?.endRefreshing()
+            }            
         }
     }
 }

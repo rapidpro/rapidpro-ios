@@ -71,7 +71,6 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             self.listChatRoom.append(countryProgram)
         }
         setupUI()
-        MBProgressHUD.showAdded(to: self.view, animated: true)
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -222,6 +221,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.separatorColor = UIColor.clear
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
+        self.tableView.addRefreshControl(target: self, selector: #selector(loadData))
     }
 
     func markCellThatChatIsOpen(_ chatRoom:URChatRoom) {        
@@ -229,9 +229,10 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         loadData()
     }
 
-    func loadData() {
+    @objc fileprivate func loadData() {
+        self.tableView.setRefreshControlTo(animate: true)
         URChatRoomManager.getChatRooms(URUser.activeUser()!, completion: { (chatRooms:[URChatRoom]?) -> Void in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.tableView.setRefreshControlTo(animate: false)
             if chatRooms != nil {
                 self.lbMessage.isHidden = true
                 let index = self.listChatRoom.index{($0.key == chatRooms!.last!.key)}

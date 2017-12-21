@@ -103,8 +103,15 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     //MARK: PollManager Delegate
+    @objc fileprivate func reloadPolls() {
+        self.pollList = []
+        self.tableView.reloadData()
+        self.tableView.setRefreshControlTo(animate: true)
+        self.pollManager.getPolls()
+    }
     
     func newPollReceived(_ poll: URPoll) {
+        self.tableView.setRefreshControlTo(animate: false)
         self.pollList.insert(poll, at: 0)
         self.tableView.reloadData()
         self.fitScrollSize()
@@ -156,7 +163,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         self.tableView.estimatedRowHeight = 220;
         self.tableView.layoutMargins = UIEdgeInsets.zero
         self.tableView.separatorInset = UIEdgeInsets.zero
-        
+        //self.tableView.addRefreshControl(target: self, selector: #selector(reloadPolls))
         URNavigationManager.setupNavigationBarWithType(.blue)
     }
     
