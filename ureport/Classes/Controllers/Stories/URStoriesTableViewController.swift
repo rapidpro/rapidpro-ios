@@ -40,12 +40,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         super.viewDidLoad()
         
         setupTableView()
-        
-        if filterStoriesToModerate == false {
-            loadNews()
-        }else{
-            self.reloadDataWithStories()
-        }
+        reloadTableView()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -122,6 +117,9 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     }
     
     // MARK: - Table view data source
+    @objc fileprivate func didPullToRefresh(_ tableView: UITableView) {
+        reloadTableView()
+    }
     
     override func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         if (filterStoriesToModerate == false){
@@ -242,9 +240,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         storyList.removeAll()
         self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)
         
-        MBProgressHUD.showAdded(to: self.view, animated: true)
         storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
-            MBProgressHUD.hide(for: self.view, animated: true)
+            self.tableView.setRefreshControlTo(animate: false)
             self.storyList = storyList.reversed()
             self.tableView.reloadData()
         }
@@ -261,6 +258,21 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         self.tableView.separatorColor = UIColor.clear
         self.tableView.estimatedRowHeight = 300
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        self.tableView.addRefreshControl(target: self, selector: #selector(didPullToRefresh(_:)))
+    }
+    
+    fileprivate func reloadTableView() {
+        self.storyList = []
+        self.newsList = []
+        self.tableView.reloadData()
+        
+        self.tableView.setRefreshControlTo(animate: true)
+        if filterStoriesToModerate == false {
+            loadNews()
+        } else {
+            self.reloadDataWithStories()
+        }
     }
     
     //MARK: StoryManagerDelegate
@@ -275,9 +287,11 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         let hasStory = self.storyList.index{($0.key == story.key)}
         
         if hasStory == nil {
+            self.tableView.beginUpdates()
             storyList.insert(story, at: 0)
             self.tableView.insertRows(at: [IndexPath(row: storyList.count - index, section: 0)], with: UITableViewRowAnimation.automatic)
             index += 1
+            self.tableView.endUpdates()
         }
     }
     

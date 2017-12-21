@@ -542,6 +542,8 @@
 		E35F1C3A1FD8337C00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
 		E3627B851FD8638E00C49EE6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */; };
 		E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */; };
+		E3791D531FEC044800ACF080 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3791D521FEC044800ACF080 /* UITableViewExtension.swift */; };
+		E3791D541FEC044800ACF080 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3791D521FEC044800ACF080 /* UITableViewExtension.swift */; };
 		E3E08B101FEA98AF002E7229 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */; };
 		E3E08B121FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
 		E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
@@ -892,6 +894,7 @@
 		E35F1C351FD822FC00C079F5 /* URStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryView.swift; sourceTree = "<group>"; };
 		E35F1C361FD822FC00C079F5 /* URStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryView.xib; sourceTree = "<group>"; };
 		E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
+		E3791D521FEC044800ACF080 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
 		E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogramotm-dev.json"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1213,6 +1216,7 @@
 				65075AF01C7DF3C6008CF8F3 /* URDownloader.swift */,
 				65A8DD2D1DD3752D00C0B2D5 /* URTwitterAuthHelper.swift */,
 				E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */,
+				E3791D521FEC044800ACF080 /* UITableViewExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2595,6 +2599,7 @@
 				65FAF0CE1BC2DA0000F8B380 /* URPointsScoredViewController.swift in Sources */,
 				656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */,
 				658D35A61C73ABDA00173DCB /* ISImageExtension.swift in Sources */,
+				E3791D531FEC044800ACF080 /* UITableViewExtension.swift in Sources */,
 				E3627B851FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */,
 				65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */,
@@ -2797,6 +2802,7 @@
 				B266AF381F9FE11800C4C968 /* URPointsScoredViewController.swift in Sources */,
 				B266AF391F9FE11800C4C968 /* URSettingsTableViewCell.swift in Sources */,
 				B266AF3A1F9FE11800C4C968 /* ISImageExtension.swift in Sources */,
+				E3791D541FEC044800ACF080 /* UITableViewExtension.swift in Sources */,
 				E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				B266AF3B1F9FE11800C4C968 /* URMyChatsIPadViewController.swift in Sources */,
 				B266AF3C1F9FE11800C4C968 /* AppDelegate.swift in Sources */,
