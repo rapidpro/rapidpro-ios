@@ -59,7 +59,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         }
         
         setupViewControllers()
-        self.title = "U-Report"
+        self.title = getTitle()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -207,7 +207,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
         
         if viewController is URStoriesTableViewController {
-            self.title = "U-Report"            
+            self.title = getTitle()
             if URUserManager.userHasPermissionToAccessTheFeature(false) == true {
                 self.navigationItem.rightBarButtonItems = nil
                 self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .compose, target: self, action: #selector(newStory))
@@ -220,7 +220,7 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         }
         
         if viewController is URMyChatsViewController || viewController is URMyChatsIPadViewController {
-            self.title = "U-Report"
+            self.title = getTitle()
             viewController.tabBarItem.badgeValue = nil
             UIApplication.shared.applicationIconBadgeNumber = 0
             self.navigationItem.rightBarButtonItems = addRightBarButtons()
@@ -228,4 +228,16 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
     }
     
+    //MARK: Util
+    fileprivate func getTitle() -> String {
+        var title: String!
+        
+        #if ONTHEMOVE
+            title = "On The Move"
+        #else
+            title = "U-Report"
+        #endif
+        
+        return title
+    }
 }

@@ -144,7 +144,8 @@ class URFireBaseManager {
                         }
                     })
                 }
-            }else{
+            } else{
+                completion(nil)
                 print(response)
             }
         }

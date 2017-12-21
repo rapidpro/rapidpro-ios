@@ -53,6 +53,10 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                 } else {
                     if FBSDKAccessToken.current() != nil {
                         URFireBaseManager.authUserWithFacebook(token: FBSDKAccessToken.current().tokenString, completion: { (user) in
+                            if let user = user {
+                                URUserLoginManager.successfulLogin(user)
+                            }
+                            
                             completion(user)
                         })
                     }
@@ -71,6 +75,9 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
                     
                     URFireBaseManager.authUserWithTwitter(userId: userID, authToken: authToken, authTokenSecret: authTokenSecret, completion: {
                         (user) in
+                        if let user = user {
+                            URUserLoginManager.successfulLogin(user)
+                        }
                         
                         completion(user)
                     })
@@ -94,6 +101,10 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
             print(error)
         }else{
             URFireBaseManager.authUserWithGoogle(token: user.authentication.accessToken, completion: { (user) in
+                if let user = user {
+                    URUserLoginManager.successfulLogin(user)
+                }
+                
                 if self.delegate != nil {
                     self.delegate?.userHasLoggedInGoogle(user!)
                 }
@@ -175,7 +186,7 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
     class func setUserAndCountryProgram(_ user:URUser) {
         URUser.setActiveUser(user)
         URUserLoginManager.setLoggedUser(user) {}
-
+        
         URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: user.country!)))
         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
     }

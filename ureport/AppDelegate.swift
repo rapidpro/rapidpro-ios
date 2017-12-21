@@ -29,9 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
     var registrationOptions = [String: AnyObject]()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
         loginViewController = URLoginViewController()
-
+        
         UIApplication.shared.setStatusBarStyle(UIStatusBarStyle.lightContent,animated:true)
 
         self.window = UIWindow(frame: UIScreen.main.bounds)

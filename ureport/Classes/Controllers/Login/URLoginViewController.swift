@@ -88,8 +88,6 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         MBProgressHUD.hide(for: self.view, animated: true)
         if user.key == nil {
             self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
-        } else {
-            URUserLoginManager.successfulLogin(user)
         }
     }
     
@@ -130,6 +128,10 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
     //MARK: Button Events
     
     @IBAction func btSkipLoginTapped(_ sender: AnyObject) {
+        #if ONTHEMOVE
+            URCountryProgramManager.setActiveCountryProgram(URCountryProgramManager.getCountryProgramByCountry(URCountry(code: "OTM")))
+        #endif
+        
         URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
     }
     
@@ -152,9 +154,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 
                 if user.key == nil {
                     self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user, updateMode:false),animated:true)
-                } else {
-                    URUserLoginManager.successfulLogin(user)
-                }
+                } 
             }
         }
     }
@@ -177,10 +177,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                 
                 if user.key == nil {
                      self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
-                }else{
-                    URUserLoginManager.successfulLogin(user)
                 }
-                
             }
         }
     }
