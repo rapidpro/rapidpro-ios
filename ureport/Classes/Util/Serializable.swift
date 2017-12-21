@@ -53,7 +53,7 @@ open class Serializable: NSObject {
             
             let propValue = self.unwrap(propValue)
             
-            if propValue is NSNull {
+            if propValue is NSNull || propValue == nil {
                 continue
             }
             

@@ -201,7 +201,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             self.navigationController?.pushViewController(URNewsDetailViewController(news:(cell as! URNewsTableViewCell).news),animated: true)
         }
     }
-    
+
     //MARK: Class Methods
     
     func sizeHeaderToFit() {
