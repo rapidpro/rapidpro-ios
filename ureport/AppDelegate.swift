@@ -20,7 +20,7 @@ enum UREnvironment {
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate {
-    static let environment: UREnvironment = .sandbox
+    static let environment: UREnvironment = .production
     
     var window: UIWindow?
     var loginViewController: URLoginViewController?

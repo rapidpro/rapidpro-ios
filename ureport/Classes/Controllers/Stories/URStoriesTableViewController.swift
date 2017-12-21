@@ -226,7 +226,7 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
             Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URNews]>) in
                     if let response = response.result.value {
                         self.newsList = response
-//                        self.tableView.reloadData()
+                        self.tableView.reloadData()
                         self.reloadDataWithStories()
                     }
             })
@@ -238,8 +238,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
         storyManager.delegate = self
         
         storyList.removeAll()
-//        self.storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)
-        
+        tableView.reloadData()
+        storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)
         storyManager.getStoriesWithCompletion(filterStoriesToModerate, initQueryFromItem: storyList.count) { (storyList) in
             self.tableView.setRefreshControlTo(animate: false)
             self.storyList = storyList.reversed()

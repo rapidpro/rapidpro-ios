@@ -16,9 +16,9 @@ protocol URClosedPollTableViewControllerDelegate {
 class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, UITableViewDelegate, UITableViewDataSource, URCurrentPollViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var scrollView: UIScrollView!
+//    @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var topView: UIView!
-    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
+//    @IBOutlet weak var contentViewHeight: NSLayoutConstraint!
     @IBOutlet weak var topViewHeight: NSLayoutConstraint!
     
     let pollManager = URPollManager()
@@ -163,7 +163,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
         self.tableView.estimatedRowHeight = 220;
         self.tableView.layoutMargins = UIEdgeInsets.zero
         self.tableView.separatorInset = UIEdgeInsets.zero
-        //self.tableView.addRefreshControl(target: self, selector: #selector(reloadPolls))
+        self.tableView.addRefreshControl(target: self, selector: #selector(reloadPolls))
         URNavigationManager.setupNavigationBarWithType(.blue)
     }
     
@@ -240,7 +240,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     }
     
     fileprivate func updateTopViewHeight(_ newHeight:CGFloat) {
-        self.scrollView.contentOffset = CGPoint(x: self.scrollView.contentOffset.x, y: -64)
+//        self.scrollView.contentOffset = CGPoint(x: self.scrollView.contentOffset.x, y: -64)
         topViewHeight.constant = newHeight
         
         UIView.animate(withDuration: 0.5, animations: { () -> Void in
@@ -253,13 +253,13 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
             topView.addSubview(headerCell)
         }
         
-        var scrollViewHeight = topViewHeight.constant
-        scrollViewHeight = scrollViewHeight + self.tableView.contentSize.height
-        
-        self.contentViewHeight.constant = scrollViewHeight
-        
-        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width,height: scrollViewHeight)
-        self.scrollView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
+//        var scrollViewHeight = topViewHeight.constant
+//        scrollViewHeight = scrollViewHeight + self.tableView.contentSize.height
+//
+//        self.contentViewHeight.constant = scrollViewHeight
+//
+//        self.scrollView.contentSize = CGSize(width: UIScreen.main.bounds.width,height: scrollViewHeight)
+//        self.scrollView.contentInset = UIEdgeInsetsMake(64, 0, 49, 0)
         
         self.view.layoutIfNeeded()
     }
