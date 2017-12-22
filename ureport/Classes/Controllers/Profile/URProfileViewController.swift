@@ -62,6 +62,8 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         setupUI()
         setupTableView()
         loadUserInfo()
+        reloadStories()
+        
         selectTabType(self.tabType)
         
         self.imageProfile.delegate = self
@@ -116,6 +118,13 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
     }
     
     //MARK: StoryManagerDelegate
+    @objc fileprivate func reloadStories() {
+        storyManager.getStoriesWithCompletion(false, initQueryFromItem: storyList.count) { (storyList) in
+            self.tableviewMyStories.setRefreshControlTo(animate: false)
+            self.storyList = storyList.reversed()
+            self.tableviewMyStories.reloadData()
+        }
+    }
     
     func newStoryReceived(_ story: URStory) {
         if story.user == URUser.activeUser()?.key {
@@ -167,6 +176,7 @@ class URProfileViewController: UIViewController, URStoryManagerDelegate, URUserM
         self.tableviewRanking.backgroundColor = UIColor.clear
         self.tableviewRanking.register(UINib(nibName: "URRankingTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URRankingTableViewCell.self))
         self.tableviewRanking.separatorColor = UIColor.clear
+        self.tableviewMyStories.addRefreshControl(target: self, selector: #selector(reloadStories))
         
     }
     

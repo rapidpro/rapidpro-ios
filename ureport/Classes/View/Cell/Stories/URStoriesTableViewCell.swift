@@ -227,14 +227,8 @@ class URStoriesTableViewCell: UITableViewCell {
             self.lbAuthorName.text = user.nickname ?? ""
             self.imgUser.setImage(url: user.picture)
         } else {
-            URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
-                if let user = user, let nickname = user.nickname {
-                    story.userObject = user
-                    
-                    self.lbAuthorName.text = "\(nickname)"
-                    self.imgUser.setImage(url: user.picture)
-                }
-            })
+            self.lbAuthorName.text = ""
+            self.imgUser.setPlaceholder()
         }
         
         if story.cover != nil && story.cover?.url != nil {
