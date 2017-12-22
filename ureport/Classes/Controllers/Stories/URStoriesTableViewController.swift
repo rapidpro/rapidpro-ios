@@ -237,7 +237,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     func reloadDataWithStories() {
         storyManager.delegate = self
-        
+        index = 1
+        isLastPost = false 
         storyList.removeAll()
         tableView.reloadData()
         storyManager.getStories(self.filterStoriesToModerate, initQueryFromItem: self.storyList.count)

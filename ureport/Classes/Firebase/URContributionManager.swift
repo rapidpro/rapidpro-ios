@@ -123,6 +123,34 @@ class URContributionManager {
             })
     }
     
+    class func getTotalContributions(keys: Set<String>, completion:@escaping (_ storyAndContributions: [String: Int]) -> Void) {
+        guard keys.count > 0 else {
+            completion([:])
+            return
+        }
+        
+        var counter = 0
+        
+        var keysAndContributions = [String: Int]()
+        for key in keys {
+            URFireBaseManager.sharedInstance()
+                .child(URCountryProgram.path())
+                .child(URCountryProgramManager.activeCountryProgram()!.code)
+                .child(URContributionManager.path())
+                .child(key)
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let contributionsLike = Int(snapshot.childrenCount)
+                    keysAndContributions[key] = contributionsLike
+                    
+                    counter += 1
+                    if counter == keys.count {
+                        completion(keysAndContributions)
+                        return
+                    }
+                })
+        }
+    }
+    
     class func removeContribution(_ storyKey: String, contributionKey: String) {
         URFireBaseManager.sharedInstance()
             .child(URCountryProgram.path())

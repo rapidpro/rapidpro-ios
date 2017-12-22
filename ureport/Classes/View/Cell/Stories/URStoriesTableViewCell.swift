@@ -212,24 +212,11 @@ class URStoriesTableViewCell: UITableViewCell {
             self.viewAttachmentHeight.constant = 0
         }
         
-        URStoryManager.getStoryLikes(story.key!, completion: { (likeCount) -> Void in
-            story.like = likeCount as NSNumber!
-            self.lbLikes.text = String(format: "likes".localized, arguments: [likeCount])
-        })
-        
-        URContributionManager.getTotalContributions(story.key!, completion: { (total:Int) -> Void in
-            story.contributions = total as NSNumber!
-            self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
-        })
-        
-        
-        if let user = story.userObject {
-            self.lbAuthorName.text = user.nickname ?? ""
-            self.imgUser.setImage(url: user.picture)
-        } else {
-            self.lbAuthorName.text = ""
-            self.imgUser.setPlaceholder()
-        }
+        let like = Int(story.like ?? 0)// as NSNumber? ?? 0
+        self.lbLikes.text = String(format: "likes".localized, arguments: [like])
+        self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
+        self.lbAuthorName.text = story.userObject?.nickname ?? ""
+        self.imgUser.setImage(url: story.userObject?.picture)
         
         if story.cover != nil && story.cover?.url != nil {
             

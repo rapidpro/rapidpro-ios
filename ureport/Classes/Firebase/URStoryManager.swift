@@ -68,7 +68,23 @@ class URStoryManager {
                 URUserManager.getByKey(story.user) {
                     user, error in
                     story.userObject = user
-                    delegate.newStoryReceived(story)
+                    
+                    guard let storyKey = story.key else {
+                        delegate.newStoryReceived(story)
+                        return
+                    }
+                    
+                    URStoryManager.getStoryLikes(storyKey) {
+                        count in
+                        story.like = count as NSNumber
+                        
+                        URContributionManager.getTotalContributions(story.key!) {
+                            count in
+                            story.contributions = count as NSNumber? ?? 0
+
+                            delegate.newStoryReceived(story)
+                        }
+                    }
                 }
         })
     }
@@ -119,7 +135,25 @@ class URStoryManager {
                     for story in storyList {
                         story.userObject = keysAndUsers[story.user]
                     }
-                    completion(storyList)
+                    
+                    let storyKeys = Set(storyList.map({$0.key!}))
+                    URStoryManager.getStoryLikes(keys: storyKeys) {
+                        keysAndCounts in
+                        
+                        for story in storyList {
+                            story.like = keysAndCounts[story.key!] as NSNumber? ?? 0
+                        }
+                        
+                        URContributionManager.getTotalContributions(keys: storyKeys) {
+                            keysAndContributions in
+                            
+                            for story in storyList {
+                                story.contributions = keysAndContributions[story.key!] as NSNumber? ?? 0
+                            }
+                            
+                            completion(storyList)
+                        }
+                    }
                 }
             })
     }
@@ -133,6 +167,35 @@ class URStoryManager {
             .observeSingleEvent(of: .value, with: { snapshot in
                 completion(Int(snapshot.childrenCount))
             })
+    }
+    
+    class func getStoryLikes(keys: Set<String>, completion:@escaping (_ storyAndCount: [String: Int]) -> Void) {
+        guard keys.count > 0 else {
+            completion([:])
+            return
+        }
+        
+        var counter = 0
+        
+        var keysAndLikes = [String: Int]()
+        for key in keys {
+            URFireBaseManager.sharedInstance()
+                .child(URCountryProgram.path())
+                .child(URCountryProgramManager.activeCountryProgram()!.code)
+                .child(self.pathStoryLike())
+                .child(key)
+                .observeSingleEvent(of: .value, with: { snapshot in
+                    let likesCount = Int(snapshot.childrenCount)
+                    keysAndLikes[key] = likesCount
+                    
+                    
+                    counter += 1
+                    if counter == keys.count {
+                        completion(keysAndLikes)
+                        return
+                    }
+                })
+        }
     }
     
     class func checkIfStoryWasLiked(_ storyKey:String, completion:@escaping (_ liked:Bool) -> Void) {

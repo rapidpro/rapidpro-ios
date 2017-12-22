@@ -156,6 +156,11 @@ class URUserManager {
     }
     
     class func getByKeys(_ keys: Set<String>, completion:@escaping ([String: URUser]?) -> Void) {
+        guard keys.count > 0 else {
+            completion([:])
+            return
+        }
+        
         var counter = 0
         
         var keysAndUsers = [String: URUser]()
