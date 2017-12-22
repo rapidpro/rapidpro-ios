@@ -11,6 +11,7 @@ import Alamofire
 import AlamofireObjectMapper
 import MBProgressHUD
 import IlhasoftCore
+import Firebase
 
 class URStoriesTableViewController: UITableViewController, URStoryManagerDelegate, URStoriesTableViewCellDelegate, URWriteStoryViewDelegate {
     

@@ -32,7 +32,6 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBOutlet weak var moderationView: UIView!
     @IBOutlet weak var markerView: UIView!
     @IBOutlet weak var attachmentView: UIView!
-    @IBOutlet weak var roundedView: UIView!
     @IBOutlet weak var btDisapprove: UIButton!
     @IBOutlet weak var btPublish: UIButton!
     @IBOutlet weak var btReportContent: UIButton!
@@ -57,6 +56,7 @@ class URStoriesTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         
+        imgUser.roundCorners(corners: [.allCorners], withRadius: Double(imgUser.frame.width/2))
         self.bgView.layer.cornerRadius = 5
         btDisapprove.layer.cornerRadius = 5
         btPublish.layer.cornerRadius = 5
@@ -71,7 +71,7 @@ class URStoriesTableViewCell: UITableViewCell {
     
     override func prepareForReuse() {
         self.lbAuthorName.text = ""
-        self.imgUser.image = nil
+        self.imgUser.setPlaceholder()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -222,23 +222,20 @@ class URStoriesTableViewCell: UITableViewCell {
             self.lbContributions.text = String(format: "stories_list_item_contributions".localized, arguments: [Int(story.contributions)])
         })
         
-        URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
-            if user != nil && user!.nickname != nil {
-                story.userObject = user
-                
-                self.lbAuthorName.text = "\(user!.nickname!)"
-
-                if user!.picture != nil {
-                    self.imgUser.contentMode = .scaleAspectFill
-                    self.imgUser.sd_setImage(with: URL(string: user!.picture!))
-                }else{
-                    self.imgUser.contentMode = .center
-                    self.imgUser.image = UIImage(named: "ic_person")
+        
+        if let user = story.userObject {
+            self.lbAuthorName.text = user.nickname ?? ""
+            self.imgUser.setImage(url: user.picture)
+        } else {
+            URUserManager.getByKey(story.user, completion: { (user:URUser?, exists:Bool) -> Void in
+                if let user = user, let nickname = user.nickname {
+                    story.userObject = user
                     
-                    self.roundedView.backgroundColor = UIColor.gray.withAlphaComponent(0.2)
+                    self.lbAuthorName.text = "\(nickname)"
+                    self.imgUser.setImage(url: user.picture)
                 }
-            }
-        })
+            })
+        }
         
         if story.cover != nil && story.cover?.url != nil {
             

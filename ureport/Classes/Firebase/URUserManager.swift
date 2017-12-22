@@ -154,7 +154,33 @@ class URUserManager {
                 completion(user, true)
             })
     }
-
+    
+    class func getByKeys(_ keys: Set<String>, completion:@escaping ([String: URUser]?) -> Void) {
+        var counter = 0
+        
+        var keysAndUsers = [String: URUser]()
+        for key in keys {
+            URFireBaseManager.sharedInstance()
+                .child(URUserManager.path)
+                .child(key)
+                .observeSingleEvent(of: .value, with: { (snapshot) in
+                    if let userDict = snapshot.value as? NSDictionary {
+                        let user = URUser(jsonDict: userDict)
+                        if let chatRooms = userDict.object(forKey: "chatRooms") as? NSDictionary {
+                            user.chatRooms = chatRooms
+                        }
+                        keysAndUsers[user.key] = user
+                    }
+                    
+                    counter += 1
+                    if counter == keys.count {
+                        completion(keysAndUsers)
+                        return
+                    }
+                })
+        }
+    }
+    
     class func checkIfUserIsMasterModerator(_ key:String,completion:@escaping (Bool) -> Void){
         URFireBaseManager.sharedInstance()
             .child(URUserManager.pathUserModerator())

@@ -549,6 +549,8 @@
 		E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
 		E3E08B141FEAD2AB002E7229 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */; };
 		E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */; };
+		E3EC208E1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
+		E3EC208F1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -898,6 +900,7 @@
 		E3791D581FEC410500ACF080 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
 		E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogramotm-dev.json"; sourceTree = "<group>"; };
+		E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1218,6 +1221,7 @@
 				65A8DD2D1DD3752D00C0B2D5 /* URTwitterAuthHelper.swift */,
 				E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */,
 				E3791D521FEC044800ACF080 /* UITableViewExtension.swift */,
+				E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2655,6 +2659,7 @@
 				655690791B7CFF5100525E00 /* UIColorExtension.swift in Sources */,
 				655690831B7D0EA200525E00 /* URType.swift in Sources */,
 				654850761BB209E70002A3D5 /* URChoiceResultView.swift in Sources */,
+				E3EC208E1FED4CF60091512F /* UIImageViewExtension.swift in Sources */,
 				65C55FDF1BBCD174007F66FA /* URModalProfileViewController.swift in Sources */,
 				65C234061BAE0843002DB994 /* ISLabelExtension.swift in Sources */,
 				655690A51B7D159C00525E00 /* URContact.swift in Sources */,
@@ -2858,6 +2863,7 @@
 				B266AF721F9FE11800C4C968 /* URChoiceResultView.swift in Sources */,
 				B266AF731F9FE11800C4C968 /* URModalProfileViewController.swift in Sources */,
 				B266AF741F9FE11800C4C968 /* ISLabelExtension.swift in Sources */,
+				E3EC208F1FED4CF60091512F /* UIImageViewExtension.swift in Sources */,
 				B266AF751F9FE11800C4C968 /* URContact.swift in Sources */,
 				B266AF761F9FE11800C4C968 /* URMarkerManager.swift in Sources */,
 				B266AF771F9FE11800C4C968 /* URPollContributionTableViewController.swift in Sources */,

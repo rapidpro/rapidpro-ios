@@ -64,8 +64,13 @@ class URStoryManager {
                     }
                     story.medias = medias
                 }
-                delegate.newStoryReceived(story)
-            })
+                
+                URUserManager.getByKey(story.user) {
+                    user, error in
+                    story.userObject = user
+                    delegate.newStoryReceived(story)
+                }
+        })
     }
     
     func getStoriesWithCompletion(_ storiesToModerate:Bool, initQueryFromItem:Int,completion:@escaping (_ storyList:[URStory]) -> Void) {
@@ -100,7 +105,22 @@ class URStoryManager {
                         storyList.append(story)
                     }
                 }
-                completion(storyList)
+                
+                
+                let storyWithUsers = storyList.filter() {$0.user != nil}
+                let userKeys = Set(storyWithUsers.map({$0.user!}))
+                URUserManager.getByKeys(userKeys) {
+                    keysAndUsers in
+                    guard let keysAndUsers = keysAndUsers else {
+                        completion(storyList)
+                        return
+                    }
+                    
+                    for story in storyList {
+                        story.userObject = keysAndUsers[story.user]
+                    }
+                    completion(storyList)
+                }
             })
     }
     
