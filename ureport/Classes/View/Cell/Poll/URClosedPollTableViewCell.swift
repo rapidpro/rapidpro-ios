@@ -36,12 +36,21 @@ class URClosedPollTableViewCell: UITableViewCell {
     
     //MARK: Class Methods
     
-    func setupCellWithData(_ poll:URPoll) {
+    func setupCellWithData(_ poll:URPoll, at indexPath: IndexPath) {
         self.poll = poll
         self.lbCategoryName.text = poll.category.name
         self.lbDescr.text = poll.title
         self.lbClosedDate.text = poll.expiration_date
-        self.viewTop.backgroundColor = poll.category.color
+        
+        var color: UIColor!
+        #if ONTHEMOVE
+            let evenIndex = indexPath.row % 2 == 0
+            color = evenIndex ? UIColor(rgba: "#c19cd2") : UIColor(rgba: "#f2d400")
+        #else
+            color = poll.category.color
+        #endif
+        
+        self.viewTop.backgroundColor = color
     }
     
 }

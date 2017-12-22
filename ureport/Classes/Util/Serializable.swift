@@ -77,7 +77,7 @@ open class Serializable: NSObject {
                     propertiesDictionary.setValue(boolPropValue, forKey: propName)
                 } else if let stringPropValue = propValue as? String  {
                     propertiesDictionary.setValue(stringPropValue, forKey: propName)
-                }else {
+                } else if (propValue != nil) {
                     print(propValue)
                     propertiesDictionary.setValue(propValue, forKey: propName)
                 }

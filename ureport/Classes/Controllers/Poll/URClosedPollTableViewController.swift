@@ -89,7 +89,7 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URClosedPollTableViewCell.self), for: indexPath) as! URClosedPollTableViewCell
         
-        cell.setupCellWithData(self.pollList[(indexPath as NSIndexPath).row])
+        cell.setupCellWithData(self.pollList[(indexPath as NSIndexPath).row], at: indexPath)
         
         return cell
     }
