@@ -150,14 +150,20 @@ extension Serializable {
     Unwraps 'any' object. See http://stackoverflow.com/questions/27989094/how-to-unwrap-an-optional-value-from-any-type
     - returns: The unwrapped object.
     */
-    fileprivate func unwrap(_ any: Any) -> Any {
+    fileprivate func unwrap(_ any: Any) -> Any? {
+//        let optional = any as? OptionalProtocol
+//        var unwrapped: Any?
+//        if optional?.isSome() ?? false {
+//            unwrapped = optional.unwrap()
+//        }
+//        return unwrapped
         let mi = Mirror(reflecting: any)
-        
+
         if mi.displayStyle != .optional {
             return any
         }
-        
-        if mi.children.count == 0 { return NSNull() }
+
+        if mi.children.count == 0 { return nil }
         let (_, some) = mi.children.first!
         return some
     }

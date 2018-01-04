@@ -167,7 +167,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
         
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
             MBProgressHUD.showAdded(to: self.view, animated: true)
-            URUserLoginManager.loginWithFacebook(self) { (user) -> Void in
+            URUserLoginManager.loginWithFacebook(self) { (user: URUser?, pendingFirebaseRegistration: Bool?) -> Void in
                 MBProgressHUD.hide(for: self.view, animated: true)
                 
                 guard let user = user else {
@@ -175,7 +175,7 @@ class URLoginViewController: UIViewController, URUserLoginManagerDelegate, ISTer
                     return
                 }
                 
-                if user.key == nil {
+                if pendingFirebaseRegistration ?? false {
                      self.navigationController!.pushViewController(URUserRegisterViewController(color: URConstant.Color.CONFIRM_INFO_PRIMARY,user: user,updateMode:false),animated:true)
                 }
             }

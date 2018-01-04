@@ -55,7 +55,9 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
 
         URIPCheckManager.getCountryCodeByIP { (countryCode) in}
         
-        URNavigationManager.setupNavigationBarWithCustomColor(URCountryProgramManager.activeCountryProgram()!.themeColor!)
+        if let themeColor = URCountryProgramManager.activeCountryProgram()?.themeColor {
+            URNavigationManager.setupNavigationBarWithCustomColor(themeColor)
+        }
         
         let tracker = GAI.sharedInstance().defaultTracker
         tracker?.set(kGAIScreenName, value: "Stories")
@@ -221,8 +223,8 @@ class URStoriesTableViewController: UITableViewController, URStoryManagerDelegat
     
     func loadNews() {
         
-        if let org = URCountryProgramManager.activeCountryProgram()!.org {
-            let url = "\(URCountryProgramManager.activeCountryProgram()!.ureportHostAPI!)\(org)"
+        if let org = URCountryProgramManager.activeCountryProgram()?.org, let hostAPI = URCountryProgramManager.activeCountryProgram()?.ureportHostAPI {
+            let url = "\(hostAPI)\(org)"
             
             Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseArray(queue: nil, keyPath: "results", context: nil, completionHandler: { (response:DataResponse<[URNews]>) in
                     if let response = response.result.value {

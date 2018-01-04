@@ -30,7 +30,7 @@ class URGCMManager {
         if from.hasPrefix(chatTopic) {
             let chatMessageDict = convertJsonToDictionary(userData["chatMessage"] as! String)
             let chatMessage = URChatMessage(jsonDict: chatMessageDict)
-            let user = URUser(jsonDict: (chatMessageDict!["user"] as? NSDictionary))
+            let user = URUser(JSON: (chatMessageDict!["user"] as? [String: Any] ?? [:]))
             
             if isUserAllowedForMessageNotification(user) {
                 print("Chat notifiction: \(chatMessage)")

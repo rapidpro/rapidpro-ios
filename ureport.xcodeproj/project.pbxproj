@@ -528,6 +528,8 @@
 		B29674661FB25B5500EFA624 /* URFcmAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B29674641FB25B4C00EFA624 /* URFcmAPI.swift */; };
 		B2EBF9161FC4937F00CEAF68 /* countryprogramotm.json in Resources */ = {isa = PBXBuildFile; fileRef = B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */; };
 		E00D0327DBB10E421FB22C9E /* Pods_ureport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2938F725A3A400358D81C846 /* Pods_ureport.framework */; };
+		E30D6CDA1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
+		E30D6CDB1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
 		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
 		E3366D171FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */; };
 		E3366D181FE177B100143AF7 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D141FE177B100143AF7 /* Key.plist */; };
@@ -885,6 +887,7 @@
 		B29674641FB25B4C00EFA624 /* URFcmAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFcmAPI.swift; sourceTree = "<group>"; };
 		B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogramotm.json; sourceTree = "<group>"; };
 		D3E4A8B1934F73CBD00FE9D0 /* Pods_ureport_on_the_move.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ureport_on_the_move.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseMappableExtension.swift; sourceTree = "<group>"; };
 		E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ureport on-the-moveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ureport_on_the_moveTests.m; sourceTree = "<group>"; };
 		E3286C941FC8BF3D00A7F78C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1222,6 +1225,7 @@
 				E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */,
 				E3791D521FEC044800ACF080 /* UITableViewExtension.swift */,
 				E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */,
+				E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2679,6 +2683,7 @@
 				6567C1D31CB5A8990041F004 /* URChatVideoItem.swift in Sources */,
 				6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */,
 				65F47F541C654B79009A2066 /* URImageMedia.swift in Sources */,
+				E30D6CDA1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */,
 				65075AF11C7DF3C6008CF8F3 /* URDownloader.swift in Sources */,
 				652F8AA81BA0D8C10096C8DC /* URCountryProgramManager.swift in Sources */,
 				65DFCD021CE3CFE900E4DFD9 /* UIViewController+Proposer.swift in Sources */,
@@ -2883,6 +2888,7 @@
 				B266AF821F9FE11800C4C968 /* URChatVideoItem.swift in Sources */,
 				B266AF831F9FE11800C4C968 /* URFileUtil.swift in Sources */,
 				B266AF841F9FE11800C4C968 /* URImageMedia.swift in Sources */,
+				E30D6CDB1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */,
 				B266AF851F9FE11800C4C968 /* URDownloader.swift in Sources */,
 				B266AF861F9FE11800C4C968 /* URCountryProgramManager.swift in Sources */,
 				B266AF871F9FE11800C4C968 /* UIViewController+Proposer.swift in Sources */,

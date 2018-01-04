@@ -11,7 +11,7 @@ import ObjectMapper
 import FirebaseDatabase
 import fcm_channel_ios
 
-class URUser: Serializable {
+class URUser: Mappable {
     
     static let ref = URFireBaseManager.sharedInstance().child("users")
     
@@ -38,9 +38,35 @@ class URUser: Serializable {
     var moderator:NSNumber?
     var masterModerator:NSNumber?
     var socialUid:String?
-
-    override init() {
-        super.init()
+    
+    init() { }
+    
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        key <- map["key"]
+        nickname <- map["nickname"]
+        email <- map["email"]
+        state <- map["state"]
+        birthday <- map["birthday"]
+        language <- map["language"]
+        country <- map["country"]
+        picture <- map["picture"]
+        gender <- map["gender"]
+        type <- map["type"]
+        countryProgram <- map["countryProgram"]
+        chatRooms <- map["chatRooms"]
+        contributions <- map["contributions"]
+        points <- map["points"]
+        stories <- map["stories"]
+        polls <- map["polls"]
+        pushIdentity <- map["pushIdentity"]
+        publicProfile <- map["publicProfile"]
+        born <- map["born"]
+        district <- map["district"]
+        moderator <- map["moderator"]
+        masterModerator <- map["masterModerator"]
+        socialUid <- map["socialUid"]
     }
     
     //MARK: User Account Manager
@@ -51,18 +77,17 @@ class URUser: Serializable {
         
         encodedData = defaults.object(forKey: "user") as? Data
         
-        if encodedData != nil {
-            let user: URUser = URUser(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
-            return user
-        } else{
-            return nil
+        var user: URUser?
+        if let encodedData = encodedData, let string = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? String {
+            user = URUser(JSONString: string)
         }
+        return user 
     }
     
     static func setActiveUser(_ user: URUser) {
         self.deactivateUser()
         let defaults: UserDefaults = UserDefaults.standard
-        let userDict = user.toDictionary()
+        let userDict = user.toJSONString()
         let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: userDict)
         defaults.set(encodedObject, forKey: "user")
         defaults.synchronize()

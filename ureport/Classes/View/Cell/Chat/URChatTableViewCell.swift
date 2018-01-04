@@ -8,8 +8,8 @@
 
 import UIKit
 
-@objc protocol URChatTableViewCellDelegate {
-    @objc optional func userSelected(_ user:URUser)
+protocol URChatTableViewCellDelegate {
+    func userSelected(_ user:URUser)
 }
 
 class URChatTableViewCell: UITableViewCell {
@@ -196,7 +196,7 @@ class URChatTableViewCell: UITableViewCell {
         }
         
         if let delegate = self.delegate {
-            delegate.userSelected!(self.user!)
+            delegate.userSelected(self.user!)
         }
                 
     }

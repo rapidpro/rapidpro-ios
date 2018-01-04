@@ -129,23 +129,25 @@ class URFireBaseManager {
         }
     }
     
-    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?) -> Void) -> Void {
+    static func authUserWithFacebook(token:String, completion:@escaping (_ user:URUser?, _ pendingFirebaseRegistration: Bool?) -> Void) -> Void {
         Alamofire.request(String(format: URConstant.Auth.AUTH_FACEBOOK(), token)).responseJSON { (response:DataResponse<Any>) in
-            if let response = response.result.value as? NSDictionary {
-                if let uid = response["uid"] as? String {
-                    URUserManager.getByKey(uid, completion: { (user, success) in
-                        if let user = user {
-                            user.socialUid = uid
-                            completion(user)
-                        } else {
-                            let user = URUserLoginManager.getFacebookUserDataWithDictionary(response["facebook"] as! NSDictionary)
-                            user.socialUid = uid
-                            completion(user)
+            if let response = response.result.value as? NSDictionary, let uid = response["uid"] as? String {
+                URUserManager.getByKey(uid, completion: { (user, success) in
+                    if let user = user {
+                        user.socialUid = uid
+                        completion(user, false)
+                    } else {
+                        let user = URUserLoginManager.getFacebookUserDataWithDictionary(response["facebook"] as! NSDictionary)
+                        user.socialUid = uid
+                        if user.key == nil {
+                            user.key = uid
                         }
-                    })
-                }
+                        completion(user, true)
+                    }
+                })
+                
             } else{
-                completion(nil)
+                completion(nil, nil)
                 print(response)
             }
         }

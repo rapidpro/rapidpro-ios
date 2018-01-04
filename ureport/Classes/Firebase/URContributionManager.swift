@@ -42,7 +42,11 @@ class URContributionManager {
                 guard let delegate = self.delegate else { return }
 
                 let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
-                let author = URUser(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "author")! as? NSDictionary)
+                
+                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
+                guard let author = URUser(JSON: json) else {
+                    return
+                }
 
                 URUserManager.getByKey(author.key, completion: { (user, exists) -> Void in
                     guard let user = user else { return }
@@ -65,7 +69,12 @@ class URContributionManager {
             .observe(.childAdded, with: { snapshot in
                 guard let delegate = self.delegate else { return }
                 let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
-                let author = URUser(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "author")! as? NSDictionary)
+                
+                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
+                guard let author = URUser(JSON: json) else {
+                    return
+                }
+                
                 URUserManager.getByKey(author.key) { (user, exists) -> Void in
                     guard let user = user else { return }
                     contribution.key = snapshot.key

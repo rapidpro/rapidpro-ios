@@ -174,7 +174,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
                         self.saveUser(user)                        
                         
                         URFireBaseManager.authUserWithPassword(email: user.email!, password: self.txtPassword.text!, completion: { (user, error) in
-                            if let _ = user {
+                            if let user = user {
+                                URUserLoginManager.successfulLogin(user)
                                 URNavigationManager.setupNavigationControllerWithMainViewController(URMainViewController())
                             }
                         })

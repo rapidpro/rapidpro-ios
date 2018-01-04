@@ -123,8 +123,8 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         if URSettings.checkIfTermsIsAccepted(termsViewController, viewController: self) == true {
             var user:URUser = URUser()
             if URSettings.getSettings().reviewMode == true {
-                gender = gender == nil ? "" : gender
-                self.birthDay = self.birthDay == nil ? Date() : self.birthDay
+                gender = gender ?? ""
+                birthDay = birthDay ?? Date()
             }
             
             MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -185,12 +185,13 @@ class URUserRegisterViewController: UIViewController, UIPickerViewDelegate, UIPi
         URUserManager.save(user)
         MBProgressHUD.hide(for: self.view, animated: true)
         
+        URUserLoginManager.successfulLogin(user)
+
         if updateMode == true {
             UIAlertView(title: nil, message: "message_success_user_update".localized, delegate: self, cancelButtonTitle: "OK").show()
             URNavigationManager.navigation.popViewController(animated: true)
         }
         
-        URUserLoginManager.successfulLogin(user)
     }
     
     func setupUIWithUserData() {

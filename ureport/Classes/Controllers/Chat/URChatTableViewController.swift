@@ -26,7 +26,6 @@ protocol URChatTableViewControllerDelegate {
 }
 
 class URChatTableViewController: UITableViewController, URChatRoomManagerDelegate, UISearchBarDelegate, URNewGroupTableViewCellDelegate {
-
     var createGroupOption:Bool!
     var listUser:[URUser] = []
     var listFilteredUser:[URUser] = []
@@ -114,6 +113,9 @@ class URChatTableViewController: UITableViewController, URChatRoomManagerDelegat
     }
     
     //MARK: URChatRoomManagerDelegate
+    func newOpenGroupReceived(_ groupChatRoom: URGroupChatRoom) {
+        //TODO: transform method in optional and remove from here
+    }
     
     func openChatRoom(_ chatRoom: URChatRoom, members: [URUser], title: String) {
         MBProgressHUD.hide(for: self.view, animated: true)

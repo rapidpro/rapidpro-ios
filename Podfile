@@ -24,7 +24,8 @@ def shared_pods
     pod 'STTwitter'
 
     pod 'IlhasoftCore', :git => 'https://bitbucket.org/ilhasoft/ilhasoft-core-ios’, :branch => 'develop'
-
+    pod 'ObjectMapper' #,  '~> 3.1'
+    
     pod 'Firebase/Core', '4.0.4'
     pod 'Firebase/Messaging', '4.0.4'
     pod 'Firebase/Auth', '4.0.4'

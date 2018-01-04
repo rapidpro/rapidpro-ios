@@ -160,7 +160,8 @@ class URCountryProgramManager {
     class func setActiveCountryProgram(_ countryProgram: URCountryProgram!) {
         self.deactivateCountryProgram()
         let defaults: UserDefaults = UserDefaults.standard
-        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgram.toDictionary())
+        let countryProgramDict = countryProgram.toDictionary()
+        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgramDict)
         defaults.set(encodedObject, forKey: "countryProgram")
         defaults.synchronize()
     }

@@ -27,9 +27,9 @@ fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-@objc protocol URChatRoomManagerDelegate {
-    @objc optional func newOpenGroupReceived(_ groupChatRoom:URGroupChatRoom)
-    @objc optional func openChatRoom(_ chatRoom:URChatRoom, members:[URUser], title:String)
+protocol URChatRoomManagerDelegate {
+    func newOpenGroupReceived(_ groupChatRoom:URGroupChatRoom)
+    func openChatRoom(_ chatRoom:URChatRoom, members:[URUser], title:String)
 }
 
 class URChatRoomManager {
@@ -86,10 +86,10 @@ class URChatRoomManager {
             group.notify(queue: DispatchQueue.main, execute: {
                 
                 if equalsChatRoomList.count > 0 {
-                    self.delegate?.openChatRoom!(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname!)
+                    self.delegate?.openChatRoom(equalsChatRoomList[0],members:[URUser.activeUser()!,friend],title:friend.nickname!)
                 }else {
                     URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
-                        self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                        self.delegate?.openChatRoom(chatRoom,members:chatMembers,title:title)
                         
                     })
                 }
@@ -98,7 +98,7 @@ class URChatRoomManager {
             
         }else {
             URChatRoomManager.createIndividualChatRoom(friend, completion: { (chatRoom, chatMembers, title) -> Void in
-                self.delegate?.openChatRoom!(chatRoom,members:chatMembers,title:title)
+                self.delegate?.openChatRoom(chatRoom,members:chatMembers,title:title)
                 
             })
         }
@@ -117,8 +117,8 @@ class URChatRoomManager {
                     completion(nil)
                     return
                 }
-                if snapshotValue["administrator"] != nil {
-                    let administrator = URUser(jsonDict: snapshotValue["administrator"] as? NSDictionary)
+                if let admin = snapshotValue["administrator"] as? [String: Any] {
+                    let administrator = URUser(JSON: admin)
                     let picture = URMedia(jsonDict: snapshotValue["picture"] as? NSDictionary)
                     let groupChatRoom = URGroupChatRoom(jsonDict: snapshotValue)
                     groupChatRoom.createdDate = snapshotValue["createdDate"] as! NSNumber
@@ -225,7 +225,7 @@ class URChatRoomManager {
                 }
 
                 let group = URGroupChatRoom(jsonDict: snapshotValue)
-                let administrator = URUser(jsonDict: snapshotValue["administrator"] as? NSDictionary)
+                let administrator = URUser(JSON: snapshotValue["administrator"] as? [String: Any] ?? [:])
 
                 if let picture = snapshotValue["picture"] as? NSDictionary{
                     group.picture = URMedia(jsonDict: picture)
@@ -241,7 +241,7 @@ class URChatRoomManager {
                             group.userIsMember = true
                         }
                     }
-                    delegate.newOpenGroupReceived!(group)
+                    delegate.newOpenGroupReceived(group)
                 })
             })
     }

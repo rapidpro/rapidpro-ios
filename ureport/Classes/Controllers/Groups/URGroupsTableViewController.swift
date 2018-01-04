@@ -9,7 +9,6 @@
 import UIKit
 
 class URGroupsTableViewController: UITableViewController, URChatRoomManagerDelegate, URGroupsTableViewCellDelegate {
-
     let chatRoomManager = URChatRoomManager()
     var listGroups:[URGroupChatRoom] = []
     var myChatsViewController:URMyChatsViewController?
@@ -66,6 +65,9 @@ class URGroupsTableViewController: UITableViewController, URChatRoomManagerDeleg
     }
     
     //MARK: UTChatRoomManagerDelegate
+    func openChatRoom(_ chatRoom: URChatRoom, members: [URUser], title: String) {
+        //TODO: transform method in optional and remove from here
+    }
     
     func newOpenGroupReceived(_ groupChatRoom: URGroupChatRoom) {
         listGroups.append(groupChatRoom)

@@ -9,8 +9,8 @@
 import UIKit
 import Firebase
 
-@objc protocol URUserManagerDelegate {
-    @objc optional func newUserReceived(_ user:URUser)
+protocol URUserManagerDelegate {
+    func newUserReceived(_ user:URUser)
 }
 
 class URUserManager {
@@ -43,7 +43,7 @@ class URUserManager {
         URFireBaseManager.sharedInstance()
             .child(URUserManager.path)
             .child(user.key)
-            .setValue(user.toDictionary())
+            .setValue(user.toJSON())
         URUser.setActiveUser(user)
     }
 
@@ -132,25 +132,22 @@ class URUserManager {
             .child(URUserManager.path)
             .queryOrdered(byChild: "points")
             .observe(.childAdded, with: { snapshot in
-                guard snapshot.value != nil else { return }
-                guard let delegate = self.delegate else { return }
-                delegate.newUserReceived!(URUser(jsonDict: snapshot.value as? NSDictionary))
+                
+                guard let user = URUser(snapshot: snapshot), self.delegate != nil else { return }
+                self.delegate.newUserReceived(user)
             })
     }
 
-    class func getByKey(_ key:String,completion:@escaping (URUser?,Bool) -> Void){
+    class func getByKey(_ key:String, completion:@escaping (URUser?, Bool) -> Void) {
         URFireBaseManager.sharedInstance()
             .child(URUserManager.path)
             .child(key)
             .observeSingleEvent(of: .value, with: { snapshot in
-                guard snapshot.value != nil else {
+                guard let user = URUser(snapshot: snapshot) else {
                     completion(nil, false)
                     return
                 }
-                let user = URUser(jsonDict: (snapshot.value as? NSDictionary))
-                if let chatRooms = (snapshot.value as? NSDictionary)?.object(forKey: "chatRooms") as? NSDictionary {
-                    user.chatRooms = chatRooms
-                }
+
                 completion(user, true)
             })
     }
@@ -169,11 +166,7 @@ class URUserManager {
                 .child(URUserManager.path)
                 .child(key)
                 .observeSingleEvent(of: .value, with: { (snapshot) in
-                    if let userDict = snapshot.value as? NSDictionary {
-                        let user = URUser(jsonDict: userDict)
-                        if let chatRooms = userDict.object(forKey: "chatRooms") as? NSDictionary {
-                            user.chatRooms = chatRooms
-                        }
+                    if let user = URUser(snapshot: snapshot) {
                         keysAndUsers[user.key] = user
                     }
                     
@@ -227,8 +220,7 @@ class URUserManager {
                 }
                 var userList:[URUser] = []
                 for rest in snapshot.children.allObjects as! [DataSnapshot] {
-                    let user = URUser(jsonDict: rest.value as? NSDictionary)
-                    if user.publicProfile != nil && user.publicProfile!.boolValue == true && user.key != URUser.activeUser()!.key {
+                    if let user = URUser(snapshot: rest), user.publicProfile != nil && user.publicProfile!.boolValue == true && user.key != URUser.activeUser()!.key {
                         userList.append(user)
                     }
                 }

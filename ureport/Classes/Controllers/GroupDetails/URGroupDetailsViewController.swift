@@ -9,7 +9,6 @@
 import UIKit
 
 class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegate {
-
     @IBOutlet weak var imgGroupPic: UIImageView!
     @IBOutlet weak var lbGroupTitle: UILabel!
     @IBOutlet weak var lbSubject: UILabel!
@@ -160,6 +159,10 @@ class URGroupDetailsViewController: UIViewController, URChatTableViewCellDelegat
             self.imgGroupPic.image = UIImage(named: "default_group")
         }
         
+    }
+    
+    func userSelected(_ user: URUser) {
+        //TODO: set method as optional at delegate declaration and remove from here
     }
     
     //MARK: Button Events

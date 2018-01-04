@@ -31,7 +31,8 @@ class URChatMessageManager {
             .observe(.childAdded, with: { (snapshot: DataSnapshot) in
                 if let delegate = self.delegate {
                     let chatMessage = URChatMessage()
-                    chatMessage.user = URUser(jsonDict: (snapshot.value as AnyObject).object(forKey: "user") as? NSDictionary)
+                    let userJSON = (snapshot.value as AnyObject).object(forKey: "user") as? [String: Any] ?? [:]
+                    chatMessage.user = URUser(JSON: userJSON)
                     chatMessage.message = (snapshot.value as AnyObject).object(forKey: "message") as? String
                     chatMessage.media = URMedia(jsonDict:(snapshot.value as AnyObject).object(forKey: "media") as? NSDictionary)
                     chatMessage.date = (snapshot.value as AnyObject).object(forKey: "date") as! NSNumber

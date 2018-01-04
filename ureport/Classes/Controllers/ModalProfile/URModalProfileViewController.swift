@@ -10,7 +10,6 @@ import UIKit
 import MBProgressHUD
 
 class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate {
-
     @IBOutlet weak var backgroundView: UIView!
     @IBOutlet weak var viewTop: UIView!
     @IBOutlet weak var roundedView: ISRoundedView!
@@ -116,6 +115,9 @@ class URModalProfileViewController: UIViewController, URChatRoomManagerDelegate 
     }
     
     //MARK: URChatRoomManagerDelegate
+    func newOpenGroupReceived(_ groupChatRoom: URGroupChatRoom) {
+        //TODO: transform method in optional and remove from here
+    }
     
     func openChatRoom(_ chatRoom: URChatRoom, members: [URUser], title: String) {
         MBProgressHUD.hide(for: self.view, animated: true)

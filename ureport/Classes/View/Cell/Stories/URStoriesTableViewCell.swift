@@ -8,10 +8,10 @@
 
 import UIKit
 
-@objc protocol URStoriesTableViewCellDelegate {
+protocol URStoriesTableViewCellDelegate {
     func openProfile(_ user:URUser)
     func openAlert(with message: String)
-    @objc optional func removeCell(_ cell:URStoriesTableViewCell)
+    func removeCell(_ cell:URStoriesTableViewCell)
 }
 
 class URStoriesTableViewCell: UITableViewCell {
@@ -91,7 +91,7 @@ class URStoriesTableViewCell: UITableViewCell {
                 URStoryManager.setStoryAsDisapproved(self.story, completion: {
                     finished in
                     if finished {
-                        self.delegate?.removeCell!(self)
+                        self.delegate?.removeCell(self)
                         self.delegate?.openAlert(with: "message_success_remove".localized)
                     }
                 })
@@ -157,7 +157,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBAction func btDisapprovedTapped(_ sender: AnyObject) {
         URStoryManager.setStoryAsDisapproved(self.story) { (finished) -> Void in
             if let delegate = self.delegate {
-                delegate.removeCell!(self)
+                delegate.removeCell(self)
             }
         }
     }
@@ -165,7 +165,7 @@ class URStoriesTableViewCell: UITableViewCell {
     @IBAction func btPublishTapped(_ sender: AnyObject) {
         URStoryManager.setStoryAsPublished(self.story) { (finished) -> Void in
             if let delegate = self.delegate {
-                delegate.removeCell!(self)
+                delegate.removeCell(self)
             }
         }
     }

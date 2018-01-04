@@ -40,31 +40,30 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         //URFireBaseManager.sharedLoginInstance().unauth()
     }
 
-    class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?) -> Void ) {
+    class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?, _ pendingFirebaseRegistration: Bool?) -> Void ) {
         let login = FBSDKLoginManager()
         login.logIn(withReadPermissions: ["email","user_birthday"], from: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
                 print(error!)
-                completion(nil)
+                completion(nil, nil)
             }
             else {
                 if (FBSDKLoginManagerLoginResult?.isCancelled)! {
-                    completion(nil)
+                    completion(nil, nil)
                 } else {
                     if FBSDKAccessToken.current() != nil {
-                        URFireBaseManager.authUserWithFacebook(token: FBSDKAccessToken.current().tokenString, completion: { (user) in
-                            if let user = user {
+                        URFireBaseManager.authUserWithFacebook(token: FBSDKAccessToken.current().tokenString, completion: { (user, pendingFirebaseRegistration) in
+                            if let user = user, !(pendingFirebaseRegistration ?? false) {
                                 URUserLoginManager.successfulLogin(user)
                             }
-                            
-                            completion(user)
+                            completion(user, pendingFirebaseRegistration)
                         })
                     }
                 }
             }
         }
     }
-
+    
     class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {    
         Twitter.sharedInstance().logIn { (session, error) in
             if let error = error {

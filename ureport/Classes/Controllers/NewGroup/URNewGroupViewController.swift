@@ -327,8 +327,8 @@ class URNewGroupViewController: UIViewController, UITableViewDataSource, UITable
             return $0.key == user.key
         }
         
-        if !filtered.isEmpty {
-            listUserSelectedToGroup.remove(at: listUserSelectedToGroup.index(of: filtered[0])!)
+        if !filtered.isEmpty, let index = listUserSelectedToGroup.index(where: {$0.key == filtered[0].key}) {
+            listUserSelectedToGroup.remove(at: index)
         }else{
             listUserSelectedToGroup.append(user)
         }
