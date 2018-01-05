@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import ObjectMapper
+import FirebaseDatabase
 
-class URPollResult: Serializable {
+class URPollResult: Mappable {
    
     var date:String!
     var polled:String!
@@ -17,4 +19,14 @@ class URPollResult: Serializable {
     var type:String!
     var results:[NSDictionary]!
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        date <- map["date"]
+        polled <- map["polled"]
+        responded <- map["responded"]
+        title <- map["title"]
+        type <- map["type"]
+        results <- map["results"]
+    }
 }

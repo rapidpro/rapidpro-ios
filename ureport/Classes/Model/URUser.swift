@@ -72,25 +72,16 @@ class URUser: Mappable {
     //MARK: User Account Manager
     
     static func activeUser() -> URUser? {
-        let defaults: UserDefaults = UserDefaults.standard
-        var encodedData: Data?
-        
-        encodedData = defaults.object(forKey: "user") as? Data
-        
         var user: URUser?
-        if let encodedData = encodedData, let string = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? String {
-            user = URUser(JSONString: string)
+        if let userString = UserDefaults.standard.getArchivedObject(key: "user") as? String { // let encodedData = encodedData, let string = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? String {
+            user = URUser(JSONString: userString)
         }
         return user 
     }
     
     static func setActiveUser(_ user: URUser) {
         self.deactivateUser()
-        let defaults: UserDefaults = UserDefaults.standard
-        let userDict = user.toJSONString()
-        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: userDict)
-        defaults.set(encodedObject, forKey: "user")
-        defaults.synchronize()
+        UserDefaults.standard.setAsString(object: user, key: "user")
     }
     
     static func deactivateUser() {

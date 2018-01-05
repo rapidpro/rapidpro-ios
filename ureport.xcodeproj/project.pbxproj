@@ -553,6 +553,8 @@
 		E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */; };
 		E3EC208E1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
 		E3EC208F1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
+		E3EEF8701FFFB15400808DD8 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EEF86F1FFFB15400808DD8 /* UserDefaultsExtension.swift */; };
+		E3EEF8711FFFB15400808DD8 /* UserDefaultsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EEF86F1FFFB15400808DD8 /* UserDefaultsExtension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -904,6 +906,7 @@
 		E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
 		E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogramotm-dev.json"; sourceTree = "<group>"; };
 		E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		E3EEF86F1FFFB15400808DD8 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1226,6 +1229,7 @@
 				E3791D521FEC044800ACF080 /* UITableViewExtension.swift */,
 				E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */,
 				E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */,
+				E3EEF86F1FFFB15400808DD8 /* UserDefaultsExtension.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -2613,6 +2617,7 @@
 				E3627B851FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */,
 				65409FC11B4C842700344D75 /* AppDelegate.swift in Sources */,
+				E3EEF8701FFFB15400808DD8 /* UserDefaultsExtension.swift in Sources */,
 				65A8DD2E1DD3752D00C0B2D5 /* URTwitterAuthHelper.swift in Sources */,
 				65EA8C181BAF4F7200F2E29E /* URLoginAlertController.swift in Sources */,
 				65F077271CB5AA4700A1D608 /* URChatFileItem.swift in Sources */,
@@ -2818,6 +2823,7 @@
 				E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */,
 				B266AF3B1F9FE11800C4C968 /* URMyChatsIPadViewController.swift in Sources */,
 				B266AF3C1F9FE11800C4C968 /* AppDelegate.swift in Sources */,
+				E3EEF8711FFFB15400808DD8 /* UserDefaultsExtension.swift in Sources */,
 				B266AF3D1F9FE11800C4C968 /* URTwitterAuthHelper.swift in Sources */,
 				B266AF3E1F9FE11800C4C968 /* URLoginAlertController.swift in Sources */,
 				B266AF3F1F9FE11800C4C968 /* URChatFileItem.swift in Sources */,

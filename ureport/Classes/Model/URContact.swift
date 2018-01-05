@@ -7,11 +7,19 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URContact: Serializable {
+class URContact: Mappable {
    
     var uuid:String?
     var name:String?
     var phoneNumber:String?
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        uuid <- map["uuid"]
+        name <- map["name"]
+        phoneNumber <- map["phoneNumber"]
+    }
 }

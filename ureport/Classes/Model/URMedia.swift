@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URMedia: Serializable {
+class URMedia: Mappable {
 
     var id:String?
     var url:String!
@@ -17,4 +18,14 @@ class URMedia: Serializable {
     var isCover:Bool?
     var metadata:[String:AnyObject]?
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        id <- map["id"]
+        url <- map["url"]
+        type <- map["type"]
+        thumbnail <- map["thumbnail"]
+        isCover <- map["isCover"]
+        metadata <- map["metadata"]
+    }
 }

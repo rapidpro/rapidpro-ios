@@ -10,13 +10,23 @@ import UIKit
 import JSQMessagesViewController
 import ObjectMapper
 
-class URChatMessage: Serializable {
+class URChatMessage: Mappable {
     
     var key:String?
     var message:String?
     var user:URUser!
     var date:NSNumber!
     var media:URMedia?
+    
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        key <- map["key"]
+        message <- map["message"]
+        user <- map["user"]
+        date <- map["date"]
+        media <- map["media"]
+    }
     
     func text() -> String! {
         return self.message

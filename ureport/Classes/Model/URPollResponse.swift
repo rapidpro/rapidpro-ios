@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URPollResponse: Serializable {
+class URPollResponse: Mappable {
    
     var channel:String!
     var from:String!
@@ -20,4 +21,11 @@ class URPollResponse: Serializable {
         self.text = text
     }        
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        channel <- map["channel"]
+        from <- map["from"]
+        text <- map["text"]
+    }
 }

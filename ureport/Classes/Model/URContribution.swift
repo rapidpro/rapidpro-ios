@@ -7,12 +7,21 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URContribution: Serializable {
+class URContribution: Mappable {
     
     var key:String?
     var content:String!
     var author:URUser!
     var createdDate:NSNumber!
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        key <- map["key"]
+        content <- map["content"]
+        author <- map["author"]
+        createdDate <- map["createdDate"]
+    }
 }

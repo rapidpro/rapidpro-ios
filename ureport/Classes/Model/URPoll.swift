@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import ObjectMapper
+import FirebaseDatabase
 
-class URPoll: Serializable {
+class URPoll: Mappable {
     
     var key:String!
     var title:String!
@@ -19,4 +21,16 @@ class URPoll: Serializable {
     var responded:String!
     var category:URPollCategory!
     
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        key <- map["key"]
+        title <- map["title"]
+        expiration_date <- map["expiration_date"]
+        flow_uuid <- map["flow_uuid"]
+        percent_rate <- map["percent_rate"]
+        polled <- map["polled"]
+        responded <- map["responded"]
+        category <- map["category"]
+    }
 }

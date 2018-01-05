@@ -7,11 +7,20 @@
 //
 
 import UIKit
+import FirebaseDatabase
+import ObjectMapper
 
-class URPollCategory: Serializable {
+class URPollCategory: Mappable {
    
     var name:String!
     var image_url:String!
     var color:UIColor!
     
+    required init?(map: Map) { }
+
+    func mapping(map: Map) {
+        name <- map["name"]
+        image_url <- map["image_url"]
+        color <- (map["color"], HexColorTransform())        
+    }
 }

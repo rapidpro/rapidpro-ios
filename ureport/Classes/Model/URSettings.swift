@@ -8,8 +8,9 @@
 
 import UIKit
 import IlhasoftCore
+import ObjectMapper
 
-class URSettings: Serializable {
+class URSettings: Mappable {
     
     var notifications:NSNumber?
     var chatNotifications:NSNumber?
@@ -17,6 +18,17 @@ class URSettings: Serializable {
     var preferredLanguage:NSString?
     var firstRun:NSNumber?
     var reviewMode:NSNumber?
+    
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        notifications <- map["notifications"]
+        chatNotifications <- map["chatNotifications"]
+        availableInChat <- map["availableInChat"]
+        preferredLanguage <- map["preferredLanguage"]
+        firstRun <- map["firstRun"]
+        reviewMode <- map["reviewMode"]
+    }
     
     class func saveSettingsLocaly(_ settings:URSettings) {
         let defaults = UserDefaults.standard

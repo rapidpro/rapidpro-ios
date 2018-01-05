@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class URChatRoom: Serializable, Mappable {
+class URChatRoom: Mappable {
     
     var key:String?
     var type:String!
@@ -17,12 +17,15 @@ class URChatRoom: Serializable, Mappable {
     var lastMessage:URChatMessage?
     var totalUnreadMessages:Int?
     
-    override init() {}
     
     required init?(map: Map){}
     
     func mapping(map: Map) {
         self.key <- map["key"]
+        self.type <- map["type"]
+        self.createdDate <- map["createdDate"]
+        self.lastMessage <- map["lastMessage"]
+        self.totalUnreadMessages <- map["totalUnreadMessages"]
     }
     
 }

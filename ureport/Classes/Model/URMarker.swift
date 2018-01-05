@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import ObjectMapper
+import FirebaseDatabase
 
-class URMarker: Serializable {
+class URMarker: Mappable {
    
     var name:String!
     
@@ -16,20 +18,9 @@ class URMarker: Serializable {
         self.name = name
     }
     
-    convenience init(jsonDict: NSDictionary?) {
-        self.init(name: "")
-        
-        if let jsonDict = jsonDict {
-            for (key, value) in jsonDict {
-                self.setValue(value, forKey:key as! String)
-            }
-        }
-        
-    }
+    required init?(map: Map) { }
     
-    override var description: String {
-        print(self.name)
-        return self.name
+    func mapping(map: Map) {
+        name <- map["name"]
     }
-    
 }

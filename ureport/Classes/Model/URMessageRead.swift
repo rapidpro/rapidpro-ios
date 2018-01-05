@@ -7,34 +7,40 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URMessageRead: Serializable {
+class URMessageRead: Mappable {
    
-    var totalMessages:NSNumber!
-    var roomKey:String!
-        
-    class func saveMessageReadLocaly(_ messageRead:URMessageRead) {
-        
-        let defaults = UserDefaults.standard
-        var readArray:[NSDictionary] = URMessageRead.getMessagesRead()
-        
-        if let _ = readArray.index(of: messageRead.toDictionary()) {
-            return
-        }else {
-            readArray.append(messageRead.toDictionary())
-        }
-        
-        defaults.set(NSKeyedArchiver.archivedData(withRootObject: readArray), forKey: "messagesRead")
-        defaults.synchronize()
+    var totalMessages: NSNumber!
+    var roomKey: String!
+    
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        totalMessages <- map["totalMessages"]
+        roomKey <- map["roomKey"]
     }
     
-    class func getMessagesRead() -> [NSDictionary]{
+    class func saveMessageReadLocaly(_ messageRead:URMessageRead) {
+        var readArray = URMessageRead.getMessagesRead()
         
-        let defaults = UserDefaults.standard
-        let readArray:[NSDictionary] = []
+        guard readArray.index(where: {$0.totalMessages == messageRead.totalMessages && $0.roomKey == messageRead.roomKey}) == nil else {
+            return
+        }
+       
+        readArray.append(messageRead)
+        UserDefaults.standard.setAsStringArray(objects: readArray, key: "messagesRead")
+    }
+    
+    class func getMessagesRead() -> [URMessageRead] {
+        var readArray: [URMessageRead] = []
         
-        if let messagesRead = defaults.object(forKey: "messagesRead") as? Data {
-            return (NSKeyedUnarchiver.unarchiveObject(with: messagesRead)) as! [NSDictionary]
+        if let messagesRead = UserDefaults.standard.getArchivedObject(key: "messagesRead") as? [String] {
+            for messageRead in messagesRead {
+                if let message = URMessageRead(JSONString: messageRead) {
+                    readArray.append(message)
+                }
+            }
         }
         
         return readArray
