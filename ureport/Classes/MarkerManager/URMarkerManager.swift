@@ -8,7 +8,7 @@
 
 import UIKit
 
-class URMarkerManager: Serializable {
+class URMarkerManager {
    
     static var markers:[URMarker]!
     
@@ -29,44 +29,31 @@ class URMarkerManager: Serializable {
             markers.append(URMarker(name: "Violence".localized))
         }
         
-        if !URMarkerManager.getLocalyMarkers().isEmpty {
-
-            for marker in URMarkerManager.getLocalyMarkers() {
-                let markerObject = URMarker(jsonDict: marker)
-                markers.append(markerObject)
-            }
-            
-        }
-        
+        let localMarkers = URMarkerManager.getLocalyMarkers()
+        markers.append(contentsOf: localMarkers)
         return markers
-        
     }
     
     class func saveMarker(_ marker:URMarker) {
+        var markers = URMarkerManager.getLocalyMarkers()
         
-        let defaults = UserDefaults.standard
-        var markerDic:[NSDictionary] = URMarkerManager.getLocalyMarkers()
-        
-        if let _ = markerDic.index(of: marker.toDictionary()) {
+        guard markers.index(where: {$0.name == marker.name}) == nil else {
             return
-        }else {
-            markerDic.append(marker.toDictionary())
         }
         
-        defaults.set(NSKeyedArchiver.archivedData(withRootObject: markerDic), forKey: "markers")
-        defaults.synchronize()
+        markers.append(marker)
+        UserDefaults.standard.setAsStringArray(objects: markers, key: "markers")
     }
     
-    class func getLocalyMarkers() -> [NSDictionary]{
-        
-        let defaults = UserDefaults.standard
-        let markerDic:[NSDictionary] = []
-        
-        if let markers = defaults.object(forKey: "markers") as? Data {
-            return (NSKeyedUnarchiver.unarchiveObject(with: markers)) as! [NSDictionary]
+    class func getLocalyMarkers() -> [URMarker] {
+        var markersArray: [URMarker] = []
+        if let markersStrings = UserDefaults.standard.getArchivedObject(key: "markers") as? [String] {
+            for markerString in markersStrings {
+                if let marker = URMarker(JSONString: markerString) {
+                    markersArray.append(marker)
+                }
+            }
         }
-        
-        return markerDic
+        return markersArray
     }
-    
 }

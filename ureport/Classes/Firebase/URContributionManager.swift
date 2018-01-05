@@ -39,16 +39,11 @@ class URContributionManager {
             .child(storyKey)
             .queryOrdered(byChild: "createdDate")
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate else { return }
-
-                let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
+                guard let delegate = self.delegate, let contribution = URContribution(snapshot: snapshot) else { return }
                 
-                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
-                guard let author = URUser(JSON: json) else {
-                    return
-                }
+//                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
 
-                URUserManager.getByKey(author.key, completion: { (user, exists) -> Void in
+                URUserManager.getByKey(contribution.author.key, completion: { (user, exists) -> Void in
                     guard let user = user else { return }
                     contribution.key = snapshot.key
                     contribution.author = user
@@ -67,15 +62,14 @@ class URContributionManager {
             .child(pollkey)
             .queryOrdered(byChild: "createdDate")
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate else { return }
-                let contribution = URContribution(jsonDict: snapshot.value as? NSDictionary)
+                guard let delegate = self.delegate, let contribution = URContribution(snapshot: snapshot) else { return }
                 
-                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
-                guard let author = URUser(JSON: json) else {
-                    return
-                }
+//                let json = (snapshot.value as! NSDictionary).object(forKey: "author")! as? [String: Any] ?? [:]
+//                guard let author = URUser(JSON: json) else {
+//                    return
+//                }
                 
-                URUserManager.getByKey(author.key) { (user, exists) -> Void in
+                URUserManager.getByKey(contribution.author.key) { (user, exists) -> Void in
                     guard let user = user else { return }
                     contribution.key = snapshot.key
                     contribution.author = user
@@ -92,7 +86,7 @@ class URContributionManager {
             .child(URContributionManager.path())
             .child(storyKey)
             .childByAutoId()
-            .setValue(contribution.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+            .setValue(contribution.toJSON(), withCompletionBlock: { (error, _) -> Void in
                 guard error == nil else {
                     completion(false)
                     return
@@ -108,7 +102,7 @@ class URContributionManager {
             .child(URContributionManager.pathPollContribution())
             .child(pollKey)
             .childByAutoId()
-            .setValue(contribution.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+            .setValue(contribution.toJSON(), withCompletionBlock: { (error, _) -> Void in
                 guard error == nil else {
                     completion(false)
                     return
@@ -187,7 +181,7 @@ class URContributionManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(self.pathContributionDenounced())
             .child(storyKey)
-            .setValue(contribution.toDictionary()) {
+            .setValue(contribution.toJSON()) {
                 (error, _) in
                 guard error == nil else {
                     completion(false)

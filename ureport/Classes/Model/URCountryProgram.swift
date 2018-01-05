@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URCountryProgram: Serializable {
+class URCountryProgram: Mappable {
 
     var code: String!
     var themeColor: UIColor!
@@ -22,6 +23,22 @@ class URCountryProgram: Serializable {
     var groupName: String!
     var stateField: String?
 
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        code <- map["code"]
+        themeColor <- map["themeColor"]
+        name <- map["name"]
+        org <- map["org"]
+        rapidProHostHandler <- map["rapidProHostHandler"]
+        rapidProHostAPI <- map["rapidProHostAPI"]
+        ureportHostAPI <- map["ureportHostAPI"]
+        twitter <- map["twitter"]
+        facebook <- map["facebook"]
+        groupName <- map["groupName"]
+        stateField <- map["stateField"]
+    }
+    
     init(dictionary: [String: Any?]) {
         self.code = dictionary["code"] as! String
         self.themeColor = UIColor(rgba: dictionary["themeColor"] as! String)
@@ -34,11 +51,6 @@ class URCountryProgram: Serializable {
         self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
         self.groupName = dictionary["groupName"] as! String
         self.stateField = dictionary["stateField"] as? String
-        super.init()
-    }
-
-    override init () {
-        super.init()
     }
 
     //MARK: FireBase Methods

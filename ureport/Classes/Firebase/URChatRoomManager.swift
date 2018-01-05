@@ -117,24 +117,24 @@ class URChatRoomManager {
                     completion(nil)
                     return
                 }
+                var chatRoom: URChatRoom?
                 if let admin = snapshotValue["administrator"] as? [String: Any] {
                     let administrator = URUser(JSON: admin)
-                    let picture = URMedia(jsonDict: snapshotValue["picture"] as? NSDictionary)
-                    let groupChatRoom = URGroupChatRoom(jsonDict: snapshotValue)
-                    groupChatRoom.createdDate = snapshotValue["createdDate"] as! NSNumber
-                    groupChatRoom.administrator = administrator
-                    groupChatRoom.picture = picture
-                    groupChatRoom.type = URChatRoomType.Group
-                    groupChatRoom.key = snapshot.key
-
-                    completion(groupChatRoom)
-
+//                    let picture = URMedia(jsonDict: snapshotValue["picture"] as? NSDictionary)
+                    chatRoom = URGroupChatRoom(snapshot: snapshot)// URGroupChatRoom(jsonDict: snapshotValue)
+//                    groupChatRoom.createdDate = snapshotValue["createdDate"] as! NSNumber
+//                    groupChatRoom.administrator = administrator
+//                    groupChatRoom.picture = picture
+                    chatRoom?.type = URChatRoomType.Group
+//                    groupChatRoom.key = snapshot.key
+//                    completion(groupChatRoom)
                 } else {
-                    let individualChatRoom = URIndividualChatRoom(jsonDict: snapshotValue)
-                    individualChatRoom.key = snapshot.key
-                    individualChatRoom.type = URChatRoomType.Individual
-                    completion(individualChatRoom)
+                    chatRoom = URIndividualChatRoom(snapshot: snapshot)// (jsonDict: snapshotValue)
+//                    individualChatRoom.key = snapshot.key
+                    chatRoom?.type = URChatRoomType.Individual
+//                    completion(individualChatRoom)
                 }
+                completion(chatRoom)
             })
     }
     

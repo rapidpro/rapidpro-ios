@@ -27,5 +27,10 @@ extension BaseMappable {
         
         self.init(JSON: json)
     }
+    
+    func isEqual(to mappable: BaseMappable) -> Bool {
+        let equal = self.toJSONString() == mappable.toJSONString()
+        return equal
+    }
 }
 

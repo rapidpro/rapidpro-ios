@@ -75,12 +75,8 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
             cell.delegate = self
             let marker = markerList[(indexPath as NSIndexPath).row]
             
-            if let _ = markerListTapped.index(of: marker) {
-                cell.setBtCheckSelected(true)
-            }else {
-                cell.setBtCheckSelected(false)
-            }
-            
+            let isSelected = markerListTapped.index(where: {$0.name == marker.name}) != nil
+            cell.setBtCheckSelected(isSelected)
             cell.setupCellWith(marker)
             return cell
         }

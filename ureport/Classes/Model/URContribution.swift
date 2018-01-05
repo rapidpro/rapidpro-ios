@@ -16,6 +16,8 @@ class URContribution: Mappable {
     var author:URUser!
     var createdDate:NSNumber!
     
+    init() { }
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {

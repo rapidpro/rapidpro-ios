@@ -18,6 +18,8 @@ class URChatMessage: Mappable {
     var date:NSNumber!
     var media:URMedia?
     
+    init() { }
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {

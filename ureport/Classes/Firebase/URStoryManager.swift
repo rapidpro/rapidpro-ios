@@ -48,22 +48,20 @@ class URStoryManager {
             .child(storiesToModerate == true ? URStoryManager.pathStoryModerate() : URStoryManager.path())
             .queryLimited(toLast: UInt(initQueryFromItem + itensByQuery))
             .observe(.childAdded, with: { (snapshot) in
-                guard let delegate = self.delegate else { return }
-                guard let snapshotValue = snapshot.value as? NSDictionary else { return }
-                let story = URStory(jsonDict: snapshotValue)
-                story.key = snapshot.key
-                if snapshotValue["cover"] != nil {
-                    let cover = URMedia(jsonDict: snapshotValue["cover"] as? NSDictionary)
-                    story.cover = cover
-                }
-                var medias:[URMedia] = []
-                if let mediaArray = snapshotValue["medias"] as? NSArray {
-                    for value in mediaArray {
-                        let media = URMedia(jsonDict:value as? NSDictionary)
-                        medias.append(media)
-                    }
-                    story.medias = medias
-                }
+                guard let delegate = self.delegate, let story = URStory(snapshot: snapshot) else { return }
+                
+//                if snapshotValue["cover"] != nil {
+//                    let cover = URMedia(jsonDict: snapshotValue["cover"] as? NSDictionary)
+//                    story.cover = cover
+//                }
+//                var medias:[URMedia] = []
+//                if let mediaArray = snapshotValue["medias"] as? NSArray {
+//                    for value in mediaArray {
+//                        let media = URMedia(jsonDict:value as? NSDictionary)
+//                        medias.append(media)
+//                    }
+//                    story.medias = medias
+//                }
                 
                 URUserManager.getByKey(story.user) {
                     user, error in
@@ -103,21 +101,21 @@ class URStoryManager {
                 }
                 var storyList = [URStory]()
                 for data in snapshot.children.allObjects as! [DataSnapshot]{
-                    if let dataValue = data.value as? NSDictionary {
-                        let story = URStory(jsonDict: dataValue)
-                        story.key = data.key
-                        if dataValue["cover"] != nil {
-                            let cover = URMedia(jsonDict: dataValue["cover"] as? NSDictionary)
-                            story.cover = cover
-                        }
-                        var medias:[URMedia] = []
-                        if let mediaArray = dataValue["medias"] as? NSArray {
-                            for value in mediaArray {
-                                let media = URMedia(jsonDict:value as? NSDictionary)
-                                medias.append(media)
-                            }
-                            story.medias = medias
-                        }
+                    if let story = URStory(snapshot: data) { //} let dataValue = data.value as? NSDictionary {
+//                        let story = URStory(jsonDict: dataValue)
+//                        story.key = data.key
+//                        if dataValue["cover"] != nil {
+//                            let cover = URMedia(jsonDict: dataValue["cover"] as? NSDictionary)
+//                            story.cover = cover
+//                        }                        
+//                        var medias:[URMedia] = []
+//                        if let mediaArray = dataValue["medias"] as? NSArray {
+//                            for value in mediaArray {
+//                                let media = URMedia(jsonDict:value as? NSDictionary)
+//                                medias.append(media)
+//                            }
+//                            story.medias = medias
+//                        }
                         storyList.append(story)
                     }
                 }
@@ -236,7 +234,7 @@ class URStoryManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(isModerator == true ? self.path() : self.pathStoryModerate())
             .childByAutoId()
-            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+            .setValue(story.toJSON(), withCompletionBlock: { (error, _) -> Void in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     completion(false)
@@ -254,7 +252,7 @@ class URStoryManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(self.path())
             .child(story.key!)
-            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+            .setValue(story.toJSON(), withCompletionBlock: { (error, _) -> Void in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -276,7 +274,7 @@ class URStoryManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(self.pathStoryDisapproved())
             .child(story.key!)
-            .setValue(story.toDictionary(), withCompletionBlock: { (error, _) -> Void in
+            .setValue(story.toJSON(), withCompletionBlock: { (error, _) -> Void in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -297,7 +295,7 @@ class URStoryManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(self.pathStoryDenounced())
             .child(story.key!)
-            .setValue(story.toDictionary()) { (error, _) -> Void in
+            .setValue(story.toJSON()) { (error, _) -> Void in
                 if let error = error {
                     print(error.localizedDescription)
                 }

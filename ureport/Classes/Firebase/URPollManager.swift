@@ -38,12 +38,11 @@ class URPollManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(URPollManager.path())
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate else { return }
-                let poll = URPoll(jsonDict: snapshot.value as? NSDictionary)
-                let category = URPollCategory(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "category")! as? NSDictionary)
-                category.color = URPollManager.getAvailableColorToCategory(category, index: self.pollIndex)
-                poll.key = snapshot.key
-                poll.category = category
+                guard let delegate = self.delegate, let poll = URPoll(snapshot: snapshot) else { return }
+                
+//                let category = URPollCategory(jsonDict: (snapshot.value as! NSDictionary).object(forKey: "category")! as? NSDictionary)
+                poll.category.color = URPollManager.getAvailableColorToCategory(poll.category, index: self.pollIndex)
+//                poll?.key = snapshot.key
                 delegate.newPollReceived(poll)
                 self.pollIndex += 1
             })
@@ -56,11 +55,10 @@ class URPollManager {
             .child(URPollManager.pathForPollResult())
             .child(pollKey)
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate else { return }
-                let pollResult = URPollResult(jsonDict: snapshot.value as? NSDictionary)
-                if let results = (snapshot.value as? NSDictionary)!.object(forKey: "results") {
-                    pollResult.results = results as! [NSDictionary]
-                }
+                guard let delegate = self.delegate, let pollResult = URPollResult(snapshot: snapshot) else { return }
+//                if let results = (snapshot.value as? NSDictionary)!.object(forKey: "results") {
+//                    pollResult.results = results as! [NSDictionary]
+//                }
                 delegate.newPollResultReceived(pollResult)
             })
     }

@@ -143,27 +143,21 @@ class URCountryProgramManager {
     }
 
     class func activeCountryProgram() -> URCountryProgram? {
-        if let countryProgram = URCountryProgramManager.activeSwitchCountryProgram() {
-            return countryProgram
-        }
-        let defaults: UserDefaults = UserDefaults.standard
-        var encodedData: Data?
-        encodedData = defaults.object(forKey: "countryProgram") as? Data
-        if encodedData != nil {
-            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
-            return countryProgram
+        var countryProgram: URCountryProgram?
+        
+        if let switchProgram = URCountryProgramManager.activeSwitchCountryProgram() {
+             countryProgram = switchProgram
+        } else if let countryProgramString = UserDefaults.standard.getArchivedObject(key: "countryProgram") as? String {
+            countryProgram = URCountryProgram(JSONString: countryProgramString)
         } else {
-            return URCountryProgramManager.getAvailableCountryPrograms()[0]
+            countryProgram = URCountryProgramManager.getAvailableCountryPrograms()[0]
         }
+        return countryProgram
     }
 
     class func setActiveCountryProgram(_ countryProgram: URCountryProgram!) {
         self.deactivateCountryProgram()
-        let defaults: UserDefaults = UserDefaults.standard
-        let countryProgramDict = countryProgram.toDictionary()
-        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgramDict)
-        defaults.set(encodedObject, forKey: "countryProgram")
-        defaults.synchronize()
+        UserDefaults.standard.setAsString(object: countryProgram, key: "countryProgram")
     }
 
     class func deactivateCountryProgram() {
@@ -174,10 +168,7 @@ class URCountryProgramManager {
 
     class func setSwitchActiveCountryProgram(_ countryProgram: URCountryProgram!) {
         self.deactivateSwitchCountryProgram()
-        let defaults: UserDefaults = UserDefaults.standard
-        let encodedObject: Data = NSKeyedArchiver.archivedData(withRootObject: countryProgram.toDictionary())
-        defaults.set(encodedObject, forKey: "countryProgram_switch")
-        defaults.synchronize()
+        UserDefaults.standard.setAsString(object: countryProgram, key: "countryProgram_switch")
     }
 
     class func deactivateSwitchCountryProgram() {
@@ -187,14 +178,10 @@ class URCountryProgramManager {
     }
 
     class func activeSwitchCountryProgram() -> URCountryProgram? {
-        let defaults: UserDefaults = UserDefaults.standard
-        var encodedData: Data?
-        encodedData = defaults.object(forKey: "countryProgram_switch") as? Data
-        if encodedData != nil {
-            let countryProgram = URCountryProgram(jsonDict: NSKeyedUnarchiver.unarchiveObject(with: encodedData!) as? NSDictionary)
-            return countryProgram
-        } else {
-            return nil
+        var switchProgram: URCountryProgram?
+        if let switchString = UserDefaults.standard.getArchivedObject(key: "countryProgram_switch") as? String {
+            switchProgram = URCountryProgram(JSONString: switchString)
         }
+        return switchProgram
     }
 }

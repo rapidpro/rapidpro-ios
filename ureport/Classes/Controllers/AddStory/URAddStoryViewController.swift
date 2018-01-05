@@ -308,7 +308,7 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
                 for j in 0...self.youtubeMediaList.count-1 {
                     
                     if let media = mView.media {
-                        if media == self.youtubeMediaList[j] {
+                        if media.isEqual(to: self.youtubeMediaList[j]) {
                             self.youtubeMediaList.remove(at: j)
                             break
                         }

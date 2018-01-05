@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import ObjectMapper
 
-class URStory: Serializable {
+class URStory: Mappable {
     
     var key:String?
     var title:String!
@@ -21,4 +22,20 @@ class URStory: Serializable {
     var medias:[URMedia]?
     var userObject:URUser?
     var like:NSNumber?
+    
+    required init?(map: Map) { }
+    
+    func mapping(map: Map) {
+        key <- map["key"]
+        title <- map["title"]
+        content <- map["content"]
+        createdDate <- map["createdDate"]
+        user <- map["user"]
+        contributions <- map["contributions"]
+        markers <- map["markers"]
+        cover <- map["cover"]
+        medias <- map["medias"]
+        userObject <- map["userObject"]
+        like <- map["like"]
+    }
 }

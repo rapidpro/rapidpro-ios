@@ -73,7 +73,7 @@ class URUser: Mappable {
     
     static func activeUser() -> URUser? {
         var user: URUser?
-        if let userString = UserDefaults.standard.getArchivedObject(key: "user") as? String { // let encodedData = encodedData, let string = NSKeyedUnarchiver.unarchiveObject(with: encodedData) as? String {
+        if let userString = UserDefaults.standard.getArchivedObject(key: "user") as? String { 
             user = URUser(JSONString: userString)
         }
         return user 

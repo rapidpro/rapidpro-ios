@@ -18,6 +18,8 @@ class URMedia: Mappable {
     var isCover:Bool?
     var metadata:[String:AnyObject]?
     
+    init() { }
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {

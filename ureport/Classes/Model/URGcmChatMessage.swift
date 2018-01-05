@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class URGcmChatMessage: Serializable {
+class URGcmChatMessage: Mappable {
     
     var chatRoom:URChatRoom?
     var chatMessage:URChatMessage?
@@ -19,11 +19,10 @@ class URGcmChatMessage: Serializable {
         self.chatMessage = chatMessage
     }
     
-    func convertToDictionary() -> [String : AnyObject] {
-        return [
-            "chatRoom": self.chatRoom!.toDictionary(),
-            "chatMessage": self.chatMessage!.toDictionary()
-        ]
-    }
+    required init?(map: Map) { }
     
+    func mapping(map: Map) {
+        chatRoom <- map["chatRoom"]
+        chatMessage <- map["chatMessage"]
+    }
 }

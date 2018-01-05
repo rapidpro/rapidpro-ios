@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class URGroupChatRoom: URChatRoom {
    
@@ -17,4 +18,11 @@ class URGroupChatRoom: URChatRoom {
     var title:String!
     var subject:String!
     var userIsMember:Bool?
+    
+    //TODO:
+    implement mapping on inheritance cases
+    func mapping(map: Map) {
+        super.mapping(map: map)
+        
+    }
 }

@@ -19,6 +19,8 @@ class URSettings: Mappable {
     var firstRun:NSNumber?
     var reviewMode:NSNumber?
     
+    init() {}
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {
@@ -31,9 +33,7 @@ class URSettings: Mappable {
     }
     
     class func saveSettingsLocaly(_ settings:URSettings) {
-        let defaults = UserDefaults.standard
-        defaults.set(URSettings.buildSettingsValues(settings).toDictionary(), forKey: "settings")
-        defaults.synchronize()
+        UserDefaults.standard.setAsString(object: settings, key: "settings")
     }
     
     class func buildSettingsValues(_ settings:URSettings) -> URSettings{
@@ -60,21 +60,20 @@ class URSettings: Mappable {
             settings.firstRun = savedSettings.firstRun
         }
         
-        if settings.reviewMode == nil && savedSettings.reviewMode != nil{
+        if settings.reviewMode == nil && savedSettings.reviewMode != nil {
             settings.reviewMode = savedSettings.reviewMode
         }
         
         return settings
     }
     
-    class func getSettings() -> URSettings{
-        
-        let defaults = UserDefaults.standard
-        
-        if let settingsDictionary = defaults.object(forKey: "settings") as? NSDictionary {
-            return URSettings(jsonDict:(settingsDictionary))
+    class func getSettings() -> URSettings {
+        var settings: URSettings?
+        if let settingsString = UserDefaults.standard.getArchivedObject(key: "settings") as? String {
+            settings = URSettings(JSONString: settingsString)
         }
-        return URSettings();
+        
+        return settings ?? URSettings()
     }
     
     class func checkIfTermsIsAccepted(_ termsViewController:ISTermsViewController,viewController:UIViewController) -> Bool {

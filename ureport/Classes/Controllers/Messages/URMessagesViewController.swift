@@ -450,7 +450,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     func sendTextMessage(_ text: String!) {
-        
         let newMessage = URChatMessage()
         newMessage.user = URUser.activeUser()
         newMessage.message = text
@@ -463,7 +462,6 @@ class URMessagesViewController: JSQMessagesViewController, URChatMessageManagerD
     }
     
     func sendMediaMessage(_ media: URMedia!) {
-        
         let newMessage = URChatMessage()
         newMessage.user = URUser.activeUser()
         newMessage.media = media
