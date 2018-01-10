@@ -158,7 +158,7 @@ class URChatRoomManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(URChatRoomManager.path)
             .childByAutoId()
-            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error, dbReference) -> Void in
+            .setValue(chatRoom.toJSON(), withCompletionBlock: { (error, dbReference) -> Void in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     return
@@ -186,7 +186,7 @@ class URChatRoomManager {
             .child(URCountryProgramManager.activeCountryProgram()!.code)
             .child(URChatRoomManager.path)
             .child(chatRoom.key!)
-            .setValue(chatRoom.toDictionary(), withCompletionBlock: { (error, firebase) -> Void in
+            .setValue(chatRoom.toJSON(), withCompletionBlock: { (error, firebase) -> Void in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     return
@@ -220,15 +220,15 @@ class URChatRoomManager {
             .queryOrdered(byChild: "privateAccess")
             .queryEqual(toValue: false)
             .observe(.childAdded, with: { snapshot in
-                guard let delegate = self.delegate, let snapshotValue = snapshot.value as? NSDictionary else {
+                guard let delegate = self.delegate, let snapshotValue = snapshot.value as? [String:Any] else {
                     return
                 }
 
-                let group = URGroupChatRoom(jsonDict: snapshotValue)
+                let group = URGroupChatRoom(JSON: snapshotValue)!
                 let administrator = URUser(JSON: snapshotValue["administrator"] as? [String: Any] ?? [:])
 
-                if let picture = snapshotValue["picture"] as? NSDictionary{
-                    group.picture = URMedia(jsonDict: picture)
+                if let picture = snapshotValue["picture"] as? [String: Any] {
+                    group.picture = URMedia(JSON: picture)
                 }
                 group.administrator = administrator
                 group.key = snapshot.key
@@ -300,13 +300,11 @@ class URChatRoomManager {
                                         URChatMessageManager.getTotalMessages(chatRoom, completion: { totalMessages -> Void in
                                             var totalUnreadMessages = 0
 
-                                            for messageRead in URMessageRead.getMessagesRead() as [NSDictionary]{
-                                                let messageRead = URMessageRead(jsonDict:messageRead)
+                                            for messageRead in URMessageRead.getMessagesRead() {
                                                 if messageRead.roomKey == chatRoom.key {
                                                     totalUnreadMessages = totalMessages - Int(messageRead.totalMessages)
                                                 }
                                             }
-
                                             chatRoom.totalUnreadMessages = totalUnreadMessages
                                             chatRoomList.append(chatRoom)
                                             completion(chatRoomList)
@@ -336,8 +334,7 @@ class URChatRoomManager {
                                                     individualChatRoom.lastMessage = chatMessage
                                                     URChatMessageManager.getTotalMessages(individualChatRoom, completion: { totalMessages -> Void in
                                                         var totalUnreadMessages = 0
-                                                        for messageRead in URMessageRead.getMessagesRead() as [NSDictionary] {
-                                                            let messageRead = URMessageRead(jsonDict:messageRead)
+                                                        for messageRead in URMessageRead.getMessagesRead() {
                                                             if messageRead.roomKey == individualChatRoom.key {
                                                                 totalUnreadMessages = totalMessages - Int(messageRead.totalMessages)
                                                             }

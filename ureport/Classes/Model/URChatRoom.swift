@@ -17,6 +17,9 @@ class URChatRoom: Mappable {
     var lastMessage:URChatMessage?
     var totalUnreadMessages:Int?
     
+    init() {
+        
+    }
     
     required init?(map: Map){}
     

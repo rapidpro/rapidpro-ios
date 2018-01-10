@@ -276,8 +276,9 @@ class URAddStoryViewController: UIViewController, URMarkerTableViewControllerDel
     
     func markersList(_ markers: [URMarker]) {
                 
-        var markersString = "\(markers)".replacingOccurrences(of: "[", with: "", options: [], range: nil)
+        var markersString = "\(markers.map{($0.name!)})".replacingOccurrences(of: "[", with: "", options: [], range: nil)
         markersString = "\(markersString)".replacingOccurrences(of: "]", with: "", options: [], range: nil)
+        markersString = "\(markersString)".replacingOccurrences(of: "\"", with: "", options: [], range: nil)
         txtMarkers.text = markersString
     }
     

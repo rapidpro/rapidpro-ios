@@ -107,7 +107,12 @@ class URMarkerTableViewController: UITableViewController, MarkerTableViewCellDel
     
     func markerHasTapped(_ cell:URMarkerTableViewCell) {
         if !markerListTapped.isEmpty {
-            if let index = markerListTapped.index(of: cell.marker) {
+            
+            let index = markerListTapped.index(where: { (marker) -> Bool in
+                return marker.name == cell.marker.name!
+            })
+            
+            if let index = index {
                 markerListTapped.remove(at: index)
                 cell.setBtCheckSelected(false)
             }else {

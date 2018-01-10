@@ -14,6 +14,8 @@ class URMessageRead: Mappable {
     var totalMessages: NSNumber!
     var roomKey: String!
     
+    init() {}
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {

@@ -19,10 +19,18 @@ class URGroupChatRoom: URChatRoom {
     var subject:String!
     var userIsMember:Bool?
     
-    //TODO:
-    implement mapping on inheritance cases
-    func mapping(map: Map) {
-        super.mapping(map: map)
-        
+    override init() {
+        super.init()
     }
+    
+    required init?(map: Map) {
+        fatalError("init(map:) has not been implemented")
+    }
+    
+    //TODO:
+//    implement mapping on inheritance cases
+//    func mapping(map: Map) {
+//        super.mapping(map: map)
+//
+//    }
 }

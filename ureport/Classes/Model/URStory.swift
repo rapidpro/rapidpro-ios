@@ -23,6 +23,10 @@ class URStory: Mappable {
     var userObject:URUser?
     var like:NSNumber?
     
+    init() {
+        
+    }
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {

@@ -34,7 +34,7 @@ class URChatMessageManager {
                     let userJSON = (snapshot.value as AnyObject).object(forKey: "user") as? [String: Any] ?? [:]
                     chatMessage.user = URUser(JSON: userJSON)
                     chatMessage.message = (snapshot.value as AnyObject).object(forKey: "message") as? String
-                    chatMessage.media = URMedia(jsonDict:(snapshot.value as AnyObject).object(forKey: "media") as? NSDictionary)
+                    chatMessage.media = URMedia(JSON: (snapshot.value as AnyObject).object(forKey: "media") as? [String: Any] ?? [:])
                     chatMessage.date = (snapshot.value as AnyObject).object(forKey: "date") as! NSNumber
 
                     print(snapshot.childrenCount)
@@ -58,7 +58,7 @@ class URChatMessageManager {
                     completion(nil)
                     return
                 }
-                completion(URChatMessage(jsonDict:((snapshot.children.allObjects[0] as! DataSnapshot).value as? NSDictionary)))
+                completion(URChatMessage(JSON:((snapshot.children.allObjects[0] as! DataSnapshot).value as? [String:Any] ?? [:])))
             })
     }
     
@@ -71,7 +71,7 @@ class URChatMessageManager {
             .child(self.path())
             .child(chatRoom.key!)
             .childByAutoId()
-            .setValue(chatMessage.toDictionary()) { (error, dbReference) -> Void in
+            .setValue(chatMessage.toJSON()) { (error, dbReference) -> Void in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     return

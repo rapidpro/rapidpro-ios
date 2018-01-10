@@ -51,7 +51,7 @@ class URRapidProManager {
             .child(URRapidProManager.path())
             .child("response")
             .childByAutoId()
-            .setValue(pollResponse.toDictionary(), withCompletionBlock: { (error, dbReference) -> Void in
+            .setValue(pollResponse.toJSON(), withCompletionBlock: { (error, dbReference) -> Void in
                 guard error == nil else {
                     print(error!.localizedDescription)
                     return
@@ -126,10 +126,10 @@ class URRapidProManager {
 
                 Alamofire.request(url, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: headers).responseJSON { (response:DataResponse<Any>) in
                     guard let response = response.result.value as? NSDictionary else { return }
-                    if let results = response.object(forKey: "results") as? [NSDictionary] {
+                    if let results = response.object(forKey: "results") as? [[String:Any]] {
                         for object in results {
-                            let contact = URContact(jsonDict: object)
-                            completion(contact)
+                            let contact = URContact(JSON: object)
+                            completion(contact!)
                         }
                     }
                 }

@@ -28,9 +28,9 @@ class URGCMManager {
     class func handleNotification(_ userData:[AnyHashable: Any]) {
         let from = userData["from"] as! String
         if from.hasPrefix(chatTopic) {
-            let chatMessageDict = convertJsonToDictionary(userData["chatMessage"] as! String)
-            let chatMessage = URChatMessage(jsonDict: chatMessageDict)
-            let user = URUser(JSON: (chatMessageDict!["user"] as? [String: Any] ?? [:]))
+            let chatMessageDict = convertJsonToDictionary(userData["chatMessage"] as! String)!
+            let chatMessage = URChatMessage(JSON: chatMessageDict)
+            let user = URUser(JSON: (chatMessageDict["user"] as? [String: Any] ?? [:]))
             
             if isUserAllowedForMessageNotification(user) {
                 print("Chat notifiction: \(chatMessage)")
@@ -38,10 +38,10 @@ class URGCMManager {
         }
     }
 
-    fileprivate class func convertJsonToDictionary(_ value:String) -> NSDictionary? {
+    fileprivate class func convertJsonToDictionary(_ value:String) -> [String:Any]? {
         if let data = value.data(using: String.Encoding.utf8) {
             do {
-                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? NSDictionary
+                return try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String:Any]
             } catch {
                 print("Error on converting json to dictionary!")
             }
