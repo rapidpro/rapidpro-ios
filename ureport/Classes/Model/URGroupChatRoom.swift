@@ -24,13 +24,17 @@ class URGroupChatRoom: URChatRoom {
     }
     
     required init?(map: Map) {
-        fatalError("init(map:) has not been implemented")
+        super.init(map: map)
     }
     
-    //TODO:
-//    implement mapping on inheritance cases
-//    func mapping(map: Map) {
-//        super.mapping(map: map)
-//
-//    }
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        self.mediaAllowed <- map["mediaAllowed"]
+        self.administrator <- map["administrator"]
+        self.picture <- map["picture"]
+        self.privateAccess <- map["privateAccess"]
+        self.title <- map["title"]
+        self.subject <- map["subject"]
+        self.userIsMember <- map["userIsMember"]
+    }
 }

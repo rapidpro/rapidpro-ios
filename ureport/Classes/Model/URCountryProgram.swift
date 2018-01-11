@@ -46,8 +46,8 @@ class URCountryProgram: Mappable {
         self.name = dictionary["name"] as! String
         self.twitter = dictionary["twitter"] as? String
         self.facebook = dictionary["facebook"] as? String
-        self.rapidProHostHandler = "\(dictionary["rapidProHostAPI"] as! String)\(URConstant.RapidPro.HANDLER_SUFIX)"
-        self.rapidProHostAPI = "\(dictionary["rapidProHostAPI"] as! String)\(URConstant.RapidPro.API_SUFIX)"
+        self.rapidProHostHandler = "\(dictionary["rapidProHost"] as! String)\(URConstant.RapidPro.HANDLER_SUFIX)"
+        self.rapidProHostAPI = "\(dictionary["rapidProHost"] as! String)\(URConstant.RapidPro.API_SUFIX)"
         self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
         self.groupName = dictionary["groupName"] as! String
         self.stateField = dictionary["stateField"] as? String

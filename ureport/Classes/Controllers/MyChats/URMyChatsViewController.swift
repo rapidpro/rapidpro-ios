@@ -235,7 +235,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             self.tableView.setRefreshControlTo(animate: false)
             if chatRooms != nil {
                 self.lbMessage.isHidden = true
-                let index = self.listChatRoom.index{($0.key == chatRooms!.last!.key)}
+                let index = self.listChatRoom.index{($0.key != nil && $0.key == chatRooms!.last!.key)}
                 if index == nil {
                     self.listChatRoom.insert(chatRooms!.last!, at: self.listChatRoom.count)
                     self.tableView.insertRows(at: [IndexPath(row: self.listChatRoom.count - 1, section: 0)], with: UITableViewRowAnimation.fade)

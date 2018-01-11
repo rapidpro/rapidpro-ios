@@ -40,6 +40,12 @@
 		6540EA531CDB9D45006287D3 /* URMarkerViewIPadController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */; };
 		6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */; };
 		6540EA571CDBB66D006287D3 /* URMyChatsIPadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */; };
+		65426F4920079AED00E7EE3A /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4820079AED00E7EE3A /* countryprogram.json */; };
+		65426F512007B4C600E7EE3A /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4C2007B4C500E7EE3A /* FirebaseDatabaseProd-Info.plist */; };
+		65426F522007B4C600E7EE3A /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4D2007B4C500E7EE3A /* FirebaseNotificationsProd-Info.plist */; };
+		65426F532007B4C600E7EE3A /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4E2007B4C500E7EE3A /* FirebaseDatabaseDev-Info.plist */; };
+		65426F542007B4C600E7EE3A /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4F2007B4C500E7EE3A /* Key-debug.plist */; };
+		65426F552007B4C600E7EE3A /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F502007B4C500E7EE3A /* Key.plist */; };
 		6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D71C762FDB00938236 /* URFileUtil.swift */; };
 		6547D3DA1C76324E00938236 /* URAudioMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D91C76324E00938236 /* URAudioMedia.swift */; };
 		6548506B1BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */; };
@@ -266,8 +272,6 @@
 		B20EFD431FB255F10029897C /* URUserManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3B1FB255F10029897C /* URUserManager.swift */; };
 		B20EFD441FB255F10029897C /* URChatRoomManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */; };
 		B20EFD451FB255F10029897C /* URReviewModeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */; };
-		B2211A201FB33A1900070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
-		B2211A211FB33A2F00070194 /* countryprogram.json in Resources */ = {isa = PBXBuildFile; fileRef = B2211A1F1FB33A1900070194 /* countryprogram.json */; };
 		B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */; };
 		B251A53C1FA13DBF00CBC02B /* URUserRegisterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */; };
 		B266AF351F9FE11800C4C968 /* URFlowAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 974249321BFBD93D0024384E /* URFlowAction.swift */; };
@@ -532,12 +536,6 @@
 		E30D6CDA1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
 		E30D6CDB1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
 		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
-		E3366D171FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */; };
-		E3366D181FE177B100143AF7 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D141FE177B100143AF7 /* Key.plist */; };
-		E3366D191FE177B100143AF7 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D151FE177B100143AF7 /* Key-debug.plist */; };
-		E3366D1A1FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */; };
-		E3366D1B1FE177B600143AF7 /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D141FE177B100143AF7 /* Key.plist */; };
-		E3366D1C1FE177BB00143AF7 /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D151FE177B100143AF7 /* Key-debug.plist */; };
 		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
 		E35F1C371FD822FC00C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
 		E35F1C381FD822FC00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
@@ -547,10 +545,6 @@
 		E3627B861FD8638E00C49EE6 /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */; };
 		E3791D531FEC044800ACF080 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3791D521FEC044800ACF080 /* UITableViewExtension.swift */; };
 		E3791D541FEC044800ACF080 /* UITableViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3791D521FEC044800ACF080 /* UITableViewExtension.swift */; };
-		E3E08B101FEA98AF002E7229 /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */; };
-		E3E08B121FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
-		E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */; };
-		E3E08B141FEAD2AB002E7229 /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */; };
 		E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */ = {isa = PBXBuildFile; fileRef = E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */; };
 		E3EC208E1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
 		E3EC208F1FED4CF60091512F /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */; };
@@ -647,6 +641,12 @@
 		6540EA511CDB9D45006287D3 /* URMarkerViewIPadController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMarkerViewIPadController.swift; sourceTree = "<group>"; };
 		6540EA521CDB9D45006287D3 /* URMarkerViewIPadController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URMarkerViewIPadController.xib; sourceTree = "<group>"; };
 		6540EA551CDBB66D006287D3 /* URMyChatsIPadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URMyChatsIPadViewController.swift; sourceTree = "<group>"; };
+		65426F4820079AED00E7EE3A /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
+		65426F4C2007B4C500E7EE3A /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
+		65426F4D2007B4C500E7EE3A /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
+		65426F4E2007B4C500E7EE3A /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
+		65426F4F2007B4C500E7EE3A /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
+		65426F502007B4C500E7EE3A /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
 		6547D3D71C762FDB00938236 /* URFileUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URFileUtil.swift; sourceTree = "<group>"; };
 		6547D3D91C76324E00938236 /* URAudioMedia.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URAudioMedia.swift; sourceTree = "<group>"; };
 		654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URPollResultTableViewCell.swift; sourceTree = "<group>"; };
@@ -882,7 +882,6 @@
 		B20EFD3B1FB255F10029897C /* URUserManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserManager.swift; sourceTree = "<group>"; };
 		B20EFD3C1FB255F10029897C /* URChatRoomManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URChatRoomManager.swift; sourceTree = "<group>"; };
 		B20EFD3D1FB255F10029897C /* URReviewModeManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URReviewModeManager.swift; sourceTree = "<group>"; };
-		B2211A1F1FB33A1900070194 /* countryprogram.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = countryprogram.json; sourceTree = "<group>"; };
 		B251A5371FA1293E00CBC02B /* URUserRegisterViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URUserRegisterViewController.xib; sourceTree = "<group>"; };
 		B251A53A1FA13DBA00CBC02B /* URUserRegisterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URUserRegisterViewController.swift; sourceTree = "<group>"; };
 		B266B03F1F9FE11800C4C968 /* ureport on-the-move.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ureport on-the-move.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -895,17 +894,12 @@
 		E3286C901FC8BF3D00A7F78C /* ureport on-the-moveTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ureport on-the-moveTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ureport_on_the_moveTests.m; sourceTree = "<group>"; };
 		E3286C941FC8BF3D00A7F78C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseDev-Info.plist"; sourceTree = "<group>"; };
-		E3366D141FE177B100143AF7 /* Key.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Key.plist; sourceTree = "<group>"; };
-		E3366D151FE177B100143AF7 /* Key-debug.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Key-debug.plist"; sourceTree = "<group>"; };
-		E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseDatabaseProd-Info.plist"; sourceTree = "<group>"; };
 		E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "ureport on-the-move-Info.plist"; sourceTree = "<group>"; };
 		E35F1C351FD822FC00C079F5 /* URStoryView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URStoryView.swift; sourceTree = "<group>"; };
 		E35F1C361FD822FC00C079F5 /* URStoryView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = URStoryView.xib; sourceTree = "<group>"; };
 		E3627B841FD8638E00C49EE6 /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		E3791D521FEC044800ACF080 /* UITableViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITableViewExtension.swift; sourceTree = "<group>"; };
 		E3791D581FEC410500ACF080 /* it */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = it; path = it.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "FirebaseNotificationsProd-Info.plist"; sourceTree = "<group>"; };
 		E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "countryprogramotm-dev.json"; sourceTree = "<group>"; };
 		E3EC208D1FED4CF60091512F /* UIImageViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		E3EEF86F1FFFB15400808DD8 /* UserDefaultsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsExtension.swift; sourceTree = "<group>"; };
@@ -1284,10 +1278,10 @@
 		65409FEA1B4C845200344D75 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				65426F4820079AED00E7EE3A /* countryprogram.json */,
 				655FC6882006668200C2ABE7 /* GoogleService-Info.plist */,
 				E3E08B151FEAD94F002E7229 /* countryprogramotm-dev.json */,
 				B2EBF9141FC491F300CEAF68 /* countryprogramotm.json */,
-				B2211A1F1FB33A1900070194 /* countryprogram.json */,
 				65DFCCF61CE24EC700E4DFD9 /* terms.rtf */,
 				97FBAA581C06447B0012D752 /* iso639_2.bundle */,
 				65EA8C1B1BB048CD00F2E29E /* iso3-country-code.json */,
@@ -1941,11 +1935,11 @@
 		A3D254D91FC5D1BE007B3777 /* SupportFiles */ = {
 			isa = PBXGroup;
 			children = (
-				E3E08B111FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist */,
-				E3366D131FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist */,
-				E3366D161FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist */,
-				E3366D151FE177B100143AF7 /* Key-debug.plist */,
-				E3366D141FE177B100143AF7 /* Key.plist */,
+				65426F4E2007B4C500E7EE3A /* FirebaseDatabaseDev-Info.plist */,
+				65426F4C2007B4C500E7EE3A /* FirebaseDatabaseProd-Info.plist */,
+				65426F4D2007B4C500E7EE3A /* FirebaseNotificationsProd-Info.plist */,
+				65426F4F2007B4C500E7EE3A /* Key-debug.plist */,
+				65426F502007B4C500E7EE3A /* Key.plist */,
 				A3D254DD1FC5D1BE007B3777 /* Info.plist */,
 			);
 			path = SupportFiles;
@@ -2201,9 +2195,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				65609F131C714C0F0039A8AB /* Localizable.strings in Resources */,
+				65426F512007B4C600E7EE3A /* FirebaseDatabaseProd-Info.plist in Resources */,
 				6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */,
-				E3366D1A1FE177B100143AF7 /* FirebaseDatabaseProd-Info.plist in Resources */,
-				E3366D171FE177B100143AF7 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				65EA8C211BB0792800F2E29E /* URAboutViewController.xib in Resources */,
 				65D0F39B1BA7625000E5D367 /* URMediaView.xib in Resources */,
 				65DFCCFF1CE2916500E4DFD9 /* URCurrentPollView.xib in Resources */,
@@ -2211,11 +2204,12 @@
 				658D14B01C99F482009A63A5 /* URAudioView.xib in Resources */,
 				6515FB7C1B881AE100CEEC3B /* Images.xcassets in Resources */,
 				658D857C1B5457CC00DFB949 /* URLoginCredentialsViewController.xib in Resources */,
-				E3366D181FE177B100143AF7 /* Key.plist in Resources */,
 				658BD0321CEBB0540019E885 /* URPollResultViewController.xib in Resources */,
+				65426F552007B4C600E7EE3A /* Key.plist in Resources */,
 				651EC7171D5B9D20008695E3 /* URAddContributionTableViewCell.xib in Resources */,
 				65D0F3AC1BA8E13500E5D367 /* URMyChatsViewController.xib in Resources */,
 				6555323A1C51683E002F6AFC /* URMediaSourceViewController.xib in Resources */,
+				65426F532007B4C600E7EE3A /* FirebaseDatabaseDev-Info.plist in Resources */,
 				6585BB101CCFD606000FA60E /* URStoryContributionViewIPadController.xib in Resources */,
 				658D85911B554D3700DFB949 /* URStoriesTableViewCell.xib in Resources */,
 				658949C61B83E1D30087F361 /* ISMenuTableViewCell.xib in Resources */,
@@ -2225,11 +2219,9 @@
 				65F8B3081BE2D712009F9CAB /* URNewsDetailViewController.xib in Resources */,
 				6548506C1BB1EFAC0002A3D5 /* URPollResultTableViewCell.xib in Resources */,
 				658D14A91C99EF2C009A63A5 /* URMediaAudioView.xib in Resources */,
-				B2211A201FB33A1900070194 /* countryprogram.json in Resources */,
 				6515FB7B1B881AE100CEEC3B /* LaunchImages.xcassets in Resources */,
 				65A45CD31B8768D8001C6808 /* URNewsTableViewCell.xib in Resources */,
 				65FAF0D41BC41AF300F8B380 /* URGroupDetailsViewController.xib in Resources */,
-				E3366D191FE177B100143AF7 /* Key-debug.plist in Resources */,
 				65DBAEBB1CEA45EC00A8B514 /* URContributionTableViewCell.xib in Resources */,
 				658D14C41C9B54A2009A63A5 /* URMediaVideoPhoneView.xib in Resources */,
 				658D85811B54597700DFB949 /* URForgotPasswordViewController.xib in Resources */,
@@ -2237,7 +2229,6 @@
 				65DFCCF71CE24EC700E4DFD9 /* terms.rtf in Resources */,
 				97B2FAC61C061EC0000820BD /* URTutoView.xib in Resources */,
 				65EA8C1C1BB048CD00F2E29E /* iso3-country-code.json in Resources */,
-				E3E08B121FEAB651002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */,
 				65FAF0CA1BC2C2E200F8B380 /* URPasswordEditViewController.xib in Resources */,
 				65816BAD1C74C26D004F9DEB /* URAudioRecorderViewController.xib in Resources */,
 				658D14BE1C9B4DB7009A63A5 /* URMediaFileView.xib in Resources */,
@@ -2246,6 +2237,7 @@
 				65A45CF01B8810DE001C6808 /* URInviteTableViewCell.xib in Resources */,
 				65B16FE21BB9F53300BDBDEE /* URRankingTableViewCell.xib in Resources */,
 				655691701B7D3DA800525E00 /* URClosedPollTableViewCell.xib in Resources */,
+				65426F542007B4C600E7EE3A /* Key-debug.plist in Resources */,
 				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
 				655FC68E2006668400C2ABE7 /* GoogleService-Info.plist in Resources */,
@@ -2254,11 +2246,13 @@
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
 				A3D254E51FC5D1BE007B3777 /* Info.plist in Resources */,
 				656562031BD5912500EBA9BD /* URNotificationViewController.xib in Resources */,
+				65426F4920079AED00E7EE3A /* countryprogram.json in Resources */,
 				65409FEF1B4C84DE00344D75 /* URLoginViewController.xib in Resources */,
 				656561FB1BD58DD200EBA9BD /* URSettingsTableViewCell.xib in Resources */,
 				6554D0991B934CCB009C5E89 /* URNewGroupViewController.xib in Resources */,
 				97B2FAC11C061E5B000820BD /* URTutorialViewController.xib in Resources */,
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
+				65426F522007B4C600E7EE3A /* FirebaseNotificationsProd-Info.plist in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
 				E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
@@ -2295,7 +2289,6 @@
 				B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */,
 				B266AFF81F9FE11800C4C968 /* URMediaView.xib in Resources */,
 				B266AFF91F9FE11800C4C968 /* URCurrentPollView.xib in Resources */,
-				E3E08B101FEA98AF002E7229 /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266AFFA1F9FE11800C4C968 /* UROpenFieldResponseView.xib in Resources */,
 				B266AFFB1F9FE11800C4C968 /* URAudioView.xib in Resources */,
 				B266AFFC1F9FE11800C4C968 /* Images.xcassets in Resources */,
@@ -2306,14 +2299,12 @@
 				B266B0011F9FE11800C4C968 /* URMediaSourceViewController.xib in Resources */,
 				B26F01F61FA0EB19005C51A6 /* URLoginViewController.xib in Resources */,
 				B266B0021F9FE11800C4C968 /* URStoryContributionViewIPadController.xib in Resources */,
-				E3366D1C1FE177BB00143AF7 /* Key-debug.plist in Resources */,
 				B266B0031F9FE11800C4C968 /* URStoriesTableViewCell.xib in Resources */,
 				B266B0041F9FE11800C4C968 /* ISMenuTableViewCell.xib in Resources */,
 				B266B0051F9FE11800C4C968 /* URPollQuestionViewController.xib in Resources */,
 				B266B0061F9FE11800C4C968 /* URMarkerTableViewController.xib in Resources */,
 				B266B0071F9FE11800C4C968 /* URProfileViewController.xib in Resources */,
 				B266B0081F9FE11800C4C968 /* URNewsDetailViewController.xib in Resources */,
-				B2211A211FB33A2F00070194 /* countryprogram.json in Resources */,
 				B266B0091F9FE11800C4C968 /* URPollResultTableViewCell.xib in Resources */,
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
@@ -2345,11 +2336,8 @@
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
-				E3E08B131FEAB657002E7229 /* FirebaseNotificationsProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
-				E3E08B141FEAD2AB002E7229 /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
-				E3366D1B1FE177B600143AF7 /* Key.plist in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
 				B266B02D1F9FE11800C4C968 /* URMarkerViewIPadController.xib in Resources */,
 				B266B02E1F9FE11800C4C968 /* URGroupsTableViewCell.xib in Resources */,
