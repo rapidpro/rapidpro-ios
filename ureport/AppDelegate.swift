@@ -65,7 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         
 //        Database.database(app: URFireBaseManager.databaseApp).isPersistenceEnabled = true
         GIDSignIn.sharedInstance().clientID = FirebaseApp.app()?.options.clientID
-        Twitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
+        TWTRTwitter.sharedInstance().start(withConsumerKey: URConstant.SocialNetwork.TWITTER_APP_ID(), consumerSecret: URConstant.SocialNetwork.TWITTER_CONSUMER_SECRET())
         requestPermissionForPushNotification(application)
         FCMChannelManager.setup()
         setupAWS()
@@ -283,7 +283,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
             let sourceApplication: String? = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
             return FBSDKApplicationDelegate.sharedInstance().application(app, open: url, sourceApplication: sourceApplication, annotation: nil)
         } else if (url.scheme?.hasPrefix("twitterkit"))! {
-            return Twitter.sharedInstance().application(app, open: url, options: options)
+            return TWTRTwitter.sharedInstance().application(app, open: url, options: options)
         } else {
             let sourceApplication: String? = options[UIApplicationOpenURLOptionsKey.sourceApplication] as? String
             return GIDSignIn.sharedInstance().handle(url, sourceApplication: sourceApplication, annotation: nil)

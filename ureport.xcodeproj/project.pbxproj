@@ -46,6 +46,12 @@
 		65426F532007B4C600E7EE3A /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4E2007B4C500E7EE3A /* FirebaseDatabaseDev-Info.plist */; };
 		65426F542007B4C600E7EE3A /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4F2007B4C500E7EE3A /* Key-debug.plist */; };
 		65426F552007B4C600E7EE3A /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F502007B4C500E7EE3A /* Key.plist */; };
+		65426F562007E0D000E7EE3A /* FirebaseDatabaseProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4C2007B4C500E7EE3A /* FirebaseDatabaseProd-Info.plist */; };
+		65426F572007E0D300E7EE3A /* FirebaseNotificationsProd-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4D2007B4C500E7EE3A /* FirebaseNotificationsProd-Info.plist */; };
+		65426F582007E0D700E7EE3A /* FirebaseDatabaseDev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4E2007B4C500E7EE3A /* FirebaseDatabaseDev-Info.plist */; };
+		65426F592007E0FD00E7EE3A /* Key-debug.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F4F2007B4C500E7EE3A /* Key-debug.plist */; };
+		65426F5A2007E0FF00E7EE3A /* Key.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65426F502007B4C500E7EE3A /* Key.plist */; };
+		65426F5B2007E12100E7EE3A /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
 		6547D3D81C762FDB00938236 /* URFileUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D71C762FDB00938236 /* URFileUtil.swift */; };
 		6547D3DA1C76324E00938236 /* URAudioMedia.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6547D3D91C76324E00938236 /* URAudioMedia.swift */; };
 		6548506B1BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 654850691BB1EFAC0002A3D5 /* URPollResultTableViewCell.swift */; };
@@ -97,7 +103,6 @@
 		655691871B7E67AB00525E00 /* URMarkerTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691861B7E67AB00525E00 /* URMarkerTableViewController.swift */; };
 		6556918A1B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 655691881B7E6A0D00525E00 /* URAddMarkerTableViewCell.swift */; };
 		6556918B1B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 655691891B7E6A0D00525E00 /* URAddMarkerTableViewCell.xib */; };
-		655FC68E2006668400C2ABE7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 655FC6882006668200C2ABE7 /* GoogleService-Info.plist */; };
 		65609F131C714C0F0039A8AB /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 659A7A981B51EFA800B56983 /* Localizable.strings */; };
 		65609F2A1C7266100039A8AB /* URPlayMediaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65609F291C7266100039A8AB /* URPlayMediaView.swift */; };
 		656561FA1BD58DD200EBA9BD /* URSettingsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 656561F81BD58DD200EBA9BD /* URSettingsTableViewCell.swift */; };
@@ -536,7 +541,6 @@
 		E30D6CDA1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
 		E30D6CDB1FFE9D800021CCA5 /* BaseMappableExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E30D6CD91FFE9D800021CCA5 /* BaseMappableExtension.swift */; };
 		E3286C931FC8BF3D00A7F78C /* ureport_on_the_moveTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E3286C921FC8BF3D00A7F78C /* ureport_on_the_moveTests.m */; };
-		E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = E35C914E1FC761AD009A3C9B /* ureport on-the-move-Info.plist */; };
 		E35F1C371FD822FC00C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
 		E35F1C381FD822FC00C079F5 /* URStoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = E35F1C361FD822FC00C079F5 /* URStoryView.xib */; };
 		E35F1C391FD8337800C079F5 /* URStoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E35F1C351FD822FC00C079F5 /* URStoryView.swift */; };
@@ -2240,7 +2244,6 @@
 				65426F542007B4C600E7EE3A /* Key-debug.plist in Resources */,
 				6566A5C41CD24ECC00A0730F /* URMediaSourceViewIPadController.xib in Resources */,
 				6515FB9E1B8B996800CEEC3B /* URChatTableViewCell.xib in Resources */,
-				655FC68E2006668400C2ABE7 /* GoogleService-Info.plist in Resources */,
 				654850741BB209C80002A3D5 /* URChoiceResultView.xib in Resources */,
 				65DFCCF91CE26BD900E4DFD9 /* URUserRegisterViewController.xib in Resources */,
 				658949BF1B83E1740087F361 /* ISMenuViewController.xib in Resources */,
@@ -2254,7 +2257,6 @@
 				659A20D41B7ECD6C00D02C69 /* URClosedPollTableViewController.xib in Resources */,
 				65426F522007B4C600E7EE3A /* FirebaseNotificationsProd-Info.plist in Resources */,
 				6515FB7D1B881AE100CEEC3B /* ExampleImages.xcassets in Resources */,
-				E35C914F1FC761AD009A3C9B /* ureport on-the-move-Info.plist in Resources */,
 				658D85981B558A6700DFB949 /* URAddStoryViewController.xib in Resources */,
 				6540EA541CDB9D45006287D3 /* URMarkerViewIPadController.xib in Resources */,
 				65A45CE81B880C3B001C6808 /* URGroupsTableViewCell.xib in Resources */,
@@ -2286,6 +2288,7 @@
 				B266AFF51F9FE11800C4C968 /* Localizable.strings in Resources */,
 				B266AFF61F9FE11800C4C968 /* URAddMarkerTableViewCell.xib in Resources */,
 				B266AFF71F9FE11800C4C968 /* URAboutViewController.xib in Resources */,
+				65426F5A2007E0FF00E7EE3A /* Key.plist in Resources */,
 				B251A5391FA1295500CBC02B /* URUserRegisterViewController.xib in Resources */,
 				B266AFF81F9FE11800C4C968 /* URMediaView.xib in Resources */,
 				B266AFF91F9FE11800C4C968 /* URCurrentPollView.xib in Resources */,
@@ -2307,6 +2310,7 @@
 				B266B0081F9FE11800C4C968 /* URNewsDetailViewController.xib in Resources */,
 				B266B0091F9FE11800C4C968 /* URPollResultTableViewCell.xib in Resources */,
 				B266B00A1F9FE11800C4C968 /* URMediaAudioView.xib in Resources */,
+				65426F582007E0D700E7EE3A /* FirebaseDatabaseDev-Info.plist in Resources */,
 				B266B00B1F9FE11800C4C968 /* LaunchImages.xcassets in Resources */,
 				B266B00C1F9FE11800C4C968 /* URNewsTableViewCell.xib in Resources */,
 				B266B00D1F9FE11800C4C968 /* URGroupDetailsViewController.xib in Resources */,
@@ -2320,12 +2324,14 @@
 				B266B0161F9FE11800C4C968 /* URPasswordEditViewController.xib in Resources */,
 				B266B0171F9FE11800C4C968 /* URAudioRecorderViewController.xib in Resources */,
 				E35F1C3A1FD8337C00C079F5 /* URStoryView.xib in Resources */,
+				65426F592007E0FD00E7EE3A /* Key-debug.plist in Resources */,
 				B266B0181F9FE11800C4C968 /* URMediaFileView.xib in Resources */,
 				B266B0191F9FE11800C4C968 /* URMediaImageView.xib in Resources */,
 				B266B01B1F9FE11800C4C968 /* URAboutViewIPadController.xib in Resources */,
 				B266B01C1F9FE11800C4C968 /* URInviteTableViewCell.xib in Resources */,
 				B266B01D1F9FE11800C4C968 /* URRankingTableViewCell.xib in Resources */,
 				B266B01E1F9FE11800C4C968 /* URClosedPollTableViewCell.xib in Resources */,
+				65426F572007E0D300E7EE3A /* FirebaseNotificationsProd-Info.plist in Resources */,
 				B266B01F1F9FE11800C4C968 /* URMediaSourceViewIPadController.xib in Resources */,
 				B266B0201F9FE11800C4C968 /* URChatTableViewCell.xib in Resources */,
 				E3E08B171FEAD953002E7229 /* countryprogramotm-dev.json in Resources */,
@@ -2336,6 +2342,7 @@
 				B266B0271F9FE11800C4C968 /* URSettingsTableViewCell.xib in Resources */,
 				B266B0281F9FE11800C4C968 /* URNewGroupViewController.xib in Resources */,
 				B266B0291F9FE11800C4C968 /* URTutorialViewController.xib in Resources */,
+				65426F562007E0D000E7EE3A /* FirebaseDatabaseProd-Info.plist in Resources */,
 				B266B02A1F9FE11800C4C968 /* URClosedPollTableViewController.xib in Resources */,
 				B266B02B1F9FE11800C4C968 /* ExampleImages.xcassets in Resources */,
 				B266B02C1F9FE11800C4C968 /* URAddStoryViewController.xib in Resources */,
@@ -2349,6 +2356,7 @@
 				B266B0341F9FE11800C4C968 /* URMarkerTableViewCell.xib in Resources */,
 				B266B0351F9FE11800C4C968 /* ImagesV2.xcassets in Resources */,
 				B266B0361F9FE11800C4C968 /* URWriteStoryView.xib in Resources */,
+				65426F5B2007E12100E7EE3A /* ureport on-the-move-Info.plist in Resources */,
 				B266B0371F9FE11800C4C968 /* URPollContributionModalViewController.xib in Resources */,
 				B266B0381F9FE11800C4C968 /* URPollViewIPadController.xib in Resources */,
 			);
@@ -2474,6 +2482,8 @@
 				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
@@ -2507,6 +2517,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",
@@ -2550,6 +2562,8 @@
 				"${BUILT_PRODUCTS_DIR}/STTwitter/STTwitter.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftAddressBook/SwiftAddressBook.framework",
 				"${BUILT_PRODUCTS_DIR}/TPKeyboardAvoiding/TPKeyboardAvoiding.framework",
+				"${PODS_ROOT}/TwitterCore/iOS/TwitterCore.framework",
+				"${PODS_ROOT}/TwitterKit/iOS/TwitterKit.framework",
 				"${BUILT_PRODUCTS_DIR}/fcm-channel-ios/fcm_channel_ios.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 				"${BUILT_PRODUCTS_DIR}/youtube-ios-player-helper/youtube_ios_player_helper.framework",
@@ -2583,6 +2597,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/STTwitter.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftAddressBook.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TPKeyboardAvoiding.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TwitterKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/fcm_channel_ios.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/youtube_ios_player_helper.framework",

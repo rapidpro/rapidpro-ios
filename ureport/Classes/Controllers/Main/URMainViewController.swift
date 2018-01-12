@@ -50,6 +50,8 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
         
         NotificationCenter.default.addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:NSNotification.Name(rawValue: "newChatReceived"), object: nil)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(newMessageReceived), name:NSNotification.Name(rawValue: "newMessageReceived"), object: nil)
+        
         if let closedPollViewController = closedPollViewController as? URClosedPollTableViewController {
             closedPollViewController.delegate = self
         }
@@ -91,6 +93,13 @@ class URMainViewController: UITabBarController, UITabBarControllerDelegate, URCl
     }
     
     //MARK: Class Methods
+    
+    func newMessageReceived() {
+        visibleViewController = self.navigationController?.visibleViewController
+        if !(visibleViewController is URMyChatsViewController || self.selectedViewController is URMyChatsViewController) {
+            (myChatsViewController as! URMyChatsViewController).newMessage = true
+        }
+    }
     
     func addBadgeMyChatsViewController() {
         visibleViewController = self.navigationController?.visibleViewController

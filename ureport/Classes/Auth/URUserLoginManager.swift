@@ -64,8 +64,8 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
         }
     }
     
-    class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {    
-        Twitter.sharedInstance().logIn { (session, error) in
+    class func loginWithTwitter(_ completion:@escaping (URUser?) ->Void ) {
+        TWTRTwitter.sharedInstance().logIn { (session, error) in
             if let error = error {
                 print(error.localizedDescription)
                 completion(nil)

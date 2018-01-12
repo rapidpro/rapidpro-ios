@@ -94,18 +94,23 @@ class URCountryProgramManager {
     }
 
     class func getAvailableCountryPrograms() -> [URCountryProgram]{
-        if countryPrograms == nil {
-            countryPrograms = []
-            let path = Bundle.main.path(forResource: "countryprogram", ofType: "json")!
-            let data = NSData(contentsOfFile: path)
-            let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
-            let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
-            
-            for countryJSON in countriesJSON {
-                countryPrograms.append(URCountryProgram(dictionary: countryJSON))
+        
+        #if ONTHEMOVE
+            return [getOtmProgram()]
+        #else
+            if countryPrograms == nil {
+                countryPrograms = []
+                let path = Bundle.main.path(forResource: "countryprogram", ofType: "json")!
+                let data = NSData(contentsOfFile: path)
+                let rootJSON = try! JSONSerialization.jsonObject(with: data! as Data) as! [String: Any]
+                let countriesJSON = rootJSON["countries"] as! [[String: Any?]]
+                
+                for countryJSON in countriesJSON {
+                    countryPrograms.append(URCountryProgram(dictionary: countryJSON))
+                }
             }
-        }
-        return countryPrograms
+            return countryPrograms
+        #endif        
     }
 
     class func getChannelOfCountryProgram(_ countryProgram:URCountryProgram) -> String?{

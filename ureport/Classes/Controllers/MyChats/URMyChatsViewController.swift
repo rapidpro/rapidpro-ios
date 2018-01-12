@@ -9,7 +9,8 @@
 import UIKit
 import MBProgressHUD
 import fcm_channel_ios
-
+import IlhasoftCore
+ 
 fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
@@ -54,6 +55,8 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     var currentCountryProgram: URCountryProgram?
 
     var delegate:URMyChatsViewControllerDelegate?
+
+    var newMessage = false
     
     init() {
         super.init(nibName: "URMyChatsViewController", bundle: nil)
@@ -66,13 +69,15 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(addBadgeMyChatsViewController), name:NSNotification.Name(rawValue: "newChatReceived"), object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(newMessageReceived), name:NSNotification.Name(rawValue: "newMessageReceived"), object: nil)
+        
         currentCountryProgram = URCountryProgramManager.activeCountryProgram()
         if let countryProgram = self.currentCountryProgram {
             self.listChatRoom.append(countryProgram)
         }
         setupUI()
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
@@ -91,7 +96,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)    
+        super.viewWillDisappear(animated)
+        if newMessage {
+            newMessage = false
+            self.tableView.reloadData()
+        }        
     }
 
     //MARK: URGroupsTableViewCellDelegate
@@ -116,6 +125,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         let cell = tableView.dequeueReusableCell(withIdentifier: NSStringFromClass(URChatTableViewCell.self), for: indexPath) as! URChatTableViewCell
         if let countryProgram = self.listChatRoom[indexPath.row] as? URCountryProgram {
             cell.setupCell(withCountryProgram: countryProgram)
+            if newMessage {
+                cell.viewUnreadMessages.isHidden = false
+                cell.viewUnreadMessages.backgroundColor = UIColor.red
+                cell.lbUnreadMessages.text = ""
+            }
             return cell
         } else {
             let chatRoom = self.listChatRoom[indexPath.row] as! URChatRoom
@@ -144,8 +158,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
                         let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
                         self.navigationController?.pushViewController(chatVC, animated: true)
                     } else {
-                        //TODO:
-                        print("Couldn't create contact at this moment.")
+                        ISAlertMessages.displaySimpleMessage("The channel is not configured, contact the country administrator.", fromController: self)
                     }
                 }
             } else {
@@ -173,6 +186,11 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
 
     //MARK: Class Methods
 
+    func newMessageReceived() {
+        newMessage = true
+        self.tableView.reloadData()
+    }
+    
     func addBadgeMyChatsViewController() {
         loadData()
     }
@@ -221,7 +239,7 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
         self.tableView.separatorColor = UIColor.clear
         self.tableView.contentInset = UIEdgeInsetsMake(0, 0, 49, 0)
         self.tableView.register(UINib(nibName: "URChatTableViewCell", bundle: nil), forCellReuseIdentifier: NSStringFromClass(URChatTableViewCell.self))
-        self.tableView.addRefreshControl(target: self, selector: #selector(loadData))
+//        self.tableView.addRefreshControl(target: self, selector: #selector(loadData))
     }
 
     func markCellThatChatIsOpen(_ chatRoom:URChatRoom) {        
