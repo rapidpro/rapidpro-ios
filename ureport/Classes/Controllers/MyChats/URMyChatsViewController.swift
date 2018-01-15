@@ -187,8 +187,12 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     //MARK: Class Methods
 
     func newMessageReceived() {
-        newMessage = true
-        self.tableView.reloadData()
+        if let navigationController = self.navigationController {
+            if !(navigationController.visibleViewController is FCMChannelChatViewController) {
+                newMessage = true
+                self.tableView.reloadData()
+            }
+        }
     }
     
     func addBadgeMyChatsViewController() {

@@ -79,7 +79,7 @@ class URRapidProContactUtil {
         let rootDictionary = NSMutableDictionary()
         
         rootDictionary.setValue(URRapidProContactUtil.rapidProUser, forKey: "fields")
-        rootDictionary.setValue(["ext:\(URUserManager.formatExtUserId(user.key))"], forKey: "urns")
+//        rootDictionary.setValue(["ext:\(URUserManager.formatExtUserId(user.key))"], forKey: "urns")
         rootDictionary.setValue(user.nickname, forKey:"name")
         rootDictionary.setValue(user.email, forKey:"email")
         
