@@ -11,7 +11,7 @@ def shared_pods
     pod 'GoogleUtilities', '1.1.0'
     pod 'SDWebImage'
     pod 'TwitterKit'
-    pod 'AWSS3', '2.6.2'
+    pod 'AWSS3'#, '2.6.2'
     pod 'NYTPhotoViewer'
     pod 'SwiftAddressBook', :git => 'https://github.com/SocialbitGmbH/SwiftAddressBook', :branch => 'chunkyguy-swift3'
     pod 'JSQMessagesViewController'

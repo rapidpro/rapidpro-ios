@@ -30,7 +30,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.firebase.$(PRODUCT_NAME:rfc1034identifier)</string>
-				<string>twitterkit-SKYXxzv0LeBdETT19fn2X3PkN</string>
+				<string>twitterkit-kcYvfs1jJpx213tqexth9qRJX</string>
 			</array>
 		</dict>
 		<dict>
@@ -51,7 +51,7 @@
 			<key>CFBundleURLSchemes</key>
 			<array>
 				<string>com.googleusercontent.apps.843441539089-a3ksd60vkbvg6v9kef20t8oi8u3hcsq9</string>
-				<string>in.ureport</string>
+				<string>in.ureport.onthemove</string>
 			</array>
 		</dict>
 		<dict>
@@ -64,7 +64,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>4</string>
+	<string>5</string>
 	<key>FacebookAppID</key>
 	<string>1021658627874726</string>
 	<key>FacebookDisplayName</key>

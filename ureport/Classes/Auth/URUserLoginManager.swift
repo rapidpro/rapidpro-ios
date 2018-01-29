@@ -42,6 +42,10 @@ class URUserLoginManager: NSObject, GIDSignInDelegate, GIDSignInUIDelegate {
 
     class func loginWithFacebook(_ viewController:UIViewController, completion:@escaping (URUser?, _ pendingFirebaseRegistration: Bool?) -> Void ) {
         let login = FBSDKLoginManager()
+        login.loginBehavior = .web
+//        #if ONTHEMOVE
+//            login.loginBehavior = .web
+//        #endif
         login.logIn(withReadPermissions: ["email","user_birthday"], from: viewController) { (FBSDKLoginManagerLoginResult, error) -> Void in
             if error != nil {
                 print(error!)

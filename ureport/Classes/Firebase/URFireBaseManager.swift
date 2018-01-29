@@ -25,7 +25,7 @@ class URFireBaseManager {
             case .sandbox:
                 reg = .USEast1
             case .production:
-                reg = .EUWest1
+                reg = .USEast1
             }
             return reg
         }
