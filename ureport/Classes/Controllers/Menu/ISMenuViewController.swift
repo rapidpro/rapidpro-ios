@@ -148,6 +148,7 @@ class ISMenuViewController: UIViewController, UITableViewDataSource, UITableView
             
             break
         case .Logout:
+            FCMChannelManager.deactivateChannelContact()
             URUserLoginManager.logoutFromSocialNetwork()
             URNavigationManager.toggleMenu()
             URUser.deactivateUser()

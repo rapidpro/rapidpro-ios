@@ -145,9 +145,18 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let _ = self.listChatRoom[indexPath.row] as? URCountryProgram {
+        if let countryProgram = self.listChatRoom[indexPath.row] as? URCountryProgram {
+            guard countryProgram.fcmSupport else {
+                ISAlertMessages.displaySimpleMessage("The channel is not configured, contact the country administrator.", fromController: self)
+                return
+            }
             if let contact = FCMChannelManager.activeContact() {
-                let chatVC = FCMChannelChatViewController(contact: contact, botName: "Bot", loadMessagesOnInit: true)
+                let chatVC = FCMChannelChatViewController(contact: contact,
+                                                          botName: "Bot",
+                                                          choiceAnswerButtonColor: UIColor(with: "#2F97F8"),
+                                                          choiceAnswerBorderColor: UIColor.white.cgColor,
+                                                          loadMessagesOnInit: true)
+
                 self.navigationController?.pushViewController(chatVC, animated: true)
             } else if let user = URUser.activeUser() {
                 MBProgressHUD.showAdded(to: self.view, animated: true)
@@ -257,14 +266,21 @@ class URMyChatsViewController: UIViewController, UITableViewDataSource, UITableV
             self.tableView.setRefreshControlTo(animate: false)
             if chatRooms != nil {
                 self.lbMessage.isHidden = true
-                let index = self.listChatRoom.index{($0.key != nil && $0.key == chatRooms!.last!.key)}
+                var listWithoutCountryProgram = [AnyObject]()
+                listWithoutCountryProgram = self.listChatRoom
+                listWithoutCountryProgram.removeFirst()
+                
+                let key = chatRooms!.last!.key!
+                
+                let index = listWithoutCountryProgram.index{(($0 as! URChatRoom).key == key)}
+                
                 if index == nil {
                     self.listChatRoom.insert(chatRooms!.last!, at: self.listChatRoom.count)
                     self.tableView.insertRows(at: [IndexPath(row: self.listChatRoom.count - 1, section: 0)], with: UITableViewRowAnimation.fade)
                 }else {
-                    self.listChatRoom.remove(at: index!)
-                    self.listChatRoom.insert(chatRooms!.last!, at: index!)
-                    self.tableView.reloadRows(at: [IndexPath(row: index!, section: 0)], with: UITableViewRowAnimation.none)
+                    self.listChatRoom.remove(at: index! + 1)
+                    self.listChatRoom.insert(chatRooms!.last!, at: index! + 1)
+                    self.tableView.reloadRows(at: [IndexPath(row: index! + 1, section: 0)], with: UITableViewRowAnimation.none)
                 }
                 if self.listChatRoom.count == chatRooms?.count {
                     self.listChatRoom = self.listChatRoom

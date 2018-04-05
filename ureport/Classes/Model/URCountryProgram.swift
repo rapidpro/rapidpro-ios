@@ -22,7 +22,8 @@ class URCountryProgram: Mappable {
     var facebook: String?
     var groupName: String!
     var stateField: String?
-
+    var fcmSupport:Bool!
+    
     required init?(map: Map) { }
     
     func mapping(map: Map) {
@@ -37,6 +38,7 @@ class URCountryProgram: Mappable {
         facebook <- map["facebook"]
         groupName <- map["groupName"]
         stateField <- map["stateField"]
+        fcmSupport <- map["fcmSupport"]
     }
     
     init(dictionary: [String: Any?]) {
@@ -51,6 +53,7 @@ class URCountryProgram: Mappable {
         self.ureportHostAPI = dictionary["ureportHostAPI"] as! String
         self.groupName = dictionary["groupName"] as! String
         self.stateField = dictionary["stateField"] as? String
+        self.fcmSupport = dictionary["fcmSupport"] as? Bool
     }
 
     //MARK: FireBase Methods

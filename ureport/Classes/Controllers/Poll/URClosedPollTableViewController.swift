@@ -77,9 +77,9 @@ class URClosedPollTableViewController: UIViewController, URPollManagerDelegate, 
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if !URRapidProManager.sendingAnswers {
-            loadCurrentFlow()
-        }
+//        if !URRapidProManager.sendingAnswers {
+//            loadCurrentFlow()
+//        }
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
