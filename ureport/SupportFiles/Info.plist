@@ -69,7 +69,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1</string>
+	<string>2</string>
 	<key>FacebookAppID</key>
 	<string>1021658627874726</string>
 	<key>FacebookDisplayName</key>
@@ -104,10 +104,10 @@
 	<string>You need grant permission to access your contacts</string>
 	<key>NSMicrophoneUsageDescription</key>
 	<string>You need grant permission to access your microphone</string>
-	<key>NSPhotoLibraryUsageDescription</key>
-	<string>You need grant permission to access your gallery</string>
 	<key>NSPhotoLibraryAddUsageDescription</key>
 	<string>You need to grant permission for gallery saving operations</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>You need grant permission to access your gallery</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>fetch</string>
